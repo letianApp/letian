@@ -16,14 +16,13 @@
 
 @property(nonatomic,strong)UIView *headBgView;
 
-
 @end
 
 @implementation FirstViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //,.........,
     self.navigationController.navigationBarHidden=YES;
     
     [self customTabBar];
