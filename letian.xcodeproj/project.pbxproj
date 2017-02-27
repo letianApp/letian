@@ -53,6 +53,10 @@
 		77038E091E63CA960096C07D /* index_slide_03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038E081E63CA960096C07D /* index_slide_03.jpg */; };
 		77038E0B1E63CA9E0096C07D /* index_slide_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038E0A1E63CA9E0096C07D /* index_slide_02.jpg */; };
 		77038E0D1E63CAAB0096C07D /* index_slide_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038E0C1E63CAAB0096C07D /* index_slide_01.jpg */; };
+		7785E20A1E64174800C0AE8C /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7785E2081E64174800C0AE8C /* HomeCell.m */; };
+		7785E20B1E64174800C0AE8C /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7785E2091E64174800C0AE8C /* HomeCell.xib */; };
+		7785E20D1E64176100C0AE8C /* tooopen_sy_156105468631.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7785E20C1E64176100C0AE8C /* tooopen_sy_156105468631.jpg */; };
+		7785E20F1E64177000C0AE8C /* msg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7785E20E1E64177000C0AE8C /* msg.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +137,11 @@
 		77038E081E63CA960096C07D /* index_slide_03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = index_slide_03.jpg; sourceTree = "<group>"; };
 		77038E0A1E63CA9E0096C07D /* index_slide_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = index_slide_02.jpg; sourceTree = "<group>"; };
 		77038E0C1E63CAAB0096C07D /* index_slide_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = index_slide_01.jpg; sourceTree = "<group>"; };
+		7785E2071E64174800C0AE8C /* HomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCell.h; sourceTree = "<group>"; };
+		7785E2081E64174800C0AE8C /* HomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCell.m; sourceTree = "<group>"; };
+		7785E2091E64174800C0AE8C /* HomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCell.xib; sourceTree = "<group>"; };
+		7785E20C1E64176100C0AE8C /* tooopen_sy_156105468631.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tooopen_sy_156105468631.jpg; sourceTree = "<group>"; };
+		7785E20E1E64177000C0AE8C /* msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +172,7 @@
 		0907336A1E64105A00F21E02 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				7785E20E1E64177000C0AE8C /* msg.png */,
 				0907336B1E64105A00F21E02 /* consultPagTab.png */,
 				0907336C1E64105A00F21E02 /* consultPagTab@2x.png */,
 				0907336D1E64105A00F21E02 /* consultPagTabSel.png */,
@@ -294,6 +304,9 @@
 		0970CFDF1E517C30007480CB /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7785E2071E64174800C0AE8C /* HomeCell.h */,
+				7785E2081E64174800C0AE8C /* HomeCell.m */,
+				7785E2091E64174800C0AE8C /* HomeCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -422,6 +435,7 @@
 				77038E0A1E63CA9E0096C07D /* index_slide_02.jpg */,
 				77038E081E63CA960096C07D /* index_slide_03.jpg */,
 				77038E061E63CA8B0096C07D /* index_slide_04.jpg */,
+				7785E20C1E64176100C0AE8C /* tooopen_sy_156105468631.jpg */,
 			);
 			path = "首页轮播图";
 			sourceTree = "<group>";
@@ -535,12 +549,14 @@
 			files = (
 				090733861E64105A00F21E02 /* mainMessageSel@2x.png in Resources */,
 				0953C2311E514B5800FB165C /* LaunchScreen.storyboard in Resources */,
+				7785E20D1E64176100C0AE8C /* tooopen_sy_156105468631.jpg in Resources */,
 				0970CFF11E5180BF007480CB /* ConsultViewController.xib in Resources */,
 				0953C22E1E514B5800FB165C /* Assets.xcassets in Resources */,
 				0953C22C1E514B5800FB165C /* Main.storyboard in Resources */,
 				77038DFD1E63C9F20096C07D /* u=275622820,2944364039&fm=214&gp=0.jpg in Resources */,
 				0907337B1E64105A00F21E02 /* consultPagTab.png in Resources */,
 				77038E031E63C9F20096C07D /* 支付宝.png in Resources */,
+				7785E20F1E64177000C0AE8C /* msg.png in Resources */,
 				0907337E1E64105A00F21E02 /* consultPagTabSel@2x.png in Resources */,
 				77038DFE1E63C9F20096C07D /* 头像.png in Resources */,
 				090733841E64105A00F21E02 /* mainMessage@2x.png in Resources */,
@@ -556,6 +572,7 @@
 				77038DFF1E63C9F20096C07D /* 屏幕快照 2017-02-20 下午4.05.02.png in Resources */,
 				0907337D1E64105A00F21E02 /* consultPagTabSel.png in Resources */,
 				090733881E64105A00F21E02 /* myPagTab@2x.png in Resources */,
+				7785E20B1E64174800C0AE8C /* HomeCell.xib in Resources */,
 				090733801E64105A00F21E02 /* firstPageTab@2x.png in Resources */,
 				0907338A1E64105A00F21E02 /* myPagTabSel@2x.png in Resources */,
 				77038E091E63CA960096C07D /* index_slide_03.jpg in Resources */,
@@ -596,6 +613,7 @@
 				0970CFF51E5180DF007480CB /* MyViewController.m in Sources */,
 				0953C2291E514B5800FB165C /* ViewController.m in Sources */,
 				77038DE81E63C3B50096C07D /* YYCycleScrollView.m in Sources */,
+				7785E20A1E64174800C0AE8C /* HomeCell.m in Sources */,
 				0970CFF01E5180BF007480CB /* ConsultViewController.m in Sources */,
 				0953C2261E514B5800FB165C /* AppDelegate.m in Sources */,
 				0953C2231E514B5800FB165C /* main.m in Sources */,
