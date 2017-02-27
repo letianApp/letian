@@ -80,12 +80,12 @@
     _classifiedSectionFirstLine.backgroundColor = WEAKPINK;
     _classifiedSectionFirstLine.showsHorizontalScrollIndicator = NO;
     
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
-    [btn setTitle:_firstLineDataSource[0] forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
+//    [btn setTitle:_firstLineDataSource[0] forState:UIControlStateNormal];
+//    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    //    [btn addTarget:self action:@selector(selRightButton) forControlEvents:UIControlEventTouchUpInside];
-    [_classifiedSectionFirstLine addSubview:btn];
+//        [btn addTarget:self action:@selector(selRightButton) forControlEvents:UIControlEventTouchUpInside];
+//    [_classifiedSectionFirstLine addSubview:btn];
     
     
     //    [self customClassifiedSectionBtnFotData:_firstLineDataSource withParentView:_classifiedSectionFirstLine];
