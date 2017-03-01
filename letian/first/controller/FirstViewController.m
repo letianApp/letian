@@ -21,9 +21,12 @@
 @implementation FirstViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    //,.........,
+    
     self.navigationController.navigationBarHidden=YES;
+    
+    self.automaticallyAdjustsScrollViewInsets=NO;
     
     [self customTabBar];
     
@@ -60,28 +63,41 @@
 //头视图
 -(void)createHeadBgView
 {
-    self.headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 420)];
+    self.headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 340)];
     
-    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 220, SCREEN_W, 200)];
+    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 220, SCREEN_W, 120)];
     
     NSArray *nameArray=@[@"- 咨询 -",@"- 文章 -",@"- 测试 -",@"- 活动 -"];
     for (NSInteger i=0; i<2; i++) {
         for (NSInteger j=0; j<2; j++) {
-            UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/2*j, i*100, SCREEN_W/2, 100)];
+            UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/2*j, i*60, SCREEN_W/2, 60)];
             label.backgroundColor=[UIColor whiteColor];
             label.text=nameArray[j+i*2];
             label.textColor=[UIColor blackColor];
             label.textAlignment=NSTextAlignmentCenter;
+            label.tag=j+i*2+100;
             
             label.userInteractionEnabled=YES;
             UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelClicked:)];
+            
             [label addGestureRecognizer:tap];
             
             [view addSubview:label];
+            
         }
     }
     
     
+    //模块分割线
+    for (NSInteger i=0; i<2; i++) {
+        UIView *horizontalLine=[[UIView alloc]initWithFrame:CGRectMake(30*(i+1)+i*((SCREEN_W-120)/2)+30*i, 60, (SCREEN_W-120)/2, 1)];
+        horizontalLine.backgroundColor=MAINCOLOR;
+        [view addSubview:horizontalLine];
+        
+        UIView *verticalLine=[[UIView alloc]initWithFrame:CGRectMake(SCREEN_W/2, 20*i+20*(i+1)+i*20, 1, 20)];
+        verticalLine.backgroundColor=MAINCOLOR;
+        [view addSubview:verticalLine];
+    }
     
     
     
@@ -95,19 +111,27 @@
     
 }
 
--(void)labelClicked:(UILabel *)label
+
+
+-(void)labelClicked:(UITapGestureRecognizer *)tap
 {
+    
     NSLog(@"咨询页面");
     
 }
+
+
 #pragma mark 定制首页轮播图
+
 -(YYCycleScrollView *)createScrollView
 {
     
     YYCycleScrollView *cycleScrollView = [[YYCycleScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, 220) animationDuration:4.0];
     
     NSMutableArray *viewArray = [[NSMutableArray alloc] init];
+    
     for (int i = 0; i < 4; i++) {
+        
         UIImageView *tempImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, 220)];
         
         
@@ -115,13 +139,21 @@
         tempImageView.contentMode = UIViewContentModeScaleAspectFill;
         tempImageView.clipsToBounds = true;
         [viewArray addObject:tempImageView];
+        
     }
+    
     [cycleScrollView setFetchContentViewAtIndex:^UIView *(NSInteger(pageIndex)) {
+        
         return [viewArray objectAtIndex:pageIndex];
+        
     }];
+    
     [cycleScrollView setTotalPagesCount:^NSInteger{
+        
         return 4;
+        
     }];
+    
     [cycleScrollView setTapActionBlock:^(NSInteger(pageIndex)) {
         
         NSLog(@"点击的相关的页面%ld",(long)pageIndex);
@@ -170,6 +202,16 @@
 -(void)msgBtnClick
 {
     NSLog(@"进入消息按钮");
+    
+  
+    
+    UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [self presentViewController:alertControl animated:YES completion:nil];
+
+
+    
+    
     
 }
 

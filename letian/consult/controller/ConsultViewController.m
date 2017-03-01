@@ -176,7 +176,6 @@
     [maxPriceBtn removeTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     maxPriceBtn.frame = CGRectMake(SCREEN_W/2+50, 8, SCREEN_W/4, navigationBar_H-16);
     
-    
 }
 
 

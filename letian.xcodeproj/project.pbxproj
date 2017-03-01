@@ -60,6 +60,8 @@
 		774DBC0D1E6420FC00B8798C /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC0B1E6420FC00B8798C /* HomeCell.xib */; };
 		774DBC0F1E64212F00B8798C /* tooopen_sy_156105468631.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC0E1E64212F00B8798C /* tooopen_sy_156105468631.jpg */; };
 		774DBC111E64214900B8798C /* msg.png in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC101E64214900B8798C /* msg.png */; };
+		77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DA5DCB1E666B92003FAE0C /* LoginViewController.m */; };
+		77DA5DCE1E666B92003FAE0C /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +152,9 @@
 		774DBC0B1E6420FC00B8798C /* HomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCell.xib; sourceTree = "<group>"; };
 		774DBC0E1E64212F00B8798C /* tooopen_sy_156105468631.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tooopen_sy_156105468631.jpg; sourceTree = "<group>"; };
 		774DBC101E64214900B8798C /* msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg.png; sourceTree = "<group>"; };
+		77DA5DCA1E666B92003FAE0C /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		77DA5DCB1E666B92003FAE0C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +248,7 @@
 		0953C2201E514B5800FB165C /* letian */ = {
 			isa = PBXGroup;
 			children = (
+				77DA5DC91E666B92003FAE0C /* Login */,
 				77038DEB1E63C9F20096C07D /* Images */,
 				77038DE91E63C49F0096C07D /* Custom */,
 				77038DE11E63C3B50096C07D /* Lib */,
@@ -453,6 +459,16 @@
 			path = "首页轮播图";
 			sourceTree = "<group>";
 		};
+		77DA5DC91E666B92003FAE0C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				77DA5DCA1E666B92003FAE0C /* LoginViewController.h */,
+				77DA5DCB1E666B92003FAE0C /* LoginViewController.m */,
+				77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -600,6 +616,7 @@
 				77038E011E63C9F20096C07D /* 客服.png in Resources */,
 				090733831E64105A00F21E02 /* mainMessage.png in Resources */,
 				090733821E64105A00F21E02 /* firstPageTabSel@2x.png in Resources */,
+				77DA5DCE1E666B92003FAE0C /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +649,7 @@
 				0970CFF01E5180BF007480CB /* ConsultViewController.m in Sources */,
 				090733951E655B0600F21E02 /* consultPageCell.m in Sources */,
 				0953C2261E514B5800FB165C /* AppDelegate.m in Sources */,
+				77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */,
 				0953C2231E514B5800FB165C /* main.m in Sources */,
 				0970CFEC1E517EB8007480CB /* FirstViewController.m in Sources */,
 				77038DE71E63C3B50096C07D /* NSTimer+YYFounction.m in Sources */,
