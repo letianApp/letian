@@ -60,6 +60,11 @@
 		774DBC0D1E6420FC00B8798C /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC0B1E6420FC00B8798C /* HomeCell.xib */; };
 		774DBC0F1E64212F00B8798C /* tooopen_sy_156105468631.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC0E1E64212F00B8798C /* tooopen_sy_156105468631.jpg */; };
 		774DBC111E64214900B8798C /* msg.png in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC101E64214900B8798C /* msg.png */; };
+		77D2BF931E668D83000B9978 /* mainMessageWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BF921E668D83000B9978 /* mainMessageWhite.png */; };
+		77D2BF971E66B3D0000B9978 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D2BF951E66B3D0000B9978 /* RegistViewController.m */; };
+		77D2BF981E66B3D0000B9978 /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BF961E66B3D0000B9978 /* RegistViewController.xib */; };
+		77D2BF9B1E66B933000B9978 /* donot.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BF9A1E66B933000B9978 /* donot.png */; };
+		77D2BF9D1E66B93E000B9978 /* do.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BF9C1E66B93E000B9978 /* do.png */; };
 		77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DA5DCB1E666B92003FAE0C /* LoginViewController.m */; };
 		77DA5DCE1E666B92003FAE0C /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */; };
 /* End PBXBuildFile section */
@@ -152,6 +157,12 @@
 		774DBC0B1E6420FC00B8798C /* HomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCell.xib; sourceTree = "<group>"; };
 		774DBC0E1E64212F00B8798C /* tooopen_sy_156105468631.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tooopen_sy_156105468631.jpg; sourceTree = "<group>"; };
 		774DBC101E64214900B8798C /* msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg.png; sourceTree = "<group>"; };
+		77D2BF921E668D83000B9978 /* mainMessageWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMessageWhite.png; sourceTree = "<group>"; };
+		77D2BF941E66B3D0000B9978 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
+		77D2BF951E66B3D0000B9978 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
+		77D2BF961E66B3D0000B9978 /* RegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
+		77D2BF9A1E66B933000B9978 /* donot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donot.png; sourceTree = "<group>"; };
+		77D2BF9C1E66B93E000B9978 /* do.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = do.png; sourceTree = "<group>"; };
 		77DA5DCA1E666B92003FAE0C /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		77DA5DCB1E666B92003FAE0C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -188,6 +199,7 @@
 				774DBC101E64214900B8798C /* msg.png */,
 				0907336B1E64105A00F21E02 /* consultPagTab.png */,
 				0907336C1E64105A00F21E02 /* consultPagTab@2x.png */,
+				77D2BF921E668D83000B9978 /* mainMessageWhite.png */,
 				0907336D1E64105A00F21E02 /* consultPagTabSel.png */,
 				0907336E1E64105A00F21E02 /* consultPagTabSel@2x.png */,
 				0907336F1E64105A00F21E02 /* firstPageTab.png */,
@@ -414,6 +426,7 @@
 		77038DEB1E63C9F20096C07D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				77D2BF991E66B928000B9978 /* 图标 */,
 				0907336A1E64105A00F21E02 /* resource */,
 				77038E051E63CA7F0096C07D /* 首页轮播图 */,
 				77038DED1E63C9F20096C07D /* 头像 */,
@@ -459,12 +472,24 @@
 			path = "首页轮播图";
 			sourceTree = "<group>";
 		};
+		77D2BF991E66B928000B9978 /* 图标 */ = {
+			isa = PBXGroup;
+			children = (
+				77D2BF9A1E66B933000B9978 /* donot.png */,
+				77D2BF9C1E66B93E000B9978 /* do.png */,
+			);
+			path = "图标";
+			sourceTree = "<group>";
+		};
 		77DA5DC91E666B92003FAE0C /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				77DA5DCA1E666B92003FAE0C /* LoginViewController.h */,
 				77DA5DCB1E666B92003FAE0C /* LoginViewController.m */,
 				77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */,
+				77D2BF941E66B3D0000B9978 /* RegistViewController.h */,
+				77D2BF951E66B3D0000B9978 /* RegistViewController.m */,
+				77D2BF961E66B3D0000B9978 /* RegistViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -593,11 +618,13 @@
 				0907337F1E64105A00F21E02 /* firstPageTab.png in Resources */,
 				77038DFA1E63C9F20096C07D /* cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg in Resources */,
 				77038E0D1E63CAAB0096C07D /* index_slide_01.jpg in Resources */,
+				77D2BF981E66B3D0000B9978 /* RegistViewController.xib in Resources */,
 				0970CFF61E5180DF007480CB /* MyViewController.xib in Resources */,
 				77038E021E63C9F20096C07D /* 微信支付.png in Resources */,
 				77038DFB1E63C9F20096C07D /* timg (1).jpeg in Resources */,
 				090733891E64105A00F21E02 /* myPagTabSel.png in Resources */,
 				090733851E64105A00F21E02 /* mainMessageSel.png in Resources */,
+				77D2BF931E668D83000B9978 /* mainMessageWhite.png in Resources */,
 				77038DFF1E63C9F20096C07D /* 屏幕快照 2017-02-20 下午4.05.02.png in Resources */,
 				0907337D1E64105A00F21E02 /* consultPagTabSel.png in Resources */,
 				090733881E64105A00F21E02 /* myPagTab@2x.png in Resources */,
@@ -616,7 +643,9 @@
 				77038E011E63C9F20096C07D /* 客服.png in Resources */,
 				090733831E64105A00F21E02 /* mainMessage.png in Resources */,
 				090733821E64105A00F21E02 /* firstPageTabSel@2x.png in Resources */,
+				77D2BF9D1E66B93E000B9978 /* do.png in Resources */,
 				77DA5DCE1E666B92003FAE0C /* LoginViewController.xib in Resources */,
+				77D2BF9B1E66B933000B9978 /* donot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +670,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77D2BF971E66B3D0000B9978 /* RegistViewController.m in Sources */,
 				0970CFF51E5180DF007480CB /* MyViewController.m in Sources */,
 				0953C2291E514B5800FB165C /* ViewController.m in Sources */,
 				77038DE81E63C3B50096C07D /* YYCycleScrollView.m in Sources */,

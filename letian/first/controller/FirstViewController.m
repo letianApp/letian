@@ -191,8 +191,8 @@
 -(void)createmsgBtnOnView:(UIView *)bgView
 {
     
-    UIButton *msgBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W-50, 25, 30, 30)];
-    [msgBtn setImage:[UIImage imageNamed:@"msg"] forState:UIControlStateNormal];
+    UIButton *msgBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W-50, 25, 25, 25)];
+    [msgBtn setImage:[UIImage imageNamed:@"mainMessageWhite"] forState:UIControlStateNormal];
     [msgBtn addTarget:self action:@selector(msgBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:msgBtn];
     

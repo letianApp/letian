@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "FirstViewController.h"
+#import "AppDelegate.h"
+#import "RegistViewController.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *acountTextField;
@@ -32,6 +34,7 @@
     [self.registBtn.layer setMasksToBounds:YES];
     [self.registBtn.layer setCornerRadius:8];
     [self.loginBtn addTarget:self action:@selector(loginBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.registBtn addTarget:self action:@selector(registBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -39,17 +42,38 @@
 -(void)loginBtnClicked{
     
    
-    FirstViewController *firstVc=[[FirstViewController alloc]init];
+    UITabBarController *mainTbc = [[UITabBarController alloc]init];
+    
+    NSArray *vcName = @[@"FirstViewController",@"ConsultViewController",@"MyViewController"];
+    NSMutableArray *vcArr = [[NSMutableArray alloc]init];
+    
+    for (int i = 0; i < vcName.count; i++) {
+        Class cls = NSClassFromString(vcName[i]);
+        UIViewController *vc = [[cls alloc]init];
+        UINavigationController *nc = [[UINavigationController alloc]initWithRootViewController:vc];
+        [vcArr addObject:nc];
+    }
+    
+    mainTbc.viewControllers = vcArr;
+    
+    
+    [UIApplication sharedApplication].keyWindow.rootViewController = mainTbc;
     
     
 }
 
+
 -(void)registBtnClicked
 {
     
+    RegistViewController *registVc=[[RegistViewController alloc]init];
+    
+    [self presentViewController:registVc animated:YES completion:nil];
     
     
 }
+
+
 //点击忘记密码
 - (IBAction)forgetBtnClick:(id)sender {
     
@@ -57,7 +81,18 @@
     
 }
 
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+    [self.acountTextField resignFirstResponder];
+    
+    [self.passwordTextField resignFirstResponder];
+    
+    
+}
 - (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
