@@ -9,6 +9,7 @@
 #import "FirstViewController.h"
 #import "YYCycleScrollView.h"
 #import "HomeCell.h"
+#import "LoginViewController.h"
 
 @interface FirstViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 
@@ -208,6 +209,24 @@
     UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
     
     [self presentViewController:alertControl animated:YES completion:nil];
+
+    // 2.实例化按钮:actionWithTitle
+    [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        
+        // 点击确定按钮的时候, 会调用这个block
+        LoginViewController *loginVc=[[LoginViewController alloc]init];
+//
+//        loginVc.hidesBottomBarWhenPushed=YES;
+//        
+//        [self.navigationController pushViewController:loginVc animated:YES];
+        
+        [self presentViewController:loginVc animated:YES completion:nil];
+        
+        
+        
+    }]];
+    
+    [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
 
 
     

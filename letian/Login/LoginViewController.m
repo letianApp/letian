@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "FirstViewController.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *acountTextField;
@@ -25,13 +26,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
     
-    [loginVC.loginBtn.layer setMasksToBounds:YES];
-    [loginVC.loginBtn.layer setCornerRadius:10.0];
+    [self.loginBtn.layer setMasksToBounds:YES];
+    [self.loginBtn.layer setCornerRadius:8];
+    [self.registBtn.layer setMasksToBounds:YES];
+    [self.registBtn.layer setCornerRadius:8];
+    [self.loginBtn addTarget:self action:@selector(loginBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
+
+-(void)loginBtnClicked{
+    
+   
+    FirstViewController *firstVc=[[FirstViewController alloc]init];
+    
+    
+}
+
+-(void)registBtnClicked
+{
+    
+    
+    
+}
 //点击忘记密码
 - (IBAction)forgetBtnClick:(id)sender {
     
