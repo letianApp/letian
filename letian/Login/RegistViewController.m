@@ -8,6 +8,9 @@
 
 #import "RegistViewController.h"
 #import "LoginViewController.h"
+#import "SetAcountViewController.h"
+
+
 @interface RegistViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
@@ -41,6 +44,7 @@
 
     [self.doButton addTarget:self action:@selector(doButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 
+    [self.nextButton addTarget:self action:@selector(nextButtonClick) forControlEvents:UIControlEventTouchUpInside];
 
 
 }
@@ -64,7 +68,9 @@
 //下一步
 - (void)nextButtonClick{
     
+    SetAcountViewController *setAcountVc=[[SetAcountViewController alloc]init];
     
+    [self presentViewController:setAcountVc animated:YES completion:nil];
     
 }
 
