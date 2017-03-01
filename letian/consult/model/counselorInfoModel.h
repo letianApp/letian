@@ -17,5 +17,7 @@
 @property (nonatomic, copy) NSString *conserlorSex;
 @property (nonatomic, copy) NSString *conserlorPrice;
 @property (nonatomic, copy) NSString *conserlorAbout;
+@property (nonatomic, copy) NSString *wwwwwww;
+
 
 @end
