@@ -26,6 +26,12 @@
 		090733951E655B0600F21E02 /* consultPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 090733931E655B0600F21E02 /* consultPageCell.m */; };
 		090733961E655B0600F21E02 /* consultPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 090733941E655B0600F21E02 /* consultPageCell.xib */; };
 		0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 090733991E65665A00F21E02 /* counselorInfoModel.m */; };
+		0945B13D1E67E7F2005B7560 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = 0945B1391E67E7F2005B7560 /* female.png */; };
+		0945B13E1E67E7F2005B7560 /* female@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0945B13A1E67E7F2005B7560 /* female@2x.png */; };
+		0945B13F1E67E7F2005B7560 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = 0945B13B1E67E7F2005B7560 /* male.png */; };
+		0945B1401E67E7F2005B7560 /* male@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0945B13C1E67E7F2005B7560 /* male@2x.png */; };
+		0945B1441E67E8BF005B7560 /* CounselorInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0945B1421E67E8BF005B7560 /* CounselorInfoViewController.m */; };
+		0945B1451E67E8BF005B7560 /* CounselorInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0945B1431E67E8BF005B7560 /* CounselorInfoViewController.xib */; };
 		0953C2231E514B5800FB165C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0953C2221E514B5800FB165C /* main.m */; };
 		0953C2261E514B5800FB165C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0953C2251E514B5800FB165C /* AppDelegate.m */; };
 		0953C2291E514B5800FB165C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0953C2281E514B5800FB165C /* ViewController.m */; };
@@ -110,6 +116,13 @@
 		090733941E655B0600F21E02 /* consultPageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = consultPageCell.xib; sourceTree = "<group>"; };
 		090733981E65665A00F21E02 /* counselorInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = counselorInfoModel.h; sourceTree = "<group>"; };
 		090733991E65665A00F21E02 /* counselorInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = counselorInfoModel.m; sourceTree = "<group>"; };
+		0945B1391E67E7F2005B7560 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
+		0945B13A1E67E7F2005B7560 /* female@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "female@2x.png"; sourceTree = "<group>"; };
+		0945B13B1E67E7F2005B7560 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
+		0945B13C1E67E7F2005B7560 /* male@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "male@2x.png"; sourceTree = "<group>"; };
+		0945B1411E67E8BF005B7560 /* CounselorInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CounselorInfoViewController.h; sourceTree = "<group>"; };
+		0945B1421E67E8BF005B7560 /* CounselorInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CounselorInfoViewController.m; sourceTree = "<group>"; };
+		0945B1431E67E8BF005B7560 /* CounselorInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CounselorInfoViewController.xib; sourceTree = "<group>"; };
 		0953C21E1E514B5800FB165C /* letian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = letian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0953C2221E514B5800FB165C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0953C2241E514B5800FB165C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -212,6 +225,10 @@
 				090733711E64105A00F21E02 /* firstPageTabSel.png */,
 				090733721E64105A00F21E02 /* firstPageTabSel@2x.png */,
 				090733731E64105A00F21E02 /* mainMessage.png */,
+				0945B1391E67E7F2005B7560 /* female.png */,
+				0945B13A1E67E7F2005B7560 /* female@2x.png */,
+				0945B13B1E67E7F2005B7560 /* male.png */,
+				0945B13C1E67E7F2005B7560 /* male@2x.png */,
 				090733741E64105A00F21E02 /* mainMessage@2x.png */,
 				090733751E64105A00F21E02 /* mainMessageSel.png */,
 				090733761E64105A00F21E02 /* mainMessageSel@2x.png */,
@@ -374,6 +391,9 @@
 				0970CFED1E5180BF007480CB /* ConsultViewController.h */,
 				0970CFEE1E5180BF007480CB /* ConsultViewController.m */,
 				0970CFEF1E5180BF007480CB /* ConsultViewController.xib */,
+				0945B1411E67E8BF005B7560 /* CounselorInfoViewController.h */,
+				0945B1421E67E8BF005B7560 /* CounselorInfoViewController.m */,
+				0945B1431E67E8BF005B7560 /* CounselorInfoViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -628,11 +648,15 @@
 				77038DFA1E63C9F20096C07D /* cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg in Resources */,
 				77038E0D1E63CAAB0096C07D /* index_slide_01.jpg in Resources */,
 				77D2BF981E66B3D0000B9978 /* RegistViewController.xib in Resources */,
+				0945B1451E67E8BF005B7560 /* CounselorInfoViewController.xib in Resources */,
 				0970CFF61E5180DF007480CB /* MyViewController.xib in Resources */,
+				0945B13E1E67E7F2005B7560 /* female@2x.png in Resources */,
+				0945B1401E67E7F2005B7560 /* male@2x.png in Resources */,
 				77038E021E63C9F20096C07D /* 微信支付.png in Resources */,
 				77038DFB1E63C9F20096C07D /* timg (1).jpeg in Resources */,
 				090733891E64105A00F21E02 /* myPagTabSel.png in Resources */,
 				090733851E64105A00F21E02 /* mainMessageSel.png in Resources */,
+				0945B13F1E67E7F2005B7560 /* male.png in Resources */,
 				77D2BF931E668D83000B9978 /* mainMessageWhite.png in Resources */,
 				77038DFF1E63C9F20096C07D /* 屏幕快照 2017-02-20 下午4.05.02.png in Resources */,
 				0907337D1E64105A00F21E02 /* consultPagTabSel.png in Resources */,
@@ -654,6 +678,7 @@
 				090733821E64105A00F21E02 /* firstPageTabSel@2x.png in Resources */,
 				77D2BF9D1E66B93E000B9978 /* do.png in Resources */,
 				77DA5DCE1E666B92003FAE0C /* LoginViewController.xib in Resources */,
+				0945B13D1E67E7F2005B7560 /* female.png in Resources */,
 				77D2BF9B1E66B933000B9978 /* donot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -691,6 +716,7 @@
 				77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */,
 				0953C2231E514B5800FB165C /* main.m in Sources */,
 				77D2BFA11E66C404000B9978 /* SetAcountViewController.m in Sources */,
+				0945B1441E67E8BF005B7560 /* CounselorInfoViewController.m in Sources */,
 				0970CFEC1E517EB8007480CB /* FirstViewController.m in Sources */,
 				77038DE71E63C3B50096C07D /* NSTimer+YYFounction.m in Sources */,
 			);

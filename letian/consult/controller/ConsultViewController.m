@@ -9,6 +9,7 @@
 #import "ConsultViewController.h"
 #import "consultPageCell.h"
 #import "counselorInfoModel.h"
+#import "CounselorInfoViewController.h"
 
 
 @interface ConsultViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -195,6 +196,7 @@
     
 }
 
+//cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     consultPageCell *cell = [consultPageCell cellWithTableView:tableView];
@@ -202,8 +204,18 @@
     
 }
 
+//行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 100;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CounselorInfoViewController *CounselorInfoVc = [[CounselorInfoViewController alloc]init];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.navigationController pushViewController:CounselorInfoVc animated:YES];
+    
 }
 
 
