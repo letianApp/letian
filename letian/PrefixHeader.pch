@@ -19,6 +19,7 @@
 #define SCREEN_H [UIScreen mainScreen].bounds.size.height
 #define statusBar_H [[UIApplication sharedApplication] statusBarFrame].size.height
 #define navigationBar_H self.navigationController.navigationBar.frame.size.height
+#define tabBar_H self.tabBarController.tabBar.frame.size.height
 
 
 

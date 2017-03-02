@@ -7,8 +7,11 @@
 //
 
 #import "ConsultViewController.h"
+#import "consultPageCell.h"
+#import "counselorInfoModel.h"
 
-@interface ConsultViewController ()
+
+@interface ConsultViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 
 
@@ -17,6 +20,8 @@
     NSArray *_mainClassifiedDataSource;
     NSArray *_counselorStatusDataSource;
     NSArray *_priceDataSource;
+    
+    UITableView *_counselorInfoTableview;
     
 }
 
@@ -33,7 +38,7 @@
     
     [self customNavigation];
     [self creatClassifiedSection];
-    
+    [self creatTableView];
     
     
 }
@@ -178,6 +183,28 @@
     
 }
 
+#pragma mark 创建tabview
+- (void)creatTableView {
+    
+    _counselorInfoTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H*4, SCREEN_W, SCREEN_H-statusBar_H - navigationBar_H*4 - tabBar_H) style:UITableViewStylePlain];
+    _counselorInfoTableview.dataSource = self;
+    _counselorInfoTableview.delegate = self;
+    _counselorInfoTableview.backgroundColor = WEAKPINK;
+    [self.view addSubview:_counselorInfoTableview];
+    _counselorInfoTableview.rowHeight = 100;
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    consultPageCell *cell = [consultPageCell cellWithTableView:tableView];
+    return cell;
+    
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 100;
+}
 
 
 

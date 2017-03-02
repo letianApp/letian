@@ -19,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *conserVisitors;
 
 
++ (instancetype) cellWithTableView:(UITableView *)tableview;
+
+
 
 @end
 
