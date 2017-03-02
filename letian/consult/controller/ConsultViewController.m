@@ -33,11 +33,16 @@
 
 @implementation ConsultViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [self customNavigation];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self customNavigation];
+//    [self customNavigation];
     [self creatClassifiedSection];
     [self creatTableView];
     
@@ -50,6 +55,7 @@
     self = [super init];
     if (self) {
         [self customTabBar];
+
     }
     return self;
 }
@@ -64,16 +70,27 @@
 - (void)customNavigation {
     
     self.navigationController.navigationBar.tintColor = MAINCOLOR;
+    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     
     UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W/2, 40)];
     searchBar.placeholder = @"搜索";
     self.navigationItem.titleView = searchBar;
     
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]initWithTitle:@"乐天心理" style:UIBarButtonItemStyleDone target:self action:nil];
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]initWithTitle:@"乐天心理"
+                                                                  style:UIBarButtonItemStyleDone
+                                                                 target:self action:nil];
     self.navigationItem.leftBarButtonItem = leftButton;
     
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"mainMessage"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(selRightButton)];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"mainMessage"]
+                                                  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self action:@selector(selRightButton)];
     self.navigationItem.rightBarButtonItem = rightButton;
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:nil];
     
 }
 
@@ -214,6 +231,7 @@
     
     CounselorInfoViewController *CounselorInfoVc = [[CounselorInfoViewController alloc]init];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    CounselorInfoVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:CounselorInfoVc animated:YES];
     
 }
