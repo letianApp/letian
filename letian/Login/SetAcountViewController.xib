@@ -117,7 +117,7 @@
                 <constraint firstItem="rbP-u1-DZ4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="yLS-UU-yyx"/>
                 <constraint firstItem="wMr-fK-WwZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="zW6-P7-lh2"/>
             </constraints>
-            <point key="canvasLocation" x="229" y="-231"/>
+            <point key="canvasLocation" x="179" y="-236"/>
         </view>
     </objects>
     <resources>

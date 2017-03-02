@@ -10,6 +10,8 @@
 #import "FirstViewController.h"
 #import "AppDelegate.h"
 #import "RegistViewController.h"
+#import "ForgetPwViewController.h"
+
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *acountTextField;
@@ -77,7 +79,9 @@
 //点击忘记密码
 - (IBAction)forgetBtnClick:(id)sender {
     
+    ForgetPwViewController *forgetPwVc=[[ForgetPwViewController alloc]init];
     
+    [self.navigationController pushViewController:forgetPwVc animated:YES];
     
 }
 

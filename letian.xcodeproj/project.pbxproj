@@ -39,6 +39,7 @@
 		0970CFF11E5180BF007480CB /* ConsultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0970CFEF1E5180BF007480CB /* ConsultViewController.xib */; };
 		0970CFF51E5180DF007480CB /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0970CFF31E5180DF007480CB /* MyViewController.m */; };
 		0970CFF61E5180DF007480CB /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0970CFF41E5180DF007480CB /* MyViewController.xib */; };
+		74FF12D34910C046FDF26AE9 /* libPods-letian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D06804C865F43F4E9B595D7 /* libPods-letian.a */; };
 		77038DE71E63C3B50096C07D /* NSTimer+YYFounction.m in Sources */ = {isa = PBXBuildFile; fileRef = 77038DE41E63C3B50096C07D /* NSTimer+YYFounction.m */; };
 		77038DE81E63C3B50096C07D /* YYCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77038DE61E63C3B50096C07D /* YYCycleScrollView.m */; };
 		77038DFA1E63C9F20096C07D /* cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038DEE1E63C9F20096C07D /* cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg */; };
@@ -67,6 +68,8 @@
 		77D2BF9D1E66B93E000B9978 /* do.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BF9C1E66B93E000B9978 /* do.png */; };
 		77D2BFA11E66C404000B9978 /* SetAcountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D2BF9F1E66C404000B9978 /* SetAcountViewController.m */; };
 		77D2BFA21E66C404000B9978 /* SetAcountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BFA01E66C404000B9978 /* SetAcountViewController.xib */; };
+		77D2BFA61E67D6A9000B9978 /* ForgetPwViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D2BFA41E67D6A9000B9978 /* ForgetPwViewController.m */; };
+		77D2BFA71E67D6A9000B9978 /* ForgetPwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BFA51E67D6A9000B9978 /* ForgetPwViewController.xib */; };
 		77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DA5DCB1E666B92003FAE0C /* LoginViewController.m */; };
 		77DA5DCE1E666B92003FAE0C /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */; };
 /* End PBXBuildFile section */
@@ -134,6 +137,7 @@
 		0970CFF21E5180DF007480CB /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		0970CFF31E5180DF007480CB /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		0970CFF41E5180DF007480CB /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
+		4D06804C865F43F4E9B595D7 /* libPods-letian.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-letian.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77038DE31E63C3B50096C07D /* NSTimer+YYFounction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+YYFounction.h"; sourceTree = "<group>"; };
 		77038DE41E63C3B50096C07D /* NSTimer+YYFounction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+YYFounction.m"; sourceTree = "<group>"; };
 		77038DE51E63C3B50096C07D /* YYCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYCycleScrollView.h; sourceTree = "<group>"; };
@@ -168,9 +172,14 @@
 		77D2BF9E1E66C404000B9978 /* SetAcountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAcountViewController.h; sourceTree = "<group>"; };
 		77D2BF9F1E66C404000B9978 /* SetAcountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAcountViewController.m; sourceTree = "<group>"; };
 		77D2BFA01E66C404000B9978 /* SetAcountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetAcountViewController.xib; sourceTree = "<group>"; };
+		77D2BFA31E67D6A9000B9978 /* ForgetPwViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPwViewController.h; sourceTree = "<group>"; };
+		77D2BFA41E67D6A9000B9978 /* ForgetPwViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwViewController.m; sourceTree = "<group>"; };
+		77D2BFA51E67D6A9000B9978 /* ForgetPwViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPwViewController.xib; sourceTree = "<group>"; };
 		77DA5DCA1E666B92003FAE0C /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		77DA5DCB1E666B92003FAE0C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		7DE455D051C315B06E3F4C61 /* Pods-letian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-letian.release.xcconfig"; path = "Pods/Target Support Files/Pods-letian/Pods-letian.release.xcconfig"; sourceTree = "<group>"; };
+		F8550220C06BB0D4BA36D36F /* Pods-letian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-letian.debug.xcconfig"; path = "Pods/Target Support Files/Pods-letian/Pods-letian.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74FF12D34910C046FDF26AE9 /* libPods-letian.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +259,8 @@
 				0953C23A1E514B5800FB165C /* letianTests */,
 				0953C2451E514B5900FB165C /* letianUITests */,
 				0953C21F1E514B5800FB165C /* Products */,
+				17141F58EED1935B6AB46B35 /* Pods */,
+				7C97B37F8435D00E98815F82 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -402,6 +414,15 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		17141F58EED1935B6AB46B35 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F8550220C06BB0D4BA36D36F /* Pods-letian.debug.xcconfig */,
+				7DE455D051C315B06E3F4C61 /* Pods-letian.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		77038DE11E63C3B50096C07D /* Lib */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,8 +519,19 @@
 				77D2BF9E1E66C404000B9978 /* SetAcountViewController.h */,
 				77D2BF9F1E66C404000B9978 /* SetAcountViewController.m */,
 				77D2BFA01E66C404000B9978 /* SetAcountViewController.xib */,
+				77D2BFA31E67D6A9000B9978 /* ForgetPwViewController.h */,
+				77D2BFA41E67D6A9000B9978 /* ForgetPwViewController.m */,
+				77D2BFA51E67D6A9000B9978 /* ForgetPwViewController.xib */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		7C97B37F8435D00E98815F82 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4D06804C865F43F4E9B595D7 /* libPods-letian.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -509,9 +541,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0953C24B1E514B5900FB165C /* Build configuration list for PBXNativeTarget "letian" */;
 			buildPhases = (
+				7B2FECA90A757B4B87E408C0 /* [CP] Check Pods Manifest.lock */,
 				0953C21A1E514B5700FB165C /* Sources */,
 				0953C21B1E514B5700FB165C /* Frameworks */,
 				0953C21C1E514B5700FB165C /* Resources */,
+				1EC28928356EB4D43D36D7FF /* [CP] Embed Pods Frameworks */,
+				8E98826DB88D084D3D8BD428 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -638,6 +673,7 @@
 				0907337D1E64105A00F21E02 /* consultPagTabSel.png in Resources */,
 				090733881E64105A00F21E02 /* myPagTab@2x.png in Resources */,
 				774DBC0D1E6420FC00B8798C /* HomeCell.xib in Resources */,
+				77D2BFA71E67D6A9000B9978 /* ForgetPwViewController.xib in Resources */,
 				090733801E64105A00F21E02 /* firstPageTab@2x.png in Resources */,
 				0907338A1E64105A00F21E02 /* myPagTabSel@2x.png in Resources */,
 				77038E091E63CA960096C07D /* index_slide_03.jpg in Resources */,
@@ -674,6 +710,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1EC28928356EB4D43D36D7FF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-letian/Pods-letian-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B2FECA90A757B4B87E408C0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8E98826DB88D084D3D8BD428 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-letian/Pods-letian-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0953C21A1E514B5700FB165C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -681,6 +765,7 @@
 			files = (
 				77D2BF971E66B3D0000B9978 /* RegistViewController.m in Sources */,
 				0970CFF51E5180DF007480CB /* MyViewController.m in Sources */,
+				77D2BFA61E67D6A9000B9978 /* ForgetPwViewController.m in Sources */,
 				0953C2291E514B5800FB165C /* ViewController.m in Sources */,
 				77038DE81E63C3B50096C07D /* YYCycleScrollView.m in Sources */,
 				774DBC0C1E6420FC00B8798C /* HomeCell.m in Sources */,
@@ -839,6 +924,7 @@
 		};
 		0953C24C1E514B5900FB165C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8550220C06BB0D4BA36D36F /* Pods-letian.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3FZ6X72MWM;
@@ -853,6 +939,7 @@
 		};
 		0953C24D1E514B5900FB165C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7DE455D051C315B06E3F4C61 /* Pods-letian.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3FZ6X72MWM;
