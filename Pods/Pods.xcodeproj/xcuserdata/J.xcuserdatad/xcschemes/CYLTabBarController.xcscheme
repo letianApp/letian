@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7BE9CC38826B8D1D13A1DFF22AA89C73'
-               BlueprintName = 'Pods-letian'
+               BlueprintIdentifier = '0C1D89EAE68EF4D4ABEDB611EC44AAB0'
+               BlueprintName = 'CYLTabBarController'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libPods-letian.a'>
+               BuildableName = 'libCYLTabBarController.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -12,7 +12,7 @@
 
 {
     UITableView *_mainTableview;
-    UILabel *_bottomBar;
+    UIView *_bottomBar;
 }
 
 @end
@@ -36,7 +36,7 @@
 
 - (void)creatBottomBar {
     
-    _bottomBar = [[UILabel alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
+    _bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
     [self.view addSubview:_bottomBar];
     _bottomBar.backgroundColor = [UIColor whiteColor];
     
