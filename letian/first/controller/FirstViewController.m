@@ -29,7 +29,7 @@
     
     self.automaticallyAdjustsScrollViewInsets=NO;
     
-    [self customTabBar];
+//    [self customTabBar];
     
     [self createHeadBgView];
     
@@ -37,19 +37,6 @@
     
     
 }
-
-
-
-#pragma mark 定制TabBar
-
-
-- (void)customTabBar {
-    
-    self.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"首页" image:[[UIImage imageNamed:@"firstPageTab"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"firstPageTabSel"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    self.tabBarController.tabBar.tintColor = MAINCOLOR;
-    
-}
-
 
 -(void)createTableView
 {

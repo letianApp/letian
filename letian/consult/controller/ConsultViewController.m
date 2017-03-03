@@ -49,23 +49,6 @@
     
 }
 
-#pragma mark 定制TabBar
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self customTabBar];
-
-    }
-    return self;
-}
-
-- (void)customTabBar {
-    
-    self.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"咨询" image:[[UIImage imageNamed:@"consultPagTab"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"consultPagTabSel"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    
-}
-
 #pragma mark 定制Navigation
 - (void)customNavigation {
     

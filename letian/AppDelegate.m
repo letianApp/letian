@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "CustomCYLTabBar.h"
+
 #import "FirstViewController.h"
 #import "ConsultViewController.h"
 #import "MyViewController.h"
@@ -19,34 +21,17 @@
 
 @implementation AppDelegate
 
-
-- (void)creatTabBarController {
-    
-    
-    //tabbar
-    UITabBarController *mainTbc = [[UITabBarController alloc]init];
-    
-    NSArray *vcName = @[@"FirstViewController",@"ConsultViewController",@"MyViewController"];
-    NSMutableArray *vcArr = [[NSMutableArray alloc]init];
-    
-    for (int i = 0; i < vcName.count; i++) {
-        Class cls = NSClassFromString(vcName[i]);
-        UIViewController *vc = [[cls alloc]init];
-        UINavigationController *nc = [[UINavigationController alloc]initWithRootViewController:vc];
-        [vcArr addObject:nc];
-    }
-    
-    mainTbc.viewControllers = vcArr;
-    self.window.backgroundColor=[UIColor whiteColor];
-    
-    self.window.rootViewController = mainTbc;
-}
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+//    [self creatTabBarController];
     
-    [self creatTabBarController];
+    // 设置主窗口,并设置根控制器
+    self.window = [[UIWindow alloc]init];
+    self.window.frame = [UIScreen mainScreen].bounds;
+    CustomCYLTabBar *tabBarControllerConfig = [[CustomCYLTabBar alloc] init];
+    [self.window setRootViewController:tabBarControllerConfig.tabBarController];
+    [self.window makeKeyAndVisible];
+
     
     return YES;
 }
