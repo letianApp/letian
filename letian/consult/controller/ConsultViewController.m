@@ -15,18 +15,13 @@
 @interface ConsultViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 
+@property (nonatomic, copy) NSArray *mainClassifiedDataSource;
+@property (nonatomic, copy) NSArray *counselorStatusDataSource;
+@property (nonatomic, copy) NSArray *priceDataSource;
 
-{
-    UIScrollView *_classifiedSectionFirstLine;
-    NSArray *_mainClassifiedDataSource;
-    NSArray *_counselorStatusDataSource;
-    NSArray *_priceDataSource;
-    
-    UITableView *_counselorInfoTableview;
-    
-}
-
-
+@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) UIScrollView *classifiedSectionFirstLine;
+@property (nonatomic, strong) UITableView *counselorInfoTableview;
 
 
 @end
@@ -34,6 +29,12 @@
 @implementation ConsultViewController
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    [self customSearchBar];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     
     [self customNavigation];
 }
@@ -43,9 +44,19 @@
     // Do any additional setup after loading the view from its nib.
     
 //    [self customNavigation];
+    
     [self creatClassifiedSection];
     [self creatTableView];
     
+    
+}
+
+- (void)customSearchBar {
+    
+    _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W/2, 40)];
+    _searchBar.placeholder = @"搜索";
+    [_searchBar setTranslucent:YES];
+//    _searchBar.searchBarStyle = UISearchBarStyleProminent;
     
 }
 
@@ -55,13 +66,12 @@
     self.navigationController.navigationBar.tintColor = MAINCOLOR;
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     
-    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W/2, 40)];
-    searchBar.placeholder = @"搜索";
-    self.navigationItem.titleView = searchBar;
+    self.navigationItem.titleView = _searchBar;
     
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]initWithTitle:@"乐天心理"
                                                                   style:UIBarButtonItemStyleDone
                                                                  target:self action:nil];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:MAINCOLOR} forState:UIControlStateDisabled];
     self.navigationItem.leftBarButtonItem = leftButton;
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"mainMessage"]

@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RTRootNavigationController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0C1D89EAE68EF4D4ABEDB611EC44AAB0</key>
+		<key>169844F3E7BF49EC10F7B0E46DD292FA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7BE9CC38826B8D1D13A1DFF22AA89C73</key>
+		<key>5E4BEE70BDD1C2750BD7AF5621DEDE81</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9C8C22335BAFBC66B1F3F5975793B053</key>
+		<key>C7067B20598AD3797CAE53F67CE6E7EC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F906C6ADD9F3E502E589316C52F4CC11</key>
 		<dict>
 			<key>primary</key>
 			<true/>
