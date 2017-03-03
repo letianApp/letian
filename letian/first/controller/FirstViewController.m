@@ -218,9 +218,9 @@
 //
 //        loginVc.hidesBottomBarWhenPushed=YES;
 //        
-//        [self.navigationController pushViewController:loginVc animated:YES];
+        [self.navigationController pushViewController:loginVc animated:YES];
         
-        [self presentViewController:loginVc animated:YES completion:nil];
+//        [self presentViewController:loginVc animated:YES completion:nil];
         
         
         
