@@ -32,10 +32,19 @@
     [self.window setRootViewController:tabBarControllerConfig.tabBarController];
     [self.window makeKeyAndVisible];
 
+    [self setUpStatusBar];
     
     return YES;
 }
 
+//设置全局的navigationBar样式
+-(void)setUpStatusBar
+{
+    
+//    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:MAINCOLOR}];
+
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

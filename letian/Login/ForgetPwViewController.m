@@ -16,8 +16,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.navigationController.navigationBarHidden=NO;
+    self.navigationItem.title = @"忘记密码";
+    self.navigationController.navigationBar.tintColor = MAINCOLOR;
+
+//    [self setUpNavigationBar];
 }
+
+
+///*** 设置导航栏信息*/
+//-(void) setUpNavigationBar
+//{
+//    self.navigationItem.title = @"忘记密码";
+//    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+//    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+//    [backButton sizeToFit];
+//    backButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+//}
+//
+//-(void) back
+//{
+//    [self.navigationController popViewControllerAnimated:YES];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

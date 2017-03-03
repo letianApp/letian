@@ -21,11 +21,16 @@
 
 @implementation FirstViewController
 
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden=YES;
+
+}
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
-    self.navigationController.navigationBarHidden=YES;
+//    self.navigationController.navigationBarHidden=YES;
     
     self.automaticallyAdjustsScrollViewInsets=NO;
     
@@ -204,13 +209,9 @@
         
         // 点击确定按钮的时候, 会调用这个block
         LoginViewController *loginVc=[[LoginViewController alloc]init];
-//
-//        loginVc.hidesBottomBarWhenPushed=YES;
-//        
+
+        
         [self.navigationController pushViewController:loginVc animated:YES];
-        
-//        [self presentViewController:loginVc animated:YES completion:nil];
-        
         
         
     }]];

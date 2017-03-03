@@ -20,21 +20,21 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TXw-9C-nn2">
-                    <rect key="frame" x="45" y="131" width="285" height="1"/>
+                    <rect key="frame" x="45" y="201" width="285" height="1"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="2df-aL-LgY"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bvm-yi-LQf">
-                    <rect key="frame" x="45" y="65" width="285" height="1"/>
+                    <rect key="frame" x="45" y="135" width="285" height="1"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="yoP-nk-JCy"/>
                     </constraints>
                 </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yJj-iN-lWN">
-                    <rect key="frame" x="45" y="96" width="285" height="30"/>
+                    <rect key="frame" x="45" y="166" width="285" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="bYG-5Q-Dlo"/>
                     </constraints>
@@ -43,7 +43,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tMe-UW-CRu">
-                    <rect key="frame" x="45" y="30" width="285" height="30"/>
+                    <rect key="frame" x="45" y="100" width="285" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="ohl-IR-eIS"/>
                     </constraints>
@@ -52,7 +52,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANc-ST-n2J">
-                    <rect key="frame" x="250" y="101" width="80" height="25"/>
+                    <rect key="frame" x="250" y="171" width="80" height="25"/>
                     <color key="backgroundColor" red="0.89019607840000003" green="0.43529411759999997" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="8re-Nq-5Ve"/>
@@ -64,7 +64,7 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vVs-KR-WXf">
-                    <rect key="frame" x="45" y="187" width="285" height="30"/>
+                    <rect key="frame" x="45" y="257" width="285" height="30"/>
                     <color key="backgroundColor" red="0.89019607840000003" green="0.43529411759999997" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="ZuC-Tj-VA4"/>
@@ -87,7 +87,7 @@
                 <constraint firstAttribute="trailing" secondItem="yJj-iN-lWN" secondAttribute="trailing" constant="45" id="XJp-cX-bmt"/>
                 <constraint firstItem="TXw-9C-nn2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="bDs-Md-h3o"/>
                 <constraint firstItem="yJj-iN-lWN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="bji-f6-ecp"/>
-                <constraint firstItem="tMe-UW-CRu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="cuM-to-cNH"/>
+                <constraint firstItem="tMe-UW-CRu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="cuM-to-cNH"/>
                 <constraint firstItem="vVs-KR-WXf" firstAttribute="top" secondItem="TXw-9C-nn2" secondAttribute="bottom" constant="55" id="dae-cY-DdA"/>
                 <constraint firstItem="vVs-KR-WXf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="f95-yz-MD2"/>
                 <constraint firstItem="yJj-iN-lWN" firstAttribute="top" secondItem="Bvm-yi-LQf" secondAttribute="bottom" constant="30" id="fbQ-u2-Nhc"/>
@@ -95,6 +95,7 @@
                 <constraint firstItem="Bvm-yi-LQf" firstAttribute="top" secondItem="tMe-UW-CRu" secondAttribute="bottom" constant="5" id="oLe-2s-MwZ"/>
                 <constraint firstItem="TXw-9C-nn2" firstAttribute="top" secondItem="yJj-iN-lWN" secondAttribute="bottom" constant="5" id="yP8-Ke-A5T"/>
             </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
         </view>
     </objects>
 </document>
