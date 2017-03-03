@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "RegistViewController.h"
 #import "ForgetPwViewController.h"
-
+#import "CustomCYLTabBar.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *acountTextField;
@@ -44,23 +44,8 @@
 -(void)loginBtnClicked{
     
    
-    UITabBarController *mainTbc = [[UITabBarController alloc]init];
-    
-    NSArray *vcName = @[@"FirstViewController",@"ConsultViewController",@"MyViewController"];
-    NSMutableArray *vcArr = [[NSMutableArray alloc]init];
-    
-    for (int i = 0; i < vcName.count; i++) {
-        Class cls = NSClassFromString(vcName[i]);
-        UIViewController *vc = [[cls alloc]init];
-        UINavigationController *nc = [[UINavigationController alloc]initWithRootViewController:vc];
-        [vcArr addObject:nc];
-    }
-    
-    mainTbc.viewControllers = vcArr;
-    
-    
-    [UIApplication sharedApplication].keyWindow.rootViewController = mainTbc;
-    
+    CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
+    [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
     
 }
 

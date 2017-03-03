@@ -7,7 +7,7 @@
 //
 
 #import "SetAcountViewController.h"
-
+#import "CustomCYLTabBar.h"
 
 @interface SetAcountViewController ()
 
@@ -45,22 +45,8 @@
 -(void)confirmBtnClick
 {
     
-    UITabBarController *mainTbc = [[UITabBarController alloc]init];
-    
-    NSArray *vcName = @[@"FirstViewController",@"ConsultViewController",@"MyViewController"];
-    NSMutableArray *vcArr = [[NSMutableArray alloc]init];
-    
-    for (int i = 0; i < vcName.count; i++) {
-        Class cls = NSClassFromString(vcName[i]);
-        UIViewController *vc = [[cls alloc]init];
-        UINavigationController *nc = [[UINavigationController alloc]initWithRootViewController:vc];
-        [vcArr addObject:nc];
-    }
-    
-    mainTbc.viewControllers = vcArr;
-    
-    
-    [UIApplication sharedApplication].keyWindow.rootViewController = mainTbc;
+    CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
+    [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
 
     
 }
