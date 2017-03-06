@@ -10,6 +10,11 @@
 
 @interface CounselorInfoViewController ()
 
+
+@property (nonatomic, weak) UIView *navigationView;
+
+
+
 @property (nonatomic, strong) UIScrollView *mainScroview;
 @property (nonatomic, strong) UITableView *mainTableview;
 
@@ -29,6 +34,9 @@
     
     self.view.backgroundColor = MAINCOLOR;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    [self setupNavigationView];
+    
     [self creatMainScroview];
     
     [self creatBottomBar];
@@ -38,10 +46,42 @@
     
 }
 
+#pragma mark 返回按钮
+- (UIBarButtonItem *)customBackItemWithTarget:(id)target
+                                       action:(SEL)action {
+
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:@"whiteback"] forState:UIControlStateNormal];
+    [btn setFrame:CGRectMake(0, 0, 25, 25)];
+    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    return item;
+    
+}
+
+- (void)setupNavigationView
+{
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    UIView *navigationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, 64)];
+    navigationView.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 32, SCREEN_W, 20)];
+    titleLabel.text = @"孙晓平";
+    titleLabel.font = [UIFont systemFontOfSize:17];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [navigationView addSubview:titleLabel];
+    
+    navigationView.alpha = 0;
+    [self.view addSubview:navigationView];
+    self.navigationView = navigationView;
+}
+
+
 #pragma mark 创建主界面滚动视图
 - (void)creatMainScroview{
     
-    _mainScroview = [[UIScrollView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H/4*3-tabBar_H)];
+    _mainScroview = [[UIScrollView alloc]initWithFrame:CGRectMake(0, SCREEN_H/3, SCREEN_W, SCREEN_H/4*3-tabBar_H)];
     _mainScroview.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_mainScroview];
     

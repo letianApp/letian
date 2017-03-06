@@ -7,6 +7,8 @@
 //
 
 #import "CustomCYLTabBar.h"
+#import "RTRootNavigationController.h"
+
 
 @interface CYLBaseNavigationController : UINavigationController
 @end
@@ -57,7 +59,7 @@
                                                    initWithRootViewController:firstViewController];
     
     ConsultViewController *secondViewController = [[ConsultViewController alloc] init];
-    UIViewController *secondNavigationController = [[CYLBaseNavigationController alloc]
+    UIViewController *secondNavigationController = [[RTRootNavigationController alloc]
                                                     initWithRootViewController:secondViewController];
     
     MyViewController *thirdViewController = [[MyViewController alloc] init];

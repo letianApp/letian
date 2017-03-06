@@ -64,7 +64,7 @@
 - (void)customNavigation {
     
     self.navigationController.navigationBar.tintColor = MAINCOLOR;
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+//    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     
     self.navigationItem.titleView = _searchBar;
     
@@ -79,11 +79,6 @@
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self action:@selector(selRightButton)];
     self.navigationItem.rightBarButtonItem = rightButton;
-    
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:nil];
     
 }
 
@@ -223,9 +218,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     CounselorInfoViewController *CounselorInfoVc = [[CounselorInfoViewController alloc]init];
+//    CounselorInfoVc.title = 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CounselorInfoVc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:CounselorInfoVc animated:YES];
+    [self.rt_navigationController pushViewController:CounselorInfoVc animated:YES];
     
 }
 
