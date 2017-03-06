@@ -30,11 +30,9 @@
     
     [super viewDidLoad];
     
-//    self.navigationController.navigationBarHidden=YES;
     
     self.automaticallyAdjustsScrollViewInsets=NO;
     
-//    [self customTabBar];
     
     [self createHeadBgView];
     

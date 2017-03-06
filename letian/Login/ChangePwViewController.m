@@ -1,59 +1,48 @@
 //
-//  ForgetPwViewController.m
+//  ChangePwViewController.m
 //  letian
 //
-//  Created by 郭茜 on 2017/3/2.
+//  Created by 郭茜 on 2017/3/6.
 //  Copyright © 2017年 J. All rights reserved.
 //
 
-#import "ForgetPwViewController.h"
 #import "ChangePwViewController.h"
+#import "LoginViewController.h"
+@interface ChangePwViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *changeTextField;
+
+@property (weak, nonatomic) IBOutlet UITextField *confirmTextField;
+
+@property (weak, nonatomic) IBOutlet UIButton *confirmButton;
 
 
 
-@interface ForgetPwViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *phoneTextFiled;
-
-@property (weak, nonatomic) IBOutlet UITextField *codeTextField;
-
-@property (weak, nonatomic) IBOutlet UIButton *getCodeButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
 
 @end
 
-@implementation ForgetPwViewController
+@implementation ChangePwViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBarHidden=NO;
+    self.confirmButton.layer.masksToBounds=YES;
+    
+    self.confirmButton.layer.cornerRadius=8;
+    
+    [self.confirmButton addTarget:self action:@selector(confirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     
     
-    self.getCodeButton.layer.masksToBounds=YES;
-    
-    self.getCodeButton.layer.cornerRadius=8;
-    
-    self.nextButton.layer.masksToBounds=YES;
-    
-    self.nextButton.layer.cornerRadius=8;
-    
-    [self.nextButton addTarget:self action:@selector(nextButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-
     [self setUpNavigationBar];
-    
-    
 }
 
 
 /*** 设置导航栏信息*/
 -(void) setUpNavigationBar
 {
-    self.navigationItem.title = @"忘记密码";
+    self.navigationItem.title = @"重设密码";
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
@@ -68,13 +57,15 @@
 }
 
 
--(void)nextButtonClicked{
+-(void)confirmButtonClicked
+{
     
-    ChangePwViewController *changePwVc=[[ChangePwViewController alloc]init];
+    LoginViewController *loginVc=[[LoginViewController alloc] init];
     
-    [self.navigationController pushViewController:changePwVc animated:YES];
+    [self.navigationController pushViewController:loginVc animated:YES];
+    
+    
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

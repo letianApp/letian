@@ -11,6 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ForgetPwViewController">
             <connections>
+                <outlet property="codeTextField" destination="yJj-iN-lWN" id="QLv-5d-4d0"/>
+                <outlet property="getCodeButton" destination="ANc-ST-n2J" id="p7U-WS-2Tf"/>
+                <outlet property="nextButton" destination="vVs-KR-WXf" id="2ZH-9S-zDM"/>
+                <outlet property="phoneTextFiled" destination="tMe-UW-CRu" id="YBF-JZ-gVu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -96,6 +100,7 @@
                 <constraint firstItem="TXw-9C-nn2" firstAttribute="top" secondItem="yJj-iN-lWN" secondAttribute="bottom" constant="5" id="yP8-Ke-A5T"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
+            <point key="canvasLocation" x="-243" y="20"/>
         </view>
     </objects>
 </document>
