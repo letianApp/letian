@@ -86,6 +86,8 @@
 		7784D8A61E6E532E004AB0CC /* whiteMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8A31E6E532E004AB0CC /* whiteMessage.png */; };
 		7784D8A71E6E532E004AB0CC /* whiteMessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8A41E6E532E004AB0CC /* whiteMessage@2x.png */; };
 		7784D8A81E6E532E004AB0CC /* whiteMessage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8A51E6E532E004AB0CC /* whiteMessage@3x.png */; };
+		7784D8AC1E6E80C5004AB0CC /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7784D8AA1E6E80C5004AB0CC /* MessageViewController.m */; };
+		7784D8AD1E6E80C5004AB0CC /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */; };
 		77C383101E6CF79A00B4EF73 /* ChangePwViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C3830E1E6CF79A00B4EF73 /* ChangePwViewController.m */; };
 		77C383111E6CF79A00B4EF73 /* ChangePwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77C3830F1E6CF79A00B4EF73 /* ChangePwViewController.xib */; };
 		77D2BF931E668D83000B9978 /* mainMessageWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BF921E668D83000B9978 /* mainMessageWhite.png */; };
@@ -225,6 +227,9 @@
 		7784D8A31E6E532E004AB0CC /* whiteMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteMessage.png; sourceTree = "<group>"; };
 		7784D8A41E6E532E004AB0CC /* whiteMessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteMessage@2x.png"; sourceTree = "<group>"; };
 		7784D8A51E6E532E004AB0CC /* whiteMessage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteMessage@3x.png"; sourceTree = "<group>"; };
+		7784D8A91E6E80C5004AB0CC /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		7784D8AA1E6E80C5004AB0CC /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
 		77C3830D1E6CF79A00B4EF73 /* ChangePwViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwViewController.h; sourceTree = "<group>"; };
 		77C3830E1E6CF79A00B4EF73 /* ChangePwViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwViewController.m; sourceTree = "<group>"; };
 		77C3830F1E6CF79A00B4EF73 /* ChangePwViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePwViewController.xib; sourceTree = "<group>"; };
@@ -482,6 +487,9 @@
 				0970CFF21E5180DF007480CB /* MyViewController.h */,
 				0970CFF31E5180DF007480CB /* MyViewController.m */,
 				0970CFF41E5180DF007480CB /* MyViewController.xib */,
+				7784D8A91E6E80C5004AB0CC /* MessageViewController.h */,
+				7784D8AA1E6E80C5004AB0CC /* MessageViewController.m */,
+				7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -819,6 +827,7 @@
 				7784D8921E6D1F43004AB0CC /* waitpay@2x.png in Resources */,
 				7784D8A61E6E532E004AB0CC /* whiteMessage.png in Resources */,
 				090733871E64105A00F21E02 /* myPagTab.png in Resources */,
+				7784D8AD1E6E80C5004AB0CC /* MessageViewController.xib in Resources */,
 				77038E041E63C9F20096C07D /* 银联支付.png in Resources */,
 				77038E011E63C9F20096C07D /* 客服.png in Resources */,
 				090733831E64105A00F21E02 /* mainMessage.png in Resources */,
@@ -906,6 +915,7 @@
 				77D2BFA61E67D6A9000B9978 /* ForgetPwViewController.m in Sources */,
 				0945B1481E6937DF005B7560 /* CustomCYLTabBar.m in Sources */,
 				0953C2291E514B5800FB165C /* ViewController.m in Sources */,
+				7784D8AC1E6E80C5004AB0CC /* MessageViewController.m in Sources */,
 				77038DE81E63C3B50096C07D /* YYCycleScrollView.m in Sources */,
 				774DBC0C1E6420FC00B8798C /* HomeCell.m in Sources */,
 				0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */,
