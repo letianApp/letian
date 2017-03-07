@@ -8,7 +8,7 @@
 
 #import "MyViewController.h"
 #import "GQControls.h"
-
+#import "MessageViewController.h"
 @interface MyViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -75,9 +75,10 @@
     nameLabel.textAlignment=NSTextAlignmentCenter;
     [headView addSubview:nameLabel];
     
-    
+    //消息
     UIButton *messageBtn=[[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W-35, 30, 25, 25)];
     [messageBtn setImage:[UIImage imageNamed:@"whiteMessage"] forState:UIControlStateNormal];
+    [messageBtn addTarget:self action:@selector(messageButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [headView addSubview:messageBtn];
     
     
@@ -85,6 +86,15 @@
     
 }
 
+-(void)messageButtonClicked
+{
+    
+    MessageViewController *messageVc=[[MessageViewController alloc]init];
+    
+    [self.navigationController pushViewController:messageVc animated:YES];
+    
+    
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -153,10 +163,6 @@
         orderLabel.textAlignment=NSTextAlignmentCenter;
         [orderView addSubview:orderLabel];
 
-        
-        
-        
-        
         
     }
     
