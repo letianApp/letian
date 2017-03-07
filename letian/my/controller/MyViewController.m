@@ -65,15 +65,20 @@
     
     //头像
     UIImageView *headImageView=[[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_W-100)/2, 55, 100, 100)];
-    headImageView.image=[UIImage imageNamed:@"headImage"];
+    headImageView.image=[UIImage imageNamed:@"women"];
     headImageView.layer.masksToBounds=YES;
     headImageView.layer.cornerRadius=50;
     [headView addSubview:headImageView];
     
     //用户名
-    UILabel *nameLabel=[GQControls createLabelWithFrame:CGRectMake((SCREEN_W-150)/2, 160, 150, 20) andText:@"我是一个用户" andTextColor:[UIColor whiteColor] andFontSize:16];
+    UILabel *nameLabel=[GQControls createLabelWithFrame:CGRectMake((SCREEN_W-150)/2, 160, 150, 20) andText:@"本宝宝是一个用户" andTextColor:[UIColor whiteColor] andFontSize:16];
     nameLabel.textAlignment=NSTextAlignmentCenter;
     [headView addSubview:nameLabel];
+    
+    
+    UIButton *messageBtn=[[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W-35, 30, 25, 25)];
+    [messageBtn setImage:[UIImage imageNamed:@"whiteMessage"] forState:UIControlStateNormal];
+    [headView addSubview:messageBtn];
     
     
     return headView;
@@ -111,7 +116,6 @@
     UILabel *allOrderLabel=[GQControls createLabelWithFrame:CGRectMake(SCREEN_W-160, 0, 150, 30) andText:@"查看全部订单 >>" andTextColor:[UIColor darkGrayColor] andFontSize:12];
     allOrderLabel.textAlignment=NSTextAlignmentRight;
     [orderView addSubview:allOrderLabel];
-    
     
     
     
