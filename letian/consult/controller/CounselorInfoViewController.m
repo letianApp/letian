@@ -34,12 +34,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.view.backgroundColor = MAINCOLOR;
+//    self.view.backgroundColor = MAINCOLOR;
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self test];
+    [self customNavigation];
     
-    [self setupNavigationView];
+//    [self setupNavigationView];
     
     [self creatMainTableview];
     
@@ -51,7 +52,7 @@
 
 - (void)test {
     
-    _dataSourceArr = @[@"毕业于山东大学，国家二级心理咨询师，心理动力学取向。持续接受精神分析系统培训，长期接受心理动力学取向案例督导及个人体验。咨询风格亲和包容。咨询理念：跟随心的指引，勇敢面对真实。",@"",@"自我探索与成长、情绪问题（抑郁、焦虑、恐惧）、亲密关系、亲子关系、人际关系等。",@"面对困惑与艰辛，鼓起勇气，让我们一起去探索自我以及生活真实的模样"];
+    _dataSourceArr = @[@"毕业于山东大学，国家二级心理咨询师，心理动力学取向。持续接受精神分析系统培训，长期接受心理动力学取向案例督导及个人体验。咨询风格亲和包容。咨询理念：跟随心的指引，勇敢面对真实。",@"亲和、温和、真诚，易建立咨访关系。洞察力敏锐，思路清晰。",@"自我探索与成长、情绪问题（抑郁、焦虑、恐惧）、亲密关系、亲子关系、人际关系等。",@"面对困惑与艰辛，鼓起勇气，让我们一起去探索自我以及生活真实的模样"];
     
 }
 
@@ -65,6 +66,21 @@
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
     return item;
+    
+}
+
+- (void)customNavigation {
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    [btn setFrame:CGRectMake(0, 0, 25, 25)];
+    [btn addTarget:self action:@selector(clickShareBtn) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.navigationItem.rightBarButtonItem = item;
+    
+}
+
+- (void)clickShareBtn {
     
 }
 
@@ -96,9 +112,16 @@
     
 }
 
+#pragma mark 底部TabBar
 - (void)creatBottomBar {
     
     UITabBar *bar = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W - 100, 0, 100, tabBar_H)];
+    btn.backgroundColor = MAINCOLOR;
+    [btn setTitle:@"预约" forState:UIControlStateNormal];
+    [bar addSubview:btn];
+    
+    
     [self.view addSubview:bar];
 
 }
@@ -108,8 +131,10 @@
 # pragma mark 创建TableView
 - (void)creatMainTableview {
     
-    _mainTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, SCREEN_H/3, SCREEN_W, SCREEN_H*2/3-tabBar_H) style:UITableViewStyleGrouped];
+    _mainTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-tabBar_H) style:UITableViewStyleGrouped];
+//    _mainTableview.contentInset = UIEdgeInsetsMake(SCREEN_H/3, 0, 0, 0);
     [self.view addSubview:_mainTableview];
+    [self customHeadView];
     _mainTableview.backgroundColor = [UIColor whiteColor];
     _mainTableview.delegate = self;
     _mainTableview.dataSource = self;
@@ -117,6 +142,12 @@
     _mainTableview.rowHeight = UITableViewAutomaticDimension;
     _mainTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    
+    UIView *footView = [[UIView alloc]init];
+    [footView sizeToFit];
+    footView.backgroundColor = [UIColor whiteColor];
+    _mainTableview.tableFooterView = footView;
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -124,6 +155,14 @@
     orderPageCell *cell = [orderPageCell cellWithTableView:tableView];
     cell.textLab.text = _dataSourceArr[indexPath.section];
     return cell;
+    
+}
+
+- (void)customHeadView {
+    
+    UIView *headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H/3)];
+    headView.backgroundColor = MAINCOLOR;
+    _mainTableview.tableHeaderView = headView;
     
 }
 
@@ -154,6 +193,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 20;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 0.1)];
+    view.backgroundColor = [UIColor whiteColor];
+    return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
