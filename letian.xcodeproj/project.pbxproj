@@ -56,8 +56,8 @@
 		77038DFC1E63C9F20096C07D /* timg.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF01E63C9F20096C07D /* timg.jpeg */; };
 		77038DFD1E63C9F20096C07D /* u=275622820,2944364039&fm=214&gp=0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF11E63C9F20096C07D /* u=275622820,2944364039&fm=214&gp=0.jpg */; };
 		77038DFE1E63C9F20096C07D /* headImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF21E63C9F20096C07D /* headImage.png */; };
-		77038DFF1E63C9F20096C07D /* 屏幕快照 2017-02-20 下午4.05.02.png in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF31E63C9F20096C07D /* 屏幕快照 2017-02-20 下午4.05.02.png */; };
-		77038E001E63C9F20096C07D /* 屏幕快照 2017-02-20 下午4.33.06.png in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF41E63C9F20096C07D /* 屏幕快照 2017-02-20 下午4.33.06.png */; };
+		77038DFF1E63C9F20096C07D /* women.png in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF31E63C9F20096C07D /* women.png */; };
+		77038E001E63C9F20096C07D /* wowomen.png in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF41E63C9F20096C07D /* wowomen.png */; };
 		77038E011E63C9F20096C07D /* 客服.png in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF51E63C9F20096C07D /* 客服.png */; };
 		77038E021E63C9F20096C07D /* 微信支付.png in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF71E63C9F20096C07D /* 微信支付.png */; };
 		77038E031E63C9F20096C07D /* 支付宝.png in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF81E63C9F20096C07D /* 支付宝.png */; };
@@ -70,6 +70,19 @@
 		774DBC0D1E6420FC00B8798C /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC0B1E6420FC00B8798C /* HomeCell.xib */; };
 		774DBC0F1E64212F00B8798C /* tooopen_sy_156105468631.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC0E1E64212F00B8798C /* tooopen_sy_156105468631.jpg */; };
 		774DBC111E64214900B8798C /* msg.png in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC101E64214900B8798C /* msg.png */; };
+		7784D8911E6D1F43004AB0CC /* waitpay.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8881E6D1F43004AB0CC /* waitpay.png */; };
+		7784D8921E6D1F43004AB0CC /* waitpay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8891E6D1F43004AB0CC /* waitpay@2x.png */; };
+		7784D8931E6D1F43004AB0CC /* waitpay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D88A1E6D1F43004AB0CC /* waitpay@3x.png */; };
+		7784D89A1E6D5512004AB0CC /* date.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8941E6D5512004AB0CC /* date.png */; };
+		7784D89B1E6D5512004AB0CC /* date@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8951E6D5512004AB0CC /* date@2x.png */; };
+		7784D89C1E6D5512004AB0CC /* date@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8961E6D5512004AB0CC /* date@3x.png */; };
+		7784D89D1E6D5512004AB0CC /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8971E6D5512004AB0CC /* success.png */; };
+		7784D89E1E6D5512004AB0CC /* success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8981E6D5512004AB0CC /* success@2x.png */; };
+		7784D89F1E6D5512004AB0CC /* success@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8991E6D5512004AB0CC /* success@3x.png */; };
+		7784D8A21E6D587D004AB0CC /* GQControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 7784D8A11E6D587D004AB0CC /* GQControls.m */; };
+		7784D8A61E6E532E004AB0CC /* whiteMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8A31E6E532E004AB0CC /* whiteMessage.png */; };
+		7784D8A71E6E532E004AB0CC /* whiteMessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8A41E6E532E004AB0CC /* whiteMessage@2x.png */; };
+		7784D8A81E6E532E004AB0CC /* whiteMessage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8A51E6E532E004AB0CC /* whiteMessage@3x.png */; };
 		77C383101E6CF79A00B4EF73 /* ChangePwViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C3830E1E6CF79A00B4EF73 /* ChangePwViewController.m */; };
 		77C383111E6CF79A00B4EF73 /* ChangePwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77C3830F1E6CF79A00B4EF73 /* ChangePwViewController.xib */; };
 		77D2BF931E668D83000B9978 /* mainMessageWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BF921E668D83000B9978 /* mainMessageWhite.png */; };
@@ -177,9 +190,9 @@
 		77038DF01E63C9F20096C07D /* timg.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = timg.jpeg; sourceTree = "<group>"; };
 		77038DF11E63C9F20096C07D /* u=275622820,2944364039&fm=214&gp=0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "u=275622820,2944364039&fm=214&gp=0.jpg"; sourceTree = "<group>"; };
 		77038DF21E63C9F20096C07D /* headImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headImage.png; sourceTree = "<group>"; };
-		77038DF31E63C9F20096C07D /* 屏幕快照 2017-02-20 下午4.05.02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "屏幕快照 2017-02-20 下午4.05.02.png"; sourceTree = "<group>"; };
-		77038DF41E63C9F20096C07D /* 屏幕快照 2017-02-20 下午4.33.06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "屏幕快照 2017-02-20 下午4.33.06.png"; sourceTree = "<group>"; };
-		77038DF51E63C9F20096C07D /* 客服.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "客服.png"; sourceTree = "<group>"; };
+		77038DF31E63C9F20096C07D /* women.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = women.png; sourceTree = "<group>"; };
+		77038DF41E63C9F20096C07D /* wowomen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wowomen.png; sourceTree = "<group>"; };
+		77038DF51E63C9F20096C07D /* 客服.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "客服.png"; path = "../客服.png"; sourceTree = "<group>"; };
 		77038DF71E63C9F20096C07D /* 微信支付.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "微信支付.png"; sourceTree = "<group>"; };
 		77038DF81E63C9F20096C07D /* 支付宝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "支付宝.png"; sourceTree = "<group>"; };
 		77038DF91E63C9F20096C07D /* 银联支付.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "银联支付.png"; sourceTree = "<group>"; };
@@ -192,6 +205,20 @@
 		774DBC0B1E6420FC00B8798C /* HomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCell.xib; sourceTree = "<group>"; };
 		774DBC0E1E64212F00B8798C /* tooopen_sy_156105468631.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tooopen_sy_156105468631.jpg; sourceTree = "<group>"; };
 		774DBC101E64214900B8798C /* msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg.png; sourceTree = "<group>"; };
+		7784D8881E6D1F43004AB0CC /* waitpay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waitpay.png; sourceTree = "<group>"; };
+		7784D8891E6D1F43004AB0CC /* waitpay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "waitpay@2x.png"; sourceTree = "<group>"; };
+		7784D88A1E6D1F43004AB0CC /* waitpay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "waitpay@3x.png"; sourceTree = "<group>"; };
+		7784D8941E6D5512004AB0CC /* date.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date.png; sourceTree = "<group>"; };
+		7784D8951E6D5512004AB0CC /* date@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date@2x.png"; sourceTree = "<group>"; };
+		7784D8961E6D5512004AB0CC /* date@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date@3x.png"; sourceTree = "<group>"; };
+		7784D8971E6D5512004AB0CC /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success.png; sourceTree = "<group>"; };
+		7784D8981E6D5512004AB0CC /* success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success@2x.png"; sourceTree = "<group>"; };
+		7784D8991E6D5512004AB0CC /* success@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success@3x.png"; sourceTree = "<group>"; };
+		7784D8A01E6D587D004AB0CC /* GQControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQControls.h; sourceTree = "<group>"; };
+		7784D8A11E6D587D004AB0CC /* GQControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQControls.m; sourceTree = "<group>"; };
+		7784D8A31E6E532E004AB0CC /* whiteMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteMessage.png; sourceTree = "<group>"; };
+		7784D8A41E6E532E004AB0CC /* whiteMessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteMessage@2x.png"; sourceTree = "<group>"; };
+		7784D8A51E6E532E004AB0CC /* whiteMessage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteMessage@3x.png"; sourceTree = "<group>"; };
 		77C3830D1E6CF79A00B4EF73 /* ChangePwViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwViewController.h; sourceTree = "<group>"; };
 		77C3830E1E6CF79A00B4EF73 /* ChangePwViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwViewController.m; sourceTree = "<group>"; };
 		77C3830F1E6CF79A00B4EF73 /* ChangePwViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePwViewController.xib; sourceTree = "<group>"; };
@@ -495,6 +522,8 @@
 		77038DE91E63C49F0096C07D /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				7784D8A01E6D587D004AB0CC /* GQControls.h */,
+				7784D8A11E6D587D004AB0CC /* GQControls.m */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -506,7 +535,6 @@
 				0907336A1E64105A00F21E02 /* resource */,
 				77038E051E63CA7F0096C07D /* 首页轮播图 */,
 				77038DED1E63C9F20096C07D /* 头像 */,
-				77038DF51E63C9F20096C07D /* 客服.png */,
 				77038DF61E63C9F20096C07D /* 支付图标 */,
 			);
 			path = Images;
@@ -515,13 +543,14 @@
 		77038DED1E63C9F20096C07D /* 头像 */ = {
 			isa = PBXGroup;
 			children = (
+				77038DF51E63C9F20096C07D /* 客服.png */,
 				77038DEE1E63C9F20096C07D /* cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg */,
 				77038DEF1E63C9F20096C07D /* timg (1).jpeg */,
 				77038DF01E63C9F20096C07D /* timg.jpeg */,
 				77038DF11E63C9F20096C07D /* u=275622820,2944364039&fm=214&gp=0.jpg */,
 				77038DF21E63C9F20096C07D /* headImage.png */,
-				77038DF31E63C9F20096C07D /* 屏幕快照 2017-02-20 下午4.05.02.png */,
-				77038DF41E63C9F20096C07D /* 屏幕快照 2017-02-20 下午4.33.06.png */,
+				77038DF31E63C9F20096C07D /* women.png */,
+				77038DF41E63C9F20096C07D /* wowomen.png */,
 			);
 			path = "头像";
 			sourceTree = "<group>";
@@ -551,6 +580,18 @@
 		77D2BF991E66B928000B9978 /* 图标 */ = {
 			isa = PBXGroup;
 			children = (
+				7784D8A31E6E532E004AB0CC /* whiteMessage.png */,
+				7784D8A41E6E532E004AB0CC /* whiteMessage@2x.png */,
+				7784D8A51E6E532E004AB0CC /* whiteMessage@3x.png */,
+				7784D8941E6D5512004AB0CC /* date.png */,
+				7784D8951E6D5512004AB0CC /* date@2x.png */,
+				7784D8961E6D5512004AB0CC /* date@3x.png */,
+				7784D8971E6D5512004AB0CC /* success.png */,
+				7784D8981E6D5512004AB0CC /* success@2x.png */,
+				7784D8991E6D5512004AB0CC /* success@3x.png */,
+				7784D8881E6D1F43004AB0CC /* waitpay.png */,
+				7784D8891E6D1F43004AB0CC /* waitpay@2x.png */,
+				7784D88A1E6D1F43004AB0CC /* waitpay@3x.png */,
 				77D2BF9A1E66B933000B9978 /* donot.png */,
 				77D2BF9C1E66B93E000B9978 /* do.png */,
 				77FF9B701E696E18008C0FE7 /* pinkback.png */,
@@ -711,6 +752,7 @@
 				77C383111E6CF79A00B4EF73 /* ChangePwViewController.xib in Resources */,
 				0953C22E1E514B5800FB165C /* Assets.xcassets in Resources */,
 				77D2BFA21E66C404000B9978 /* SetAcountViewController.xib in Resources */,
+				7784D89F1E6D5512004AB0CC /* success@3x.png in Resources */,
 				0953C22C1E514B5800FB165C /* Main.storyboard in Resources */,
 				77038DFD1E63C9F20096C07D /* u=275622820,2944364039&fm=214&gp=0.jpg in Resources */,
 				0907337B1E64105A00F21E02 /* consultPagTab.png in Resources */,
@@ -728,31 +770,42 @@
 				0970CFF61E5180DF007480CB /* MyViewController.xib in Resources */,
 				0945B13E1E67E7F2005B7560 /* female@2x.png in Resources */,
 				0945B1401E67E7F2005B7560 /* male@2x.png in Resources */,
+				7784D89C1E6D5512004AB0CC /* date@3x.png in Resources */,
 				77038E021E63C9F20096C07D /* 微信支付.png in Resources */,
 				77038DFB1E63C9F20096C07D /* timg (1).jpeg in Resources */,
 				090733891E64105A00F21E02 /* myPagTabSel.png in Resources */,
 				090733851E64105A00F21E02 /* mainMessageSel.png in Resources */,
+				7784D89B1E6D5512004AB0CC /* date@2x.png in Resources */,
 				0945B13F1E67E7F2005B7560 /* male.png in Resources */,
 				77D2BF931E668D83000B9978 /* mainMessageWhite.png in Resources */,
-				77038DFF1E63C9F20096C07D /* 屏幕快照 2017-02-20 下午4.05.02.png in Resources */,
+				77038DFF1E63C9F20096C07D /* women.png in Resources */,
 				0907337D1E64105A00F21E02 /* consultPagTabSel.png in Resources */,
+				7784D8A71E6E532E004AB0CC /* whiteMessage@2x.png in Resources */,
 				090733881E64105A00F21E02 /* myPagTab@2x.png in Resources */,
 				77FF9B781E696E18008C0FE7 /* pinkback@3x.png in Resources */,
+				7784D89E1E6D5512004AB0CC /* success@2x.png in Resources */,
 				774DBC0D1E6420FC00B8798C /* HomeCell.xib in Resources */,
 				77D2BFA71E67D6A9000B9978 /* ForgetPwViewController.xib in Resources */,
 				090733801E64105A00F21E02 /* firstPageTab@2x.png in Resources */,
 				0907338A1E64105A00F21E02 /* myPagTabSel@2x.png in Resources */,
+				7784D8A81E6E532E004AB0CC /* whiteMessage@3x.png in Resources */,
 				77FF9B7B1E696E18008C0FE7 /* whiteback@3x.png in Resources */,
 				77FF9B771E696E18008C0FE7 /* pinkback@2x.png in Resources */,
+				7784D8911E6D1F43004AB0CC /* waitpay.png in Resources */,
 				77038E091E63CA960096C07D /* index_slide_03.jpg in Resources */,
 				77038E001E63C9F20096C07D /* 屏幕快照 2017-02-20 下午4.33.06.png in Resources */,
 				09F1E6FE1E6E4A3E007FBE81 /* orderPageCell.xib in Resources */,
 				77038DFC1E63C9F20096C07D /* timg.jpeg in Resources */,
+				7784D8931E6D1F43004AB0CC /* waitpay@3x.png in Resources */,
 				090733811E64105A00F21E02 /* firstPageTabSel.png in Resources */,
+				7784D89D1E6D5512004AB0CC /* success.png in Resources */,
+				7784D89A1E6D5512004AB0CC /* date.png in Resources */,
 				77038E0B1E63CA9E0096C07D /* index_slide_02.jpg in Resources */,
 				090733961E655B0600F21E02 /* consultPageCell.xib in Resources */,
 				77038E071E63CA8B0096C07D /* index_slide_04.jpg in Resources */,
 				77FF9B7A1E696E18008C0FE7 /* whiteback@2x.png in Resources */,
+				7784D8921E6D1F43004AB0CC /* waitpay@2x.png in Resources */,
+				7784D8A61E6E532E004AB0CC /* whiteMessage.png in Resources */,
 				090733871E64105A00F21E02 /* myPagTab.png in Resources */,
 				77038E041E63C9F20096C07D /* 银联支付.png in Resources */,
 				77038E011E63C9F20096C07D /* 客服.png in Resources */,
@@ -849,6 +902,7 @@
 				0953C2261E514B5800FB165C /* AppDelegate.m in Sources */,
 				77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */,
 				0953C2231E514B5800FB165C /* main.m in Sources */,
+				7784D8A21E6D587D004AB0CC /* GQControls.m in Sources */,
 				77D2BFA11E66C404000B9978 /* SetAcountViewController.m in Sources */,
 				0945B1441E67E8BF005B7560 /* CounselorInfoViewController.m in Sources */,
 				0970CFEC1E517EB8007480CB /* FirstViewController.m in Sources */,

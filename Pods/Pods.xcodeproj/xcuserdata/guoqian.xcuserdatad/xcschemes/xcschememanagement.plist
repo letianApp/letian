@@ -16,6 +16,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>RTRootNavigationController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -31,6 +36,16 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>169844F3E7BF49EC10F7B0E46DD292FA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5E4BEE70BDD1C2750BD7AF5621DEDE81</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>7BE9CC38826B8D1D13A1DFF22AA89C73</key>
 		<dict>
 			<key>primary</key>
@@ -41,7 +56,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C7067B20598AD3797CAE53F67CE6E7EC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>EF44352D4D5612A608D5925080BC911F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F906C6ADD9F3E502E589316C52F4CC11</key>
 		<dict>
 			<key>primary</key>
 			<true/>

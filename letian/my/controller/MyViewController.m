@@ -7,6 +7,7 @@
 //
 
 #import "MyViewController.h"
+#import "GQControls.h"
 
 @interface MyViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -62,6 +63,24 @@
     
     headView.backgroundColor=MAINCOLOR;
     
+    //头像
+    UIImageView *headImageView=[[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_W-100)/2, 55, 100, 100)];
+    headImageView.image=[UIImage imageNamed:@"women"];
+    headImageView.layer.masksToBounds=YES;
+    headImageView.layer.cornerRadius=50;
+    [headView addSubview:headImageView];
+    
+    //用户名
+    UILabel *nameLabel=[GQControls createLabelWithFrame:CGRectMake((SCREEN_W-150)/2, 160, 150, 20) andText:@"本宝宝是一个用户" andTextColor:[UIColor whiteColor] andFontSize:16];
+    nameLabel.textAlignment=NSTextAlignmentCenter;
+    [headView addSubview:nameLabel];
+    
+    
+    UIButton *messageBtn=[[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W-35, 30, 25, 25)];
+    [messageBtn setImage:[UIImage imageNamed:@"whiteMessage"] forState:UIControlStateNormal];
+    [headView addSubview:messageBtn];
+    
+    
     return headView;
     
 }
@@ -89,16 +108,21 @@
     
     UIView *orderView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 100)];
     
-    UILabel *allOrderLabel=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, SCREEN_W-20, 30)];
     
-    allOrderLabel.text=@"全部订单 >>";
+    UILabel *label=[GQControls createLabelWithFrame:CGRectMake(10, 0, 100, 30) andText:@"全部订单" andTextColor:[UIColor darkGrayColor] andFontSize:14];
+    [orderView addSubview:label];
+    
+    
+    UILabel *allOrderLabel=[GQControls createLabelWithFrame:CGRectMake(SCREEN_W-160, 0, 150, 30) andText:@"查看全部订单 >>" andTextColor:[UIColor darkGrayColor] andFontSize:12];
     allOrderLabel.textAlignment=NSTextAlignmentRight;
-    allOrderLabel.font=[UIFont systemFontOfSize:15];
     [orderView addSubview:allOrderLabel];
+    
+    
     
     UIView *lineView1=[[UIView alloc]initWithFrame:CGRectMake(0, 31, SCREEN_W, 0.5)];
     lineView1.backgroundColor=[UIColor lightGrayColor];
     [orderView addSubview:lineView1];
+    
     
     UIView *lineView2=[[UIView alloc]initWithFrame:CGRectMake(0, 99, SCREEN_W, 0.5)];
     lineView2.backgroundColor=[UIColor lightGrayColor];
@@ -107,19 +131,32 @@
     
     //左边隔 30        按钮  40       中间  (screen-60-40*3)/2
     
+    NSArray *imageNameArray=@[@"date",@"waitpay",@"success"];
     NSArray *orderSrateArray=@[@"我的预约",@"待支付",@"已完成"];
+    
+    
+    
     for (NSInteger i=0; i<3; i++) {
         
-        UIButton *orderButton=[[UIButton alloc]initWithFrame:CGRectMake(30+((SCREEN_W-60-40*3)/2+40)*i, 38, 40, 40)];
-        UILabel *orderLabel=[[UILabel alloc]initWithFrame:CGRectMake(20+((SCREEN_W-40-60*3)/2+60)*i, 82, 60, 10)];
-        orderLabel.text=orderSrateArray[i];
-        orderLabel.textAlignment=NSTextAlignmentCenter;
-        orderLabel.font=[UIFont systemFontOfSize:10];
         
+        //订单分类按钮
+        UIButton *orderButton=[[UIButton alloc]initWithFrame:CGRectMake(30+((SCREEN_W-60-40*3)/2+40)*i, 38, 40, 40)];
+        [orderButton setImage:[UIImage imageNamed:imageNameArray[i]] forState:UIControlStateNormal];
         [orderButton addTarget:self action:@selector(orderSrateButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
         [orderView addSubview:orderButton];
+        
+        
+        
+        //订单分类label
+        UILabel *orderLabel=[GQControls createLabelWithFrame:CGRectMake(20+((SCREEN_W-40-60*3)/2+60)*i, 82, 60, 10) andText:orderSrateArray[i] andTextColor:[UIColor darkGrayColor] andFontSize:11];
+        orderLabel.textAlignment=NSTextAlignmentCenter;
         [orderView addSubview:orderLabel];
+
+        
+        
+        
+        
         
     }
     
@@ -132,7 +169,7 @@
 -(void)orderSrateButtonClick:(UIButton *)btn
 {
     
-    
+    NSLog(@"进入订单列表");
     
     
     
@@ -156,6 +193,8 @@
     
     cell.textLabel.font=[UIFont systemFontOfSize:15];
     
+    cell.textLabel.textColor=[UIColor darkGrayColor];
+    
     
     
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 49, SCREEN_W, 0.5)];
@@ -178,7 +217,11 @@
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
 
     NSLog(@"cell被点击%li",indexPath.row);
+    
 }
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
