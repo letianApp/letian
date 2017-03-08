@@ -1,5 +1,6 @@
 PODS:
   - CYLTabBarController (1.10.0)
+  - Masonry (1.0.2)
   - RTRootNavigationController (0.5.23)
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
@@ -7,14 +8,16 @@ PODS:
 
 DEPENDENCIES:
   - CYLTabBarController (= 1.10.0)
+  - Masonry
   - RTRootNavigationController
   - SDWebImage (~> 3.7.5)
 
 SPEC CHECKSUMS:
   CYLTabBarController: 2de9a4c26f50d33574398becf8e7b0aaed794240
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   RTRootNavigationController: 70c0da2913cf50cbe944b0193a649700ff640a2c
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
 
-PODFILE CHECKSUM: 5b8909080b06fb8eab0caa51bd2b5d3aea196385
+PODFILE CHECKSUM: fa358f6b6b1b07287043052af589e19bc0719d33
 
 COCOAPODS: 1.2.0

@@ -8,17 +8,16 @@
 
 #import "CounselorInfoViewController.h"
 #import "orderPageCell.h"
-
+#import "counselorInfoModel.h"
 
 @interface CounselorInfoViewController ()<UITableViewDataSource,UITableViewDelegate>
 
-
-@property (nonatomic, weak) UIView *navigationView;
 
 
 
 @property (nonatomic, strong) UIScrollView *mainScroview;
 @property (nonatomic, strong) UITableView *mainTableview;
+@property (nonatomic, strong) UIView *holdView;                      //下滑占用图
 @property (nonatomic, copy) NSArray *dataSourceArr;
 
 @end
@@ -34,17 +33,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    self.view.backgroundColor = MAINCOLOR;
+    self.view.backgroundColor = MAINCOLOR;
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self test];
     [self customNavigation];
-    
-//    [self setupNavigationView];
-    
     [self creatMainTableview];
-    
-    
     [self creatBottomBar];
 
     
@@ -62,7 +56,7 @@
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:@"whiteback"] forState:UIControlStateNormal];
-    [btn setFrame:CGRectMake(0, 0, 25, 25)];
+    [btn setFrame:CGRectMake(0, 0, 20, 20)];
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
     return item;
@@ -73,7 +67,7 @@
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
-    [btn setFrame:CGRectMake(0, 0, 25, 25)];
+    [btn setFrame:CGRectMake(0, 0, 20, 20)];
     [btn addTarget:self action:@selector(clickShareBtn) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = item;
@@ -81,27 +75,8 @@
 }
 
 - (void)clickShareBtn {
-    
+    NSLog(@"分享");
 }
-
-- (void)setupNavigationView
-{
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    
-    UIView *navigationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, 64)];
-    navigationView.backgroundColor = [UIColor whiteColor];
-    
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 32, SCREEN_W, 20)];
-    titleLabel.text = @"孙晓平";
-    titleLabel.font = [UIFont systemFontOfSize:17];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    [navigationView addSubview:titleLabel];
-    
-    navigationView.alpha = 0;
-    [self.view addSubview:navigationView];
-    self.navigationView = navigationView;
-}
-
 
 #pragma mark 创建主界面滚动视图
 - (void)creatMainScroview{
@@ -142,14 +117,13 @@
     _mainTableview.rowHeight = UITableViewAutomaticDimension;
     _mainTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    _holdView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 0)];
+    _holdView.backgroundColor = MAINCOLOR;
     
-    UIView *footView = [[UIView alloc]init];
-    [footView sizeToFit];
-    footView.backgroundColor = [UIColor whiteColor];
-    _mainTableview.tableFooterView = footView;
 
 }
 
+# pragma mark 创建TableViewCell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     orderPageCell *cell = [orderPageCell cellWithTableView:tableView];
@@ -158,12 +132,49 @@
     
 }
 
+# pragma mark 定制头部视图
 - (void)customHeadView {
     
     UIView *headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H/3)];
     headView.backgroundColor = MAINCOLOR;
+    //
+    UIImageView *picView = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_W*2/5, statusBar_H+navigationBar_H, SCREEN_W/5, SCREEN_W/5)];
+    [picView setImage:[UIImage imageNamed:@"wowomen"]];
+    picView.layer.cornerRadius = SCREEN_W/10;
+    picView.layer.borderWidth = 1;
+    picView.layer.borderColor = ([UIColor whiteColor].CGColor);
+    picView.layer.masksToBounds = YES;
+    [headView addSubview:picView];
+    //
+    UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*2/5, (statusBar_H+navigationBar_H+SCREEN_W/5+10), SCREEN_W/5, 20)];
+    nameLab.textAlignment = NSTextAlignmentCenter;
+    nameLab.text = @"孙晓平";
+    nameLab.textColor = [UIColor whiteColor];
+    nameLab.font = [UIFont boldSystemFontOfSize:15];
+    [headView addSubview:nameLab];
+    
     _mainTableview.tableHeaderView = headView;
     
+    
+}
+
+# pragma mark 滚动方法
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == _mainTableview)
+    {
+        
+        float i = scrollView.contentOffset.y;
+        
+        NSLog(@"%f",i);
+        CGFloat sectionHeaderHeight = SCREEN_H/3; //sectionHeaderHeight
+        if (scrollView.contentOffset.y < 0) {
+            [scrollView addSubview:_holdView];
+            _holdView.frame = CGRectMake(0, 0, SCREEN_W, (scrollView.contentOffset.y));
+        } else {
+            [scrollView willRemoveSubview:_holdView];
+            NSLog(@"移除");
+        }
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -182,7 +193,7 @@
     tagView.backgroundColor = MAINCOLOR;
     [headSectionView addSubview:tagView];
     UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(18, 5, 100, 15)];
-    titleLab.font = [UIFont boldSystemFontOfSize:12];
+    titleLab.font = [UIFont boldSystemFontOfSize:15];
     NSArray *titleArr = @[@"简介：",@"资讯特点：",@"擅长领域：",@"咨询理念："];
     titleLab.text = titleArr[section];
     [headSectionView addSubview:titleLab];
@@ -193,12 +204,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 20;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 0.1)];
-    view.backgroundColor = [UIColor whiteColor];
-    return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

@@ -36,7 +36,7 @@
 //测试数据
 - (void)test {
     
-    self.conselorImage.image = [UIImage imageNamed:@"屏幕快照 2017-02-20 下午4.33.06"];
+    self.conselorImage.image = [UIImage imageNamed:@"wowomen"];
     self.conserlorSex.image = [UIImage imageNamed:@"female"];
     self.conselorName.text = @"孙晓平";
     self.conselorStatus.text = @"专家心理咨询师";

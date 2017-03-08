@@ -22,7 +22,7 @@
 - (void)customLab {
     
     self.textLab.numberOfLines = 0;
-    self.textLab.font = [UIFont systemFontOfSize:12];
+    self.textLab.font = [UIFont systemFontOfSize:15];
     self.textLab.textColor = [UIColor darkGrayColor];
     
 }
