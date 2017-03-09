@@ -7,8 +7,11 @@
 //
 
 #import "SystomMsgViewController.h"
+#import "MessageCell.h"
+@interface SystomMsgViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@interface SystomMsgViewController ()
+@property (nonatomic,strong) UITableView *tableView;
+
 
 @end
 
@@ -16,9 +19,45 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor=[UIColor redColor];
+    [self createTableView];
 }
 
+-(void)createTableView
+{
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-64) style:UITableViewStylePlain];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
+    
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 10;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    MessageCell *cell=[MessageCell cellWithTableView:tableView];
+    
+    return cell;
+    
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 150;
+}
+//cell点击事件
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
+    
+    NSLog(@"cell被点击%li",indexPath.row);
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

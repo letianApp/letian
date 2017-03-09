@@ -71,7 +71,7 @@
 
 -(void)setContentScrollView {
 
-    UIScrollView *sv = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, SCREEN_H)];
+    UIScrollView *sv = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
     
     [self.view addSubview:sv];
     sv.bounces = NO;
@@ -90,7 +90,7 @@
         
     }
     
-    sv.contentSize = CGSizeMake(4 * SCREEN_W, 0);
+    sv.contentSize = CGSizeMake(2 * SCREEN_W, 0);
     self.contentScrollView = sv;
     
 }
@@ -118,7 +118,7 @@
     
     CGPoint offset = self.contentScrollView.contentOffset;
     
-    offset.x = self.view.frame.size.width * Page;
+    offset.x = SCREEN_W * Page;
     
     [UIView animateWithDuration:0.3 animations:^{
         

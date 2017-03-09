@@ -246,7 +246,15 @@
     return 80;
 }
 
-
+//cell点击事件
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
+    
+    NSLog(@"cell被点击%li",indexPath.row);
+    
+}
 #pragma mark -----------------searchBarDelegate
 //即将开始编辑
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{

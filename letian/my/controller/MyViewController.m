@@ -35,7 +35,7 @@
     
     [super viewDidLoad];
     
-    self.dataArray=@[@"系统设置",@"客服电话",@"客服电话",@"关于我们"];
+    self.dataArray=@[@"系统设置",@"客服电话    400-119-2001",@"我要分享",@"关于我们"];
     
     [self createTableView];
     
@@ -223,6 +223,15 @@
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
 
     NSLog(@"cell被点击%li",indexPath.row);
+    
+    if (indexPath.row==1) {
+        //拨打客服电话，打完之后不会留在通讯录而是回到应用
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"400-119-2001"];
+        UIWebView * callWebview = [[UIWebView alloc] init];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+        [self.view addSubview:callWebview];
+
+    }
     
 }
 
