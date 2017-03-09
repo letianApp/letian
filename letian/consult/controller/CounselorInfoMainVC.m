@@ -9,6 +9,7 @@
 #import "CounselorInfoMainVC.h"
 #import "OrderPageTbC.h"
 #import "ConfirmPageTbC.h"
+#import "ConfirmPageVC.h"
 
 #import "Masonry.h"
 
@@ -193,7 +194,7 @@
 - (void)creatBottomBar {
     
     _tabBar = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W - 100, 0, 100, tabBar_H)];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
     btn.backgroundColor = MAINCOLOR;
     [btn setTitle:@"预约" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(clickAppointmentBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -206,6 +207,8 @@
 
 - (void)clickAppointmentBtn {
     NSLog(@"点击预约按钮");
+    ConfirmPageVC *cvc = [[ConfirmPageVC alloc]init];
+    [self.rt_navigationController pushViewController:cvc animated:YES];
     
 }
 

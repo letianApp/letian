@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="146" id="KGk-i7-Jjw" customClass="ConfirmPageCell">
+            <rect key="frame" x="0.0" y="0.0" width="348" height="146"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="348" height="146"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Pe-Qx-XuG">
+                        <rect key="frame" x="0.0" y="15" width="5" height="15"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="1OV-pN-02x"/>
+                            <constraint firstAttribute="width" constant="5" id="pKT-eR-apQ"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evd-te-hVl">
+                        <rect key="frame" x="15" y="15" width="100" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="0Yi-LI-ZNO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wvg-G5-a93">
+                        <rect key="frame" x="0.0" y="35" width="348" height="111"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uEs-96-FkU">
+                        <rect key="frame" x="15" y="45" width="318" height="85.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="uEs-96-FkU" secondAttribute="trailing" constant="15" id="2FJ-IP-jZ2"/>
+                    <constraint firstAttribute="bottom" secondItem="Wvg-G5-a93" secondAttribute="bottom" id="6uu-9c-uW1"/>
+                    <constraint firstItem="uEs-96-FkU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ASO-Oh-sn2"/>
+                    <constraint firstAttribute="trailing" secondItem="Wvg-G5-a93" secondAttribute="trailing" id="DLb-EB-I10"/>
+                    <constraint firstItem="evd-te-hVl" firstAttribute="leading" secondItem="0Pe-Qx-XuG" secondAttribute="trailing" constant="10" id="MPP-In-Oq1"/>
+                    <constraint firstItem="0Pe-Qx-XuG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="VNg-Y7-WdP"/>
+                    <constraint firstItem="Wvg-G5-a93" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XMi-Ck-Ny2"/>
+                    <constraint firstItem="evd-te-hVl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Y8D-LE-jhq"/>
+                    <constraint firstItem="0Pe-Qx-XuG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="cVo-6f-uZH"/>
+                    <constraint firstAttribute="bottom" secondItem="uEs-96-FkU" secondAttribute="bottom" constant="15" id="eCX-gj-b2k"/>
+                    <constraint firstItem="Wvg-G5-a93" firstAttribute="top" secondItem="evd-te-hVl" secondAttribute="bottom" constant="5" id="h3X-ug-zjy"/>
+                    <constraint firstItem="uEs-96-FkU" firstAttribute="top" secondItem="evd-te-hVl" secondAttribute="bottom" constant="15" id="uzG-NU-BW1"/>
+                    <constraint firstItem="evd-te-hVl" firstAttribute="height" secondItem="0Pe-Qx-XuG" secondAttribute="height" id="vrf-Ot-N4N"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="backView" destination="Wvg-G5-a93" id="65c-hz-uvA"/>
+                <outlet property="detialLab" destination="uEs-96-FkU" id="goU-bt-2Ma"/>
+                <outlet property="labelTag" destination="evd-te-hVl" id="inw-ly-V4f"/>
+                <outlet property="mainColorTag" destination="0Pe-Qx-XuG" id="dfl-Du-c3A"/>
+            </connections>
+            <point key="canvasLocation" x="39" y="103"/>
+        </tableViewCell>
+    </objects>
+</document>

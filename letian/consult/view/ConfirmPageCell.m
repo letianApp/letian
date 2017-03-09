@@ -1,40 +1,39 @@
 //
-//  orderPageCell.m
+//  ConfirmPageCell.m
 //  letian
 //
-//  Created by J on 2017/3/7.
+//  Created by J on 2017/3/9.
 //  Copyright © 2017年 J. All rights reserved.
 //
 
-#import "orderPageCell.h"
+#import "ConfirmPageCell.h"
 
-@implementation orderPageCell
+@implementation ConfirmPageCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
     
-    self.userInteractionEnabled = NO;
-    [self customLab];
+    [self customCell];
     
 }
 
-- (void)customLab {
+- (void)customCell {
     
-    self.textLab.numberOfLines = 0;
-    self.textLab.font = [UIFont systemFontOfSize:15];
-    self.textLab.textColor = [UIColor darkGrayColor];
+    self.mainColorTag.backgroundColor = MAINCOLOR;
+    self.labelTag.font = [UIFont boldSystemFontOfSize:15];
+    self.detialLab.numberOfLines = 0;
+    self.detialLab.font = [UIFont systemFontOfSize:15];
+    self.detialLab.textColor = [UIColor darkGrayColor];
     
 }
-
-
 
 
 + (instancetype) cellWithTableView:(UITableView *)tableView {
     
-    orderPageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"orderPageCell"];
+    ConfirmPageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ConfirmPageCell"];
     if (cell == nil) {
-        cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"orderPageCell"];
+        cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ConfirmPageCell"];
     }
     return cell;
 }
@@ -46,7 +45,6 @@
     }
     return self;
 }
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

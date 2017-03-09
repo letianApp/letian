@@ -10,6 +10,7 @@
 #import "consultPageCell.h"
 #import "counselorInfoModel.h"
 #import "CounselorInfoMainVC.h"
+#import "CounselorInfoVC.h"
 
 
 @interface ConsultViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -217,7 +218,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         
-    CounselorInfoMainVC *counselorInfoMainVC = [[CounselorInfoMainVC alloc]init];
+    CounselorInfoVC *counselorInfoMainVC = [[CounselorInfoVC alloc]init];
     counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
     
     [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];
