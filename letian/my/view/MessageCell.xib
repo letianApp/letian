@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="127" id="KGk-i7-Jjw" customClass="MessageCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SCt-wp-3T7">
+                        <rect key="frame" x="12" y="40" width="296" height="108.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单消息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJu-y8-6Sc">
+                                <rect key="frame" x="10" y="8" width="276" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="jbD-zD-3hz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的订单37347938904738783943已完成付款。发神经换房间和废物3" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8D8-6e-ja0">
+                                <rect key="frame" x="10" y="36" width="276" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="BcH-Di-hAj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击查看详情" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3T-0X-ByK">
+                                <rect key="frame" x="206" y="81" width="80" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="RWe-PO-tGE"/>
+                                    <constraint firstAttribute="width" constant="80" id="gdZ-ys-IDl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="N3T-0X-ByK" firstAttribute="top" secondItem="8D8-6e-ja0" secondAttribute="bottom" constant="5" id="CUY-e6-paY"/>
+                            <constraint firstItem="mJu-y8-6Sc" firstAttribute="top" secondItem="SCt-wp-3T7" secondAttribute="top" constant="8" id="OAI-C0-NYB"/>
+                            <constraint firstItem="8D8-6e-ja0" firstAttribute="top" secondItem="mJu-y8-6Sc" secondAttribute="bottom" constant="8" id="XCB-Ij-3Ux"/>
+                            <constraint firstAttribute="trailing" secondItem="8D8-6e-ja0" secondAttribute="trailing" constant="10" id="adC-ca-LkZ"/>
+                            <constraint firstAttribute="trailing" secondItem="N3T-0X-ByK" secondAttribute="trailing" constant="10" id="b4R-bC-AQ3"/>
+                            <constraint firstItem="8D8-6e-ja0" firstAttribute="leading" secondItem="SCt-wp-3T7" secondAttribute="leading" constant="10" id="jdy-YU-Clv"/>
+                            <constraint firstAttribute="trailing" secondItem="mJu-y8-6Sc" secondAttribute="trailing" constant="10" id="kXW-WV-eWq"/>
+                            <constraint firstItem="mJu-y8-6Sc" firstAttribute="leading" secondItem="SCt-wp-3T7" secondAttribute="leading" constant="10" id="qt8-gl-AlJ"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017年3月9日" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HnE-7s-ZfV">
+                        <rect key="frame" x="110" y="10" width="100" height="20"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="4C4-3j-dVL"/>
+                            <constraint firstAttribute="width" constant="100" id="8qQ-pr-ovE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                <constraints>
+                    <constraint firstItem="SCt-wp-3T7" firstAttribute="top" secondItem="HnE-7s-ZfV" secondAttribute="bottom" constant="10" id="3ek-n5-CMT"/>
+                    <constraint firstItem="HnE-7s-ZfV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="7aH-4w-QWP"/>
+                    <constraint firstItem="SCt-wp-3T7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="8gC-IC-ybN"/>
+                    <constraint firstItem="HnE-7s-ZfV" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="GBu-kb-Dbo"/>
+                    <constraint firstAttribute="trailing" secondItem="SCt-wp-3T7" secondAttribute="trailing" constant="12" id="Mpq-Db-ORV"/>
+                    <constraint firstAttribute="bottom" secondItem="SCt-wp-3T7" secondAttribute="bottom" constant="1" id="XpU-WF-i4t"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bgView" destination="SCt-wp-3T7" id="0ha-88-KL2"/>
+                <outlet property="dateLabel" destination="HnE-7s-ZfV" id="9bL-kX-ROi"/>
+                <outlet property="msgDetailLabel" destination="8D8-6e-ja0" id="r5t-qf-a2b"/>
+            </connections>
+            <point key="canvasLocation" x="-158" y="75"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -79,6 +79,8 @@
 		774DBC0D1E6420FC00B8798C /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC0B1E6420FC00B8798C /* HomeCell.xib */; };
 		774DBC0F1E64212F00B8798C /* tooopen_sy_156105468631.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC0E1E64212F00B8798C /* tooopen_sy_156105468631.jpg */; };
 		774DBC111E64214900B8798C /* msg.png in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC101E64214900B8798C /* msg.png */; };
+		7752C7B31E70EC360093ED37 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7752C7B11E70EC360093ED37 /* MessageCell.m */; };
+		7752C7B41E70EC360093ED37 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7752C7B21E70EC360093ED37 /* MessageCell.xib */; };
 		7784D8911E6D1F43004AB0CC /* waitpay.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8881E6D1F43004AB0CC /* waitpay.png */; };
 		7784D8921E6D1F43004AB0CC /* waitpay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8891E6D1F43004AB0CC /* waitpay@2x.png */; };
 		7784D8931E6D1F43004AB0CC /* waitpay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D88A1E6D1F43004AB0CC /* waitpay@3x.png */; };
@@ -229,6 +231,9 @@
 		774DBC0B1E6420FC00B8798C /* HomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCell.xib; sourceTree = "<group>"; };
 		774DBC0E1E64212F00B8798C /* tooopen_sy_156105468631.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tooopen_sy_156105468631.jpg; sourceTree = "<group>"; };
 		774DBC101E64214900B8798C /* msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msg.png; sourceTree = "<group>"; };
+		7752C7B01E70EC360093ED37 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		7752C7B11E70EC360093ED37 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		7752C7B21E70EC360093ED37 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		7784D8881E6D1F43004AB0CC /* waitpay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waitpay.png; sourceTree = "<group>"; };
 		7784D8891E6D1F43004AB0CC /* waitpay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "waitpay@2x.png"; sourceTree = "<group>"; };
 		7784D88A1E6D1F43004AB0CC /* waitpay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "waitpay@3x.png"; sourceTree = "<group>"; };
@@ -530,6 +535,9 @@
 		0970CFE91E517D3E007480CB /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7752C7B01E70EC360093ED37 /* MessageCell.h */,
+				7752C7B11E70EC360093ED37 /* MessageCell.m */,
+				7752C7B21E70EC360093ED37 /* MessageCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -747,7 +755,7 @@
 				TargetAttributes = {
 					0953C21D1E514B5700FB165C = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 3FZ6X72MWM;
+						DevelopmentTeam = EWE93FDJ2V;
 						ProvisioningStyle = Automatic;
 					};
 					0953C2361E514B5800FB165C = {
@@ -846,6 +854,7 @@
 				7784D8931E6D1F43004AB0CC /* waitpay@3x.png in Resources */,
 				090733811E64105A00F21E02 /* firstPageTabSel.png in Resources */,
 				7784D89D1E6D5512004AB0CC /* success.png in Resources */,
+				7752C7B41E70EC360093ED37 /* MessageCell.xib in Resources */,
 				7784D89A1E6D5512004AB0CC /* date.png in Resources */,
 				77038E0B1E63CA9E0096C07D /* index_slide_02.jpg in Resources */,
 				090733961E655B0600F21E02 /* consultPageCell.xib in Resources */,
@@ -952,6 +961,7 @@
 				0970CFF01E5180BF007480CB /* ConsultViewController.m in Sources */,
 				09FBE00E1E6FB4A0003452A6 /* CounselorInfoMainVC.m in Sources */,
 				090733951E655B0600F21E02 /* consultPageCell.m in Sources */,
+				7752C7B31E70EC360093ED37 /* MessageCell.m in Sources */,
 				0953C2261E514B5800FB165C /* AppDelegate.m in Sources */,
 				77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */,
 				0953C2231E514B5800FB165C /* main.m in Sources */,
@@ -1111,13 +1121,15 @@
 			baseConfigurationReference = F8550220C06BB0D4BA36D36F /* Pods-letian.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 3FZ6X72MWM;
+				DEVELOPMENT_TEAM = EWE93FDJ2V;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/letian/PrefixHeader.pch";
 				INFOPLIST_FILE = letian/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = J.letian;
+				PRODUCT_BUNDLE_IDENTIFIER = com.letian.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1126,13 +1138,15 @@
 			baseConfigurationReference = 7DE455D051C315B06E3F4C61 /* Pods-letian.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 3FZ6X72MWM;
+				DEVELOPMENT_TEAM = EWE93FDJ2V;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/letian/PrefixHeader.pch";
 				INFOPLIST_FILE = letian/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = J.letian;
+				PRODUCT_BUNDLE_IDENTIFIER = com.letian.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
