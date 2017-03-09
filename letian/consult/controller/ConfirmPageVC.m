@@ -60,6 +60,10 @@
     [self.view addSubview:_mainTableView];
     _mainTableView.delegate = self;
     _mainTableView.dataSource = self;
+    //自动计算高度 iOS8
+    _mainTableView.estimatedRowHeight=44.0;
+    _mainTableView.rowHeight=UITableViewAutomaticDimension;
+    _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 }
 

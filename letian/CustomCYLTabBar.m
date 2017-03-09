@@ -88,7 +88,7 @@
                                                  CYLTabBarItemSelectedImage : @"firstPageTabSel", /* NSString and UIImage are supported*/
                                                  };
     NSDictionary *secondTabBarItemsAttributes = @{
-                                                  CYLTabBarItemTitle : @"咨询",
+                                                  CYLTabBarItemTitle : @"预约",
                                                   CYLTabBarItemImage : @"consultPagTab",
                                                   CYLTabBarItemSelectedImage : @"consultPagTabSel",
                                                   };

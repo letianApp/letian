@@ -9,7 +9,6 @@
 #import "ConsultViewController.h"
 #import "consultPageCell.h"
 #import "counselorInfoModel.h"
-#import "CounselorInfoMainVC.h"
 #import "CounselorInfoVC.h"
 
 
@@ -220,7 +219,7 @@
         
     CounselorInfoVC *counselorInfoMainVC = [[CounselorInfoVC alloc]init];
     counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];
     
 }

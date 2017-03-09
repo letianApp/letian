@@ -9,11 +9,14 @@
 #import "CounselorInfoVC.h"
 #import "ConfirmPageCell.h"
 #import "ConfirmPageVC.h"
+#import "CYLTabBarController.h"
+#import "Masonry.h"
 
 @interface CounselorInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) UIView *headView;
 @property (nonatomic, strong) UITableView *mainTableView;
+@property (nonatomic, strong) UIView *holdView;
 @property (nonatomic, strong) UITabBar *tabBar;
 
 @end
@@ -24,8 +27,8 @@
     [super viewDidLoad];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
-
-    self.view.backgroundColor = MAINCOLOR;
+    
+//    self.view.backgroundColor = [UIColor whiteColor];
     [self customNavigation];
     [self customMainTableView];
     [self customHeadView];
@@ -37,7 +40,6 @@
 - (void)customNavigation {
     
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(0, 0, 20, 20)];
@@ -73,17 +75,25 @@
     //自动计算高度 iOS8
     _mainTableView.estimatedRowHeight=44.0;
     _mainTableView.rowHeight=UITableViewAutomaticDimension;
+    _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    _holdView = [[UIView alloc]init];
+    _holdView.backgroundColor = MAINCOLOR;
+    [_mainTableView addSubview:_holdView];
+
 }
 
 //cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ConfirmPageCell *cell = [ConfirmPageCell cellWithTableView:tableView];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;                        //设置cell不可以点
     
-    NSArray *lableTagArr = @[@"简介",@"资讯特点",@"擅长领域",@"咨询理念"];
+    NSArray *lableTagArr = @[@"简介",@"擅长领域",@"咨询风格"];
     cell.labelTag.text = lableTagArr[indexPath.row];
     
+    NSArray *detialArr = @[@"国家二级心理咨询师，北京师范大学应用心理学博士，上海心理卫生学会会员，上海某国际中学心理专家，《中学生报》专栏心理专家，心理咨询师考试培训教师，国家注册高级青少年心理成长导师，海南省职业教育研究所名誉顾问",@"青少年成长问题、亲子关系，焦虑、强迫、恐惧等神经症问题，家庭情感问题、人际交往、职场压力。",@"善于通过细致耐心的心理系统分析，准确把握来访者的心理结构、人格特质，以亲和与平易的咨询风格启发和引导来访者的自我探索，陪伴来访者一起心理成长，深度挖掘来访者内在心理资源，发展其自身的心理能量。"];
+    cell.detialLab.text = detialArr[indexPath.row];
     
     return cell;
     
@@ -91,7 +101,7 @@
 
 //行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 3;
 }
 
 #pragma mark 头部视图
@@ -113,24 +123,75 @@
     nameLab.textAlignment = NSTextAlignmentCenter;
     nameLab.text = @"孙晓平";
     nameLab.textColor = [UIColor whiteColor];
-    nameLab.font = [UIFont boldSystemFontOfSize:15];
+    nameLab.font = [UIFont boldSystemFontOfSize:17];
     [_headView addSubview:nameLab];
-    
+    //咨询师称号
+    UILabel *statusLab = [[UILabel alloc]init];
+    [_headView addSubview:statusLab];
+    [statusLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(nameLab.mas_centerX);
+        make.top.equalTo(nameLab.mas_bottom).offset(10);
+        make.width.equalTo(self.view.mas_width).multipliedBy(0.3);
+        make.height.equalTo(nameLab.mas_height);
+    }];
+    statusLab.textAlignment = NSTextAlignmentCenter;
+    statusLab.text = @"专家心理咨询师";
+    statusLab.textColor = [UIColor whiteColor];
+    statusLab.font = [UIFont boldSystemFontOfSize:12];
+
 }
 
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if (scrollView == _mainTableView) {
+        _holdView.frame = CGRectMake(0, 0, SCREEN_W, _mainTableView.contentOffset.y);
+    }
+}
 
 #pragma mark 定制底部TabBar
 - (void)creatBottomBar {
     
     _tabBar = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
-    btn.backgroundColor = MAINCOLOR;
-    [btn setTitle:@"预约" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(clickAppointmentBtn) forControlEvents:UIControlEventTouchUpInside];
-    [_tabBar addSubview:btn];
-    
+    //预约按钮
+    UIButton *AppointmentBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
+    AppointmentBtn.backgroundColor = MAINCOLOR;
+    [AppointmentBtn setTitle:@"预约" forState:UIControlStateNormal];
+    [AppointmentBtn addTarget:self action:@selector(clickAppointmentBtn) forControlEvents:UIControlEventTouchUpInside];
+    [_tabBar addSubview:AppointmentBtn];
+    //咨询按钮
+    UIButton *askBtn = [[UIButton alloc]initWithFrame:CGRectMake(15, 3, tabBar_H*2/3, tabBar_H*2/3)];
+    [_tabBar addSubview:askBtn];
+    [askBtn setImage:[UIImage imageNamed:@"ask"] forState:UIControlStateNormal];
+    [askBtn addTarget:self action:@selector(clickAskBrn) forControlEvents:UIControlEventTouchUpInside];
+    UILabel *askLab = [[UILabel alloc]initWithFrame:CGRectMake(15, tabBar_H*2/3, tabBar_H*2/3, tabBar_H/3)];
+    [_tabBar addSubview:askLab];
+    askLab.text = @"咨询";
+    askLab.textAlignment = NSTextAlignmentCenter;
+    askLab.font = [UIFont systemFontOfSize:10];
+    askLab.textColor = [UIColor darkGrayColor];
     [self.view addSubview:_tabBar];
+    //价格lable
+    UILabel *priceLab = [[UILabel alloc]init];
+    [_tabBar addSubview:priceLab];
+    [priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(AppointmentBtn.mas_left).offset(-5);
+        make.top.equalTo(_tabBar.mas_top);
+        make.width.equalTo(_tabBar.mas_width).multipliedBy(0.3);
+        make.height.equalTo(_tabBar.mas_height);
+    }];
+    priceLab.textColor = MAINCOLOR;
+    priceLab.text = @"1000元／小时";
+    priceLab.textAlignment = NSTextAlignmentRight;
+    priceLab.font = [UIFont boldSystemFontOfSize:15];
+
+
+    
+    
+    
+}
+
+- (void)clickAskBrn {
+    NSLog(@"点击咨询按钮");
 }
 
 - (void)clickAppointmentBtn {
