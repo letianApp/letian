@@ -68,6 +68,7 @@
             label.text=nameArray[j+i*2];
             label.textColor=[UIColor blackColor];
             label.textAlignment=NSTextAlignmentCenter;
+            
             label.tag=j+i*2+100;
             
             label.userInteractionEnabled=YES;
