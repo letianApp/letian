@@ -69,6 +69,8 @@
 		77038E091E63CA960096C07D /* index_slide_03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038E081E63CA960096C07D /* index_slide_03.jpg */; };
 		77038E0B1E63CA9E0096C07D /* index_slide_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038E0A1E63CA9E0096C07D /* index_slide_02.jpg */; };
 		77038E0D1E63CAAB0096C07D /* index_slide_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038E0C1E63CAAB0096C07D /* index_slide_01.jpg */; };
+		77221D901E6FB5E700022AAF /* AdvisoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77221D8F1E6FB5E700022AAF /* AdvisoryViewController.m */; };
+		77221D931E6FB63400022AAF /* SystomMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77221D921E6FB63400022AAF /* SystomMsgViewController.m */; };
 		774DBC0C1E6420FC00B8798C /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 774DBC0A1E6420FC00B8798C /* HomeCell.m */; };
 		774DBC0D1E6420FC00B8798C /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC0B1E6420FC00B8798C /* HomeCell.xib */; };
 		774DBC0F1E64212F00B8798C /* tooopen_sy_156105468631.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC0E1E64212F00B8798C /* tooopen_sy_156105468631.jpg */; };
@@ -208,6 +210,10 @@
 		77038E081E63CA960096C07D /* index_slide_03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = index_slide_03.jpg; sourceTree = "<group>"; };
 		77038E0A1E63CA9E0096C07D /* index_slide_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = index_slide_02.jpg; sourceTree = "<group>"; };
 		77038E0C1E63CAAB0096C07D /* index_slide_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = index_slide_01.jpg; sourceTree = "<group>"; };
+		77221D8E1E6FB5E700022AAF /* AdvisoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvisoryViewController.h; sourceTree = "<group>"; };
+		77221D8F1E6FB5E700022AAF /* AdvisoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvisoryViewController.m; sourceTree = "<group>"; };
+		77221D911E6FB63400022AAF /* SystomMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystomMsgViewController.h; sourceTree = "<group>"; };
+		77221D921E6FB63400022AAF /* SystomMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystomMsgViewController.m; sourceTree = "<group>"; };
 		774DBC091E6420FC00B8798C /* HomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCell.h; sourceTree = "<group>"; };
 		774DBC0A1E6420FC00B8798C /* HomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCell.m; sourceTree = "<group>"; };
 		774DBC0B1E6420FC00B8798C /* HomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCell.xib; sourceTree = "<group>"; };
@@ -490,6 +496,10 @@
 				7784D8A91E6E80C5004AB0CC /* MessageViewController.h */,
 				7784D8AA1E6E80C5004AB0CC /* MessageViewController.m */,
 				7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */,
+				77221D8E1E6FB5E700022AAF /* AdvisoryViewController.h */,
+				77221D8F1E6FB5E700022AAF /* AdvisoryViewController.m */,
+				77221D911E6FB63400022AAF /* SystomMsgViewController.h */,
+				77221D921E6FB63400022AAF /* SystomMsgViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -909,6 +919,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77221D931E6FB63400022AAF /* SystomMsgViewController.m in Sources */,
 				77D2BF971E66B3D0000B9978 /* RegistViewController.m in Sources */,
 				77C383101E6CF79A00B4EF73 /* ChangePwViewController.m in Sources */,
 				0970CFF51E5180DF007480CB /* MyViewController.m in Sources */,
@@ -928,6 +939,7 @@
 				77D2BFA11E66C404000B9978 /* SetAcountViewController.m in Sources */,
 				0945B1441E67E8BF005B7560 /* CounselorInfoViewController.m in Sources */,
 				0970CFEC1E517EB8007480CB /* FirstViewController.m in Sources */,
+				77221D901E6FB5E700022AAF /* AdvisoryViewController.m in Sources */,
 				09F1E6FD1E6E4A3E007FBE81 /* orderPageCell.m in Sources */,
 				77038DE71E63C3B50096C07D /* NSTimer+YYFounction.m in Sources */,
 			);
