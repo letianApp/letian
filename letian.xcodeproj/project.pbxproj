@@ -30,8 +30,6 @@
 		0945B13E1E67E7F2005B7560 /* female@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0945B13A1E67E7F2005B7560 /* female@2x.png */; };
 		0945B13F1E67E7F2005B7560 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = 0945B13B1E67E7F2005B7560 /* male.png */; };
 		0945B1401E67E7F2005B7560 /* male@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0945B13C1E67E7F2005B7560 /* male@2x.png */; };
-		0945B1441E67E8BF005B7560 /* CounselorInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0945B1421E67E8BF005B7560 /* CounselorInfoViewController.m */; };
-		0945B1451E67E8BF005B7560 /* CounselorInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0945B1431E67E8BF005B7560 /* CounselorInfoViewController.xib */; };
 		0945B1481E6937DF005B7560 /* CustomCYLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0945B1471E6937DF005B7560 /* CustomCYLTabBar.m */; };
 		0953C2231E514B5800FB165C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0953C2221E514B5800FB165C /* main.m */; };
 		0953C2261E514B5800FB165C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0953C2251E514B5800FB165C /* AppDelegate.m */; };
@@ -51,6 +49,12 @@
 		09F1E7021E6E6506007FBE81 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E6FF1E6E6506007FBE81 /* share.png */; };
 		09F1E7031E6E6506007FBE81 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E7001E6E6506007FBE81 /* share@2x.png */; };
 		09F1E7041E6E6506007FBE81 /* share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E7011E6E6506007FBE81 /* share@3x.png */; };
+		09FBE00E1E6FB4A0003452A6 /* CounselorInfoMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FBE00C1E6FB4A0003452A6 /* CounselorInfoMainVC.m */; };
+		09FBE00F1E6FB4A0003452A6 /* CounselorInfoMainVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FBE00D1E6FB4A0003452A6 /* CounselorInfoMainVC.xib */; };
+		09FBE0131E6FFE04003452A6 /* OrderPageTbC.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FBE0111E6FFE04003452A6 /* OrderPageTbC.m */; };
+		09FBE0141E6FFE04003452A6 /* OrderPageTbC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FBE0121E6FFE04003452A6 /* OrderPageTbC.xib */; };
+		09FBE0181E700164003452A6 /* ConfirmPageTbC.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FBE0161E700164003452A6 /* ConfirmPageTbC.m */; };
+		09FBE0191E700164003452A6 /* ConfirmPageTbC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FBE0171E700164003452A6 /* ConfirmPageTbC.xib */; };
 		74FF12D34910C046FDF26AE9 /* libPods-letian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D06804C865F43F4E9B595D7 /* libPods-letian.a */; };
 		77038DE71E63C3B50096C07D /* NSTimer+YYFounction.m in Sources */ = {isa = PBXBuildFile; fileRef = 77038DE41E63C3B50096C07D /* NSTimer+YYFounction.m */; };
 		77038DE81E63C3B50096C07D /* YYCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77038DE61E63C3B50096C07D /* YYCycleScrollView.m */; };
@@ -154,9 +158,6 @@
 		0945B13A1E67E7F2005B7560 /* female@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "female@2x.png"; sourceTree = "<group>"; };
 		0945B13B1E67E7F2005B7560 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 		0945B13C1E67E7F2005B7560 /* male@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "male@2x.png"; sourceTree = "<group>"; };
-		0945B1411E67E8BF005B7560 /* CounselorInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CounselorInfoViewController.h; sourceTree = "<group>"; };
-		0945B1421E67E8BF005B7560 /* CounselorInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CounselorInfoViewController.m; sourceTree = "<group>"; };
-		0945B1431E67E8BF005B7560 /* CounselorInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CounselorInfoViewController.xib; sourceTree = "<group>"; };
 		0945B1461E6937DE005B7560 /* CustomCYLTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCYLTabBar.h; sourceTree = "<group>"; };
 		0945B1471E6937DF005B7560 /* CustomCYLTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCYLTabBar.m; sourceTree = "<group>"; };
 		0953C21E1E514B5800FB165C /* letian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = letian.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,6 +190,15 @@
 		09F1E6FF1E6E6506007FBE81 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		09F1E7001E6E6506007FBE81 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		09F1E7011E6E6506007FBE81 /* share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@3x.png"; sourceTree = "<group>"; };
+		09FBE00B1E6FB4A0003452A6 /* CounselorInfoMainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CounselorInfoMainVC.h; sourceTree = "<group>"; };
+		09FBE00C1E6FB4A0003452A6 /* CounselorInfoMainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CounselorInfoMainVC.m; sourceTree = "<group>"; };
+		09FBE00D1E6FB4A0003452A6 /* CounselorInfoMainVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CounselorInfoMainVC.xib; sourceTree = "<group>"; };
+		09FBE0101E6FFE04003452A6 /* OrderPageTbC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderPageTbC.h; path = ../view/OrderPageTbC.h; sourceTree = "<group>"; };
+		09FBE0111E6FFE04003452A6 /* OrderPageTbC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderPageTbC.m; path = ../view/OrderPageTbC.m; sourceTree = "<group>"; };
+		09FBE0121E6FFE04003452A6 /* OrderPageTbC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OrderPageTbC.xib; path = ../view/OrderPageTbC.xib; sourceTree = "<group>"; };
+		09FBE0151E700164003452A6 /* ConfirmPageTbC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfirmPageTbC.h; path = ../view/ConfirmPageTbC.h; sourceTree = "<group>"; };
+		09FBE0161E700164003452A6 /* ConfirmPageTbC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfirmPageTbC.m; path = ../view/ConfirmPageTbC.m; sourceTree = "<group>"; };
+		09FBE0171E700164003452A6 /* ConfirmPageTbC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfirmPageTbC.xib; path = ../view/ConfirmPageTbC.xib; sourceTree = "<group>"; };
 		4D06804C865F43F4E9B595D7 /* libPods-letian.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-letian.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77038DE31E63C3B50096C07D /* NSTimer+YYFounction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+YYFounction.h"; sourceTree = "<group>"; };
 		77038DE41E63C3B50096C07D /* NSTimer+YYFounction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+YYFounction.m"; sourceTree = "<group>"; };
@@ -480,9 +490,15 @@
 				0970CFED1E5180BF007480CB /* ConsultViewController.h */,
 				0970CFEE1E5180BF007480CB /* ConsultViewController.m */,
 				0970CFEF1E5180BF007480CB /* ConsultViewController.xib */,
-				0945B1411E67E8BF005B7560 /* CounselorInfoViewController.h */,
-				0945B1421E67E8BF005B7560 /* CounselorInfoViewController.m */,
-				0945B1431E67E8BF005B7560 /* CounselorInfoViewController.xib */,
+				09FBE00B1E6FB4A0003452A6 /* CounselorInfoMainVC.h */,
+				09FBE00C1E6FB4A0003452A6 /* CounselorInfoMainVC.m */,
+				09FBE00D1E6FB4A0003452A6 /* CounselorInfoMainVC.xib */,
+				09FBE0101E6FFE04003452A6 /* OrderPageTbC.h */,
+				09FBE0111E6FFE04003452A6 /* OrderPageTbC.m */,
+				09FBE0121E6FFE04003452A6 /* OrderPageTbC.xib */,
+				09FBE0151E700164003452A6 /* ConfirmPageTbC.h */,
+				09FBE0161E700164003452A6 /* ConfirmPageTbC.m */,
+				09FBE0171E700164003452A6 /* ConfirmPageTbC.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -794,7 +810,6 @@
 				77038DFA1E63C9F20096C07D /* cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg in Resources */,
 				77038E0D1E63CAAB0096C07D /* index_slide_01.jpg in Resources */,
 				77D2BF981E66B3D0000B9978 /* RegistViewController.xib in Resources */,
-				0945B1451E67E8BF005B7560 /* CounselorInfoViewController.xib in Resources */,
 				0970CFF61E5180DF007480CB /* MyViewController.xib in Resources */,
 				0945B13E1E67E7F2005B7560 /* female@2x.png in Resources */,
 				0945B1401E67E7F2005B7560 /* male@2x.png in Resources */,
@@ -810,8 +825,10 @@
 				77038DFF1E63C9F20096C07D /* women.png in Resources */,
 				0907337D1E64105A00F21E02 /* consultPagTabSel.png in Resources */,
 				09F1E7021E6E6506007FBE81 /* share.png in Resources */,
+				09FBE00F1E6FB4A0003452A6 /* CounselorInfoMainVC.xib in Resources */,
 				7784D8A71E6E532E004AB0CC /* whiteMessage@2x.png in Resources */,
 				090733881E64105A00F21E02 /* myPagTab@2x.png in Resources */,
+				09FBE0141E6FFE04003452A6 /* OrderPageTbC.xib in Resources */,
 				77FF9B781E696E18008C0FE7 /* pinkback@3x.png in Resources */,
 				7784D89E1E6D5512004AB0CC /* success@2x.png in Resources */,
 				774DBC0D1E6420FC00B8798C /* HomeCell.xib in Resources */,
@@ -837,6 +854,7 @@
 				7784D8921E6D1F43004AB0CC /* waitpay@2x.png in Resources */,
 				7784D8A61E6E532E004AB0CC /* whiteMessage.png in Resources */,
 				090733871E64105A00F21E02 /* myPagTab.png in Resources */,
+				09FBE0191E700164003452A6 /* ConfirmPageTbC.xib in Resources */,
 				7784D8AD1E6E80C5004AB0CC /* MessageViewController.xib in Resources */,
 				77038E041E63C9F20096C07D /* 银联支付.png in Resources */,
 				77038E011E63C9F20096C07D /* 客服.png in Resources */,
@@ -922,6 +940,7 @@
 				77221D931E6FB63400022AAF /* SystomMsgViewController.m in Sources */,
 				77D2BF971E66B3D0000B9978 /* RegistViewController.m in Sources */,
 				77C383101E6CF79A00B4EF73 /* ChangePwViewController.m in Sources */,
+				09FBE0181E700164003452A6 /* ConfirmPageTbC.m in Sources */,
 				0970CFF51E5180DF007480CB /* MyViewController.m in Sources */,
 				77D2BFA61E67D6A9000B9978 /* ForgetPwViewController.m in Sources */,
 				0945B1481E6937DF005B7560 /* CustomCYLTabBar.m in Sources */,
@@ -931,13 +950,14 @@
 				774DBC0C1E6420FC00B8798C /* HomeCell.m in Sources */,
 				0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */,
 				0970CFF01E5180BF007480CB /* ConsultViewController.m in Sources */,
+				09FBE00E1E6FB4A0003452A6 /* CounselorInfoMainVC.m in Sources */,
 				090733951E655B0600F21E02 /* consultPageCell.m in Sources */,
 				0953C2261E514B5800FB165C /* AppDelegate.m in Sources */,
 				77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */,
 				0953C2231E514B5800FB165C /* main.m in Sources */,
 				7784D8A21E6D587D004AB0CC /* GQControls.m in Sources */,
 				77D2BFA11E66C404000B9978 /* SetAcountViewController.m in Sources */,
-				0945B1441E67E8BF005B7560 /* CounselorInfoViewController.m in Sources */,
+				09FBE0131E6FFE04003452A6 /* OrderPageTbC.m in Sources */,
 				0970CFEC1E517EB8007480CB /* FirstViewController.m in Sources */,
 				77221D901E6FB5E700022AAF /* AdvisoryViewController.m in Sources */,
 				09F1E6FD1E6E4A3E007FBE81 /* orderPageCell.m in Sources */,
