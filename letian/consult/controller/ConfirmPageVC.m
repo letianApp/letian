@@ -8,6 +8,9 @@
 
 #import "ConfirmPageVC.h"
 #import "ConfirmPageCell.h"
+#import "UIView+Layout.h"
+#import "WZYCalendar.h"
+
 
 @interface ConfirmPageVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -61,9 +64,12 @@
     _mainTableView.delegate = self;
     _mainTableView.dataSource = self;
     //自动计算高度 iOS8
-    _mainTableView.estimatedRowHeight=44.0;
-    _mainTableView.rowHeight=UITableViewAutomaticDimension;
+//    _mainTableView.estimatedRowHeight = 44.0;
+//    _mainTableView.rowHeight = UITableViewAutomaticDimension;
     _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    _mainTableView.rowHeight = 500;
+    
     
 }
 
@@ -71,9 +77,80 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ConfirmPageCell *cell = [ConfirmPageCell cellWithTableView:tableView];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;                        //设置cell不可以点
+    
+    NSArray *lableTagArr = @[@"咨询方式及时间",@"个人信息"];
+    cell.labelTag.text = lableTagArr[indexPath.row];
+    cell.detialLab.hidden = YES;
+//    cell.backView.backgroundColor = [UIColor yellowColor];
+    
+    
+    
+    
+    [self customCell:cell withBgView:cell.backView forRowAtIndexPath:indexPath];
+    
     return cell;
     
 }
+
+- (void)customCell:(UITableViewCell *)cell withBgView:(UIView *)view forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(indexPath.row == 0){
+//        view.backgroundColor = [UIColor yellowColor];
+        
+        NSArray *btnTitle = @[@"面对面咨询",@"文字语音",@"电话咨询"];
+        
+        for (int i = 0; i < 3; i++) {
+            
+            UIButton *btn = [GQControls createButtonWithFrame:CGRectMake(10+SCREEN_W/3*i, 10, SCREEN_W/3-20, 30) andTitle:btnTitle[i] andTitleColor:[UIColor blackColor] andFontSize:15 andTag:i+1 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:([UIColor darkGrayColor].CGColor)];
+            btn.backgroundColor = [UIColor whiteColor];
+            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+            [btn addTarget:self action:@selector(clickChoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
+            [view addSubview:btn];
+            
+        }
+        
+        [self setupCalendarWithView:view];
+        
+        
+    }
+    
+}
+
+- (void)clickChoiceBtn:(UIButton *)btn {
+    
+    for (int i = 0; i < 3; i++) {
+        UIButton *btnn = [self.view viewWithTag:i+1];
+        btnn.selected = NO;
+        btnn.backgroundColor = [UIColor whiteColor];
+    }
+    
+    btn.selected = YES;
+    btn.backgroundColor = MAINCOLOR;
+    
+}
+
+- (void)setupCalendarWithView:(UIView *)view {
+    
+    CGFloat width = self.view.bounds.size.width - 20.0;
+    CGPoint origin = CGPointMake(10.0, 50.0);
+    
+    // 传入Calendar的origin和width。自动计算控件高度
+    WZYCalendarView *calendar = [[WZYCalendarView alloc] initWithFrameOrigin:origin width:width];
+    
+    NSLog(@"height --- %lf", calendar.frame.size.height);
+    
+    // 点击某一天的回调
+    calendar.didSelectDayHandler = ^(NSInteger year, NSInteger month, NSInteger day) {
+        
+        
+    };
+    
+    [view addSubview:calendar];
+    
+}
+
+
 
 //行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -90,6 +167,7 @@
     [btn setTitle:@"确定预约" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
     [_tabBar addSubview:btn];
+    
     
     [self.view addSubview:_tabBar];
     

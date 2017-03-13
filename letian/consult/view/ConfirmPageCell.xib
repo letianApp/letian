@@ -27,9 +27,9 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evd-te-hVl">
-                        <rect key="frame" x="15" y="15" width="100" height="15"/>
+                        <rect key="frame" x="15" y="15" width="200" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="0Yi-LI-ZNO"/>
+                            <constraint firstAttribute="width" constant="200" id="0Yi-LI-ZNO"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>

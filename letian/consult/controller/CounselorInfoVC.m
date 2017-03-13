@@ -10,7 +10,6 @@
 #import "ConfirmPageCell.h"
 #import "ConfirmPageVC.h"
 #import "CYLTabBarController.h"
-#import "Masonry.h"
 
 @interface CounselorInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -73,8 +72,8 @@
     _mainTableView.delegate = self;
     _mainTableView.dataSource = self;
     //自动计算高度 iOS8
-    _mainTableView.estimatedRowHeight=44.0;
-    _mainTableView.rowHeight=UITableViewAutomaticDimension;
+    _mainTableView.estimatedRowHeight = 44.0;
+    _mainTableView.rowHeight = UITableViewAutomaticDimension;
     _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     _holdView = [[UIView alloc]init];
@@ -174,7 +173,7 @@
     UILabel *priceLab = [[UILabel alloc]init];
     [_tabBar addSubview:priceLab];
     [priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(AppointmentBtn.mas_left).offset(-5);
+        make.right.equalTo(AppointmentBtn.mas_left).offset(-SCREEN_W/100);
         make.top.equalTo(_tabBar.mas_top);
         make.width.equalTo(_tabBar.mas_width).multipliedBy(0.3);
         make.height.equalTo(_tabBar.mas_height);
@@ -183,10 +182,19 @@
     priceLab.text = @"1000元／小时";
     priceLab.textAlignment = NSTextAlignmentRight;
     priceLab.font = [UIFont boldSystemFontOfSize:15];
-
-
-    
-    
+    //优惠lable
+    UILabel *couponLab = [[UILabel alloc]init];
+    [_tabBar addSubview:couponLab];
+    [couponLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(priceLab.mas_right);
+        make.bottom.equalTo(_tabBar.mas_bottom);
+        make.width.equalTo(priceLab.mas_width);
+        make.height.equalTo(priceLab.mas_height).multipliedBy(0.5);
+    }];
+    couponLab.text = @"4小时以上88折";
+    couponLab.textColor = [UIColor orangeColor];
+    couponLab.textAlignment = NSTextAlignmentRight;
+    couponLab.font = [UIFont boldSystemFontOfSize:10];
     
 }
 
