@@ -9,6 +9,7 @@
 #import "MyViewController.h"
 #import "GQControls.h"
 #import "MessageViewController.h"
+#import "OrderViewController.h"
 @interface MyViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -162,7 +163,7 @@
         UILabel *orderLabel=[GQControls createLabelWithFrame:CGRectMake(20+((SCREEN_W-40-60*3)/2+60)*i, 82, 60, 10) andText:orderSrateArray[i] andTextColor:[UIColor darkGrayColor] andFontSize:11];
         orderLabel.textAlignment=NSTextAlignmentCenter;
         [orderView addSubview:orderLabel];
-
+        
         
     }
     
@@ -176,6 +177,10 @@
 {
     
     NSLog(@"进入订单列表");
+    
+    OrderViewController *orderVc=[[OrderViewController alloc]init];
+    
+    [self.navigationController pushViewController:orderVc animated:NO];
     
     
     
@@ -221,7 +226,7 @@
 {
     
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
-
+    
     NSLog(@"cell被点击%li",indexPath.row);
     
     if (indexPath.row==1) {
@@ -230,7 +235,7 @@
         UIWebView * callWebview = [[UIWebView alloc] init];
         [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
         [self.view addSubview:callWebview];
-
+        
     }
     
 }
@@ -243,13 +248,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
