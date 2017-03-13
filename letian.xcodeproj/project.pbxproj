@@ -53,6 +53,7 @@
 		09A64DE81E76363500DCE8D9 /* WZYCalendarMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DE11E76363500DCE8D9 /* WZYCalendarMonth.m */; };
 		09A64DE91E76363500DCE8D9 /* WZYCalendarScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DE31E76363500DCE8D9 /* WZYCalendarScrollView.m */; };
 		09A64DEA1E76363500DCE8D9 /* WZYCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DE51E76363500DCE8D9 /* WZYCalendarView.m */; };
+		09A64DF01E76486F00DCE8D9 /* GQSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DEF1E76486F00DCE8D9 /* GQSegment.m */; };
 		09F1E7021E6E6506007FBE81 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E6FF1E6E6506007FBE81 /* share.png */; };
 		09F1E7031E6E6506007FBE81 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E7001E6E6506007FBE81 /* share@2x.png */; };
 		09F1E7041E6E6506007FBE81 /* share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E7011E6E6506007FBE81 /* share@3x.png */; };
@@ -209,6 +210,8 @@
 		09A64DE31E76363500DCE8D9 /* WZYCalendarScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZYCalendarScrollView.m; sourceTree = "<group>"; };
 		09A64DE41E76363500DCE8D9 /* WZYCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZYCalendarView.h; sourceTree = "<group>"; };
 		09A64DE51E76363500DCE8D9 /* WZYCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZYCalendarView.m; sourceTree = "<group>"; };
+		09A64DEE1E76486F00DCE8D9 /* GQSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQSegment.h; sourceTree = "<group>"; };
+		09A64DEF1E76486F00DCE8D9 /* GQSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQSegment.m; sourceTree = "<group>"; };
 		09F1E6FF1E6E6506007FBE81 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		09F1E7001E6E6506007FBE81 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		09F1E7011E6E6506007FBE81 /* share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@3x.png"; sourceTree = "<group>"; };
@@ -616,6 +619,8 @@
 				7784D8A11E6D587D004AB0CC /* GQControls.m */,
 				09A64DD71E7290C300DCE8D9 /* UIView+Layout.h */,
 				09A64DD81E7290C300DCE8D9 /* UIView+Layout.m */,
+				09A64DEE1E76486F00DCE8D9 /* GQSegment.h */,
+				09A64DEF1E76486F00DCE8D9 /* GQSegment.m */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1006,6 +1011,7 @@
 				09FBE0221E70F609003452A6 /* ConfirmPageCell.m in Sources */,
 				0970CFF01E5180BF007480CB /* ConsultViewController.m in Sources */,
 				090733951E655B0600F21E02 /* consultPageCell.m in Sources */,
+				09A64DF01E76486F00DCE8D9 /* GQSegment.m in Sources */,
 				09FBE01D1E70EE60003452A6 /* ConfirmPageVC.m in Sources */,
 				7752C7B31E70EC360093ED37 /* MessageCell.m in Sources */,
 				0953C2261E514B5800FB165C /* AppDelegate.m in Sources */,
