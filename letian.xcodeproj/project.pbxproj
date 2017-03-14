@@ -117,6 +117,8 @@
 		77D2BFA71E67D6A9000B9978 /* ForgetPwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BFA51E67D6A9000B9978 /* ForgetPwViewController.xib */; };
 		77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DA5DCB1E666B92003FAE0C /* LoginViewController.m */; };
 		77DA5DCE1E666B92003FAE0C /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */; };
+		77F3D85D1E764E22008B5FC0 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F3D85B1E764E22008B5FC0 /* OrderViewController.m */; };
+		77F3D85E1E764E22008B5FC0 /* OrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F3D85C1E764E22008B5FC0 /* OrderViewController.xib */; };
 		77FF9B761E696E18008C0FE7 /* pinkback.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FF9B701E696E18008C0FE7 /* pinkback.png */; };
 		77FF9B771E696E18008C0FE7 /* pinkback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FF9B711E696E18008C0FE7 /* pinkback@2x.png */; };
 		77FF9B781E696E18008C0FE7 /* pinkback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FF9B721E696E18008C0FE7 /* pinkback@3x.png */; };
@@ -292,6 +294,9 @@
 		77DA5DCA1E666B92003FAE0C /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		77DA5DCB1E666B92003FAE0C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		77F3D85A1E764E22008B5FC0 /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
+		77F3D85B1E764E22008B5FC0 /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
+		77F3D85C1E764E22008B5FC0 /* OrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderViewController.xib; sourceTree = "<group>"; };
 		77FF9B701E696E18008C0FE7 /* pinkback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinkback.png; sourceTree = "<group>"; };
 		77FF9B711E696E18008C0FE7 /* pinkback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinkback@2x.png"; sourceTree = "<group>"; };
 		77FF9B721E696E18008C0FE7 /* pinkback@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinkback@3x.png"; sourceTree = "<group>"; };
@@ -534,6 +539,7 @@
 		0970CFE71E517D3E007480CB /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				77F3D8591E764E22008B5FC0 /* 订单 */,
 				0970CFF21E5180DF007480CB /* MyViewController.h */,
 				0970CFF31E5180DF007480CB /* MyViewController.m */,
 				0970CFF41E5180DF007480CB /* MyViewController.xib */,
@@ -723,6 +729,16 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		77F3D8591E764E22008B5FC0 /* 订单 */ = {
+			isa = PBXGroup;
+			children = (
+				77F3D85A1E764E22008B5FC0 /* OrderViewController.h */,
+				77F3D85B1E764E22008B5FC0 /* OrderViewController.m */,
+				77F3D85C1E764E22008B5FC0 /* OrderViewController.xib */,
+			);
+			path = "订单";
+			sourceTree = "<group>";
+		};
 		7C97B37F8435D00E98815F82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -870,6 +886,7 @@
 				0945B1401E67E7F2005B7560 /* male@2x.png in Resources */,
 				7784D89C1E6D5512004AB0CC /* date@3x.png in Resources */,
 				77038E021E63C9F20096C07D /* 微信支付.png in Resources */,
+				77F3D85E1E764E22008B5FC0 /* OrderViewController.xib in Resources */,
 				77038DFB1E63C9F20096C07D /* timg (1).jpeg in Resources */,
 				090733891E64105A00F21E02 /* myPagTabSel.png in Resources */,
 				09FBE0231E70F609003452A6 /* ConfirmPageCell.xib in Resources */,
@@ -1019,6 +1036,7 @@
 				09A64DD91E7290C300DCE8D9 /* UIView+Layout.m in Sources */,
 				09A64DE71E76363500DCE8D9 /* WZYCalendarCell.m in Sources */,
 				09A64DE81E76363500DCE8D9 /* WZYCalendarMonth.m in Sources */,
+				77F3D85D1E764E22008B5FC0 /* OrderViewController.m in Sources */,
 				77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */,
 				0953C2231E514B5800FB165C /* main.m in Sources */,
 				7784D8A21E6D587D004AB0CC /* GQControls.m in Sources */,
