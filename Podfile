@@ -4,8 +4,6 @@ pod 'SDWebImage', '~> 3.7.5'
 pod 'CYLTabBarController', '1.10.0'
 pod 'Masonry'
 pod "RTRootNavigationController"
-pod 'HSDatePickerViewController', '~> 1.0.4'
-
 
 
 end
