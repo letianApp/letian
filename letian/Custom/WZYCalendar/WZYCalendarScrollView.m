@@ -189,7 +189,7 @@ static NSString *const kCellIdentifier = @"cell";
             // 标识今天
             if ((monthInfo.month == [[NSDate date] dateMonth]) && (monthInfo.year == [[NSDate date] dateYear])) {
                 if (indexPath.row == [[NSDate date] dateDay] + firstWeekday - 1) {
-                    cell.todayCircle.backgroundColor = CURRENTHEXCOLOR(0xFF5A39);
+                    cell.todayCircle.backgroundColor = MAINCOLOR;
                     cell.todayLabel.textColor = [UIColor whiteColor];
                 } else {
                     cell.todayCircle.backgroundColor = [UIColor clearColor];
@@ -306,6 +306,12 @@ static NSString *const kCellIdentifier = @"cell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
+//    WZYCalendarCell *cell = (WZYCalendarCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//    cell.pointView.backgroundColor = [UIColor clearColor];
+    
+//    WZYCalendarCell *selCell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
+    
+    
     if (self.didSelectDayHandler != nil) {
         
         NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -318,7 +324,20 @@ static NSString *const kCellIdentifier = @"cell";
         NSInteger month = [currentDate dateMonth];
         NSInteger day = [cell.todayLabel.text integerValue];
         
-        self.didSelectDayHandler(year, month, day); // 执行回调（将点击的日期cell上面的信息回调出去）
+        
+        if (collectionView == _collectionViewM) {
+            
+//            selCell.pointView.backgroundColor = MAINCOLOR;
+            
+        }
+        
+//        NSLog(@"%ld",(long)indexPath.row);
+//        cell.isSelected = YES;
+//        cell.pointView.backgroundColor = MAINCOLOR;
+        
+        
+        
+        self.didSelectDayHandler(year, month, day, cell.backgroundView); // 执行回调（将点击的日期cell上面的信息回调出去）
     }
     
 }

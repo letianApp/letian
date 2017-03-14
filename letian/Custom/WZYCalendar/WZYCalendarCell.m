@@ -19,7 +19,7 @@
         // 当天的日期数字
         [self addSubview:self.todayLabel];
         // 提醒标记点
-        //        [self addSubview:self.pointView];
+        [self addSubview:self.pointView];
         
     }
     
@@ -47,9 +47,9 @@
 
 - (UIView *)pointView {
     if (_pointView == nil) {
-        _pointView = [[UIView alloc] initWithFrame:CGRectMake(self.bounds.size.width - 4 - 2, 2, 4, 4)];
+        _pointView = [[UIView alloc] initWithFrame:CGRectMake(5, self.bounds.size.height - 4, self.bounds.size.width - 10, 4)];
         _pointView.layer.cornerRadius = 2;
-        _pointView.backgroundColor = [UIColor redColor];
+        _pointView.backgroundColor = [UIColor clearColor];
     }
     return _pointView;
 }

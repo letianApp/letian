@@ -90,7 +90,7 @@
     _calendarHeaderButton = yearMonthButton;
     yearMonthButton.frame = CGRectMake(0, 0, 120, frame.size.height);
     yearMonthButton.backgroundColor = [UIColor clearColor];
-    [yearMonthButton setTitleColor:HEXCOLOR(0xFF5A39) forState:UIControlStateNormal];
+    [yearMonthButton setTitleColor:MAINCOLOR forState:UIControlStateNormal];
     [yearMonthButton.titleLabel setFont:[UIFont fontWithName:@"PingFang SC" size:16]];
     [backView addSubview:yearMonthButton];
     
@@ -98,7 +98,7 @@
     todayButton.frame = CGRectMake(frame.size.width - frame.size.height, 7, frame.size.height - 14, frame.size.height - 14);
     [todayButton setTitle:@"今" forState:UIControlStateNormal];
     [todayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    todayButton.backgroundColor = HEXCOLOR(0xFF5A39);
+    todayButton.backgroundColor = MAINCOLOR;
     todayButton.layer.cornerRadius = todayButton.frame.size.width * 0.5;
     [todayButton addTarget:self action:@selector(refreshToCurrentMonthAction:) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:todayButton];

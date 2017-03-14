@@ -98,7 +98,7 @@
     if(indexPath.row == 0){
 //        view.backgroundColor = [UIColor yellowColor];
         
-        NSArray *btnTitle = @[@"面对面咨询",@"文字语音",@"电话咨询"];
+        NSArray *btnTitle = @[@"面对面咨询",@"文字语音",@"视频咨询"];
         
         for (int i = 0; i < 3; i++) {
             
@@ -141,8 +141,11 @@
     NSLog(@"height --- %lf", calendar.frame.size.height);
     
     // 点击某一天的回调
-    calendar.didSelectDayHandler = ^(NSInteger year, NSInteger month, NSInteger day) {
+    calendar.didSelectDayHandler = ^(NSInteger year, NSInteger month, NSInteger day, UIView *view) {
         
+//        NSLog(@"%ld年%ld月%ld日",(long)year,(long)month,(long)day);
+//        NSLog(@"%f",view.frame.origin.x);
+//        view.backgroundColor = MAINCOLOR;
         
     };
     
