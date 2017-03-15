@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FSCalendar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,27 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>099326652FCDFBF551F8E8E03B01D0DF</key>
+		<key>187D4938E4853AAF74ED933257C249B1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>169844F3E7BF49EC10F7B0E46DD292FA</key>
+		<key>46AA28753E93B0ACEC0588D1EAB31835</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1C12840C947A69398D845BBFA1F1120A</key>
+		<key>557D2A99DEE4B491F4EF4E8D242328DD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5A2BD3FC4CD5B12A30E1E2F4432F5581</key>
+		<key>58FE0486E83AA749B9E8C1300B64E2A2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9DC8D9E02903E93BD0B2FEC9D846EA20</key>
+		<key>C5A2DB7A84B7B78E359870D2E1B24AA7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D52144DE9D7255DE912490FF5A806573</key>
 		<dict>
 			<key>primary</key>
 			<true/>

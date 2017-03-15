@@ -116,7 +116,7 @@
     for (int i = 0; i < dataArr.count; i++) {
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W/4*i+10, 8, SCREEN_W/4-12, navigationBar_H-16)];
         [btn setTitle:dataArr[i] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         btn.backgroundColor = [UIColor whiteColor];
         btn.layer.borderColor = MAINCOLOR.CGColor;

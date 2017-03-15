@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 // 定义回调Block
-typedef void (^DidSelectDayHandler)(NSInteger, NSInteger, NSInteger);
+typedef void (^DidSelectDayHandler)(NSInteger, NSInteger, NSInteger, UIView *);
 
 @interface WZYCalendarScrollView : UIScrollView
 

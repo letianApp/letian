@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 // 回调 block
-typedef void (^DidSelectDayHandler)(NSInteger, NSInteger, NSInteger);
+typedef void (^DidSelectDayHandler)(NSInteger, NSInteger, NSInteger, UIView *);
 
 @interface WZYCalendarView : UIView
 
