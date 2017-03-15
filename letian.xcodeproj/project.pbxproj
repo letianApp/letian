@@ -54,6 +54,15 @@
 		09A64DE91E76363500DCE8D9 /* WZYCalendarScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DE31E76363500DCE8D9 /* WZYCalendarScrollView.m */; };
 		09A64DEA1E76363500DCE8D9 /* WZYCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DE51E76363500DCE8D9 /* WZYCalendarView.m */; };
 		09A64DF01E76486F00DCE8D9 /* GQSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DEF1E76486F00DCE8D9 /* GQSegment.m */; };
+		09A64E041E77D25500DCE8D9 /* NSDate+ZYDateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DF31E77D25500DCE8D9 /* NSDate+ZYDateTools.m */; };
+		09A64E051E77D25500DCE8D9 /* ZYCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DF51E77D25500DCE8D9 /* ZYCalendar.m */; };
+		09A64E061E77D25500DCE8D9 /* ZYCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DF71E77D25500DCE8D9 /* ZYCalendarCell.m */; };
+		09A64E071E77D25500DCE8D9 /* ZYCalendarCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DF91E77D25500DCE8D9 /* ZYCalendarCellModel.m */; };
+		09A64E081E77D25500DCE8D9 /* ZYCalendarCorver.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DFB1E77D25500DCE8D9 /* ZYCalendarCorver.m */; };
+		09A64E091E77D25500DCE8D9 /* ZYCalendarRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DFD1E77D25500DCE8D9 /* ZYCalendarRange.m */; };
+		09A64E0A1E77D25500DCE8D9 /* ZYCalendarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DFF1E77D25500DCE8D9 /* ZYCalendarTableViewCell.m */; };
+		09A64E0B1E77D25500DCE8D9 /* ZYCalendarTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64E011E77D25500DCE8D9 /* ZYCalendarTableViewCellModel.m */; };
+		09A64E0C1E77D25500DCE8D9 /* ZYCalendarWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64E031E77D25500DCE8D9 /* ZYCalendarWeekView.m */; };
 		09F1E7021E6E6506007FBE81 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E6FF1E6E6506007FBE81 /* share.png */; };
 		09F1E7031E6E6506007FBE81 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E7001E6E6506007FBE81 /* share@2x.png */; };
 		09F1E7041E6E6506007FBE81 /* share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E7011E6E6506007FBE81 /* share@3x.png */; };
@@ -63,7 +72,7 @@
 		09FBE0231E70F609003452A6 /* ConfirmPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FBE0211E70F609003452A6 /* ConfirmPageCell.xib */; };
 		09FBE0271E70FE12003452A6 /* CounselorInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FBE0251E70FE12003452A6 /* CounselorInfoVC.m */; };
 		09FBE0281E70FE12003452A6 /* CounselorInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FBE0261E70FE12003452A6 /* CounselorInfoVC.xib */; };
-		74FF12D34910C046FDF26AE9 /* libPods-letian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D06804C865F43F4E9B595D7 /* libPods-letian.a */; };
+		409A63AB2E6AC88BB7667EDA /* Pods_letian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505775953CF6A0895C5EA53C /* Pods_letian.framework */; };
 		77038DE71E63C3B50096C07D /* NSTimer+YYFounction.m in Sources */ = {isa = PBXBuildFile; fileRef = 77038DE41E63C3B50096C07D /* NSTimer+YYFounction.m */; };
 		77038DE81E63C3B50096C07D /* YYCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77038DE61E63C3B50096C07D /* YYCycleScrollView.m */; };
 		77038DFA1E63C9F20096C07D /* cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038DEE1E63C9F20096C07D /* cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg */; };
@@ -214,6 +223,24 @@
 		09A64DE51E76363500DCE8D9 /* WZYCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZYCalendarView.m; sourceTree = "<group>"; };
 		09A64DEE1E76486F00DCE8D9 /* GQSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQSegment.h; sourceTree = "<group>"; };
 		09A64DEF1E76486F00DCE8D9 /* GQSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQSegment.m; sourceTree = "<group>"; };
+		09A64DF21E77D25500DCE8D9 /* NSDate+ZYDateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ZYDateTools.h"; sourceTree = "<group>"; };
+		09A64DF31E77D25500DCE8D9 /* NSDate+ZYDateTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ZYDateTools.m"; sourceTree = "<group>"; };
+		09A64DF41E77D25500DCE8D9 /* ZYCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalendar.h; sourceTree = "<group>"; };
+		09A64DF51E77D25500DCE8D9 /* ZYCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalendar.m; sourceTree = "<group>"; };
+		09A64DF61E77D25500DCE8D9 /* ZYCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalendarCell.h; sourceTree = "<group>"; };
+		09A64DF71E77D25500DCE8D9 /* ZYCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalendarCell.m; sourceTree = "<group>"; };
+		09A64DF81E77D25500DCE8D9 /* ZYCalendarCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalendarCellModel.h; sourceTree = "<group>"; };
+		09A64DF91E77D25500DCE8D9 /* ZYCalendarCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalendarCellModel.m; sourceTree = "<group>"; };
+		09A64DFA1E77D25500DCE8D9 /* ZYCalendarCorver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalendarCorver.h; sourceTree = "<group>"; };
+		09A64DFB1E77D25500DCE8D9 /* ZYCalendarCorver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalendarCorver.m; sourceTree = "<group>"; };
+		09A64DFC1E77D25500DCE8D9 /* ZYCalendarRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalendarRange.h; sourceTree = "<group>"; };
+		09A64DFD1E77D25500DCE8D9 /* ZYCalendarRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalendarRange.m; sourceTree = "<group>"; };
+		09A64DFE1E77D25500DCE8D9 /* ZYCalendarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalendarTableViewCell.h; sourceTree = "<group>"; };
+		09A64DFF1E77D25500DCE8D9 /* ZYCalendarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalendarTableViewCell.m; sourceTree = "<group>"; };
+		09A64E001E77D25500DCE8D9 /* ZYCalendarTableViewCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalendarTableViewCellModel.h; sourceTree = "<group>"; };
+		09A64E011E77D25500DCE8D9 /* ZYCalendarTableViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalendarTableViewCellModel.m; sourceTree = "<group>"; };
+		09A64E021E77D25500DCE8D9 /* ZYCalendarWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalendarWeekView.h; sourceTree = "<group>"; };
+		09A64E031E77D25500DCE8D9 /* ZYCalendarWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalendarWeekView.m; sourceTree = "<group>"; };
 		09F1E6FF1E6E6506007FBE81 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		09F1E7001E6E6506007FBE81 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		09F1E7011E6E6506007FBE81 /* share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@3x.png"; sourceTree = "<group>"; };
@@ -226,7 +253,7 @@
 		09FBE0241E70FE12003452A6 /* CounselorInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CounselorInfoVC.h; sourceTree = "<group>"; };
 		09FBE0251E70FE12003452A6 /* CounselorInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CounselorInfoVC.m; sourceTree = "<group>"; };
 		09FBE0261E70FE12003452A6 /* CounselorInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CounselorInfoVC.xib; sourceTree = "<group>"; };
-		4D06804C865F43F4E9B595D7 /* libPods-letian.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-letian.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		505775953CF6A0895C5EA53C /* Pods_letian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_letian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77038DE31E63C3B50096C07D /* NSTimer+YYFounction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+YYFounction.h"; sourceTree = "<group>"; };
 		77038DE41E63C3B50096C07D /* NSTimer+YYFounction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+YYFounction.m"; sourceTree = "<group>"; };
 		77038DE51E63C3B50096C07D /* YYCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYCycleScrollView.h; sourceTree = "<group>"; };
@@ -312,7 +339,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74FF12D34910C046FDF26AE9 /* libPods-letian.a in Frameworks */,
+				409A63AB2E6AC88BB7667EDA /* Pods_letian.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,6 +616,31 @@
 			path = WZYCalendar;
 			sourceTree = "<group>";
 		};
+		09A64DF11E77D25500DCE8D9 /* ZYCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				09A64DF21E77D25500DCE8D9 /* NSDate+ZYDateTools.h */,
+				09A64DF31E77D25500DCE8D9 /* NSDate+ZYDateTools.m */,
+				09A64DF41E77D25500DCE8D9 /* ZYCalendar.h */,
+				09A64DF51E77D25500DCE8D9 /* ZYCalendar.m */,
+				09A64DF61E77D25500DCE8D9 /* ZYCalendarCell.h */,
+				09A64DF71E77D25500DCE8D9 /* ZYCalendarCell.m */,
+				09A64DF81E77D25500DCE8D9 /* ZYCalendarCellModel.h */,
+				09A64DF91E77D25500DCE8D9 /* ZYCalendarCellModel.m */,
+				09A64DFA1E77D25500DCE8D9 /* ZYCalendarCorver.h */,
+				09A64DFB1E77D25500DCE8D9 /* ZYCalendarCorver.m */,
+				09A64DFC1E77D25500DCE8D9 /* ZYCalendarRange.h */,
+				09A64DFD1E77D25500DCE8D9 /* ZYCalendarRange.m */,
+				09A64DFE1E77D25500DCE8D9 /* ZYCalendarTableViewCell.h */,
+				09A64DFF1E77D25500DCE8D9 /* ZYCalendarTableViewCell.m */,
+				09A64E001E77D25500DCE8D9 /* ZYCalendarTableViewCellModel.h */,
+				09A64E011E77D25500DCE8D9 /* ZYCalendarTableViewCellModel.m */,
+				09A64E021E77D25500DCE8D9 /* ZYCalendarWeekView.h */,
+				09A64E031E77D25500DCE8D9 /* ZYCalendarWeekView.m */,
+			);
+			path = ZYCalendar;
+			sourceTree = "<group>";
+		};
 		17141F58EED1935B6AB46B35 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -621,6 +673,7 @@
 			isa = PBXGroup;
 			children = (
 				09A64DDA1E76363500DCE8D9 /* WZYCalendar */,
+				09A64DF11E77D25500DCE8D9 /* ZYCalendar */,
 				7784D8A01E6D587D004AB0CC /* GQControls.h */,
 				7784D8A11E6D587D004AB0CC /* GQControls.m */,
 				09A64DD71E7290C300DCE8D9 /* UIView+Layout.h */,
@@ -742,7 +795,7 @@
 		7C97B37F8435D00E98815F82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4D06804C865F43F4E9B595D7 /* libPods-letian.a */,
+				505775953CF6A0895C5EA53C /* Pods_letian.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1011,23 +1064,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09A64E091E77D25500DCE8D9 /* ZYCalendarRange.m in Sources */,
 				77221D931E6FB63400022AAF /* SystomMsgViewController.m in Sources */,
+				09A64E081E77D25500DCE8D9 /* ZYCalendarCorver.m in Sources */,
 				77D2BF971E66B3D0000B9978 /* RegistViewController.m in Sources */,
+				09A64E0A1E77D25500DCE8D9 /* ZYCalendarTableViewCell.m in Sources */,
 				09A64DE91E76363500DCE8D9 /* WZYCalendarScrollView.m in Sources */,
 				77C383101E6CF79A00B4EF73 /* ChangePwViewController.m in Sources */,
 				0970CFF51E5180DF007480CB /* MyViewController.m in Sources */,
 				77D2BFA61E67D6A9000B9978 /* ForgetPwViewController.m in Sources */,
 				0945B1481E6937DF005B7560 /* CustomCYLTabBar.m in Sources */,
 				0953C2291E514B5800FB165C /* ViewController.m in Sources */,
+				09A64E0B1E77D25500DCE8D9 /* ZYCalendarTableViewCellModel.m in Sources */,
 				7784D8AC1E6E80C5004AB0CC /* MessageViewController.m in Sources */,
 				77038DE81E63C3B50096C07D /* YYCycleScrollView.m in Sources */,
 				09A64DEA1E76363500DCE8D9 /* WZYCalendarView.m in Sources */,
 				774DBC0C1E6420FC00B8798C /* HomeCell.m in Sources */,
 				09A64DE61E76363500DCE8D9 /* NSDate+WZYCalendar.m in Sources */,
 				0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */,
+				09A64E071E77D25500DCE8D9 /* ZYCalendarCellModel.m in Sources */,
 				09FBE0221E70F609003452A6 /* ConfirmPageCell.m in Sources */,
 				0970CFF01E5180BF007480CB /* ConsultViewController.m in Sources */,
+				09A64E061E77D25500DCE8D9 /* ZYCalendarCell.m in Sources */,
 				090733951E655B0600F21E02 /* consultPageCell.m in Sources */,
+				09A64E041E77D25500DCE8D9 /* NSDate+ZYDateTools.m in Sources */,
 				09A64DF01E76486F00DCE8D9 /* GQSegment.m in Sources */,
 				09FBE01D1E70EE60003452A6 /* ConfirmPageVC.m in Sources */,
 				7752C7B31E70EC360093ED37 /* MessageCell.m in Sources */,
@@ -1035,11 +1095,13 @@
 				09FBE0271E70FE12003452A6 /* CounselorInfoVC.m in Sources */,
 				09A64DD91E7290C300DCE8D9 /* UIView+Layout.m in Sources */,
 				09A64DE71E76363500DCE8D9 /* WZYCalendarCell.m in Sources */,
+				09A64E0C1E77D25500DCE8D9 /* ZYCalendarWeekView.m in Sources */,
 				09A64DE81E76363500DCE8D9 /* WZYCalendarMonth.m in Sources */,
 				77F3D85D1E764E22008B5FC0 /* OrderViewController.m in Sources */,
 				77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */,
 				0953C2231E514B5800FB165C /* main.m in Sources */,
 				7784D8A21E6D587D004AB0CC /* GQControls.m in Sources */,
+				09A64E051E77D25500DCE8D9 /* ZYCalendar.m in Sources */,
 				77D2BFA11E66C404000B9978 /* SetAcountViewController.m in Sources */,
 				0970CFEC1E517EB8007480CB /* FirstViewController.m in Sources */,
 				77221D901E6FB5E700022AAF /* AdvisoryViewController.m in Sources */,

@@ -31,7 +31,7 @@
 //============================第三方=========================
 #import "RTRootNavigationController.h"                                                      //自定义导航栏
 #import "Masonry.h"                                                                         //约束
-//#import "UIView+Layout.h"                                                                   //改变view frame
+#import "UIView+Layout.h"                                                                   //改变view frame
 #import "GQControls.h"
 
 

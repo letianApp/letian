@@ -8,15 +8,19 @@
 
 #import "ConfirmPageVC.h"
 #import "ConfirmPageCell.h"
-#import "UIView+Layout.h"
-#import "WZYCalendar.h"
+#import "FSCalendar.h"
 
 
-@interface ConfirmPageVC ()<UITableViewDelegate,UITableViewDataSource>
+
+
+
+@interface ConfirmPageVC ()<UITableViewDelegate,UITableViewDataSource,FSCalendarDataSource, FSCalendarDelegate>
 
 @property (nonatomic, strong) UITableView *mainTableView;
 @property (nonatomic, strong) UITabBar *tabBar;
-
+@property (nonatomic, weak) FSCalendar *calendar;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) NSCalendar *gregorianCalendar;
 
 
 
@@ -102,7 +106,7 @@
         
         for (int i = 0; i < 3; i++) {
             
-            UIButton *btn = [GQControls createButtonWithFrame:CGRectMake(10+SCREEN_W/3*i, 10, SCREEN_W/3-20, 30) andTitle:btnTitle[i] andTitleColor:[UIColor blackColor] andFontSize:15 andTag:i+1 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:([UIColor darkGrayColor].CGColor)];
+            UIButton *btn = [GQControls createButtonWithFrame:CGRectMake(10+SCREEN_W/3*i, 10, SCREEN_W/3-20, 30) andTitle:btnTitle[i] andTitleColor:MAINCOLOR andFontSize:15 andTag:i+1 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
             btn.backgroundColor = [UIColor whiteColor];
             [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
             [btn addTarget:self action:@selector(clickChoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -110,7 +114,12 @@
             
         }
         
+        UIButton *defBtn = [view viewWithTag:1];
+        defBtn.selected = YES;
+        defBtn.backgroundColor = MAINCOLOR;
+        
         [self setupCalendarWithView:view];
+        
         
         
     }
@@ -132,27 +141,59 @@
 
 - (void)setupCalendarWithView:(UIView *)view {
     
-    CGFloat width = self.view.bounds.size.width - 20.0;
-    CGPoint origin = CGPointMake(10.0, 50.0);
+    FSCalendar *calendar = [[FSCalendar alloc] initWithFrame:CGRectMake(10, 64, SCREEN_W-20, SCREEN_H*0.45)];
+    calendar.dataSource = self;
+    calendar.delegate = self;
     
-    // 传入Calendar的origin和width。自动计算控件高度
-    WZYCalendarView *calendar = [[WZYCalendarView alloc] initWithFrameOrigin:origin width:width];
-    
-    NSLog(@"height --- %lf", calendar.frame.size.height);
-    
-    // 点击某一天的回调
-    calendar.didSelectDayHandler = ^(NSInteger year, NSInteger month, NSInteger day, UIView *view) {
-        
-//        NSLog(@"%ld年%ld月%ld日",(long)year,(long)month,(long)day);
-//        NSLog(@"%f",view.frame.origin.x);
-//        view.backgroundColor = MAINCOLOR;
-        
-    };
+    calendar.backgroundColor = [UIColor whiteColor];
+    calendar.appearance.headerTitleColor = MAINCOLOR;
+    calendar.appearance.weekdayTextColor = MAINCOLOR;
+//    calendar.appearance.titleTodayColor = MAINCOLOR;
+    calendar.appearance.todayColor = MAINCOLOR;
+    calendar.appearance.selectionColor = MAINCOLOR;
     
     [view addSubview:calendar];
+    self.calendar = calendar;
+    
+    self.gregorianCalendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    self.dateFormatter.dateFormat = @"yyyy/MM/dd";
+}
+
+- (NSString *)calendar:(FSCalendar *)calendar titleForDate:(NSDate *)date
+{
+    if ([self.gregorianCalendar isDateInToday:date]) {
+        return @"今";
+    }
+    return nil;
+}
+
+- (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition {
+    
+    calendar.appearance.todayColor = [UIColor whiteColor];
+    calendar.appearance.titleTodayColor = MAINCOLOR;
+    
+    NSDate *todayDate = [NSDate new];
+//    NSDate *selDate = [self.dateFormatter stringFromDate:date];
+    
+    
+    
+    if ([date earlierDate:todayDate]) {
+//        NSLog(@"早");
+    }
+    
+    
+    
+
+    
+    NSLog(@"当前时间：%@",todayDate);
+    NSLog(@"did select date %@",[self.dateFormatter stringFromDate:date]);
     
 }
 
+//- (NSDate *)laterDate:(NSDate *)anotherDate {
+//    
+//}
 
 
 //行数
