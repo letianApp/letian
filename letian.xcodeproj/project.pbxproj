@@ -119,6 +119,8 @@
 		77DA5DCE1E666B92003FAE0C /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */; };
 		77F3D85D1E764E22008B5FC0 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F3D85B1E764E22008B5FC0 /* OrderViewController.m */; };
 		77F3D85E1E764E22008B5FC0 /* OrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F3D85C1E764E22008B5FC0 /* OrderViewController.xib */; };
+		77F3D8621E7670D2008B5FC0 /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F3D8601E7670D2008B5FC0 /* OrderCell.m */; };
+		77F3D8631E7670D2008B5FC0 /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F3D8611E7670D2008B5FC0 /* OrderCell.xib */; };
 		77FF9B761E696E18008C0FE7 /* pinkback.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FF9B701E696E18008C0FE7 /* pinkback.png */; };
 		77FF9B771E696E18008C0FE7 /* pinkback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FF9B711E696E18008C0FE7 /* pinkback@2x.png */; };
 		77FF9B781E696E18008C0FE7 /* pinkback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FF9B721E696E18008C0FE7 /* pinkback@3x.png */; };
@@ -297,6 +299,9 @@
 		77F3D85A1E764E22008B5FC0 /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
 		77F3D85B1E764E22008B5FC0 /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
 		77F3D85C1E764E22008B5FC0 /* OrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderViewController.xib; sourceTree = "<group>"; };
+		77F3D85F1E7670D2008B5FC0 /* OrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCell.h; sourceTree = "<group>"; };
+		77F3D8601E7670D2008B5FC0 /* OrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCell.m; sourceTree = "<group>"; };
+		77F3D8611E7670D2008B5FC0 /* OrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
 		77FF9B701E696E18008C0FE7 /* pinkback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinkback.png; sourceTree = "<group>"; };
 		77FF9B711E696E18008C0FE7 /* pinkback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinkback@2x.png"; sourceTree = "<group>"; };
 		77FF9B721E696E18008C0FE7 /* pinkback@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinkback@3x.png"; sourceTree = "<group>"; };
@@ -567,6 +572,9 @@
 				7752C7B01E70EC360093ED37 /* MessageCell.h */,
 				7752C7B11E70EC360093ED37 /* MessageCell.m */,
 				7752C7B21E70EC360093ED37 /* MessageCell.xib */,
+				77F3D85F1E7670D2008B5FC0 /* OrderCell.h */,
+				77F3D8601E7670D2008B5FC0 /* OrderCell.m */,
+				77F3D8611E7670D2008B5FC0 /* OrderCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -862,6 +870,7 @@
 				774DBC0F1E64212F00B8798C /* tooopen_sy_156105468631.jpg in Resources */,
 				77FF9B761E696E18008C0FE7 /* pinkback.png in Resources */,
 				0970CFF11E5180BF007480CB /* ConsultViewController.xib in Resources */,
+				77F3D8631E7670D2008B5FC0 /* OrderCell.xib in Resources */,
 				09F1E7041E6E6506007FBE81 /* share@3x.png in Resources */,
 				77C383111E6CF79A00B4EF73 /* ChangePwViewController.xib in Resources */,
 				0953C22E1E514B5800FB165C /* Assets.xcassets in Resources */,
@@ -1033,6 +1042,7 @@
 				7752C7B31E70EC360093ED37 /* MessageCell.m in Sources */,
 				0953C2261E514B5800FB165C /* AppDelegate.m in Sources */,
 				09FBE0271E70FE12003452A6 /* CounselorInfoVC.m in Sources */,
+				77F3D8621E7670D2008B5FC0 /* OrderCell.m in Sources */,
 				09A64DD91E7290C300DCE8D9 /* UIView+Layout.m in Sources */,
 				09A64DE71E76363500DCE8D9 /* WZYCalendarCell.m in Sources */,
 				09A64DE81E76363500DCE8D9 /* WZYCalendarMonth.m in Sources */,

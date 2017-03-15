@@ -8,6 +8,7 @@
 
 #import "OrderViewController.h"
 #import "GQSegment.h"
+#import "OrderCell.h"
 @interface OrderViewController ()<UITableViewDataSource,UITableViewDelegate,SegmentDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -44,8 +45,7 @@
 -(void)setSegment {
     
     [self buttonList];
-    //初始化
-    //    LGSegment *segment = [[LGSegment alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - LG_scrollViewH - 50, self.view.frame.size.width, LG_segmentH)];
+
     GQSegment *segment = [[GQSegment alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     segment.delegate = self;
     self.segment = segment;
@@ -65,7 +65,7 @@
 -(void)createTableView
 {
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-64) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
@@ -85,9 +85,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-//    MessageCell *cell=[MessageCell cellWithTableView:tableView];
-    UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
-    cell.textLabel.text=@"fewfwe";
+    OrderCell *cell=[OrderCell cellWithTableView:tableView];
+
     return cell;
     
 }
@@ -96,9 +95,10 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return 150;
+    return 130;
     
 }
+
 
 //cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -124,6 +124,7 @@
     backButton.frame=CGRectMake(30, 12, 20, 20);
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 }
+
 
 
 -(void) back
