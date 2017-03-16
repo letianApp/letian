@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>FSCalendar.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -51,7 +56,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>187D4938E4853AAF74ED933257C249B1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1C12840C947A69398D845BBFA1F1120A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>46AA28753E93B0ACEC0588D1EAB31835</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>557D2A99DEE4B491F4EF4E8D242328DD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>58FE0486E83AA749B9E8C1300B64E2A2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -81,7 +106,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C5A2DB7A84B7B78E359870D2E1B24AA7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C7067B20598AD3797CAE53F67CE6E7EC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D52144DE9D7255DE912490FF5A806573</key>
 		<dict>
 			<key>primary</key>
 			<true/>

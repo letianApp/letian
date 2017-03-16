@@ -9,6 +9,7 @@
 #import "OrderViewController.h"
 #import "GQSegment.h"
 #import "OrderCell.h"
+#import "OrderDetailViewController.h"
 @interface OrderViewController ()<UITableViewDataSource,UITableViewDelegate,SegmentDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -105,6 +106,10 @@
 {
     
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
+    
+    OrderDetailViewController *orderDetailVc=[[OrderDetailViewController alloc]init];
+    
+    [self.navigationController pushViewController:orderDetailVc animated:YES];
     
     NSLog(@"cell被点击%li",indexPath.row);
     

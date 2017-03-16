@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="321" height="130"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="321" height="129"/>
+                <rect key="frame" x="0.0" y="0.0" width="321" height="129.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JmY-EY-Mtb">
@@ -32,7 +32,7 @@
                             <constraint firstAttribute="height" constant="1" id="2j3-8E-FLQ"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RnO-uu-ap9">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wowomen.png" translatesAutoresizingMaskIntoConstraints="NO" id="RnO-uu-ap9">
                         <rect key="frame" x="10" y="15" width="65" height="65"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="65" id="ITz-h0-wJc"/>
@@ -78,9 +78,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jug-cm-567">
-                        <rect key="frame" x="246" y="101" width="65" height="25"/>
+                        <rect key="frame" x="231" y="101" width="80" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="65" id="eFG-Jq-pfv"/>
+                            <constraint firstAttribute="width" constant="80" id="eFG-Jq-pfv"/>
                             <constraint firstAttribute="height" constant="25" id="jqG-KB-0GB"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -111,7 +111,18 @@
                     <constraint firstItem="Gww-QT-LTx" firstAttribute="top" secondItem="RnO-uu-ap9" secondAttribute="bottom" constant="10" id="tyj-Ux-JYS"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-11.5" y="-3.5"/>
+            <connections>
+                <outlet property="headImageView" destination="RnO-uu-ap9" id="HRs-eq-x2r"/>
+                <outlet property="moneyLabel" destination="lWu-zL-SWk" id="0OT-eN-fbB"/>
+                <outlet property="nameLabel" destination="Trw-3h-u0p" id="bgr-rO-Urw"/>
+                <outlet property="stateButton" destination="jug-cm-567" id="JSd-wL-fpW"/>
+                <outlet property="timeLabel" destination="yex-1J-Wxc" id="sKH-zR-A5L"/>
+                <outlet property="wayLabel" destination="3c0-4y-vZs" id="mbG-hp-7Zr"/>
+            </connections>
+            <point key="canvasLocation" x="74" y="9"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="wowomen.png" width="232" height="230"/>
+    </resources>
 </document>

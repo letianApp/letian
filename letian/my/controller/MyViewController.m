@@ -127,6 +127,14 @@
     UILabel *allOrderLabel=[GQControls createLabelWithFrame:CGRectMake(SCREEN_W-160, 0, 150, 30) andText:@"查看全部订单 >>" andTextColor:[UIColor darkGrayColor] andFontSize:12];
     allOrderLabel.textAlignment=NSTextAlignmentRight;
     [orderView addSubview:allOrderLabel];
+
+    
+    //添加手势
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(orderSrateButtonClick:)];
+    [allOrderLabel addGestureRecognizer:tap];
+    allOrderLabel.userInteractionEnabled=YES;
+    
+    
     
     
     
@@ -171,6 +179,7 @@
     return orderView;
     
 }
+
 
 //点击进入订单页面
 -(void)orderSrateButtonClick:(UIButton *)btn

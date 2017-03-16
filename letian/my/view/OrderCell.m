@@ -8,11 +8,36 @@
 
 #import "OrderCell.h"
 
+@interface OrderCell()
+
+@property (weak, nonatomic) IBOutlet UIImageView *headImageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *wayLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *stateButton;
+
+
+
+@end
+
 @implementation OrderCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    self.stateButton.layer.borderColor=MAINCOLOR.CGColor;
+    self.stateButton.layer.borderWidth=0.8;
+    self.stateButton.layer.masksToBounds=YES;
+    self.stateButton.layer.cornerRadius=8;
+    
+    
+    
 }
 
 +(instancetype) cellWithTableView:(UITableView *)tableView
