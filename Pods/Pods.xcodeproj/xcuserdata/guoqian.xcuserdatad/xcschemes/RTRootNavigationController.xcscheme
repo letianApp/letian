@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F906C6ADD9F3E502E589316C52F4CC11"
-               BuildableName = "libRTRootNavigationController.a"
+               BlueprintIdentifier = "187D4938E4853AAF74ED933257C249B1"
+               BuildableName = "RTRootNavigationController.framework"
                BlueprintName = "RTRootNavigationController"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
@@ -45,8 +45,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F906C6ADD9F3E502E589316C52F4CC11"
-            BuildableName = "libRTRootNavigationController.a"
+            BlueprintIdentifier = "187D4938E4853AAF74ED933257C249B1"
+            BuildableName = "RTRootNavigationController.framework"
             BlueprintName = "RTRootNavigationController"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
@@ -63,8 +63,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F906C6ADD9F3E502E589316C52F4CC11"
-            BuildableName = "libRTRootNavigationController.a"
+            BlueprintIdentifier = "187D4938E4853AAF74ED933257C249B1"
+            BuildableName = "RTRootNavigationController.framework"
             BlueprintName = "RTRootNavigationController"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
