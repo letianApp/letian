@@ -9,12 +9,10 @@
 #import "ConfirmPageVC.h"
 #import "ConfirmPageCell.h"
 #import "FSCalendar.h"
+#import "HZQDatePickerView.h"
 
 
-
-
-
-@interface ConfirmPageVC ()<UITableViewDelegate,UITableViewDataSource,FSCalendarDataSource, FSCalendarDelegate>
+@interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, HZQDatePickerViewDelegate>
 
 @property (nonatomic, strong) UITableView *mainTableView;
 @property (nonatomic, strong) UITabBar *tabBar;
@@ -22,6 +20,19 @@
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSCalendar *gregorianCalendar;
 
+@property (nonatomic, strong) UIView *timeChoicesView;
+@property (nonatomic, strong) UILabel *dateDisplayLab;
+
+@property (nonatomic, strong) HZQDatePickerView *pikerView;
+@property (nonatomic, strong) UIButton *startBtn;
+@property (nonatomic, strong) UIButton *endBtn;
+@property (nonatomic, strong) UIView *lineView;
+
+@property (nonatomic, strong) UIAlertController *dateAlCtl;
+@property (nonatomic, strong) UIPickerView *datePick;
+
+
+@property (nonatomic, assign) NSInteger firstCellHeight;
 
 
 @end
@@ -88,21 +99,19 @@
     cell.detialLab.hidden = YES;
 //    cell.backView.backgroundColor = [UIColor yellowColor];
     
-    
-    
-    
     [self customCell:cell withBgView:cell.backView forRowAtIndexPath:indexPath];
     
     return cell;
     
 }
 
+#pragma mark 主界面cell
 - (void)customCell:(UITableViewCell *)cell withBgView:(UIView *)view forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if(indexPath.row == 0){
 //        view.backgroundColor = [UIColor yellowColor];
         
-        NSArray *btnTitle = @[@"面对面咨询",@"文字语音",@"视频咨询"];
+        NSArray *btnTitle = @[@"面对面咨询",@"文字语音",@"电话咨询"];
         
         for (int i = 0; i < 3; i++) {
             
@@ -118,8 +127,8 @@
         defBtn.selected = YES;
         defBtn.backgroundColor = MAINCOLOR;
         
-        [self setupCalendarWithView:view];
-        
+        [self setupCalendarWithBGView:view];
+        [self creatTimeChoicesViewWithBGView:view];
         
         
     }
@@ -139,61 +148,163 @@
     
 }
 
-- (void)setupCalendarWithView:(UIView *)view {
+#pragma mark 日历
+- (void)setupCalendarWithBGView:(UIView *)view {
     
-    FSCalendar *calendar = [[FSCalendar alloc] initWithFrame:CGRectMake(10, 64, SCREEN_W-20, SCREEN_H*0.45)];
+    FSCalendar *calendar = [[FSCalendar alloc] initWithFrame:CGRectMake(10, 60, SCREEN_W-20, SCREEN_H*0.45)];
+    [view addSubview:calendar];
+
     calendar.dataSource = self;
     calendar.delegate = self;
-    
     calendar.backgroundColor = [UIColor whiteColor];
     calendar.appearance.headerTitleColor = MAINCOLOR;
     calendar.appearance.weekdayTextColor = MAINCOLOR;
-//    calendar.appearance.titleTodayColor = MAINCOLOR;
     calendar.appearance.todayColor = MAINCOLOR;
     calendar.appearance.selectionColor = MAINCOLOR;
     
-    [view addSubview:calendar];
     self.calendar = calendar;
     
     self.gregorianCalendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    self.dateFormatter.dateFormat = @"yyyy/MM/dd";
+    self.dateFormatter.timeZone = [NSTimeZone systemTimeZone];
+    self.dateFormatter.dateFormat = @"yyyy-MM-dd";
 }
 
-- (NSString *)calendar:(FSCalendar *)calendar titleForDate:(NSDate *)date
-{
+- (NSString *)calendar:(FSCalendar *)calendar titleForDate:(NSDate *)date {
     if ([self.gregorianCalendar isDateInToday:date]) {
         return @"今";
     }
     return nil;
 }
 
-- (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition {
+#pragma mark 时间选择View
+- (void)creatTimeChoicesViewWithBGView:(UIView *)view {
     
-    calendar.appearance.todayColor = [UIColor whiteColor];
-    calendar.appearance.titleTodayColor = MAINCOLOR;
+    _timeChoicesView = [[UIView alloc]initWithFrame:CGRectMake(30, _calendar.height+70, SCREEN_W-60, 40)];
+    _dateDisplayLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, _timeChoicesView.width, 40)];
+    [view addSubview:_timeChoicesView];
     
-    NSDate *todayDate = [NSDate new];
-//    NSDate *selDate = [self.dateFormatter stringFromDate:date];
+    NSString *todayStr = [self.dateFormatter stringFromDate:[NSDate new]];
+    _dateDisplayLab.text = todayStr;
+    _dateDisplayLab.textColor = MAINCOLOR;
+    _dateDisplayLab.textAlignment = 1;
+    _dateDisplayLab.font = [UIFont systemFontOfSize:20];
     
+//    UIButton *startBtn = [[UIButton alloc]initWithFrame:CGRectMake(_timeChoicesView.width/2, 5, _timeChoicesView.width/5, 30)];
     
-    
-    if ([date earlierDate:todayDate]) {
-//        NSLog(@"早");
-    }
-    
-    
-    
+    _startBtn = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 5, _timeChoicesView.width*0.3, 30) andTitle:@"起始时间" andTitleColor:MAINCOLOR andFontSize:13 andTag:102 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
 
+    _endBtn = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.6, 5, _timeChoicesView.width*0.3, 30) andTitle:@"结束时间" andTitleColor:MAINCOLOR andFontSize:13 andTag:103 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
     
-    NSLog(@"当前时间：%@",todayDate);
-    NSLog(@"did select date %@",[self.dateFormatter stringFromDate:date]);
+    [_startBtn addTarget:self action:@selector(clickTimeChoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_endBtn addTarget:self action:@selector(clickTimeChoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
+
+    _lineView = [[UIView alloc]initWithFrame:CGRectMake(_timeChoicesView.width*0.4+20, _timeChoicesView.height*0.5-1, _timeChoicesView.width*0.2-40, 2)];
+    _lineView.backgroundColor = MAINCOLOR;
+    
+    [_timeChoicesView addSubview:_startBtn];
+    [_timeChoicesView addSubview:_endBtn];
+    [_timeChoicesView addSubview:_lineView];
+//    startBtn.backgroundColor = MAINCOLOR;
+    
+//    _timeChoicesView.backgroundColor = MAINCOLOR;
+//    _dateDisplayLab.backgroundColor = [UIColor yellowColor];
+    
     
 }
 
-//- (NSDate *)laterDate:(NSDate *)anotherDate {
-//    
-//}
+#pragma mark 点击日历方法
+- (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition {
+    
+    //改变图标
+    calendar.appearance.todayColor = [UIColor whiteColor];
+    calendar.appearance.titleTodayColor = MAINCOLOR;
+    //判断日期
+    NSString *todayStr = [self.dateFormatter stringFromDate:[NSDate new]];
+    NSString *selDateStr = [self.dateFormatter stringFromDate:date];
+    NSDate *todayDate = [self.dateFormatter dateFromString:todayStr];
+    NSDate *selDate = [self.dateFormatter dateFromString:selDateStr];
+    NSComparisonResult result = [selDate compare:todayDate];
+    if (result == NSOrderedAscending) {
+        NSLog(@"不可以穿越到过去预约哦");
+        _dateDisplayLab.text = @"不可以穿越到过去预约哦";
+        _dateDisplayLab.font = [UIFont systemFontOfSize:20];
+        [_startBtn removeFromSuperview];
+        [_endBtn removeFromSuperview];
+        [_lineView removeFromSuperview];
+        [_timeChoicesView addSubview:_dateDisplayLab];
+
+        
+        
+    } else {
+        
+        [_dateDisplayLab removeFromSuperview];
+        [_timeChoicesView addSubview:_startBtn];
+        [_timeChoicesView addSubview:_endBtn];
+        [_timeChoicesView addSubview:_lineView];
+        
+        
+//        _dateDisplayLab.text = selDateStr;
+//        _dateDisplayLab.font = [UIFont systemFontOfSize:20];
+
+    }
+
+    
+    
+//    NSLog(@"当前时间：%@",todayDate);
+//    NSLog(@"did select date %@",[self.dateFormatter stringFromDate:date]);
+    
+}
+
+- (void)clickTimeChoiceBtn:(UIButton *)btn {
+    
+    if (btn == _startBtn) {
+        [self setupDateView:DateTypeOfStart];
+    } else if (btn == _endBtn) {
+        [self setupDateView:DateTypeOfEnd];
+    }
+    
+    
+}
+
+
+- (void)setupDateView:(DateType)type {
+    
+    _pikerView = [HZQDatePickerView instanceDatePickerView];
+    _pikerView.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
+    [_pikerView setBackgroundColor:[UIColor clearColor]];
+    _pikerView.delegate = self;
+    _pikerView.type = type;
+    // 今天开始往后的日期
+//    [_pikerView.datePickerView setMinimumDate:[NSDate date]];
+    // 在今天之前的日期
+        [_pikerView.datePickerView setMaximumDate:[NSDate date]];
+    [self.view addSubview:_pikerView];
+    
+}
+
+- (void)getSelectDate:(NSString *)date type:(DateType)type {
+    NSLog(@"%d - %@", type, date);
+    
+    switch (type) {
+        case DateTypeOfStart:
+//            _startBtn.titleLabel.text = [NSString stringWithFormat:@"%@", date];
+            
+            [_startBtn setTitle:[NSString stringWithFormat:@"%@", date] forState:UIControlStateNormal];
+            
+//            _startBtn.titleLabel.textAlignment = 1;
+            
+            break;
+            
+        case DateTypeOfEnd:
+            [_endBtn setTitle:[NSString stringWithFormat:@"%@", date] forState:UIControlStateNormal];
+            
+            break;
+            
+        default:
+            break;
+    }
+}
 
 
 //行数
