@@ -171,6 +171,7 @@
     [self.view addSubview:_tabBar];
     //价格lable
     UILabel *priceLab = [[UILabel alloc]init];
+    priceLab.adjustsFontSizeToFitWidth = YES;
     [_tabBar addSubview:priceLab];
     [priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(AppointmentBtn.mas_left).offset(-SCREEN_W/100);

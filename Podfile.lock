@@ -2,6 +2,7 @@ PODS:
   - CYLTabBarController (1.10.0)
   - FSCalendar (2.7.3)
   - Masonry (1.0.2)
+  - MBProgressHUD (1.0.0)
   - RTRootNavigationController (0.5.23)
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
@@ -11,6 +12,7 @@ DEPENDENCIES:
   - CYLTabBarController (= 1.10.0)
   - FSCalendar
   - Masonry
+  - MBProgressHUD
   - RTRootNavigationController
   - SDWebImage (~> 3.7.5)
 
@@ -18,9 +20,10 @@ SPEC CHECKSUMS:
   CYLTabBarController: 2de9a4c26f50d33574398becf8e7b0aaed794240
   FSCalendar: 574388d70778c22719eed9341653e1743b345573
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   RTRootNavigationController: 70c0da2913cf50cbe944b0193a649700ff640a2c
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
 
-PODFILE CHECKSUM: 90977bc6024f2f0260e3077a0578d71d62a58ffc
+PODFILE CHECKSUM: 0bbdb84064137be0846d20c45d4c2a5b2414ed5b
 
 COCOAPODS: 1.2.0

@@ -7,344 +7,360 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		025B597A02D30CBA79407B1048B0FCB3 /* CYLTabBarController.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F3EE01DBE6C450A70DDB3FFDED615E /* CYLTabBarController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0391556AD0826AFE5DB7A98E097406CA /* UIImage+GIF.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A2156F5AD333B57C101F8C8C2DA0C18 /* UIImage+GIF.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		04A7D6AADAB213CE7D26F8EAD2F87536 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C3FE6BA1F9F606E9A57945CF1B79031 /* MASUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		068EF598E554EC57038ACFB89CC2C47A /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B79018579E40089E5916B45A5CF786E7 /* View+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		091D17D5D8F832D28546A72B788CF0AE /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 704D0017E1DD8635E1730BE7DDF6A3DB /* MASViewConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		09CE8C64DDA1333F0530FCAD307E373C /* SDWebImageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 27DFB019C37D5C5E373CC21B7F3F15D5 /* SDWebImageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		09FEE7ACC14B94004B03C7A4FF15F10A /* Pods-letian-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA3262AE2B74156C006F38539D71E27 /* Pods-letian-dummy.m */; };
-		0A7AF0E9B853211DE831CAAD4C21F11C /* FSCalendarConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A75CEAB5384F58FDE73BA109CA9B09C /* FSCalendarConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C1652B59A1393F80122B0B450D2DB36 /* RTRootNavigationController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3838CA851CB7CDE27E0F0F01D99A1762 /* RTRootNavigationController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0DD46AF65FABE6D2BDE4501F807046A6 /* FSCalendarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E66211502F053DD1B56F3470A7D12 /* FSCalendarAppearance.m */; };
-		0E12AF8B2156B27227E70F4A0FE257E6 /* NSData+ImageContentType.h in Headers */ = {isa = PBXBuildFile; fileRef = 413CD998EA69F10791A57AEFC4FC04F0 /* NSData+ImageContentType.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0F3DF5C3BEFCC9838B53C37735B414BE /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EAA7998C6D2DEDCDFFDE107701C639 /* NSLayoutConstraint+MASDebugAdditions.m */; };
-		0FDB2B4F75591851F0F119EAE70B3F63 /* NSLayoutConstraint+MASDebugAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = A85B8E39DDBA7B26C788D1D78EE41466 /* NSLayoutConstraint+MASDebugAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1553B8EC2359BF7C7B0B4F3F717292FE /* CYLTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 098B1B4382E59BB0D06CD0A3D55BD9FE /* CYLTabBarController.m */; };
-		1A36E4C3981BA50422C49BB0DAABA40C /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A602052EFF149E7274275F4DF5124F5B /* UIImageView+WebCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		23030A104D169F16905813FF5862EB5F /* CYLTabBarController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C66C345924A9AE15F04C233984143996 /* CYLTabBarController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		243E3FBB25AD6B55CDF6971E0D22DA4F /* FSCalendarConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B5E931B0C3F19407B03F41DA755B6B /* FSCalendarConstants.m */; };
-		2846CAAD8C39F8B47064914BBD3C4D94 /* UIView+WebCacheOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F61A9602977C28BD0FA668BCC5625042 /* UIView+WebCacheOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2854C9B1086758BD2B6681206B6759B4 /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AE820C1792FFBBFCE2A9FCAEF18B7A0 /* ViewController+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2E09A3761E0019BD3DC3030B036625FD /* UIViewController+CYLTabBarControllerExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B47E792F14F78B0465B35C362A2871 /* UIViewController+CYLTabBarControllerExtention.m */; };
-		2F03F4DEF7EF2DECDB9C59012BD682D4 /* SDWebImageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F568FD3EFEF2003430B7A0C90B25DBE /* SDWebImageOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		308AAD034C9A85A6AD2F5D59F46E41D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20AAFAD6F0B7418EB664A68DC573CB65 /* Foundation.framework */; };
-		319B9108C608433156DEEE4801EF95B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20AAFAD6F0B7418EB664A68DC573CB65 /* Foundation.framework */; };
-		31D2B44DBB251779B8BE93E91A36CD40 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20AAFAD6F0B7418EB664A68DC573CB65 /* Foundation.framework */; };
-		323658236F00E7C34246B97916A0E8FE /* SDWebImageDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = EC8312F65521BBCC98FFC94A56DCBA34 /* SDWebImageDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		343BAFAB730011E632154BF8A0E47D08 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20AAFAD6F0B7418EB664A68DC573CB65 /* Foundation.framework */; };
-		3C00B78106F3AD57ECC19CE096167023 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63231622DC913F93E1FEC8B0E3A927F0 /* SDWebImageManager.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		457ACF9150DCF9AF445B129CC9678FB6 /* Masonry-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 512A11F298F9E4F7A20EA11CF4668D67 /* Masonry-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45FC900F731440A37EEDE8052F6389B0 /* SDImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 991FBF9EC3A29CDA9D9F086CC56D14CD /* SDImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		46348956112C5A0C99434D90B04D1489 /* SDWebImage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E29A7FB0E5276A4839D14201A01F33D7 /* SDWebImage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4884DBC10088DFC603D41036941FE2B1 /* RTRootNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825448C35B10CDD94C54CB17DCDF59 /* RTRootNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		490E2016A111031E8B9C1D5BDB1C3B56 /* CYLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F3629C117E69B2C4292963A11FDFA4 /* CYLTabBar.m */; };
-		4965AF61C1DECB46FAC01ADE2E82B74D /* SDWebImage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC54122536826DD62AF30F90A2AFC55 /* SDWebImage-dummy.m */; };
-		49F1C59A34E52484FD2B6462CE8D7C91 /* FSCalendarDelegationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = C796F1D6B8B2ECB2BBD17078527C4172 /* FSCalendarDelegationProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4AB769895453645083E415E840DE9CC3 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E3EA52FFCD7FF5390297872D63F3AF /* UIImage+GIF.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		4D4F2050654580FE1F1D5F4F82CEDDB8 /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BBEB9951E6C77868F991E5B9FFE663D /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		53BDF81D0A52EA526D597A5C5B139D7F /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A1F297D70F7375C3C9E96115A468EE /* MASCompositeConstraint.m */; };
-		53E75E062F515B1705E392F1781D11AB /* UIViewController+CYLTabBarControllerExtention.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F069151B394A9DDAAE011E1F7D2A59 /* UIViewController+CYLTabBarControllerExtention.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55F4561E55A6CF264BEDB8FB18B5FA8C /* FSCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7EBAB1EA83B6E996252A81226050E2 /* FSCalendarCell.m */; };
-		57D4F36C483A487950FA1F143AE5DCBC /* FSCalendarDelegationFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 28EA27D36E2569954CCC481959309E29 /* FSCalendarDelegationFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		59F81DE0305CC2AC448D2A3C6B3280A2 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC753D03EB0460650676BF578622307 /* MASConstraint.m */; };
-		5A2A46C4905114B32E4A0704CEE3CF22 /* CYLPlusButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 22971CB257E1355E1F8DE99ACF6FDEED /* CYLPlusButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5C62C27E2855390100E9519DE3095DDB /* FSCalendarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D57457058939009E03643A5782BF0 /* FSCalendarHeaderView.m */; };
-		5DA025EA8CB45CFB5517393FD3AEBDFA /* UIImageView+WebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C886318E00710FB86B975B41987659C /* UIImageView+WebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5DDEB75579F695F27676A6E327AA9E39 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E3FF0F283D555802AF65A56465DF5A /* SDWebImageCompat.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		5F3C7A5EEE31763D425F76A4F3E6C6BD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20AAFAD6F0B7418EB664A68DC573CB65 /* Foundation.framework */; };
-		6230C102162087640821ABDE5F0BC534 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B721193584C7C9E987C5EDAD3866EB94 /* UIKit.framework */; };
-		625F05F7702CA250DEB66A699766DA9E /* FSCalendar-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1069642F2BC68FB4983985329A0BA9F0 /* FSCalendar-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		636BBA734C1A17A734761D674FAE8800 /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA680188ECCCDAF248C8C4878F4C389 /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		64388D740C4F4B5048240D2AC7D47803 /* UIViewController+RTRootNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = C72452BE4BB4CB281BD6B7949D9FAFD0 /* UIViewController+RTRootNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		66737F48243D514269C499D65A7B4DBE /* FSCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D1BFF84A310F77F839157B52584D0E /* FSCalendar.m */; };
-		6AB6757CD5B80A0A84C89CE774224569 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 443C307866F4E4544C4FAFDDA8779EEB /* UIImageView+HighlightedWebCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		6C23BBF56ED4DCC10CA1765A6736D1F8 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 375A67289998E4945B81C61B4F22C9DF /* MASLayoutConstraint.m */; };
-		71120A5975B56A5F6822E5457618D767 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E549D354B81050139816B506F7681C3C /* SDWebImagePrefetcher.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		712FF0C70B4C85F44AFB5CDDC1DD9018 /* FSCalendarDynamicHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 958DB63890205DDD875D6CC18652EB10 /* FSCalendarDynamicHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		73BBDACC22CCA36A6DAAA167AD780BAF /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A350BF6EC8A954C5A0E8235AAD8949 /* MASConstraintMaker.m */; };
-		756DF24546C7D91459DCADC8F1C98660 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A46625514BF59EA931B16DE4BA65443 /* MASViewConstraint.m */; };
-		7C17BEA6034027310D1D205DB2008CA5 /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = AA903E4445DFC08C1590DC992939B09D /* MASLayoutConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7530455F3BA946F7ACC44DBFE734A2 /* UIImage+MultiFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A3BF5530C628E245C4D9513A4D91D32 /* UIImage+MultiFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E320930D1F4218F307C7FB786F0C514 /* FSCalendarCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DB896673EB29709D13940B445474E0 /* FSCalendarCollectionView.m */; };
-		81C9AD3581C1DD50D8C46AC23D957F39 /* SDWebImageCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = EFDAB935C5616187ADBE9D7C5D69F68E /* SDWebImageCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8632FCFA0471878FC95240290BE97458 /* FSCalendar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 343D680902B559A751931577396C3C23 /* FSCalendar-dummy.m */; };
-		88DE7BAB1F4999A5F4B617F44E5FD1D3 /* MASConstraintMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A03E7D5E6690F73E452D707C9977A2B /* MASConstraintMaker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8A2F5DAACE360A867631590370D76A49 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B721193584C7C9E987C5EDAD3866EB94 /* UIKit.framework */; };
-		8A6EEF68E7625AB66A3A8DED1594F88F /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F85AD316766F2603D104634545E27A4 /* ViewController+MASAdditions.m */; };
-		8CD45B754192DE834B642975E85257AB /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B23082E0D7FE9842A56ABE3CB44A4AD /* MASCompositeConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E8E60E0406837DF7038528766C90AEA /* FSCalendarScopeHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D12A19F3301A95732F46F6438352E4E /* FSCalendarScopeHandle.m */; };
-		8F7003744526BA3547F59200EE4F4D16 /* FSCalendarWeekdayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A57CB2C9615280E234DFA0F876CDD4 /* FSCalendarWeekdayView.m */; };
-		91693C90642539B4F411E794548A9E2A /* FSCalendarCollectionViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 93EBCBCF6B3CEC6375A90C31698EAEE8 /* FSCalendarCollectionViewLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		96E021283F050BCADF9A9B668C77B203 /* FSCalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 661D12FED8879F80D3A38837E0097DA3 /* FSCalendarExtensions.m */; };
-		9762A3085162217C6B6A0856C7A472CA /* UIViewController+RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BF2A12D0C8B7BB8FF8D584CF1C62C /* UIViewController+RTRootNavigationController.m */; };
-		9AFC7067E6EE518F47C8874EDFCD8EF1 /* RTRootNavigationController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0044212D6B41298EA5AFEA9B21F556E3 /* RTRootNavigationController-dummy.m */; };
-		9CF04404C01848D25E78B22A88BFF129 /* FSCalendar.h in Headers */ = {isa = PBXBuildFile; fileRef = 573B193AE2477321618B4F86D223AE60 /* FSCalendar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A000A7A7023F7FB4CEDD1023EB87BF93 /* FSCalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4B33A8098832660DDD12365DF5F611 /* FSCalendarCollectionViewLayout.m */; };
-		A08A8AB356264E248D01F1BC0EF08166 /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F97F4CF07C06F838C70FACD94FC9390B /* Masonry-dummy.m */; };
-		A3D1147CED9648BEDE2E47B8E8A44924 /* FSCalendar+Deprecated.m in Sources */ = {isa = PBXBuildFile; fileRef = 3233964CA106CBF30B4C03AABD5BAA50 /* FSCalendar+Deprecated.m */; };
-		A701CE014A08B08DD4CA1632BDF9247A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF4235DA7BDF396961864D3C37C384A /* QuartzCore.framework */; };
-		A7370CE9231F9A4927142D79021879EC /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 1041A4B243D91E28386C293123BDEE51 /* MASViewAttribute.m */; };
-		AA530E2A16D259DF436F9957BC923F18 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20AAFAD6F0B7418EB664A68DC573CB65 /* Foundation.framework */; };
-		AA978FCF3EF1D8D10DDE3BB4C6312A7B /* FSCalendarDelegationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DFCE2EB4B549E452CAD1288DC78971AC /* FSCalendarDelegationProxy.m */; };
-		AD0A0080B1BB2187DFC4A4CC8EEA87CA /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A617C57B0F2BD227EF308FDBCEE0501 /* NSData+ImageContentType.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		B44383A3FA435C1E986942C817339302 /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 92E3E9DF39C4DAF944C398BC080A946F /* View+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B9D6DBAD1DD63B3682E0C1B550CF4BC4 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851FBDDE69E83D20834023B3D253092 /* UIView+WebCacheOperation.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		BDA1ED05CBA5580B30785A431D5B231B /* FSCalendarTransitionCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = 52F9B5F28BE7CB44005A5FEA224ED9C3 /* FSCalendarTransitionCoordinator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C0A16E00B4BC2D88A7833D5DAED62942 /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B0606E04E3F5BC56EAE81E2958B25C6 /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C17D68C964954EF1C0BB3C314C2F452F /* FSCalendarWeekdayView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF9BF1B6F435EBA579FCF5253B75825F /* FSCalendarWeekdayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C69663957B2EB4C7CF4D8192480AA8B4 /* FSCalendarExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 92D168432289EDB25C8A171598495B1B /* FSCalendarExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C8DF22EAFFC2F81B0426E2165AC93E44 /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = C72FEAFF245488AB37FDA1F60685CAB8 /* MASConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CBF2F7196B3594AF8692B83ECC3C691F /* SDWebImageDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 125BE27C33B167AD5B3F3F7D0B091EDB /* SDWebImageDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CC243BCE5D99D80031BD96EAD42B1993 /* Pods-letian-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4708E4E38083FB5E152167F9E904906D /* Pods-letian-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CC8F9B4A1AC4E276EA8AA4C6F2BF3CD4 /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = D741F60B6D22434266370186F6620351 /* Masonry.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CDB052C277F6148BBAACB2C2C7C6321B /* FSCalendarTransitionCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C55E33258C17B4A1CD968E7500DA2DC /* FSCalendarTransitionCoordinator.m */; };
-		CF2ABD6A243A7C112FD204C18DD7BC73 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B721193584C7C9E987C5EDAD3866EB94 /* UIKit.framework */; };
-		D1AA13E4477B8089A0E6430654A6102E /* RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A425EBC7BE19DEB72717C423ABFF08 /* RTRootNavigationController.m */; };
-		D3A0011CF9BDDFB992DF820E246F44EA /* CYLPlusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC7168326C9AA56DF351B1422AD8B8 /* CYLPlusButton.m */; };
-		D4F3BEEB43698475E5443150838E84ED /* FSCalendarStickyHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 150A9F9556637ACD7514E8138079D45A /* FSCalendarStickyHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D6799150541E68B06C66DA5E650B8B20 /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 701362B282DCE647FA648E9FC5DB7CAE /* SDWebImageDownloaderOperation.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		D8B1525CB3DFCBD8E5032680530413D9 /* NSArray+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 906B9C084ED87AA353ED7B84F1922F8A /* NSArray+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DBA768E91CE248414F9FBF531A13B52E /* UIImageView+HighlightedWebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D15D8CC4AB92D55A00B0BC993AE2F0 /* UIImageView+HighlightedWebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DD66D7505B9F87CC837979CFEB84A530 /* CYLTabBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 451F9039D231A7D2DC11946C1E47416B /* CYLTabBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DD6DF296F24289D0CBDA1C36A577A824 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 132856D38346150183920C3B9D5CA63A /* SDImageCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		DE0F3913CDD24965B55FD99E0D8C2587 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9F282A574723109BB2D466CECD4B15 /* ImageIO.framework */; };
-		E09E669CE1808336CB02081BC7BBCFEB /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA1E2CBCB8022F1963EBA9605FDB0C3 /* SDWebImageDecoder.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E1685AB943D1B43AFEBCC2EC64BB1241 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D1B50E442D05CD1E7657437B1CB65E /* UIButton+WebCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E1B077BAFD8840CA3D96BB4545B7B255 /* FSCalendarScopeHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C31878ADCA1E9AE0ADCD0B22610C4CF /* FSCalendarScopeHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E248E14C298E3F304D6899C737F2DD8F /* UIButton+WebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 693986A08069C42DA3E78DF06DDC3E6D /* UIButton+WebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E2A6FCE5A9E466AA1CC876B360A84555 /* CYLTabBarController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CF01F44810165595AEC462FD00C3D8 /* CYLTabBarController-dummy.m */; };
-		E3B93CDF418A2678614DDAD9331C0C0D /* FSCalendarCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6865632E6150DE56B85E428AE91B7A4B /* FSCalendarCollectionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E4CE2EABBC3A8E5F3D54C90CF46E79C3 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = FEEFE703D4CB5C01AB310B231B1EFD50 /* UIImage+MultiFormat.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E53CC9D574F6C68B7483352159395653 /* CYLConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A60349D9E6BA8297C6FBBE39EBA5713 /* CYLConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E72EDE323AC9F92EC8A00A93AC186093 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0AB0870AF1E6F13B444B2075EEE879 /* NSArray+MASAdditions.m */; };
-		EE078A13105301767BE0ECAC1705A9B5 /* FSCalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B88153786C86855CD1E16F61D0AD3 /* FSCalendarStickyHeader.m */; };
-		F4B3E44D5D2F6508BC1BB35A9FBDEC70 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0813E4970CA941CEC7B35485FAF07573 /* View+MASAdditions.m */; };
-		F537D4E99E77B630E38480F125243F99 /* SDWebImageDownloaderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FE73FB6AD25AC5961DB19279E752DEA /* SDWebImageDownloaderOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F54E2CAED6EAE74D9E1F878E10FA30BD /* FSCalendarDelegationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = D94390931760BF35AF5B56DE17CE3242 /* FSCalendarDelegationFactory.m */; };
-		F6A1EC699E916996EF2B7B4C6137DB8D /* FSCalendarHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D634618D7EDAC594057C769198960FE /* FSCalendarHeaderView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F746795DC38AD2DB3D584A110174FED0 /* FSCalendarCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 74CEEB98417A3B501078D465FFDC66C0 /* FSCalendarCalculator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F75DFB5A6E8642C4964CC3968A2DD0C8 /* FSCalendarCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B1F1EDD09BB03E92B66FD2A4B9A1959 /* FSCalendarCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FB312B40766E2D757726B288CAD52F35 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69CDBFB51E597DD2BF1E5EC63A2886 /* SDWebImageDownloader.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		FD051B5A9F3E663081656EB261A724D2 /* FSCalendarAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 948B89F093C083E2DB6CA52F6FB1C4A5 /* FSCalendarAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FE5B9BD9BD05A2A01CB054149C3F64FC /* SDWebImagePrefetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = C72813301E0940E9AF4F96D7D86F2CB7 /* SDWebImagePrefetcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FFBEAF63A28F6A7DD881E8256F9503B7 /* FSCalendarCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = B877E3876EF3A5587F7C5FE23EE69E4C /* FSCalendarCalculator.m */; };
+		025B597A02D30CBA79407B1048B0FCB3 /* CYLTabBarController.h in Headers */ = {isa = PBXBuildFile; fileRef = 13831A5BF0363C242F60EFF3428697B1 /* CYLTabBarController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03000F6EB3F0C203036F2E4414BCA758 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B36FDCA6CE390A639A0E4E413C6AAEC /* UIView+WebCacheOperation.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		04A7D6AADAB213CE7D26F8EAD2F87536 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = A9FDAB748EEB1BA398F03DEF094F00C9 /* MASUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		068EF598E554EC57038ACFB89CC2C47A /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FC757C5C8CC253B2895329C879F01D4 /* View+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		091D17D5D8F832D28546A72B788CF0AE /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 13FF6F4F3FC18AA38F32B3CF5EFD01A5 /* MASViewConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0968524ED4DE8DF7834055C5B6089D72 /* MBProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 097B1C4A0ABDCA82D0289629219CEB6E /* MBProgressHUD-dummy.m */; };
+		097CE7D98BF45C33842A2F9E2CE54D1E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2013E0622BA7112824FE37BBA61D4FD6 /* Foundation.framework */; };
+		0A7AF0E9B853211DE831CAAD4C21F11C /* FSCalendarConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D267DA0CDD8F974B16EBC5EC3084236 /* FSCalendarConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0DD46AF65FABE6D2BDE4501F807046A6 /* FSCalendarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BEBCF68CFA73B6224C783528007E79 /* FSCalendarAppearance.m */; };
+		0E748C843DA1B8826512EB64714BBA60 /* RTRootNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0180A3C5FCF088924C9F73D213596C4B /* RTRootNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0F3DF5C3BEFCC9838B53C37735B414BE /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F6E436403555E462A7B4E672F3EE26C4 /* NSLayoutConstraint+MASDebugAdditions.m */; };
+		0FDB2B4F75591851F0F119EAE70B3F63 /* NSLayoutConstraint+MASDebugAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E284AD806125F66FABFF7BC9284CAD7 /* NSLayoutConstraint+MASDebugAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		120558FCBB09E7C0AAE4249F1686CCA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2013E0622BA7112824FE37BBA61D4FD6 /* Foundation.framework */; };
+		1215629D558162CE728B27386DA02D1D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2013E0622BA7112824FE37BBA61D4FD6 /* Foundation.framework */; };
+		1310258E4C31E4FEF27BC4854E0EE887 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = A36DA914D2E039D058CC0CC90CCDFA3B /* NSData+ImageContentType.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		1553B8EC2359BF7C7B0B4F3F717292FE /* CYLTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277ABAEB975784B125261502CFF91372 /* CYLTabBarController.m */; };
+		163DC42152F30F45DA6F20E170CDB841 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EEC869026093787180DF413794FEB32 /* UIImage+GIF.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		16640FF1E61ECB21384E78DCB335CE45 /* RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED538FD73A748148CFACE78F6CCEBE5C /* RTRootNavigationController.m */; };
+		23030A104D169F16905813FF5862EB5F /* CYLTabBarController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CDCAA56B47E3378E4882CF3554AFD5F /* CYLTabBarController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		243E3FBB25AD6B55CDF6971E0D22DA4F /* FSCalendarConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C7759041102F658D6E6A94F4377B8E /* FSCalendarConstants.m */; };
+		2854C9B1086758BD2B6681206B6759B4 /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6235805115BFD90502D7BE44682DF1C1 /* ViewController+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		28A794912ED1E06B05D96DF5ED0AED19 /* MBProgressHUD-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E03AE283CDA8F27484D50AEDF4EB14B /* MBProgressHUD-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2E09A3761E0019BD3DC3030B036625FD /* UIViewController+CYLTabBarControllerExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A0F19A07390CD2C0A24DE85F31F730 /* UIViewController+CYLTabBarControllerExtention.m */; };
+		308AAD034C9A85A6AD2F5D59F46E41D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2013E0622BA7112824FE37BBA61D4FD6 /* Foundation.framework */; };
+		394A6396653AF967FF1C9BA6A445352C /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E8841C3D8E866BC25F8E8FB702BF63 /* UIImageView+HighlightedWebCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		457ACF9150DCF9AF445B129CC9678FB6 /* Masonry-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B6AA8277B7356548A015AF3072971F55 /* Masonry-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		46CD989C4EA73DBB7F4BFB9AF25CC993 /* UIViewController+RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E59E2E8D9710075C8D6C304653FF07 /* UIViewController+RTRootNavigationController.m */; };
+		490E2016A111031E8B9C1D5BDB1C3B56 /* CYLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EAC5A18C9A2EF1913109D928B69AA2 /* CYLTabBar.m */; };
+		498165C74E9AA127B8CDD09072F6ADE5 /* SDImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B2DA45587FB7D816E78B311E271E7C6 /* SDImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49F1C59A34E52484FD2B6462CE8D7C91 /* FSCalendarDelegationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 47E79200B0F466323C35601AD9FDB5B9 /* FSCalendarDelegationProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4D4F2050654580FE1F1D5F4F82CEDDB8 /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 12A4A0A01CFDFC613F5FBC618C9AD32B /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4F8192AB854C9009D5200466CDFB5722 /* SDWebImagePrefetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CC948C4D0512265E9B8B13C4D4BB76D /* SDWebImagePrefetcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53BDF81D0A52EA526D597A5C5B139D7F /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F1F5669B83193CF8DC252F3433736C /* MASCompositeConstraint.m */; };
+		53E75E062F515B1705E392F1781D11AB /* UIViewController+CYLTabBarControllerExtention.h in Headers */ = {isa = PBXBuildFile; fileRef = A3B5F867CDB474BA825156646117B059 /* UIViewController+CYLTabBarControllerExtention.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		547B5B48797C58A6915A7406863EFBAB /* SDWebImageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA9BA42B457BA0E9197A826A903AABE /* SDWebImageOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55F4561E55A6CF264BEDB8FB18B5FA8C /* FSCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B75A536654B3E6E5E05CCAC19244DC4 /* FSCalendarCell.m */; };
+		57D4F36C483A487950FA1F143AE5DCBC /* FSCalendarDelegationFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B727E0C53DBF2C2055642E9AA8279F2 /* FSCalendarDelegationFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		59F81DE0305CC2AC448D2A3C6B3280A2 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = BD66CA81F1A193B93BBE5ACFBF9F1ED1 /* MASConstraint.m */; };
+		5A2A46C4905114B32E4A0704CEE3CF22 /* CYLPlusButton.h in Headers */ = {isa = PBXBuildFile; fileRef = ED8F97C6AE473759549B3CA24181E31A /* CYLPlusButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5AC3562AF1B1D7B6EFD5F41453EE263B /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = FDBF36DB80A5F8B8444248517803FE64 /* SDWebImageCompat.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		5C62C27E2855390100E9519DE3095DDB /* FSCalendarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE781A1018950B3B82F7B3E69C1B57B /* FSCalendarHeaderView.m */; };
+		5C7106665ACD09E682ECC78A5E5C141D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2013E0622BA7112824FE37BBA61D4FD6 /* Foundation.framework */; };
+		5F3C7A5EEE31763D425F76A4F3E6C6BD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2013E0622BA7112824FE37BBA61D4FD6 /* Foundation.framework */; };
+		6230C102162087640821ABDE5F0BC534 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD161754BE60BC2EC7F22FFAF577939 /* UIKit.framework */; };
+		625F05F7702CA250DEB66A699766DA9E /* FSCalendar-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB418B4B96DDA05286B0B602FA464BA /* FSCalendar-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		636BBA734C1A17A734761D674FAE8800 /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 54E6C1119934DC742437CA758F17CA68 /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		65449424E9EAB72AD2E44E6AD86AB22B /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = D723A5A3A900FA7B56ABBF90857D993B /* SDWebImageDownloader.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		66737F48243D514269C499D65A7B4DBE /* FSCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D917814C24EDF6F1CDEC70E2B31C2F /* FSCalendar.m */; };
+		6C23BBF56ED4DCC10CA1765A6736D1F8 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2152026F6BD278F13867DA2D7BDAAD67 /* MASLayoutConstraint.m */; };
+		712FF0C70B4C85F44AFB5CDDC1DD9018 /* FSCalendarDynamicHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FDCE4D51314041BD690C26A1F2324E /* FSCalendarDynamicHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		713C5058A24FDEC28DB1254C064E21D1 /* SDWebImageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EA3A93A6EA003BE75A3D9875979DCB2 /* SDWebImageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		72563723EAC2C58AF08D1FA37D46B69F /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA18F4D5055D38D38DFEC75A65CAFC79 /* SDWebImageDownloaderOperation.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		73BBDACC22CCA36A6DAAA167AD780BAF /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4F7E6D30BDAD829DDCF7BA38847D71 /* MASConstraintMaker.m */; };
+		756DF24546C7D91459DCADC8F1C98660 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = E377767B23741A26EE86FC2C58433AD1 /* MASViewConstraint.m */; };
+		78A92C8528EEB4EB6F8005889AC25A66 /* SDWebImage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 28D2B0DDBF4849F4AA7A5C76960C3536 /* SDWebImage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7A6E578F9A12FD06430A808202926A90 /* UIImage+GIF.h in Headers */ = {isa = PBXBuildFile; fileRef = 873167EDB49F8B355C914F526C28F75C /* UIImage+GIF.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7C17BEA6034027310D1D205DB2008CA5 /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = E1B21CBBE32149B873D4147083703BD4 /* MASLayoutConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7CD30739486D297D703D79C5BDC8F7E7 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 926DB15048FD95D46FC22CE967B6570A /* SDWebImageDecoder.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		7E320930D1F4218F307C7FB786F0C514 /* FSCalendarCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D18A648AC3DB22D73DB29041F00315D /* FSCalendarCollectionView.m */; };
+		8055DD5C27EF2962C52D1737FD6836BF /* UIImageView+HighlightedWebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = C11951BBDB84822D61FA426D4352D782 /* UIImageView+HighlightedWebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8305261A69169369A2640FA204470E7A /* NSData+ImageContentType.h in Headers */ = {isa = PBXBuildFile; fileRef = F75BC76D22CE8560065D2C561CEB4FCF /* NSData+ImageContentType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8632FCFA0471878FC95240290BE97458 /* FSCalendar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 26167000DF2D66FA17BA75AF1DD59A7E /* FSCalendar-dummy.m */; };
+		87E70AE6CFB3F08C63B18408D55701ED /* SDWebImageDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B26277A0EE1686B4C744BB5E50941A8 /* SDWebImageDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		88DE7BAB1F4999A5F4B617F44E5FD1D3 /* MASConstraintMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 1539A8D8B000CC3E18157781D5295EDC /* MASConstraintMaker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		897C38C8E3C31950E2E93A4D6937CCC4 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9487E055E8B7AEBD75ECA292F86484AF /* MBProgressHUD.m */; };
+		8A6EEF68E7625AB66A3A8DED1594F88F /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A32528DFDE91D7D1BED0EC77E2C76670 /* ViewController+MASAdditions.m */; };
+		8CD45B754192DE834B642975E85257AB /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = AD60B7EEEBAD7FA6DB10103D663D7DD6 /* MASCompositeConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8E8E60E0406837DF7038528766C90AEA /* FSCalendarScopeHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2F15BCB0EB78B84B90C1290E5B8E71 /* FSCalendarScopeHandle.m */; };
+		8F7003744526BA3547F59200EE4F4D16 /* FSCalendarWeekdayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8836AFDB1E55661E0279D0D7B9E04BD2 /* FSCalendarWeekdayView.m */; };
+		91693C90642539B4F411E794548A9E2A /* FSCalendarCollectionViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = C984158B9E0B2E8522B69623CF337821 /* FSCalendarCollectionViewLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		94F1032123C6C28B46D8E464E7565470 /* UIImageView+WebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = F23BDBEB0DCABB5AFC5B6B35F53ACE7E /* UIImageView+WebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		96E021283F050BCADF9A9B668C77B203 /* FSCalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3044D467C7E081058066D55847B89429 /* FSCalendarExtensions.m */; };
+		98DF470CA8F6DD132AFAC1398FCD579C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17FED3BB6117EE87B0B77B8257A5D4E6 /* CoreGraphics.framework */; };
+		99EB70BD0D1014BC95802E54912ED07F /* SDWebImageDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = A321C027E7A8F626695A93FFDC64E38F /* SDWebImageDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B31200A39F8EE899CB14DE4784D2E26 /* RTRootNavigationController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 643B84D1B67DD32995F0E42D402B994B /* RTRootNavigationController-dummy.m */; };
+		9CF04404C01848D25E78B22A88BFF129 /* FSCalendar.h in Headers */ = {isa = PBXBuildFile; fileRef = C1CF657ED951D81E09FD6027D58D9F9A /* FSCalendar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A000A7A7023F7FB4CEDD1023EB87BF93 /* FSCalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 40790C8D347E382FAD56AD07DC7E604D /* FSCalendarCollectionViewLayout.m */; };
+		A08A8AB356264E248D01F1BC0EF08166 /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB776BB793B4333E29B9E33EFD2235EB /* Masonry-dummy.m */; };
+		A3D1147CED9648BEDE2E47B8E8A44924 /* FSCalendar+Deprecated.m in Sources */ = {isa = PBXBuildFile; fileRef = 716A1458632025125A620E4C0BF11DF7 /* FSCalendar+Deprecated.m */; };
+		A5BF8DBDD8660DBCFE712657F3D82BDA /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E00E3E4EF3F2BB14D1D40DE03DC567B /* MBProgressHUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A701CE014A08B08DD4CA1632BDF9247A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA510D2CBE6BDCBD595FDD5DD559B93 /* QuartzCore.framework */; };
+		A7370CE9231F9A4927142D79021879EC /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F149879B87C43C7225865DC39E4612C /* MASViewAttribute.m */; };
+		AA530E2A16D259DF436F9957BC923F18 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2013E0622BA7112824FE37BBA61D4FD6 /* Foundation.framework */; };
+		AA978FCF3EF1D8D10DDE3BB4C6312A7B /* FSCalendarDelegationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C279997D8A5D3EFAD4A9D7F6945A3D /* FSCalendarDelegationProxy.m */; };
+		ADA6564F59ADB78E8F2E35FB4D8EFFD5 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD916A823E4C8E9CDEDB402E22855F8 /* UIImageView+WebCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B44383A3FA435C1E986942C817339302 /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = BEBD6F09F20C187A7EA833DE1BCCB2CA /* View+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B51995DBE5F605785CB5936DEA2DA01B /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B899F5D0B3D7FA51371F3F126F7B31 /* SDWebImagePrefetcher.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B8DD2A78BAA214EF0693E22657EFF472 /* Pods-letian-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4708E4E38083FB5E152167F9E904906D /* Pods-letian-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B91306C336FCFF2AA5AC414B74F1F0C5 /* Pods-letian-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA3262AE2B74156C006F38539D71E27 /* Pods-letian-dummy.m */; };
+		BDA1ED05CBA5580B30785A431D5B231B /* FSCalendarTransitionCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = E085685BDE7D7B15AECD697D2852FDE8 /* FSCalendarTransitionCoordinator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C0A16E00B4BC2D88A7833D5DAED62942 /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0267E9029158E1A5DAB7DFCE423DBDF7 /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C0D23A47C4256A722321470DE8126A18 /* SDWebImageCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 0728198D69AEB69EB4E746AD3DC08E5F /* SDWebImageCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C17D68C964954EF1C0BB3C314C2F452F /* FSCalendarWeekdayView.h in Headers */ = {isa = PBXBuildFile; fileRef = B32A1C1E391EBD5716D4BBFBF5FD2EDB /* FSCalendarWeekdayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C69663957B2EB4C7CF4D8192480AA8B4 /* FSCalendarExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = D764C83013D37C7B9466E4C83366A91C /* FSCalendarExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C6B01F7EA1E80B53FCD43C7FE102E140 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7989056C8091A2BB6349C6F1B8C3C669 /* UIButton+WebCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		C8DF22EAFFC2F81B0426E2165AC93E44 /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BB5E5035FEBE6FB42566FBFC5E2C18E /* MASConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CC8F9B4A1AC4E276EA8AA4C6F2BF3CD4 /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = 88FEA958238852BA01F2181261FCB800 /* Masonry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDB052C277F6148BBAACB2C2C7C6321B /* FSCalendarTransitionCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1342485B8B5F18B0E11D51E3C58F1679 /* FSCalendarTransitionCoordinator.m */; };
+		CE0271F23C4D250894FA58519F8F134D /* SDWebImageDownloaderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 710B96A0CCC8977319E0C3F1DE28B39B /* SDWebImageDownloaderOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CF2ABD6A243A7C112FD204C18DD7BC73 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD161754BE60BC2EC7F22FFAF577939 /* UIKit.framework */; };
+		CFA7B682885FC931D47F880758B41CA3 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD4DCCC6C679FA3FB6D7DD5836D25C0 /* SDImageCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		D1040641525490723B307E77244D6E50 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = BF81CF8F89ED912732035CE70E186AB3 /* UIImage+MultiFormat.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		D2A32CE93EDF4CF4DC52A2D5065811BC /* UIView+WebCacheOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 463F47B54D0BC6FCC47A41F30E7172CF /* UIView+WebCacheOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D3A0011CF9BDDFB992DF820E246F44EA /* CYLPlusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0918F05F566F8847E329FD091E7549CB /* CYLPlusButton.m */; };
+		D4F3BEEB43698475E5443150838E84ED /* FSCalendarStickyHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 06961B4A488AAD52FABD99B06710D758 /* FSCalendarStickyHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8B1525CB3DFCBD8E5032680530413D9 /* NSArray+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = BA5B5E7A0CDA63229803040EE83F6B28 /* NSArray+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA3FBCF3B21EB18151C3BC2645107E0D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA510D2CBE6BDCBD595FDD5DD559B93 /* QuartzCore.framework */; };
+		DD66D7505B9F87CC837979CFEB84A530 /* CYLTabBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A307D2237D1F56555784F1E6D1FADB2 /* CYLTabBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E1B077BAFD8840CA3D96BB4545B7B255 /* FSCalendarScopeHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3813D151AB6E5470D7712A9EB04725C7 /* FSCalendarScopeHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2A6FCE5A9E466AA1CC876B360A84555 /* CYLTabBarController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E05728F4025869EAEBD6D25FC76499BD /* CYLTabBarController-dummy.m */; };
+		E3B27A563864EDE9F8661936C6FAEC46 /* SDWebImage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6654FBFB3A8802254644E73F1F47768E /* SDWebImage-dummy.m */; };
+		E3B93CDF418A2678614DDAD9331C0C0D /* FSCalendarCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = C654FA1AD49DC67683054ADE84898055 /* FSCalendarCollectionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E53CC9D574F6C68B7483352159395653 /* CYLConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = D0F7055E5699565068E7BFB583AD2C61 /* CYLConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E72EDE323AC9F92EC8A00A93AC186093 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 71256F0E855E83B2E6FC286FC9E8725A /* NSArray+MASAdditions.m */; };
+		E8D4DAF87A3EDB1A95B7E6DCC0940FBD /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 568B10A0EBCD978598E632AB6DC2AB68 /* SDWebImageManager.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		EE078A13105301767BE0ECAC1705A9B5 /* FSCalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2033CA5F5A4D111C20B6095096F4D6BC /* FSCalendarStickyHeader.m */; };
+		EFAEB2A8D40BA82ED965F2BA8D8321A4 /* RTRootNavigationController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 96639A50AE58EFDA2507AB0450663722 /* RTRootNavigationController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4B3E44D5D2F6508BC1BB35A9FBDEC70 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7202E196053C5BC5167E058492D4017C /* View+MASAdditions.m */; };
+		F54E2CAED6EAE74D9E1F878E10FA30BD /* FSCalendarDelegationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9368DD1F2C0C4DF169B3BE4A55094EB9 /* FSCalendarDelegationFactory.m */; };
+		F6A1EC699E916996EF2B7B4C6137DB8D /* FSCalendarHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = A3C731F74E78151500935B7374C657B0 /* FSCalendarHeaderView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F746795DC38AD2DB3D584A110174FED0 /* FSCalendarCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 10FE41922A30AE5FF26854B060719CB4 /* FSCalendarCalculator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F75DFB5A6E8642C4964CC3968A2DD0C8 /* FSCalendarCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3653D7777173E35EA937CE28C458C767 /* FSCalendarCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F919B31546F468FA33A2098B4A198DEB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5622C89D4510B1F5B0ACCD2F89626FD7 /* ImageIO.framework */; };
+		FA0910C733771C52A5F70A235BF17E8F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD161754BE60BC2EC7F22FFAF577939 /* UIKit.framework */; };
+		FB9C1379587FAF0B0721BED23CA6ED1C /* UIImage+MultiFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = C91483998D4B01CD32D337E4A7D30B60 /* UIImage+MultiFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB9C382CC15DFF92E6ADF575FD5392D1 /* UIButton+WebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 714126FECE415A64931DD04CCDE55C09 /* UIButton+WebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FD051B5A9F3E663081656EB261A724D2 /* FSCalendarAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA2E0251D4D8EF64F0EB9EEA0F9FC77 /* FSCalendarAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE7E9969F7DCFCE5E850A3A369BDA36B /* UIViewController+RTRootNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5880558B7FF2489C895E647D3CBE36D /* UIViewController+RTRootNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FFBEAF63A28F6A7DD881E8256F9503B7 /* FSCalendarCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 78446C9746BB3D835594A8555030C117 /* FSCalendarCalculator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1C5B884939C0D4B87A6D6CC9FD8B58FD /* PBXContainerItemProxy */ = {
+		156E3D18BEA9A03960421BDACA03BA9F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 187D4938E4853AAF74ED933257C249B1;
+			remoteGlobalIDString = B89DDE77C536C542AE1AAF9FC2940148;
+			remoteInfo = SDWebImage;
+		};
+		242540BE6BA837B9650EBFC153D6ACB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B37B2F822F4CA084289FB447DA61996E;
 			remoteInfo = RTRootNavigationController;
 		};
-		9E00C71CAB9B70C8F3D2D6EA59BCACCD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 58FE0486E83AA749B9E8C1300B64E2A2;
-			remoteInfo = CYLTabBarController;
-		};
-		9ECDAB079D326347E9E4702878768218 /* PBXContainerItemProxy */ = {
+		4ED7864CF9DEA593C3709218D89EE9D6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C5A2DB7A84B7B78E359870D2E1B24AA7;
 			remoteInfo = FSCalendar;
 		};
-		A19368D945DA9B53D7B73A310A62FF09 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 46AA28753E93B0ACEC0588D1EAB31835;
-			remoteInfo = SDWebImage;
-		};
-		DB1386E9978D44A0B425F7F81A7921E4 /* PBXContainerItemProxy */ = {
+		778C4EFC028C1FA06C5AA732C507D339 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D52144DE9D7255DE912490FF5A806573;
 			remoteInfo = Masonry;
 		};
+		79CFF5F69240652606BB460FCBE1B2E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41FA54D12162DAD51D02FC58A2CD5034;
+			remoteInfo = MBProgressHUD;
+		};
+		7BB135FA8D7A1D789148C8238AB1C02A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 58FE0486E83AA749B9E8C1300B64E2A2;
+			remoteInfo = CYLTabBarController;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0044212D6B41298EA5AFEA9B21F556E3 /* RTRootNavigationController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RTRootNavigationController-dummy.m"; sourceTree = "<group>"; };
-		02B1A066D9A765E69F90D71F49988DFB /* CYLTabBarController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CYLTabBarController.framework; path = CYLTabBarController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		04EAA7998C6D2DEDCDFFDE107701C639 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+MASDebugAdditions.m"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
-		05B47E792F14F78B0465B35C362A2871 /* UIViewController+CYLTabBarControllerExtention.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+CYLTabBarControllerExtention.m"; path = "CYLTabBarController/UIViewController+CYLTabBarControllerExtention.m"; sourceTree = "<group>"; };
-		0813E4970CA941CEC7B35485FAF07573 /* View+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "View+MASAdditions.m"; path = "Masonry/View+MASAdditions.m"; sourceTree = "<group>"; };
-		098B1B4382E59BB0D06CD0A3D55BD9FE /* CYLTabBarController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CYLTabBarController.m; path = CYLTabBarController/CYLTabBarController.m; sourceTree = "<group>"; };
-		0C886318E00710FB86B975B41987659C /* UIImageView+WebCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+WebCache.h"; path = "SDWebImage/UIImageView+WebCache.h"; sourceTree = "<group>"; };
-		0CB4D24F7B8B4836FFEACC0B62DC1321 /* Masonry-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-prefix.pch"; sourceTree = "<group>"; };
-		0E9F282A574723109BB2D466CECD4B15 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
-		1041A4B243D91E28386C293123BDEE51 /* MASViewAttribute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewAttribute.m; path = Masonry/MASViewAttribute.m; sourceTree = "<group>"; };
-		1069642F2BC68FB4983985329A0BA9F0 /* FSCalendar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSCalendar-umbrella.h"; sourceTree = "<group>"; };
-		125BE27C33B167AD5B3F3F7D0B091EDB /* SDWebImageDownloader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDownloader.h; path = SDWebImage/SDWebImageDownloader.h; sourceTree = "<group>"; };
-		132856D38346150183920C3B9D5CA63A /* SDImageCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDImageCache.m; path = SDWebImage/SDImageCache.m; sourceTree = "<group>"; };
-		14A425EBC7BE19DEB72717C423ABFF08 /* RTRootNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RTRootNavigationController.m; path = RTRootNavigationController/Classes/RTRootNavigationController.m; sourceTree = "<group>"; };
-		150A9F9556637ACD7514E8138079D45A /* FSCalendarStickyHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarStickyHeader.h; path = FSCalendar/FSCalendarStickyHeader.h; sourceTree = "<group>"; };
-		1851FBDDE69E83D20834023B3D253092 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+WebCacheOperation.m"; path = "SDWebImage/UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
-		1A03E7D5E6690F73E452D707C9977A2B /* MASConstraintMaker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraintMaker.h; path = Masonry/MASConstraintMaker.h; sourceTree = "<group>"; };
-		1EF4235DA7BDF396961864D3C37C384A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		1F0D57457058939009E03643A5782BF0 /* FSCalendarHeaderView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarHeaderView.m; path = FSCalendar/FSCalendarHeaderView.m; sourceTree = "<group>"; };
-		20AAFAD6F0B7418EB664A68DC573CB65 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		22971CB257E1355E1F8DE99ACF6FDEED /* CYLPlusButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CYLPlusButton.h; path = CYLTabBarController/CYLPlusButton.h; sourceTree = "<group>"; };
+		0180A3C5FCF088924C9F73D213596C4B /* RTRootNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RTRootNavigationController.h; path = RTRootNavigationController/Classes/RTRootNavigationController.h; sourceTree = "<group>"; };
+		0267E9029158E1A5DAB7DFCE423DBDF7 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASAdditions.h"; path = "Masonry/NSArray+MASAdditions.h"; sourceTree = "<group>"; };
+		06961B4A488AAD52FABD99B06710D758 /* FSCalendarStickyHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarStickyHeader.h; path = FSCalendar/FSCalendarStickyHeader.h; sourceTree = "<group>"; };
+		0728198D69AEB69EB4E746AD3DC08E5F /* SDWebImageCompat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageCompat.h; path = SDWebImage/SDWebImageCompat.h; sourceTree = "<group>"; };
+		0918F05F566F8847E329FD091E7549CB /* CYLPlusButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CYLPlusButton.m; path = CYLTabBarController/CYLPlusButton.m; sourceTree = "<group>"; };
+		097B1C4A0ABDCA82D0289629219CEB6E /* MBProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD-dummy.m"; sourceTree = "<group>"; };
+		0E00E3E4EF3F2BB14D1D40DE03DC567B /* MBProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		10FE41922A30AE5FF26854B060719CB4 /* FSCalendarCalculator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarCalculator.h; path = FSCalendar/FSCalendarCalculator.h; sourceTree = "<group>"; };
+		1111DB8EEFDE914F34C5750811E4904C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12A4A0A01CFDFC613F5FBC618C9AD32B /* MASConstraint+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MASConstraint+Private.h"; path = "Masonry/MASConstraint+Private.h"; sourceTree = "<group>"; };
+		1342485B8B5F18B0E11D51E3C58F1679 /* FSCalendarTransitionCoordinator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarTransitionCoordinator.m; path = FSCalendar/FSCalendarTransitionCoordinator.m; sourceTree = "<group>"; };
+		13831A5BF0363C242F60EFF3428697B1 /* CYLTabBarController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CYLTabBarController.h; path = CYLTabBarController/CYLTabBarController.h; sourceTree = "<group>"; };
+		13FF6F4F3FC18AA38F32B3CF5EFD01A5 /* MASViewConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewConstraint.h; path = Masonry/MASViewConstraint.h; sourceTree = "<group>"; };
+		1539A8D8B000CC3E18157781D5295EDC /* MASConstraintMaker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraintMaker.h; path = Masonry/MASConstraintMaker.h; sourceTree = "<group>"; };
+		1799FA4DF86771612F18AF3478EAFAF7 /* Masonry-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-prefix.pch"; sourceTree = "<group>"; };
+		17FED3BB6117EE87B0B77B8257A5D4E6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		1B26277A0EE1686B4C744BB5E50941A8 /* SDWebImageDownloader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDownloader.h; path = SDWebImage/SDWebImageDownloader.h; sourceTree = "<group>"; };
+		1E1B31DA16EF245C87B1E4C4A8CDB3BE /* SDWebImage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SDWebImage.xcconfig; sourceTree = "<group>"; };
+		1E284AD806125F66FABFF7BC9284CAD7 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+MASDebugAdditions.h"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
+		2013E0622BA7112824FE37BBA61D4FD6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		2033CA5F5A4D111C20B6095096F4D6BC /* FSCalendarStickyHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarStickyHeader.m; path = FSCalendar/FSCalendarStickyHeader.m; sourceTree = "<group>"; };
+		2152026F6BD278F13867DA2D7BDAAD67 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASLayoutConstraint.m; path = Masonry/MASLayoutConstraint.m; sourceTree = "<group>"; };
+		26167000DF2D66FA17BA75AF1DD59A7E /* FSCalendar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FSCalendar-dummy.m"; sourceTree = "<group>"; };
 		2663F37C80983EE660F0DDE640BF8518 /* Pods-letian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-letian.debug.xcconfig"; sourceTree = "<group>"; };
-		27DFB019C37D5C5E373CC21B7F3F15D5 /* SDWebImageManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageManager.h; path = SDWebImage/SDWebImageManager.h; sourceTree = "<group>"; };
-		27F069151B394A9DDAAE011E1F7D2A59 /* UIViewController+CYLTabBarControllerExtention.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+CYLTabBarControllerExtention.h"; path = "CYLTabBarController/UIViewController+CYLTabBarControllerExtention.h"; sourceTree = "<group>"; };
-		28EA27D36E2569954CCC481959309E29 /* FSCalendarDelegationFactory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarDelegationFactory.h; path = FSCalendar/FSCalendarDelegationFactory.h; sourceTree = "<group>"; };
-		299B28DEDE1094AC79E2F1D7D0DC9436 /* Pods_letian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_letian.framework; path = "Pods-letian.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2A14E6CB59926B87E0867FCEFC0E4E25 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3233964CA106CBF30B4C03AABD5BAA50 /* FSCalendar+Deprecated.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FSCalendar+Deprecated.m"; path = "FSCalendar/FSCalendar+Deprecated.m"; sourceTree = "<group>"; };
-		343D680902B559A751931577396C3C23 /* FSCalendar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FSCalendar-dummy.m"; sourceTree = "<group>"; };
-		34CF01F44810165595AEC462FD00C3D8 /* CYLTabBarController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CYLTabBarController-dummy.m"; sourceTree = "<group>"; };
-		375A67289998E4945B81C61B4F22C9DF /* MASLayoutConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASLayoutConstraint.m; path = Masonry/MASLayoutConstraint.m; sourceTree = "<group>"; };
-		3838CA851CB7CDE27E0F0F01D99A1762 /* RTRootNavigationController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RTRootNavigationController-umbrella.h"; sourceTree = "<group>"; };
-		3A3BF5530C628E245C4D9513A4D91D32 /* UIImage+MultiFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+MultiFormat.h"; path = "SDWebImage/UIImage+MultiFormat.h"; sourceTree = "<group>"; };
-		3B23082E0D7FE9842A56ABE3CB44A4AD /* MASCompositeConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
-		3F2B88153786C86855CD1E16F61D0AD3 /* FSCalendarStickyHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarStickyHeader.m; path = FSCalendar/FSCalendarStickyHeader.m; sourceTree = "<group>"; };
-		4002BB1C9CCD17EDDA0C8FE9611B02EA /* SDWebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SDWebImage.framework; path = SDWebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		413CD998EA69F10791A57AEFC4FC04F0 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSData+ImageContentType.h"; path = "SDWebImage/NSData+ImageContentType.h"; sourceTree = "<group>"; };
-		443C307866F4E4544C4FAFDDA8779EEB /* UIImageView+HighlightedWebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+HighlightedWebCache.m"; path = "SDWebImage/UIImageView+HighlightedWebCache.m"; sourceTree = "<group>"; };
-		447114A405958CC2A33BC0C7026C5184 /* SDWebImage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SDWebImage.xcconfig; sourceTree = "<group>"; };
-		451F9039D231A7D2DC11946C1E47416B /* CYLTabBar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CYLTabBar.h; path = CYLTabBarController/CYLTabBar.h; sourceTree = "<group>"; };
+		277ABAEB975784B125261502CFF91372 /* CYLTabBarController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CYLTabBarController.m; path = CYLTabBarController/CYLTabBarController.m; sourceTree = "<group>"; };
+		27A0F19A07390CD2C0A24DE85F31F730 /* UIViewController+CYLTabBarControllerExtention.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+CYLTabBarControllerExtention.m"; path = "CYLTabBarController/UIViewController+CYLTabBarControllerExtention.m"; sourceTree = "<group>"; };
+		28D2B0DDBF4849F4AA7A5C76960C3536 /* SDWebImage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SDWebImage-umbrella.h"; sourceTree = "<group>"; };
+		29D917814C24EDF6F1CDEC70E2B31C2F /* FSCalendar.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendar.m; path = FSCalendar/FSCalendar.m; sourceTree = "<group>"; };
+		2BB5E5035FEBE6FB42566FBFC5E2C18E /* MASConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraint.h; path = Masonry/MASConstraint.h; sourceTree = "<group>"; };
+		2CC948C4D0512265E9B8B13C4D4BB76D /* SDWebImagePrefetcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImagePrefetcher.h; path = SDWebImage/SDWebImagePrefetcher.h; sourceTree = "<group>"; };
+		2D267DA0CDD8F974B16EBC5EC3084236 /* FSCalendarConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarConstants.h; path = FSCalendar/FSCalendarConstants.h; sourceTree = "<group>"; };
+		2E03AE283CDA8F27484D50AEDF4EB14B /* MBProgressHUD-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-umbrella.h"; sourceTree = "<group>"; };
+		3044D467C7E081058066D55847B89429 /* FSCalendarExtensions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarExtensions.m; path = FSCalendar/FSCalendarExtensions.m; sourceTree = "<group>"; };
+		305CFA8413CE5805EB2FDF9E19BD8679 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Masonry.framework; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3134FE9B1B657011911C4746B9465460 /* SDWebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SDWebImage.framework; path = SDWebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		33F1F5669B83193CF8DC252F3433736C /* MASCompositeConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
+		343042110C4654409059346B72FA8BA4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3653D7777173E35EA937CE28C458C767 /* FSCalendarCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarCell.h; path = FSCalendar/FSCalendarCell.h; sourceTree = "<group>"; };
+		3813D151AB6E5470D7712A9EB04725C7 /* FSCalendarScopeHandle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarScopeHandle.h; path = FSCalendar/FSCalendarScopeHandle.h; sourceTree = "<group>"; };
+		3A307D2237D1F56555784F1E6D1FADB2 /* CYLTabBar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CYLTabBar.h; path = CYLTabBarController/CYLTabBar.h; sourceTree = "<group>"; };
+		3AA2E0251D4D8EF64F0EB9EEA0F9FC77 /* FSCalendarAppearance.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarAppearance.h; path = FSCalendar/FSCalendarAppearance.h; sourceTree = "<group>"; };
+		3D18A648AC3DB22D73DB29041F00315D /* FSCalendarCollectionView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarCollectionView.m; path = FSCalendar/FSCalendarCollectionView.m; sourceTree = "<group>"; };
+		40790C8D347E382FAD56AD07DC7E604D /* FSCalendarCollectionViewLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarCollectionViewLayout.m; path = FSCalendar/FSCalendarCollectionViewLayout.m; sourceTree = "<group>"; };
+		431F4FE96EC9B6C901FA6FB3F8CB65F7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43F2C65C73BD3669C70E4AFA28A72755 /* CYLTabBarController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CYLTabBarController.xcconfig; sourceTree = "<group>"; };
+		463F47B54D0BC6FCC47A41F30E7172CF /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+WebCacheOperation.h"; path = "SDWebImage/UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		4708E4E38083FB5E152167F9E904906D /* Pods-letian-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-letian-umbrella.h"; sourceTree = "<group>"; };
-		48D15D8CC4AB92D55A00B0BC993AE2F0 /* UIImageView+HighlightedWebCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+HighlightedWebCache.h"; path = "SDWebImage/UIImageView+HighlightedWebCache.h"; sourceTree = "<group>"; };
-		492A32D0D9CD97C7504042E6BCE0C7E7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4AE820C1792FFBBFCE2A9FCAEF18B7A0 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "ViewController+MASAdditions.h"; path = "Masonry/ViewController+MASAdditions.h"; sourceTree = "<group>"; };
-		4B1F1EDD09BB03E92B66FD2A4B9A1959 /* FSCalendarCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarCell.h; path = FSCalendar/FSCalendarCell.h; sourceTree = "<group>"; };
-		4B2FEC4793FDC01AF238FDF52A3B5E07 /* SDWebImage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SDWebImage.modulemap; sourceTree = "<group>"; };
-		4BBEB9951E6C77868F991E5B9FFE663D /* MASConstraint+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MASConstraint+Private.h"; path = "Masonry/MASConstraint+Private.h"; sourceTree = "<group>"; };
-		4C31878ADCA1E9AE0ADCD0B22610C4CF /* FSCalendarScopeHandle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarScopeHandle.h; path = FSCalendar/FSCalendarScopeHandle.h; sourceTree = "<group>"; };
-		4C55E33258C17B4A1CD968E7500DA2DC /* FSCalendarTransitionCoordinator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarTransitionCoordinator.m; path = FSCalendar/FSCalendarTransitionCoordinator.m; sourceTree = "<group>"; };
-		4CC753D03EB0460650676BF578622307 /* MASConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraint.m; path = Masonry/MASConstraint.m; sourceTree = "<group>"; };
-		4E48D0C003BBA202E95D5BF68E028E44 /* RTRootNavigationController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = RTRootNavigationController.modulemap; sourceTree = "<group>"; };
-		512A11F298F9E4F7A20EA11CF4668D67 /* Masonry-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-umbrella.h"; sourceTree = "<group>"; };
-		52F9B5F28BE7CB44005A5FEA224ED9C3 /* FSCalendarTransitionCoordinator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarTransitionCoordinator.h; path = FSCalendar/FSCalendarTransitionCoordinator.h; sourceTree = "<group>"; };
-		55089987528EA37503F8C1A43404C101 /* FSCalendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FSCalendar.framework; path = FSCalendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		573B193AE2477321618B4F86D223AE60 /* FSCalendar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendar.h; path = FSCalendar/FSCalendar.h; sourceTree = "<group>"; };
-		5B4B33A8098832660DDD12365DF5F611 /* FSCalendarCollectionViewLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarCollectionViewLayout.m; path = FSCalendar/FSCalendarCollectionViewLayout.m; sourceTree = "<group>"; };
+		47E79200B0F466323C35601AD9FDB5B9 /* FSCalendarDelegationProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarDelegationProxy.h; path = FSCalendar/FSCalendarDelegationProxy.h; sourceTree = "<group>"; };
+		4CA9BA42B457BA0E9197A826A903AABE /* SDWebImageOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageOperation.h; path = SDWebImage/SDWebImageOperation.h; sourceTree = "<group>"; };
+		4EE781A1018950B3B82F7B3E69C1B57B /* FSCalendarHeaderView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarHeaderView.m; path = FSCalendar/FSCalendarHeaderView.m; sourceTree = "<group>"; };
+		51EAC5A18C9A2EF1913109D928B69AA2 /* CYLTabBar.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CYLTabBar.m; path = CYLTabBarController/CYLTabBar.m; sourceTree = "<group>"; };
+		54E6C1119934DC742437CA758F17CA68 /* MASViewAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewAttribute.h; path = Masonry/MASViewAttribute.h; sourceTree = "<group>"; };
+		5622C89D4510B1F5B0ACCD2F89626FD7 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
+		568B10A0EBCD978598E632AB6DC2AB68 /* SDWebImageManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageManager.m; path = SDWebImage/SDWebImageManager.m; sourceTree = "<group>"; };
+		5B2DA45587FB7D816E78B311E271E7C6 /* SDImageCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageCache.h; path = SDWebImage/SDImageCache.h; sourceTree = "<group>"; };
+		5B75A536654B3E6E5E05CCAC19244DC4 /* FSCalendarCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarCell.m; path = FSCalendar/FSCalendarCell.m; sourceTree = "<group>"; };
+		5BD916A823E4C8E9CDEDB402E22855F8 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+WebCache.m"; path = "SDWebImage/UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		5C54843A1E591D4572306B238A90FB63 /* Pods-letian.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-letian.modulemap"; sourceTree = "<group>"; };
-		5C8BF2A12D0C8B7BB8FF8D584CF1C62C /* UIViewController+RTRootNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+RTRootNavigationController.m"; path = "RTRootNavigationController/Classes/UIViewController+RTRootNavigationController.m"; sourceTree = "<group>"; };
-		5F568FD3EFEF2003430B7A0C90B25DBE /* SDWebImageOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageOperation.h; path = SDWebImage/SDWebImageOperation.h; sourceTree = "<group>"; };
+		5EA3A93A6EA003BE75A3D9875979DCB2 /* SDWebImageManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageManager.h; path = SDWebImage/SDWebImageManager.h; sourceTree = "<group>"; };
 		602698C22A43D40B086F8055D2D6E4D3 /* Pods-letian-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-letian-resources.sh"; sourceTree = "<group>"; };
-		63231622DC913F93E1FEC8B0E3A927F0 /* SDWebImageManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageManager.m; path = SDWebImage/SDWebImageManager.m; sourceTree = "<group>"; };
-		65A1F297D70F7375C3C9E96115A468EE /* MASCompositeConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
-		661D12FED8879F80D3A38837E0097DA3 /* FSCalendarExtensions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarExtensions.m; path = FSCalendar/FSCalendarExtensions.m; sourceTree = "<group>"; };
-		6865632E6150DE56B85E428AE91B7A4B /* FSCalendarCollectionView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarCollectionView.h; path = FSCalendar/FSCalendarCollectionView.h; sourceTree = "<group>"; };
-		693986A08069C42DA3E78DF06DDC3E6D /* UIButton+WebCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+WebCache.h"; path = "SDWebImage/UIButton+WebCache.h"; sourceTree = "<group>"; };
-		6A617C57B0F2BD227EF308FDBCEE0501 /* NSData+ImageContentType.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSData+ImageContentType.m"; path = "SDWebImage/NSData+ImageContentType.m"; sourceTree = "<group>"; };
-		6C69CDBFB51E597DD2BF1E5EC63A2886 /* SDWebImageDownloader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDownloader.m; path = SDWebImage/SDWebImageDownloader.m; sourceTree = "<group>"; };
-		6D634618D7EDAC594057C769198960FE /* FSCalendarHeaderView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarHeaderView.h; path = FSCalendar/FSCalendarHeaderView.h; sourceTree = "<group>"; };
-		701362B282DCE647FA648E9FC5DB7CAE /* SDWebImageDownloaderOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDownloaderOperation.m; path = SDWebImage/SDWebImageDownloaderOperation.m; sourceTree = "<group>"; };
-		704D0017E1DD8635E1730BE7DDF6A3DB /* MASViewConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewConstraint.h; path = Masonry/MASViewConstraint.h; sourceTree = "<group>"; };
+		6235805115BFD90502D7BE44682DF1C1 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "ViewController+MASAdditions.h"; path = "Masonry/ViewController+MASAdditions.h"; sourceTree = "<group>"; };
+		643B84D1B67DD32995F0E42D402B994B /* RTRootNavigationController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RTRootNavigationController-dummy.m"; sourceTree = "<group>"; };
+		65174EFA53891C7FB02EB2AD6C84FE34 /* MBProgressHUD.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = MBProgressHUD.modulemap; sourceTree = "<group>"; };
+		6654FBFB3A8802254644E73F1F47768E /* SDWebImage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SDWebImage-dummy.m"; sourceTree = "<group>"; };
+		6B36FDCA6CE390A639A0E4E413C6AAEC /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+WebCacheOperation.m"; path = "SDWebImage/UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		6B727E0C53DBF2C2055642E9AA8279F2 /* FSCalendarDelegationFactory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarDelegationFactory.h; path = FSCalendar/FSCalendarDelegationFactory.h; sourceTree = "<group>"; };
+		6C2F15BCB0EB78B84B90C1290E5B8E71 /* FSCalendarScopeHandle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarScopeHandle.m; path = FSCalendar/FSCalendarScopeHandle.m; sourceTree = "<group>"; };
 		70A7700AD064D4FFEDB01CBC788F7673 /* Pods-letian-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-letian-frameworks.sh"; sourceTree = "<group>"; };
-		74CEEB98417A3B501078D465FFDC66C0 /* FSCalendarCalculator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarCalculator.h; path = FSCalendar/FSCalendarCalculator.h; sourceTree = "<group>"; };
-		7A46625514BF59EA931B16DE4BA65443 /* MASViewConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewConstraint.m; path = Masonry/MASViewConstraint.m; sourceTree = "<group>"; };
-		7C3FE6BA1F9F606E9A57945CF1B79031 /* MASUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Masonry/MASUtilities.h; sourceTree = "<group>"; };
-		7D12A19F3301A95732F46F6438352E4E /* FSCalendarScopeHandle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarScopeHandle.m; path = FSCalendar/FSCalendarScopeHandle.m; sourceTree = "<group>"; };
-		80A57CB2C9615280E234DFA0F876CDD4 /* FSCalendarWeekdayView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarWeekdayView.m; path = FSCalendar/FSCalendarWeekdayView.m; sourceTree = "<group>"; };
-		84D1B50E442D05CD1E7657437B1CB65E /* UIButton+WebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+WebCache.m"; path = "SDWebImage/UIButton+WebCache.m"; sourceTree = "<group>"; };
-		84F3EE01DBE6C450A70DDB3FFDED615E /* CYLTabBarController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CYLTabBarController.h; path = CYLTabBarController/CYLTabBarController.h; sourceTree = "<group>"; };
-		85C25EDFD7D1AE69AA895BC45A2054AD /* Masonry.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Masonry.modulemap; sourceTree = "<group>"; };
-		89E3EA52FFCD7FF5390297872D63F3AF /* UIImage+GIF.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+GIF.m"; path = "SDWebImage/UIImage+GIF.m"; sourceTree = "<group>"; };
-		8A0AB0870AF1E6F13B444B2075EEE879 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MASAdditions.m"; path = "Masonry/NSArray+MASAdditions.m"; sourceTree = "<group>"; };
-		8A2156F5AD333B57C101F8C8C2DA0C18 /* UIImage+GIF.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+GIF.h"; path = "SDWebImage/UIImage+GIF.h"; sourceTree = "<group>"; };
-		8A60349D9E6BA8297C6FBBE39EBA5713 /* CYLConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CYLConstants.h; path = CYLTabBarController/CYLConstants.h; sourceTree = "<group>"; };
-		8A75CEAB5384F58FDE73BA109CA9B09C /* FSCalendarConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarConstants.h; path = FSCalendar/FSCalendarConstants.h; sourceTree = "<group>"; };
-		8FA680188ECCCDAF248C8C4878F4C389 /* MASViewAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewAttribute.h; path = Masonry/MASViewAttribute.h; sourceTree = "<group>"; };
-		906B9C084ED87AA353ED7B84F1922F8A /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASShorthandAdditions.h"; path = "Masonry/NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		91DC7168326C9AA56DF351B1422AD8B8 /* CYLPlusButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CYLPlusButton.m; path = CYLTabBarController/CYLPlusButton.m; sourceTree = "<group>"; };
-		92D168432289EDB25C8A171598495B1B /* FSCalendarExtensions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarExtensions.h; path = FSCalendar/FSCalendarExtensions.h; sourceTree = "<group>"; };
-		92E3E9DF39C4DAF944C398BC080A946F /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		710B96A0CCC8977319E0C3F1DE28B39B /* SDWebImageDownloaderOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDownloaderOperation.h; path = SDWebImage/SDWebImageDownloaderOperation.h; sourceTree = "<group>"; };
+		71256F0E855E83B2E6FC286FC9E8725A /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MASAdditions.m"; path = "Masonry/NSArray+MASAdditions.m"; sourceTree = "<group>"; };
+		714126FECE415A64931DD04CCDE55C09 /* UIButton+WebCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+WebCache.h"; path = "SDWebImage/UIButton+WebCache.h"; sourceTree = "<group>"; };
+		716A1458632025125A620E4C0BF11DF7 /* FSCalendar+Deprecated.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FSCalendar+Deprecated.m"; path = "FSCalendar/FSCalendar+Deprecated.m"; sourceTree = "<group>"; };
+		7202E196053C5BC5167E058492D4017C /* View+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "View+MASAdditions.m"; path = "Masonry/View+MASAdditions.m"; sourceTree = "<group>"; };
+		75C1425805C76F57A7C5B1E14AA9F466 /* MBProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-prefix.pch"; sourceTree = "<group>"; };
+		75C458AE22E531D52BC34C46EB64E1E2 /* FSCalendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FSCalendar.framework; path = FSCalendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77FDCE4D51314041BD690C26A1F2324E /* FSCalendarDynamicHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarDynamicHeader.h; path = FSCalendar/FSCalendarDynamicHeader.h; sourceTree = "<group>"; };
+		78446C9746BB3D835594A8555030C117 /* FSCalendarCalculator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarCalculator.m; path = FSCalendar/FSCalendarCalculator.m; sourceTree = "<group>"; };
+		7989056C8091A2BB6349C6F1B8C3C669 /* UIButton+WebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+WebCache.m"; path = "SDWebImage/UIButton+WebCache.m"; sourceTree = "<group>"; };
+		7A22C15DA37FF0D8FE2BABCEA37337CF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A5D72822D579FB2767321C79E3A20DE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CDCAA56B47E3378E4882CF3554AFD5F /* CYLTabBarController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CYLTabBarController-umbrella.h"; sourceTree = "<group>"; };
+		7F4F7E6D30BDAD829DDCF7BA38847D71 /* MASConstraintMaker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraintMaker.m; path = Masonry/MASConstraintMaker.m; sourceTree = "<group>"; };
+		81E69D736E0C1FBE5BC382EA738D5C43 /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MBProgressHUD.framework; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		82E59E2E8D9710075C8D6C304653FF07 /* UIViewController+RTRootNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+RTRootNavigationController.m"; path = "RTRootNavigationController/Classes/UIViewController+RTRootNavigationController.m"; sourceTree = "<group>"; };
+		851B51307F9319682D8E0A60044CF4D0 /* RTRootNavigationController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = RTRootNavigationController.framework; path = RTRootNavigationController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		873167EDB49F8B355C914F526C28F75C /* UIImage+GIF.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+GIF.h"; path = "SDWebImage/UIImage+GIF.h"; sourceTree = "<group>"; };
+		8836AFDB1E55661E0279D0D7B9E04BD2 /* FSCalendarWeekdayView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarWeekdayView.m; path = FSCalendar/FSCalendarWeekdayView.m; sourceTree = "<group>"; };
+		88FEA958238852BA01F2181261FCB800 /* Masonry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Masonry.h; path = Masonry/Masonry.h; sourceTree = "<group>"; };
+		8BB418B4B96DDA05286B0B602FA464BA /* FSCalendar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSCalendar-umbrella.h"; sourceTree = "<group>"; };
+		913FF39D6456E958AAD91281BEC88724 /* RTRootNavigationController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RTRootNavigationController.xcconfig; sourceTree = "<group>"; };
+		926DB15048FD95D46FC22CE967B6570A /* SDWebImageDecoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDecoder.m; path = SDWebImage/SDWebImageDecoder.m; sourceTree = "<group>"; };
+		92C7759041102F658D6E6A94F4377B8E /* FSCalendarConstants.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarConstants.m; path = FSCalendar/FSCalendarConstants.m; sourceTree = "<group>"; };
+		92EBE45F2054D98C4A6C7A1147983276 /* CYLTabBarController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CYLTabBarController-prefix.pch"; sourceTree = "<group>"; };
+		9368DD1F2C0C4DF169B3BE4A55094EB9 /* FSCalendarDelegationFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarDelegationFactory.m; path = FSCalendar/FSCalendarDelegationFactory.m; sourceTree = "<group>"; };
+		938B8369C214EDCC83130E1AE579A112 /* CYLTabBarController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CYLTabBarController.framework; path = CYLTabBarController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		93EBCBCF6B3CEC6375A90C31698EAEE8 /* FSCalendarCollectionViewLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarCollectionViewLayout.h; path = FSCalendar/FSCalendarCollectionViewLayout.h; sourceTree = "<group>"; };
-		948712346799326A82A563A0EC6F9669 /* CYLTabBarController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CYLTabBarController-prefix.pch"; sourceTree = "<group>"; };
-		948B89F093C083E2DB6CA52F6FB1C4A5 /* FSCalendarAppearance.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarAppearance.h; path = FSCalendar/FSCalendarAppearance.h; sourceTree = "<group>"; };
+		9405134156E807CA240C2249AFD7DC71 /* FSCalendar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = FSCalendar.modulemap; sourceTree = "<group>"; };
+		9487E055E8B7AEBD75ECA292F86484AF /* MBProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		94CC285F9D76FF4B155B0A07703058BD /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		958DB63890205DDD875D6CC18652EB10 /* FSCalendarDynamicHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarDynamicHeader.h; path = FSCalendar/FSCalendarDynamicHeader.h; sourceTree = "<group>"; };
-		978FDBF984EE1C68CBAC519172EB18C2 /* SDWebImage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SDWebImage-prefix.pch"; sourceTree = "<group>"; };
-		98F3629C117E69B2C4292963A11FDFA4 /* CYLTabBar.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CYLTabBar.m; path = CYLTabBarController/CYLTabBar.m; sourceTree = "<group>"; };
-		991FBF9EC3A29CDA9D9F086CC56D14CD /* SDImageCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageCache.h; path = SDWebImage/SDImageCache.h; sourceTree = "<group>"; };
-		9B0606E04E3F5BC56EAE81E2958B25C6 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASAdditions.h"; path = "Masonry/NSArray+MASAdditions.h"; sourceTree = "<group>"; };
-		9C6E66211502F053DD1B56F3470A7D12 /* FSCalendarAppearance.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarAppearance.m; path = FSCalendar/FSCalendarAppearance.m; sourceTree = "<group>"; };
-		9F85AD316766F2603D104634545E27A4 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
-		9FE73FB6AD25AC5961DB19279E752DEA /* SDWebImageDownloaderOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDownloaderOperation.h; path = SDWebImage/SDWebImageDownloaderOperation.h; sourceTree = "<group>"; };
-		A1D1BFF84A310F77F839157B52584D0E /* FSCalendar.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendar.m; path = FSCalendar/FSCalendar.m; sourceTree = "<group>"; };
-		A1D3E26FE8279D86E1BBF345EB9EFE8B /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Masonry.framework; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96639A50AE58EFDA2507AB0450663722 /* RTRootNavigationController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RTRootNavigationController-umbrella.h"; sourceTree = "<group>"; };
+		9AA510D2CBE6BDCBD595FDD5DD559B93 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		9AD4DCCC6C679FA3FB6D7DD5836D25C0 /* SDImageCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDImageCache.m; path = SDWebImage/SDImageCache.m; sourceTree = "<group>"; };
+		9EEC869026093787180DF413794FEB32 /* UIImage+GIF.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+GIF.m"; path = "SDWebImage/UIImage+GIF.m"; sourceTree = "<group>"; };
+		9F149879B87C43C7225865DC39E4612C /* MASViewAttribute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewAttribute.m; path = Masonry/MASViewAttribute.m; sourceTree = "<group>"; };
+		9FC757C5C8CC253B2895329C879F01D4 /* View+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
 		A295FD78AD4C28BD051D929728AD0772 /* Pods-letian-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-letian-acknowledgements.markdown"; sourceTree = "<group>"; };
+		A321C027E7A8F626695A93FFDC64E38F /* SDWebImageDecoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDecoder.h; path = SDWebImage/SDWebImageDecoder.h; sourceTree = "<group>"; };
+		A32528DFDE91D7D1BED0EC77E2C76670 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
+		A34601FDE3BADC1997FD71F2F4A5409D /* Pods_letian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_letian.framework; path = "Pods-letian.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A36DA914D2E039D058CC0CC90CCDFA3B /* NSData+ImageContentType.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSData+ImageContentType.m"; path = "SDWebImage/NSData+ImageContentType.m"; sourceTree = "<group>"; };
+		A3B5F867CDB474BA825156646117B059 /* UIViewController+CYLTabBarControllerExtention.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+CYLTabBarControllerExtention.h"; path = "CYLTabBarController/UIViewController+CYLTabBarControllerExtention.h"; sourceTree = "<group>"; };
+		A3C731F74E78151500935B7374C657B0 /* FSCalendarHeaderView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarHeaderView.h; path = FSCalendar/FSCalendarHeaderView.h; sourceTree = "<group>"; };
+		A4BEBCF68CFA73B6224C783528007E79 /* FSCalendarAppearance.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarAppearance.m; path = FSCalendar/FSCalendarAppearance.m; sourceTree = "<group>"; };
 		A5555FA498B184DCC8C30493F9BC4133 /* Pods-letian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-letian.release.xcconfig"; sourceTree = "<group>"; };
-		A5E3FF0F283D555802AF65A56465DF5A /* SDWebImageCompat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageCompat.m; path = SDWebImage/SDWebImageCompat.m; sourceTree = "<group>"; };
-		A602052EFF149E7274275F4DF5124F5B /* UIImageView+WebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+WebCache.m"; path = "SDWebImage/UIImageView+WebCache.m"; sourceTree = "<group>"; };
-		A85B8E39DDBA7B26C788D1D78EE41466 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+MASDebugAdditions.h"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
-		AA903E4445DFC08C1590DC992939B09D /* MASLayoutConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASLayoutConstraint.h; path = Masonry/MASLayoutConstraint.h; sourceTree = "<group>"; };
-		AE6DBDA856F716C10CD113548EEA9ADF /* CYLTabBarController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CYLTabBarController.xcconfig; sourceTree = "<group>"; };
-		AF9BF1B6F435EBA579FCF5253B75825F /* FSCalendarWeekdayView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarWeekdayView.h; path = FSCalendar/FSCalendarWeekdayView.h; sourceTree = "<group>"; };
-		B0A350BF6EC8A954C5A0E8235AAD8949 /* MASConstraintMaker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraintMaker.m; path = Masonry/MASConstraintMaker.m; sourceTree = "<group>"; };
-		B70498485B43E87F5FE113E362648C14 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B721193584C7C9E987C5EDAD3866EB94 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		B79018579E40089E5916B45A5CF786E7 /* View+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
-		B877E3876EF3A5587F7C5FE23EE69E4C /* FSCalendarCalculator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarCalculator.m; path = FSCalendar/FSCalendarCalculator.m; sourceTree = "<group>"; };
-		BDCFB765B8C28003E0046DE125DB180F /* CYLTabBarController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = CYLTabBarController.modulemap; sourceTree = "<group>"; };
-		BE738A4B7D659C192101FAEA4F24674A /* RTRootNavigationController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = RTRootNavigationController.framework; path = RTRootNavigationController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C2578373C05EE1C88E34D96EF946DF4F /* Masonry.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Masonry.xcconfig; sourceTree = "<group>"; };
-		C61EF853EDD200B2CB393E0AD63D8AED /* RTRootNavigationController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RTRootNavigationController.xcconfig; sourceTree = "<group>"; };
-		C66C345924A9AE15F04C233984143996 /* CYLTabBarController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CYLTabBarController-umbrella.h"; sourceTree = "<group>"; };
-		C72452BE4BB4CB281BD6B7949D9FAFD0 /* UIViewController+RTRootNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+RTRootNavigationController.h"; path = "RTRootNavigationController/Classes/UIViewController+RTRootNavigationController.h"; sourceTree = "<group>"; };
-		C72813301E0940E9AF4F96D7D86F2CB7 /* SDWebImagePrefetcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImagePrefetcher.h; path = SDWebImage/SDWebImagePrefetcher.h; sourceTree = "<group>"; };
-		C72FEAFF245488AB37FDA1F60685CAB8 /* MASConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraint.h; path = Masonry/MASConstraint.h; sourceTree = "<group>"; };
-		C796F1D6B8B2ECB2BBD17078527C4172 /* FSCalendarDelegationProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarDelegationProxy.h; path = FSCalendar/FSCalendarDelegationProxy.h; sourceTree = "<group>"; };
-		CA72A243ED334336FE77E258076C220A /* FSCalendar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSCalendar-prefix.pch"; sourceTree = "<group>"; };
-		CA7EBAB1EA83B6E996252A81226050E2 /* FSCalendarCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarCell.m; path = FSCalendar/FSCalendarCell.m; sourceTree = "<group>"; };
-		CC277C7A15C55199DF8FE579689D3181 /* FSCalendar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = FSCalendar.modulemap; sourceTree = "<group>"; };
-		CE7F9A84B9C64AB55E038C8E150CE241 /* FSCalendar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FSCalendar.xcconfig; sourceTree = "<group>"; };
-		CEE15FB501E338FFEE070D59DAF2DD8C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CF825448C35B10CDD94C54CB17DCDF59 /* RTRootNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RTRootNavigationController.h; path = RTRootNavigationController/Classes/RTRootNavigationController.h; sourceTree = "<group>"; };
-		D1A3F20193C72DDD787F2D5B02E43EF2 /* RTRootNavigationController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RTRootNavigationController-prefix.pch"; sourceTree = "<group>"; };
-		D5DB896673EB29709D13940B445474E0 /* FSCalendarCollectionView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarCollectionView.m; path = FSCalendar/FSCalendarCollectionView.m; sourceTree = "<group>"; };
-		D741F60B6D22434266370186F6620351 /* Masonry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Masonry.h; path = Masonry/Masonry.h; sourceTree = "<group>"; };
-		D83722489D14180D014D9300D4267EA6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D94390931760BF35AF5B56DE17CE3242 /* FSCalendarDelegationFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarDelegationFactory.m; path = FSCalendar/FSCalendarDelegationFactory.m; sourceTree = "<group>"; };
-		DFCE2EB4B549E452CAD1288DC78971AC /* FSCalendarDelegationProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarDelegationProxy.m; path = FSCalendar/FSCalendarDelegationProxy.m; sourceTree = "<group>"; };
-		E29A7FB0E5276A4839D14201A01F33D7 /* SDWebImage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SDWebImage-umbrella.h"; sourceTree = "<group>"; };
-		E549D354B81050139816B506F7681C3C /* SDWebImagePrefetcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImagePrefetcher.m; path = SDWebImage/SDWebImagePrefetcher.m; sourceTree = "<group>"; };
-		E6B5E931B0C3F19407B03F41DA755B6B /* FSCalendarConstants.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarConstants.m; path = FSCalendar/FSCalendarConstants.m; sourceTree = "<group>"; };
-		EC8312F65521BBCC98FFC94A56DCBA34 /* SDWebImageDecoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDecoder.h; path = SDWebImage/SDWebImageDecoder.h; sourceTree = "<group>"; };
-		ECC54122536826DD62AF30F90A2AFC55 /* SDWebImage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SDWebImage-dummy.m"; sourceTree = "<group>"; };
+		A5880558B7FF2489C895E647D3CBE36D /* UIViewController+RTRootNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+RTRootNavigationController.h"; path = "RTRootNavigationController/Classes/UIViewController+RTRootNavigationController.h"; sourceTree = "<group>"; };
+		A5902EAADB8EB020F946CE87A6DA8362 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A91DC95CA8ED5FB5925BFBEBEF615A50 /* RTRootNavigationController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = RTRootNavigationController.modulemap; sourceTree = "<group>"; };
+		A9FDAB748EEB1BA398F03DEF094F00C9 /* MASUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Masonry/MASUtilities.h; sourceTree = "<group>"; };
+		AD60B7EEEBAD7FA6DB10103D663D7DD6 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
+		AFD161754BE60BC2EC7F22FFAF577939 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		B32A1C1E391EBD5716D4BBFBF5FD2EDB /* FSCalendarWeekdayView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarWeekdayView.h; path = FSCalendar/FSCalendarWeekdayView.h; sourceTree = "<group>"; };
+		B4B899F5D0B3D7FA51371F3F126F7B31 /* SDWebImagePrefetcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImagePrefetcher.m; path = SDWebImage/SDWebImagePrefetcher.m; sourceTree = "<group>"; };
+		B4EEDBCE425E4944A1828AF9858C78D9 /* SDWebImage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SDWebImage.modulemap; sourceTree = "<group>"; };
+		B6AA8277B7356548A015AF3072971F55 /* Masonry-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-umbrella.h"; sourceTree = "<group>"; };
+		BA5B5E7A0CDA63229803040EE83F6B28 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASShorthandAdditions.h"; path = "Masonry/NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		BD66CA81F1A193B93BBE5ACFBF9F1ED1 /* MASConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraint.m; path = Masonry/MASConstraint.m; sourceTree = "<group>"; };
+		BD8F6596862EAD3ABB8E31A8251E6C09 /* SDWebImage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SDWebImage-prefix.pch"; sourceTree = "<group>"; };
+		BEBD6F09F20C187A7EA833DE1BCCB2CA /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		BF81CF8F89ED912732035CE70E186AB3 /* UIImage+MultiFormat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+MultiFormat.m"; path = "SDWebImage/UIImage+MultiFormat.m"; sourceTree = "<group>"; };
+		C0C279997D8A5D3EFAD4A9D7F6945A3D /* FSCalendarDelegationProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarDelegationProxy.m; path = FSCalendar/FSCalendarDelegationProxy.m; sourceTree = "<group>"; };
+		C11951BBDB84822D61FA426D4352D782 /* UIImageView+HighlightedWebCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+HighlightedWebCache.h"; path = "SDWebImage/UIImageView+HighlightedWebCache.h"; sourceTree = "<group>"; };
+		C1CF657ED951D81E09FD6027D58D9F9A /* FSCalendar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendar.h; path = FSCalendar/FSCalendar.h; sourceTree = "<group>"; };
+		C654FA1AD49DC67683054ADE84898055 /* FSCalendarCollectionView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarCollectionView.h; path = FSCalendar/FSCalendarCollectionView.h; sourceTree = "<group>"; };
+		C91483998D4B01CD32D337E4A7D30B60 /* UIImage+MultiFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+MultiFormat.h"; path = "SDWebImage/UIImage+MultiFormat.h"; sourceTree = "<group>"; };
+		C984158B9E0B2E8522B69623CF337821 /* FSCalendarCollectionViewLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarCollectionViewLayout.h; path = FSCalendar/FSCalendarCollectionViewLayout.h; sourceTree = "<group>"; };
+		CA2AB586A6D8BEF194B2781E3B9A4B88 /* Masonry.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Masonry.modulemap; sourceTree = "<group>"; };
+		D0F7055E5699565068E7BFB583AD2C61 /* CYLConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CYLConstants.h; path = CYLTabBarController/CYLConstants.h; sourceTree = "<group>"; };
+		D2A9D448836A2EB5A4BB0B0AEF7F16B2 /* RTRootNavigationController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RTRootNavigationController-prefix.pch"; sourceTree = "<group>"; };
+		D723A5A3A900FA7B56ABBF90857D993B /* SDWebImageDownloader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDownloader.m; path = SDWebImage/SDWebImageDownloader.m; sourceTree = "<group>"; };
+		D764C83013D37C7B9466E4C83366A91C /* FSCalendarExtensions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarExtensions.h; path = FSCalendar/FSCalendarExtensions.h; sourceTree = "<group>"; };
+		DA18F4D5055D38D38DFEC75A65CAFC79 /* SDWebImageDownloaderOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDownloaderOperation.m; path = SDWebImage/SDWebImageDownloaderOperation.m; sourceTree = "<group>"; };
+		DA86DB11B38D75E8E80A7444840376A6 /* FSCalendar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FSCalendar.xcconfig; sourceTree = "<group>"; };
+		DB776BB793B4333E29B9E33EFD2235EB /* Masonry-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Masonry-dummy.m"; sourceTree = "<group>"; };
+		E012307BB4CEBAA4558390E536AFABFF /* FSCalendar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSCalendar-prefix.pch"; sourceTree = "<group>"; };
+		E05728F4025869EAEBD6D25FC76499BD /* CYLTabBarController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CYLTabBarController-dummy.m"; sourceTree = "<group>"; };
+		E085685BDE7D7B15AECD697D2852FDE8 /* FSCalendarTransitionCoordinator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarTransitionCoordinator.h; path = FSCalendar/FSCalendarTransitionCoordinator.h; sourceTree = "<group>"; };
+		E1B21CBBE32149B873D4147083703BD4 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASLayoutConstraint.h; path = Masonry/MASLayoutConstraint.h; sourceTree = "<group>"; };
+		E377767B23741A26EE86FC2C58433AD1 /* MASViewConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewConstraint.m; path = Masonry/MASViewConstraint.m; sourceTree = "<group>"; };
+		E502CC4209F3ABBC9BFA02CDA16643DD /* CYLTabBarController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = CYLTabBarController.modulemap; sourceTree = "<group>"; };
+		EAE438F966D96B9B80B633EEC120949A /* Masonry.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Masonry.xcconfig; sourceTree = "<group>"; };
+		ED538FD73A748148CFACE78F6CCEBE5C /* RTRootNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RTRootNavigationController.m; path = RTRootNavigationController/Classes/RTRootNavigationController.m; sourceTree = "<group>"; };
+		ED8F97C6AE473759549B3CA24181E31A /* CYLPlusButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CYLPlusButton.h; path = CYLTabBarController/CYLPlusButton.h; sourceTree = "<group>"; };
+		EF899C4BA6A1FA0B4CCA58E03D0F3494 /* MBProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MBProgressHUD.xcconfig; sourceTree = "<group>"; };
 		EFA3262AE2B74156C006F38539D71E27 /* Pods-letian-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-letian-dummy.m"; sourceTree = "<group>"; };
-		EFDAB935C5616187ADBE9D7C5D69F68E /* SDWebImageCompat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageCompat.h; path = SDWebImage/SDWebImageCompat.h; sourceTree = "<group>"; };
-		F61A9602977C28BD0FA668BCC5625042 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+WebCacheOperation.h"; path = "SDWebImage/UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
-		F97F4CF07C06F838C70FACD94FC9390B /* Masonry-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Masonry-dummy.m"; sourceTree = "<group>"; };
+		F23BDBEB0DCABB5AFC5B6B35F53ACE7E /* UIImageView+WebCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+WebCache.h"; path = "SDWebImage/UIImageView+WebCache.h"; sourceTree = "<group>"; };
+		F5E8841C3D8E866BC25F8E8FB702BF63 /* UIImageView+HighlightedWebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+HighlightedWebCache.m"; path = "SDWebImage/UIImageView+HighlightedWebCache.m"; sourceTree = "<group>"; };
+		F6E436403555E462A7B4E672F3EE26C4 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+MASDebugAdditions.m"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
+		F75BC76D22CE8560065D2C561CEB4FCF /* NSData+ImageContentType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSData+ImageContentType.h"; path = "SDWebImage/NSData+ImageContentType.h"; sourceTree = "<group>"; };
 		FB786FF5ABDA69854E154E6CA4C1374A /* Pods-letian-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-letian-acknowledgements.plist"; sourceTree = "<group>"; };
-		FEA1E2CBCB8022F1963EBA9605FDB0C3 /* SDWebImageDecoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDecoder.m; path = SDWebImage/SDWebImageDecoder.m; sourceTree = "<group>"; };
-		FEEFE703D4CB5C01AB310B231B1EFD50 /* UIImage+MultiFormat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+MultiFormat.m"; path = "SDWebImage/UIImage+MultiFormat.m"; sourceTree = "<group>"; };
+		FDBF36DB80A5F8B8444248517803FE64 /* SDWebImageCompat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageCompat.m; path = SDWebImage/SDWebImageCompat.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		005BE9279B7B4DADCBAFA3A56166A563 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				097CE7D98BF45C33842A2F9E2CE54D1E /* Foundation.framework in Frameworks */,
+				FA0910C733771C52A5F70A235BF17E8F /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		03D1DAA2078DBC7E25935A86ABBF2F27 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				308AAD034C9A85A6AD2F5D59F46E41D1 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0D40F510C84FDA3D33D44FE124A9C354 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				31D2B44DBB251779B8BE93E91A36CD40 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		199B211ECBE80F2741F0B0F83DB3D02B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				343BAFAB730011E632154BF8A0E47D08 /* Foundation.framework in Frameworks */,
-				8A2F5DAACE360A867631590370D76A49 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,12 +374,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6EEA03EC7B04D38F27AF242440A3BC0F /* Frameworks */ = {
+		4CF14BFAEB1F78D0E7307C8A4218ED2A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				319B9108C608433156DEEE4801EF95B7 /* Foundation.framework in Frameworks */,
-				DE0F3913CDD24965B55FD99E0D8C2587 /* ImageIO.framework in Frameworks */,
+				120558FCBB09E7C0AAE4249F1686CCA2 /* Foundation.framework in Frameworks */,
+				F919B31546F468FA33A2098B4A198DEB /* ImageIO.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8238947CE019C2131085CBAC1B100286 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C7106665ACD09E682ECC78A5E5C141D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B57774E30FD88AE26F9037E1360E947B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				98DF470CA8F6DD132AFAC1398FCD579C /* CoreGraphics.framework in Frameworks */,
+				1215629D558162CE728B27386DA02D1D /* Foundation.framework in Frameworks */,
+				DA3FBCF3B21EB18151C3BC2645107E0D /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,46 +413,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0ACDB322E6C741331956F6140DBADF03 /* Masonry */ = {
+		0FF8D8FD0877B55F6D83677F19F31238 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
-				3B23082E0D7FE9842A56ABE3CB44A4AD /* MASCompositeConstraint.h */,
-				65A1F297D70F7375C3C9E96115A468EE /* MASCompositeConstraint.m */,
-				C72FEAFF245488AB37FDA1F60685CAB8 /* MASConstraint.h */,
-				4CC753D03EB0460650676BF578622307 /* MASConstraint.m */,
-				4BBEB9951E6C77868F991E5B9FFE663D /* MASConstraint+Private.h */,
-				1A03E7D5E6690F73E452D707C9977A2B /* MASConstraintMaker.h */,
-				B0A350BF6EC8A954C5A0E8235AAD8949 /* MASConstraintMaker.m */,
-				AA903E4445DFC08C1590DC992939B09D /* MASLayoutConstraint.h */,
-				375A67289998E4945B81C61B4F22C9DF /* MASLayoutConstraint.m */,
-				D741F60B6D22434266370186F6620351 /* Masonry.h */,
-				7C3FE6BA1F9F606E9A57945CF1B79031 /* MASUtilities.h */,
-				8FA680188ECCCDAF248C8C4878F4C389 /* MASViewAttribute.h */,
-				1041A4B243D91E28386C293123BDEE51 /* MASViewAttribute.m */,
-				704D0017E1DD8635E1730BE7DDF6A3DB /* MASViewConstraint.h */,
-				7A46625514BF59EA931B16DE4BA65443 /* MASViewConstraint.m */,
-				9B0606E04E3F5BC56EAE81E2958B25C6 /* NSArray+MASAdditions.h */,
-				8A0AB0870AF1E6F13B444B2075EEE879 /* NSArray+MASAdditions.m */,
-				906B9C084ED87AA353ED7B84F1922F8A /* NSArray+MASShorthandAdditions.h */,
-				A85B8E39DDBA7B26C788D1D78EE41466 /* NSLayoutConstraint+MASDebugAdditions.h */,
-				04EAA7998C6D2DEDCDFFDE107701C639 /* NSLayoutConstraint+MASDebugAdditions.m */,
-				B79018579E40089E5916B45A5CF786E7 /* View+MASAdditions.h */,
-				0813E4970CA941CEC7B35485FAF07573 /* View+MASAdditions.m */,
-				92E3E9DF39C4DAF944C398BC080A946F /* View+MASShorthandAdditions.h */,
-				4AE820C1792FFBBFCE2A9FCAEF18B7A0 /* ViewController+MASAdditions.h */,
-				9F85AD316766F2603D104634545E27A4 /* ViewController+MASAdditions.m */,
-				5D6F68AA34980B9F1A5C717920005B05 /* Support Files */,
+				63DDBC01370E203CA4EDA1D21E05A49A /* Core */,
+				E3BE29EE59D667C48EBDF182458921E4 /* Support Files */,
 			);
-			name = Masonry;
-			path = Masonry;
-			sourceTree = "<group>";
-		};
-		14B8B9B15ECBE87983FF987239AB2D7B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				53704228C80969F1590C5AF70F22A8CF /* iOS */,
-			);
-			name = Frameworks;
+			name = SDWebImage;
+			path = SDWebImage;
 			sourceTree = "<group>";
 		};
 		1D981B1271305055409A80F1ABAD0B66 /* Targets Support Files */ = {
@@ -429,81 +431,106 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		34E3FDD3E4E488AD6554F358471B7340 /* Support Files */ = {
+		20B56609144CE204DFA8221F742B2D76 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CEE15FB501E338FFEE070D59DAF2DD8C /* Info.plist */,
-				4B2FEC4793FDC01AF238FDF52A3B5E07 /* SDWebImage.modulemap */,
-				447114A405958CC2A33BC0C7026C5184 /* SDWebImage.xcconfig */,
-				ECC54122536826DD62AF30F90A2AFC55 /* SDWebImage-dummy.m */,
-				978FDBF984EE1C68CBAC519172EB18C2 /* SDWebImage-prefix.pch */,
-				E29A7FB0E5276A4839D14201A01F33D7 /* SDWebImage-umbrella.h */,
+				218E08C4CBEA956CF04ED47E0B962D50 /* iOS */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/SDWebImage";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3FF9460491E9BF3A8D309E138C010844 /* Support Files */ = {
+		218E08C4CBEA956CF04ED47E0B962D50 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				BDCFB765B8C28003E0046DE125DB180F /* CYLTabBarController.modulemap */,
-				AE6DBDA856F716C10CD113548EEA9ADF /* CYLTabBarController.xcconfig */,
-				34CF01F44810165595AEC462FD00C3D8 /* CYLTabBarController-dummy.m */,
-				948712346799326A82A563A0EC6F9669 /* CYLTabBarController-prefix.pch */,
-				C66C345924A9AE15F04C233984143996 /* CYLTabBarController-umbrella.h */,
-				B70498485B43E87F5FE113E362648C14 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/CYLTabBarController";
-			sourceTree = "<group>";
-		};
-		457B90382DF3F73D7860F704F4855680 /* SDWebImage */ = {
-			isa = PBXGroup;
-			children = (
-				F2817F1B836077D579369FC4244C853C /* Core */,
-				34E3FDD3E4E488AD6554F358471B7340 /* Support Files */,
-			);
-			name = SDWebImage;
-			path = SDWebImage;
-			sourceTree = "<group>";
-		};
-		53704228C80969F1590C5AF70F22A8CF /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				20AAFAD6F0B7418EB664A68DC573CB65 /* Foundation.framework */,
-				0E9F282A574723109BB2D466CECD4B15 /* ImageIO.framework */,
-				1EF4235DA7BDF396961864D3C37C384A /* QuartzCore.framework */,
-				B721193584C7C9E987C5EDAD3866EB94 /* UIKit.framework */,
+				17FED3BB6117EE87B0B77B8257A5D4E6 /* CoreGraphics.framework */,
+				2013E0622BA7112824FE37BBA61D4FD6 /* Foundation.framework */,
+				5622C89D4510B1F5B0ACCD2F89626FD7 /* ImageIO.framework */,
+				9AA510D2CBE6BDCBD595FDD5DD559B93 /* QuartzCore.framework */,
+				AFD161754BE60BC2EC7F22FFAF577939 /* UIKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		5924175390F873B42CB54E68BABF2105 /* Support Files */ = {
+		2A140B1AB530A68710C29A2DA74D8A33 /* CYLTabBarController */ = {
 			isa = PBXGroup;
 			children = (
-				CC277C7A15C55199DF8FE579689D3181 /* FSCalendar.modulemap */,
-				CE7F9A84B9C64AB55E038C8E150CE241 /* FSCalendar.xcconfig */,
-				343D680902B559A751931577396C3C23 /* FSCalendar-dummy.m */,
-				CA72A243ED334336FE77E258076C220A /* FSCalendar-prefix.pch */,
-				1069642F2BC68FB4983985329A0BA9F0 /* FSCalendar-umbrella.h */,
-				492A32D0D9CD97C7504042E6BCE0C7E7 /* Info.plist */,
+				D0F7055E5699565068E7BFB583AD2C61 /* CYLConstants.h */,
+				ED8F97C6AE473759549B3CA24181E31A /* CYLPlusButton.h */,
+				0918F05F566F8847E329FD091E7549CB /* CYLPlusButton.m */,
+				3A307D2237D1F56555784F1E6D1FADB2 /* CYLTabBar.h */,
+				51EAC5A18C9A2EF1913109D928B69AA2 /* CYLTabBar.m */,
+				13831A5BF0363C242F60EFF3428697B1 /* CYLTabBarController.h */,
+				277ABAEB975784B125261502CFF91372 /* CYLTabBarController.m */,
+				A3B5F867CDB474BA825156646117B059 /* UIViewController+CYLTabBarControllerExtention.h */,
+				27A0F19A07390CD2C0A24DE85F31F730 /* UIViewController+CYLTabBarControllerExtention.m */,
+				FDB86E957F31016F0B11697F988C5A28 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/FSCalendar";
+			name = CYLTabBarController;
+			path = CYLTabBarController;
 			sourceTree = "<group>";
 		};
-		5D6F68AA34980B9F1A5C717920005B05 /* Support Files */ = {
+		39CC6F334F020EAEA28D86C0A54D62ED /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				D83722489D14180D014D9300D4267EA6 /* Info.plist */,
-				85C25EDFD7D1AE69AA895BC45A2054AD /* Masonry.modulemap */,
-				C2578373C05EE1C88E34D96EF946DF4F /* Masonry.xcconfig */,
-				F97F4CF07C06F838C70FACD94FC9390B /* Masonry-dummy.m */,
-				0CB4D24F7B8B4836FFEACC0B62DC1321 /* Masonry-prefix.pch */,
-				512A11F298F9E4F7A20EA11CF4668D67 /* Masonry-umbrella.h */,
+				A5902EAADB8EB020F946CE87A6DA8362 /* Info.plist */,
+				CA2AB586A6D8BEF194B2781E3B9A4B88 /* Masonry.modulemap */,
+				EAE438F966D96B9B80B633EEC120949A /* Masonry.xcconfig */,
+				DB776BB793B4333E29B9E33EFD2235EB /* Masonry-dummy.m */,
+				1799FA4DF86771612F18AF3478EAFAF7 /* Masonry-prefix.pch */,
+				B6AA8277B7356548A015AF3072971F55 /* Masonry-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Masonry";
+			sourceTree = "<group>";
+		};
+		63624D7D5927EC5E7BA64435DFC8BF9E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				343042110C4654409059346B72FA8BA4 /* Info.plist */,
+				A91DC95CA8ED5FB5925BFBEBEF615A50 /* RTRootNavigationController.modulemap */,
+				913FF39D6456E958AAD91281BEC88724 /* RTRootNavigationController.xcconfig */,
+				643B84D1B67DD32995F0E42D402B994B /* RTRootNavigationController-dummy.m */,
+				D2A9D448836A2EB5A4BB0B0AEF7F16B2 /* RTRootNavigationController-prefix.pch */,
+				96639A50AE58EFDA2507AB0450663722 /* RTRootNavigationController-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/RTRootNavigationController";
+			sourceTree = "<group>";
+		};
+		63DDBC01370E203CA4EDA1D21E05A49A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				F75BC76D22CE8560065D2C561CEB4FCF /* NSData+ImageContentType.h */,
+				A36DA914D2E039D058CC0CC90CCDFA3B /* NSData+ImageContentType.m */,
+				5B2DA45587FB7D816E78B311E271E7C6 /* SDImageCache.h */,
+				9AD4DCCC6C679FA3FB6D7DD5836D25C0 /* SDImageCache.m */,
+				0728198D69AEB69EB4E746AD3DC08E5F /* SDWebImageCompat.h */,
+				FDBF36DB80A5F8B8444248517803FE64 /* SDWebImageCompat.m */,
+				A321C027E7A8F626695A93FFDC64E38F /* SDWebImageDecoder.h */,
+				926DB15048FD95D46FC22CE967B6570A /* SDWebImageDecoder.m */,
+				1B26277A0EE1686B4C744BB5E50941A8 /* SDWebImageDownloader.h */,
+				D723A5A3A900FA7B56ABBF90857D993B /* SDWebImageDownloader.m */,
+				710B96A0CCC8977319E0C3F1DE28B39B /* SDWebImageDownloaderOperation.h */,
+				DA18F4D5055D38D38DFEC75A65CAFC79 /* SDWebImageDownloaderOperation.m */,
+				5EA3A93A6EA003BE75A3D9875979DCB2 /* SDWebImageManager.h */,
+				568B10A0EBCD978598E632AB6DC2AB68 /* SDWebImageManager.m */,
+				4CA9BA42B457BA0E9197A826A903AABE /* SDWebImageOperation.h */,
+				2CC948C4D0512265E9B8B13C4D4BB76D /* SDWebImagePrefetcher.h */,
+				B4B899F5D0B3D7FA51371F3F126F7B31 /* SDWebImagePrefetcher.m */,
+				714126FECE415A64931DD04CCDE55C09 /* UIButton+WebCache.h */,
+				7989056C8091A2BB6349C6F1B8C3C669 /* UIButton+WebCache.m */,
+				873167EDB49F8B355C914F526C28F75C /* UIImage+GIF.h */,
+				9EEC869026093787180DF413794FEB32 /* UIImage+GIF.m */,
+				C91483998D4B01CD32D337E4A7D30B60 /* UIImage+MultiFormat.h */,
+				BF81CF8F89ED912732035CE70E186AB3 /* UIImage+MultiFormat.m */,
+				C11951BBDB84822D61FA426D4352D782 /* UIImageView+HighlightedWebCache.h */,
+				F5E8841C3D8E866BC25F8E8FB702BF63 /* UIImageView+HighlightedWebCache.m */,
+				F23BDBEB0DCABB5AFC5B6B35F53ACE7E /* UIImageView+WebCache.h */,
+				5BD916A823E4C8E9CDEDB402E22855F8 /* UIImageView+WebCache.m */,
+				463F47B54D0BC6FCC47A41F30E7172CF /* UIView+WebCacheOperation.h */,
+				6B36FDCA6CE390A639A0E4E413C6AAEC /* UIView+WebCacheOperation.m */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 		6A606ACB708FA6B086F308323A63398A /* Pods-letian */ = {
@@ -524,167 +551,211 @@
 			path = "Target Support Files/Pods-letian";
 			sourceTree = "<group>";
 		};
-		6B547C8379071CAE6BA2E9E5109C48C9 /* RTRootNavigationController */ = {
+		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
-				CF825448C35B10CDD94C54CB17DCDF59 /* RTRootNavigationController.h */,
-				14A425EBC7BE19DEB72717C423ABFF08 /* RTRootNavigationController.m */,
-				C72452BE4BB4CB281BD6B7949D9FAFD0 /* UIViewController+RTRootNavigationController.h */,
-				5C8BF2A12D0C8B7BB8FF8D584CF1C62C /* UIViewController+RTRootNavigationController.m */,
-				77610CD0CC52EAC2BAC36345327E0AF6 /* Support Files */,
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				20B56609144CE204DFA8221F742B2D76 /* Frameworks */,
+				BA8584F2646761B269600824ABD1C0EC /* Pods */,
+				DBD5CEBC1E275A575C6FBC14C592D98B /* Products */,
+				1D981B1271305055409A80F1ABAD0B66 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8ACE8D6253CF4B0115F78C70845DB554 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9405134156E807CA240C2249AFD7DC71 /* FSCalendar.modulemap */,
+				DA86DB11B38D75E8E80A7444840376A6 /* FSCalendar.xcconfig */,
+				26167000DF2D66FA17BA75AF1DD59A7E /* FSCalendar-dummy.m */,
+				E012307BB4CEBAA4558390E536AFABFF /* FSCalendar-prefix.pch */,
+				8BB418B4B96DDA05286B0B602FA464BA /* FSCalendar-umbrella.h */,
+				1111DB8EEFDE914F34C5750811E4904C /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/FSCalendar";
+			sourceTree = "<group>";
+		};
+		AFBAE363FD64C38D5A24AB1523D67536 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7A22C15DA37FF0D8FE2BABCEA37337CF /* Info.plist */,
+				65174EFA53891C7FB02EB2AD6C84FE34 /* MBProgressHUD.modulemap */,
+				EF899C4BA6A1FA0B4CCA58E03D0F3494 /* MBProgressHUD.xcconfig */,
+				097B1C4A0ABDCA82D0289629219CEB6E /* MBProgressHUD-dummy.m */,
+				75C1425805C76F57A7C5B1E14AA9F466 /* MBProgressHUD-prefix.pch */,
+				2E03AE283CDA8F27484D50AEDF4EB14B /* MBProgressHUD-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MBProgressHUD";
+			sourceTree = "<group>";
+		};
+		B45D4C95D4D9814400D88EB473710B8B /* RTRootNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				0180A3C5FCF088924C9F73D213596C4B /* RTRootNavigationController.h */,
+				ED538FD73A748148CFACE78F6CCEBE5C /* RTRootNavigationController.m */,
+				A5880558B7FF2489C895E647D3CBE36D /* UIViewController+RTRootNavigationController.h */,
+				82E59E2E8D9710075C8D6C304653FF07 /* UIViewController+RTRootNavigationController.m */,
+				63624D7D5927EC5E7BA64435DFC8BF9E /* Support Files */,
 			);
 			name = RTRootNavigationController;
 			path = RTRootNavigationController;
 			sourceTree = "<group>";
 		};
-		77610CD0CC52EAC2BAC36345327E0AF6 /* Support Files */ = {
+		B9F2A71F42E886CE5100089BC1ED2378 /* Masonry */ = {
 			isa = PBXGroup;
 			children = (
-				2A14E6CB59926B87E0867FCEFC0E4E25 /* Info.plist */,
-				4E48D0C003BBA202E95D5BF68E028E44 /* RTRootNavigationController.modulemap */,
-				C61EF853EDD200B2CB393E0AD63D8AED /* RTRootNavigationController.xcconfig */,
-				0044212D6B41298EA5AFEA9B21F556E3 /* RTRootNavigationController-dummy.m */,
-				D1A3F20193C72DDD787F2D5B02E43EF2 /* RTRootNavigationController-prefix.pch */,
-				3838CA851CB7CDE27E0F0F01D99A1762 /* RTRootNavigationController-umbrella.h */,
+				AD60B7EEEBAD7FA6DB10103D663D7DD6 /* MASCompositeConstraint.h */,
+				33F1F5669B83193CF8DC252F3433736C /* MASCompositeConstraint.m */,
+				2BB5E5035FEBE6FB42566FBFC5E2C18E /* MASConstraint.h */,
+				BD66CA81F1A193B93BBE5ACFBF9F1ED1 /* MASConstraint.m */,
+				12A4A0A01CFDFC613F5FBC618C9AD32B /* MASConstraint+Private.h */,
+				1539A8D8B000CC3E18157781D5295EDC /* MASConstraintMaker.h */,
+				7F4F7E6D30BDAD829DDCF7BA38847D71 /* MASConstraintMaker.m */,
+				E1B21CBBE32149B873D4147083703BD4 /* MASLayoutConstraint.h */,
+				2152026F6BD278F13867DA2D7BDAAD67 /* MASLayoutConstraint.m */,
+				88FEA958238852BA01F2181261FCB800 /* Masonry.h */,
+				A9FDAB748EEB1BA398F03DEF094F00C9 /* MASUtilities.h */,
+				54E6C1119934DC742437CA758F17CA68 /* MASViewAttribute.h */,
+				9F149879B87C43C7225865DC39E4612C /* MASViewAttribute.m */,
+				13FF6F4F3FC18AA38F32B3CF5EFD01A5 /* MASViewConstraint.h */,
+				E377767B23741A26EE86FC2C58433AD1 /* MASViewConstraint.m */,
+				0267E9029158E1A5DAB7DFCE423DBDF7 /* NSArray+MASAdditions.h */,
+				71256F0E855E83B2E6FC286FC9E8725A /* NSArray+MASAdditions.m */,
+				BA5B5E7A0CDA63229803040EE83F6B28 /* NSArray+MASShorthandAdditions.h */,
+				1E284AD806125F66FABFF7BC9284CAD7 /* NSLayoutConstraint+MASDebugAdditions.h */,
+				F6E436403555E462A7B4E672F3EE26C4 /* NSLayoutConstraint+MASDebugAdditions.m */,
+				9FC757C5C8CC253B2895329C879F01D4 /* View+MASAdditions.h */,
+				7202E196053C5BC5167E058492D4017C /* View+MASAdditions.m */,
+				BEBD6F09F20C187A7EA833DE1BCCB2CA /* View+MASShorthandAdditions.h */,
+				6235805115BFD90502D7BE44682DF1C1 /* ViewController+MASAdditions.h */,
+				A32528DFDE91D7D1BED0EC77E2C76670 /* ViewController+MASAdditions.m */,
+				39CC6F334F020EAEA28D86C0A54D62ED /* Support Files */,
+			);
+			name = Masonry;
+			path = Masonry;
+			sourceTree = "<group>";
+		};
+		BA8584F2646761B269600824ABD1C0EC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2A140B1AB530A68710C29A2DA74D8A33 /* CYLTabBarController */,
+				F49E0D255B7483DB10B53458ED174594 /* FSCalendar */,
+				B9F2A71F42E886CE5100089BC1ED2378 /* Masonry */,
+				C8E77DB207C9C3959AD9E8F09BD634A3 /* MBProgressHUD */,
+				B45D4C95D4D9814400D88EB473710B8B /* RTRootNavigationController */,
+				0FF8D8FD0877B55F6D83677F19F31238 /* SDWebImage */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C8E77DB207C9C3959AD9E8F09BD634A3 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				0E00E3E4EF3F2BB14D1D40DE03DC567B /* MBProgressHUD.h */,
+				9487E055E8B7AEBD75ECA292F86484AF /* MBProgressHUD.m */,
+				AFBAE363FD64C38D5A24AB1523D67536 /* Support Files */,
+			);
+			name = MBProgressHUD;
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		DBD5CEBC1E275A575C6FBC14C592D98B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				938B8369C214EDCC83130E1AE579A112 /* CYLTabBarController.framework */,
+				75C458AE22E531D52BC34C46EB64E1E2 /* FSCalendar.framework */,
+				305CFA8413CE5805EB2FDF9E19BD8679 /* Masonry.framework */,
+				81E69D736E0C1FBE5BC382EA738D5C43 /* MBProgressHUD.framework */,
+				A34601FDE3BADC1997FD71F2F4A5409D /* Pods_letian.framework */,
+				851B51307F9319682D8E0A60044CF4D0 /* RTRootNavigationController.framework */,
+				3134FE9B1B657011911C4746B9465460 /* SDWebImage.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E3BE29EE59D667C48EBDF182458921E4 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7A5D72822D579FB2767321C79E3A20DE /* Info.plist */,
+				B4EEDBCE425E4944A1828AF9858C78D9 /* SDWebImage.modulemap */,
+				1E1B31DA16EF245C87B1E4C4A8CDB3BE /* SDWebImage.xcconfig */,
+				6654FBFB3A8802254644E73F1F47768E /* SDWebImage-dummy.m */,
+				BD8F6596862EAD3ABB8E31A8251E6C09 /* SDWebImage-prefix.pch */,
+				28D2B0DDBF4849F4AA7A5C76960C3536 /* SDWebImage-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/RTRootNavigationController";
+			path = "../Target Support Files/SDWebImage";
 			sourceTree = "<group>";
 		};
-		7DB346D0F39D3F0E887471402A8071AB = {
+		F49E0D255B7483DB10B53458ED174594 /* FSCalendar */ = {
 			isa = PBXGroup;
 			children = (
-				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				14B8B9B15ECBE87983FF987239AB2D7B /* Frameworks */,
-				D4B9C46C31895602E4463B997E151D58 /* Pods */,
-				DF7BBFC8BC75E87795F8E06968B2B520 /* Products */,
-				1D981B1271305055409A80F1ABAD0B66 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		AF2171C8FC1B0779C8744695D2022AA8 /* FSCalendar */ = {
-			isa = PBXGroup;
-			children = (
-				573B193AE2477321618B4F86D223AE60 /* FSCalendar.h */,
-				A1D1BFF84A310F77F839157B52584D0E /* FSCalendar.m */,
-				3233964CA106CBF30B4C03AABD5BAA50 /* FSCalendar+Deprecated.m */,
-				948B89F093C083E2DB6CA52F6FB1C4A5 /* FSCalendarAppearance.h */,
-				9C6E66211502F053DD1B56F3470A7D12 /* FSCalendarAppearance.m */,
-				74CEEB98417A3B501078D465FFDC66C0 /* FSCalendarCalculator.h */,
-				B877E3876EF3A5587F7C5FE23EE69E4C /* FSCalendarCalculator.m */,
-				4B1F1EDD09BB03E92B66FD2A4B9A1959 /* FSCalendarCell.h */,
-				CA7EBAB1EA83B6E996252A81226050E2 /* FSCalendarCell.m */,
-				6865632E6150DE56B85E428AE91B7A4B /* FSCalendarCollectionView.h */,
-				D5DB896673EB29709D13940B445474E0 /* FSCalendarCollectionView.m */,
-				93EBCBCF6B3CEC6375A90C31698EAEE8 /* FSCalendarCollectionViewLayout.h */,
-				5B4B33A8098832660DDD12365DF5F611 /* FSCalendarCollectionViewLayout.m */,
-				8A75CEAB5384F58FDE73BA109CA9B09C /* FSCalendarConstants.h */,
-				E6B5E931B0C3F19407B03F41DA755B6B /* FSCalendarConstants.m */,
-				28EA27D36E2569954CCC481959309E29 /* FSCalendarDelegationFactory.h */,
-				D94390931760BF35AF5B56DE17CE3242 /* FSCalendarDelegationFactory.m */,
-				C796F1D6B8B2ECB2BBD17078527C4172 /* FSCalendarDelegationProxy.h */,
-				DFCE2EB4B549E452CAD1288DC78971AC /* FSCalendarDelegationProxy.m */,
-				958DB63890205DDD875D6CC18652EB10 /* FSCalendarDynamicHeader.h */,
-				92D168432289EDB25C8A171598495B1B /* FSCalendarExtensions.h */,
-				661D12FED8879F80D3A38837E0097DA3 /* FSCalendarExtensions.m */,
-				6D634618D7EDAC594057C769198960FE /* FSCalendarHeaderView.h */,
-				1F0D57457058939009E03643A5782BF0 /* FSCalendarHeaderView.m */,
-				4C31878ADCA1E9AE0ADCD0B22610C4CF /* FSCalendarScopeHandle.h */,
-				7D12A19F3301A95732F46F6438352E4E /* FSCalendarScopeHandle.m */,
-				150A9F9556637ACD7514E8138079D45A /* FSCalendarStickyHeader.h */,
-				3F2B88153786C86855CD1E16F61D0AD3 /* FSCalendarStickyHeader.m */,
-				52F9B5F28BE7CB44005A5FEA224ED9C3 /* FSCalendarTransitionCoordinator.h */,
-				4C55E33258C17B4A1CD968E7500DA2DC /* FSCalendarTransitionCoordinator.m */,
-				AF9BF1B6F435EBA579FCF5253B75825F /* FSCalendarWeekdayView.h */,
-				80A57CB2C9615280E234DFA0F876CDD4 /* FSCalendarWeekdayView.m */,
-				5924175390F873B42CB54E68BABF2105 /* Support Files */,
+				C1CF657ED951D81E09FD6027D58D9F9A /* FSCalendar.h */,
+				29D917814C24EDF6F1CDEC70E2B31C2F /* FSCalendar.m */,
+				716A1458632025125A620E4C0BF11DF7 /* FSCalendar+Deprecated.m */,
+				3AA2E0251D4D8EF64F0EB9EEA0F9FC77 /* FSCalendarAppearance.h */,
+				A4BEBCF68CFA73B6224C783528007E79 /* FSCalendarAppearance.m */,
+				10FE41922A30AE5FF26854B060719CB4 /* FSCalendarCalculator.h */,
+				78446C9746BB3D835594A8555030C117 /* FSCalendarCalculator.m */,
+				3653D7777173E35EA937CE28C458C767 /* FSCalendarCell.h */,
+				5B75A536654B3E6E5E05CCAC19244DC4 /* FSCalendarCell.m */,
+				C654FA1AD49DC67683054ADE84898055 /* FSCalendarCollectionView.h */,
+				3D18A648AC3DB22D73DB29041F00315D /* FSCalendarCollectionView.m */,
+				C984158B9E0B2E8522B69623CF337821 /* FSCalendarCollectionViewLayout.h */,
+				40790C8D347E382FAD56AD07DC7E604D /* FSCalendarCollectionViewLayout.m */,
+				2D267DA0CDD8F974B16EBC5EC3084236 /* FSCalendarConstants.h */,
+				92C7759041102F658D6E6A94F4377B8E /* FSCalendarConstants.m */,
+				6B727E0C53DBF2C2055642E9AA8279F2 /* FSCalendarDelegationFactory.h */,
+				9368DD1F2C0C4DF169B3BE4A55094EB9 /* FSCalendarDelegationFactory.m */,
+				47E79200B0F466323C35601AD9FDB5B9 /* FSCalendarDelegationProxy.h */,
+				C0C279997D8A5D3EFAD4A9D7F6945A3D /* FSCalendarDelegationProxy.m */,
+				77FDCE4D51314041BD690C26A1F2324E /* FSCalendarDynamicHeader.h */,
+				D764C83013D37C7B9466E4C83366A91C /* FSCalendarExtensions.h */,
+				3044D467C7E081058066D55847B89429 /* FSCalendarExtensions.m */,
+				A3C731F74E78151500935B7374C657B0 /* FSCalendarHeaderView.h */,
+				4EE781A1018950B3B82F7B3E69C1B57B /* FSCalendarHeaderView.m */,
+				3813D151AB6E5470D7712A9EB04725C7 /* FSCalendarScopeHandle.h */,
+				6C2F15BCB0EB78B84B90C1290E5B8E71 /* FSCalendarScopeHandle.m */,
+				06961B4A488AAD52FABD99B06710D758 /* FSCalendarStickyHeader.h */,
+				2033CA5F5A4D111C20B6095096F4D6BC /* FSCalendarStickyHeader.m */,
+				E085685BDE7D7B15AECD697D2852FDE8 /* FSCalendarTransitionCoordinator.h */,
+				1342485B8B5F18B0E11D51E3C58F1679 /* FSCalendarTransitionCoordinator.m */,
+				B32A1C1E391EBD5716D4BBFBF5FD2EDB /* FSCalendarWeekdayView.h */,
+				8836AFDB1E55661E0279D0D7B9E04BD2 /* FSCalendarWeekdayView.m */,
+				8ACE8D6253CF4B0115F78C70845DB554 /* Support Files */,
 			);
 			name = FSCalendar;
 			path = FSCalendar;
 			sourceTree = "<group>";
 		};
-		CA3CA8E9F7DDA8831589551678CECDFE /* CYLTabBarController */ = {
+		FDB86E957F31016F0B11697F988C5A28 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				8A60349D9E6BA8297C6FBBE39EBA5713 /* CYLConstants.h */,
-				22971CB257E1355E1F8DE99ACF6FDEED /* CYLPlusButton.h */,
-				91DC7168326C9AA56DF351B1422AD8B8 /* CYLPlusButton.m */,
-				451F9039D231A7D2DC11946C1E47416B /* CYLTabBar.h */,
-				98F3629C117E69B2C4292963A11FDFA4 /* CYLTabBar.m */,
-				84F3EE01DBE6C450A70DDB3FFDED615E /* CYLTabBarController.h */,
-				098B1B4382E59BB0D06CD0A3D55BD9FE /* CYLTabBarController.m */,
-				27F069151B394A9DDAAE011E1F7D2A59 /* UIViewController+CYLTabBarControllerExtention.h */,
-				05B47E792F14F78B0465B35C362A2871 /* UIViewController+CYLTabBarControllerExtention.m */,
-				3FF9460491E9BF3A8D309E138C010844 /* Support Files */,
+				E502CC4209F3ABBC9BFA02CDA16643DD /* CYLTabBarController.modulemap */,
+				43F2C65C73BD3669C70E4AFA28A72755 /* CYLTabBarController.xcconfig */,
+				E05728F4025869EAEBD6D25FC76499BD /* CYLTabBarController-dummy.m */,
+				92EBE45F2054D98C4A6C7A1147983276 /* CYLTabBarController-prefix.pch */,
+				7CDCAA56B47E3378E4882CF3554AFD5F /* CYLTabBarController-umbrella.h */,
+				431F4FE96EC9B6C901FA6FB3F8CB65F7 /* Info.plist */,
 			);
-			name = CYLTabBarController;
-			path = CYLTabBarController;
-			sourceTree = "<group>";
-		};
-		D4B9C46C31895602E4463B997E151D58 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CA3CA8E9F7DDA8831589551678CECDFE /* CYLTabBarController */,
-				AF2171C8FC1B0779C8744695D2022AA8 /* FSCalendar */,
-				0ACDB322E6C741331956F6140DBADF03 /* Masonry */,
-				6B547C8379071CAE6BA2E9E5109C48C9 /* RTRootNavigationController */,
-				457B90382DF3F73D7860F704F4855680 /* SDWebImage */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		DF7BBFC8BC75E87795F8E06968B2B520 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				02B1A066D9A765E69F90D71F49988DFB /* CYLTabBarController.framework */,
-				55089987528EA37503F8C1A43404C101 /* FSCalendar.framework */,
-				A1D3E26FE8279D86E1BBF345EB9EFE8B /* Masonry.framework */,
-				299B28DEDE1094AC79E2F1D7D0DC9436 /* Pods_letian.framework */,
-				BE738A4B7D659C192101FAEA4F24674A /* RTRootNavigationController.framework */,
-				4002BB1C9CCD17EDDA0C8FE9611B02EA /* SDWebImage.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		F2817F1B836077D579369FC4244C853C /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				413CD998EA69F10791A57AEFC4FC04F0 /* NSData+ImageContentType.h */,
-				6A617C57B0F2BD227EF308FDBCEE0501 /* NSData+ImageContentType.m */,
-				991FBF9EC3A29CDA9D9F086CC56D14CD /* SDImageCache.h */,
-				132856D38346150183920C3B9D5CA63A /* SDImageCache.m */,
-				EFDAB935C5616187ADBE9D7C5D69F68E /* SDWebImageCompat.h */,
-				A5E3FF0F283D555802AF65A56465DF5A /* SDWebImageCompat.m */,
-				EC8312F65521BBCC98FFC94A56DCBA34 /* SDWebImageDecoder.h */,
-				FEA1E2CBCB8022F1963EBA9605FDB0C3 /* SDWebImageDecoder.m */,
-				125BE27C33B167AD5B3F3F7D0B091EDB /* SDWebImageDownloader.h */,
-				6C69CDBFB51E597DD2BF1E5EC63A2886 /* SDWebImageDownloader.m */,
-				9FE73FB6AD25AC5961DB19279E752DEA /* SDWebImageDownloaderOperation.h */,
-				701362B282DCE647FA648E9FC5DB7CAE /* SDWebImageDownloaderOperation.m */,
-				27DFB019C37D5C5E373CC21B7F3F15D5 /* SDWebImageManager.h */,
-				63231622DC913F93E1FEC8B0E3A927F0 /* SDWebImageManager.m */,
-				5F568FD3EFEF2003430B7A0C90B25DBE /* SDWebImageOperation.h */,
-				C72813301E0940E9AF4F96D7D86F2CB7 /* SDWebImagePrefetcher.h */,
-				E549D354B81050139816B506F7681C3C /* SDWebImagePrefetcher.m */,
-				693986A08069C42DA3E78DF06DDC3E6D /* UIButton+WebCache.h */,
-				84D1B50E442D05CD1E7657437B1CB65E /* UIButton+WebCache.m */,
-				8A2156F5AD333B57C101F8C8C2DA0C18 /* UIImage+GIF.h */,
-				89E3EA52FFCD7FF5390297872D63F3AF /* UIImage+GIF.m */,
-				3A3BF5530C628E245C4D9513A4D91D32 /* UIImage+MultiFormat.h */,
-				FEEFE703D4CB5C01AB310B231B1EFD50 /* UIImage+MultiFormat.m */,
-				48D15D8CC4AB92D55A00B0BC993AE2F0 /* UIImageView+HighlightedWebCache.h */,
-				443C307866F4E4544C4FAFDDA8779EEB /* UIImageView+HighlightedWebCache.m */,
-				0C886318E00710FB86B975B41987659C /* UIImageView+WebCache.h */,
-				A602052EFF149E7274275F4DF5124F5B /* UIImageView+WebCache.m */,
-				F61A9602977C28BD0FA668BCC5625042 /* UIView+WebCacheOperation.h */,
-				1851FBDDE69E83D20834023B3D253092 /* UIView+WebCacheOperation.m */,
-			);
-			name = Core;
+			name = "Support Files";
+			path = "../Target Support Files/CYLTabBarController";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		197B7877D5D346F405BDD059EF96DBDC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28A794912ED1E06B05D96DF5ED0AED19 /* MBProgressHUD-umbrella.h in Headers */,
+				A5BF8DBDD8660DBCFE712657F3D82BDA /* MBProgressHUD.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		39D1D55AFF169DB3CA20BA16428E543B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -698,44 +769,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		81F56AB86DEB84D7D59A0038277CD67B /* Headers */ = {
+		42564F1917011C938EF53827864A5422 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E12AF8B2156B27227E70F4A0FE257E6 /* NSData+ImageContentType.h in Headers */,
-				45FC900F731440A37EEDE8052F6389B0 /* SDImageCache.h in Headers */,
-				46348956112C5A0C99434D90B04D1489 /* SDWebImage-umbrella.h in Headers */,
-				81C9AD3581C1DD50D8C46AC23D957F39 /* SDWebImageCompat.h in Headers */,
-				323658236F00E7C34246B97916A0E8FE /* SDWebImageDecoder.h in Headers */,
-				CBF2F7196B3594AF8692B83ECC3C691F /* SDWebImageDownloader.h in Headers */,
-				F537D4E99E77B630E38480F125243F99 /* SDWebImageDownloaderOperation.h in Headers */,
-				09CE8C64DDA1333F0530FCAD307E373C /* SDWebImageManager.h in Headers */,
-				2F03F4DEF7EF2DECDB9C59012BD682D4 /* SDWebImageOperation.h in Headers */,
-				FE5B9BD9BD05A2A01CB054149C3F64FC /* SDWebImagePrefetcher.h in Headers */,
-				E248E14C298E3F304D6899C737F2DD8F /* UIButton+WebCache.h in Headers */,
-				0391556AD0826AFE5DB7A98E097406CA /* UIImage+GIF.h in Headers */,
-				7C7530455F3BA946F7ACC44DBFE734A2 /* UIImage+MultiFormat.h in Headers */,
-				DBA768E91CE248414F9FBF531A13B52E /* UIImageView+HighlightedWebCache.h in Headers */,
-				5DA025EA8CB45CFB5517393FD3AEBDFA /* UIImageView+WebCache.h in Headers */,
-				2846CAAD8C39F8B47064914BBD3C4D94 /* UIView+WebCacheOperation.h in Headers */,
+				B8DD2A78BAA214EF0693E22657EFF472 /* Pods-letian-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		967A4E66DFAB45DF0631033160CCC7FB /* Headers */ = {
+		E6CEE5283725634FEF5D69C1CF470329 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC243BCE5D99D80031BD96EAD42B1993 /* Pods-letian-umbrella.h in Headers */,
+				8305261A69169369A2640FA204470E7A /* NSData+ImageContentType.h in Headers */,
+				498165C74E9AA127B8CDD09072F6ADE5 /* SDImageCache.h in Headers */,
+				78A92C8528EEB4EB6F8005889AC25A66 /* SDWebImage-umbrella.h in Headers */,
+				C0D23A47C4256A722321470DE8126A18 /* SDWebImageCompat.h in Headers */,
+				99EB70BD0D1014BC95802E54912ED07F /* SDWebImageDecoder.h in Headers */,
+				87E70AE6CFB3F08C63B18408D55701ED /* SDWebImageDownloader.h in Headers */,
+				CE0271F23C4D250894FA58519F8F134D /* SDWebImageDownloaderOperation.h in Headers */,
+				713C5058A24FDEC28DB1254C064E21D1 /* SDWebImageManager.h in Headers */,
+				547B5B48797C58A6915A7406863EFBAB /* SDWebImageOperation.h in Headers */,
+				4F8192AB854C9009D5200466CDFB5722 /* SDWebImagePrefetcher.h in Headers */,
+				FB9C382CC15DFF92E6ADF575FD5392D1 /* UIButton+WebCache.h in Headers */,
+				7A6E578F9A12FD06430A808202926A90 /* UIImage+GIF.h in Headers */,
+				FB9C1379587FAF0B0721BED23CA6ED1C /* UIImage+MultiFormat.h in Headers */,
+				8055DD5C27EF2962C52D1737FD6836BF /* UIImageView+HighlightedWebCache.h in Headers */,
+				94F1032123C6C28B46D8E464E7565470 /* UIImageView+WebCache.h in Headers */,
+				D2A32CE93EDF4CF4DC52A2D5065811BC /* UIView+WebCacheOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D06273139F7301FF94B5D5E0641667E7 /* Headers */ = {
+		EA05F8D8630F3B0BF2C456B6BFC20A6D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C1652B59A1393F80122B0B450D2DB36 /* RTRootNavigationController-umbrella.h in Headers */,
-				4884DBC10088DFC603D41036941FE2B1 /* RTRootNavigationController.h in Headers */,
-				64388D740C4F4B5048240D2AC7D47803 /* UIViewController+RTRootNavigationController.h in Headers */,
+				EFAEB2A8D40BA82ED965F2BA8D8321A4 /* RTRootNavigationController-umbrella.h in Headers */,
+				0E748C843DA1B8826512EB64714BBA60 /* RTRootNavigationController.h in Headers */,
+				FE7E9969F7DCFCE5E850A3A369BDA36B /* UIViewController+RTRootNavigationController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -789,60 +860,21 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		187D4938E4853AAF74ED933257C249B1 /* RTRootNavigationController */ = {
+		41FA54D12162DAD51D02FC58A2CD5034 /* MBProgressHUD */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5915FCD315882209B8596D4E6A4F0ED3 /* Build configuration list for PBXNativeTarget "RTRootNavigationController" */;
+			buildConfigurationList = CC1874913BA1F82C4953C3C7F551AB22 /* Build configuration list for PBXNativeTarget "MBProgressHUD" */;
 			buildPhases = (
-				159FAE8B469F669DC29946B4D98CC8E8 /* Sources */,
-				199B211ECBE80F2741F0B0F83DB3D02B /* Frameworks */,
-				D06273139F7301FF94B5D5E0641667E7 /* Headers */,
+				FE8E0446C3B3B52779E8DE373E495A61 /* Sources */,
+				B57774E30FD88AE26F9037E1360E947B /* Frameworks */,
+				197B7877D5D346F405BDD059EF96DBDC /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = RTRootNavigationController;
-			productName = RTRootNavigationController;
-			productReference = BE738A4B7D659C192101FAEA4F24674A /* RTRootNavigationController.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		46AA28753E93B0ACEC0588D1EAB31835 /* SDWebImage */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5B0E58B9B55F421EB5A94BC161C240DE /* Build configuration list for PBXNativeTarget "SDWebImage" */;
-			buildPhases = (
-				5A907054669B12B62431F030291E8894 /* Sources */,
-				6EEA03EC7B04D38F27AF242440A3BC0F /* Frameworks */,
-				81F56AB86DEB84D7D59A0038277CD67B /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SDWebImage;
-			productName = SDWebImage;
-			productReference = 4002BB1C9CCD17EDDA0C8FE9611B02EA /* SDWebImage.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		557D2A99DEE4B491F4EF4E8D242328DD /* Pods-letian */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 67D1391E9CA066BB3E94942AB922DF76 /* Build configuration list for PBXNativeTarget "Pods-letian" */;
-			buildPhases = (
-				876BB4D7D645B196B4B50780B94C368B /* Sources */,
-				0D40F510C84FDA3D33D44FE124A9C354 /* Frameworks */,
-				967A4E66DFAB45DF0631033160CCC7FB /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				057E8FF9083899BC70230144E5A29E64 /* PBXTargetDependency */,
-				69857AB424643BDCB5D7DBC456E8045A /* PBXTargetDependency */,
-				3617926847AEC2CE58DAA20FC947849B /* PBXTargetDependency */,
-				F738B4619191C88C0EA6CE6DA9AF2AE8 /* PBXTargetDependency */,
-				0518B1CE9260CED0D4C59985987AA70B /* PBXTargetDependency */,
-			);
-			name = "Pods-letian";
-			productName = "Pods-letian";
-			productReference = 299B28DEDE1094AC79E2F1D7D0DC9436 /* Pods_letian.framework */;
+			name = MBProgressHUD;
+			productName = MBProgressHUD;
+			productReference = 81E69D736E0C1FBE5BC382EA738D5C43 /* MBProgressHUD.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		58FE0486E83AA749B9E8C1300B64E2A2 /* CYLTabBarController */ = {
@@ -859,7 +891,64 @@
 			);
 			name = CYLTabBarController;
 			productName = CYLTabBarController;
-			productReference = 02B1A066D9A765E69F90D71F49988DFB /* CYLTabBarController.framework */;
+			productReference = 938B8369C214EDCC83130E1AE579A112 /* CYLTabBarController.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		76258397B06B84A9737EC15109254AFC /* Pods-letian */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5CADC7FEF7ABCA5FD1408A1687E09EB /* Build configuration list for PBXNativeTarget "Pods-letian" */;
+			buildPhases = (
+				21F0BAF96C1E88AC0346051B28B77C4A /* Sources */,
+				8238947CE019C2131085CBAC1B100286 /* Frameworks */,
+				42564F1917011C938EF53827864A5422 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B9691D0E65A338033277367DA9E905D /* PBXTargetDependency */,
+				F057B0CCB711B80B3CADC3D7C3596696 /* PBXTargetDependency */,
+				7CF92D343849069903FC728B4978E09C /* PBXTargetDependency */,
+				FEB77A2C6F7E81B3A3039CE73F226FDF /* PBXTargetDependency */,
+				308FCD5E03E06D4CA09740C6B6A5144E /* PBXTargetDependency */,
+				E0F9C5BBA99C8589B4FA3D0C840B105A /* PBXTargetDependency */,
+			);
+			name = "Pods-letian";
+			productName = "Pods-letian";
+			productReference = A34601FDE3BADC1997FD71F2F4A5409D /* Pods_letian.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B37B2F822F4CA084289FB447DA61996E /* RTRootNavigationController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41795EDA26A3FD0BBDB6DF50EF4E81C1 /* Build configuration list for PBXNativeTarget "RTRootNavigationController" */;
+			buildPhases = (
+				6CECE7B144756841A437E8ADD1B504E0 /* Sources */,
+				005BE9279B7B4DADCBAFA3A56166A563 /* Frameworks */,
+				EA05F8D8630F3B0BF2C456B6BFC20A6D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RTRootNavigationController;
+			productName = RTRootNavigationController;
+			productReference = 851B51307F9319682D8E0A60044CF4D0 /* RTRootNavigationController.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B89DDE77C536C542AE1AAF9FC2940148 /* SDWebImage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC7A5F08FF8F8712C1F935B50516335E /* Build configuration list for PBXNativeTarget "SDWebImage" */;
+			buildPhases = (
+				57E16C2C6139B81A8C9CC4B351CFA9BB /* Sources */,
+				4CF14BFAEB1F78D0E7307C8A4218ED2A /* Frameworks */,
+				E6CEE5283725634FEF5D69C1CF470329 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SDWebImage;
+			productName = SDWebImage;
+			productReference = 3134FE9B1B657011911C4746B9465460 /* SDWebImage.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		C5A2DB7A84B7B78E359870D2E1B24AA7 /* FSCalendar */ = {
@@ -876,7 +965,7 @@
 			);
 			name = FSCalendar;
 			productName = FSCalendar;
-			productReference = 55089987528EA37503F8C1A43404C101 /* FSCalendar.framework */;
+			productReference = 75C458AE22E531D52BC34C46EB64E1E2 /* FSCalendar.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		D52144DE9D7255DE912490FF5A806573 /* Masonry */ = {
@@ -893,7 +982,7 @@
 			);
 			name = Masonry;
 			productName = Masonry;
-			productReference = A1D3E26FE8279D86E1BBF345EB9EFE8B /* Masonry.framework */;
+			productReference = 305CFA8413CE5805EB2FDF9E19BD8679 /* Masonry.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -913,16 +1002,17 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = DF7BBFC8BC75E87795F8E06968B2B520 /* Products */;
+			productRefGroup = DBD5CEBC1E275A575C6FBC14C592D98B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				58FE0486E83AA749B9E8C1300B64E2A2 /* CYLTabBarController */,
 				C5A2DB7A84B7B78E359870D2E1B24AA7 /* FSCalendar */,
 				D52144DE9D7255DE912490FF5A806573 /* Masonry */,
-				557D2A99DEE4B491F4EF4E8D242328DD /* Pods-letian */,
-				187D4938E4853AAF74ED933257C249B1 /* RTRootNavigationController */,
-				46AA28753E93B0ACEC0588D1EAB31835 /* SDWebImage */,
+				41FA54D12162DAD51D02FC58A2CD5034 /* MBProgressHUD */,
+				76258397B06B84A9737EC15109254AFC /* Pods-letian */,
+				B37B2F822F4CA084289FB447DA61996E /* RTRootNavigationController */,
+				B89DDE77C536C542AE1AAF9FC2940148 /* SDWebImage */,
 			);
 		};
 /* End PBXProject section */
@@ -946,13 +1036,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		159FAE8B469F669DC29946B4D98CC8E8 /* Sources */ = {
+		21F0BAF96C1E88AC0346051B28B77C4A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AFC7067E6EE518F47C8874EDFCD8EF1 /* RTRootNavigationController-dummy.m in Sources */,
-				D1AA13E4477B8089A0E6430654A6102E /* RTRootNavigationController.m in Sources */,
-				9762A3085162217C6B6A0856C7A472CA /* UIViewController+RTRootNavigationController.m in Sources */,
+				B91306C336FCFF2AA5AC414B74F1F0C5 /* Pods-letian-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -980,33 +1068,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5A907054669B12B62431F030291E8894 /* Sources */ = {
+		57E16C2C6139B81A8C9CC4B351CFA9BB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD0A0080B1BB2187DFC4A4CC8EEA87CA /* NSData+ImageContentType.m in Sources */,
-				DD6DF296F24289D0CBDA1C36A577A824 /* SDImageCache.m in Sources */,
-				4965AF61C1DECB46FAC01ADE2E82B74D /* SDWebImage-dummy.m in Sources */,
-				5DDEB75579F695F27676A6E327AA9E39 /* SDWebImageCompat.m in Sources */,
-				E09E669CE1808336CB02081BC7BBCFEB /* SDWebImageDecoder.m in Sources */,
-				FB312B40766E2D757726B288CAD52F35 /* SDWebImageDownloader.m in Sources */,
-				D6799150541E68B06C66DA5E650B8B20 /* SDWebImageDownloaderOperation.m in Sources */,
-				3C00B78106F3AD57ECC19CE096167023 /* SDWebImageManager.m in Sources */,
-				71120A5975B56A5F6822E5457618D767 /* SDWebImagePrefetcher.m in Sources */,
-				E1685AB943D1B43AFEBCC2EC64BB1241 /* UIButton+WebCache.m in Sources */,
-				4AB769895453645083E415E840DE9CC3 /* UIImage+GIF.m in Sources */,
-				E4CE2EABBC3A8E5F3D54C90CF46E79C3 /* UIImage+MultiFormat.m in Sources */,
-				6AB6757CD5B80A0A84C89CE774224569 /* UIImageView+HighlightedWebCache.m in Sources */,
-				1A36E4C3981BA50422C49BB0DAABA40C /* UIImageView+WebCache.m in Sources */,
-				B9D6DBAD1DD63B3682E0C1B550CF4BC4 /* UIView+WebCacheOperation.m in Sources */,
+				1310258E4C31E4FEF27BC4854E0EE887 /* NSData+ImageContentType.m in Sources */,
+				CFA7B682885FC931D47F880758B41CA3 /* SDImageCache.m in Sources */,
+				E3B27A563864EDE9F8661936C6FAEC46 /* SDWebImage-dummy.m in Sources */,
+				5AC3562AF1B1D7B6EFD5F41453EE263B /* SDWebImageCompat.m in Sources */,
+				7CD30739486D297D703D79C5BDC8F7E7 /* SDWebImageDecoder.m in Sources */,
+				65449424E9EAB72AD2E44E6AD86AB22B /* SDWebImageDownloader.m in Sources */,
+				72563723EAC2C58AF08D1FA37D46B69F /* SDWebImageDownloaderOperation.m in Sources */,
+				E8D4DAF87A3EDB1A95B7E6DCC0940FBD /* SDWebImageManager.m in Sources */,
+				B51995DBE5F605785CB5936DEA2DA01B /* SDWebImagePrefetcher.m in Sources */,
+				C6B01F7EA1E80B53FCD43C7FE102E140 /* UIButton+WebCache.m in Sources */,
+				163DC42152F30F45DA6F20E170CDB841 /* UIImage+GIF.m in Sources */,
+				D1040641525490723B307E77244D6E50 /* UIImage+MultiFormat.m in Sources */,
+				394A6396653AF967FF1C9BA6A445352C /* UIImageView+HighlightedWebCache.m in Sources */,
+				ADA6564F59ADB78E8F2E35FB4D8EFFD5 /* UIImageView+WebCache.m in Sources */,
+				03000F6EB3F0C203036F2E4414BCA758 /* UIView+WebCacheOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		876BB4D7D645B196B4B50780B94C368B /* Sources */ = {
+		6CECE7B144756841A437E8ADD1B504E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09FEE7ACC14B94004B03C7A4FF15F10A /* Pods-letian-dummy.m in Sources */,
+				9B31200A39F8EE899CB14DE4784D2E26 /* RTRootNavigationController-dummy.m in Sources */,
+				16640FF1E61ECB21384E78DCB335CE45 /* RTRootNavigationController.m in Sources */,
+				46CD989C4EA73DBB7F4BFB9AF25CC993 /* UIViewController+RTRootNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1022,45 +1112,60 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FE8E0446C3B3B52779E8DE373E495A61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0968524ED4DE8DF7834055C5B6089D72 /* MBProgressHUD-dummy.m in Sources */,
+				897C38C8E3C31950E2E93A4D6937CCC4 /* MBProgressHUD.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0518B1CE9260CED0D4C59985987AA70B /* PBXTargetDependency */ = {
+		308FCD5E03E06D4CA09740C6B6A5144E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SDWebImage;
-			target = 46AA28753E93B0ACEC0588D1EAB31835 /* SDWebImage */;
-			targetProxy = A19368D945DA9B53D7B73A310A62FF09 /* PBXContainerItemProxy */;
+			name = RTRootNavigationController;
+			target = B37B2F822F4CA084289FB447DA61996E /* RTRootNavigationController */;
+			targetProxy = 242540BE6BA837B9650EBFC153D6ACB0 /* PBXContainerItemProxy */;
 		};
-		057E8FF9083899BC70230144E5A29E64 /* PBXTargetDependency */ = {
+		7CF92D343849069903FC728B4978E09C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MBProgressHUD;
+			target = 41FA54D12162DAD51D02FC58A2CD5034 /* MBProgressHUD */;
+			targetProxy = 79CFF5F69240652606BB460FCBE1B2E8 /* PBXContainerItemProxy */;
+		};
+		9B9691D0E65A338033277367DA9E905D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CYLTabBarController;
 			target = 58FE0486E83AA749B9E8C1300B64E2A2 /* CYLTabBarController */;
-			targetProxy = 9E00C71CAB9B70C8F3D2D6EA59BCACCD /* PBXContainerItemProxy */;
+			targetProxy = 7BB135FA8D7A1D789148C8238AB1C02A /* PBXContainerItemProxy */;
 		};
-		3617926847AEC2CE58DAA20FC947849B /* PBXTargetDependency */ = {
+		E0F9C5BBA99C8589B4FA3D0C840B105A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = Masonry;
-			target = D52144DE9D7255DE912490FF5A806573 /* Masonry */;
-			targetProxy = DB1386E9978D44A0B425F7F81A7921E4 /* PBXContainerItemProxy */;
+			name = SDWebImage;
+			target = B89DDE77C536C542AE1AAF9FC2940148 /* SDWebImage */;
+			targetProxy = 156E3D18BEA9A03960421BDACA03BA9F /* PBXContainerItemProxy */;
 		};
-		69857AB424643BDCB5D7DBC456E8045A /* PBXTargetDependency */ = {
+		F057B0CCB711B80B3CADC3D7C3596696 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FSCalendar;
 			target = C5A2DB7A84B7B78E359870D2E1B24AA7 /* FSCalendar */;
-			targetProxy = 9ECDAB079D326347E9E4702878768218 /* PBXContainerItemProxy */;
+			targetProxy = 4ED7864CF9DEA593C3709218D89EE9D6 /* PBXContainerItemProxy */;
 		};
-		F738B4619191C88C0EA6CE6DA9AF2AE8 /* PBXTargetDependency */ = {
+		FEB77A2C6F7E81B3A3039CE73F226FDF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = RTRootNavigationController;
-			target = 187D4938E4853AAF74ED933257C249B1 /* RTRootNavigationController */;
-			targetProxy = 1C5B884939C0D4B87A6D6CC9FD8B58FD /* PBXContainerItemProxy */;
+			name = Masonry;
+			target = D52144DE9D7255DE912490FF5A806573 /* Masonry */;
+			targetProxy = 778C4EFC028C1FA06C5AA732C507D339 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		0104A5B5C4684CAFBB2F4A203E68E909 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE6DBDA856F716C10CD113548EEA9ADF /* CYLTabBarController.xcconfig */;
+			baseConfigurationReference = 43F2C65C73BD3669C70E4AFA28A72755 /* CYLTabBarController.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1135,7 +1240,7 @@
 		};
 		0166417896C125B1FD100184FD8C9E99 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE7F9A84B9C64AB55E038C8E150CE241 /* FSCalendar.xcconfig */;
+			baseConfigurationReference = DA86DB11B38D75E8E80A7444840376A6 /* FSCalendar.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1164,15 +1269,15 @@
 			};
 			name = Debug;
 		};
-		42E567971D45A3771C80BBB80F09B6D4 /* Debug */ = {
+		03B8EDDBDC52E87E70FD700EB5D562DA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 447114A405958CC2A33BC0C7026C5184 /* SDWebImage.xcconfig */;
+			baseConfigurationReference = 1E1B31DA16EF245C87B1E4C4A8CDB3BE /* SDWebImage.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1185,7 +1290,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SDWebImage/SDWebImage.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = SDWebImage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1193,7 +1298,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		44CDBB6D11DE06DB64D6268622BDC47E /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1235,9 +1340,9 @@
 			};
 			name = Release;
 		};
-		471A75C09CE6D4C1CF90D59ADEE8A325 /* Release */ = {
+		572D4130BAEA46F565C7733FF9661D5E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 447114A405958CC2A33BC0C7026C5184 /* SDWebImage.xcconfig */;
+			baseConfigurationReference = 913FF39D6456E958AAD91281BEC88724 /* RTRootNavigationController.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1250,14 +1355,14 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SDWebImage/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/RTRootNavigationController/RTRootNavigationController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RTRootNavigationController/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SDWebImage/SDWebImage.modulemap";
+				MODULEMAP_FILE = "Target Support Files/RTRootNavigationController/RTRootNavigationController.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SDWebImage;
+				PRODUCT_NAME = RTRootNavigationController;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1266,7 +1371,7 @@
 			};
 			name = Release;
 		};
-		75DBF000336E2DC7B363AD13726BA144 /* Debug */ = {
+		5E74E142A02F70735C57A345A66D9AF9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2663F37C80983EE660F0DDE640BF8518 /* Pods-letian.debug.xcconfig */;
 			buildSettings = {
@@ -1301,7 +1406,38 @@
 			};
 			name = Debug;
 		};
-		798C71D5B3B60A4383D852708B61F508 /* Release */ = {
+		679B973EA7AD405C207DDD569F65D749 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF899C4BA6A1FA0B4CCA58E03D0F3494 /* MBProgressHUD.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MBProgressHUD/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MBProgressHUD/MBProgressHUD.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = MBProgressHUD;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6BE0021ADA96F8CE18E400F85CA5B286 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5555FA498B184DCC8C30493F9BC4133 /* Pods-letian.release.xcconfig */;
 			buildSettings = {
@@ -1336,9 +1472,71 @@
 			};
 			name = Release;
 		};
+		6FF338087EBFB3A8F561488B7D2E9F09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 913FF39D6456E958AAD91281BEC88724 /* RTRootNavigationController.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/RTRootNavigationController/RTRootNavigationController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RTRootNavigationController/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/RTRootNavigationController/RTRootNavigationController.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = RTRootNavigationController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7B1230B2BA14E13BD851B1184FB2BC7E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF899C4BA6A1FA0B4CCA58E03D0F3494 /* MBProgressHUD.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MBProgressHUD/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MBProgressHUD/MBProgressHUD.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = MBProgressHUD;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		7C43D8E0EA546EFC74B0F3952CC470F1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE7F9A84B9C64AB55E038C8E150CE241 /* FSCalendar.xcconfig */;
+			baseConfigurationReference = DA86DB11B38D75E8E80A7444840376A6 /* FSCalendar.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1369,7 +1567,7 @@
 		};
 		7CC747A8B09F50D8EA3191B7C5EDD18B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C2578373C05EE1C88E34D96EF946DF4F /* Masonry.xcconfig */;
+			baseConfigurationReference = EAE438F966D96B9B80B633EEC120949A /* Masonry.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1398,9 +1596,9 @@
 			};
 			name = Release;
 		};
-		87A524622528093365E2FF2774FF3F3E /* Debug */ = {
+		A5A06E0F635670FD8E326D1CF30B2E43 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C61EF853EDD200B2CB393E0AD63D8AED /* RTRootNavigationController.xcconfig */;
+			baseConfigurationReference = 1E1B31DA16EF245C87B1E4C4A8CDB3BE /* SDWebImage.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1413,14 +1611,14 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/RTRootNavigationController/RTRootNavigationController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/RTRootNavigationController/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SDWebImage/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/RTRootNavigationController/RTRootNavigationController.modulemap";
+				MODULEMAP_FILE = "Target Support Files/SDWebImage/SDWebImage.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = RTRootNavigationController;
+				PRODUCT_NAME = SDWebImage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1431,7 +1629,7 @@
 		};
 		B4749D97C54F363844A472EF9324AB16 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE6DBDA856F716C10CD113548EEA9ADF /* CYLTabBarController.xcconfig */;
+			baseConfigurationReference = 43F2C65C73BD3669C70E4AFA28A72755 /* CYLTabBarController.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1462,7 +1660,7 @@
 		};
 		DDBED416AF7EF4E0711DC078BAC8DC3E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C2578373C05EE1C88E34D96EF946DF4F /* Masonry.xcconfig */;
+			baseConfigurationReference = EAE438F966D96B9B80B633EEC120949A /* Masonry.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1491,37 +1689,6 @@
 			};
 			name = Debug;
 		};
-		E245C6FDC5CF992C334B4B2C0E15C322 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C61EF853EDD200B2CB393E0AD63D8AED /* RTRootNavigationController.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/RTRootNavigationController/RTRootNavigationController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/RTRootNavigationController/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/RTRootNavigationController/RTRootNavigationController.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = RTRootNavigationController;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1543,29 +1710,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5915FCD315882209B8596D4E6A4F0ED3 /* Build configuration list for PBXNativeTarget "RTRootNavigationController" */ = {
+		41795EDA26A3FD0BBDB6DF50EF4E81C1 /* Build configuration list for PBXNativeTarget "RTRootNavigationController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				87A524622528093365E2FF2774FF3F3E /* Debug */,
-				E245C6FDC5CF992C334B4B2C0E15C322 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5B0E58B9B55F421EB5A94BC161C240DE /* Build configuration list for PBXNativeTarget "SDWebImage" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				42E567971D45A3771C80BBB80F09B6D4 /* Debug */,
-				471A75C09CE6D4C1CF90D59ADEE8A325 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		67D1391E9CA066BB3E94942AB922DF76 /* Build configuration list for PBXNativeTarget "Pods-letian" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				75DBF000336E2DC7B363AD13726BA144 /* Debug */,
-				798C71D5B3B60A4383D852708B61F508 /* Release */,
+				6FF338087EBFB3A8F561488B7D2E9F09 /* Debug */,
+				572D4130BAEA46F565C7733FF9661D5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1575,6 +1724,33 @@
 			buildConfigurations = (
 				0166417896C125B1FD100184FD8C9E99 /* Debug */,
 				7C43D8E0EA546EFC74B0F3952CC470F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC1874913BA1F82C4953C3C7F551AB22 /* Build configuration list for PBXNativeTarget "MBProgressHUD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				679B973EA7AD405C207DDD569F65D749 /* Debug */,
+				7B1230B2BA14E13BD851B1184FB2BC7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC7A5F08FF8F8712C1F935B50516335E /* Build configuration list for PBXNativeTarget "SDWebImage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5A06E0F635670FD8E326D1CF30B2E43 /* Debug */,
+				03B8EDDBDC52E87E70FD700EB5D562DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5CADC7FEF7ABCA5FD1408A1687E09EB /* Build configuration list for PBXNativeTarget "Pods-letian" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E74E142A02F70735C57A345A66D9AF9 /* Debug */,
+				6BE0021ADA96F8CE18E400F85CA5B286 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

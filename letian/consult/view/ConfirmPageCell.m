@@ -23,7 +23,7 @@
     self.mainColorTag.backgroundColor = MAINCOLOR;
     self.labelTag.font = [UIFont boldSystemFontOfSize:15];
     self.detialLab.numberOfLines = 0;
-    self.detialLab.font = [UIFont systemFontOfSize:15];
+    self.detialLab.font = [UIFont systemFontOfSize:13];
     self.detialLab.textColor = [UIColor darkGrayColor];
     
 }

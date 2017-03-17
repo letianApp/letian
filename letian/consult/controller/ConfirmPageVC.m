@@ -10,7 +10,7 @@
 #import "ConfirmPageCell.h"
 #import "FSCalendar.h"
 #import "HZQDatePickerView.h"
-
+#import "MBProgressHUD.h"
 
 @interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, HZQDatePickerViewDelegate>
 
@@ -33,6 +33,8 @@
 
 
 @property (nonatomic, assign) NSInteger firstCellHeight;
+
+@property (nonatomic, strong) UIButton *ConfirmBtn;
 
 
 @end
@@ -83,7 +85,6 @@
 //    _mainTableView.rowHeight = UITableViewAutomaticDimension;
     _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    _mainTableView.rowHeight = 500;
     
     
 }
@@ -117,6 +118,7 @@
             
             UIButton *btn = [GQControls createButtonWithFrame:CGRectMake(10+SCREEN_W/3*i, 10, SCREEN_W/3-20, 30) andTitle:btnTitle[i] andTitleColor:MAINCOLOR andFontSize:15 andTag:i+1 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
             btn.backgroundColor = [UIColor whiteColor];
+            btn.titleLabel.adjustsFontSizeToFitWidth = YES;
             [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
             [btn addTarget:self action:@selector(clickChoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
             [view addSubview:btn];
@@ -135,16 +137,25 @@
     
 }
 
-- (void)clickChoiceBtn:(UIButton *)btn {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    CGFloat height = _timeChoicesView.y + 75;
+    return height;
+}
+
+- (void)clickChoiceBtn:(UIButton *)btn {
+
+    [self animationbegin:btn];
     for (int i = 0; i < 3; i++) {
         UIButton *btnn = [self.view viewWithTag:i+1];
         btnn.selected = NO;
         btnn.backgroundColor = [UIColor whiteColor];
+//        btnn.enabled = YES;
     }
     
     btn.selected = YES;
     btn.backgroundColor = MAINCOLOR;
+//    btn.enabled = NO;
     
 }
 
@@ -192,9 +203,11 @@
     
 //    UIButton *startBtn = [[UIButton alloc]initWithFrame:CGRectMake(_timeChoicesView.width/2, 5, _timeChoicesView.width/5, 30)];
     
-    _startBtn = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 5, _timeChoicesView.width*0.3, 30) andTitle:@"起始时间" andTitleColor:MAINCOLOR andFontSize:13 andTag:102 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    _startBtn = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 5, _timeChoicesView.width*0.3, 30) andTitle:@"起始时间" andTitleColor:MAINCOLOR andFontSize:15 andTag:102 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    _startBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
 
-    _endBtn = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.6, 5, _timeChoicesView.width*0.3, 30) andTitle:@"结束时间" andTitleColor:MAINCOLOR andFontSize:13 andTag:103 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    _endBtn = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.6, 5, _timeChoicesView.width*0.3, 30) andTitle:@"结束时间" andTitleColor:MAINCOLOR andFontSize:15 andTag:103 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    _endBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
     
     [_startBtn addTarget:self action:@selector(clickTimeChoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_endBtn addTarget:self action:@selector(clickTimeChoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -233,6 +246,9 @@
         [_endBtn removeFromSuperview];
         [_lineView removeFromSuperview];
         [_timeChoicesView addSubview:_dateDisplayLab];
+        
+        _ConfirmBtn.enabled = NO;
+        _ConfirmBtn.backgroundColor = [UIColor lightGrayColor];
 
         
         
@@ -243,6 +259,8 @@
         [_timeChoicesView addSubview:_endBtn];
         [_timeChoicesView addSubview:_lineView];
         
+        _ConfirmBtn.enabled = YES;
+        _ConfirmBtn.backgroundColor = MAINCOLOR;
         
 //        _dateDisplayLab.text = selDateStr;
 //        _dateDisplayLab.font = [UIFont systemFontOfSize:20];
@@ -259,13 +277,43 @@
 - (void)clickTimeChoiceBtn:(UIButton *)btn {
     
     if (btn == _startBtn) {
+        [self animationbegin:btn];
         [self setupDateView:DateTypeOfStart];
+        
+        
+        
+        
     } else if (btn == _endBtn) {
+        
+        
+        [self animationbegin:btn];
         [self setupDateView:DateTypeOfEnd];
     }
     
     
 }
+
+
+- (void)animationbegin:(UIView *)view {
+    /* 放大缩小 */
+    
+    // 设定为缩放
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    
+    // 动画选项设定
+    animation.duration = 0.1; // 动画持续时间
+    animation.repeatCount = -1; // 重复次数
+    animation.autoreverses = YES; // 动画结束时执行逆动画
+    
+    // 缩放倍数
+    animation.fromValue = [NSNumber numberWithFloat:1.0]; // 开始时的倍率
+    animation.toValue = [NSNumber numberWithFloat:0.9]; // 结束时的倍率
+    
+    // 添加动画
+    [view.layer addAnimation:animation forKey:@"scale-layer"];
+    
+}
+
 
 
 - (void)setupDateView:(DateType)type {
@@ -278,7 +326,7 @@
     // 今天开始往后的日期
 //    [_pikerView.datePickerView setMinimumDate:[NSDate date]];
     // 在今天之前的日期
-        [_pikerView.datePickerView setMaximumDate:[NSDate date]];
+    [_pikerView.datePickerView setMaximumDate:[NSDate date]];
     [self.view addSubview:_pikerView];
     
 }
@@ -317,11 +365,11 @@
 - (void)creatBottomBar {
     
     _tabBar = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
-    btn.backgroundColor = MAINCOLOR;
-    [btn setTitle:@"确定预约" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
-    [_tabBar addSubview:btn];
+    _ConfirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
+    _ConfirmBtn.backgroundColor = MAINCOLOR;
+    [_ConfirmBtn setTitle:@"确定预约" forState:UIControlStateNormal];
+    [_ConfirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
+    [_tabBar addSubview:_ConfirmBtn];
     
     
     [self.view addSubview:_tabBar];
