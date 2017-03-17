@@ -11,7 +11,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderDetailViewController">
             <connections>
+                <outlet property="cancelButton" destination="DJB-fC-tLi" id="fJe-9F-H8p"/>
+                <outlet property="consultTimelabel" destination="Z8r-iP-wIO" id="tQK-16-LNa"/>
+                <outlet property="moneyLabel" destination="G61-S2-0Jv" id="Ata-FM-sql"/>
+                <outlet property="nameLabel" destination="j02-bz-dGG" id="zXE-3z-QpU"/>
+                <outlet property="orderNumLabel" destination="3mX-Ai-Ox2" id="Rez-Vn-V6m"/>
+                <outlet property="orderStateLabel" destination="amr-Kg-B6q" id="3od-H6-57l"/>
+                <outlet property="payButton" destination="pdb-RB-9Ae" id="dTI-aw-ckH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="wayLabel" destination="ToF-V9-1Im" id="MDU-Gp-qmr"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -248,7 +256,7 @@
                 <constraint firstItem="ToF-V9-1Im" firstAttribute="top" secondItem="j02-bz-dGG" secondAttribute="bottom" constant="10" id="wmQ-hf-Jqu"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <point key="canvasLocation" x="-71" y="-53"/>
+            <point key="canvasLocation" x="-192" y="-86"/>
         </view>
     </objects>
 </document>

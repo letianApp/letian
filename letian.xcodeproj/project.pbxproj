@@ -64,10 +64,10 @@
 		409A63AB2E6AC88BB7667EDA /* Pods_letian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505775953CF6A0895C5EA53C /* Pods_letian.framework */; };
 		77038DE71E63C3B50096C07D /* NSTimer+YYFounction.m in Sources */ = {isa = PBXBuildFile; fileRef = 77038DE41E63C3B50096C07D /* NSTimer+YYFounction.m */; };
 		77038DE81E63C3B50096C07D /* YYCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77038DE61E63C3B50096C07D /* YYCycleScrollView.m */; };
-		77038DFA1E63C9F20096C07D /* cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038DEE1E63C9F20096C07D /* cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg */; };
-		77038DFB1E63C9F20096C07D /* timg (1).jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 77038DEF1E63C9F20096C07D /* timg (1).jpeg */; };
-		77038DFC1E63C9F20096C07D /* timg.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF01E63C9F20096C07D /* timg.jpeg */; };
-		77038DFD1E63C9F20096C07D /* u=275622820,2944364039&fm=214&gp=0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF11E63C9F20096C07D /* u=275622820,2944364039&fm=214&gp=0.jpg */; };
+		77038DFA1E63C9F20096C07D /* head1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038DEE1E63C9F20096C07D /* head1.jpg */; };
+		77038DFB1E63C9F20096C07D /* head2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 77038DEF1E63C9F20096C07D /* head2.jpeg */; };
+		77038DFC1E63C9F20096C07D /* head3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF01E63C9F20096C07D /* head3.jpeg */; };
+		77038DFD1E63C9F20096C07D /* head4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF11E63C9F20096C07D /* head4.jpg */; };
 		77038DFE1E63C9F20096C07D /* headImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF21E63C9F20096C07D /* headImage.png */; };
 		77038DFF1E63C9F20096C07D /* women.png in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF31E63C9F20096C07D /* women.png */; };
 		77038E001E63C9F20096C07D /* wowomen.png in Resources */ = {isa = PBXBuildFile; fileRef = 77038DF41E63C9F20096C07D /* wowomen.png */; };
@@ -230,10 +230,10 @@
 		77038DE51E63C3B50096C07D /* YYCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYCycleScrollView.h; sourceTree = "<group>"; };
 		77038DE61E63C3B50096C07D /* YYCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYCycleScrollView.m; sourceTree = "<group>"; };
 		77038DEA1E63C6590096C07D /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		77038DEE1E63C9F20096C07D /* cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg; sourceTree = "<group>"; };
-		77038DEF1E63C9F20096C07D /* timg (1).jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "timg (1).jpeg"; sourceTree = "<group>"; };
-		77038DF01E63C9F20096C07D /* timg.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = timg.jpeg; sourceTree = "<group>"; };
-		77038DF11E63C9F20096C07D /* u=275622820,2944364039&fm=214&gp=0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "u=275622820,2944364039&fm=214&gp=0.jpg"; sourceTree = "<group>"; };
+		77038DEE1E63C9F20096C07D /* head1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = head1.jpg; sourceTree = "<group>"; };
+		77038DEF1E63C9F20096C07D /* head2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = head2.jpeg; sourceTree = "<group>"; };
+		77038DF01E63C9F20096C07D /* head3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = head3.jpeg; sourceTree = "<group>"; };
+		77038DF11E63C9F20096C07D /* head4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = head4.jpg; sourceTree = "<group>"; };
 		77038DF21E63C9F20096C07D /* headImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headImage.png; sourceTree = "<group>"; };
 		77038DF31E63C9F20096C07D /* women.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = women.png; sourceTree = "<group>"; };
 		77038DF41E63C9F20096C07D /* wowomen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wowomen.png; sourceTree = "<group>"; };
@@ -651,10 +651,10 @@
 			isa = PBXGroup;
 			children = (
 				77038DF51E63C9F20096C07D /* 客服.png */,
-				77038DEE1E63C9F20096C07D /* cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg */,
-				77038DEF1E63C9F20096C07D /* timg (1).jpeg */,
-				77038DF01E63C9F20096C07D /* timg.jpeg */,
-				77038DF11E63C9F20096C07D /* u=275622820,2944364039&fm=214&gp=0.jpg */,
+				77038DEE1E63C9F20096C07D /* head1.jpg */,
+				77038DEF1E63C9F20096C07D /* head2.jpeg */,
+				77038DF01E63C9F20096C07D /* head3.jpeg */,
+				77038DF11E63C9F20096C07D /* head4.jpg */,
 				77038DF21E63C9F20096C07D /* headImage.png */,
 				77038DF31E63C9F20096C07D /* women.png */,
 				77038DF41E63C9F20096C07D /* wowomen.png */,
@@ -880,7 +880,7 @@
 				77D2BFA21E66C404000B9978 /* SetAcountViewController.xib in Resources */,
 				7784D89F1E6D5512004AB0CC /* success@3x.png in Resources */,
 				0953C22C1E514B5800FB165C /* Main.storyboard in Resources */,
-				77038DFD1E63C9F20096C07D /* u=275622820,2944364039&fm=214&gp=0.jpg in Resources */,
+				77038DFD1E63C9F20096C07D /* head4.jpg in Resources */,
 				0907337B1E64105A00F21E02 /* consultPagTab.png in Resources */,
 				77038E031E63C9F20096C07D /* 支付宝.png in Resources */,
 				774DBC111E64214900B8798C /* msg.png in Resources */,
@@ -889,7 +889,7 @@
 				090733841E64105A00F21E02 /* mainMessage@2x.png in Resources */,
 				0907337C1E64105A00F21E02 /* consultPagTab@2x.png in Resources */,
 				0907337F1E64105A00F21E02 /* firstPageTab.png in Resources */,
-				77038DFA1E63C9F20096C07D /* cd516b22jw8fa4mlfynwzj20hs0hm0tr.jpg in Resources */,
+				77038DFA1E63C9F20096C07D /* head1.jpg in Resources */,
 				77038E0D1E63CAAB0096C07D /* index_slide_01.jpg in Resources */,
 				77D2BF981E66B3D0000B9978 /* RegistViewController.xib in Resources */,
 				09FBE01E1E70EE60003452A6 /* ConfirmPageVC.xib in Resources */,
@@ -899,7 +899,7 @@
 				7784D89C1E6D5512004AB0CC /* date@3x.png in Resources */,
 				77038E021E63C9F20096C07D /* 微信支付.png in Resources */,
 				77F3D85E1E764E22008B5FC0 /* OrderViewController.xib in Resources */,
-				77038DFB1E63C9F20096C07D /* timg (1).jpeg in Resources */,
+				77038DFB1E63C9F20096C07D /* head2.jpeg in Resources */,
 				090733891E64105A00F21E02 /* myPagTabSel.png in Resources */,
 				09FBE0231E70F609003452A6 /* ConfirmPageCell.xib in Resources */,
 				090733851E64105A00F21E02 /* mainMessageSel.png in Resources */,
@@ -925,7 +925,7 @@
 				7784D8911E6D1F43004AB0CC /* waitpay.png in Resources */,
 				77038E091E63CA960096C07D /* index_slide_03.jpg in Resources */,
 				77038E001E63C9F20096C07D /* wowomen.png in Resources */,
-				77038DFC1E63C9F20096C07D /* timg.jpeg in Resources */,
+				77038DFC1E63C9F20096C07D /* head3.jpeg in Resources */,
 				7784D8931E6D1F43004AB0CC /* waitpay@3x.png in Resources */,
 				090733811E64105A00F21E02 /* firstPageTabSel.png in Resources */,
 				7784D89D1E6D5512004AB0CC /* success.png in Resources */,
