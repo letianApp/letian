@@ -10,6 +10,23 @@
 
 @interface OrderDetailViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *wayLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *consultTimelabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *orderStateLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *orderNumLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *payButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+
+
 @end
 
 @implementation OrderDetailViewController
@@ -19,8 +36,24 @@
     
     [self setUpNavigationBar];
     
+    [self SetUpViewLayer];
     
  }
+
+
+-(void)SetUpViewLayer{
+    
+    self.payButton.layer.borderWidth=1;
+    self.payButton.layer.borderColor=[MAINCOLOR CGColor];
+    self.payButton.layer.masksToBounds=YES;
+    self.payButton.layer.cornerRadius=8;
+    
+    self.cancelButton.layer.borderWidth=1;
+    self.cancelButton.layer.borderColor=[[UIColor darkGrayColor] CGColor];
+    self.cancelButton.layer.masksToBounds=YES;
+    self.cancelButton.layer.cornerRadius=8;
+    
+}
 
 /*** 设置导航栏信息*/
 -(void) setUpNavigationBar

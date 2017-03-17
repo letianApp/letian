@@ -16,7 +16,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self setUpNavigationBar];
+}
+
+
+/*** 设置导航栏信息*/
+-(void) setUpNavigationBar
+{
+    
+    self.navigationItem.title=@"订单详情";
+    
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    
+    backButton.frame=CGRectMake(30, 12, 20, 20);
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+}
+
+
+
+-(void) back
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
