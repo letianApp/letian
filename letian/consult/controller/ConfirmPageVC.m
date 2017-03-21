@@ -19,6 +19,7 @@
 @property (nonatomic, weak) FSCalendar *calendar;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSCalendar *gregorianCalendar;
+@property (nonatomic, assign) BOOL isToday;
 
 @property (nonatomic, strong) UIView *timeChoicesView;
 @property (nonatomic, strong) UILabel *dateDisplayLab;
@@ -27,9 +28,10 @@
 @property (nonatomic, strong) UIButton *startBtn;
 @property (nonatomic, strong) UIButton *endBtn;
 @property (nonatomic, strong) UIView *lineView;
+@property (nonatomic, assign) NSDate *startDate;
 
-@property (nonatomic, strong) UIAlertController *dateAlCtl;
-@property (nonatomic, strong) UIPickerView *datePick;
+//@property (nonatomic, strong) UIAlertController *dateAlCtl;
+//@property (nonatomic, strong) UIPickerView *datePick;
 
 
 @property (nonatomic, assign) NSInteger firstCellHeight;
@@ -46,8 +48,9 @@
     // Do any additional setup after loading the view from its nib.
     
     self.automaticallyAdjustsScrollViewInsets = NO;
+    _isToday = YES;
 //    self.view.backgroundColor = [UIColor yellowColor];
-    
+    [self customNavigation];
     [self customMainTableView];
     
     
@@ -58,7 +61,8 @@
 - (void)customNavigation {
     
 //    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-    self.navigationController.navigationBar.barTintColor = MAINCOLOR;
+//    self.navigationController.navigationBar.barTintColor = MAINCOLOR;
+    self.navigationItem.title = @"孙晓平";
     
 }
 
@@ -178,7 +182,7 @@
     self.gregorianCalendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.timeZone = [NSTimeZone systemTimeZone];
-    self.dateFormatter.dateFormat = @"yyyy-MM-dd";
+    self.dateFormatter.dateFormat = @"yyyy-MM-dd";              //时间格式用来判断日期
 }
 
 - (NSString *)calendar:(FSCalendar *)calendar titleForDate:(NSDate *)date {
@@ -240,6 +244,7 @@
     NSComparisonResult result = [selDate compare:todayDate];
     if (result == NSOrderedAscending) {
         NSLog(@"不可以穿越到过去预约哦");
+        _isToday = NO;
         _dateDisplayLab.text = @"不可以穿越到过去预约哦";
         _dateDisplayLab.font = [UIFont systemFontOfSize:20];
         [_startBtn removeFromSuperview];
@@ -252,8 +257,20 @@
 
         
         
+    } else if (result == NSOrderedSame) {
+        
+        _isToday = YES;
+        [_dateDisplayLab removeFromSuperview];
+        [_timeChoicesView addSubview:_startBtn];
+        [_timeChoicesView addSubview:_endBtn];
+        [_timeChoicesView addSubview:_lineView];
+        
+        _ConfirmBtn.enabled = YES;
+        _ConfirmBtn.backgroundColor = MAINCOLOR;
+        
     } else {
         
+        _isToday = NO;
         [_dateDisplayLab removeFromSuperview];
         [_timeChoicesView addSubview:_startBtn];
         [_timeChoicesView addSubview:_endBtn];
@@ -268,9 +285,9 @@
     }
 
     
-    
-//    NSLog(@"当前时间：%@",todayDate);
-//    NSLog(@"did select date %@",[self.dateFormatter stringFromDate:date]);
+//    _startDate = date;
+    NSLog(@"是否今天bool值：%@",_isToday?@"YES":@"NO");
+//    NSLog(@"did select date %@",_startDate);
     
 }
 
@@ -314,8 +331,6 @@
     
 }
 
-
-
 - (void)setupDateView:(DateType)type {
     
     _pikerView = [HZQDatePickerView instanceDatePickerView];
@@ -323,11 +338,59 @@
     [_pikerView setBackgroundColor:[UIColor clearColor]];
     _pikerView.delegate = self;
     _pikerView.type = type;
+    _pikerView.datePickerView.minuteInterval = 30;
+    
+    switch (type) {
+        case DateTypeOfStart:
+            
+            // 今天开始往后的日期
+            
+            if (_isToday == YES) {
+                [_pikerView.datePickerView setMinimumDate:[NSDate new]];
+            } else {
+                
+//                NSString *commonDateStr = @"上午 09:00";
+//                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//                [dateFormatter setDateFormat:@"a hh:mm"];
+//                NSDate *commonDate = [dateFormatter dateFromString:commonDateStr];
+//                NSDate *localCommonDate = [commonDate dateByAddingTimeInterval:8 * 60 * 60];
+//                NSLog(@"字符串转date: %@",localCommonDate);
+//                NSLog(@"%@",commonDate);
+//                
+//                [_pikerView.datePickerView setMinimumDate:localCommonDate];
+
+                
+            }
+            
+            [self.view addSubview:_pikerView];
+            
+            break;
+            
+        case DateTypeOfEnd:
+            
+            if ([_startBtn.titleLabel.text isEqual: @"起始时间"]) {
+                NSLog(@"nonononono");
+            } else {
+                
+                NSDate *anHourDate = [_startDate dateByAddingTimeInterval:60*60];
+                NSLog(@"%@",anHourDate);
+                
+                [_pikerView.datePickerView setMinimumDate:anHourDate];
+                [self.view addSubview:_pikerView];
+            }
+            
+            break;
+            
+        default:
+            break;
+    }
+
+    
+    
     // 今天开始往后的日期
 //    [_pikerView.datePickerView setMinimumDate:[NSDate date]];
     // 在今天之前的日期
-    [_pikerView.datePickerView setMaximumDate:[NSDate date]];
-    [self.view addSubview:_pikerView];
+//    [_pikerView.datePickerView setMaximumDate:[NSDate date]];
     
 }
 
@@ -337,8 +400,18 @@
     switch (type) {
         case DateTypeOfStart:
 //            _startBtn.titleLabel.text = [NSString stringWithFormat:@"%@", date];
+//            _startDate = date;
             
-            [_startBtn setTitle:[NSString stringWithFormat:@"%@", date] forState:UIControlStateNormal];
+            if ([date containsString:@":00"] || [date containsString:@":30"]) {
+                _startDate = [_pikerView.datePickerView date];
+                NSLog(@"%@",_startDate);
+                [_startBtn setTitle:[NSString stringWithFormat:@"%@", date] forState:UIControlStateNormal];
+            } else {
+                
+                NSLog(@"请选择整点时间");
+                
+            }
+            
             
 //            _startBtn.titleLabel.textAlignment = 1;
             

@@ -28,7 +28,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5H-3t-3wG">
                     <rect key="frame" x="20" y="193.5" width="335" height="280"/>
                     <subviews>
-                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Jns-b0-mnj">
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="Jns-b0-mnj">
                             <rect key="frame" x="0.0" y="5" width="335" height="220"/>
                             <date key="date" timeIntervalSinceReferenceDate="460383388.36114901">
                                 <!--2015-08-04 12:16:28 +0000-->
