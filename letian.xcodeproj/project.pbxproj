@@ -105,6 +105,9 @@
 		7784D8A81E6E532E004AB0CC /* whiteMessage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8A51E6E532E004AB0CC /* whiteMessage@3x.png */; };
 		7784D8AC1E6E80C5004AB0CC /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7784D8AA1E6E80C5004AB0CC /* MessageViewController.m */; };
 		7784D8AD1E6E80C5004AB0CC /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */; };
+		77A17B7A1E7F9A2900569558 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A17B791E7F9A2900569558 /* ArticleViewController.m */; };
+		77A17B7D1E7F9C1800569558 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A17B7C1E7F9C1800569558 /* TestViewController.m */; };
+		77A17B831E7FA20B00569558 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A17B821E7FA20B00569558 /* ActivityViewController.m */; };
 		77B5C9E71E7A2F000028CB9E /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5C9E51E7A2F000028CB9E /* OrderDetailViewController.m */; };
 		77B5C9E81E7A2F000028CB9E /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B5C9E61E7A2F000028CB9E /* OrderDetailViewController.xib */; };
 		77B5C9EC1E7A4AF50028CB9E /* CompleteOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5C9EA1E7A4AF50028CB9E /* CompleteOrderViewController.m */; };
@@ -283,6 +286,12 @@
 		7784D8A91E6E80C5004AB0CC /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		7784D8AA1E6E80C5004AB0CC /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
+		77A17B781E7F9A2900569558 /* ArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleViewController.h; sourceTree = "<group>"; };
+		77A17B791E7F9A2900569558 /* ArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleViewController.m; sourceTree = "<group>"; };
+		77A17B7B1E7F9C1800569558 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		77A17B7C1E7F9C1800569558 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		77A17B811E7FA20B00569558 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
+		77A17B821E7FA20B00569558 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		77B5C9E41E7A2F000028CB9E /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		77B5C9E51E7A2F000028CB9E /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		77B5C9E61E7A2F000028CB9E /* OrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
@@ -540,6 +549,12 @@
 			children = (
 				0970CFEA1E517EB8007480CB /* FirstViewController.h */,
 				0970CFEB1E517EB8007480CB /* FirstViewController.m */,
+				77A17B811E7FA20B00569558 /* ActivityViewController.h */,
+				77A17B821E7FA20B00569558 /* ActivityViewController.m */,
+				77A17B7B1E7F9C1800569558 /* TestViewController.h */,
+				77A17B7C1E7F9C1800569558 /* TestViewController.m */,
+				77A17B781E7F9A2900569558 /* ArticleViewController.h */,
+				77A17B791E7F9A2900569558 /* ArticleViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1055,9 +1070,12 @@
 				0970CFF51E5180DF007480CB /* MyViewController.m in Sources */,
 				77D2BFA61E67D6A9000B9978 /* ForgetPwViewController.m in Sources */,
 				0945B1481E6937DF005B7560 /* CustomCYLTabBar.m in Sources */,
+				77A17B831E7FA20B00569558 /* ActivityViewController.m in Sources */,
 				0953C2291E514B5800FB165C /* ViewController.m in Sources */,
 				7784D8AC1E6E80C5004AB0CC /* MessageViewController.m in Sources */,
 				0965FBC31E8230B400C0FBAD /* KuroTextField.m in Sources */,
+				77A17B7D1E7F9C1800569558 /* TestViewController.m in Sources */,
+				77A17B7A1E7F9A2900569558 /* ArticleViewController.m in Sources */,
 				77038DE81E63C3B50096C07D /* YYCycleScrollView.m in Sources */,
 				774DBC0C1E6420FC00B8798C /* HomeCell.m in Sources */,
 				0965FBC41E8230B400C0FBAD /* PulsingHaloLayer.m in Sources */,
