@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9D60816151C101C1D95662B39F6BFAA6'
-               BlueprintName = 'RTRootNavigationController'
+               BlueprintIdentifier = 'C067A0E3F9B296CC29DB4EE70BC31D14'
+               BlueprintName = 'ZYKeyboardUtil'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'RTRootNavigationController.framework'>
+               BuildableName = 'ZYKeyboardUtil.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -46,6 +46,7 @@
 		0965FBC31E8230B400C0FBAD /* KuroTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0965FBC01E8230B400C0FBAD /* KuroTextField.m */; };
 		0965FBC81E824AF900C0FBAD /* OrderPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0965FBC61E824AF900C0FBAD /* OrderPageVC.m */; };
 		0965FBC91E824AF900C0FBAD /* OrderPageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0965FBC71E824AF900C0FBAD /* OrderPageVC.xib */; };
+		096DE4591E82591C00C57DDF /* LRTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 096DE4581E82591C00C57DDF /* LRTextField.m */; };
 		0970CFEC1E517EB8007480CB /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0970CFEB1E517EB8007480CB /* FirstViewController.m */; };
 		0970CFF01E5180BF007480CB /* ConsultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0970CFEE1E5180BF007480CB /* ConsultViewController.m */; };
 		0970CFF11E5180BF007480CB /* ConsultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0970CFEF1E5180BF007480CB /* ConsultViewController.xib */; };
@@ -214,6 +215,8 @@
 		0965FBC51E824AF900C0FBAD /* OrderPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPageVC.h; sourceTree = "<group>"; };
 		0965FBC61E824AF900C0FBAD /* OrderPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPageVC.m; sourceTree = "<group>"; };
 		0965FBC71E824AF900C0FBAD /* OrderPageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderPageVC.xib; sourceTree = "<group>"; };
+		096DE4571E82591C00C57DDF /* LRTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRTextField.h; sourceTree = "<group>"; };
+		096DE4581E82591C00C57DDF /* LRTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRTextField.m; sourceTree = "<group>"; };
 		0970CFEA1E517EB8007480CB /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		0970CFEB1E517EB8007480CB /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		0970CFED1E5180BF007480CB /* ConsultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultViewController.h; sourceTree = "<group>"; };
@@ -524,6 +527,15 @@
 			path = TextField;
 			sourceTree = "<group>";
 		};
+		096DE4561E82591C00C57DDF /* LRTextField */ = {
+			isa = PBXGroup;
+			children = (
+				096DE4571E82591C00C57DDF /* LRTextField.h */,
+				096DE4581E82591C00C57DDF /* LRTextField.m */,
+			);
+			path = LRTextField;
+			sourceTree = "<group>";
+		};
 		0970CFDB1E515A92007480CB /* first */ = {
 			isa = PBXGroup;
 			children = (
@@ -680,6 +692,7 @@
 			children = (
 				0965FBAF1E7A918900C0FBAD /* HZQDatePickerView */,
 				0965FBBE1E8230B400C0FBAD /* TextField */,
+				096DE4561E82591C00C57DDF /* LRTextField */,
 				7784D8A01E6D587D004AB0CC /* GQControls.h */,
 				7784D8A11E6D587D004AB0CC /* GQControls.m */,
 				09A64DD71E7290C300DCE8D9 /* UIView+Layout.h */,
@@ -1125,6 +1138,7 @@
 				0970CFEC1E517EB8007480CB /* FirstViewController.m in Sources */,
 				77221D901E6FB5E700022AAF /* AdvisoryViewController.m in Sources */,
 				77038DE71E63C3B50096C07D /* NSTimer+YYFounction.m in Sources */,
+				096DE4591E82591C00C57DDF /* LRTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
