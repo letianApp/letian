@@ -38,7 +38,7 @@
     
     
     leftLayer.path = leftPath.CGPath;
-    leftLayer.strokeColor = [[UIColor whiteColor] CGColor];
+    leftLayer.strokeColor = [[UIColor blackColor] CGColor];
     leftLayer.fillColor = nil;
     leftLayer.borderWidth = 3.0f;
     leftLayer.lineCap = kCALineCapRound;
@@ -58,7 +58,7 @@
     
     
     rightLayer.path = rightPath.CGPath;
-    rightLayer.strokeColor = [[UIColor whiteColor] CGColor];
+    rightLayer.strokeColor = [[UIColor blackColor] CGColor];
     rightLayer.fillColor = nil;
     rightLayer.borderWidth = 3.0f;
     rightLayer.lineCap = kCALineCapRound;
@@ -81,9 +81,9 @@
         
         NSLog(@"%f",self.bounds.size.width-50);
         self.placeHolderLabel.text = @"Username";
-        self.placeHolderLabel.textColor = [UIColor whiteColor];
+        self.placeHolderLabel.textColor = [UIColor blackColor];
         self.placeHolderLabel.backgroundColor=[UIColor clearColor];
-        self.placeHolderLabel.font = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0];
+        self.placeHolderLabel.font = [UIFont boldSystemFontOfSize:15];
         self.placeHolderLabel.textAlignment = NSTextAlignmentCenter;
         //        self.placeHolderLabel.frame=CGRectOffset(self.placeHolderLabel.frame, 0, 10*textFieldInset.y);
         

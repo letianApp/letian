@@ -13,6 +13,8 @@
 #import "MBProgressHUD.h"
 #import "KuroTextField.h"
 
+#import "OrderPageVC.h"
+
 @interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, HZQDatePickerViewDelegate>
 
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -399,10 +401,11 @@
         
 //#import "KuroTextField.h"
 
-        KuroTextField *tf = [[KuroTextField alloc]initWithFrame:CGRectMake(SCREEN_W*0.1, 30+i*50, SCREEN_W*0.7, 30)];
+        KuroTextField *tf = [[KuroTextField alloc]initWithFrame:CGRectMake(SCREEN_W*0.1, 30+i*110, SCREEN_W*0.7, 80)];
         [bgView addSubview:tf];
-        [tf.layer setBorderColor:([UIColor lightGrayColor].CGColor)];
-        [tf.layer setBorderWidth:1];
+//        [tf.layer setBorderColor:([UIColor lightGrayColor].CGColor)];
+//        [tf.layer setBorderWidth:1];
+        tf.borderStyle = UITextBorderStyleLine;
         bgView.backgroundColor = MAINCOLOR;
         
 //        tf.backgroundColor = MAINCOLOR;
@@ -437,6 +440,9 @@
 
 - (void)clickConfirmBtn {
     NSLog(@"确认预约");
+    
+    OrderPageVC *vcc = [[OrderPageVC alloc]init];
+    [self.navigationController pushViewController:vcc animated:YES];
     
 }
 

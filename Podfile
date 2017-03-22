@@ -7,6 +7,7 @@ pod "RTRootNavigationController"
 pod 'MBProgressHUD'
 pod 'Shimmer', '~> 1.0.2'
 pod 'AFNetworking', '~> 3.1.0'
+pod 'MJExtension', '~> 3.0.13'
 
 
 use_frameworks!
