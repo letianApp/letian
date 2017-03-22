@@ -8,14 +8,16 @@
 
 #import "ConfirmPageVC.h"
 #import "ConfirmPageCell.h"
+
 #import "FSCalendar.h"
 #import "HZQDatePickerView.h"
 #import "MBProgressHUD.h"
-#import "KuroTextField.h"
+#import "LRTextField.h"
+#import "ZYKeyboardUtil.h"
 
 #import "OrderPageVC.h"
 
-@interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, HZQDatePickerViewDelegate>
+@interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, HZQDatePickerViewDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) UITableView *mainTableView;
 @property (nonatomic, strong) UITabBar *tabBar;
@@ -35,7 +37,7 @@
 
 //@property (nonatomic, strong) UIAlertController *dateAlCtl;
 //@property (nonatomic, strong) UIPickerView *datePick;
-
+@property (nonatomic, strong) ZYKeyboardUtil *keyboardUtil;
 
 @property (nonatomic, assign) NSInteger firstCellHeight;
 
@@ -51,12 +53,13 @@
     // Do any additional setup after loading the view from its nib.
     
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.keyboardUtil = [[ZYKeyboardUtil alloc] init];
     _isToday = YES;
 //    self.view.backgroundColor = [UIColor yellowColor];
     [self customNavigation];
     [self customMainTableView];
     
-    
+    [self configKeyBoardRespond];
     [self creatBottomBar];
 }
 
@@ -91,7 +94,9 @@
 //    _mainTableView.estimatedRowHeight = 44.0;
 //    _mainTableView.rowHeight = UITableViewAutomaticDimension;
     _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _mainTableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
+
     
     
 }
@@ -378,41 +383,49 @@
 #pragma mark 输入个人信息cell
 - (void)inputInfoWithBackView:(UIView *)bgView {
     
-    NSArray *titleArr = @[@"姓名：",@"性别：",@"年龄：",@"电话："];
-    for (int i = 0; i < titleArr.count; i++) {
-        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*0.1, 30+i*50, SCREEN_W*0.2, 30)];
-//        [bgView addSubview:lab];
-        lab.backgroundColor = MAINCOLOR;
-        lab.text = titleArr[i];
-        lab.textAlignment = NSTextAlignmentRight;
-        lab.font = [UIFont systemFontOfSize:15];
-        
-        UITextField *tfView = [[UITextField alloc]init];
-//        [bgView addSubview:tfView];
-//        [tfView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(lab.mas_top);
-//            make.bottom.equalTo(lab.mas_bottom);
-//            make.left.equalTo(lab.mas_right).offset(10);
-//            make.right.equalTo(bgView.mas_right).offset(-SCREEN_W*0.1);
-//        }];
-        [tfView.layer setBorderWidth:1];
-        [tfView.layer setBorderColor:([UIColor lightGrayColor].CGColor)];
-//        [tfView.layer setCornerRadius:5];
-        
-//#import "KuroTextField.h"
+    //点击空白收键盘
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    [bgView addGestureRecognizer:tap];
+    tap.delegate = self;
+    
+    
+    
+    LRTextField *nameTextField = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 30, SCREEN_W*0.7, 30) labelHeight:15];
+    [bgView addSubview:nameTextField];
+    nameTextField.delegate = self;
+    nameTextField.placeholder = @"姓名";
+    nameTextField.placeholderActiveColor = MAINCOLOR;
+    
+    LRTextField *sexTextField = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 90, SCREEN_W*0.7, 30) labelHeight:15];
+    [bgView addSubview:sexTextField];
+    sexTextField.delegate = self;
+    sexTextField.placeholder = @"性别";
+    sexTextField.placeholderActiveColor = MAINCOLOR;
+    sexTextField.hintText = @"请输入 \"男\" \"女\" \"其他\"";
+    [sexTextField setValidationBlock:^NSDictionary *(LRTextField *textField, NSString *text) {
+        [NSThread sleepForTimeInterval:1.0];
+        if ([text isEqualToString:@"男"] || [text isEqualToString:@"女"] || [text isEqualToString:@"其他"]) {
+            return @{ VALIDATION_INDICATOR_COLOR : @"MAINCOLOR" };
+        }
+        return @{ VALIDATION_INDICATOR_NO : @"请输入 \"男\" \"女\" \"其他\"" };
+    }];
+    
+    LRTextField *ageTextField = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 150, SCREEN_W*0.7, 30) labelHeight:15];
+    [bgView addSubview:ageTextField];
+    ageTextField.placeholder = @"年龄";
+    ageTextField.placeholderActiveColor = MAINCOLOR;
+    ageTextField.keyboardType = UIKeyboardTypeNumberPad;
 
-        KuroTextField *tf = [[KuroTextField alloc]initWithFrame:CGRectMake(SCREEN_W*0.1, 30+i*110, SCREEN_W*0.7, 80)];
-        [bgView addSubview:tf];
-//        [tf.layer setBorderColor:([UIColor lightGrayColor].CGColor)];
-//        [tf.layer setBorderWidth:1];
-        tf.borderStyle = UITextBorderStyleLine;
-        bgView.backgroundColor = MAINCOLOR;
-        
-//        tf.backgroundColor = MAINCOLOR;
-        
+    LRTextField *phoneTextField = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 210, SCREEN_W*0.7, 30) labelHeight:15 style:LRTextFieldStylePhone];
+    [bgView addSubview:phoneTextField];
+    phoneTextField.placeholder = @"电话";
+    phoneTextField.placeholderActiveColor = MAINCOLOR;
+    
+    
 
-        
-    }
+
+    
+    
     
 }
 
@@ -420,6 +433,14 @@
 //行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 2;
+}
+
+- (void)configKeyBoardRespond {
+    __weak ConfirmPageVC *weakSelf = self;
+#pragma explain - 全自动键盘弹出/收起处理 (需调用keyboardUtil 的 adaptiveViewHandleWithController:adaptiveView:)
+    [_keyboardUtil setAnimateWhenKeyboardAppearAutomaticAnimBlock:^(ZYKeyboardUtil *keyboardUtil) {
+        [keyboardUtil adaptiveViewHandleWithController:weakSelf adaptiveView:weakSelf.mainTableView, nil];
+    }];
 }
 
 
@@ -444,6 +465,15 @@
     OrderPageVC *vcc = [[OrderPageVC alloc]init];
     [self.navigationController pushViewController:vcc animated:YES];
     
+}
+
+- (void)dismissKeyboard {
+    [self.view endEditing:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 #pragma mark 按钮动画

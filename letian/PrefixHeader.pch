@@ -34,8 +34,6 @@
 #import "UIView+Layout.h"                                                                   //改变view frame
 #import "GQControls.h"
 
-
-
 #endif
 
 

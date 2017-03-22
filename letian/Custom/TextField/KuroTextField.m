@@ -109,7 +109,7 @@
     
     
     
-    UIFont *fontOfText=[UIFont fontWithName:@"AvenirNext-Medium" size:self.font.pointSize*0.7];
+    UIFont *fontOfText=[UIFont boldSystemFontOfSize:15*0.7];
     return placeholderInset.y+fontOfText.lineHeight;
 }
 - (void)addPlaceHolderLabel

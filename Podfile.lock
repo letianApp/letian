@@ -24,6 +24,7 @@ PODS:
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
   - Shimmer (1.0.2)
+  - ZYKeyboardUtil (1.0.7)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - RTRootNavigationController
   - SDWebImage (~> 3.7.5)
   - Shimmer (~> 1.0.2)
+  - ZYKeyboardUtil (~> 1.0.7)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -46,7 +48,8 @@ SPEC CHECKSUMS:
   RTRootNavigationController: 70c0da2913cf50cbe944b0193a649700ff640a2c
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
+  ZYKeyboardUtil: c4b920eed9af063c46af2e9ea62e851d9331fbd9
 
-PODFILE CHECKSUM: 3c1cd90dda017ce179edd80600cb5ba8e9dca0d6
+PODFILE CHECKSUM: 6edc3a53188a6652a628651a9343e13104b1665b
 
 COCOAPODS: 1.2.0

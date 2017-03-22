@@ -54,10 +54,20 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ZYKeyboardUtil.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3B9798321645D759E60D19060426546B</key>
+		<key>05C2FC5C7320A35C2D3C259840D2D089</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>21558BC129076F15CB62F3637A1F288D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,12 +87,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>81F6CF2AE588547FC02502221B7E540F</key>
+		<key>9D60816151C101C1D95662B39F6BFAA6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BF53816400F70BF829B16F5A24814872</key>
+		<key>BB2BF8C7EE11B98EFBD0A60FAFB51699</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C067A0E3F9B296CC29DB4EE70BC31D14</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -98,11 +113,6 @@
 			<true/>
 		</dict>
 		<key>D52144DE9D7255DE912490FF5A806573</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DC7891E38BF0514533B92665F85EC376</key>
 		<dict>
 			<key>primary</key>
 			<true/>
