@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 		<key>CYLTabBarController.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>7</integer>
+		</dict>
+		<key>MJExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
 		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
@@ -42,6 +52,11 @@
 			<false/>
 			<key>orderHint</key>
 			<integer>2</integer>
+		</dict>
+		<key>Shimmer.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -71,6 +86,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3B9798321645D759E60D19060426546B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
 		<dict>
 			<key>primary</key>
@@ -96,6 +116,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>5AA17C95E926B760FD08E0B487DAEFA2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5E4BEE70BDD1C2750BD7AF5621DEDE81</key>
 		<dict>
 			<key>primary</key>
@@ -107,6 +132,11 @@
 			<true/>
 		</dict>
 		<key>7BE9CC38826B8D1D13A1DFF22AA89C73</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>81F6CF2AE588547FC02502221B7E540F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -131,6 +161,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>BF53816400F70BF829B16F5A24814872</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C5A2DB7A84B7B78E359870D2E1B24AA7</key>
 		<dict>
 			<key>primary</key>
@@ -141,7 +176,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>CF671F7E57B92905F1CC91D036D6B4A7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D52144DE9D7255DE912490FF5A806573</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DC7891E38BF0514533B92665F85EC376</key>
 		<dict>
 			<key>primary</key>
 			<true/>

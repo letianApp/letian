@@ -22,6 +22,11 @@
 #define tabBar_H self.tabBarController.tabBar.frame.size.height
 
 
+//===========================用户信息==================
+#define kFetchToken         [[NSUserDefaults standardUserDefaults] objectForKey:kTokenKey]
+
+
+
 
 //============================颜色=========================
 #define MAINCOLOR [UIColor colorWithRed:227/255.0 green:111/255.0 blue:117/255.0 alpha:1]   //主色调
@@ -33,7 +38,7 @@
 #import "Masonry.h"                                                                         //约束
 #import "UIView+Layout.h"                                                                   //改变view frame
 #import "GQControls.h"
-
+#import  "GQNetworkManager.h"
 
 
 #endif

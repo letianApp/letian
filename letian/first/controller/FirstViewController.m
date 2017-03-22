@@ -16,11 +16,16 @@
 #import "CustomCYLTabBar.h"
 #import "ConsultViewController.h"
 #import "AppDelegate.h"
+#import "MJExtension.h"
+#import "UIImageView+WebCache.h"
+#import "TestListModel.h"
 @interface FirstViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 
 @property(nonatomic,strong)UIView *headBgView;
+
+@property (nonatomic,strong) NSMutableArray <TestListModel *> *testList;
 
 @end
 
@@ -31,6 +36,15 @@
     self.navigationController.navigationBarHidden=YES;
 
 }
+
+-(NSMutableArray *)testList
+{
+    if (_testList == nil) {
+        _testList = [NSMutableArray array];
+    }
+    return _testList;
+}
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -43,6 +57,7 @@
     
     [self createTableView];
     
+    [self requestData];
     
 }
 
@@ -55,6 +70,28 @@
     [self.view addSubview:tableView];
     self.tableView = tableView;
     self.tableView.tableHeaderView=self.headBgView;
+    
+}
+
+
+//请求套餐信息
+-(void)requestData
+{
+    
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:@"http://bapi.xinli001.com/ceshi/ceshis.json/?rows=10&offset=0&category_id=2&rmd=-1&key=86467ca472d76f198f8aa89d186fa85e"];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        weakSelf.testList=[TestListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        
+        [_tableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+    
     
 }
 
@@ -265,13 +302,19 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.testList.count;
 }
 
 //cell定制
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HomeCell *cell=[HomeCell cellWithTableView:tableView];
+    
+    cell.titleLabel.text=self.testList[indexPath.row].title;
+    
+    cell.detailLabel.text=self.testList[indexPath.row].content;
+    
+    [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.testList[indexPath.row].cover]];
     
     return cell;
 }

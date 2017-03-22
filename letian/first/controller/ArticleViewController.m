@@ -70,9 +70,9 @@
 -(void)createWebView
 {
 
-    NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://mp.weixin.qq.com/mp/homepage?__biz=MzA3NjA4ODcxMQ==&hid=5&sn=066abcaccc743b1b8149c260ddf7e05d#wechat_redirect"]];
+    NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://mp.weixin.qq.com/mp/homepage?__biz=MzA3NjA4ODcxMQ==&hid=2&sn=2961ee681490a42a9e103ebd04126296#wechat_redirect"]];
 
-    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height )];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H )];
 
     webView.allowsBackForwardNavigationGestures=YES;
     
