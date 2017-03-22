@@ -1,4 +1,19 @@
 PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
   - CYLTabBarController (1.10.0)
   - FSCalendar (2.7.3)
   - Masonry (1.0.2)
@@ -7,23 +22,28 @@ PODS:
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
+  - Shimmer (1.0.2)
 
 DEPENDENCIES:
+  - AFNetworking (~> 3.1.0)
   - CYLTabBarController (= 1.10.0)
   - FSCalendar
   - Masonry
   - MBProgressHUD
   - RTRootNavigationController
   - SDWebImage (~> 3.7.5)
+  - Shimmer (~> 1.0.2)
 
 SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   CYLTabBarController: 2de9a4c26f50d33574398becf8e7b0aaed794240
   FSCalendar: 574388d70778c22719eed9341653e1743b345573
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   RTRootNavigationController: 70c0da2913cf50cbe944b0193a649700ff640a2c
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
 
-PODFILE CHECKSUM: 0bbdb84064137be0846d20c45d4c2a5b2414ed5b
+PODFILE CHECKSUM: 49797c20953e9d1b16f061142c0c0cd67dc1fc9e
 
 COCOAPODS: 1.2.0

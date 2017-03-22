@@ -42,6 +42,9 @@
 		0965FBB51E7A918900C0FBAD /* HZQDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0965FBB11E7A918900C0FBAD /* HZQDatePickerView.m */; };
 		0965FBB61E7A918900C0FBAD /* HZQDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0965FBB21E7A918900C0FBAD /* HZQDatePickerView.xib */; };
 		0965FBB71E7A918900C0FBAD /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 0965FBB41E7A918900C0FBAD /* UIColor+HexString.m */; };
+		0965FBBA1E82155500C0FBAD /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0965FBB91E82155500C0FBAD /* OrderModel.m */; };
+		0965FBC31E8230B400C0FBAD /* KuroTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0965FBC01E8230B400C0FBAD /* KuroTextField.m */; };
+		0965FBC41E8230B400C0FBAD /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0965FBC21E8230B400C0FBAD /* PulsingHaloLayer.m */; };
 		0970CFEC1E517EB8007480CB /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0970CFEB1E517EB8007480CB /* FirstViewController.m */; };
 		0970CFF01E5180BF007480CB /* ConsultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0970CFEE1E5180BF007480CB /* ConsultViewController.m */; };
 		0970CFF11E5180BF007480CB /* ConsultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0970CFEF1E5180BF007480CB /* ConsultViewController.xib */; };
@@ -197,6 +200,12 @@
 		0965FBB21E7A918900C0FBAD /* HZQDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HZQDatePickerView.xib; sourceTree = "<group>"; };
 		0965FBB31E7A918900C0FBAD /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexString.h"; sourceTree = "<group>"; };
 		0965FBB41E7A918900C0FBAD /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
+		0965FBB81E82155500C0FBAD /* OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderModel.h; sourceTree = "<group>"; };
+		0965FBB91E82155500C0FBAD /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
+		0965FBBF1E8230B400C0FBAD /* KuroTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KuroTextField.h; sourceTree = "<group>"; };
+		0965FBC01E8230B400C0FBAD /* KuroTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KuroTextField.m; sourceTree = "<group>"; };
+		0965FBC11E8230B400C0FBAD /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
+		0965FBC21E8230B400C0FBAD /* PulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PulsingHaloLayer.m; sourceTree = "<group>"; };
 		0970CFEA1E517EB8007480CB /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		0970CFEB1E517EB8007480CB /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		0970CFED1E5180BF007480CB /* ConsultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultViewController.h; sourceTree = "<group>"; };
@@ -380,6 +389,8 @@
 			children = (
 				090733981E65665A00F21E02 /* counselorInfoModel.h */,
 				090733991E65665A00F21E02 /* counselorInfoModel.m */,
+				0965FBB81E82155500C0FBAD /* OrderModel.h */,
+				0965FBB91E82155500C0FBAD /* OrderModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -481,6 +492,17 @@
 				0965FBB41E7A918900C0FBAD /* UIColor+HexString.m */,
 			);
 			path = HZQDatePickerView;
+			sourceTree = "<group>";
+		};
+		0965FBBE1E8230B400C0FBAD /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				0965FBBF1E8230B400C0FBAD /* KuroTextField.h */,
+				0965FBC01E8230B400C0FBAD /* KuroTextField.m */,
+				0965FBC11E8230B400C0FBAD /* PulsingHaloLayer.h */,
+				0965FBC21E8230B400C0FBAD /* PulsingHaloLayer.m */,
+			);
+			path = TextField;
 			sourceTree = "<group>";
 		};
 		0970CFDB1E515A92007480CB /* first */ = {
@@ -625,6 +647,7 @@
 			isa = PBXGroup;
 			children = (
 				0965FBAF1E7A918900C0FBAD /* HZQDatePickerView */,
+				0965FBBE1E8230B400C0FBAD /* TextField */,
 				7784D8A01E6D587D004AB0CC /* GQControls.h */,
 				7784D8A11E6D587D004AB0CC /* GQControls.m */,
 				09A64DD71E7290C300DCE8D9 /* UIView+Layout.h */,
@@ -1034,8 +1057,10 @@
 				0945B1481E6937DF005B7560 /* CustomCYLTabBar.m in Sources */,
 				0953C2291E514B5800FB165C /* ViewController.m in Sources */,
 				7784D8AC1E6E80C5004AB0CC /* MessageViewController.m in Sources */,
+				0965FBC31E8230B400C0FBAD /* KuroTextField.m in Sources */,
 				77038DE81E63C3B50096C07D /* YYCycleScrollView.m in Sources */,
 				774DBC0C1E6420FC00B8798C /* HomeCell.m in Sources */,
+				0965FBC41E8230B400C0FBAD /* PulsingHaloLayer.m in Sources */,
 				0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */,
 				09FBE0221E70F609003452A6 /* ConfirmPageCell.m in Sources */,
 				0970CFF01E5180BF007480CB /* ConsultViewController.m in Sources */,
@@ -1049,11 +1074,11 @@
 				09A64DD91E7290C300DCE8D9 /* UIView+Layout.m in Sources */,
 				0965FBB51E7A918900C0FBAD /* HZQDatePickerView.m in Sources */,
 				77F3D85D1E764E22008B5FC0 /* OrderViewController.m in Sources */,
+				0965FBBA1E82155500C0FBAD /* OrderModel.m in Sources */,
 				77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */,
 				77B5C9E71E7A2F000028CB9E /* OrderDetailViewController.m in Sources */,
 				0953C2231E514B5800FB165C /* main.m in Sources */,
 				7784D8A21E6D587D004AB0CC /* GQControls.m in Sources */,
-				09A64E051E77D25500DCE8D9 /* ZYCalendar.m in Sources */,
 				77B5C9EC1E7A4AF50028CB9E /* CompleteOrderViewController.m in Sources */,
 				77D2BFA11E66C404000B9978 /* SetAcountViewController.m in Sources */,
 				0970CFEC1E517EB8007480CB /* FirstViewController.m in Sources */,

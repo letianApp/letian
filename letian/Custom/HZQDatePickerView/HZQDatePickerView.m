@@ -40,6 +40,9 @@
     self.backgVIew.layer.borderColor = [[UIColor clearColor] CGColor];
     self.backgVIew.layer.masksToBounds = YES;
     
+    self.coverView.hidden = YES;
+    self.coverView.backgroundColor = [UIColor clearColor];
+    
     /** 确定 */
     self.sureBtn.layer.cornerRadius = 4;
     self.sureBtn.layer.borderWidth = 1;

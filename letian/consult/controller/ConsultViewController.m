@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UIScrollView *classifiedSectionFirstLine;
 @property (nonatomic, strong) UITableView *counselorInfoTableview;
+@property (nonatomic, strong) UIView *mainHeadView;
 
 
 @end
@@ -44,9 +45,8 @@
     // Do any additional setup after loading the view from its nib.
     
 //    [self customNavigation];
-    
-    [self creatClassifiedSection];
     [self creatTableView];
+    [self creatClassifiedSection];
     
     
 }
@@ -106,8 +106,8 @@
 //分类栏按钮
 - (void)customClassifiedSectionBtnFotData:(NSArray *)dataArr withLineNumber:(int)n{
     
-    UIScrollView *ParentView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, (statusBar_H + navigationBar_H)+n*navigationBar_H, SCREEN_W, navigationBar_H)];
-    [self.view addSubview:ParentView];
+    UIScrollView *ParentView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, n*navigationBar_H, SCREEN_W, navigationBar_H)];
+    [_mainHeadView addSubview:ParentView];
     ParentView.backgroundColor = WEAKPINK;
     ParentView.showsHorizontalScrollIndicator = NO;
     ParentView.contentSize = CGSizeMake(dataArr.count * SCREEN_W/4 , navigationBar_H);
@@ -192,12 +192,14 @@
 #pragma mark 创建tabview
 - (void)creatTableView {
     
-    _counselorInfoTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H*4, SCREEN_W, SCREEN_H-statusBar_H - navigationBar_H*4 - tabBar_H) style:UITableViewStylePlain];
+    _counselorInfoTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, SCREEN_H-statusBar_H - navigationBar_H) style:UITableViewStylePlain];
     _counselorInfoTableview.dataSource = self;
     _counselorInfoTableview.delegate = self;
     _counselorInfoTableview.backgroundColor = WEAKPINK;
     [self.view addSubview:_counselorInfoTableview];
     _counselorInfoTableview.rowHeight = 100;
+    _mainHeadView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, navigationBar_H*3)];
+    _counselorInfoTableview.tableHeaderView = _mainHeadView;
     
 }
 

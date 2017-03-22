@@ -11,6 +11,7 @@
 #import "FSCalendar.h"
 #import "HZQDatePickerView.h"
 #import "MBProgressHUD.h"
+#import "KuroTextField.h"
 
 @interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, HZQDatePickerViewDelegate>
 
@@ -137,6 +138,8 @@
         [self creatTimeChoicesViewWithBGView:view];
         
         
+    } else {
+        [self inputInfoWithBackView:view];
     }
     
 }
@@ -209,9 +212,11 @@
     
     _startBtn = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 5, _timeChoicesView.width*0.3, 30) andTitle:@"起始时间" andTitleColor:MAINCOLOR andFontSize:15 andTag:102 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
     _startBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
+    _startBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
 
     _endBtn = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.6, 5, _timeChoicesView.width*0.3, 30) andTitle:@"结束时间" andTitleColor:MAINCOLOR andFontSize:15 andTag:103 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
     _endBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
+    _endBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     [_startBtn addTarget:self action:@selector(clickTimeChoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_endBtn addTarget:self action:@selector(clickTimeChoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -222,11 +227,6 @@
     [_timeChoicesView addSubview:_startBtn];
     [_timeChoicesView addSubview:_endBtn];
     [_timeChoicesView addSubview:_lineView];
-//    startBtn.backgroundColor = MAINCOLOR;
-    
-//    _timeChoicesView.backgroundColor = MAINCOLOR;
-//    _dateDisplayLab.backgroundColor = [UIColor yellowColor];
-    
     
 }
 
@@ -254,8 +254,6 @@
         
         _ConfirmBtn.enabled = NO;
         _ConfirmBtn.backgroundColor = [UIColor lightGrayColor];
-
-        
         
     } else if (result == NSOrderedSame) {
         
@@ -278,15 +276,12 @@
         
         _ConfirmBtn.enabled = YES;
         _ConfirmBtn.backgroundColor = MAINCOLOR;
-        
-//        _dateDisplayLab.text = selDateStr;
-//        _dateDisplayLab.font = [UIFont systemFontOfSize:20];
-
     }
-
     
-//    _startDate = date;
     NSLog(@"是否今天bool值：%@",_isToday?@"YES":@"NO");
+    [_startBtn setTitle:@"起始时间" forState:UIControlStateNormal];
+    [_endBtn setTitle:@"结束时间" forState:UIControlStateNormal];
+    
 //    NSLog(@"did select date %@",_startDate);
     
 }
@@ -297,40 +292,14 @@
         [self animationbegin:btn];
         [self setupDateView:DateTypeOfStart];
         
-        
-        
-        
     } else if (btn == _endBtn) {
-        
         
         [self animationbegin:btn];
         [self setupDateView:DateTypeOfEnd];
     }
-    
-    
 }
 
-
-- (void)animationbegin:(UIView *)view {
-    /* 放大缩小 */
-    
-    // 设定为缩放
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    
-    // 动画选项设定
-    animation.duration = 0.1; // 动画持续时间
-    animation.repeatCount = -1; // 重复次数
-    animation.autoreverses = YES; // 动画结束时执行逆动画
-    
-    // 缩放倍数
-    animation.fromValue = [NSNumber numberWithFloat:1.0]; // 开始时的倍率
-    animation.toValue = [NSNumber numberWithFloat:0.9]; // 结束时的倍率
-    
-    // 添加动画
-    [view.layer addAnimation:animation forKey:@"scale-layer"];
-    
-}
-
+#pragma mark 选择时间界面
 - (void)setupDateView:(DateType)type {
     
     _pikerView = [HZQDatePickerView instanceDatePickerView];
@@ -348,16 +317,6 @@
             if (_isToday == YES) {
                 [_pikerView.datePickerView setMinimumDate:[NSDate new]];
             } else {
-                
-//                NSString *commonDateStr = @"上午 09:00";
-//                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//                [dateFormatter setDateFormat:@"a hh:mm"];
-//                NSDate *commonDate = [dateFormatter dateFromString:commonDateStr];
-//                NSDate *localCommonDate = [commonDate dateByAddingTimeInterval:8 * 60 * 60];
-//                NSLog(@"字符串转date: %@",localCommonDate);
-//                NSLog(@"%@",commonDate);
-//                
-//                [_pikerView.datePickerView setMinimumDate:localCommonDate];
 
                 
             }
@@ -375,6 +334,7 @@
                 NSDate *anHourDate = [_startDate dateByAddingTimeInterval:60*60];
                 NSLog(@"%@",anHourDate);
                 
+                _pikerView.coverView.hidden = NO;
                 [_pikerView.datePickerView setMinimumDate:anHourDate];
                 [self.view addSubview:_pikerView];
             }
@@ -384,14 +344,6 @@
         default:
             break;
     }
-
-    
-    
-    // 今天开始往后的日期
-//    [_pikerView.datePickerView setMinimumDate:[NSDate date]];
-    // 在今天之前的日期
-//    [_pikerView.datePickerView setMaximumDate:[NSDate date]];
-    
 }
 
 - (void)getSelectDate:(NSString *)date type:(DateType)type {
@@ -399,8 +351,6 @@
     
     switch (type) {
         case DateTypeOfStart:
-//            _startBtn.titleLabel.text = [NSString stringWithFormat:@"%@", date];
-//            _startDate = date;
             
             if ([date containsString:@":00"] || [date containsString:@":30"]) {
                 _startDate = [_pikerView.datePickerView date];
@@ -411,10 +361,6 @@
                 NSLog(@"请选择整点时间");
                 
             }
-            
-            
-//            _startBtn.titleLabel.textAlignment = 1;
-            
             break;
             
         case DateTypeOfEnd:
@@ -425,6 +371,46 @@
         default:
             break;
     }
+}
+
+#pragma mark 输入个人信息cell
+- (void)inputInfoWithBackView:(UIView *)bgView {
+    
+    NSArray *titleArr = @[@"姓名：",@"性别：",@"年龄：",@"电话："];
+    for (int i = 0; i < titleArr.count; i++) {
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*0.1, 30+i*50, SCREEN_W*0.2, 30)];
+//        [bgView addSubview:lab];
+        lab.backgroundColor = MAINCOLOR;
+        lab.text = titleArr[i];
+        lab.textAlignment = NSTextAlignmentRight;
+        lab.font = [UIFont systemFontOfSize:15];
+        
+        UITextField *tfView = [[UITextField alloc]init];
+//        [bgView addSubview:tfView];
+//        [tfView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(lab.mas_top);
+//            make.bottom.equalTo(lab.mas_bottom);
+//            make.left.equalTo(lab.mas_right).offset(10);
+//            make.right.equalTo(bgView.mas_right).offset(-SCREEN_W*0.1);
+//        }];
+        [tfView.layer setBorderWidth:1];
+        [tfView.layer setBorderColor:([UIColor lightGrayColor].CGColor)];
+//        [tfView.layer setCornerRadius:5];
+        
+//#import "KuroTextField.h"
+
+        KuroTextField *tf = [[KuroTextField alloc]initWithFrame:CGRectMake(SCREEN_W*0.1, 30+i*50, SCREEN_W*0.7, 30)];
+        [bgView addSubview:tf];
+        [tf.layer setBorderColor:([UIColor lightGrayColor].CGColor)];
+        [tf.layer setBorderWidth:1];
+        bgView.backgroundColor = MAINCOLOR;
+        
+//        tf.backgroundColor = MAINCOLOR;
+        
+
+        
+    }
+    
 }
 
 
@@ -454,6 +440,26 @@
     
 }
 
+#pragma mark 按钮动画
+- (void)animationbegin:(UIView *)view {
+    /* 放大缩小 */
+    
+    // 设定为缩放
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    
+    // 动画选项设定
+    animation.duration = 0.1; // 动画持续时间
+    animation.repeatCount = -1; // 重复次数
+    animation.autoreverses = YES; // 动画结束时执行逆动画
+    
+    // 缩放倍数
+    animation.fromValue = [NSNumber numberWithFloat:1.0]; // 开始时的倍率
+    animation.toValue = [NSNumber numberWithFloat:0.9]; // 结束时的倍率
+    
+    // 添加动画
+    [view.layer addAnimation:animation forKey:@"scale-layer"];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

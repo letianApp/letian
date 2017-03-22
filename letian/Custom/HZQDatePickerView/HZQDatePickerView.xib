@@ -63,6 +63,11 @@
                                 <action selector="sureBtnClick:" destination="eZf-qE-a14" eventType="touchUpInside" id="0rB-dq-waw"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D9x-Va-OLo">
+                            <rect key="frame" x="201" y="0.0" width="126" height="231"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -95,12 +100,13 @@
             <connections>
                 <outlet property="backgVIew" destination="o5H-3t-3wG" id="bmH-oF-RWa"/>
                 <outlet property="cannelBtn" destination="1Ae-U8-3BG" id="rhV-Zn-khr"/>
+                <outlet property="coverView" destination="D9x-Va-OLo" id="yi0-Ac-mHy"/>
                 <outlet property="datePickerView" destination="Jns-b0-mnj" id="ySG-p8-IFc"/>
                 <outlet property="leftPadding" destination="Crf-CR-uEU" id="s1d-fV-g4o"/>
                 <outlet property="rightPadding" destination="KFj-vi-qzQ" id="uEM-eR-UBl"/>
                 <outlet property="sureBtn" destination="02Q-n7-Fu5" id="t8W-6X-FyZ"/>
             </connections>
-            <point key="canvasLocation" x="111" y="328"/>
+            <point key="canvasLocation" x="110.5" y="327.5"/>
         </view>
     </objects>
 </document>

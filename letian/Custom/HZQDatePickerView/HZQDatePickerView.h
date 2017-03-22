@@ -33,4 +33,6 @@ typedef enum {
 
 @property (nonatomic, assign) DateType type;
 
+@property (weak, nonatomic) IBOutlet UIView *coverView;
+
 @end
