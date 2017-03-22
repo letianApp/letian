@@ -10,7 +10,12 @@
 #import "YYCycleScrollView.h"
 #import "HomeCell.h"
 #import "LoginViewController.h"
-
+#import "ArticleViewController.h"
+#import "TestViewController.h"
+#import "ActivityViewController.h"
+#import "CustomCYLTabBar.h"
+#import "ConsultViewController.h"
+#import "AppDelegate.h"
 @interface FirstViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -74,6 +79,7 @@
             label.userInteractionEnabled=YES;
             UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelClicked:)];
             
+            
             [label addGestureRecognizer:tap];
             
             [view addSubview:label];
@@ -110,7 +116,37 @@
 -(void)labelClicked:(UITapGestureRecognizer *)tap
 {
     
-    NSLog(@"咨询页面");
+//    跳到咨询页面
+    if (tap.view.tag==100) {
+        
+        CustomCYLTabBar *tabBarControllerConfig = [[CustomCYLTabBar alloc] init];
+        [UIApplication sharedApplication].delegate.window.rootViewController = tabBarControllerConfig.tabBarController;
+        tabBarControllerConfig.tabBarController.selectedIndex = 1;
+        
+//    跳到文章
+    }else if (tap.view.tag==101) {
+        
+
+        ArticleViewController *articleVc=[[ArticleViewController alloc]init];
+        
+        [self.navigationController pushViewController:articleVc animated:YES];
+        
+//    跳到测试
+    }else if (tap.view.tag==102) {
+        
+        
+        TestViewController *testVc=[[TestViewController alloc]init];
+        
+        [self.navigationController pushViewController:testVc animated:YES];
+        
+//    跳到活动
+    }else if (tap.view.tag==103){
+        
+        
+        ActivityViewController *activityVc=[[ActivityViewController alloc]init];
+        
+        [self.navigationController pushViewController:activityVc animated:YES];
+    }
     
 }
 
@@ -251,6 +287,10 @@
 {
     
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
+    
+    ArticleViewController *articleVc=[[ArticleViewController alloc]init];
+    
+    [self.navigationController pushViewController:articleVc animated:YES];
     
     NSLog(@"cell被点击%li",indexPath.row);
     

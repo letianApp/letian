@@ -14,6 +14,11 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -66,6 +71,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>46AA28753E93B0ACEC0588D1EAB31835</key>
 		<dict>
 			<key>primary</key>
@@ -91,6 +101,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>76258397B06B84A9737EC15109254AFC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>7BE9CC38826B8D1D13A1DFF22AA89C73</key>
 		<dict>
 			<key>primary</key>
@@ -102,6 +117,16 @@
 			<true/>
 		</dict>
 		<key>9DC8D9E02903E93BD0B2FEC9D846EA20</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B37B2F822F4CA084289FB447DA61996E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B89DDE77C536C542AE1AAF9FC2940148</key>
 		<dict>
 			<key>primary</key>
 			<true/>
