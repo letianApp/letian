@@ -1,47 +1,37 @@
 //
-//  ActivityViewController.m
+//  TestDetailViewController.m
 //  letian
 //
-//  Created by 郭茜 on 2017/3/20.
+//  Created by 郭茜 on 2017/3/22.
 //  Copyright © 2017年 J. All rights reserved.
 //
 
-#import "ActivityViewController.h"
-
+#import "TestDetailViewController.h"
 #import <WebKit/WebKit.h>
 
-@interface ActivityViewController ()<WKNavigationDelegate,WKUIDelegate>
+@interface TestDetailViewController ()<WKNavigationDelegate,WKUIDelegate>
 
 @property (nonatomic,strong) WKWebView *webView;
 
+
 @end
 
-@implementation ActivityViewController
-
-
--(void)viewWillAppear:(BOOL)animated {
-    
-    self.navigationController.navigationBarHidden=NO;
-    
-}
+@implementation TestDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setUpNavigationBar];
     
-    
     [self createWebView];
-    
-    
-    
-    
+   
 }
 
 
 -(void) setUpNavigationBar
 {
     
-    self.navigationItem.title=@"乐天活动";
+    self.navigationItem.title=@"心理测试";
     
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -51,6 +41,9 @@
     backButton.frame=CGRectMake(30, 12, 20, 20);
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
+    
+    //设置navigationBar不透明
+    self.navigationController.navigationBar.translucent = NO;
     
 }
 
@@ -64,9 +57,9 @@
 -(void)createWebView
 {
     
-    NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://mp.weixin.qq.com/mp/homepage?__biz=MzA3NjA4ODcxMQ==&hid=5&sn=066abcaccc743b1b8149c260ddf7e05d#wechat_redirect"]];
+    NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:self.testUrl]];
     
-    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H )];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, -45, SCREEN_W, SCREEN_H+45 )];
     
     webView.allowsBackForwardNavigationGestures=YES;
     
@@ -74,17 +67,28 @@
     
     webView.navigationDelegate=self;
     
-    webView.scrollView.showsVerticalScrollIndicator=NO;
-
     webView.UIDelegate = self;
     
+    webView.scrollView.showsVerticalScrollIndicator=NO;
+    
+    webView.scrollView.bounces = NO;//禁止下拉
+    
+    [self.view addSubview:webView];
     
     self.webView=webView;
     
-    [self.view addSubview:webView];
+    
 }
 
 
+-(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
+    
+    [webView evaluateJavaScript:@"document.getElementsByClassName('mediaList')[0].style.display = 'none';                   document.getElementsByClassName('card')[0].style.display = 'none';  document.getElementsByClassName('po_footer')[0].style.display = 'none'; document.getElementsByClassName('mediaTitle')[0].style.display = 'none'; document.getElementsByClassName('recomend-payTest')[0].style.display = 'none';   document.getElementsByClassName('test-jumpBtn')[0].style.display = 'none' ;   document.getElementsByClassName('kuang')[0].style.display = 'none' ;" completionHandler:^(id evaluate, NSError * error) {
+        
+    }];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

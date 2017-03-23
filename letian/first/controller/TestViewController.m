@@ -7,15 +7,31 @@
 //
 
 #import "TestViewController.h"
-#import <WebKit/WebKit.h>
+#import "HomeCell.h"
+#import "TestDetailViewController.h"
+#import "TestListModel.h"
+#import "MJExtension.h"
+#import "UIImageView+WebCache.h"
 
-@interface TestViewController ()<WKNavigationDelegate,WKUIDelegate>
+@interface TestViewController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic,strong) WKWebView *webView;
+@property (nonatomic,strong) UITableView *tableView;
+
+@property (nonatomic,strong) NSMutableArray <TestListModel *> *testList;
+
 
 @end
 
 @implementation TestViewController
+
+
+-(NSMutableArray *)testList
+{
+    if (_testList == nil) {
+        _testList = [NSMutableArray array];
+    }
+    return _testList;
+}
 
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -26,12 +42,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
     [self setUpNavigationBar];
     
+    [self createTableView];
     
-    [self createWebView];
+    [self requestData];
+}
+
+
+
+//请求数据
+-(void)requestData
+{
     
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:@"http://bapi.xinli001.com/ceshi/ceshis.json/?rows=40&offset=0&category_id=2&rmd=-1&key=86467ca472d76f198f8aa89d186fa85e"];
+
+    __weak typeof(self) weakSelf = self;
     
+    [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+         weakSelf.testList=[TestListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        NSLog(@"responseObject=%@",responseObject);
+            [_tableView reloadData];
+  
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+      
+    }];
     
     
 }
@@ -53,7 +90,7 @@
     
     //设置navigationBar不透明
     self.navigationController.navigationBar.translucent = NO;
-
+    
 }
 
 
@@ -63,68 +100,61 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)createWebView
+-(void)createTableView
 {
-    
-    NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://m.yidianling.com/test/jiankang/"]];
-    
-    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, -84, SCREEN_W, SCREEN_H )];
-    
-    webView.allowsBackForwardNavigationGestures=YES;
-    
-    [webView loadRequest:request];
-    
-    webView.navigationDelegate=self;
-    
-    webView.UIDelegate = self;
-    
-    webView.scrollView.showsVerticalScrollIndicator=NO;
-    
-
-    
-    [self.view addSubview:webView];
-    
-    self.webView=webView;
-
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-64) style:UITableViewStylePlain];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
     
 }
 
-//-(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
-//    [webView evaluateJavaScript:@"document.getElementById(\"content\").offsetHeight;"completionHandler:^(id_Nullableresult,NSError *_Nullable error) {
-//        //获取页面高度，并重置webview的frame
-//        CGFloat documentHeight = [result doubleValue];
-//        CGRect frame = webView.frame;
-//        frame.size.height = documentHeight;
-//        webView.frame = frame;
-//    }];
-//}
 
-// 类似 UIWebView的 -webView: shouldStartLoadWithRequest: navigationType:
-//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void(^)(WKNavigationActionPolicy))decisionHandler {
 
-//    NSString *strRequest = [navigationAction.request.URL.absoluteString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+#pragma mark -----------------tableViewDelegate
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.testList.count;
+}
+
+//cell定制
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    HomeCell *cell=[HomeCell cellWithTableView:tableView];
     
-//    NSLog(@"fffffff");
-//    if([strRequest isEqualToString:@"http://www.weiceyan.com/"]) {//主页面加载内容
-//        decisionHandler(WKNavigationActionPolicyAllow);//允许跳转
-//    } else {//截获页面里面的链接点击
-//        //do something you want
-//        decisionHandler(WKNavigationActionPolicyCancel);//不允许跳转
-//    }
-//}
+    cell.titleLabel.text=self.testList[indexPath.row].title;
+    
+    cell.detailLabel.text=self.testList[indexPath.row].content;
+    
+    [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.testList[indexPath.row].cover]];
+    
+    return cell;
+}
 
 
-//-(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
-//    [webView evaluateJavaScript:@"document.getElementsByTagName('header')[0].hidden = true;document.getElementsByClassName('img_ad')[0].hidden = true;document.getElementsByClassName('m-comment ui-list')[0].hidden = true;document.getElementsByClassName('m-down m-down-tie')[0].hidden = true;document.getElementsByClassName('m-video-recommond')[0].hidden = true;document.getElementsByClassName('m-hotnews js-hotnews-1')[0].hidden = true;document.getElementsByClassName('m-hotnews js-hotnews-2')[0].hidden = true;document.getElementsByClassName('m-vedios js-vedios')[0].hidden = true;document.getElementsByClassName('m-bottom-banner')[0].hidden = true;document.getElementById('instant-news').hidden = true;" completionHandler:^(id evaluate, NSError * error) {
-//     
-//     }];
-//    //redirect是跳转页面的地址中的一个关键字。进入网页以后，加载完毕以后会跳转到另外一个页面，所以我们等它跳转到加载完毕哪个页面，webView.URL的路径中包含了redirect以后，再显示网页。
-//    if ([webView.URL.absoluteString rangeOfString:@"redirect"].location != NSNotFound) {
-//        self.webView.hidden = NO;
-////        [LCLoadingHUD hideInView:self.view];
-//    }
-//}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 85;
+}
 
+//cell点击事件
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
+    
+    TestDetailViewController *testDetailVc=[[TestDetailViewController alloc]init];
+    
+    testDetailVc.testUrl=self.testList[indexPath.row].absolute_url;
+    
+    [self.navigationController pushViewController:testDetailVc animated:YES];
+    
+    NSLog(@"cell被点击%li",indexPath.row);
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
