@@ -63,7 +63,7 @@
     
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
          weakSelf.testList=[TestListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-  
+        NSLog(@"responseObject=%@",responseObject);
             [_tableView reloadData];
   
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

@@ -87,9 +87,11 @@
 
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    [webView evaluateJavaScript:@"document.getElementsByClassName('mediaList')[0].hidden = true;document.getElementsByClassName('grzy')[0].hidden = true;document.getElementsByClassName('po_footer')[0].hidden = true;document.getElementsByClassName('mediaTitle')[0].hidden = true;document.getElementsByClassName('recomend-payTest')[0].hidden = true;document.getElementsByClassName('test-jumpBtn')[0].hidden = true;" completionHandler:^(id evaluate, NSError * error) {
+    
+    [webView evaluateJavaScript:@"document.getElementsByClassName('mediaList')[0].style.display = 'none';                   document.getElementsByClassName('card')[0].style.display = 'none';  document.getElementsByClassName('po_footer')[0].style.display = 'none'; document.getElementsByClassName('mediaTitle')[0].style.display = 'none'; document.getElementsByClassName('recomend-payTest')[0].style.display = 'none';   document.getElementsByClassName('test-jumpBtn')[0].style.display = 'none' ;   document.getElementsByClassName('kuang')[0].style.display = 'none' ;" completionHandler:^(id evaluate, NSError * error) {
         
     }];
+    
 }
 
 

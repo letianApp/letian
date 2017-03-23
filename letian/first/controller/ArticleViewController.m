@@ -70,7 +70,7 @@
 -(void)createWebView
 {
 
-    NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://mp.weixin.qq.com/mp/homepage?__biz=MzA3NjA4ODcxMQ==&hid=2&sn=2961ee681490a42a9e103ebd04126296#wechat_redirect"]];
+    NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.wzright.com/psychological-counseling/2962.html"]];
 
     WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H )];
 
@@ -84,12 +84,27 @@
     
     webView.UIDelegate = self;
 
+//    webView.scrollView.bounces = NO;//禁止下拉
     
     self.webView=webView;
     
     [self.view addSubview:webView];
 }
 
+-(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
+    
+    
+    //嵌入js代码
+    [webView evaluateJavaScript:@"document.getElementsByClassName('nav-top')[0].style.display = 'none';                                                      document.getElementsByClassName('share-box')[0].style.display = 'none';  document.getElementsByClassName('entry')[0].style.display = 'none';  document.getElementsByClassName('current-info')[0].style.display = 'none';  document.getElementsByClassName('tab-fixed')[0].style.display = 'none'; document.getElementsByClassName('gclear')[0].style.display = 'none'; document.getElementsByClassName('nav-unlogin')[0].style.display = 'none';  document.getElementsByClassName('gotop-btn')[0].style.display = 'none';          var navbar = document.getElementsByClassName('wap-navbar');for(var i in navbar){navbar[i].style.display = 'none'};         "    completionHandler:^(id evaluate, NSError * error) {
+        
+    }];
+    
+    
+    
+}
+
+//document.getElementsByClassName('l')[0].hidden = true;document.getElementsByClassName('r')[0].hidden = true; document.getElementsByTagName('aside').hidden = true; content-block
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
