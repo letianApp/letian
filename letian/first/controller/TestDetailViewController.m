@@ -73,10 +73,6 @@
     
     webView.scrollView.bounces = NO;//禁止下拉
     
-
-//    [webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
-    
-    
     [self.view addSubview:webView];
     
     self.webView=webView;
@@ -95,24 +91,6 @@
 }
 
 
-//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-//    if ([keyPath isEqualToString:@"contentSize"]) {
-//        dispatch_async(dispatch_get_global_queue(0,0), ^{
-//            //document.documentElement.scrollHeight
-//            //document.body.offsetHeight
-//            [self.webView evaluateJavaScript:@"" completionHandler:^(id _Nullable, NSError * _Nullable error) {
-//                CGRect frame =self.webView.frame;
-//                frame.size.height = [result doubleValue] + 50;
-//                self.webView.frame = frame;
-//                _scrollViewHeight =220 + _webView.height;
-//                self.webView.scrollView.contentSize =CGSizeMake(kScreenWidth,_scrollViewHeight);
-//
-//            }];
-//            
-//        });
-//    }
-//}
-//
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

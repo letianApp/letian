@@ -67,10 +67,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
 -(void)createWebView
 {
 
-    NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.wzright.com/psychological-counseling/2962.html"]];
+    NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.wzright.com/psychological-counseling/3264.html"]];
 
     WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H )];
 
@@ -84,7 +85,6 @@
     
     webView.UIDelegate = self;
 
-//    webView.scrollView.bounces = NO;//禁止下拉
     
     self.webView=webView;
     
