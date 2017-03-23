@@ -295,7 +295,7 @@
                 NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
                 if ( ![emailTest evaluateWithObject:text] )
                 {
-                    return @{ VALIDATION_INDICATOR_NO : @"Invalid Email" };
+                    return @{ VALIDATION_INDICATOR_NO : @"错误的邮箱格式" };
                 }
                 return @{};
             };

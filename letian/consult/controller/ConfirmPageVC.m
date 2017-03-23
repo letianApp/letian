@@ -8,6 +8,7 @@
 
 #import "ConfirmPageVC.h"
 #import "ConfirmPageCell.h"
+#import "OrderModel.h"
 
 #import "FSCalendar.h"
 #import "HZQDatePickerView.h"
@@ -19,6 +20,8 @@
 
 @interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, HZQDatePickerViewDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate>
 
+@property (nonatomic, strong) OrderModel *orderModel;
+//@property (nonatomic, strong) MBProgressHUD *HUD;
 @property (nonatomic, strong) UITableView *mainTableView;
 @property (nonatomic, strong) UITabBar *tabBar;
 @property (nonatomic, weak) FSCalendar *calendar;
@@ -55,6 +58,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.keyboardUtil = [[ZYKeyboardUtil alloc] init];
     _isToday = YES;
+    _orderModel = [[OrderModel alloc]init];
 //    self.view.backgroundColor = [UIColor yellowColor];
     [self customNavigation];
     [self customMainTableView];
@@ -69,6 +73,8 @@
 //    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 //    self.navigationController.navigationBar.barTintColor = MAINCOLOR;
     self.navigationItem.title = @"孙晓平";
+    _orderModel.conserlorName = self.navigationItem.title;
+//    NSLog(@"%@",_orderModel.conserlorName);
     
 }
 
@@ -81,6 +87,16 @@
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
     return item;
+}
+
+- (void)customHUDWithText:(NSString *)str {
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];;
+    HUD.mode = MBProgressHUDModeText;
+    HUD.label.text = str;
+    [HUD hideAnimated:YES afterDelay:2.f];
+
+    
 }
 
 #pragma mark 主界面tableview
@@ -140,7 +156,8 @@
         UIButton *defBtn = [view viewWithTag:1];
         defBtn.selected = YES;
         defBtn.backgroundColor = MAINCOLOR;
-        
+        _orderModel.orderChoice = defBtn.titleLabel.text;
+
         [self setupCalendarWithBGView:view];
         [self creatTimeChoicesViewWithBGView:view];
         
@@ -153,8 +170,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    CGFloat height = _timeChoicesView.y + 75;
-    return height;
+    if (indexPath.row == 0) {
+        CGFloat height = _timeChoicesView.y + 75;
+        return height;
+    } else {
+        return 420;
+    }
+    
 }
 
 - (void)clickChoiceBtn:(UIButton *)btn {
@@ -169,6 +191,8 @@
     
     btn.selected = YES;
     btn.backgroundColor = MAINCOLOR;
+    _orderModel.orderChoice = btn.titleLabel.text;
+    NSLog(@"%@",_orderModel.orderChoice);
 //    btn.enabled = NO;
     
 }
@@ -192,11 +216,16 @@
     self.gregorianCalendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.timeZone = [NSTimeZone systemTimeZone];
-    self.dateFormatter.dateFormat = @"yyyy-MM-dd";              //时间格式用来判断日期
+    self.dateFormatter.dateFormat = @"yyyy年MM月dd日";              //时间格式用来判断日期
 }
 
 - (NSString *)calendar:(FSCalendar *)calendar titleForDate:(NSDate *)date {
     if ([self.gregorianCalendar isDateInToday:date]) {
+        
+        NSString *todayStr = [self.dateFormatter stringFromDate:date];
+        _orderModel.orderDateStr = todayStr;
+//        NSLog(@"%@",_orderModel.orderDateStr);
+
         return @"今";
     }
     return nil;
@@ -259,8 +288,10 @@
         [_lineView removeFromSuperview];
         [_timeChoicesView addSubview:_dateDisplayLab];
         
-        _ConfirmBtn.enabled = NO;
-        _ConfirmBtn.backgroundColor = [UIColor lightGrayColor];
+        _orderModel.orderDateStr = nil;
+//        NSLog(@"%@",_orderModel.orderDateStr);
+//        _ConfirmBtn.enabled = NO;
+//        _ConfirmBtn.backgroundColor = [UIColor lightGrayColor];
         
     } else if (result == NSOrderedSame) {
         
@@ -270,8 +301,10 @@
         [_timeChoicesView addSubview:_endBtn];
         [_timeChoicesView addSubview:_lineView];
         
-        _ConfirmBtn.enabled = YES;
-        _ConfirmBtn.backgroundColor = MAINCOLOR;
+        _orderModel.orderDateStr = selDateStr;
+//        NSLog(@"%@",_orderModel.orderDateStr);
+//        _ConfirmBtn.enabled = YES;
+//        _ConfirmBtn.backgroundColor = MAINCOLOR;
         
     } else {
         
@@ -280,12 +313,15 @@
         [_timeChoicesView addSubview:_startBtn];
         [_timeChoicesView addSubview:_endBtn];
         [_timeChoicesView addSubview:_lineView];
-        
-        _ConfirmBtn.enabled = YES;
-        _ConfirmBtn.backgroundColor = MAINCOLOR;
+        _orderModel.orderDateStr = selDateStr;
+//        NSLog(@"%@",_orderModel.orderDateStr);
+//        _ConfirmBtn.enabled = YES;
+//        _ConfirmBtn.backgroundColor = MAINCOLOR;
     }
     
-    NSLog(@"是否今天bool值：%@",_isToday?@"YES":@"NO");
+//    NSLog(@"是否今天bool值：%@",_isToday?@"YES":@"NO");
+//    _orderModel.orderDateStr = selDateStr;
+//    NSLog(@"%@",_orderModel.orderDateStr);
     [_startBtn setTitle:@"起始时间" forState:UIControlStateNormal];
     [_endBtn setTitle:@"结束时间" forState:UIControlStateNormal];
     
@@ -335,7 +371,9 @@
         case DateTypeOfEnd:
             
             if ([_startBtn.titleLabel.text isEqual: @"起始时间"]) {
-                NSLog(@"nonononono");
+                NSLog(@"请先选择起始时间");
+                [self customHUDWithText:@"请先选择起始时间"];
+
             } else {
                 
                 NSDate *anHourDate = [_startDate dateByAddingTimeInterval:60*60];
@@ -363,9 +401,10 @@
                 _startDate = [_pikerView.datePickerView date];
                 NSLog(@"%@",_startDate);
                 [_startBtn setTitle:[NSString stringWithFormat:@"%@", date] forState:UIControlStateNormal];
+                [_endBtn setTitle:@"结束时间" forState:UIControlStateNormal];
             } else {
-                
                 NSLog(@"请选择整点时间");
+                [self customHUDWithText:@"请选择正确的时间"];
                 
             }
             break;
@@ -421,7 +460,12 @@
     phoneTextField.placeholder = @"电话";
     phoneTextField.placeholderActiveColor = MAINCOLOR;
     
-    
+    LRTextField *emailTextField = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 270, SCREEN_W*0.7, 30) labelHeight:15 style:LRTextFieldStyleEmail];
+    [bgView addSubview:emailTextField];
+    emailTextField.placeholder = @"邮箱*";
+    emailTextField.placeholderActiveColor = MAINCOLOR;
+    emailTextField.hintText = @"*选填";
+    emailTextField.hintTextColor = [UIColor blackColor];
 
 
     
@@ -449,7 +493,8 @@
     
     _tabBar = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
     _ConfirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
-    _ConfirmBtn.backgroundColor = MAINCOLOR;
+    _ConfirmBtn.backgroundColor = [UIColor lightGrayColor];
+    _ConfirmBtn.enabled = NO;
     [_ConfirmBtn setTitle:@"确定预约" forState:UIControlStateNormal];
     [_ConfirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
     [_tabBar addSubview:_ConfirmBtn];

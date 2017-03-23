@@ -154,6 +154,7 @@
     //预约按钮
     UIButton *AppointmentBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
     AppointmentBtn.backgroundColor = MAINCOLOR;
+//    [AppointmentBtn setBackgroundImage:[UIImage imageNamed:@"btnBackImage"] forState:UIControlStateNormal];
     [AppointmentBtn setTitle:@"预约" forState:UIControlStateNormal];
     [AppointmentBtn addTarget:self action:@selector(clickAppointmentBtn) forControlEvents:UIControlEventTouchUpInside];
     [_tabBar addSubview:AppointmentBtn];
