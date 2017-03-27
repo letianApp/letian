@@ -25,6 +25,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
 
+//定时器
+@property (nonatomic,strong) NSTimer *timer;
+//倒计时时间
+@property (nonatomic,assign) NSInteger time;
+
 
 @end
 
@@ -42,12 +47,85 @@
     self.nextButton.layer.cornerRadius=8;
     
 
+    [self.getCodeBtn addTarget:self action:@selector(requestData:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.doButton addTarget:self action:@selector(doButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 
     [self.nextButton addTarget:self action:@selector(nextButtonClick) forControlEvents:UIControlEventTouchUpInside];
-
+    
+    
 
 }
+
+
+-(void)requestData:(UIButton *)button{
+    
+    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+   
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_UTILS];
+    [requestString appendFormat:@"%@",API_NAME_SENDMSG];
+    __weak typeof(self) weakSelf   = self;
+    NSMutableDictionary *params    = [NSMutableDictionary dictionary];
+
+    params[@"authCode"]            =@"";
+    params[@"phone"]               = self.phoneTextField.text;
+    params[@"enumSmsType"]         = @(2);
+    
+    
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSLog(@"发送短信%@",responseObject);
+        if([responseObject[@"code"] integerValue] == 200){
+//            [SVProgressHUD showSuccessWithStatus:@"验证码发送成功,请您注意查收"];
+            button.selected=YES;
+
+            button.userInteractionEnabled = NO;
+            [button setTitle:[NSString stringWithFormat:@"重新发送(%ld)",(long)weakSelf.time] forState:UIControlStateSelected];
+            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1 target:weakSelf selector:@selector(changeText) userInfo:nil repeats:YES];
+            weakSelf.getCodeBtn.titleLabel.alpha = 0.4;
+            [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+            weakSelf.timer = timer;
+        }
+//            else if([responseObject[@"code"] integerValue] == NetworkStatusError){
+//            YYLOG("%@",responseObject);
+//            [SVProgressHUD showErrorWithStatus:responseObject[@"info"]];
+//            
+//        }else{
+//            [SVProgressHUD dismiss];
+//        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"错误%@",error);
+//        [SVProgressHUD dismiss];
+        // 如果是取消了任务，就不算请求失败，就直接返回
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+//            [SVProgressHUD showErrorWithStatus:@"发送短信超时"];
+        } else {
+//            [SVProgressHUD showErrorWithStatus:@"发送短信失败"];
+        }
+    }];
+
+    
+    
+}
+
+-(void) changeText
+{
+    self.time--;
+    if (self.time < 0) {
+        [self.timer invalidate];
+        self.timer = nil;
+        self.time = 60;
+        self.getCodeBtn.userInteractionEnabled = YES;
+        self.getCodeBtn.titleLabel.alpha = 1;
+        [self.getCodeBtn setTitle:[NSString stringWithFormat:@"重新发送"] forState:UIControlStateNormal];
+        return;
+    }
+    [self.getCodeBtn setTitle:[NSString stringWithFormat:@"重新发送(%ld)",(long)self.time] forState:UIControlStateNormal];
+}
+
 
 //是否选中
 -(void)doButtonClick:(UIButton *)btn
@@ -85,10 +163,10 @@
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    
     [self.phoneTextField resignFirstResponder];
     
     [self.codeTextField resignFirstResponder];
-    
     
 }
 - (void)didReceiveMemoryWarning {
