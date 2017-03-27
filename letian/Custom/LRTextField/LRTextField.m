@@ -303,7 +303,7 @@
         case LRTextFieldStylePhone:
             self.placeholder = @"Phone";
             self.keyboardType = UIKeyboardTypePhonePad;
-            self.format = @"###-####-####";
+            self.format = @"### #### ####";
             break;
         case LRTextFieldStylePassword:
             self.placeholder = @"Password";

@@ -17,6 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self customLab];
+}
+
+- (void)customLab {
+    
+    NSLog(@"%@,%@",self.orderModel.conserlorName,self.orderModel.orderInfoSex);
+    
 }
 
 - (void)didReceiveMemoryWarning {
