@@ -98,54 +98,91 @@
 //头视图
 -(void)createHeadBgView
 {
-    self.headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 340)];
     
-    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 220, SCREEN_W, 120)];
+    
+//    self.headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 320)];
+//    
+//    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 220, SCREEN_W, 100)];
+//
+//    CGFloat margin=(SCREEN_W-240)/5;
+//    NSArray *nameArray=@[@"- 咨询 -",@"- 文章 -",@"- 测试 -",@"- 活动 -"];
+//    NSArray *imageNameArray=@[@"givemefive",@"kiss me",@"fish",@"self"];
+//    for (NSInteger i=0; i<4; i++) {
+//        UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
+//        button.frame=CGRectMake(margin+(margin+60)*i, 20, 60, 60);
+//        //        button.backgroundColor=MAINCOLOR;
+//        button.alpha=0.8;
+////        [button setTitle:nameArray[i] forState:UIControlStateNormal];
+//        button.titleLabel.textColor=[UIColor whiteColor];
+//        button.titleLabel.font=[UIFont systemFontOfSize:15];
+//        button.layer.masksToBounds=YES;
+//        button.layer.cornerRadius=30;
+//        [button setImage:[UIImage imageNamed:imageNameArray[i]] forState:UIControlStateNormal];
+//        [view addSubview:button];
+//    }
+
+    
+    self.headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 325)];
+    
+    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 220, SCREEN_W, 100)];
     
     NSArray *nameArray=@[@"- 咨询 -",@"- 文章 -",@"- 测试 -",@"- 活动 -"];
+    NSArray *imageArray=@[@"zixun",@"wenzhang",@"ceshi",@"huodong"];
     for (NSInteger i=0; i<2; i++) {
         for (NSInteger j=0; j<2; j++) {
-            UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/2*j, i*60, SCREEN_W/2, 60)];
+            UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/2*j, i*50, SCREEN_W/2, 50)];
             label.backgroundColor=[UIColor whiteColor];
             label.text=nameArray[j+i*2];
-            label.textColor=[UIColor blackColor];
+            label.textColor=MAINCOLOR;
             label.textAlignment=NSTextAlignmentCenter;
-            
+            label.font=[UIFont boldSystemFontOfSize:17];
             label.tag=j+i*2+100;
             
             label.userInteractionEnabled=YES;
             UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelClicked:)];
             
             
+            
             [label addGestureRecognizer:tap];
             
             [view addSubview:label];
+            
+            
+            UIImageView *smallImage=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_W/2*j-30, i*50, 20, 20)];
+            smallImage.image=[UIImage imageNamed:imageArray[i]];
+            [view addSubview:smallImage];
+            
             
         }
     }
     
     
+    
     //模块分割线
     for (NSInteger i=0; i<2; i++) {
-        UIView *horizontalLine=[[UIView alloc]initWithFrame:CGRectMake(30*(i+1)+i*((SCREEN_W-120)/2)+30*i, 60, (SCREEN_W-120)/2, 1)];
-        horizontalLine.backgroundColor=MAINCOLOR;
+        UIView *horizontalLine=[[UIView alloc]initWithFrame:CGRectMake(20*(i+1)+i*((SCREEN_W-100)/2)+40*i, 50, (SCREEN_W-100)/2, 1)];
+        horizontalLine.backgroundColor=[UIColor groupTableViewBackgroundColor];
         [view addSubview:horizontalLine];
-        
-        UIView *verticalLine=[[UIView alloc]initWithFrame:CGRectMake(SCREEN_W/2, 20*i+20*(i+1)+i*20, 1, 20)];
-        verticalLine.backgroundColor=MAINCOLOR;
+
+        UIView *verticalLine=[[UIView alloc]initWithFrame:CGRectMake(SCREEN_W/2, 15*i+15*(i+1)+i*15, 1, 20)];
+        verticalLine.backgroundColor=[UIColor groupTableViewBackgroundColor];
         [view addSubview:verticalLine];
     }
     
     
+    UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 320, SCREEN_W, 5)];
+    lineView.backgroundColor=[UIColor groupTableViewBackgroundColor];
+    
+    [self.headBgView addSubview:lineView];
     
     [self.headBgView addSubview:[self createScrollView]];
-    
+
     [self.headBgView addSubview:view];
-    
+
     [self createSearchBarOnView:self.headBgView];
-    
+
     [self createmsgBtnOnView:self.headBgView];
-    
+
 }
 
 

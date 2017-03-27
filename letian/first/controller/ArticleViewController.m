@@ -85,6 +85,7 @@
     
     webView.UIDelegate = self;
 
+    webView.hidden=YES;
     
     self.webView=webView;
     
@@ -100,9 +101,14 @@
         
     }];
     
-    
+    self.webView.hidden=NO;
+
+
     
 }
+
+
+
 
 //document.getElementsByClassName('l')[0].hidden = true;document.getElementsByClassName('r')[0].hidden = true; document.getElementsByTagName('aside').hidden = true; content-block
 

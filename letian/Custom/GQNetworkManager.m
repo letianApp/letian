@@ -19,6 +19,7 @@
         instance = [[self alloc] initWithBaseURL:url sessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
         instance.responseSerializer = [AFJSONResponseSerializer serializer];
         instance.requestSerializer = [AFJSONRequestSerializer serializer];
+        instance.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
     });
     return instance;
 }

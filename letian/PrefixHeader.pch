@@ -23,7 +23,7 @@
 
 
 //===========================用户信息==================
-#define kFetchToken         [[NSUserDefaults standardUserDefaults] objectForKey:kTokenKey]
+#define kFetchToken         [[NSUserDefaults standardUserDefaults] objectForKey:@"token"]
 
 
 //===========================通用==================
@@ -40,6 +40,8 @@
 #import "UIView+Layout.h"                                                                   //改变view frame
 #import "GQControls.h"
 #import  "GQNetworkManager.h"
+
+#include "API.h"
 
 
 #endif
