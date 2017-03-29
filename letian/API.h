@@ -39,9 +39,11 @@
 //用户注册
 #define API_NAME_REGISTER    @"Register"
 
-
+//发送验证码
 #define API_NAME_SENDMSG    @"SendShortMsgByTypeID"
 
+//验证验证码
+#define API_NAME_CHECKCODE    @"CheckShortMsgCode"
 
 
 

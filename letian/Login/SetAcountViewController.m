@@ -8,7 +8,8 @@
 
 #import "SetAcountViewController.h"
 #import "CustomCYLTabBar.h"
-
+#import "RegisterModel.h"
+#import "MJExtension.h"
 @interface SetAcountViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
@@ -44,9 +45,67 @@
 //确认
 -(void)confirmBtnClick
 {
+    if (![self.sexTextField.text isEqualToString:@"男"] && ![self.sexTextField.text isEqualToString:@"女"]) {
+        
+        NSLog(@"请输入“男”或“女”");
+        
+        return;
+    }
     
-    CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
-    [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
+    
+    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_USER];
+    [requestString appendFormat:@"%@",API_NAME_REGISTER];
+
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    
+    params[@"NickName"]=self.nameTextField.text;
+    params[@"Phone"]=self.phone;
+    params[@"Password"]=self.passwordTextField.text;
+    params[@"VerifyCode"]=self.msgCode;
+    
+    if ([self.sexTextField.text isEqualToString:@"男"]) {
+        params[@"EnumSexType"]=@(0);
+    }else if ([self.sexTextField.text isEqualToString:@"女"]){
+        params[@"EnumSexType"]=@(1);
+        
+    }
+    params[@"EnumUserType"]=@(1);
+    
+    NSLog(@"Params=%@",params);
+   
+    
+    
+    [manager POST:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSLog(@"注册%@",responseObject);
+        
+        if([responseObject[@"Code"] integerValue] == 200){
+            
+            CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
+            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
+           
+        }
+        
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"错误%@",error);
+        //        [SVProgressHUD dismiss];
+        // 如果是取消了任务，就不算请求失败，就直接返回
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            //            [SVProgressHUD showErrorWithStatus:@"发送短信超时"];
+        } else {
+            //            [SVProgressHUD showErrorWithStatus:@"发送短信失败"];
+        }
+    }];
+    
+
+    
+    
 
     
 }

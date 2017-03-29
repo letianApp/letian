@@ -28,6 +28,9 @@
 
 //===========================通用==================
 #define NULLString(string) ((![string isKindOfClass:[NSString class]])||[string isEqualToString:@""] || (string == nil) || [string isEqualToString:@""] || [string isKindOfClass:[NSNull class]]||[[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0)                                    //判断字符串是否为空
+//短信授权码
+#define AUTHCODE      @"5ee3fa9e-8ff4-4441-a715-61a566f72839"
+
 
 //============================颜色=========================
 #define MAINCOLOR [UIColor colorWithRed:227/255.0 green:111/255.0 blue:117/255.0 alpha:1]   //主色调
