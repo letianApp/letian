@@ -57,7 +57,11 @@
 		09A64DD01E7145C600DCE8D9 /* ask@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A64DCD1E7145C600DCE8D9 /* ask@3x.png */; };
 		09A64DD91E7290C300DCE8D9 /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DD81E7290C300DCE8D9 /* UIView+Layout.m */; };
 		09A64DF01E76486F00DCE8D9 /* GQSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A64DEF1E76486F00DCE8D9 /* GQSegment.m */; };
+		09B8033A1E8B68560045DAB5 /* UILabel+CustomLab.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B803391E8B68560045DAB5 /* UILabel+CustomLab.m */; };
 		09D826B11E83C57A00323C53 /* btnBackImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 09D826B01E83C57A00323C53 /* btnBackImage.png */; };
+		09E182491E8B922700A5BE7B /* PGPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E182431E8B922700A5BE7B /* PGPayManager.m */; };
+		09E1824A1E8B922700A5BE7B /* PGPayResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E182461E8B922700A5BE7B /* PGPayResult.m */; };
+		09E1824B1E8B922700A5BE7B /* UIViewController+Pay.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E182481E8B922700A5BE7B /* UIViewController+Pay.m */; };
 		09F1E7021E6E6506007FBE81 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E6FF1E6E6506007FBE81 /* share.png */; };
 		09F1E7031E6E6506007FBE81 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E7001E6E6506007FBE81 /* share@2x.png */; };
 		09F1E7041E6E6506007FBE81 /* share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E7011E6E6506007FBE81 /* share@3x.png */; };
@@ -246,7 +250,16 @@
 		09A64DD81E7290C300DCE8D9 /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
 		09A64DEE1E76486F00DCE8D9 /* GQSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQSegment.h; sourceTree = "<group>"; };
 		09A64DEF1E76486F00DCE8D9 /* GQSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQSegment.m; sourceTree = "<group>"; };
+		09B803381E8B68560045DAB5 /* UILabel+CustomLab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+CustomLab.h"; sourceTree = "<group>"; };
+		09B803391E8B68560045DAB5 /* UILabel+CustomLab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+CustomLab.m"; sourceTree = "<group>"; };
 		09D826B01E83C57A00323C53 /* btnBackImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnBackImage.png; sourceTree = "<group>"; };
+		09E182421E8B922700A5BE7B /* PGPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGPayManager.h; sourceTree = "<group>"; };
+		09E182431E8B922700A5BE7B /* PGPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGPayManager.m; sourceTree = "<group>"; };
+		09E182441E8B922700A5BE7B /* PGPayManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGPayManagerDelegate.h; sourceTree = "<group>"; };
+		09E182451E8B922700A5BE7B /* PGPayResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGPayResult.h; sourceTree = "<group>"; };
+		09E182461E8B922700A5BE7B /* PGPayResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGPayResult.m; sourceTree = "<group>"; };
+		09E182471E8B922700A5BE7B /* UIViewController+Pay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Pay.h"; sourceTree = "<group>"; };
+		09E182481E8B922700A5BE7B /* UIViewController+Pay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Pay.m"; sourceTree = "<group>"; };
 		09F1E6FF1E6E6506007FBE81 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		09F1E7001E6E6506007FBE81 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		09F1E7011E6E6506007FBE81 /* share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@3x.png"; sourceTree = "<group>"; };
@@ -702,6 +715,20 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		09E182411E8B91ED00A5BE7B /* pay */ = {
+			isa = PBXGroup;
+			children = (
+				09E182421E8B922700A5BE7B /* PGPayManager.h */,
+				09E182431E8B922700A5BE7B /* PGPayManager.m */,
+				09E182441E8B922700A5BE7B /* PGPayManagerDelegate.h */,
+				09E182451E8B922700A5BE7B /* PGPayResult.h */,
+				09E182461E8B922700A5BE7B /* PGPayResult.m */,
+				09E182471E8B922700A5BE7B /* UIViewController+Pay.h */,
+				09E182481E8B922700A5BE7B /* UIViewController+Pay.m */,
+			);
+			path = pay;
+			sourceTree = "<group>";
+		};
 		17141F58EED1935B6AB46B35 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -738,6 +765,9 @@
 				096DE4561E82591C00C57DDF /* LRTextField */,
 				7784D8A01E6D587D004AB0CC /* GQControls.h */,
 				7784D8A11E6D587D004AB0CC /* GQControls.m */,
+				09B803381E8B68560045DAB5 /* UILabel+CustomLab.h */,
+				09B803391E8B68560045DAB5 /* UILabel+CustomLab.m */,
+				09E182411E8B91ED00A5BE7B /* pay */,
 				77E10CEA1E88D06B00E1A254 /* Foundation+Log.m */,
 				09A64DD71E7290C300DCE8D9 /* UIView+Layout.h */,
 				09A64DD81E7290C300DCE8D9 /* UIView+Layout.m */,
@@ -1154,6 +1184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0965FBB71E7A918900C0FBAD /* UIColor+HexString.m in Sources */,
+				09E182491E8B922700A5BE7B /* PGPayManager.m in Sources */,
 				77221D931E6FB63400022AAF /* SystomMsgViewController.m in Sources */,
 				77D2BF971E66B3D0000B9978 /* RegistViewController.m in Sources */,
 				7769CA601E8253D000646619 /* TestListModel.m in Sources */,
@@ -1171,9 +1202,11 @@
 				7769CA5D1E82539C00646619 /* TestViewController.m in Sources */,
 				774DBC0C1E6420FC00B8798C /* HomeCell.m in Sources */,
 				0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */,
+				09E1824B1E8B922700A5BE7B /* UIViewController+Pay.m in Sources */,
 				7769CA5C1E82539C00646619 /* TestDetailViewController.m in Sources */,
 				09FBE0221E70F609003452A6 /* ConfirmPageCell.m in Sources */,
 				0970CFF01E5180BF007480CB /* ConsultViewController.m in Sources */,
+				09B8033A1E8B68560045DAB5 /* UILabel+CustomLab.m in Sources */,
 				090733951E655B0600F21E02 /* consultPageCell.m in Sources */,
 				7769CA631E8253F300646619 /* GQNetworkManager.m in Sources */,
 				09A64DF01E76486F00DCE8D9 /* GQSegment.m in Sources */,
@@ -1184,6 +1217,7 @@
 				09FBE0271E70FE12003452A6 /* CounselorInfoVC.m in Sources */,
 				77F3D8621E7670D2008B5FC0 /* OrderCell.m in Sources */,
 				09A64DD91E7290C300DCE8D9 /* UIView+Layout.m in Sources */,
+				09E1824A1E8B922700A5BE7B /* PGPayResult.m in Sources */,
 				0965FBB51E7A918900C0FBAD /* HZQDatePickerView.m in Sources */,
 				77F3D85D1E764E22008B5FC0 /* OrderViewController.m in Sources */,
 				0965FBBA1E82155500C0FBAD /* OrderModel.m in Sources */,

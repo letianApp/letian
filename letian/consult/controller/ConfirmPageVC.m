@@ -68,12 +68,8 @@
 #pragma mark 定制导航栏
 - (void)customNavigation {
     
-//    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-//    self.navigationController.navigationBar.barTintColor = MAINCOLOR;
     self.navigationItem.title = @"孙晓平";
     _orderModel.conserlorName = self.navigationItem.title;
-//    [_orderDataDic setValue:_orderModel.conserlorName forKey:@"conserlorName"];
-//    NSLog(@"%@",_orderModel.conserlorName);
     
 }
 
@@ -555,7 +551,7 @@
     _tabBar = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
     _ConfirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
     _ConfirmBtn.backgroundColor = [UIColor lightGrayColor];
-    _ConfirmBtn.enabled = NO;
+//    _ConfirmBtn.enabled = NO;
     [_ConfirmBtn setTitle:@"确定预约" forState:UIControlStateNormal];
     [_ConfirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
     [_tabBar addSubview:_ConfirmBtn];
