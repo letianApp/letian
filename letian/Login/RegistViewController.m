@@ -39,6 +39,7 @@
     
     [super viewDidLoad];
 
+    self.time=60;
     
     self.getCodeBtn.layer.masksToBounds=YES;
     self.getCodeBtn.layer.cornerRadius=8;
@@ -57,6 +58,7 @@
 
 }
 
+#pragma mark   ----------获取验证码
 
 -(void)requestData:(UIButton *)button{
     
@@ -68,7 +70,7 @@
     __weak typeof(self) weakSelf   = self;
     NSMutableDictionary *params    = [NSMutableDictionary dictionary];
 
-    params[@"authCode"]            =@"";
+    params[@"authCode"]            =AUTHCODE;
     params[@"phone"]               = self.phoneTextField.text;
     params[@"enumSmsType"]         = @(2);
     
@@ -76,24 +78,17 @@
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSLog(@"发送短信%@",responseObject);
-        if([responseObject[@"code"] integerValue] == 200){
-//            [SVProgressHUD showSuccessWithStatus:@"验证码发送成功,请您注意查收"];
-            button.selected=YES;
+        NSLog(@"%@",requestString);
+        if([responseObject[@"Code"] integerValue] == 200){
 
             button.userInteractionEnabled = NO;
-            [button setTitle:[NSString stringWithFormat:@"重新发送(%ld)",(long)weakSelf.time] forState:UIControlStateSelected];
+            [button setTitle:[NSString stringWithFormat:@"重新发送(%ld)",(long)weakSelf.time] forState:UIControlStateNormal];
             NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1 target:weakSelf selector:@selector(changeText) userInfo:nil repeats:YES];
             weakSelf.getCodeBtn.titleLabel.alpha = 0.4;
             [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
             weakSelf.timer = timer;
         }
-//            else if([responseObject[@"code"] integerValue] == NetworkStatusError){
-//            YYLOG("%@",responseObject);
-//            [SVProgressHUD showErrorWithStatus:responseObject[@"info"]];
-//            
-//        }else{
-//            [SVProgressHUD dismiss];
-//        }
+        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"错误%@",error);
@@ -127,11 +122,23 @@
 }
 
 
-//是否选中
+
 -(void)doButtonClick:(UIButton *)btn
 {
-    
+    //是否选中
+
     btn.selected=!btn.selected;
+    
+    
+    if (btn.selected==NO) {
+        self.nextButton.backgroundColor=[UIColor lightGrayColor];
+        self.nextButton.userInteractionEnabled=NO;
+    }else{
+        self.nextButton.backgroundColor=MAINCOLOR;
+        self.nextButton.userInteractionEnabled=YES;
+    }
+    
+    
     
 }
 
@@ -143,12 +150,56 @@
     
 }
 
+#pragma mark  ----------下一步
+
 //下一步
 - (void)nextButtonClick{
     
-    SetAcountViewController *setAcountVc=[[SetAcountViewController alloc]init];
     
-    [self presentViewController:setAcountVc animated:YES completion:nil];
+    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_UTILS];
+    [requestString appendFormat:@"%@",API_NAME_CHECKCODE];
+//    __weak typeof(self) weakSelf   = self;
+    NSMutableDictionary *params    = [NSMutableDictionary dictionary];
+    
+    params[@"verifyCode"]            =self.codeTextField.text;
+    params[@"phone"]               = self.phoneTextField.text;
+    params[@"enumSmsType"]         = @(2);
+    
+    
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSLog(@"验证短信验证码%@",responseObject);
+        
+        if([responseObject[@"Code"] integerValue] == 200){
+            
+            
+            SetAcountViewController *setAcountVc=[[SetAcountViewController alloc]init];
+            setAcountVc.phone=self.phoneTextField.text;
+            setAcountVc.msgCode=self.codeTextField.text;
+            
+            [self presentViewController:setAcountVc animated:YES completion:nil];
+            
+            
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"错误%@",error);
+        //        [SVProgressHUD dismiss];
+        // 如果是取消了任务，就不算请求失败，就直接返回
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            //            [SVProgressHUD showErrorWithStatus:@"发送短信超时"];
+        } else {
+            //            [SVProgressHUD showErrorWithStatus:@"发送短信失败"];
+        }
+    }];
+    
+
+    
     
 }
 

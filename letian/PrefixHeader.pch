@@ -25,7 +25,8 @@
 //===========================用户信息==================
 #define kFetchToken         [[NSUserDefaults standardUserDefaults] objectForKey:@"token"]
 
-
+//短信授权码
+#define AUTHCODE      @"5ee3fa9e-8ff4-4441-a715-61a566f72839"
 
 
 //============================颜色=========================
