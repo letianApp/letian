@@ -17,11 +17,11 @@
 #import "ZYKeyboardUtil.h"
 
 #import "OrderPageVC.h"
+#import "PayPageVC.h"
 
 @interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, HZQDatePickerViewDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) OrderModel *orderModel;
-//@property (nonatomic, strong) MBProgressHUD *HUD;
 @property (nonatomic, strong) UITableView *mainTableView;
 @property (nonatomic, strong) UITabBar *tabBar;
 @property (nonatomic, weak) FSCalendar *calendar;
@@ -38,13 +38,9 @@
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, assign) NSDate *startDate;
 
-//@property (nonatomic, strong) UIAlertController *dateAlCtl;
-//@property (nonatomic, strong) UIPickerView *datePick;
 @property (nonatomic, strong) ZYKeyboardUtil *keyboardUtil;
-
-@property (nonatomic, assign) NSInteger firstCellHeight;
-
 @property (nonatomic, strong) UIButton *ConfirmBtn;
+@property (nonatomic, assign) BOOL isSexRight;
 
 
 @end
@@ -57,9 +53,12 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.keyboardUtil = [[ZYKeyboardUtil alloc] init];
-    _isToday = YES;
     _orderModel = [[OrderModel alloc]init];
+    _isToday = YES;
+    _isSexRight = NO;
+//    _orderDataDic = @{nil:@"an"};
 //    self.view.backgroundColor = [UIColor yellowColor];
+//    [self setDataModel];
     [self customNavigation];
     [self customMainTableView];
     
@@ -70,11 +69,8 @@
 #pragma mark 定制导航栏
 - (void)customNavigation {
     
-//    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-//    self.navigationController.navigationBar.barTintColor = MAINCOLOR;
     self.navigationItem.title = @"孙晓平";
     _orderModel.conserlorName = self.navigationItem.title;
-//    NSLog(@"%@",_orderModel.conserlorName);
     
 }
 
@@ -96,7 +92,6 @@
     HUD.label.text = str;
     [HUD hideAnimated:YES afterDelay:2.f];
 
-    
 }
 
 #pragma mark 主界面tableview
@@ -111,9 +106,6 @@
 //    _mainTableView.rowHeight = UITableViewAutomaticDimension;
     _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _mainTableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-    
-
-    
     
 }
 
@@ -157,6 +149,7 @@
         defBtn.selected = YES;
         defBtn.backgroundColor = MAINCOLOR;
         _orderModel.orderChoice = defBtn.titleLabel.text;
+//        [_orderDataDic setValue:_orderModel.orderChoice forKey:@"orderChoice"];
 
         [self setupCalendarWithBGView:view];
         [self creatTimeChoicesViewWithBGView:view];
@@ -192,9 +185,9 @@
     btn.selected = YES;
     btn.backgroundColor = MAINCOLOR;
     _orderModel.orderChoice = btn.titleLabel.text;
+//    [_orderDataDic setValue:_orderModel.orderChoice forKey:@"orderChoice"];
     NSLog(@"%@",_orderModel.orderChoice);
-//    btn.enabled = NO;
-    
+    [self reflashInfo];
 }
 
 #pragma mark 日历
@@ -224,6 +217,7 @@
         
         NSString *todayStr = [self.dateFormatter stringFromDate:date];
         _orderModel.orderDateStr = todayStr;
+//        [_orderDataDic setValue:_orderModel.orderDateStr forKey:@"orderDateStr"];
 //        NSLog(@"%@",_orderModel.orderDateStr);
 
         return @"今";
@@ -243,8 +237,6 @@
     _dateDisplayLab.textColor = MAINCOLOR;
     _dateDisplayLab.textAlignment = 1;
     _dateDisplayLab.font = [UIFont systemFontOfSize:20];
-    
-//    UIButton *startBtn = [[UIButton alloc]initWithFrame:CGRectMake(_timeChoicesView.width/2, 5, _timeChoicesView.width/5, 30)];
     
     _startBtn = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 5, _timeChoicesView.width*0.3, 30) andTitle:@"起始时间" andTitleColor:MAINCOLOR andFontSize:15 andTag:102 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
     _startBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -287,11 +279,7 @@
         [_endBtn removeFromSuperview];
         [_lineView removeFromSuperview];
         [_timeChoicesView addSubview:_dateDisplayLab];
-        
         _orderModel.orderDateStr = nil;
-//        NSLog(@"%@",_orderModel.orderDateStr);
-//        _ConfirmBtn.enabled = NO;
-//        _ConfirmBtn.backgroundColor = [UIColor lightGrayColor];
         
     } else if (result == NSOrderedSame) {
         
@@ -300,11 +288,7 @@
         [_timeChoicesView addSubview:_startBtn];
         [_timeChoicesView addSubview:_endBtn];
         [_timeChoicesView addSubview:_lineView];
-        
         _orderModel.orderDateStr = selDateStr;
-//        NSLog(@"%@",_orderModel.orderDateStr);
-//        _ConfirmBtn.enabled = YES;
-//        _ConfirmBtn.backgroundColor = MAINCOLOR;
         
     } else {
         
@@ -314,18 +298,14 @@
         [_timeChoicesView addSubview:_endBtn];
         [_timeChoicesView addSubview:_lineView];
         _orderModel.orderDateStr = selDateStr;
-//        NSLog(@"%@",_orderModel.orderDateStr);
-//        _ConfirmBtn.enabled = YES;
-//        _ConfirmBtn.backgroundColor = MAINCOLOR;
     }
+    NSLog(@"%@",_orderModel.orderDateStr);
     
-//    NSLog(@"是否今天bool值：%@",_isToday?@"YES":@"NO");
-//    _orderModel.orderDateStr = selDateStr;
-//    NSLog(@"%@",_orderModel.orderDateStr);
     [_startBtn setTitle:@"起始时间" forState:UIControlStateNormal];
+    _orderModel.orderDateTimeStart = nil;
     [_endBtn setTitle:@"结束时间" forState:UIControlStateNormal];
-    
-//    NSLog(@"did select date %@",_startDate);
+    _orderModel.orderDateTimeEnd = nil;
+    [self reflashInfo];
     
 }
 
@@ -352,6 +332,21 @@
     _pikerView.type = type;
     _pikerView.datePickerView.minuteInterval = 30;
     
+    NSString *customTimeStartStr = @" 上午 10:00";
+    NSString *customTimeEndStr = @" 下午 9:00";
+    NSMutableString *selDateStartStr = [NSMutableString stringWithFormat:@"%@%@", _orderModel.orderDateStr,customTimeStartStr];
+    NSMutableString *selDateEndStr = [NSMutableString stringWithFormat:@"%@%@", _orderModel.orderDateStr,customTimeEndStr];
+    NSDateFormatter *selDateFormatter = [[NSDateFormatter alloc]init];
+    [selDateFormatter setDateFormat:@"yyyy年MM月dd日 a hh:mm"];
+    //真机运行需要设置Local
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    [selDateFormatter setLocale:locale];
+    NSDate *selDateStart = [selDateFormatter dateFromString:selDateStartStr];
+    NSDate *selDateEnd = [selDateFormatter dateFromString:selDateEndStr];
+
+    NSLog(@"%@",selDateEnd);
+    
+    
     switch (type) {
         case DateTypeOfStart:
             
@@ -360,8 +355,8 @@
             if (_isToday == YES) {
                 [_pikerView.datePickerView setMinimumDate:[NSDate new]];
             } else {
-
-                
+                [_pikerView.datePickerView setMinimumDate:selDateStart];
+                [_pikerView.datePickerView setMaximumDate:selDateEnd];
             }
             
             [self.view addSubview:_pikerView];
@@ -389,6 +384,8 @@
         default:
             break;
     }
+    [self reflashInfo];
+
 }
 
 - (void)getSelectDate:(NSString *)date type:(DateType)type {
@@ -402,8 +399,11 @@
                 NSLog(@"%@",_startDate);
                 [_startBtn setTitle:[NSString stringWithFormat:@"%@", date] forState:UIControlStateNormal];
                 [_endBtn setTitle:@"结束时间" forState:UIControlStateNormal];
+                _orderModel.orderDateTimeStart = [NSString stringWithFormat:@"%@", date];
+                _orderModel.orderDateTimeEnd = nil;
+
             } else {
-                NSLog(@"请选择整点时间");
+                NSLog(@"请选择正确的时间");
                 [self customHUDWithText:@"请选择正确的时间"];
                 
             }
@@ -411,12 +411,15 @@
             
         case DateTypeOfEnd:
             [_endBtn setTitle:[NSString stringWithFormat:@"%@", date] forState:UIControlStateNormal];
-            
+            _orderModel.orderDateTimeEnd = [NSString stringWithFormat:@"%@", date];
+
             break;
             
         default:
             break;
     }
+    [self reflashInfo];
+
 }
 
 #pragma mark 输入个人信息cell
@@ -427,16 +430,18 @@
     [bgView addGestureRecognizer:tap];
     tap.delegate = self;
     
-    
-    
     LRTextField *nameTextField = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 30, SCREEN_W*0.7, 30) labelHeight:15];
     [bgView addSubview:nameTextField];
+    nameTextField.tag = 11;
     nameTextField.delegate = self;
     nameTextField.placeholder = @"姓名";
     nameTextField.placeholderActiveColor = MAINCOLOR;
+    nameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     LRTextField *sexTextField = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 90, SCREEN_W*0.7, 30) labelHeight:15];
     [bgView addSubview:sexTextField];
+    sexTextField.tag = 12;
+    sexTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     sexTextField.delegate = self;
     sexTextField.placeholder = @"性别";
     sexTextField.placeholderActiveColor = MAINCOLOR;
@@ -444,33 +449,94 @@
     [sexTextField setValidationBlock:^NSDictionary *(LRTextField *textField, NSString *text) {
         [NSThread sleepForTimeInterval:1.0];
         if ([text isEqualToString:@"男"] || [text isEqualToString:@"女"] || [text isEqualToString:@"其他"]) {
-            return @{ VALIDATION_INDICATOR_COLOR : @"MAINCOLOR" };
+
+            return @{ VALIDATION_INDICATOR_COLOR : MAINCOLOR };
         }
+
         return @{ VALIDATION_INDICATOR_NO : @"请输入 \"男\" \"女\" \"其他\"" };
     }];
     
     LRTextField *ageTextField = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 150, SCREEN_W*0.7, 30) labelHeight:15];
     [bgView addSubview:ageTextField];
+    ageTextField.tag = 13;
+    ageTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    ageTextField.delegate = self;
     ageTextField.placeholder = @"年龄";
     ageTextField.placeholderActiveColor = MAINCOLOR;
     ageTextField.keyboardType = UIKeyboardTypeNumberPad;
 
     LRTextField *phoneTextField = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 210, SCREEN_W*0.7, 30) labelHeight:15 style:LRTextFieldStylePhone];
     [bgView addSubview:phoneTextField];
+    phoneTextField.tag = 14;
+    phoneTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    phoneTextField.delegate = self;
     phoneTextField.placeholder = @"电话";
     phoneTextField.placeholderActiveColor = MAINCOLOR;
     
     LRTextField *emailTextField = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 270, SCREEN_W*0.7, 30) labelHeight:15 style:LRTextFieldStyleEmail];
     [bgView addSubview:emailTextField];
+    emailTextField.tag = 15;
+    emailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    emailTextField.delegate = self;
     emailTextField.placeholder = @"邮箱*";
     emailTextField.placeholderActiveColor = MAINCOLOR;
     emailTextField.hintText = @"*选填";
     emailTextField.hintTextColor = [UIColor blackColor];
+    _orderModel.orderInfoEmail = @"未填写";
+//    [_orderDataDic setValue:_orderModel.orderInfoEmail forKey:@"orderInfoEmail"];
 
+    
+}
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     
-    
-    
+    if ([textField isEqual:[self.view viewWithTag:11]]) {
+        NSLog(@"名字:%@",textField.text);
+        if (NULLString(textField.text)) {
+            NSLog(@"名字空");
+            _orderModel.orderInfoName = nil;
+
+        }
+        _orderModel.orderInfoName = textField.text;
+
+    } else if ([textField isEqual:[self.view viewWithTag:12]]){
+        if ([textField.text isEqualToString:@"男"] || [textField.text isEqualToString:@"女"] || [textField.text isEqualToString:@"其他"]) {
+            _orderModel.orderInfoSex = textField.text;
+            NSLog(@"性别:%@",_orderModel.orderInfoSex);
+        } else{
+        _orderModel.orderInfoSex = nil;
+        }
+    } else if ([textField isEqual:[self.view viewWithTag:13]]){
+        NSLog(@"年龄:%@",textField.text);
+        if (NULLString(textField.text)) {
+            NSLog(@"年龄空");
+            _orderModel.orderInfoAge = nil;
+        }
+        _orderModel.orderInfoAge = textField.text;
+    } else if ([textField isEqual:[self.view viewWithTag:14]]){
+        NSLog(@"电话:%@",textField.text);
+        if (NULLString(textField.text)) {
+            _orderModel.orderInfoPhone = nil;
+            NSLog(@"电话:%@",_orderModel.orderInfoSex);
+
+        }
+        _orderModel.orderInfoPhone = textField.text;
+    }
+    [self reflashInfo];
+
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([textField isEqual:[self.view viewWithTag:13]]) {
+        if(range.length + range.location > textField.text.length) {
+            return NO;
+        }
+        
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        return newLength <= 3;
+    }
+    return YES;
 }
 
 
@@ -494,7 +560,7 @@
     _tabBar = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
     _ConfirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
     _ConfirmBtn.backgroundColor = [UIColor lightGrayColor];
-    _ConfirmBtn.enabled = NO;
+//    _ConfirmBtn.enabled = NO;
     [_ConfirmBtn setTitle:@"确定预约" forState:UIControlStateNormal];
     [_ConfirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
     [_tabBar addSubview:_ConfirmBtn];
@@ -504,11 +570,28 @@
     
 }
 
+- (void)reflashInfo {
+    
+    if (NULLString(_orderModel.conserlorName) || NULLString(_orderModel.orderChoice) ||  NULLString(_orderModel.orderDateStr) ||  NULLString(_orderModel.orderDateTimeStart) ||  NULLString(_orderModel.orderDateTimeEnd) || NULLString(_orderModel.orderInfoName) ||  NULLString(_orderModel.orderInfoSex) ||  NULLString(_orderModel.orderInfoAge) ||  NULLString(_orderModel.orderInfoPhone) ||  NULLString(_orderModel.orderInfoEmail)) {
+        _ConfirmBtn.enabled = NO;
+        _ConfirmBtn.backgroundColor = [UIColor lightGrayColor];
+        
+    } else {
+        _ConfirmBtn.backgroundColor = MAINCOLOR;
+        _ConfirmBtn.enabled = YES;
+
+    }
+    
+}
+
 - (void)clickConfirmBtn {
     NSLog(@"确认预约");
     
-    OrderPageVC *vcc = [[OrderPageVC alloc]init];
-    [self.navigationController pushViewController:vcc animated:YES];
+    OrderPageVC *orderPage = [[OrderPageVC alloc]init];
+    orderPage.orderModel = _orderModel;
+    
+    PayPageVC *payPage = [[PayPageVC alloc]init];
+    [self.navigationController pushViewController:payPage animated:YES];
     
 }
 

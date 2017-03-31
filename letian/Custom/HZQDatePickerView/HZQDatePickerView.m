@@ -72,7 +72,7 @@
 {
     NSDate *selected = [self.datePickerView date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"a HH:mm"];
+    [dateFormatter setDateFormat:@"a hh:mm"];
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:selected];
     return currentOlderOneDateStr;
 }

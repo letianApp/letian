@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderModel.h"
 
 @interface OrderPageVC : UIViewController
+
+@property (nonatomic, strong) OrderModel *orderModel;
 
 @end
