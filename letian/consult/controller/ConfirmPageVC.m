@@ -17,6 +17,7 @@
 #import "ZYKeyboardUtil.h"
 
 #import "OrderPageVC.h"
+#import "PayPageVC.h"
 
 @interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, HZQDatePickerViewDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate>
 
@@ -298,6 +299,7 @@
         [_timeChoicesView addSubview:_lineView];
         _orderModel.orderDateStr = selDateStr;
     }
+    NSLog(@"%@",_orderModel.orderDateStr);
     
     [_startBtn setTitle:@"起始时间" forState:UIControlStateNormal];
     _orderModel.orderDateTimeStart = nil;
@@ -330,13 +332,19 @@
     _pikerView.type = type;
     _pikerView.datePickerView.minuteInterval = 30;
     
-    NSMutableString *selDateStr = [NSMutableString stringWithFormat:@"%@", _orderModel.orderDateStr];
     NSString *customTimeStartStr = @" 上午 10:00";
-    [selDateStr appendString:customTimeStartStr];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy年MM月dd日 a hh:mm"];
-    NSDate *selDate = [dateFormatter dateFromString:selDateStr];
-    NSLog(@"%@",selDate);
+    NSString *customTimeEndStr = @" 下午 9:00";
+    NSMutableString *selDateStartStr = [NSMutableString stringWithFormat:@"%@%@", _orderModel.orderDateStr,customTimeStartStr];
+    NSMutableString *selDateEndStr = [NSMutableString stringWithFormat:@"%@%@", _orderModel.orderDateStr,customTimeEndStr];
+    NSDateFormatter *selDateFormatter = [[NSDateFormatter alloc]init];
+    [selDateFormatter setDateFormat:@"yyyy年MM月dd日 a hh:mm"];
+    //真机运行需要设置Local
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    [selDateFormatter setLocale:locale];
+    NSDate *selDateStart = [selDateFormatter dateFromString:selDateStartStr];
+    NSDate *selDateEnd = [selDateFormatter dateFromString:selDateEndStr];
+
+    NSLog(@"%@",selDateEnd);
     
     
     switch (type) {
@@ -347,7 +355,8 @@
             if (_isToday == YES) {
                 [_pikerView.datePickerView setMinimumDate:[NSDate new]];
             } else {
-                [_pikerView.datePickerView setMinimumDate:selDate];
+                [_pikerView.datePickerView setMinimumDate:selDateStart];
+                [_pikerView.datePickerView setMaximumDate:selDateEnd];
             }
             
             [self.view addSubview:_pikerView];
@@ -580,7 +589,9 @@
     
     OrderPageVC *orderPage = [[OrderPageVC alloc]init];
     orderPage.orderModel = _orderModel;
-    [self.navigationController pushViewController:orderPage animated:YES];
+    
+    PayPageVC *payPage = [[PayPageVC alloc]init];
+    [self.navigationController pushViewController:payPage animated:YES];
     
 }
 

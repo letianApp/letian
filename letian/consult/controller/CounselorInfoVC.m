@@ -26,7 +26,7 @@
     [super viewDidLoad];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+        
 //    self.view.backgroundColor = [UIColor whiteColor];
     [self customNavigation];
     [self customMainTableView];
@@ -106,37 +106,49 @@
 #pragma mark 头部视图
 - (void)customHeadView {
     
-    _headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H/3-10)];
+    _headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H*0.3)];
     _headView.backgroundColor = MAINCOLOR;
     _mainTableView.tableHeaderView = _headView;
     //咨询师头像
-    UIImageView *picView = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_W*2/5, statusBar_H+navigationBar_H, SCREEN_W/5, SCREEN_W/5)];
+    UIImageView *picView = [[UIImageView alloc]init];
     [picView setImage:[UIImage imageNamed:@"wowomen"]];
     picView.layer.cornerRadius = SCREEN_W/10;
     picView.layer.borderWidth = 1;
     picView.layer.borderColor = ([UIColor whiteColor].CGColor);
     picView.layer.masksToBounds = YES;
     [_headView addSubview:picView];
+    [picView mas_updateConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(_headView.mas_centerX);
+        make.centerY.equalTo(_headView.mas_centerY);
+        make.width.equalTo(_headView.mas_width).multipliedBy(0.2);
+        make.height.equalTo(_headView.mas_width).multipliedBy(0.2);
+    }];
+    
+    float lineHeight = (_headView.height/2-_headView.width*0.1)/7;
+    NSLog(@"%f",lineHeight);
     //咨询师名字
-    UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*2/5, (statusBar_H+navigationBar_H+SCREEN_W/5+10), SCREEN_W/5, 20)];
+    UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*2/5, _headView.height-lineHeight*6, SCREEN_W/5, lineHeight*2)];
     nameLab.textAlignment = NSTextAlignmentCenter;
     nameLab.text = @"孙晓平";
     nameLab.textColor = [UIColor whiteColor];
-    nameLab.font = [UIFont boldSystemFontOfSize:17];
+    nameLab.font = [UIFont systemFontOfSize:14 weight:2];
     [_headView addSubview:nameLab];
+//    nameLab.backgroundColor = [UIColor yellowColor];
     //咨询师称号
     UILabel *statusLab = [[UILabel alloc]init];
+//    statusLab.backgroundColor = [UIColor yellowColor];
     [_headView addSubview:statusLab];
     [statusLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(nameLab.mas_centerX);
-        make.top.equalTo(nameLab.mas_bottom).offset(10);
+        make.top.equalTo(nameLab.mas_bottom).offset(lineHeight);
         make.width.equalTo(self.view.mas_width).multipliedBy(0.3);
         make.height.equalTo(nameLab.mas_height);
     }];
     statusLab.textAlignment = NSTextAlignmentCenter;
     statusLab.text = @"专家心理咨询师";
     statusLab.textColor = [UIColor whiteColor];
-    statusLab.font = [UIFont boldSystemFontOfSize:12];
+    statusLab.font = [UIFont systemFontOfSize:12];
 
 }
 

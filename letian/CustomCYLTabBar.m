@@ -55,7 +55,7 @@
 
 - (NSArray *)viewControllers {
     FirstViewController *firstViewController = [[FirstViewController alloc] init];
-    UIViewController *firstNavigationController = [[CYLBaseNavigationController alloc]
+    UIViewController *firstNavigationController = [[RTRootNavigationController alloc]
                                                    initWithRootViewController:firstViewController];
     
     ConsultViewController *secondViewController = [[ConsultViewController alloc] init];
@@ -63,7 +63,7 @@
                                                     initWithRootViewController:secondViewController];
     
     MyViewController *thirdViewController = [[MyViewController alloc] init];
-    UIViewController *thirdNavigationController = [[CYLBaseNavigationController alloc]
+    UIViewController *thirdNavigationController = [[RTRootNavigationController alloc]
                                                    initWithRootViewController:thirdViewController];
     
     /**

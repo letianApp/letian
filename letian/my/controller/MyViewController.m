@@ -10,10 +10,11 @@
 #import "GQControls.h"
 #import "MessageViewController.h"
 #import "OrderViewController.h"
+#import "AboutUsPageVC.h"
+
 @interface MyViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
-
 @property (nonatomic,strong) NSArray *dataArray;
 
 
@@ -22,10 +23,9 @@
 @implementation MyViewController
 
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     
     self.navigationController.navigationBarHidden=YES;
-    
     self.automaticallyAdjustsScrollViewInsets=NO;
     
 }
@@ -43,8 +43,8 @@
 }
 
 
--(void)createTableView
-{
+- (void)createTableView {
+    
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-44) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
@@ -58,7 +58,7 @@
 
 #pragma mark--------账户头像
 
--(UIView *)createHeadView{
+- (UIView *)createHeadView {
     
     UIView *headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 220)];
     
@@ -87,8 +87,7 @@
     
 }
 
--(void)messageButtonClicked
-{
+- (void)messageButtonClicked {
     
     MessageViewController *messageVc=[[MessageViewController alloc]init];
     
@@ -97,16 +96,14 @@
     
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return 4;
     
 }
 
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return 50;
     
@@ -114,8 +111,7 @@
 
 #pragma mark--------订单view
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView *orderView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 100)];
     
@@ -183,8 +179,7 @@
 
 
 //点击进入订单页面
--(void)orderSrateButtonClick:(UIButton *)btn
-{
+- (void)orderSrateButtonClick:(UIButton *)btn {
     
     NSLog(@"进入订单列表");
     
@@ -197,16 +192,14 @@
 }
 
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     return 100;
     
 }
 
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     
@@ -232,8 +225,7 @@
 }
 
 //cell点击事件
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
     
@@ -245,6 +237,13 @@
         UIWebView * callWebview = [[UIWebView alloc] init];
         [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
         [self.view addSubview:callWebview];
+        
+    } else if (indexPath.row == 3) {
+        
+        AboutUsPageVC *aboutUsPage = [[AboutUsPageVC alloc]init];
+        aboutUsPage.hidesBottomBarWhenPushed = YES;
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self.navigationController pushViewController:aboutUsPage animated:YES];
         
     }
     
