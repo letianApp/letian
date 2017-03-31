@@ -12,6 +12,7 @@
 #import "RegistViewController.h"
 #import "ForgetPwViewController.h"
 #import "CustomCYLTabBar.h"
+#import "NSString+YYExtension.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *acountTextField;
@@ -52,9 +53,83 @@
 
 -(void)loginBtnClicked{
     
+    
+    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_USER];
+    [requestString appendString:API_NAME_LOGIN];
+    NSMutableDictionary *params    = [NSMutableDictionary dictionary];
+    NSString *signature            = @"";//加密字符串
+    NSString *timeSp               = [NSString timestamp];//时间戳
+    NSString* nonce                = [NSString randomString];//随机数
+    //用户名
+    params[@"LoginName"]               = [self.acountTextField.text.trim stringByReplacingOccurrencesOfString:@" " withString:@""];
+    //密码
+    params[@"Password"]            =self.passwordTextField.text;
+    
+    //加密签名字符串
+    params[@"Signature"]           = [signature YYApi_SHA1Encryption:nonce timeSp:timeSp];
+    
+    //时间戳
+    params[@"Timestamp"]           = timeSp;
+    
+    //随机数
+    params[@"Nonce"]               = nonce;
+    
+    //应用接入ID
+    params[@"AppId"]               = APPID;
+    
+    params[@"PushNo"]               = @"";
+
+    __weak typeof(self) weakSelf   = self;
+    
+    //        [SVProgressHUD showWithStatus:@"登录中..."];
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        //            [SVProgressHUD dismiss];
+        
+        NSLog(@"登录%@",responseObject);
+        
+        if([responseObject[@"code"] integerValue] == 200 && [responseObject[@"isSuccess"] boolValue] == YES){
+            //存储用户信息
+//            [CYUserManager saveUserData:@{@"UserId":responseObject[@"result"][@"source"][@"id"]} andToken:responseObject[@"result"][@"source"][@"access_token"]];
+            
+            //发送登录成功的通知
+//            [[NSNotificationCenter defaultCenter] postNotificationName:kLoginSuccessNotification object:nil];
+            
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+            
+//            YYLOG(@" >>>> user login result (token) === %@",kFetchToken);
+            
+            
+            
+            CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
+            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
+            
+            
+            
+        }else{
+//            [SVProgressHUD showErrorWithStatus:responseObject[@"info"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        YYLOG(@">>>> user login result error === %@",error);
+        
+        
+        
+        // 如果是取消了任务，就不算请求失败，就直接返回
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+//            [SVProgressHUD showErrorWithStatus:@"登录超时"];
+        } else {
+//            [SVProgressHUD showErrorWithStatus:@"登录失败"];
+        }
+    }];
+    
+    
+    
+
    
-    CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
-    [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
+    
     
 }
 

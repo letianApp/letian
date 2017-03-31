@@ -10,6 +10,7 @@
 #import "GQControls.h"
 #import "MessageViewController.h"
 #import "OrderViewController.h"
+
 @interface MyViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -36,11 +37,12 @@
     
     [super viewDidLoad];
     
-    self.dataArray=@[@"系统设置",@"客服电话    400-109-2001",@"我要分享",@"关于我们"];
+    self.dataArray=@[@"系统设置",@"客服电话    021-37702979",@"我要分享",@"关于我们"];
     
     [self createTableView];
     
 }
+
 
 
 -(void)createTableView
@@ -172,7 +174,7 @@
         orderLabel.textAlignment=NSTextAlignmentCenter;
         [orderView addSubview:orderLabel];
         
-        
+
         
     }
     
@@ -192,7 +194,7 @@
     
     [self.navigationController pushViewController:orderVc animated:NO];
     
-    
+
     
 }
 
@@ -232,6 +234,7 @@
 }
 
 //cell点击事件
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -241,7 +244,7 @@
     
     if (indexPath.row==1) {
         //拨打客服电话，打完之后不会留在通讯录而是回到应用
-        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"400-109-2001"];
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"021-37702979"];
         UIWebView * callWebview = [[UIWebView alloc] init];
         [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
         [self.view addSubview:callWebview];
