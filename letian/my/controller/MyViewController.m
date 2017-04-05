@@ -92,6 +92,8 @@
     
     MessageViewController *messageVc=[[MessageViewController alloc]init];
     
+    messageVc.hidesBottomBarWhenPushed=YES;
+    
     [self.navigationController pushViewController:messageVc animated:YES];
     
     
@@ -185,6 +187,8 @@
     NSLog(@"进入订单列表");
     
     OrderViewController *orderVc=[[OrderViewController alloc]init];
+    
+    orderVc.hidesBottomBarWhenPushed=YES;
     
     [self.navigationController pushViewController:orderVc animated:NO];
     
