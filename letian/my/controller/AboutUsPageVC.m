@@ -91,6 +91,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"AboutUsCellId"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;                        //设置cell不可以点
     NSArray *titleArr = @[@"微信公众号",@"联系电话",@"邮箱",@"官方网站"];
     NSArray *detailArr = @[@"乐天心理咨询",@"021-37702979",@"rightpsy@126.com",@"www.wzright.com"];
     cell.textLabel.text = titleArr[indexPath.row];
