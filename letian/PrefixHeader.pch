@@ -26,6 +26,11 @@
 #define kFetchToken         [[NSUserDefaults standardUserDefaults] objectForKey:@"token"]
 
 
+
+
+
+//========================APP============================
+
 //===========================通用==================
 #define NULLString(string) ((![string isKindOfClass:[NSString class]])||[string isEqualToString:@""] || (string == nil) || [string isEqualToString:@""] || [string isKindOfClass:[NSNull class]]||[[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0)                                    //判断字符串是否为空
 //短信授权码
@@ -34,7 +39,12 @@
 #define JIGUANGPUSHAPPKEY           @"4c395a924e846f2c729009b6"
 #define JIGUANGPUSHMASTERSECRET     @"50be4900f2b53f9ca1b2dbb7"
 
+// APPID
+#define APPID      @"55c9e9ea-169e-40e1-826c-c78d3f109e93"
 
+#define APPKEY      @"6a2f401d291349b193f7fe5688bd8aba"
+
+#define APPSECRET      @"a92e9517d06342608b921f840a89d36b"
 
 //============================颜色=========================
 #define MAINCOLOR [UIColor colorWithRed:227/255.0 green:111/255.0 blue:117/255.0 alpha:1]   //主色调
@@ -47,6 +57,8 @@
 #import "UIView+Layout.h"                                                                   //改变view frame
 #import "GQControls.h"
 #import  "GQNetworkManager.h"
+#import  "UIColor+YYExtension.h"
+#import  "UIView+YYExtension.h"
 
 #include "API.h"
 
