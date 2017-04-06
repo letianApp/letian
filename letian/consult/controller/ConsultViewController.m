@@ -12,6 +12,9 @@
 #import "CounselorInfoVC.h"
 #import "CYUserManager.h"
 #import "LoginViewController.h"
+
+#import "ChatListViewController.h"
+
 @interface ConsultViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 
@@ -83,6 +86,9 @@
 }
 
 - (void)selRightButton {
+    
+    ChatListViewController *vc = [[ChatListViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

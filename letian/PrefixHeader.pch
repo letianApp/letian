@@ -59,6 +59,17 @@
 #define AUTHCODE        @"5ee3fa9e-8ff4-4441-a715-61a566f72839"
 
 //极光推送
+<<<<<<< HEAD
+#define JIGUANGPUSHAPPKEY           @"4c395a924e846f2c729009b6"
+#define JIGUANGPUSHMASTERSECRET     @"50be4900f2b53f9ca1b2dbb7"
+//融云
+#define RONGYUNAPPKEY               @"82hegw5u83dkx"
+#define RONGYUNAPPSECRET            @"TZwaP6feAoneVl"
+// APPID
+#define APPID      @"55c9e9ea-169e-40e1-826c-c78d3f109e93"
+#define APPKEY      @"6a2f401d291349b193f7fe5688bd8aba"
+#define APPSECRET      @"a92e9517d06342608b921f840a89d36b"
+=======
 #define JPUSHAPPKEY     @"4c395a924e846f2c729009b6"
 #define JPUSHSECRET     @"50be4900f2b53f9ca1b2dbb7"
 
@@ -84,6 +95,8 @@
 #import  "GQNetworkManager.h"
 #import  "UIColor+YYExtension.h"
 #import  "UIView+YYExtension.h"
+
+
 #import "MBHudSet.h"
 #include "API.h"
 #import "MBProgressHUD.h"
