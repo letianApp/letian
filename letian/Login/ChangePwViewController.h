@@ -10,4 +10,8 @@
 
 @interface ChangePwViewController : UIViewController
 
+@property(nonatomic,copy)NSString *phone;
+
+@property(nonatomic,copy)NSString *msgCode;
+
 @end

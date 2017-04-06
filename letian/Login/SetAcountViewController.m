@@ -8,7 +8,6 @@
 
 #import "SetAcountViewController.h"
 #import "CustomCYLTabBar.h"
-#import "RegisterModel.h"
 #import "MJExtension.h"
 @interface SetAcountViewController ()
 
@@ -77,9 +76,11 @@
     NSLog(@"Params=%@",params);
    
     
-    
+    [MBHudSet showStatusOnView:self.view];
+
     [manager POST:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+        [MBHudSet dismiss:self.view];
+
         NSLog(@"注册%@",responseObject);
         
         if([responseObject[@"Code"] integerValue] == 200){
@@ -87,19 +88,29 @@
             CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
             [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
            
+        }else{
+            
+            [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
+            
         }
+
         
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"错误%@",error);
-        //        [SVProgressHUD dismiss];
+        [MBHudSet dismiss:self.view];
         // 如果是取消了任务，就不算请求失败，就直接返回
         if (error.code == NSURLErrorCancelled) return;
+        
         if (error.code == NSURLErrorTimedOut) {
-            //            [SVProgressHUD showErrorWithStatus:@"发送短信超时"];
-        } else {
-            //            [SVProgressHUD showErrorWithStatus:@"发送短信失败"];
+            
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+            
+        } else{
+            
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+            
         }
     }];
     

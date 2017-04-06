@@ -13,6 +13,8 @@
 #import "ForgetPwViewController.h"
 #import "CustomCYLTabBar.h"
 #import "NSString+YYExtension.h"
+#import "JPUSHService.h"
+#import "CYUserManager.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *acountTextField;
@@ -53,6 +55,10 @@
 
 -(void)loginBtnClicked{
     
+    if ([self.acountTextField.text isEqualToString:@""]) {
+        [MBHudSet showText:@"请输入账号" andOnView:self.view];
+        return;
+    }
     
     GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
@@ -72,33 +78,40 @@
     
     //时间戳
     params[@"Timestamp"]           = timeSp;
-    
+
     //随机数
     params[@"Nonce"]               = nonce;
-    
+
     //应用接入ID
     params[@"AppId"]               = APPID;
+
     
-    params[@"PushNo"]               = @"";
+    params[@"PushNo"]               = [JPUSHService registrationID];;
 
     __weak typeof(self) weakSelf   = self;
     
-    //        [SVProgressHUD showWithStatus:@"登录中..."];
+    [MBHudSet showStatusOnView:self.view];
+    
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        //            [SVProgressHUD dismiss];
-        
-        NSLog(@"登录%@",responseObject);
-        
-        if([responseObject[@"code"] integerValue] == 200 && [responseObject[@"isSuccess"] boolValue] == YES){
-            //存储用户信息
-//            [CYUserManager saveUserData:@{@"UserId":responseObject[@"result"][@"source"][@"id"]} andToken:responseObject[@"result"][@"source"][@"access_token"]];
             
-            //发送登录成功的通知
-//            [[NSNotificationCenter defaultCenter] postNotificationName:kLoginSuccessNotification object:nil];
+        [MBHudSet dismiss:self.view];
+            
+        NSLog(@"登录%@",responseObject);
+        NSLog(@"Msg%@",responseObject[@"Msg"]);
+
+        if([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES){
+            //存储用户信息
+            [CYUserManager saveUserData:@{@"UserId":responseObject[@"Result"][@"Source"][@"userid"]} andToken:responseObject[@"Result"][@"Source"][@"access_token"]];
+            
+            NSLog(@"token:%@",kFetchToken);
+
+            [[NSUserDefaults standardUserDefaults] setObject:self.acountTextField.text.trim forKey:kUserPhoneKey];
             
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
             
-//            YYLOG(@" >>>> user login result (token) === %@",kFetchToken);
+            [[NSNotificationCenter defaultCenter] postNotificationName:kLoginSuccessNotification object:nil];
+            
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
             
             
             
@@ -108,28 +121,32 @@
             
             
         }else{
-//            [SVProgressHUD showErrorWithStatus:responseObject[@"info"]];
+            
+
+            [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        YYLOG(@">>>> user login result error === %@",error);
         
-        
+        [MBHudSet dismiss:self.view];
+
         
         // 如果是取消了任务，就不算请求失败，就直接返回
         if (error.code == NSURLErrorCancelled) return;
+        
         if (error.code == NSURLErrorTimedOut) {
-//            [SVProgressHUD showErrorWithStatus:@"登录超时"];
-        } else {
-//            [SVProgressHUD showErrorWithStatus:@"登录失败"];
+            
+            [MBHudSet showText:@"登录超时" andOnView:self.view];
+        
+        } else{
+            
+            [MBHudSet showText:@"登录失败" andOnView:self.view];
+
         }
     }];
     
     
-    
-
-   
-    
+  
     
 }
 

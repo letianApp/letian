@@ -48,6 +48,8 @@
 //登录
 #define API_NAME_LOGIN         @"Login"
 
+//忘记密码
+#define API_NAME_FORGET         @"ForgetPwd"
 
 
 

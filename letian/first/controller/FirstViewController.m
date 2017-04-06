@@ -60,7 +60,6 @@
     [self requestData];
     
     
-    
 }
 
 -(void)createTableView
@@ -79,7 +78,7 @@
 //请求套餐信息
 -(void)requestData
 {
-    
+
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:@"http://bapi.xinli001.com/ceshi/ceshis.json/?rows=10&offset=0&category_id=2&rmd=-1&key=86467ca472d76f198f8aa89d186fa85e"];
     
@@ -94,42 +93,21 @@
         
     }];
     
-    
 }
 
 //头视图
 -(void)createHeadBgView
 {
     
-    
-//    self.headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 320)];
-//    
-//    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 220, SCREEN_W, 100)];
-//
-//    CGFloat margin=(SCREEN_W-240)/5;
-//    NSArray *nameArray=@[@"- 咨询 -",@"- 文章 -",@"- 测试 -",@"- 活动 -"];
-//    NSArray *imageNameArray=@[@"givemefive",@"kiss me",@"fish",@"self"];
-//    for (NSInteger i=0; i<4; i++) {
-//        UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
-//        button.frame=CGRectMake(margin+(margin+60)*i, 20, 60, 60);
-//        //        button.backgroundColor=MAINCOLOR;
-//        button.alpha=0.8;
-////        [button setTitle:nameArray[i] forState:UIControlStateNormal];
-//        button.titleLabel.textColor=[UIColor whiteColor];
-//        button.titleLabel.font=[UIFont systemFontOfSize:15];
-//        button.layer.masksToBounds=YES;
-//        button.layer.cornerRadius=30;
-//        [button setImage:[UIImage imageNamed:imageNameArray[i]] forState:UIControlStateNormal];
-//        [view addSubview:button];
-//    }
 
+
+    
     
     self.headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 325)];
     
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 220, SCREEN_W, 100)];
     
     NSArray *nameArray=@[@"- 咨询 -",@"- 文章 -",@"- 测试 -",@"- 活动 -"];
-    NSArray *imageArray=@[@"zixun",@"wenzhang",@"ceshi",@"huodong"];
     for (NSInteger i=0; i<2; i++) {
         for (NSInteger j=0; j<2; j++) {
             UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/2*j, i*50, SCREEN_W/2, 50)];
@@ -149,10 +127,7 @@
             
             [view addSubview:label];
             
-            
-            UIImageView *smallImage=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_W/2*j-30, i*50, 20, 20)];
-            smallImage.image=[UIImage imageNamed:imageArray[i]];
-            [view addSubview:smallImage];
+           
             
             
         }
@@ -205,6 +180,8 @@
 
         ArticleViewController *articleVc=[[ArticleViewController alloc]init];
         
+        articleVc.hidesBottomBarWhenPushed=YES;
+        
         [self.navigationController pushViewController:articleVc animated:YES];
         
 //    跳到测试
@@ -213,6 +190,8 @@
         
         TestViewController *testVc=[[TestViewController alloc]init];
         
+        testVc.hidesBottomBarWhenPushed=YES;
+        
         [self.navigationController pushViewController:testVc animated:YES];
         
 //    跳到活动
@@ -220,6 +199,8 @@
         
         
         ActivityViewController *activityVc=[[ActivityViewController alloc]init];
+        
+        activityVc.hidesBottomBarWhenPushed=YES;
         
         [self.navigationController pushViewController:activityVc animated:YES];
     }
@@ -321,9 +302,9 @@
         // 点击确定按钮的时候, 会调用这个block
         LoginViewController *loginVc=[[LoginViewController alloc]init];
 
+        loginVc.hidesBottomBarWhenPushed=YES;
         
         [self.navigationController pushViewController:loginVc animated:YES];
-        
         
     }]];
     
@@ -371,6 +352,8 @@
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
     
     ArticleViewController *articleVc=[[ArticleViewController alloc]init];
+    
+    articleVc.hidesBottomBarWhenPushed=YES;
     
     [self.navigationController pushViewController:articleVc animated:YES];
     
