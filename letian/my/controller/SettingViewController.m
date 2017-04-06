@@ -9,7 +9,7 @@
 #import "SettingViewController.h"
 #import "CYUserManager.h"
 #import "LoginViewController.h"
-
+#import "ChangePwCodeViewController.h"
 
 @interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -159,6 +159,25 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
+    
+    if (indexPath.section==0) {
+        //修改密码
+        ChangePwCodeViewController *changePwCodeVc=[[ChangePwCodeViewController alloc]init];
+        
+        [self.navigationController pushViewController:changePwCodeVc animated:YES];
+        
+        if (indexPath.row==0) {
+            
+        }
+        
+        
+    }else if (indexPath.section==1){
+        
+    }
+}
 
 /*** 设置导航栏信息*/
 -(void) setUpNavigationBar

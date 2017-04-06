@@ -225,12 +225,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+
+    
     //已登录
     if ([CYUserManager isHaveLogin]) {
         
         CounselorInfoVC *counselorInfoMainVC = [[CounselorInfoVC alloc]init];
         counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
         [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];
         
 
@@ -244,7 +246,7 @@
             
             LoginViewController *loginVc=[[LoginViewController alloc]init];
             
-            loginVc.tabbarIndex=1;
+            loginVc.tabbarIndex= 1;
             
             loginVc.hidesBottomBarWhenPushed=YES;
             

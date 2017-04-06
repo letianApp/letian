@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfoModel.h"
 
 @interface SettingViewController : UIViewController
+
+@property(nonatomic,strong)UserInfoModel *userInfoModel;
 
 @end

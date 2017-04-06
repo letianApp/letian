@@ -15,7 +15,6 @@
 #import "NSString+YYExtension.h"
 #import "JPUSHService.h"
 #import "CYUserManager.h"
-
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *acountTextField;
 
@@ -165,9 +164,11 @@
 - (IBAction)doNotLogin:(id)sender {
     
     CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
+    
     [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
+    
     tabBarController.tabBarController.selectedIndex = self.tabbarIndex;
-
+    
 }
 
 //点击忘记密码

@@ -10,6 +10,6 @@
 
 @interface LoginViewController : UIViewController
 
-@property(nonatomic,assign)NSInteger *tabbarIndex;
+@property(nonatomic,assign)NSInteger tabbarIndex;
 
 @end

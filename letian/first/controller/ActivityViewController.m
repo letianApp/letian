@@ -7,16 +7,33 @@
 //
 
 #import "ActivityViewController.h"
-
+#import "HomeCell.h"
 #import <WebKit/WebKit.h>
+#import "ActiveListModel.h"
+#import "MJExtension.h"
 
-@interface ActivityViewController ()<WKNavigationDelegate,WKUIDelegate>
+@interface ActivityViewController ()<WKNavigationDelegate,WKUIDelegate,UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic,strong) UITableView *tableView;
+@property (nonatomic,strong) NSArray *dataArray;
+
+@property(nonatomic,strong)NSMutableArray <ActiveListModel *> *activeListArray;
 
 @property (nonatomic,strong) WKWebView *webView;
 
 @end
 
 @implementation ActivityViewController
+
+
+-(NSMutableArray *)activeListArray
+{
+    if (_activeListArray == nil) {
+        _activeListArray = [NSMutableArray array];
+    }
+    return _activeListArray;
+}
+
 
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -29,7 +46,8 @@
     [super viewDidLoad];
     [self setUpNavigationBar];
     
-    
+//    [self createTableView];
+//    [self requestData];
     [self createWebView];
     
     
@@ -37,6 +55,105 @@
     
 }
 
+-(void)requestData
+{
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_ACTIVE];
+    [requestString appendString:API_NAME_GETACTIVELIST];
+    __weak typeof(self) weakSelf = self;
+    
+    
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    
+    params[@"pageIndex"]=@(1);
+    params[@"pageSize"]=@(10);
+
+    
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    
+    [MBHudSet showStatusOnView:self.view];
+    
+    [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [MBHudSet dismiss:self.view];
+        
+        NSLog(@"&&&&&&&&&*获取活动列表%@",responseObject);
+        NSLog(@"ActiveTypeIDString=%@",responseObject[@"Result"][@"Source"][0][@"ActiveTypeIDString"]);
+        if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
+            
+            weakSelf.activeListArray=[ActiveListModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+            NSLog(@"activeListArray=%@",weakSelf.activeListArray);
+            
+            [_tableView reloadData];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+        
+        if (error.code == NSURLErrorCancelled) return;
+        
+        if (error.code == NSURLErrorTimedOut) {
+            
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+            
+        } else{
+            
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+            
+        }
+        
+    }];
+    
+}
+
+-(void)createTableView
+{
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H) style:UITableViewStylePlain];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
+    
+}
+
+#pragma mark -----------------tableViewDelegate
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.activeListArray.count;
+}
+
+//cell定制
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    HomeCell *cell=[HomeCell cellWithTableView:tableView];
+    
+    cell.titleLabel.text=self.activeListArray[indexPath.row].Name;
+    
+    cell.detailLabel.text=self.activeListArray[indexPath.row].Description;
+    
+//    [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.testList[indexPath.row].cover]];
+    
+    return cell;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 85;
+}
+
+//cell点击事件
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
+    
+    
+    
+}
 
 -(void) setUpNavigationBar
 {

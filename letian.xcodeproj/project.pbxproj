@@ -190,8 +190,13 @@
 		77B5C9E81E7A2F000028CB9E /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B5C9E61E7A2F000028CB9E /* OrderDetailViewController.xib */; };
 		77B5C9EC1E7A4AF50028CB9E /* CompleteOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5C9EA1E7A4AF50028CB9E /* CompleteOrderViewController.m */; };
 		77B5C9ED1E7A4AF50028CB9E /* CompleteOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B5C9EB1E7A4AF50028CB9E /* CompleteOrderViewController.xib */; };
-		77C383101E6CF79A00B4EF73 /* ChangePwViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C3830E1E6CF79A00B4EF73 /* ChangePwViewController.m */; };
-		77C383111E6CF79A00B4EF73 /* ChangePwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77C3830F1E6CF79A00B4EF73 /* ChangePwViewController.xib */; };
+		77D07EDF1E962CB200904AD9 /* ResetPwViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D07EDD1E962CB200904AD9 /* ResetPwViewController.m */; };
+		77D07EE01E962CB200904AD9 /* ResetPwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D07EDE1E962CB200904AD9 /* ResetPwViewController.xib */; };
+		77D07EE41E962D2A00904AD9 /* ChangePwViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D07EE21E962D2A00904AD9 /* ChangePwViewController.m */; };
+		77D07EE51E962D2A00904AD9 /* ChangePwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D07EE31E962D2A00904AD9 /* ChangePwViewController.xib */; };
+		77D07EE91E962D7900904AD9 /* ChangePwCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D07EE71E962D7900904AD9 /* ChangePwCodeViewController.m */; };
+		77D07EEA1E962D7900904AD9 /* ChangePwCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D07EE81E962D7900904AD9 /* ChangePwCodeViewController.xib */; };
+		77D07EED1E9637CC00904AD9 /* ActiveListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D07EEC1E9637CC00904AD9 /* ActiveListModel.m */; };
 		77D2BF931E668D83000B9978 /* mainMessageWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BF921E668D83000B9978 /* mainMessageWhite.png */; };
 		77D2BF971E66B3D0000B9978 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D2BF951E66B3D0000B9978 /* RegistViewController.m */; };
 		77D2BF981E66B3D0000B9978 /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BF961E66B3D0000B9978 /* RegistViewController.xib */; };
@@ -476,9 +481,17 @@
 		77B5C9E91E7A4AF50028CB9E /* CompleteOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteOrderViewController.h; sourceTree = "<group>"; };
 		77B5C9EA1E7A4AF50028CB9E /* CompleteOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompleteOrderViewController.m; sourceTree = "<group>"; };
 		77B5C9EB1E7A4AF50028CB9E /* CompleteOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompleteOrderViewController.xib; sourceTree = "<group>"; };
-		77C3830D1E6CF79A00B4EF73 /* ChangePwViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwViewController.h; sourceTree = "<group>"; };
-		77C3830E1E6CF79A00B4EF73 /* ChangePwViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwViewController.m; sourceTree = "<group>"; };
-		77C3830F1E6CF79A00B4EF73 /* ChangePwViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePwViewController.xib; sourceTree = "<group>"; };
+		77D07EDC1E962CB200904AD9 /* ResetPwViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPwViewController.h; sourceTree = "<group>"; };
+		77D07EDD1E962CB200904AD9 /* ResetPwViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwViewController.m; sourceTree = "<group>"; };
+		77D07EDE1E962CB200904AD9 /* ResetPwViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPwViewController.xib; sourceTree = "<group>"; };
+		77D07EE11E962D2A00904AD9 /* ChangePwViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwViewController.h; sourceTree = "<group>"; };
+		77D07EE21E962D2A00904AD9 /* ChangePwViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwViewController.m; sourceTree = "<group>"; };
+		77D07EE31E962D2A00904AD9 /* ChangePwViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePwViewController.xib; sourceTree = "<group>"; };
+		77D07EE61E962D7900904AD9 /* ChangePwCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwCodeViewController.h; sourceTree = "<group>"; };
+		77D07EE71E962D7900904AD9 /* ChangePwCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwCodeViewController.m; sourceTree = "<group>"; };
+		77D07EE81E962D7900904AD9 /* ChangePwCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePwCodeViewController.xib; sourceTree = "<group>"; };
+		77D07EEB1E9637CC00904AD9 /* ActiveListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveListModel.h; sourceTree = "<group>"; };
+		77D07EEC1E9637CC00904AD9 /* ActiveListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveListModel.m; sourceTree = "<group>"; };
 		77D2BF921E668D83000B9978 /* mainMessageWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMessageWhite.png; sourceTree = "<group>"; };
 		77D2BF941E66B3D0000B9978 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		77D2BF951E66B3D0000B9978 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
@@ -908,6 +921,8 @@
 			children = (
 				7769CA5E1E8253D000646619 /* TestListModel.h */,
 				7769CA5F1E8253D000646619 /* TestListModel.m */,
+				77D07EEB1E9637CC00904AD9 /* ActiveListModel.h */,
+				77D07EEC1E9637CC00904AD9 /* ActiveListModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -947,6 +962,12 @@
 				770FFC5B1E95F51E009B81FC /* SettingViewController.h */,
 				770FFC5C1E95F51E009B81FC /* SettingViewController.m */,
 				770FFC5D1E95F51E009B81FC /* SettingViewController.xib */,
+				77D07EE61E962D7900904AD9 /* ChangePwCodeViewController.h */,
+				77D07EE71E962D7900904AD9 /* ChangePwCodeViewController.m */,
+				77D07EE81E962D7900904AD9 /* ChangePwCodeViewController.xib */,
+				77D07EE11E962D2A00904AD9 /* ChangePwViewController.h */,
+				77D07EE21E962D2A00904AD9 /* ChangePwViewController.m */,
+				77D07EE31E962D2A00904AD9 /* ChangePwViewController.xib */,
 				7784D8A91E6E80C5004AB0CC /* MessageViewController.h */,
 				7784D8AA1E6E80C5004AB0CC /* MessageViewController.m */,
 				7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */,
@@ -1132,9 +1153,9 @@
 				77D2BFA31E67D6A9000B9978 /* ForgetPwViewController.h */,
 				77D2BFA41E67D6A9000B9978 /* ForgetPwViewController.m */,
 				77D2BFA51E67D6A9000B9978 /* ForgetPwViewController.xib */,
-				77C3830D1E6CF79A00B4EF73 /* ChangePwViewController.h */,
-				77C3830E1E6CF79A00B4EF73 /* ChangePwViewController.m */,
-				77C3830F1E6CF79A00B4EF73 /* ChangePwViewController.xib */,
+				77D07EDC1E962CB200904AD9 /* ResetPwViewController.h */,
+				77D07EDD1E962CB200904AD9 /* ResetPwViewController.m */,
+				77D07EDE1E962CB200904AD9 /* ResetPwViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1326,7 +1347,6 @@
 				77F3D8631E7670D2008B5FC0 /* OrderCell.xib in Resources */,
 				770FFC6D1E961070009B81FC /* UserInfoViewController.xib in Resources */,
 				09F1E7041E6E6506007FBE81 /* share@3x.png in Resources */,
-				77C383111E6CF79A00B4EF73 /* ChangePwViewController.xib in Resources */,
 				77B5C9E81E7A2F000028CB9E /* OrderDetailViewController.xib in Resources */,
 				094FC50D1E8CBF0E00BFFBBB /* PayPageVC.xib in Resources */,
 				0953C22E1E514B5800FB165C /* Assets.xcassets in Resources */,
@@ -1400,6 +1420,7 @@
 				7784D8A81E6E532E004AB0CC /* whiteMessage@3x.png in Resources */,
 				77FF9B7B1E696E18008C0FE7 /* whiteback@3x.png in Resources */,
 				77B5C9ED1E7A4AF50028CB9E /* CompleteOrderViewController.xib in Resources */,
+				77D07EEA1E962D7900904AD9 /* ChangePwCodeViewController.xib in Resources */,
 				77FF9B771E696E18008C0FE7 /* pinkback@2x.png in Resources */,
 				7784D8911E6D1F43004AB0CC /* waitpay.png in Resources */,
 				77038E091E63CA960096C07D /* index_slide_03.jpg in Resources */,
@@ -1414,6 +1435,7 @@
 				7784D89D1E6D5512004AB0CC /* success.png in Resources */,
 				7752C7B41E70EC360093ED37 /* MessageCell.xib in Resources */,
 				7784D89A1E6D5512004AB0CC /* date.png in Resources */,
+				77D07EE51E962D2A00904AD9 /* ChangePwViewController.xib in Resources */,
 				77038E0B1E63CA9E0096C07D /* index_slide_02.jpg in Resources */,
 				094FC54D1E8CF6A500BFFBBB /* 乐天logonotificationCenter_27.5pt@2x.png in Resources */,
 				090733961E655B0600F21E02 /* consultPageCell.xib in Resources */,
@@ -1438,6 +1460,7 @@
 				090733831E64105A00F21E02 /* mainMessage.png in Resources */,
 				094FC5631E8CF6A500BFFBBB /* 乐天logoMacLarge_256pt.png in Resources */,
 				77FF9B791E696E18008C0FE7 /* whiteback.png in Resources */,
+				77D07EE01E962CB200904AD9 /* ResetPwViewController.xib in Resources */,
 				090733821E64105A00F21E02 /* firstPageTabSel@2x.png in Resources */,
 				77D2BF9D1E66B93E000B9978 /* do.png in Resources */,
 				77DA5DCE1E666B92003FAE0C /* LoginViewController.xib in Resources */,
@@ -1519,13 +1542,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77D07EDF1E962CB200904AD9 /* ResetPwViewController.m in Sources */,
 				0965FBB71E7A918900C0FBAD /* UIColor+HexString.m in Sources */,
 				77221D931E6FB63400022AAF /* SystomMsgViewController.m in Sources */,
 				77D2BF971E66B3D0000B9978 /* RegistViewController.m in Sources */,
 				7769CA601E8253D000646619 /* TestListModel.m in Sources */,
-				77C383101E6CF79A00B4EF73 /* ChangePwViewController.m in Sources */,
 				0970CFF51E5180DF007480CB /* MyViewController.m in Sources */,
 				77D2BFA61E67D6A9000B9978 /* ForgetPwViewController.m in Sources */,
+				77D07EED1E9637CC00904AD9 /* ActiveListModel.m in Sources */,
 				0945B1481E6937DF005B7560 /* CustomCYLTabBar.m in Sources */,
 				77A17B831E7FA20B00569558 /* ActivityViewController.m in Sources */,
 				0953C2291E514B5800FB165C /* ViewController.m in Sources */,
@@ -1542,10 +1566,10 @@
 				094FC50C1E8CBF0D00BFFBBB /* PayPageVC.m in Sources */,
 				0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */,
 				770FFC681E960548009B81FC /* UserInfoModel.m in Sources */,
-				09E1824B1E8B922700A5BE7B /* UIViewController+Pay.m in Sources */,
 				7769CA5C1E82539C00646619 /* TestDetailViewController.m in Sources */,
 				09FBE0221E70F609003452A6 /* ConfirmPageCell.m in Sources */,
 				094FC5111E8CC1E500BFFBBB /* PayPageCell.m in Sources */,
+				77D07EE91E962D7900904AD9 /* ChangePwCodeViewController.m in Sources */,
 				0970CFF01E5180BF007480CB /* ConsultViewController.m in Sources */,
 				09B8033A1E8B68560045DAB5 /* UILabel+CustomLab.m in Sources */,
 				090733951E655B0600F21E02 /* consultPageCell.m in Sources */,
@@ -1567,6 +1591,7 @@
 				77DCE0601E8BAA1C00178A70 /* NSString+YYExtension.m in Sources */,
 				0965FBBA1E82155500C0FBAD /* OrderModel.m in Sources */,
 				77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */,
+				77D07EE41E962D2A00904AD9 /* ChangePwViewController.m in Sources */,
 				772064081E95E74000D94698 /* MBHudSet.m in Sources */,
 				77B5C9E71E7A2F000028CB9E /* OrderDetailViewController.m in Sources */,
 				093DA77D1E960F08003CEDD9 /* ChatListViewController.m in Sources */,
