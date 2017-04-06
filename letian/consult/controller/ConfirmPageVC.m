@@ -89,8 +89,8 @@
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];;
     HUD.mode = MBProgressHUDModeText;
-    HUD.label.text = str;
-    [HUD hideAnimated:YES afterDelay:2.f];
+    HUD.labelText = str;
+    [HUD hide:YES afterDelay:2.f];
 
 }
 

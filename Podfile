@@ -10,6 +10,8 @@ pod 'AFNetworking', '~> 3.1.0'
 pod 'MJExtension', '~> 3.0.13'
 pod 'ZYKeyboardUtil', '~> 1.0.7'
 pod 'JPush'
+pod 'RongCloudIM/IMLib'
+pod 'RongCloudIM/IMKit' 
 
 
 

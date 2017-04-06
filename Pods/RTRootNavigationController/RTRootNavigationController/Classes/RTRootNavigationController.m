@@ -252,6 +252,16 @@ __attribute((overloadable)) static inline UIViewController *RTSafeWrapViewContro
     // self.containerNavigationController.view.frame = self.view.bounds;
 }
 
+- (BOOL)becomeFirstResponder
+{
+    return [self.contentViewController becomeFirstResponder];
+}
+
+- (BOOL)canBecomeFirstResponder
+{
+    return [self.contentViewController canBecomeFirstResponder];
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return [self.contentViewController preferredStatusBarStyle];
@@ -758,6 +768,23 @@ __attribute((overloadable)) static inline UIViewController *RTSafeWrapViewContro
     self.animationBlock = block;
     [self pushViewController:viewController
                     animated:animated];
+}
+
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated complete:(void (^)(BOOL))block
+{
+    if (self.animationBlock) {
+        self.animationBlock(NO);
+    }
+    self.animationBlock = block;
+    
+    UIViewController *vc = [self popViewControllerAnimated:animated];
+    if (!vc) {
+        if (self.animationBlock) {
+            self.animationBlock(YES);
+            self.animationBlock = nil;
+        }
+    }
+    return vc;
 }
 
 - (NSArray <__kindof UIViewController *> *)popToViewController:(UIViewController *)viewController
