@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -100,6 +100,21 @@
                         <action selector="forgetBtnClick:" destination="-1" eventType="touchUpInside" id="VUs-aZ-InW"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hOW-p8-hyD">
+                    <rect key="frame" x="112" y="587" width="150" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="T3f-mv-3fy"/>
+                        <constraint firstAttribute="width" constant="150" id="f8w-23-X84"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="不登录，随便看看">
+                        <color key="titleColor" red="0.89019607840000003" green="0.43529411759999997" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="doNotLogin:" destination="-1" eventType="touchUpInside" id="eJA-Xh-hGt"/>
+                        <action selector="forgetBtnClick:" destination="-1" eventType="touchUpInside" id="WCS-qt-gy6"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -109,6 +124,7 @@
                 <constraint firstAttribute="trailing" secondItem="E7t-Qw-Tgo" secondAttribute="trailing" constant="60" id="DaD-3j-0Ld"/>
                 <constraint firstItem="Haj-nh-Inh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="100" id="HFV-Z9-nOh"/>
                 <constraint firstItem="x7W-ik-ur4" firstAttribute="top" secondItem="rfl-wl-QRl" secondAttribute="bottom" constant="45" id="Jbl-oU-2Wl"/>
+                <constraint firstAttribute="bottom" secondItem="hOW-p8-hyD" secondAttribute="bottom" constant="50" id="LrA-YZ-ekp"/>
                 <constraint firstItem="2ev-vd-eIM" firstAttribute="top" secondItem="jwa-NW-zMN" secondAttribute="bottom" constant="5" id="Mgv-9z-NpZ"/>
                 <constraint firstItem="jwa-NW-zMN" firstAttribute="top" secondItem="Haj-nh-Inh" secondAttribute="bottom" constant="25" id="Qf4-La-ggK"/>
                 <constraint firstItem="rC9-fG-GbH" firstAttribute="top" secondItem="2ev-vd-eIM" secondAttribute="bottom" constant="30" id="ah5-Q1-aYK"/>
@@ -119,6 +135,7 @@
                 <constraint firstItem="rC9-fG-GbH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="mrG-nt-92X"/>
                 <constraint firstItem="jwa-NW-zMN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="neK-xo-wYd"/>
                 <constraint firstItem="rfl-wl-QRl" firstAttribute="top" secondItem="rC9-fG-GbH" secondAttribute="bottom" constant="5" id="oCH-Ww-Ntm"/>
+                <constraint firstItem="hOW-p8-hyD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="oHg-YT-QGn"/>
                 <constraint firstAttribute="trailing" secondItem="x7W-ik-ur4" secondAttribute="trailing" constant="55" id="pha-Er-1Cu"/>
                 <constraint firstItem="Q1l-SJ-pay" firstAttribute="top" secondItem="rfl-wl-QRl" secondAttribute="bottom" constant="45" id="sqa-Go-Anf"/>
                 <constraint firstAttribute="trailing" secondItem="rC9-fG-GbH" secondAttribute="trailing" constant="45" id="utL-yS-ND6"/>
