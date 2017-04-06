@@ -433,7 +433,7 @@
 //获取当前的时间戳
 +(NSString *) timestamp
 {
-    return  [NSString stringWithFormat:@"%.0f", [[NSDate  date] timeIntervalSince1970] * 1000];
+    return  [NSString stringWithFormat:@"%.0f", [[NSDate  date] timeIntervalSince1970] ];
 }
 
 //返回字符串所占用的尺寸.

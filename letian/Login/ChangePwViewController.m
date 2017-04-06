@@ -59,10 +59,68 @@
 
 -(void)confirmButtonClicked
 {
+//    密码输入不一致
+    if (![self.changeTextField.text isEqualToString:self.confirmTextField.text]) {
+        [MBHudSet showText:@"密码不一致" andOnView:self.view];
+
+        return;
+    }
     
-    LoginViewController *loginVc=[[LoginViewController alloc] init];
+    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     
-    [self.navigationController pushViewController:loginVc animated:YES];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_USER];
+    [requestString appendFormat:@"%@",API_NAME_FORGET];
+    //    __weak typeof(self) weakSelf   = self;
+    NSMutableDictionary *params    = [NSMutableDictionary dictionary];
+    
+    params[@"VerifyCode"]            =self.msgCode;
+    params[@"Phone"]               = self.phone;
+    params[@"NewPassword"]         = self.changeTextField.text;
+    
+    [MBHudSet showStatusOnView:self.view];
+
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBHudSet dismiss:self.view];
+
+        NSLog(@"忘记密码%@",responseObject);
+        NSLog(@"Msg%@",responseObject[@"Msg"]);
+        
+        if([responseObject[@"Code"] integerValue] == 200){
+            
+            
+            LoginViewController *loginVc=[[LoginViewController alloc]init];
+            
+            loginVc.hidesBottomBarWhenPushed=YES;
+            
+            [self.navigationController pushViewController:loginVc animated:YES];
+            
+            
+            
+            
+        }else{
+            
+            [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
+            
+        }
+
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
+        [MBHudSet dismiss:self.view];
+        
+        if (error.code == NSURLErrorCancelled) return;
+        
+        if (error.code == NSURLErrorTimedOut) {
+            
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+            
+        } else{
+            
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+            
+        }
+    }];
     
     
 }

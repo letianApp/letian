@@ -134,6 +134,8 @@
 		77038E091E63CA960096C07D /* index_slide_03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038E081E63CA960096C07D /* index_slide_03.jpg */; };
 		77038E0B1E63CA9E0096C07D /* index_slide_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038E0A1E63CA9E0096C07D /* index_slide_02.jpg */; };
 		77038E0D1E63CAAB0096C07D /* index_slide_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77038E0C1E63CAAB0096C07D /* index_slide_01.jpg */; };
+		772061CE1E94C44C00D94698 /* CYUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 772061CD1E94C44C00D94698 /* CYUserManager.m */; };
+		772064081E95E74000D94698 /* MBHudSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 772064071E95E74000D94698 /* MBHudSet.m */; };
 		77221D901E6FB5E700022AAF /* AdvisoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77221D8F1E6FB5E700022AAF /* AdvisoryViewController.m */; };
 		77221D931E6FB63400022AAF /* SystomMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77221D921E6FB63400022AAF /* SystomMsgViewController.m */; };
 		774DBC0C1E6420FC00B8798C /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 774DBC0A1E6420FC00B8798C /* HomeCell.m */; };
@@ -187,7 +189,6 @@
 		77DCE0611E8BAA1C00178A70 /* UIColor+YYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DCE05A1E8BAA1B00178A70 /* UIColor+YYExtension.m */; };
 		77DCE0621E8BAA1C00178A70 /* UIView+YYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DCE05C1E8BAA1C00178A70 /* UIView+YYExtension.m */; };
 		77E10CEB1E88D06B00E1A254 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E10CEA1E88D06B00E1A254 /* Foundation+Log.m */; };
-		77E10CF01E88F21500E1A254 /* RegisterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E10CEF1E88F21500E1A254 /* RegisterModel.m */; };
 		77F3D85D1E764E22008B5FC0 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F3D85B1E764E22008B5FC0 /* OrderViewController.m */; };
 		77F3D85E1E764E22008B5FC0 /* OrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F3D85C1E764E22008B5FC0 /* OrderViewController.xib */; };
 		77F3D8621E7670D2008B5FC0 /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F3D8601E7670D2008B5FC0 /* OrderCell.m */; };
@@ -382,6 +383,10 @@
 		77038E081E63CA960096C07D /* index_slide_03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = index_slide_03.jpg; sourceTree = "<group>"; };
 		77038E0A1E63CA9E0096C07D /* index_slide_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = index_slide_02.jpg; sourceTree = "<group>"; };
 		77038E0C1E63CAAB0096C07D /* index_slide_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = index_slide_01.jpg; sourceTree = "<group>"; };
+		772061CC1E94C44C00D94698 /* CYUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYUserManager.h; sourceTree = "<group>"; };
+		772061CD1E94C44C00D94698 /* CYUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYUserManager.m; sourceTree = "<group>"; };
+		772064061E95E74000D94698 /* MBHudSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBHudSet.h; sourceTree = "<group>"; };
+		772064071E95E74000D94698 /* MBHudSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBHudSet.m; sourceTree = "<group>"; };
 		77221D8E1E6FB5E700022AAF /* AdvisoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvisoryViewController.h; sourceTree = "<group>"; };
 		77221D8F1E6FB5E700022AAF /* AdvisoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvisoryViewController.m; sourceTree = "<group>"; };
 		77221D911E6FB63400022AAF /* SystomMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystomMsgViewController.h; sourceTree = "<group>"; };
@@ -461,8 +466,6 @@
 		77DCE05C1E8BAA1C00178A70 /* UIView+YYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YYExtension.m"; sourceTree = "<group>"; };
 		77E10CE61E88A69300E1A254 /* API.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
 		77E10CEA1E88D06B00E1A254 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
-		77E10CEE1E88F21500E1A254 /* RegisterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterModel.h; sourceTree = "<group>"; };
-		77E10CEF1E88F21500E1A254 /* RegisterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterModel.m; sourceTree = "<group>"; };
 		77F3D85A1E764E22008B5FC0 /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
 		77F3D85B1E764E22008B5FC0 /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
 		77F3D85C1E764E22008B5FC0 /* OrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderViewController.xib; sourceTree = "<group>"; };
@@ -929,6 +932,10 @@
 				096DE4561E82591C00C57DDF /* LRTextField */,
 				7784D8A01E6D587D004AB0CC /* GQControls.h */,
 				7784D8A11E6D587D004AB0CC /* GQControls.m */,
+				772064061E95E74000D94698 /* MBHudSet.h */,
+				772064071E95E74000D94698 /* MBHudSet.m */,
+				772061CC1E94C44C00D94698 /* CYUserManager.h */,
+				772061CD1E94C44C00D94698 /* CYUserManager.m */,
 				09B803381E8B68560045DAB5 /* UILabel+CustomLab.h */,
 				09B803391E8B68560045DAB5 /* UILabel+CustomLab.m */,
 				09E182411E8B91ED00A5BE7B /* pay */,
@@ -1026,7 +1033,6 @@
 		77DA5DC91E666B92003FAE0C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				77E10CED1E88F1F400E1A254 /* Model */,
 				77DA5DCA1E666B92003FAE0C /* LoginViewController.h */,
 				77DA5DCB1E666B92003FAE0C /* LoginViewController.m */,
 				77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */,
@@ -1063,15 +1069,6 @@
 				77DCE05C1E8BAA1C00178A70 /* UIView+YYExtension.m */,
 			);
 			path = Categories;
-			sourceTree = "<group>";
-		};
-		77E10CED1E88F1F400E1A254 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				77E10CEE1E88F21500E1A254 /* RegisterModel.h */,
-				77E10CEF1E88F21500E1A254 /* RegisterModel.m */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		77F3D8591E764E22008B5FC0 /* 订单 */ = {
@@ -1448,11 +1445,11 @@
 				7769CA631E8253F300646619 /* GQNetworkManager.m in Sources */,
 				09A64DF01E76486F00DCE8D9 /* GQSegment.m in Sources */,
 				77DCE05E1E8BAA1C00178A70 /* NSDictionary+Safe.m in Sources */,
-				77E10CF01E88F21500E1A254 /* RegisterModel.m in Sources */,
 				09FBE01D1E70EE60003452A6 /* ConfirmPageVC.m in Sources */,
 				77DCE0611E8BAA1C00178A70 /* UIColor+YYExtension.m in Sources */,
 				7752C7B31E70EC360093ED37 /* MessageCell.m in Sources */,
 				0953C2261E514B5800FB165C /* AppDelegate.m in Sources */,
+				772061CE1E94C44C00D94698 /* CYUserManager.m in Sources */,
 				77E10CEB1E88D06B00E1A254 /* Foundation+Log.m in Sources */,
 				09FBE0271E70FE12003452A6 /* CounselorInfoVC.m in Sources */,
 				77F3D8621E7670D2008B5FC0 /* OrderCell.m in Sources */,
@@ -1463,6 +1460,7 @@
 				77DCE0601E8BAA1C00178A70 /* NSString+YYExtension.m in Sources */,
 				0965FBBA1E82155500C0FBAD /* OrderModel.m in Sources */,
 				77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */,
+				772064081E95E74000D94698 /* MBHudSet.m in Sources */,
 				77B5C9E71E7A2F000028CB9E /* OrderDetailViewController.m in Sources */,
 				094FC5161E8CE1D500BFFBBB /* AboutUsPageVC.m in Sources */,
 				0953C2231E514B5800FB165C /* main.m in Sources */,
