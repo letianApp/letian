@@ -228,6 +228,10 @@
     
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
 
+    CounselorInfoVC *counselorInfoMainVC = [[CounselorInfoVC alloc]init];
+    counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
+    [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];
+    
     
     //已登录
     if ([CYUserManager isHaveLogin]) {

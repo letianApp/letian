@@ -22,9 +22,14 @@
 
 @implementation CounselorInfoVC
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
         
 //    self.view.backgroundColor = [UIColor whiteColor];

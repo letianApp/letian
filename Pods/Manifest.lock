@@ -147,6 +147,7 @@ PODS:
     - UMengUShare/Core
   - UMengUShare/UI (6.4.2):
     - UMengUShare/Core
+  - WechatOpenSDK (1.7.7)
   - ZYKeyboardUtil (1.0.7)
 
 DEPENDENCIES:
@@ -163,6 +164,7 @@ DEPENDENCIES:
   - SDWebImage (~> 3.7.5)
   - Shimmer (~> 1.0.2)
   - UMengUShare
+  - WechatOpenSDK
   - ZYKeyboardUtil (~> 1.0.7)
 
 SPEC CHECKSUMS:
@@ -179,8 +181,9 @@ SPEC CHECKSUMS:
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
   UMengUShare: 740664d1dd5cc2fb2cc3325d61e4b35539aa9c78
+  WechatOpenSDK: cbd332148eb792d444ed4eec94f421d98f2046ee
   ZYKeyboardUtil: c4b920eed9af063c46af2e9ea62e851d9331fbd9
 
-PODFILE CHECKSUM: d721f15de25a662cddd13937385e88ac380f76f8
+PODFILE CHECKSUM: d487df94aa26de40549e8d7b0e00528df9b7de3a
 
 COCOAPODS: 1.2.0

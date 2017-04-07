@@ -39,7 +39,7 @@
 @property (nonatomic, assign) NSDate *startDate;
 
 @property (nonatomic, strong) ZYKeyboardUtil *keyboardUtil;
-@property (nonatomic, strong) UIButton *ConfirmBtn;
+@property (nonatomic, strong) UIButton *confirmBtn;
 @property (nonatomic, assign) BOOL isSexRight;
 
 
@@ -89,8 +89,8 @@
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];;
     HUD.mode = MBProgressHUDModeText;
-    HUD.labelText = str;
-    [HUD hide:YES afterDelay:2.f];
+    HUD.label.text = str;
+    [HUD hideAnimated:YES afterDelay:2.f];
 
 }
 
@@ -558,13 +558,12 @@
 - (void)creatBottomBar {
     
     _tabBar = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
-    _ConfirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
-    _ConfirmBtn.backgroundColor = [UIColor lightGrayColor];
-//    _ConfirmBtn.enabled = NO;
-    [_ConfirmBtn setTitle:@"确定预约" forState:UIControlStateNormal];
-    [_ConfirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
-    [_tabBar addSubview:_ConfirmBtn];
-    
+    _confirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
+    _confirmBtn.backgroundColor = [UIColor lightGrayColor];
+//    _confirmBtn.enabled = NO;
+    [_confirmBtn setTitle:@"确定预约" forState:UIControlStateNormal];
+    [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
+    [_tabBar addSubview:_confirmBtn];
     
     [self.view addSubview:_tabBar];
     
@@ -573,12 +572,12 @@
 - (void)reflashInfo {
     
     if (NULLString(_orderModel.conserlorName) || NULLString(_orderModel.orderChoice) ||  NULLString(_orderModel.orderDateStr) ||  NULLString(_orderModel.orderDateTimeStart) ||  NULLString(_orderModel.orderDateTimeEnd) || NULLString(_orderModel.orderInfoName) ||  NULLString(_orderModel.orderInfoSex) ||  NULLString(_orderModel.orderInfoAge) ||  NULLString(_orderModel.orderInfoPhone) ||  NULLString(_orderModel.orderInfoEmail)) {
-        _ConfirmBtn.enabled = NO;
-        _ConfirmBtn.backgroundColor = [UIColor lightGrayColor];
+//        _confirmBtn.enabled = NO;
+        _confirmBtn.backgroundColor = [UIColor lightGrayColor];
         
     } else {
-        _ConfirmBtn.backgroundColor = MAINCOLOR;
-        _ConfirmBtn.enabled = YES;
+        _confirmBtn.backgroundColor = MAINCOLOR;
+//        _confirmBtn.enabled = YES;
 
     }
     
@@ -587,12 +586,13 @@
 - (void)clickConfirmBtn {
     NSLog(@"确认预约");
     
-    OrderPageVC *orderPage = [[OrderPageVC alloc]init];
-    orderPage.orderModel = _orderModel;
-    
-    PayPageVC *payPage = [[PayPageVC alloc]init];
-    [self.navigationController pushViewController:payPage animated:YES];
-    
+    if (_confirmBtn.backgroundColor == [UIColor lightGrayColor]) {
+        [self customHUDWithText:@"请完善预约信息"];
+
+    } else {
+        PayPageVC *payPage = [[PayPageVC alloc]init];
+        [self.navigationController pushViewController:payPage animated:YES];
+    }
 }
 
 - (void)dismissKeyboard {
