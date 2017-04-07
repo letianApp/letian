@@ -85,8 +85,9 @@
 
 - (void)selRightButton {
     
-    ChatListViewController *vc = [[ChatListViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    ChatListViewController *chatListVc = [[ChatListViewController alloc]init];
+    chatListVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:chatListVc animated:YES];
     
 }
 

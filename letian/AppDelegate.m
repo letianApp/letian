@@ -21,7 +21,7 @@
 
 
 
-@interface AppDelegate ()
+@interface AppDelegate ()<RCIMUserInfoDataSource>
 
 @end
 
@@ -141,9 +141,11 @@
 
 - (void)customEM {
     
-    [[RCIM sharedRCIM] initWithAppKey:RONGYUNAPPKEY];
+    [[RCIM sharedRCIM] initWithAppKey:RONGYUN_APPKEY];
     [[RCIM sharedRCIM] connectWithToken:@"pdtQ2qT6ucmSKegQZEReC9Bpol8+z5qA20RkCIv9EwyxLoLjlDnHcnfdX2W+xKvA7piGIbRreIQ="     success:^(NSString *userId) {
         NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+        [[RCIM sharedRCIM] setUserInfoDataSource:self];
+        
     } error:^(RCConnectErrorCode status) {
         NSLog(@"登陆的错误码为:%ld", (long)status);
     } tokenIncorrect:^{
@@ -156,6 +158,19 @@
     
 }
 
+- (void)getUserInfoWithUserId:(NSString *)userId
+                   completion:(void (^)(RCUserInfo *userInfo))completion {
+    
+    if ([userId isEqualToString:@"002"]) {
+        RCUserInfo *userInfo = [[RCUserInfo alloc]init];
+        userInfo.userId = userId;
+        userInfo.name = @"测试2";
+        userInfo.portraitUri = @"http://www.wzright.com/upload/201610311133447158.jpg";
+        
+        return completion(userInfo);
+    }
+    return completion(nil);
+}
 
 /**
  * 功能：禁止横屏
