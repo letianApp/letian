@@ -42,7 +42,7 @@
 /*** 设置导航栏信息*/
 -(void) setUpNavigationBar
 {
-    self.navigationItem.title = @"重设密码";
+    self.navigationItem.title = @"修改密码";
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
@@ -70,7 +70,7 @@
     
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_USER];
-    [requestString appendFormat:@"%@",API_NAME_FORGET];
+    [requestString appendFormat:@"%@",API_NAME_CHANGEPW];
     //    __weak typeof(self) weakSelf   = self;
     NSMutableDictionary *params    = [NSMutableDictionary dictionary];
     
@@ -83,7 +83,7 @@
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
 
-        NSLog(@"忘记密码%@",responseObject);
+        NSLog(@"修改密码%@",responseObject);
         NSLog(@"Msg%@",responseObject[@"Msg"]);
         
         if([responseObject[@"Code"] integerValue] == 200){
@@ -96,7 +96,8 @@
             [self.navigationController pushViewController:loginVc animated:YES];
             
             
-            
+            [MBHudSet showText:@"密码已修改，请重新登录" andOnView:self.view];
+
             
         }else{
             

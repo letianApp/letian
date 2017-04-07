@@ -1,16 +1,18 @@
 //
-//  ForgetPwViewController.m
+//  ChangePwCodeViewController.m
 //  letian
 //
-//  Created by 郭茜 on 2017/3/2.
+//  Created by 郭茜 on 2017/4/6.
 //  Copyright © 2017年 J. All rights reserved.
 //
 
-#import "ForgetPwViewController.h"
-#import "ResetPwViewController.h"
+#import "ChangePwCodeViewController.h"
+
+#import "ChangePwViewController.h"
 
 
-@interface ForgetPwViewController ()
+
+@interface ChangePwCodeViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextFiled;
 
@@ -28,13 +30,13 @@
 
 @end
 
-@implementation ForgetPwViewController
+@implementation ChangePwCodeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.time=60;
-
+    
     self.navigationController.navigationBarHidden=NO;
     
     
@@ -52,7 +54,7 @@
     [self.nextButton addTarget:self action:@selector(nextButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     
     
-
+    
     [self setUpNavigationBar];
     
     
@@ -62,7 +64,7 @@
 /*** 设置导航栏信息*/
 -(void) setUpNavigationBar
 {
-    self.navigationItem.title = @"忘记密码";
+    self.navigationItem.title = @"修改密码";
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
@@ -89,17 +91,17 @@
     
     params[@"authCode"]            =AUTHCODE;
     params[@"phone"]               = self.phoneTextFiled.text;
-    params[@"enumSmsType"]         = @(3);
+    params[@"enumSmsType"]         = @(4);
     
     [MBHudSet showStatusOnView:self.view];
-
+    
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [MBHudSet dismiss:self.view];
-
-        NSLog(@"忘记密码发送短信%@",responseObject);
+        
+        NSLog(@"修改密码发送短信%@",responseObject);
         NSLog(@"Msg%@",responseObject[@"Msg"]);
-
+        
         if([responseObject[@"Code"] integerValue] == 200){
             
             button.userInteractionEnabled = NO;
@@ -113,11 +115,11 @@
             [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
             
         }
-
+        
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-
+        
         [MBHudSet dismiss:self.view];
         
         // 如果是取消了任务，就不算请求失败，就直接返回
@@ -134,7 +136,7 @@
         }
     }];
     
-
+    
     
 }
 
@@ -167,28 +169,29 @@
     
     params[@"verifyCode"]            =self.codeTextField.text;
     params[@"phone"]               = self.phoneTextFiled.text;
-    params[@"enumSmsType"]         = @(3);
+    params[@"enumSmsType"]         = @(4);
     
     [MBHudSet showStatusOnView:self.view];
-
+    
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [MBHudSet dismiss:self.view];
-
-        NSLog(@"忘记密码验证短信验证码%@",responseObject);
+        
+        NSLog(@"修改密码验证短信验证码%@",responseObject);
         NSLog(@"Msg%@",responseObject[@"Msg"]);
-
+        
         if([responseObject[@"Code"] integerValue] == 200){
             
             
-            ResetPwViewController *resetPwVc=[[ResetPwViewController alloc]init];
+            ChangePwViewController *changePwVc=[[ChangePwViewController alloc]init];
             
-            resetPwVc.phone=self.phoneTextFiled.text;
-            resetPwVc.msgCode=self.codeTextField.text;
-                        
-            [self.navigationController pushViewController:resetPwVc animated:YES];
+            changePwVc.phone=self.phoneTextFiled.text;
+            changePwVc.msgCode=self.codeTextField.text;
             
-
+            
+            [self.navigationController pushViewController:changePwVc animated:YES];
+            
+            
             
             
         }else{
@@ -196,7 +199,7 @@
             [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
             
         }
-
+        
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -216,13 +219,12 @@
         }
     }];
     
-
     
-
-   
+    
+    
+    
     
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

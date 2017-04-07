@@ -19,6 +19,8 @@
 #import "MJExtension.h"
 #import "UIImageView+WebCache.h"
 #import "TestListModel.h"
+#import "CYUserManager.h"
+#import "MessageViewController.h"
 @interface FirstViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -288,20 +290,31 @@
 //消息按钮点击
 -(void)msgBtnClick
 {
-    NSLog(@"进入消息按钮");
-    
-  
+
+//    已登陆
+    if ([CYUserManager isHaveLogin]) {
+        
+        MessageViewController *messageVc=[[MessageViewController alloc]init];
+        
+        messageVc.hidesBottomBarWhenPushed=YES;
+        
+        [self.navigationController pushViewController:messageVc animated:YES];
+        
+        
+    }else{
+        
+//  未登录
     
     UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
     
     [self presentViewController:alertControl animated:YES completion:nil];
 
-    // 2.实例化按钮:actionWithTitle
     [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         
-        // 点击确定按钮的时候, 会调用这个block
         LoginViewController *loginVc=[[LoginViewController alloc]init];
-
+        
+        loginVc.tabbarIndex=0;
+        
         loginVc.hidesBottomBarWhenPushed=YES;
         
         [self.navigationController pushViewController:loginVc animated:YES];
@@ -311,7 +324,7 @@
     [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
 
 
-    
+    }
     
     
 }

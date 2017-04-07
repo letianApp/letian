@@ -11,12 +11,22 @@
 #import "MessageViewController.h"
 #import "OrderViewController.h"
 #import "AboutUsPageVC.h"
-
+#import "SettingViewController.h"
+#import "UserInfoModel.h"
+#import "MJExtension.h"
+#import "CYUserManager.h"
+#import "LoginViewController.h"
+#import "UserInfoViewController.h"
 @interface MyViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSArray *dataArray;
 
+@property(nonatomic,strong)UserInfoModel *userInfoModel;
+
+@property(nonatomic,strong)UILabel *nameLabel;
+
+@property(nonatomic,strong)UIImageView *headImageView;
 
 @end
 
@@ -27,6 +37,8 @@
     
     self.navigationController.navigationBarHidden=YES;
     self.automaticallyAdjustsScrollViewInsets=NO;
+
+    
     
 }
 
@@ -37,8 +49,54 @@
     [super viewDidLoad];
     
     self.dataArray=@[@"系统设置",@"客服电话    021-37702979",@"我要分享",@"关于我们"];
-    
     [self createTableView];
+    [self requestData];
+
+}
+
+#pragma mark------------获取用户信息
+-(void)requestData
+{
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_USER];
+    [requestString appendString:API_NAME_GETUSERINFO];
+    __weak typeof(self) weakSelf = self;
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    
+    [MBHudSet showStatusOnView:self.view];
+
+    [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [MBHudSet dismiss:self.view];
+
+        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
+        if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
+            
+
+            weakSelf.userInfoModel=[UserInfoModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
+            
+            self.nameLabel.text=weakSelf.userInfoModel.NickName;
+            
+            [_tableView reloadData];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+
+        if (error.code == NSURLErrorCancelled) return;
+        
+        if (error.code == NSURLErrorTimedOut) {
+            
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+            
+        } else{
+            
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+            
+        }
+        
+    }];
     
 }
 
@@ -65,29 +123,73 @@
     
     headView.backgroundColor=MAINCOLOR;
     
-    //头像
-    UIImageView *headImageView=[[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_W-100)/2, 55, 100, 100)];
-    headImageView.image=[UIImage imageNamed:@"women"];
-    headImageView.layer.masksToBounds=YES;
-    headImageView.layer.cornerRadius=50;
-    [headView addSubview:headImageView];
+    if ([CYUserManager isHaveLogin]) {
+        //头像
+        UIImageView *headImageView=[[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_W-100)/2, 55, 100, 100)];
+        headImageView.image=[UIImage imageNamed:@"women"];
+        headImageView.layer.masksToBounds=YES;
+        headImageView.layer.cornerRadius=50;
+        [headView addSubview:headImageView];
+        
+        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(userInfoClick)];
+        [headImageView addGestureRecognizer:tap];
+        headImageView.userInteractionEnabled=YES;
+        
+        self.headImageView=headImageView;
+        
+        
+        //用户名
+        UILabel *nameLabel=[GQControls createLabelWithFrame:CGRectMake((SCREEN_W-150)/2, 160, 150, 20) andText:@"" andTextColor:[UIColor whiteColor] andFontSize:16];
+        nameLabel.textAlignment=NSTextAlignmentCenter;
+        [headView addSubview:nameLabel];
+        self.nameLabel=nameLabel;
+        
+        //消息
+        UIButton *messageBtn=[[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W-35, 30, 25, 25)];
+        [messageBtn setImage:[UIImage imageNamed:@"whiteMessage"] forState:UIControlStateNormal];
+        [messageBtn addTarget:self action:@selector(messageButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        [headView addSubview:messageBtn];
+        
+        
+    }else{
+//        未登录则显示登录按钮
+        UIButton *loginBtn=[GQControls createButtonWithFrame:CGRectMake((SCREEN_W-100)/2, (220-40)/2, 100, 40) andTitle:@"登录/注册" andTitleColor:[UIColor whiteColor] andFontSize:15 andTag:100 andMaskToBounds:YES andRadius:20 andBorderWidth:1 andBorderColor:[UIColor whiteColor].CGColor];
+        [loginBtn addTarget:self action:@selector(loginButtonClick) forControlEvents:UIControlEventTouchUpInside];
+        [headView addSubview:loginBtn];
+        
+    }
     
-    //用户名
-    UILabel *nameLabel=[GQControls createLabelWithFrame:CGRectMake((SCREEN_W-150)/2, 160, 150, 20) andText:@"本宝宝是一个用户" andTextColor:[UIColor whiteColor] andFontSize:16];
-    nameLabel.textAlignment=NSTextAlignmentCenter;
-    [headView addSubview:nameLabel];
-    
-    //消息
-    UIButton *messageBtn=[[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W-35, 30, 25, 25)];
-    [messageBtn setImage:[UIImage imageNamed:@"whiteMessage"] forState:UIControlStateNormal];
-    [messageBtn addTarget:self action:@selector(messageButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [headView addSubview:messageBtn];
     
     
     return headView;
     
 }
 
+-(void)userInfoClick{
+    
+    UserInfoViewController *userInfoVc=[[UserInfoViewController alloc]init];
+    
+    userInfoVc.hidesBottomBarWhenPushed=YES;
+    
+    userInfoVc.userInfoModel=self.userInfoModel;
+    
+    [self.navigationController pushViewController:userInfoVc animated:YES];
+    
+    
+}
+
+
+-(void)loginButtonClick{
+
+    LoginViewController *loginVc=[[LoginViewController alloc]init];
+    
+    loginVc.hidesBottomBarWhenPushed=YES;
+    
+    loginVc.tabbarIndex=2;
+
+    [self.navigationController pushViewController:loginVc animated:YES];
+
+}
 - (void)messageButtonClicked {
     
     MessageViewController *messageVc=[[MessageViewController alloc]init];
@@ -237,12 +339,27 @@
     
     NSLog(@"cell被点击%li",indexPath.row);
     
-    if (indexPath.row==1) {
+    if (indexPath.row==0){
+        
+        //跳到系统设置
+        SettingViewController *settingVc=[[SettingViewController alloc]init];
+        
+        settingVc.hidesBottomBarWhenPushed=YES;
+        
+        [self.navigationController pushViewController:settingVc animated:YES];
+        
+        
+    }else if(indexPath.row==1) {
+        
         //拨打客服电话，打完之后不会留在通讯录而是回到应用
         NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"021-37702979"];
         UIWebView * callWebview = [[UIWebView alloc] init];
         [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
         [self.view addSubview:callWebview];
+        
+    }else if(indexPath.row==2) {
+        
+        //分享
         
     } else if (indexPath.row == 3) {
         

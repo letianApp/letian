@@ -40,6 +40,14 @@
     return button;
 }
 
++(UIButton *)createImageButtonWithFrame:(CGRect)frame withImageName:(NSString *)imageName{
+    UIButton *button=[[UIButton alloc]initWithFrame:frame];
+    
+    [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    
+    
+    return button;
+}
 //创建非矩形button
 +(UIButton *)createButtonWithFrame:(CGRect)frame andTitle:(NSString *)title andTitleColor:(UIColor *)color andFontSize:(CGFloat)fontSize andTag:(NSInteger)tag andMaskToBounds:(BOOL)mask andRadius:(CGFloat)radius andBorderWidth:(CGFloat)borderWidth andBorderColor:(CGColorRef )borderColor{
     UIButton *button=[[UIButton alloc]initWithFrame:frame];
