@@ -12,6 +12,8 @@ pod 'ZYKeyboardUtil', '~> 1.0.7'
 pod 'JPush'
 pod 'RongCloudIM/IMLib'
 pod 'RongCloudIM/IMKit' 
+pod 'UMengUShare'
+
 
 
 

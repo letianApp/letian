@@ -132,7 +132,7 @@
     if(indexPath.row == 0){
 //        view.backgroundColor = [UIColor yellowColor];
         
-        NSArray *btnTitle = @[@"面对面咨询",@"文字语音",@"电话咨询"];
+        NSArray *btnTitle = @[@"面对面咨询",@"文字语音",@"视频咨询"];
         
         for (int i = 0; i < 3; i++) {
             

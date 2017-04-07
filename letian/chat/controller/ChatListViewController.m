@@ -7,6 +7,7 @@
 //
 
 #import "ChatListViewController.h"
+#import "ChatViewController.h"
 
 @interface ChatListViewController ()
 
@@ -18,10 +19,12 @@
 {
     self = [super init];
     if (self) {
-        [self customNavigation];
+        //设置在列表中需要显示的会话类型
+        [self setDisplayConversationTypes:@[@(ConversationType_PRIVATE),
+                                              @(ConversationType_CUSTOMERSERVICE),
+                                              @(ConversationType_SYSTEM)]];
         //设置需要将哪些类型的会话在会话列表中聚合显示
-        [self setCollectionConversationType:@[@(ConversationType_DISCUSSION),
-                                              @(ConversationType_GROUP)]];
+        [self setCollectionConversationType:@[@(ConversationType_SYSTEM)]];
     }
     return self;
 }
@@ -30,7 +33,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
+    [self customNavigation];
+
     
 }
 
@@ -52,6 +56,45 @@
     return item;
 }
 
+#pragma mark 定制cell
+- (void)willDisplayConversationTableCell:(RCConversationBaseCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
+    RCConversationModel *model = self.conversationListDataSource[indexPath.row];
+    
+    if (model.conversationType == ConversationType_PRIVATE) {
+        RCConversationCell *conversationCell = (RCConversationCell *)cell;
+//        conversationCell.conversationTitle.textColor = MAINCOLOR;
+        conversationCell.bubbleTipView.bubbleTipBackgroundColor = MAINCOLOR;
+    }
+    
+}
+
+#pragma mark 点击cell方法
+- (void)onSelectedTableRow:(RCConversationModelType)conversationModelType
+         conversationModel:(RCConversationModel *)model
+               atIndexPath:(NSIndexPath *)indexPath {
+    
+    if (conversationModelType == RC_CONVERSATION_MODEL_TYPE_COLLECTION) {
+        
+        ChatListViewController *systemChatVc = [[ChatListViewController alloc]init];
+        NSArray *arr = [NSArray arrayWithObject:[NSNumber numberWithInt:model.conversationType]];
+        [systemChatVc setDisplayConversationTypeArray:arr];
+        [systemChatVc setCollectionConversationType:nil];
+        systemChatVc.isEnteredToCollectionViewController = YES;
+        [self.navigationController pushViewController:systemChatVc animated:YES];
+        
+    } else if (conversationModelType == ConversationType_PRIVATE) {
+    
+        ChatViewController *chatVc = [[ChatViewController alloc]init];
+        chatVc.hidesBottomBarWhenPushed = YES;
+        chatVc.conversationType = model.conversationType;
+        chatVc.targetId = model.targetId;
+        chatVc.title = @"002";
+    
+        [self.navigationController pushViewController:chatVc animated:YES];
+    
+    }
+}
 
 
 

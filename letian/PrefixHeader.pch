@@ -66,8 +66,10 @@
 #define UMENGAPPKEY           @"58e6ec7804e205b94e00200c"
 
 //融云
-#define RONGYUNAPPKEY               @"82hegw5u83dkx"
-#define RONGYUNAPPSECRET            @"TZwaP6feAoneVl"
+
+#define RONGYUN_APPKEY               @"82hegw5u83dkx"
+#define RONGYUN_APPSECRET            @"TZwaP6feAoneVl"
+#define RONGYUN_SERVICE_ID           @"KEFU149145862082595"
 
 // APPID
 #define APPID      @"55c9e9ea-169e-40e1-826c-c78d3f109e93"
