@@ -11,6 +11,10 @@
 #import "ConfirmPageVC.h"
 #import "CYLTabBarController.h"
 
+#import "CYUserManager.h"
+#import "LoginViewController.h"
+
+
 @interface CounselorInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) UIView *headView;
@@ -223,8 +227,26 @@
 
 - (void)clickAppointmentBtn {
     NSLog(@"点击预约按钮");
-    ConfirmPageVC *cvc = [[ConfirmPageVC alloc]init];
-    [self.rt_navigationController pushViewController:cvc animated:YES];
+    
+//    if ([CYUserManager isHaveLogin]) {
+    
+        ConfirmPageVC *cvc = [[ConfirmPageVC alloc]init];
+        [self.rt_navigationController pushViewController:cvc animated:YES];
+//    } else {
+//        
+//        UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
+//        [self presentViewController:alertControl animated:YES completion:nil];
+//        [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+//            
+//            LoginViewController *loginVc=[[LoginViewController alloc]init];
+//            loginVc.tabbarIndex= 1;
+//            loginVc.hidesBottomBarWhenPushed=YES;
+//            [self.navigationController pushViewController:loginVc animated:YES];
+//        }]];
+//        
+//        [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+//    }
+
 }
 
 - (void)didReceiveMemoryWarning {

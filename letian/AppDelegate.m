@@ -54,7 +54,9 @@
 - (void)resignWechat {
     
     BOOL weChatResult = [WXApi registerApp:WECHAT_APPID];
-    NSLog(@"微信注册： %@",weChatResult?@"YES":@"NO");
+//    BOOL weChatIns = [WXApi isWXAppInstalled];
+    
+    NSLog(@"微信： %@",weChatResult?@"YES":@"NO");
     
 }
 

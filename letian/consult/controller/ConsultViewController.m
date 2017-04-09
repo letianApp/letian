@@ -230,42 +230,7 @@
 
     CounselorInfoVC *counselorInfoMainVC = [[CounselorInfoVC alloc]init];
     counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
-    [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];
-    
-    
-    //已登录
-    if ([CYUserManager isHaveLogin]) {
-        
-        CounselorInfoVC *counselorInfoMainVC = [[CounselorInfoVC alloc]init];
-        counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
-        [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];
-        
-
-    }else{
-//        未登录
-        UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
-        
-        [self presentViewController:alertControl animated:YES completion:nil];
-        
-        [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-            
-            LoginViewController *loginVc=[[LoginViewController alloc]init];
-            
-            loginVc.tabbarIndex= 1;
-            
-            loginVc.hidesBottomBarWhenPushed=YES;
-            
-            [self.navigationController pushViewController:loginVc animated:YES];
-            
-        }]];
-        
-        [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        
-        
-
-        
-    }
-    
+    [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];    
     
 }
 
