@@ -27,11 +27,16 @@
 @property(nonatomic,strong)UILabel *nameLabel;
 
 @property(nonatomic,strong)UIImageView *headImageView;
+@property (nonatomic, strong) UIView *holdView;
+
 
 @end
 
 @implementation MyViewController
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -104,14 +109,26 @@
 
 - (void)createTableView {
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-44) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-44) style:UITableViewStylePlain];    
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    tableView.tag = 10;
     [self.view addSubview:tableView];
     self.tableView = tableView;
     self.tableView.tableHeaderView=[self createHeadView];
     
+    _holdView = [[UIView alloc]init];
+    _holdView.backgroundColor = MAINCOLOR;
+    [tableView addSubview:_holdView];
+}
+
+//下拉改变背景颜色
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if (scrollView.tag == 10) {
+        _holdView.frame = CGRectMake(0, 0, SCREEN_W, scrollView.contentOffset.y);
+    }
 }
 
 

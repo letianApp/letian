@@ -13,7 +13,10 @@
 #import "FirstViewController.h"
 #import "ConsultViewController.h"
 #import "MyViewController.h"
+
 #import <RongIMKit/RongIMKit.h>
+#import "WXApi.h"
+
 #import "JPUSHService.h"
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
@@ -21,7 +24,7 @@
 
 
 
-@interface AppDelegate ()<RCIMUserInfoDataSource>
+@interface AppDelegate ()<RCIMUserInfoDataSource, WXApiDelegate>
 
 @end
 
@@ -39,6 +42,8 @@
     [self.window makeKeyAndVisible];
 
     [self setUpStatusBar];
+    
+    [self resignWechat];
     [self ConfigJPush:launchOptions];
     
     [self customEM];
@@ -46,6 +51,18 @@
     return YES;
 }
 
+- (void)resignWechat {
+    
+    BOOL weChatResult = [WXApi registerApp:WECHAT_APPID];
+    NSLog(@"微信注册： %@",weChatResult?@"YES":@"NO");
+    
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    
+    return [WXApi handleOpenURL:url delegate:self];
+    
+}
 
 -(void)ConfigJPush:(NSDictionary *)launchOptions{
     //Required
@@ -171,6 +188,7 @@
     }
     return completion(nil);
 }
+
 
 /**
  * 功能：禁止横屏
