@@ -89,7 +89,9 @@
     
     __weak typeof(self) weakSelf = self;
     
+    [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBHudSet dismiss:self.view];
         weakSelf.testList=[TestListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         
         [_tableView reloadData];
@@ -103,9 +105,6 @@
 //头视图
 -(void)createHeadBgView
 {
-    
-
-
     
     
     self.headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 325)];
@@ -125,8 +124,6 @@
             
             label.userInteractionEnabled=YES;
             UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelClicked:)];
-            
-            
             
             [label addGestureRecognizer:tap];
             

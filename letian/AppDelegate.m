@@ -89,7 +89,7 @@
     
     
     
-    [JPUSHService setupWithOption:launchOptions appKey:JPUSHAPPKEY
+    [JPUSHService setupWithOption:launchOptions appKey:JPUSH_APPKEY
                           channel:@"APPStore"
                  apsForProduction:false];
     
