@@ -2,7 +2,7 @@
 //  CYUserManager.h
 //  KeepCarEasy
 //
-//  Created by 恽雨晨 on 16/8/4.
+//  Created by guoqian on 16/8/4.
 //  Copyright © 2016年 www.7eche.com. All rights reserved.
 //
 
@@ -10,18 +10,9 @@
 
 @interface CYUserManager : NSObject
 
-/* Account = 15161170944;
- HeadImage = "http://image.7eche.com/201604162247493063.jpg";
- IsValidate = 0;
- Money = 0;
- MsgCount = 0;
- NickName = OMG;
- Point = 0;
- Sex = 1;
- ShareMoney = 30;
- UserId = 2603;
- */
+
 //用户基本信息
+
 @property(nonatomic,strong)NSString * uid;//用户ID
 
 @property(nonatomic,strong)NSString * token; //用户token
@@ -58,8 +49,6 @@
 
 /**
  *  判断是否已经登录
- *
- *  @return YES or NO
  */
 + (BOOL)isHaveLogin;
 

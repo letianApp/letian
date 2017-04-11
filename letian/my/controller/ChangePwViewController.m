@@ -39,6 +39,7 @@
 }
 
 
+
 /*** 设置导航栏信息*/
 -(void) setUpNavigationBar
 {

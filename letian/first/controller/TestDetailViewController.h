@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TestListModel.h"
 
 @interface TestDetailViewController : UIViewController
 
-
+@property(nonatomic,strong)TestListModel *testModel;
 @property(nonatomic,copy)NSString *testUrl;//测试网址
+
+
+
 @end

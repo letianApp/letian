@@ -17,6 +17,8 @@
 #import "CYUserManager.h"
 #import "LoginViewController.h"
 #import "UserInfoViewController.h"
+#import <UShareUI/UShareUI.h>
+#import "GQActionSheet.h"
 @interface MyViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -181,6 +183,7 @@
     return headView;
     
 }
+
 
 -(void)userInfoClick{
     
@@ -376,10 +379,37 @@
         
     }else if(indexPath.row==2) {
         
-        //分享
+//        分享
+        NSArray *titles = @[@"分享到朋友圈",@"分享到微信",@"分享到微博",@"分享到空间",@"分享到短信",@"分享到QQ"];
+        NSArray *imageNames = @[@"pengyou",@"weixin",@"weibo",@"kongjian",@"mess",@"qq"];
+        GQActionSheet *sheet = [[GQActionSheet alloc] initWithTitles:titles iconNames:imageNames];
+        [sheet showActionSheetWithClickBlock:^(int btnIndex) {
+            NSLog(@"btnIndex:%d",btnIndex);
+            NSInteger platformType;
+            if (btnIndex==0) {
+                platformType=2;
+            }else if (btnIndex==1){
+                platformType=1;
+            }else if (btnIndex==2){
+                platformType=0;
+            }else if (btnIndex==3){
+                platformType=5;
+            }else if (btnIndex==4){
+                platformType=13;
+            }else {
+                platformType=4;
+            }
+            
+            [self shareWebPageToPlatformType:platformType];
+            
+        } cancelBlock:^{
+            NSLog(@"取消");
+        }];
+        
+
         
     } else if (indexPath.row == 3) {
-        
+//        关于我们
         AboutUsPageVC *aboutUsPage = [[AboutUsPageVC alloc]init];
         aboutUsPage.hidesBottomBarWhenPushed = YES;
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -390,6 +420,26 @@
 }
 
 
+
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    //创建网页内容对象
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"乐天心理" descr:@"解除心理束缚，重获心灵自由。——最好的心理医生" thumImage:[UIImage imageNamed:@"乐天logo"]];
+    //设置网页地址
+    shareObject.webpageUrl =@"http://www.wzright.com/";
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
+            NSLog(@"response data is %@",data);
+        }
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

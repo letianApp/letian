@@ -54,16 +54,13 @@
     
     [super viewDidLoad];
     
-    
     self.automaticallyAdjustsScrollViewInsets=NO;
-    
     
     [self createHeadBgView];
     
     [self createTableView];
     
     [self requestData];
-    
     
 }
 
@@ -91,13 +88,29 @@
     
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         [MBHudSet dismiss:self.view];
+
         weakSelf.testList=[TestListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         
         [_tableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
+        [MBHudSet dismiss:self.view];
+
+        if (error.code == NSURLErrorCancelled) return;
+        
+        if (error.code == NSURLErrorTimedOut) {
+            
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+            
+        } else{
+            
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+            
+        }
+
     }];
     
 }
