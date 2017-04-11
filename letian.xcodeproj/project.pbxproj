@@ -985,12 +985,12 @@
 				09FBE01A1E70EE5F003452A6 /* ConfirmPageVC.h */,
 				09FBE01B1E70EE5F003452A6 /* ConfirmPageVC.m */,
 				09FBE01C1E70EE5F003452A6 /* ConfirmPageVC.xib */,
-				0965FBC51E824AF900C0FBAD /* OrderPageVC.h */,
-				0965FBC61E824AF900C0FBAD /* OrderPageVC.m */,
-				0965FBC71E824AF900C0FBAD /* OrderPageVC.xib */,
 				094FC5091E8CBF0D00BFFBBB /* PayPageVC.h */,
 				094FC50A1E8CBF0D00BFFBBB /* PayPageVC.m */,
 				094FC50B1E8CBF0D00BFFBBB /* PayPageVC.xib */,
+				0965FBC51E824AF900C0FBAD /* OrderPageVC.h */,
+				0965FBC61E824AF900C0FBAD /* OrderPageVC.m */,
+				0965FBC71E824AF900C0FBAD /* OrderPageVC.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";

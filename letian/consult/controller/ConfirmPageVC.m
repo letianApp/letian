@@ -586,13 +586,13 @@
 - (void)clickConfirmBtn {
     NSLog(@"确认预约");
     
-    if (_confirmBtn.backgroundColor == [UIColor lightGrayColor]) {
-        [self customHUDWithText:@"请完善预约信息"];
-
-    } else {
+//    if (_confirmBtn.backgroundColor == [UIColor lightGrayColor]) {
+//        [self customHUDWithText:@"请完善预约信息"];
+//
+//    } else {
         PayPageVC *payPage = [[PayPageVC alloc]init];
         [self.navigationController pushViewController:payPage animated:YES];
-    }
+//    }
 }
 
 - (void)dismissKeyboard {
