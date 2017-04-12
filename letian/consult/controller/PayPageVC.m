@@ -9,8 +9,9 @@
 #import "PayPageVC.h"
 
 #import "WXApi.h"
+#import "NSString+YYExtension.h"
 
-//#import "WXApiObject.h"
+
 
 @interface PayPageVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -100,27 +101,30 @@
     if (indexPath.row == 0) {
         NSLog(@"微信");
         
-        PayReq *request = [[PayReq alloc] init];
-        /** 商家向财付通申请的商家id */
-        request.partnerId = @"1456039302";
-        /** 预支付订单 */
-        request.prepayId= @"8201038****be9c4c063c30";
-        /** 商家根据财付通文档填写的数据和签名 */
-        request.package = @"Sign=WXPay";
-        /** 随机串，防重发 */
-        request.nonceStr= @"lUu5qloVJV7rrJlr";
-        /** 时间戳，防重发 */
-//        request.timeStamp= 145****985;
-        /** 商家根据微信开放平台文档对数据做的签名 */
-        request.sign= @"b640c1a4565b4****4b8a9e71960b0123";
-        /*! @brief 发送请求到微信，等待微信返回onResp
-         *
-         * 函数调用后，会切换到微信的界面。第三方应用程序等待微信返回onResp。微信在异步处理完成后一定会调用onResp。支持以下类型
-         * SendAuthReq、SendMessageToWXReq、PayReq等。
-         * @param req 具体的发送请求，在调用函数后，请自己释放。
-         * @return 成功返回YES，失败返回NO。
-         */
-        [WXApi sendReq: request];
+//        BOOL weChatIns = [WXApi isWXAppInstalled];
+        [WXApi openWXApp];
+        
+//        PayReq *request = [[PayReq alloc] init];
+//        /** 商家向财付通申请的商家id */
+//        request.partnerId = WEIXIN_PARTNERID;
+//        /** 预支付订单 */
+//        request.prepayId= @"8201038****be9c4c063c30";
+//        /** 商家根据财付通文档填写的数据和签名 */
+//        request.package = @"Sign=WXPay";
+//        /** 随机串，防重发 */
+//        request.nonceStr= @"lUu5qloVJV7rrJlr";
+//        /** 时间戳，防重发 */
+////        request.timeStamp= 145****985;
+//        /** 商家根据微信开放平台文档对数据做的签名 */
+//        request.sign= @"b640c1a4565b4****4b8a9e71960b0123";
+//        /*! @brief 发送请求到微信，等待微信返回onResp
+//         *
+//         * 函数调用后，会切换到微信的界面。第三方应用程序等待微信返回onResp。微信在异步处理完成后一定会调用onResp。支持以下类型
+//         * SendAuthReq、SendMessageToWXReq、PayReq等。
+//         * @param req 具体的发送请求，在调用函数后，请自己释放。
+//         * @return 成功返回YES，失败返回NO。
+//         */
+//        [WXApi sendReq: request];
         
     } else if (indexPath.row == 1) {
         NSLog(@"支付宝");

@@ -91,6 +91,8 @@
     
     [MBHudSet showStatusOnView:self.view];
     
+    NSLog(@"%@",requestString);
+    
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
         [MBHudSet dismiss:self.view];

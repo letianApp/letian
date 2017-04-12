@@ -49,16 +49,21 @@
 #define API_NAME_LOGIN          @"Login"
 
 //忘记密码
-#define API_NAME_FORGETPW        @"ForgetPwd"
+#define API_NAME_FORGETPW       @"ForgetPwd"
 
-#define API_NAME_CHANGEPW         @"ModifyPassword"
+#define API_NAME_CHANGEPW       @"ModifyPassword"
 
 //获取用户信息
 #define API_NAME_GETUSERINFO    @"GetUserInfo"
 
 //获取活动列表
-#define API_NAME_GETACTIVELIST    @"GetActiveList"
+#define API_NAME_GETACTIVELIST  @"GetActiveList"
 
+//获取咨询师列表
+#define API_NAME_GETCONSULTLIST @"GetConsultDoctorList"
+
+//获取咨询师详情
+#define API_NAME_GETCONSULTINFO @"GetConsultDoctorInfo"
 
 
 

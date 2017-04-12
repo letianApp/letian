@@ -116,6 +116,15 @@
 		0970CFF11E5180BF007480CB /* ConsultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0970CFEF1E5180BF007480CB /* ConsultViewController.xib */; };
 		0970CFF51E5180DF007480CB /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0970CFF31E5180DF007480CB /* MyViewController.m */; };
 		0970CFF61E5180DF007480CB /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0970CFF41E5180DF007480CB /* MyViewController.xib */; };
+		097105D21E9A34FE00AC8E4F /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 097105D01E9A34FE00AC8E4F /* AlipaySDK.bundle */; };
+		097105D31E9A34FE00AC8E4F /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105D11E9A34FE00AC8E4F /* AlipaySDK.framework */; };
+		097105D51E9A368A00AC8E4F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105D41E9A368A00AC8E4F /* SystemConfiguration.framework */; };
+		097105D71E9A369E00AC8E4F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105D61E9A369E00AC8E4F /* CoreTelephony.framework */; };
+		097105D91E9A36AD00AC8E4F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105D81E9A36AD00AC8E4F /* QuartzCore.framework */; };
+		097105DB1E9A36C100AC8E4F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105DA1E9A36C100AC8E4F /* CoreText.framework */; };
+		097105DD1E9A36EB00AC8E4F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105DC1E9A36EB00AC8E4F /* CoreGraphics.framework */; };
+		097105DF1E9A36F700AC8E4F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105DE1E9A36F700AC8E4F /* UIKit.framework */; };
+		097105E11E9A370800AC8E4F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105E01E9A370800AC8E4F /* CFNetwork.framework */; };
 		09A64DCE1E7145C600DCE8D9 /* ask.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A64DCB1E7145C600DCE8D9 /* ask.png */; };
 		09A64DCF1E7145C600DCE8D9 /* ask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A64DCC1E7145C600DCE8D9 /* ask@2x.png */; };
 		09A64DD01E7145C600DCE8D9 /* ask@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A64DCD1E7145C600DCE8D9 /* ask@3x.png */; };
@@ -382,6 +391,15 @@
 		0970CFF21E5180DF007480CB /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		0970CFF31E5180DF007480CB /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		0970CFF41E5180DF007480CB /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
+		097105D01E9A34FE00AC8E4F /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		097105D11E9A34FE00AC8E4F /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		097105D41E9A368A00AC8E4F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		097105D61E9A369E00AC8E4F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		097105D81E9A36AD00AC8E4F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		097105DA1E9A36C100AC8E4F /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		097105DC1E9A36EB00AC8E4F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		097105DE1E9A36F700AC8E4F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		097105E01E9A370800AC8E4F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		09A64DCB1E7145C600DCE8D9 /* ask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask.png; sourceTree = "<group>"; };
 		09A64DCC1E7145C600DCE8D9 /* ask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ask@2x.png"; sourceTree = "<group>"; };
 		09A64DCD1E7145C600DCE8D9 /* ask@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ask@3x.png"; sourceTree = "<group>"; };
@@ -547,7 +565,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				097105E11E9A370800AC8E4F /* CFNetwork.framework in Frameworks */,
+				097105DF1E9A36F700AC8E4F /* UIKit.framework in Frameworks */,
+				097105DD1E9A36EB00AC8E4F /* CoreGraphics.framework in Frameworks */,
+				097105DB1E9A36C100AC8E4F /* CoreText.framework in Frameworks */,
+				097105D91E9A36AD00AC8E4F /* QuartzCore.framework in Frameworks */,
+				097105D71E9A369E00AC8E4F /* CoreTelephony.framework in Frameworks */,
+				097105D51E9A368A00AC8E4F /* SystemConfiguration.framework in Frameworks */,
 				093587491E94E5EE0007B1D9 /* Accounts.framework in Frameworks */,
+				097105D31E9A34FE00AC8E4F /* AlipaySDK.framework in Frameworks */,
 				093587471E94E5DE0007B1D9 /* Social.framework in Frameworks */,
 				093587451E94E5690007B1D9 /* CoreMotion.framework in Frameworks */,
 				093587421E94BF800007B1D9 /* CoreMedia.framework in Frameworks */,
@@ -1012,6 +1038,15 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		097105CF1E9A34FE00AC8E4F /* pay */ = {
+			isa = PBXGroup;
+			children = (
+				097105D01E9A34FE00AC8E4F /* AlipaySDK.bundle */,
+				097105D11E9A34FE00AC8E4F /* AlipaySDK.framework */,
+			);
+			path = pay;
+			sourceTree = "<group>";
+		};
 		17141F58EED1935B6AB46B35 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1043,6 +1078,7 @@
 		77038DE91E63C49F0096C07D /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				097105CF1E9A34FE00AC8E4F /* pay */,
 				77DCE0501E8BAA1B00178A70 /* Categories */,
 				0965FBAF1E7A918900C0FBAD /* HZQDatePickerView */,
 				0965FBBE1E8230B400C0FBAD /* TextField */,
@@ -1206,6 +1242,13 @@
 		7C97B37F8435D00E98815F82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				097105E01E9A370800AC8E4F /* CFNetwork.framework */,
+				097105DE1E9A36F700AC8E4F /* UIKit.framework */,
+				097105DC1E9A36EB00AC8E4F /* CoreGraphics.framework */,
+				097105DA1E9A36C100AC8E4F /* CoreText.framework */,
+				097105D81E9A36AD00AC8E4F /* QuartzCore.framework */,
+				097105D61E9A369E00AC8E4F /* CoreTelephony.framework */,
+				097105D41E9A368A00AC8E4F /* SystemConfiguration.framework */,
 				093587481E94E5EE0007B1D9 /* Accounts.framework */,
 				093587461E94E5DE0007B1D9 /* Social.framework */,
 				093587441E94E5690007B1D9 /* CoreMotion.framework */,
@@ -1370,6 +1413,7 @@
 				77038E031E63C9F20096C07D /* 支付宝支付.png in Resources */,
 				770FFC641E95FF56009B81FC /* detail@2x.png in Resources */,
 				774DBC111E64214900B8798C /* msg.png in Resources */,
+				097105D21E9A34FE00AC8E4F /* AlipaySDK.bundle in Resources */,
 				094FC5691E8CF6A500BFFBBB /* 乐天logoMacSmall_32pt.png in Resources */,
 				094FC54A1E8CF6A500BFFBBB /* 乐天logocompanion_29pt@3x.png in Resources */,
 				0907337E1E64105A00F21E02 /* consultPagTabSel@2x.png in Resources */,
@@ -1767,6 +1811,10 @@
 				CODE_SIGN_ENTITLEMENTS = letian/letian.entitlements;
 				DEVELOPMENT_TEAM = EWE93FDJ2V;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/letian/Custom/pay",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/letian/PrefixHeader.pch";
 				INFOPLIST_FILE = letian/Info.plist;
@@ -1786,6 +1834,10 @@
 				CODE_SIGN_ENTITLEMENTS = letian/letian.entitlements;
 				DEVELOPMENT_TEAM = EWE93FDJ2V;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/letian/Custom/pay",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/letian/PrefixHeader.pch";
 				INFOPLIST_FILE = letian/Info.plist;

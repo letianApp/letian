@@ -14,7 +14,8 @@ pod 'RongCloudIM/IMLib'
 pod 'RongCloudIM/IMKit' 
 pod 'UMengUShare'
 pod 'WechatOpenSDK'
-
+pod 'Colours'
+pod 'JSONModel'
 
 
 use_frameworks!

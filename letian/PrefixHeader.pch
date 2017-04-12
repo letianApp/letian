@@ -54,37 +54,43 @@
 //========================APP============================
 
 //===========================通用==================
-#define NULLString(string) ((![string isKindOfClass:[NSString class]])||[string isEqualToString:@""] || (string == nil) || [string isEqualToString:@""] || [string isKindOfClass:[NSNull class]]||[[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0)                                    //判断字符串是否为空
+//判断字符串是否为空
+#define NULLString(string) ((![string isKindOfClass:[NSString class]])||[string isEqualToString:@""] || (string == nil) || [string isEqualToString:@""] || [string isKindOfClass:[NSNull class]]||[[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0)
+
+//系统版本号是否大于8.0
+#define IS_SystemVersionGreaterThanEight  ([UIDevice currentDevice].systemVersion.doubleValue >= 8.0)
+
 //短信授权码
-#define AUTHCODE        @"5ee3fa9e-8ff4-4441-a715-61a566f72839"
+#define AUTHCODE           @"5ee3fa9e-8ff4-4441-a715-61a566f72839"
 
 //极光推送
-#define JPUSH_APPKEY           @"4c395a924e846f2c729009b6"
-#define JPUSH_SECRET     @"50be4900f2b53f9ca1b2dbb7"
+#define JPUSH_APPKEY       @"4c395a924e846f2c729009b6"
+#define JPUSH_SECRET       @"50be4900f2b53f9ca1b2dbb7"
 
 //友盟
-#define UMENG_APPKEY           @"58e6ec7804e205b94e00200c"
+#define UMENG_APPKEY       @"58e6ec7804e205b94e00200c"
 
 //融云
-#define RONGYUN_APPKEY               @"82hegw5u83dkx"
-#define RONGYUN_APPSECRET            @"TZwaP6feAoneVl"
-#define RONGYUN_SERVICE_ID           @"KEFU149145862082595"
+#define RONGYUN_APPKEY     @"82hegw5u83dkx"
+#define RONGYUN_APPSECRET  @"TZwaP6feAoneVl"
+#define RONGYUN_SERVICE_ID @"KEFU149145862082595"
 
 //微信
-#define WEIXIN_APPID               @"wx7407060a8eb038f8"
-#define WEIXIN_SECRET              @"3f63b5f58b418c45743c82dc5174d7d1"
+#define WEIXIN_APPID       @"wx7407060a8eb038f8"
+#define WEIXIN_SECRET      @"3f63b5f58b418c45743c82dc5174d7d1"
+#define WEIXIN_PARTNERID   @"1456039302"
 
 //新浪微博
-#define WEIBO_APPKEY              @"4285108144"
-#define WEIBO_SECRET              @"6a77c955961555721b98ded54b559f75"
+#define WEIBO_APPKEY       @"4285108144"
+#define WEIBO_SECRET       @"6a77c955961555721b98ded54b559f75"
 
 
 
 // 登录参数
-#define APPID           @"55c9e9ea-169e-40e1-826c-c78d3f109e93"
-#define APPSECRET       @"a92e9517d06342608b921f840a89d36b"
+#define APPID              @"55c9e9ea-169e-40e1-826c-c78d3f109e93"
+#define APPSECRET          @"a92e9517d06342608b921f840a89d36b"
 
-#define APPKEY          @"6a2f401d291349b193f7fe5688bd8aba"
+#define APPKEY             @"6a2f401d291349b193f7fe5688bd8aba"
 
 
 //============================颜色=========================
@@ -97,9 +103,9 @@
 #import "Masonry.h"                                                                         //约束
 #import "UIView+Layout.h"                                                                   //改变view frame
 #import "GQControls.h"
-#import  "GQNetworkManager.h"
-#import  "UIColor+YYExtension.h"
-#import  "UIView+YYExtension.h"
+#import "GQNetworkManager.h"
+#import "UIColor+YYExtension.h"
+#import "UIView+YYExtension.h"
 
 
 #import "MBHudSet.h"
