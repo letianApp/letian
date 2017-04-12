@@ -2,7 +2,7 @@
 //  CYUserManager.m
 //  KeepCarEasy
 //
-//  Created by 恽雨晨 on 16/8/4.
+//  Created by guoqian on 16/8/4.
 //  Copyright © 2016年 www.7eche.com. All rights reserved.
 //
 
@@ -121,20 +121,9 @@
         return;
     }
     
-    /* Account = 15161170944;
-    HeadImage = "http://image.7eche.com/201604162247493063.jpg";
-    IsValidate = 0;
-    Money = 0;
-    MsgCount = 0;
-    NickName = OMG;
-    Point = 0;
-    Sex = 1;
-    ShareMoney = 30;
-    UserId = 2603;
-    */
     self.uid = [infoDic safeObjectForKey:@"UserId"];
     
-    self.gender = [infoDic safeObjectForKey:@"Sex"];
+    self.gender = [infoDic safeObjectForKey:@"SexString"];
     
     self.account = [infoDic safeObjectForKey:@"Account"];
     
@@ -142,9 +131,9 @@
     
     self.token =  [infoDic safeObjectForKey:@"token"];
 
-    //self.email = [infoDic safeObjectForKey:@"email"];
+    self.email = [infoDic safeObjectForKey:@"Email"];
     
-    //self.mobile = [infoDic safeObjectForKey:@"mobile"];
+    self.mobile = [infoDic safeObjectForKey:@"MobilePhone"];
     
     //self.lastloginip = [infoDic safeObjectForKey:@"lastloginip"];
     
@@ -175,8 +164,6 @@
 
 /**
  *  判断是否已经登录
- *
- *  @return YES or NO
  */
 + (BOOL)isHaveLogin
 {

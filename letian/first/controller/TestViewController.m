@@ -14,9 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import <WebKit/WebKit.h>
 
-@interface TestViewController ()<UITableViewDataSource,UITableViewDelegate,WKNavigationDelegate,WKUIDelegate>
-
-@property (nonatomic,strong) WKWebView *webView;
+@interface TestViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 
@@ -48,53 +46,16 @@
    
     [self setUpNavigationBar];
     
-//    [self createTableView];
+    [self createTableView];
     
-//    [self requestData];
-    
-    [self createWebView];
-    
-    NSLog(@",,,,,,,,,,");
-
-}
-
-
-
--(void)createWebView
-{
-    
-    NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.weiceyan.com/"]];
-    
-    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, -45, SCREEN_W, SCREEN_H+45 )];
-    
-    webView.allowsBackForwardNavigationGestures=YES;
-    
-    [webView loadRequest:request];
-    
-    webView.navigationDelegate=self;
-    
-    webView.UIDelegate = self;
-    
-    webView.scrollView.showsVerticalScrollIndicator=NO;
-    
-    webView.scrollView.bounces = NO;//禁止下拉
-    
-    [self.view addSubview:webView];
-    
-    self.webView=webView;
+    [self requestData];
     
     
 }
 
 
--(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
-{
-//    
-//    [webView evaluateJavaScript:@"document.getElementsByClassName('mediaList')[0].style.display = 'none';                   document.getElementsByClassName('card')[0].style.display = 'none';  document.getElementsByClassName('po_footer')[0].style.display = 'none'; document.getElementsByClassName('mediaTitle')[0].style.display = 'none'; document.getElementsByClassName('recomend-payTest')[0].style.display = 'none';   document.getElementsByClassName('test-jumpBtn')[0].style.display = 'none' ;   document.getElementsByClassName('kuang')[0].style.display = 'none' ;" completionHandler:^(id evaluate, NSError * error) {
-//        
-//    }];
-    
-}
+
+
 
 
 
@@ -197,8 +158,9 @@
     TestDetailViewController *testDetailVc=[[TestDetailViewController alloc]init];
     
     testDetailVc.testUrl=self.testList[indexPath.row].absolute_url;
+    testDetailVc.testModel=self.testList[indexPath.row];
     
-    [self.navigationController pushViewController:testDetailVc animated:YES];
+    [self.navigationController pushViewController:testDetailVc animated:NO];
     
     NSLog(@"cell被点击%li",indexPath.row);
     

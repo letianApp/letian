@@ -8,7 +8,7 @@
 
 #import "MessageViewController.h"
 #import "SystomMsgViewController.h"
-#import "AdvisoryViewController.h"
+#import "ChatListViewController.h"
 @interface MessageViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *contentScrollView;
@@ -99,7 +99,7 @@
 
 -(void)addChildViewController{
     
-    AdvisoryViewController * vc1 = [[AdvisoryViewController alloc]init];
+    ChatListViewController * vc1 = [[ChatListViewController alloc]init];
     
     [self addChildViewController:vc1];
     

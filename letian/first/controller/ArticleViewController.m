@@ -26,7 +26,6 @@
     
 }
 
-
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -35,20 +34,14 @@
     
     [self setUpNavigationBar];
     
-    
     [self createWebView];
     
-    
-    
-    
 }
-
 
 -(void) setUpNavigationBar
 {
     
     self.navigationItem.title=@"文章";
-    
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
@@ -57,9 +50,7 @@
     backButton.frame=CGRectMake(30, 12, 20, 20);
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    
 }
-
 
 
 -(void) back
@@ -90,27 +81,31 @@
     self.webView=webView;
     
     [self.view addSubview:webView];
+    
+    [MBHudSet showStatusOnView:self.view];
+
 }
+
 
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     
-    
     //嵌入js代码
-    [webView evaluateJavaScript:@"document.getElementsByClassName('nav-top')[0].style.display = 'none';                                                      document.getElementsByClassName('share-box')[0].style.display = 'none';  document.getElementsByClassName('entry')[0].style.display = 'none';  document.getElementsByClassName('current-info')[0].style.display = 'none';  document.getElementsByClassName('tab-fixed')[0].style.display = 'none'; document.getElementsByClassName('gclear')[0].style.display = 'none'; document.getElementsByClassName('nav-unlogin')[0].style.display = 'none';  document.getElementsByClassName('gotop-btn')[0].style.display = 'none';          var navbar = document.getElementsByClassName('wap-navbar');for(var i in navbar){navbar[i].style.display = 'none'};         "    completionHandler:^(id evaluate, NSError * error) {
+    [webView evaluateJavaScript:@"document.getElementsByClassName('nav-top')[0].style.display = 'none';                                                      document.getElementsByClassName('share-box')[0].style.display = 'none';    document.getElementsByClassName('entry')[0].style.display = 'none';         document.getElementsByClassName('current-info')[0].style.display = 'none';      document.getElementsByClassName('tab-fixed')[0].style.display = 'none';     document.getElementsByClassName('gclear')[0].style.display = 'none';            document.getElementsByClassName('nav-unlogin')[0].style.display = 'none';  document.getElementsByClassName('gotop-btn')[0].style.display = 'none';  document.getElementsByClassName('content-block')[0].style.display = 'none';                                         var navbar = document.getElementsByClassName('wap-navbar');for(var i in navbar){navbar[i].style.display = 'none'};         "    completionHandler:^(id evaluate, NSError * error) {
         
     }];
     
-    self.webView.hidden=NO;
+    [MBHudSet dismiss:self.view];
 
-
+    [self performSelector:@selector(webViewHidden) withObject:nil afterDelay:0.3f];
     
 }
 
+-(void)webViewHidden{
+    self.webView.hidden=NO;
 
+}
 
-
-//document.getElementsByClassName('l')[0].hidden = true;document.getElementsByClassName('r')[0].hidden = true; document.getElementsByTagName('aside').hidden = true; content-block
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
