@@ -10,13 +10,14 @@
 
 @interface counselorInfoModel : NSObject
 
-@property (nonatomic, copy) NSString *conserlorName;
-@property (nonatomic, copy) NSString *conserlorImage;
-@property (nonatomic, copy) NSString *counselorStatus;
-@property (nonatomic, copy) NSString *conserlorClassified;
-@property (nonatomic, copy) NSString *conserlorSex;
-@property (nonatomic, copy) NSString *conserlorPrice;
-@property (nonatomic, copy) NSString *conserlorAbout;
+@property (nonatomic, assign) NSInteger conserlorID;
+@property (nonatomic, copy  ) NSString  *conserlorName;
+@property (nonatomic, copy  ) NSString  *conserlorImage;
+@property (nonatomic, copy  ) NSString  *counselorStatus;
+@property (nonatomic, copy  ) NSString  *conserlorClassified;
+@property (nonatomic, copy  ) NSString  *conserlorSex;
+@property (nonatomic, copy  ) NSString  *conserlorPrice;
+@property (nonatomic, copy  ) NSString  *conserlorAbout;
 
 
 @end

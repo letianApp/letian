@@ -65,6 +65,9 @@
 //获取咨询师详情
 #define API_NAME_GETCONSULTINFO @"GetConsultDoctorInfo"
 
+//提交订单
+#define API_NAME_POSTORDER      @"DoConsultAppointment"
+
 
 
 #endif /* API_h */

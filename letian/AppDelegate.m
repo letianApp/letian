@@ -27,7 +27,7 @@
 
 
 
-@interface AppDelegate ()<RCIMUserInfoDataSource, WXApiDelegate>
+@interface AppDelegate ()<WXApiDelegate>
 
 @end
 
@@ -235,19 +235,19 @@
     
 }
 
-- (void)getUserInfoWithUserId:(NSString *)userId
-                   completion:(void (^)(RCUserInfo *userInfo))completion {
-    
-    if ([userId isEqualToString:@"002"]) {
-        RCUserInfo *userInfo = [[RCUserInfo alloc]init];
-        userInfo.userId = userId;
-        userInfo.name = @"测试2";
-        userInfo.portraitUri = @"http://www.wzright.com/upload/201610311133447158.jpg";
-        
-        return completion(userInfo);
-    }
-    return completion(nil);
-}
+//- (void)getUserInfoWithUserId:(NSString *)userId
+//                   completion:(void (^)(RCUserInfo *userInfo))completion {
+//    
+//    if ([userId isEqualToString:@"002"]) {
+//        RCUserInfo *userInfo = [[RCUserInfo alloc]init];
+//        userInfo.userId = userId;
+//        userInfo.name = @"测试2";
+//        userInfo.portraitUri = @"http://www.wzright.com/upload/201610311133447158.jpg";
+//        
+//        return completion(userInfo);
+//    }
+//    return completion(nil);
+//}
 
 
 /**

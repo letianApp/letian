@@ -91,35 +91,29 @@
 #pragma mark 获取咨询师信息
 - (void)getCounsultDataSource {
     
-    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
-//    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
 
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_CONSULT];
     [requestString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
     NSLog(@"%@",requestString);
-//    __weak typeof(self) weakSelf   = self;
-    
+    __weak typeof(self) weakSelf   = self;
+
     NSMutableDictionary *params    = [[NSMutableDictionary alloc]init];
 //    params[@"searchName"] = @"aaa";
-    params[@"enumPsyCategory"] = @0;
-    params[@"enumUserTitle"] = @0;
+    params[@"enumPsyCategory"]     = @0;
+    params[@"enumUserTitle"]       = @0;
 //    params[@"minFee"] = @(122);
 //    params[@"maxFee"] = @(233);
 //    params[@"pageIndex"] = @(1);
 //    params[@"pageSize"] = @(10);
     
-    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [PPNetworkHelper GET:requestString parameters:params success:^(id responseObject) {
         NSLog(@"%@",responseObject);
-        
-        
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师列表错误，错误代码：%ld",error.code]andOnView:self.view];
-    
+
+    } failure:^(NSError *error) {
+        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师列表错误，错误代码：%ld",error.code]andOnView:weakSelf.view];
+
     }];
-    
 }
     
 

@@ -169,12 +169,10 @@
 
         [self setupCalendarWithBGView:view];
         [self creatTimeChoicesViewWithBGView:view];
-
         
     } else {
         [self inputInfoWithBackView:view];
     }
-    
 }
 
 - (void)clickMapBtn:(UIButton *)btn {
@@ -635,17 +633,55 @@
 - (void)clickConfirmBtn {
     NSLog(@"确认预约");
     
+    [MBHudSet showStatusOnView:self.view];
+
 //    if (_confirmBtn.backgroundColor == [UIColor lightGrayColor]) {
 //        [self customHUDWithText:@"请完善预约信息"];
 //
 //    } else {
-//        PayPageVC *payPage = [[PayPageVC alloc]init];
+    
+        
+        NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+        [requestString appendFormat:@"%@/",API_MODULE_CONSULT];
+        [requestString appendFormat:@"%@",API_NAME_POSTORDER];
+        __weak typeof(self) weakSelf   = self;
+
+        NSMutableDictionary *params    = [[NSMutableDictionary alloc]init];
+
+        params[@"ConsultUserID"]       = @(_orderModel.conserlorID);
+        params[@"AppointmentDate"]     = _orderModel.orderDateStr;
+        params[@"StartTime"]           = _orderModel.orderDateTimeStart;
+        params[@"EndTime"]             = _orderModel.orderDateTimeEnd;
+        params[@"EnumConsultType"]     = _orderModel.orderChoice;
+        params[@"TotalFee"]            = _orderModel.orderPrice;
+        params[@"ConSultName"]         = _orderModel.orderInfoName;
+        params[@"EnumSexType"]         = _orderModel.orderInfoSex;
+        params[@"ConsultAge"]          = _orderModel.orderInfoAge;
+        params[@"ConsultPhone"]        = _orderModel.orderInfoPhone;
+        params[@"ConsultEmail"]        = _orderModel.orderInfoEmail;
+
+        NSLog(@"Params=%@",params);
+
+        
+    
+        [PPNetworkHelper POST:requestString parameters:params success:^(id responseObject) {
+            NSLog(@"%@",responseObject);
+            [MBHudSet dismiss:weakSelf.view];
+        } failure:^(NSError *error) {
+            [MBHudSet showText:[NSString stringWithFormat:@"创建订单失败，错误代码：%ld",error.code]andOnView:weakSelf.view];
+
+        }];
+        
+        
+        
+        
+        PayPageVC *payPage = [[PayPageVC alloc]init];
 //        [self.navigationController pushViewController:payPage animated:YES];
 //    }
     
-    OrderPageVC *ovc = [[OrderPageVC alloc]init];
-    ovc.orderModel = self.orderModel;
-    [self.navigationController pushViewController:ovc animated:YES];
+//    OrderPageVC *ovc = [[OrderPageVC alloc]init];
+//    ovc.orderModel = self.orderModel;
+//    [self.navigationController pushViewController:ovc animated:YES];
     
 }
 

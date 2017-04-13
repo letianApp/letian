@@ -39,7 +39,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MJRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Masonry.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>PPNetworkHelper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -64,6 +74,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>YYCache.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ZYKeyboardUtil.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,17 +87,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>24F151DADE1A73CEFB474F8CA81B3617</key>
+		<key>18ABB8F4FACB839D1A14966383A72778</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1CAAC310814277B7CBB34FDBB052A138</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3DA16CC6F7F76881ACE3F4D6E05A1478</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5341A28E6ED39231778CAF85681EEFC5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,12 +117,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>909303416BF1DEE145657247B77C2909</key>
+		<key>5C113B1E5849782155E066842890918C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BFFE1C144C136D65D13739DCD5EA5E0D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>C5A2DB7A84B7B78E359870D2E1B24AA7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C97B45D1E6A705F1A76B75DBC7AD83CC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,6 +147,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>D32FDC4AF64EA0CF3DEE650143D7F177</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D52144DE9D7255DE912490FF5A806573</key>
 		<dict>
 			<key>primary</key>
@@ -127,12 +162,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F46F95C652C87C056CDC2AD7A52A5A24</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FEE38396BA3640B59DA203B6D0F1515F</key>
+		<key>E14A62900910444707A5504D25EC98DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

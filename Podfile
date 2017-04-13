@@ -16,6 +16,9 @@ pod 'UMengUShare'
 pod 'WechatOpenSDK'
 pod 'Colours'
 pod 'JSONModel'
+pod 'PPNetworkHelper'
+pod 'MJRefresh'
+
 
 
 use_frameworks!
