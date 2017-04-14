@@ -23,22 +23,22 @@
 - (void)customCell {
     
     self.conselorImage.layer.cornerRadius = self.conselorImage.frame.size.width / 2;
-    self.conselorImage.clipsToBounds=YES;
-    self.conselorName.textColor = MAINCOLOR;
-    self.conselorName.font = [UIFont boldSystemFontOfSize:15];
-    self.conselorStatus.textColor = [UIColor lightGrayColor];
-    self.conserlorAbout.numberOfLines = 0;
-    self.conserlorAbout.font = [UIFont systemFontOfSize:12];
-    self.conserlorAbout.textColor = [UIColor lightGrayColor];
+    self.conselorImage.clipsToBounds      = YES;
+    self.conselorName.textColor           = MAINCOLOR;
+    self.conselorName.font                = [UIFont boldSystemFontOfSize:15];
+    self.conselorStatus.textColor         = [UIColor lightGrayColor];
+    self.conserlorAbout.numberOfLines     = 0;
+    self.conserlorAbout.font              = [UIFont systemFontOfSize:12];
+    self.conserlorAbout.textColor         = [UIColor lightGrayColor];
     
 }
 
 //测试数据
 - (void)test {
-    
+
     self.conselorImage.image = [UIImage imageNamed:@"wowomen"];
-    self.conserlorSex.image = [UIImage imageNamed:@"female"];
-    self.conselorName.text = @"孙晓平";
+    self.conserlorSex.image  = [UIImage imageNamed:@"female"];
+    self.conselorName.text   = @"孙晓平";
     self.conselorStatus.text = @"专家心理咨询师";
     self.conserlorAbout.text = @"毕业于山东大学，国家二级心理咨询师，心理动力学取向。持续接受精神分析系统培训，长期接受心理动力学取向案例督导及个人体验。咨询风格亲和包容。咨询理念：跟随心的指引，勇敢面对真实";
     self.conserlorPrice.text = @"800元/小时，4小时以上88折，8小时88折赠送1小时";

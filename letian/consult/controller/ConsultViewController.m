@@ -15,8 +15,11 @@
 
 #import "ChatListViewController.h"
 
+#import <YYModel/YYModel.h>
+
 @interface ConsultViewController ()<UITableViewDataSource,UITableViewDelegate>
 
+@property (nonatomic, copy ) NSMutableArray *mainDataSource;
 
 @property (nonatomic, copy  ) NSArray      *mainClassifiedDataSource;
 @property (nonatomic, copy  ) NSArray      *counselorStatusDataSource;
@@ -108,12 +111,32 @@
 //    params[@"pageSize"] = @(10);
     
     [PPNetworkHelper GET:requestString parameters:params success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+        
+        // 将 JSON (NSData,NSString,NSDictionary) 转换为 Model:
+//        counselorInfoModel *user = [counselorInfoModel yy_modelWithJSON:responseObject];
+//        NSDictionary *dataDict = [user valueForKey:@"data"];
+        
+        __strong typeof(self) strongself = weakSelf;
+        
+        strongself.mainDataSource = responseObject[@"Result"][@"Source"];
+        for (NSDictionary *consultDic in strongself.mainDataSource) {
+            
+            NSLog(@"%@",consultDic);
+            counselorInfoModel *consultModel = [[counselorInfoModel alloc]init];
+
+        }
+        
+//        NSLog(@"%@",sourceArr);
 
     } failure:^(NSError *error) {
-        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师列表错误，错误代码：%ld",error.code]andOnView:weakSelf.view];
+        
+        __strong typeof(self) strongself = weakSelf;
+
+        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师列表错误，错误代码：%ld",error.code]andOnView:strongself.view];
 
     }];
+    
+   
 }
     
 

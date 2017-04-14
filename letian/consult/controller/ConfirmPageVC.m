@@ -175,32 +175,41 @@
     }
 }
 
+#pragma mark 点击地图按钮
 - (void)clickMapBtn:(UIButton *)btn {
         
     UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"导航到设备" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
+    __weak typeof(self) weakSelf   = self;
+
     [alertController addAction:[UIAlertAction actionWithTitle:@"复制地址" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        __strong typeof(self) strongself = weakSelf;
         [UIPasteboard generalPasteboard].string = @"上海市徐汇区零陵路791弄上影广场3号楼20层2002室";
-        [MBHudSet showText:@"地址已经复制到剪贴板" andOnView:self.view];
+        [MBHudSet showText:@"地址已经复制到剪贴板" andOnView:strongself.view];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:@"自带地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        __strong typeof(self) strongself = weakSelf;
         MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
-        MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:self.coordinate addressDictionary:nil]];
+        MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:strongself.coordinate addressDictionary:nil]];
         [MKMapItem openMapsWithItems:@[currentLocation,toLocation] launchOptions:@{MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey:[NSNumber numberWithBool:YES]}];
         }]];
     
     if ( [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]) {
 
         [alertController addAction:[UIAlertAction actionWithTitle:@"高德地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSString *urlsting = [[NSString stringWithFormat:@"iosamap://navi?sourceApplication= &backScheme= &lat=%f&lon=%f&dev=0&style=2",self.coordinate.latitude,self.coordinate.longitude]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            
+            __strong typeof(self) strongself = weakSelf;
+            NSString *urlsting = [[NSString stringWithFormat:@"iosamap://navi?sourceApplication= &backScheme= &lat=%f&lon=%f&dev=0&style=2",strongself.coordinate.latitude,strongself.coordinate.longitude]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [[UIApplication  sharedApplication]openURL:[NSURL URLWithString:urlsting]];
         }]];
     } else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://"]]) {
 
         [alertController addAction:[UIAlertAction actionWithTitle:@"百度地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-
-            NSString *urlsting = [[NSString stringWithFormat:@"baidumap://map/direction?origin={{我的位置}}&destination=latlng:%f,%f|name=目的地&mode=driving&coord_type=gcj02",self.coordinate.latitude,self.coordinate.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            
+            __strong typeof(self) strongself = weakSelf;
+            NSString *urlsting = [[NSString stringWithFormat:@"baidumap://map/direction?origin={{我的位置}}&destination=latlng:%f,%f|name=目的地&mode=driving&coord_type=gcj02",strongself.coordinate.latitude,strongself.coordinate.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlsting]];
         }]];
     }
@@ -661,14 +670,21 @@
         params[@"ConsultEmail"]        = _orderModel.orderInfoEmail;
 
         NSLog(@"Params=%@",params);
-
-        
+    
     
         [PPNetworkHelper POST:requestString parameters:params success:^(id responseObject) {
+            
+            __strong typeof(self) strongself = weakSelf;
             NSLog(@"%@",responseObject);
-            [MBHudSet dismiss:weakSelf.view];
+            [MBHudSet dismiss:strongself.view];
         } failure:^(NSError *error) {
-            [MBHudSet showText:[NSString stringWithFormat:@"创建订单失败，错误代码：%ld",error.code]andOnView:weakSelf.view];
+            
+            __strong typeof(self) strongself = weakSelf;
+            
+            NSLog(@"错误代码：%ld",error.code);
+            
+            [MBHudSet dismiss:strongself.view];
+            [MBHudSet showText:[NSString stringWithFormat:@"创建订单失败，错误代码：%ld",error.code]andOnView:strongself.view];
 
         }];
         

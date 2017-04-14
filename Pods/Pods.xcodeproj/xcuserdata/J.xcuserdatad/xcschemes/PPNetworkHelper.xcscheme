@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C97B45D1E6A705F1A76B75DBC7AD83CC'
+               BlueprintIdentifier = '8DAF4134D17D6843BB67DF54635C5956'
                BlueprintName = 'PPNetworkHelper'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'PPNetworkHelper.framework'>
