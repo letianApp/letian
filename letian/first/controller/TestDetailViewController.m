@@ -150,10 +150,32 @@
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     
-    [webView evaluateJavaScript:@"document.getElementsByClassName('mediaList')[0].style.display = 'none';                   document.getElementsByClassName('card')[0].style.display = 'none';      document.getElementsByClassName('po_footer')[0].style.display = 'none'; document.getElementsByClassName('mediaTitle')[0].style.display = 'none'; document.getElementsByClassName('recomend-payTest')[0].style.display = 'none';   document.getElementsByClassName('test-jumpBtn')[0].style.display = 'none' ;   document.getElementsByClassName('kuang')[0].style.display = 'none' ;             document.getElementsByClassName('mediaList')[1].style.display = 'none';    document.getElementsByClassName('grzy')[0].style.display = 'none';         " completionHandler:^(id evaluate, NSError * error) {
-        
-    }];
+    [webView evaluateJavaScript:@"document.getElementsByClassName('mediaList')[0].style.display = 'none'; " completionHandler:nil];
     
+    [webView evaluateJavaScript:@"document.getElementsById('nativeShare').style.display = 'none';" completionHandler:nil];
+    
+    [webView evaluateJavaScript:@"document.getElementsByClassName('card')[0].style.display = 'none';" completionHandler:nil];
+    
+    [webView evaluateJavaScript:@"document.getElementsByClassName('po_footer')[0].style.display = 'none';" completionHandler:nil];
+    
+    [webView evaluateJavaScript:@"document.getElementsByClassName('mediaTitle')[0].style.display = 'none'; ;" completionHandler:nil];
+    
+    [webView evaluateJavaScript:@"document.getElementsByClassName('recomend-payTest')[0].style.display = 'none';" completionHandler:nil];
+    
+    [webView evaluateJavaScript:@"document.getElementsByClassName('test-jumpBtn')[0].style.display = 'none' ;" completionHandler:nil];
+    
+    [webView evaluateJavaScript:@"document.getElementsByClassName('mediaList')[1].style.display = 'none';" completionHandler:nil];
+    
+    
+    if (![self.webView.URL.absoluteString isEqualToString:self.testUrl]) {
+        self.webView.hidden=YES;
+        [webView evaluateJavaScript:@"document.getElementsByClassName('test-result')[0].getElementsByTagName('div')[1].style.display='none';" completionHandler:nil];
+        
+        [webView evaluateJavaScript:@"var parent = document.getElementsByClassName('test-result')[0].getElementsByTagName('div')[2];var child = parent.lastChild ;parent.removeChild(child)" completionHandler:nil];
+        
+
+    }
+
     [MBHudSet dismiss:self.view];
     
     [self performSelector:@selector(webViewHidden) withObject:nil afterDelay:0.3f];
@@ -164,18 +186,11 @@
 
 -(void)webViewHidden{
     self.webView.hidden=NO;
-    NSLog(@"ee ");
     
 }
 
 
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-    NSString *currentURL = webView.URL.absoluteString;
-    NSLog(@"当前url%@",currentURL);
 
-    NSLog(@"第一个url%@",self.testUrl);
-
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

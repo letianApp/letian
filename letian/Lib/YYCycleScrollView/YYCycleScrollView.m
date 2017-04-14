@@ -67,7 +67,7 @@
         //设置分页显示的圆点
         _pageControl = [[UIPageControl alloc] init];
         _pageControl.frame = CGRectMake(frame.size.width-80, frame.size.height - 20, 80, 20);
-        _pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+        _pageControl.currentPageIndicatorTintColor = MAINCOLOR;
         _pageControl.pageIndicatorTintColor = [UIColor grayColor];
         [self addSubview:_pageControl];
     }

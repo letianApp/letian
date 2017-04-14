@@ -12,7 +12,6 @@
 #import "TestListModel.h"
 #import "MJExtension.h"
 #import "UIImageView+WebCache.h"
-#import <WebKit/WebKit.h>
 
 @interface TestViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -165,6 +164,37 @@
     NSLog(@"cell被点击%li",indexPath.row);
     
 }
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    //
+    CATransform3D rotation;
+    rotation = CATransform3DMakeRotation((90.0*M_PI/180), 0.0, 0.7, 0.4);
+    rotation.m44 = 1.0/-600;
+    //阴影
+    cell.layer.shadowColor = [[UIColor blackColor]CGColor];
+    //阴影偏移
+    cell.layer.shadowOffset = CGSizeMake(10, 10);
+    //透明度
+    cell.alpha = 0;
+    
+    cell.layer.transform = rotation;
+    
+    //锚点
+    cell.layer.anchorPoint = CGPointMake(0.5, 0.5);
+    
+    [UIView beginAnimations:@"rotaion" context:NULL];
+    
+    [UIView setAnimationDuration:0.3];
+    
+    cell.layer.transform = CATransform3DIdentity;
+    
+    cell.alpha = 1;
+    cell.layer.shadowOffset = CGSizeMake(0, 0);
+    
+    [UIView commitAnimations];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

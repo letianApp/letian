@@ -29,7 +29,8 @@
 #define API_MODULE_ACTIVE      @"Active"
 //文章
 #define API_MODULE_ARTICLE     @"Article"
-
+//网页文章
+#define API_MODULE_WEBARTICLE     @"WebArticle"
 
 
 
@@ -58,6 +59,12 @@
 
 //获取活动列表
 #define API_NAME_GETACTIVELIST  @"GetActiveList"
+
+//获取网页文章列表
+#define API_NAME_GETWEBACTIVELIST  @"GetWebArticleList"
+
+//获取网页文章
+#define API_NAME_GETWEBACTIVEL  @"GetWebArticleInfo"
 
 //获取咨询师列表
 #define API_NAME_GETCONSULTLIST @"GetConsultDoctorList"

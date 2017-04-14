@@ -1,5 +1,5 @@
 //
-//  ArticleViewController.h
+//  WebArticleViewController.h
 //  letian
 //
 //  Created by 郭茜 on 2017/3/17.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ArticleViewController : UIViewController
+@interface WebArticleViewController : UIViewController
+
+@property(nonatomic,assign)NSInteger articleID;
 
 @end
