@@ -87,6 +87,8 @@
     
     params[@"PushNo"]               = [JPUSHService registrationID];;
 
+    params[@"enumUserType"]         =@1;
+    
     __weak typeof(self) weakSelf   = self;
     
     [MBHudSet showStatusOnView:self.view];

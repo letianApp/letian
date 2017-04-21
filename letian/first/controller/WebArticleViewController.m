@@ -36,9 +36,8 @@
 
     [self requestData];
     
-
-
 }
+
 
 -(void) setUpNavigationBar
 {
@@ -69,7 +68,6 @@
     [requestString appendFormat:@"%@/",API_MODULE_WEBARTICLE];
     [requestString appendString:API_NAME_GETWEBACTIVEL];
     __weak typeof(self) weakSelf = self;
-    
     
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     
