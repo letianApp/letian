@@ -15,7 +15,6 @@
 
 #import "ChatListViewController.h"
 
-#import <YYModel/YYModel.h>
 
 @interface ConsultViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -74,14 +73,26 @@
     self.navigationController.navigationBar.tintColor = MAINCOLOR;
     self.navigationItem.titleView                     = _searchBar;
 
-    UIBarButtonItem *leftButton                       = [[UIBarButtonItem alloc]initWithTitle:@"乐天心理" style:UIBarButtonItemStyleDone target:self action:nil];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:MAINCOLOR} forState:UIControlStateDisabled];
-    self.navigationItem.leftBarButtonItem             = leftButton;
+//    UIBarButtonItem *leftButton                       = [[UIBarButtonItem alloc]initWithTitle:@"乐天心理" style:UIBarButtonItemStyleDone target:self action:nil];
+//    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:MAINCOLOR} forState:UIControlStateDisabled];
+//    self.navigationItem.leftBarButtonItem             = leftButton;
 
-    UIBarButtonItem *rightButton                      = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"mainMessage"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]style:UIBarButtonItemStylePlain target:self action:@selector(selRightButton)];
-    self.navigationItem.rightBarButtonItem = rightButton;
+//    UIBarButtonItem *rightButton                      = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"mainMessage"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]style:UIBarButtonItemStylePlain target:self action:@selector(selRightButton)];
+//    self.navigationItem.rightBarButtonItem = rightButton;
     
 }
+
+- (UIBarButtonItem *)customBackItemWithTarget:(id)target
+                                       action:(SEL)action {
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+    [btn setFrame:CGRectMake(0, 0, 20, 20)];
+    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    return item;
+}
+
 
 - (void)selRightButton {
     
@@ -200,6 +211,7 @@
 //点击按钮方法
 - (void)clickBtn:(UIButton *)btn {
 
+    [self animationbegin:btn];
     if (btn.tag < 100) {
     for (int i           = 1; i < _mainClassifiedDataSource.count+1; i++) {
     UIButton *btnn       = [self.view viewWithTag:i];
@@ -277,11 +289,32 @@
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
 
     CounselorInfoVC *counselorInfoMainVC = [[CounselorInfoVC alloc]init];
-    counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
+//    counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
     [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];    
     
 }
 
+
+#pragma mark 按钮动画
+- (void)animationbegin:(UIView *)view {
+    /* 放大缩小 */
+    
+    // 设定为缩放
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    
+    // 动画选项设定
+    animation.duration = 0.1; // 动画持续时间
+    animation.repeatCount = -1; // 重复次数
+    animation.autoreverses = YES; // 动画结束时执行逆动画
+    
+    // 缩放倍数
+    animation.fromValue = [NSNumber numberWithFloat:1.0]; // 开始时的倍率
+    animation.toValue = [NSNumber numberWithFloat:0.9]; // 结束时的倍率
+    
+    // 添加动画
+    [view.layer addAnimation:animation forKey:@"scale-layer"];
+    
+}
 
 
 

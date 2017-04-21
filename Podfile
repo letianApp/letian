@@ -18,7 +18,7 @@ pod 'Colours'
 pod 'JSONModel'
 pod 'PPNetworkHelper'
 pod 'MJRefresh'
-pod 'YYModel'
+pod 'SnailPopupController'
 
 
 

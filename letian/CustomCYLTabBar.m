@@ -58,9 +58,9 @@
     UIViewController *firstNavigationController = [[RTRootNavigationController alloc]
                                                    initWithRootViewController:firstViewController];
     
-    ConsultViewController *secondViewController = [[ConsultViewController alloc] init];
-    UIViewController *secondNavigationController = [[RTRootNavigationController alloc]
-                                                    initWithRootViewController:secondViewController];
+//    ConsultViewController *secondViewController = [[ConsultViewController alloc] init];
+//    UIViewController *secondNavigationController = [[RTRootNavigationController alloc]
+//                                                    initWithRootViewController:secondViewController];
     
     MyViewController *thirdViewController = [[MyViewController alloc] init];
     UIViewController *thirdNavigationController = [[RTRootNavigationController alloc]
@@ -75,7 +75,7 @@
     //tabBarController.titlePositionAdjustment = UIOffsetMake(0, MAXFLOAT);
     NSArray *viewControllers = @[
                                  firstNavigationController,
-                                 secondNavigationController,
+//                                 secondNavigationController,
                                  thirdNavigationController,
                                  ];
     return viewControllers;
@@ -87,11 +87,11 @@
                                                  CYLTabBarItemImage : @"firstPageTab",  /* NSString and UIImage are supported*/
                                                  CYLTabBarItemSelectedImage : @"firstPageTabSel", /* NSString and UIImage are supported*/
                                                  };
-    NSDictionary *secondTabBarItemsAttributes = @{
-                                                  CYLTabBarItemTitle : @"预约",
-                                                  CYLTabBarItemImage : @"consultPagTab",
-                                                  CYLTabBarItemSelectedImage : @"consultPagTabSel",
-                                                  };
+//    NSDictionary *secondTabBarItemsAttributes = @{
+//                                                  CYLTabBarItemTitle : @"预约",
+//                                                  CYLTabBarItemImage : @"consultPagTab",
+//                                                  CYLTabBarItemSelectedImage : @"consultPagTabSel",
+//                                                  };
     NSDictionary *thirdTabBarItemsAttributes = @{
                                                  CYLTabBarItemTitle : @"我的",
                                                  CYLTabBarItemImage : @"myPagTab",
@@ -99,11 +99,13 @@
                                                  };
     NSArray *tabBarItemsAttributes = @[
                                        firstTabBarItemsAttributes,
-                                       secondTabBarItemsAttributes,
+//                                       secondTabBarItemsAttributes,
                                        thirdTabBarItemsAttributes,
                                        ];
     return tabBarItemsAttributes;
 }
+
+
 
 /**
  *  更多TabBar自定义设置：比如：tabBarItem 的选中和不选中文字和背景图片属性、tabbar 背景图片属性等等

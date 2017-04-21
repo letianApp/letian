@@ -135,6 +135,10 @@
 		09F1E7021E6E6506007FBE81 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E6FF1E6E6506007FBE81 /* share.png */; };
 		09F1E7031E6E6506007FBE81 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E7001E6E6506007FBE81 /* share@2x.png */; };
 		09F1E7041E6E6506007FBE81 /* share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F1E7011E6E6506007FBE81 /* share@3x.png */; };
+		09F6F95A1EA5C26700A95CD5 /* CustomPlusBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F6F9591EA5C26700A95CD5 /* CustomPlusBtn.m */; };
+		09F6F95E1EA5D45C00A95CD5 /* consultPagTabWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F6F95B1EA5D45C00A95CD5 /* consultPagTabWhite.png */; };
+		09F6F95F1EA5D45C00A95CD5 /* consultPagTabWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F6F95C1EA5D45C00A95CD5 /* consultPagTabWhite@2x.png */; };
+		09F6F9601EA5D45C00A95CD5 /* consultPagTabWhite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F6F95D1EA5D45C00A95CD5 /* consultPagTabWhite@3x.png */; };
 		09FBE01D1E70EE60003452A6 /* ConfirmPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FBE01B1E70EE5F003452A6 /* ConfirmPageVC.m */; };
 		09FBE01E1E70EE60003452A6 /* ConfirmPageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FBE01C1E70EE5F003452A6 /* ConfirmPageVC.xib */; };
 		09FBE0221E70F609003452A6 /* ConfirmPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FBE0201E70F609003452A6 /* ConfirmPageCell.m */; };
@@ -434,6 +438,11 @@
 		09F1E6FF1E6E6506007FBE81 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		09F1E7001E6E6506007FBE81 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		09F1E7011E6E6506007FBE81 /* share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@3x.png"; sourceTree = "<group>"; };
+		09F6F9581EA5C26700A95CD5 /* CustomPlusBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPlusBtn.h; sourceTree = "<group>"; };
+		09F6F9591EA5C26700A95CD5 /* CustomPlusBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPlusBtn.m; sourceTree = "<group>"; };
+		09F6F95B1EA5D45C00A95CD5 /* consultPagTabWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = consultPagTabWhite.png; sourceTree = "<group>"; };
+		09F6F95C1EA5D45C00A95CD5 /* consultPagTabWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "consultPagTabWhite@2x.png"; sourceTree = "<group>"; };
+		09F6F95D1EA5D45C00A95CD5 /* consultPagTabWhite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "consultPagTabWhite@3x.png"; sourceTree = "<group>"; };
 		09FBE01A1E70EE5F003452A6 /* ConfirmPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmPageVC.h; sourceTree = "<group>"; };
 		09FBE01B1E70EE5F003452A6 /* ConfirmPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmPageVC.m; sourceTree = "<group>"; };
 		09FBE01C1E70EE5F003452A6 /* ConfirmPageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmPageVC.xib; sourceTree = "<group>"; };
@@ -666,6 +675,9 @@
 				09A64DCC1E7145C600DCE8D9 /* ask@2x.png */,
 				09A64DCD1E7145C600DCE8D9 /* ask@3x.png */,
 				774DBC101E64214900B8798C /* msg.png */,
+				09F6F95B1EA5D45C00A95CD5 /* consultPagTabWhite.png */,
+				09F6F95C1EA5D45C00A95CD5 /* consultPagTabWhite@2x.png */,
+				09F6F95D1EA5D45C00A95CD5 /* consultPagTabWhite@3x.png */,
 				0907336B1E64105A00F21E02 /* consultPagTab.png */,
 				0907336C1E64105A00F21E02 /* consultPagTab@2x.png */,
 				77D2BF921E668D83000B9978 /* mainMessageWhite.png */,
@@ -877,6 +889,8 @@
 				77E10CE61E88A69300E1A254 /* API.h */,
 				0945B1461E6937DE005B7560 /* CustomCYLTabBar.h */,
 				0945B1471E6937DF005B7560 /* CustomCYLTabBar.m */,
+				09F6F9581EA5C26700A95CD5 /* CustomPlusBtn.h */,
+				09F6F9591EA5C26700A95CD5 /* CustomPlusBtn.m */,
 				0953C2271E514B5800FB165C /* ViewController.h */,
 				0953C2281E514B5800FB165C /* ViewController.m */,
 				0953C22A1E514B5800FB165C /* Main.storyboard */,
@@ -1485,6 +1499,7 @@
 				77FF9B761E696E18008C0FE7 /* pinkback.png in Resources */,
 				094FC5591E8CF6A500BFFBBB /* 乐天logoiPhoneApp_60pt@2x.png in Resources */,
 				0970CFF11E5180BF007480CB /* ConsultViewController.xib in Resources */,
+				09F6F95E1EA5D45C00A95CD5 /* consultPagTabWhite.png in Resources */,
 				77F3D8631E7670D2008B5FC0 /* OrderCell.xib in Resources */,
 				770FFC6D1E961070009B81FC /* UserInfoViewController.xib in Resources */,
 				09F1E7041E6E6506007FBE81 /* share@3x.png in Resources */,
@@ -1493,6 +1508,7 @@
 				094FC50D1E8CBF0E00BFFBBB /* PayPageVC.xib in Resources */,
 				0953C22E1E514B5800FB165C /* Assets.xcassets in Resources */,
 				77D2BFA21E66C404000B9978 /* SetAcountViewController.xib in Resources */,
+				09F6F95F1EA5D45C00A95CD5 /* consultPagTabWhite@2x.png in Resources */,
 				7784D89F1E6D5512004AB0CC /* success@3x.png in Resources */,
 				094FC5551E8CF6A500BFFBBB /* 乐天logoiPadSpootlight5_29pt.png in Resources */,
 				0953C22C1E514B5800FB165C /* Main.storyboard in Resources */,
@@ -1559,6 +1575,7 @@
 				094FC55F1E8CF6A500BFFBBB /* 乐天logoiPhoneSpootlight7_40pt@2x.png in Resources */,
 				77FF9B781E696E18008C0FE7 /* pinkback@3x.png in Resources */,
 				094FC55B1E8CF6A500BFFBBB /* 乐天logoiPhoneNotification_20pt@2x.png in Resources */,
+				09F6F9601EA5D45C00A95CD5 /* consultPagTabWhite@3x.png in Resources */,
 				7784D89E1E6D5512004AB0CC /* success@2x.png in Resources */,
 				774DBC0D1E6420FC00B8798C /* HomeCell.xib in Resources */,
 				770FFC651E95FF56009B81FC /* detail@3x.png in Resources */,
@@ -1675,7 +1692,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8E98826DB88D084D3D8BD428 /* [CP] Copy Pods Resources */ = {
@@ -1705,6 +1722,7 @@
 				0965FBB71E7A918900C0FBAD /* UIColor+HexString.m in Sources */,
 				771F900E1E9B6612003B1806 /* GQActionSheetItem.m in Sources */,
 				77221D931E6FB63400022AAF /* SystomMsgViewController.m in Sources */,
+				09F6F95A1EA5C26700A95CD5 /* CustomPlusBtn.m in Sources */,
 				77D2BF971E66B3D0000B9978 /* RegistViewController.m in Sources */,
 				7769CA601E8253D000646619 /* TestListModel.m in Sources */,
 				0970CFF51E5180DF007480CB /* MyViewController.m in Sources */,

@@ -38,6 +38,7 @@ PODS:
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
   - Shimmer (1.0.2)
+  - SnailPopupController (2.0.2)
   - UMengUShare (6.4.2):
     - UMengUShare/Core (= 6.4.2)
     - UMengUShare/Network (= 6.4.2)
@@ -157,7 +158,6 @@ PODS:
     - UMengUShare/Core
   - WechatOpenSDK (1.7.7)
   - YYCache (1.0.4)
-  - YYModel (1.0.4)
   - ZYKeyboardUtil (1.0.7)
 
 DEPENDENCIES:
@@ -177,9 +177,9 @@ DEPENDENCIES:
   - RTRootNavigationController
   - SDWebImage (~> 3.7.5)
   - Shimmer (~> 1.0.2)
+  - SnailPopupController
   - UMengUShare
   - WechatOpenSDK
-  - YYModel
   - ZYKeyboardUtil (~> 1.0.7)
 
 SPEC CHECKSUMS:
@@ -199,12 +199,12 @@ SPEC CHECKSUMS:
   RTRootNavigationController: 5ccb6469e9c639ff464248f611678e0f98778e00
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
+  SnailPopupController: 0355c7f9e67567123a7172d68b87fe9e1163b13f
   UMengUShare: 740664d1dd5cc2fb2cc3325d61e4b35539aa9c78
   WechatOpenSDK: cbd332148eb792d444ed4eec94f421d98f2046ee
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
-  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZYKeyboardUtil: c4b920eed9af063c46af2e9ea62e851d9331fbd9
 
-PODFILE CHECKSUM: cb4e7ff41d1a00ac128020e966e3222ed617dfd9
+PODFILE CHECKSUM: 468a7f33a1e51c4ba30149a0cb88e3fc3a344de9
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1

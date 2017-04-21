@@ -74,12 +74,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>YYCache.xcscheme</key>
+		<key>SnailPopupController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>YYModel.xcscheme</key>
+		<key>YYCache.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -92,22 +92,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1933679B4D5CA5C8BEA2ACD15106DF70</key>
+		<key>0E9F81DE7A485AB79AE30AAD4C153D79</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2C61D3D3FA4A1E99322EB8585E3C8D2B</key>
+		<key>133C4618870C23D4553610ABC353E38F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>30074A035291378FEC49EFD9E61E8F08</key>
+		<key>378909DD109033230753054D3B0E7DCC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3B15DE1A6A7D1921E07BFB0D36C50A59</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4EF3AF825CA0ECC2F0F70E72FFCC7A21</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>589177A8598F08FF295CDD85D9F0D958</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,22 +137,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>70D3C5809045C1FC0C2D35A7F2B4D291</key>
+		<key>9A263EBF9B2A64ED4033F49B36709BB3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>74FB7F9803EB50CDCC3FD77B15EAF88A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8DAF4134D17D6843BB67DF54635C5956</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A434F235B96DCAD5B4A6AD74C3FDDBFF</key>
+		<key>A72C7545C754E1CE4462E315243BBEEE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -168,11 +173,6 @@
 			<true/>
 		</dict>
 		<key>E14A62900910444707A5504D25EC98DC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E3E7340CB4C16F5C41DE583973CEC6BB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -11,10 +11,10 @@
 #import "ChatListViewController.h"
 @interface MessageViewController ()<UIScrollViewDelegate>
 
-@property (nonatomic, strong) UIScrollView *contentScrollView;
-@property(nonatomic,strong)NSMutableArray *buttonList;
-@property(nonatomic,weak)CALayer *LGLayer;
-@property(nonatomic,strong)UISegmentedControl *segment;
+@property (nonatomic,strong ) UIScrollView       *contentScrollView;
+@property (nonatomic,strong ) NSMutableArray     *buttonList;
+@property (nonatomic,weak   ) CALayer            *LGLayer;
+@property (nonatomic,strong ) UISegmentedControl *segment;
 
 @end
 

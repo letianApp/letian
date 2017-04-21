@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "CustomCYLTabBar.h"
+#import "CustomPlusBtn.h"
 
 #import "FirstViewController.h"
 #import "ConsultViewController.h"
@@ -38,9 +39,13 @@
 //    [self creatTabBarController];
     
     // 设置主窗口,并设置根控制器
-    self.window = [[UIWindow alloc]init];
-    self.window.frame = [UIScreen mainScreen].bounds;
+    self.window                             = [[UIWindow alloc]init];
+    self.window.frame                       = [UIScreen mainScreen].bounds;
+    [CustomPlusBtn registerPlusButton];
+    
+    
     CustomCYLTabBar *tabBarControllerConfig = [[CustomCYLTabBar alloc] init];
+    
     [self.window setRootViewController:tabBarControllerConfig.tabBarController];
     [self.window makeKeyAndVisible];
 
@@ -58,11 +63,12 @@
     
     [self confitUShareSettings];
     
-    [self customEM];
+//    [self customEM];
     
     
     return YES;
 }
+
 
 - (void)resignWechat {
     
@@ -218,10 +224,14 @@
 
 - (void)customEM {
     
+    __weak typeof(self) weakSelf   = self;
+
     [[RCIM sharedRCIM] initWithAppKey:RONGYUN_APPKEY];
     [[RCIM sharedRCIM] connectWithToken:@"pdtQ2qT6ucmSKegQZEReC9Bpol8+z5qA20RkCIv9EwyxLoLjlDnHcnfdX2W+xKvA7piGIbRreIQ="     success:^(NSString *userId) {
+        
+        __strong typeof(self) strongself = weakSelf;
         NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
-        [[RCIM sharedRCIM] setUserInfoDataSource:self];
+        [[RCIM sharedRCIM] setUserInfoDataSource:strongself];
         
     } error:^(RCConnectErrorCode status) {
         NSLog(@"登陆的错误码为:%ld", (long)status);

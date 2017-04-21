@@ -17,10 +17,10 @@
 
 @interface CounselorInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic, strong) UIView *headView;
+@property (nonatomic, strong) UIView      *headView;
 @property (nonatomic, strong) UITableView *mainTableView;
-@property (nonatomic, strong) UIView *holdView;
-@property (nonatomic, strong) UITabBar *tabBar;
+@property (nonatomic, strong) UIView      *holdView;
+@property (nonatomic, strong) UITabBar    *tabBar;
 
 @end
 
@@ -46,15 +46,15 @@
 
 #pragma mark 定制导航栏
 - (void)customNavigation {
-    
+
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *btn                          = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(0, 0, 20, 20)];
     [btn addTarget:self action:@selector(clickShareBtn) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    UIBarButtonItem *item                  = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = item;
-    
+
 }
 
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target
@@ -171,28 +171,28 @@
 #pragma mark 定制底部TabBar
 - (void)creatBottomBar {
     
-    _tabBar = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
+    _tabBar                            = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
     //预约按钮
-    UIButton *AppointmentBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
-    AppointmentBtn.backgroundColor = MAINCOLOR;
+    UIButton *AppointmentBtn           = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
+    AppointmentBtn.backgroundColor     = MAINCOLOR;
 //    [AppointmentBtn setBackgroundImage:[UIImage imageNamed:@"btnBackImage"] forState:UIControlStateNormal];
     [AppointmentBtn setTitle:@"预约" forState:UIControlStateNormal];
     [AppointmentBtn addTarget:self action:@selector(clickAppointmentBtn) forControlEvents:UIControlEventTouchUpInside];
     [_tabBar addSubview:AppointmentBtn];
     //咨询按钮
-    UIButton *askBtn = [[UIButton alloc]initWithFrame:CGRectMake(15, 3, tabBar_H*2/3, tabBar_H*2/3)];
+    UIButton *askBtn                   = [[UIButton alloc]initWithFrame:CGRectMake(15, 3, tabBar_H*2/3, tabBar_H*2/3)];
     [_tabBar addSubview:askBtn];
     [askBtn setImage:[UIImage imageNamed:@"ask"] forState:UIControlStateNormal];
     [askBtn addTarget:self action:@selector(clickAskBrn) forControlEvents:UIControlEventTouchUpInside];
-    UILabel *askLab = [[UILabel alloc]initWithFrame:CGRectMake(15, tabBar_H*2/3, tabBar_H*2/3, tabBar_H/3)];
+    UILabel *askLab                    = [[UILabel alloc]initWithFrame:CGRectMake(15, tabBar_H*2/3, tabBar_H*2/3, tabBar_H/3)];
     [_tabBar addSubview:askLab];
-    askLab.text = @"咨询";
-    askLab.textAlignment = NSTextAlignmentCenter;
-    askLab.font = [UIFont systemFontOfSize:10];
-    askLab.textColor = [UIColor darkGrayColor];
+    askLab.text                        = @"咨询";
+    askLab.textAlignment               = NSTextAlignmentCenter;
+    askLab.font                        = [UIFont systemFontOfSize:10];
+    askLab.textColor                   = [UIColor darkGrayColor];
     [self.view addSubview:_tabBar];
     //价格lable
-    UILabel *priceLab = [[UILabel alloc]init];
+    UILabel *priceLab                  = [[UILabel alloc]init];
     priceLab.adjustsFontSizeToFitWidth = YES;
     [_tabBar addSubview:priceLab];
     [priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -201,12 +201,12 @@
         make.width.equalTo(_tabBar.mas_width).multipliedBy(0.3);
         make.height.equalTo(_tabBar.mas_height);
     }];
-    priceLab.textColor = MAINCOLOR;
-    priceLab.text = @"1000元／小时";
-    priceLab.textAlignment = NSTextAlignmentRight;
-    priceLab.font = [UIFont boldSystemFontOfSize:15];
+    priceLab.textColor                 = MAINCOLOR;
+    priceLab.text                      = @"1000元／小时";
+    priceLab.textAlignment             = NSTextAlignmentRight;
+    priceLab.font                      = [UIFont boldSystemFontOfSize:15];
     //优惠lable
-    UILabel *couponLab = [[UILabel alloc]init];
+    UILabel *couponLab                 = [[UILabel alloc]init];
     [_tabBar addSubview:couponLab];
     [couponLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(priceLab.mas_right);
@@ -214,11 +214,11 @@
         make.width.equalTo(priceLab.mas_width);
         make.height.equalTo(priceLab.mas_height).multipliedBy(0.5);
     }];
-    couponLab.text = @"4小时以上88折";
-    couponLab.textColor = [UIColor orangeColor];
-    couponLab.textAlignment = NSTextAlignmentRight;
-    couponLab.font = [UIFont boldSystemFontOfSize:10];
-    
+    couponLab.text                     = @"4小时以上88折";
+    couponLab.textColor                = [UIColor orangeColor];
+    couponLab.textAlignment            = NSTextAlignmentRight;
+    couponLab.font                     = [UIFont boldSystemFontOfSize:10];
+
 }
 
 - (void)clickAskBrn {

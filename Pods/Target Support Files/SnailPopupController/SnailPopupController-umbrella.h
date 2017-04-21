@@ -10,10 +10,8 @@
 #endif
 #endif
 
-#import "NSObject+YYModel.h"
-#import "YYClassInfo.h"
-#import "YYModel.h"
+#import "SnailPopupController.h"
 
-FOUNDATION_EXPORT double YYModelVersionNumber;
-FOUNDATION_EXPORT const unsigned char YYModelVersionString[];
+FOUNDATION_EXPORT double SnailPopupControllerVersionNumber;
+FOUNDATION_EXPORT const unsigned char SnailPopupControllerVersionString[];
 

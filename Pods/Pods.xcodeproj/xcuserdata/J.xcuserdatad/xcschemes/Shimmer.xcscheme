@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '2C61D3D3FA4A1E99322EB8585E3C8D2B'
+               BlueprintIdentifier = '9A263EBF9B2A64ED4033F49B36709BB3'
                BlueprintName = 'Shimmer'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Shimmer.framework'>
