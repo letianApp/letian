@@ -22,6 +22,7 @@
 #import "CYUserManager.h"
 #import "MessageViewController.h"
 #import "WebArticleListViewController.h"
+#import "TestDetailViewController.h"
 @interface FirstViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -378,7 +379,9 @@
     
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
     
-    WebArticleViewController *articleVc=[[WebArticleViewController alloc]init];
+    TestDetailViewController *articleVc=[[TestDetailViewController alloc]init];
+    
+    articleVc.testUrl=self.testList[indexPath.row].absolute_url;
     
     articleVc.hidesBottomBarWhenPushed=YES;
     
