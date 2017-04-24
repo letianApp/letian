@@ -8,17 +8,11 @@
 
 #import "MessageCell.h"
 
-
 @interface MessageCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-
 @property (weak, nonatomic) IBOutlet UIView *bgView;
-
 @property (weak, nonatomic) IBOutlet UILabel *msgDetailLabel;
-
-
-
 
 @end
 
@@ -26,7 +20,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
 
 +(instancetype) cellWithTableView:(UITableView *)tableView
@@ -41,7 +34,6 @@
     cell.bgView.layer.cornerRadius=8;
     return cell;
 }
-
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

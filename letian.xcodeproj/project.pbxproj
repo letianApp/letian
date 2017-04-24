@@ -217,6 +217,12 @@
 		7784D8AD1E6E80C5004AB0CC /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */; };
 		77A17B7A1E7F9A2900569558 /* WebArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A17B791E7F9A2900569558 /* WebArticleViewController.m */; };
 		77A17B831E7FA20B00569558 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A17B821E7FA20B00569558 /* ActivityViewController.m */; };
+		77B5BCC01EA9B82D0034497D /* BDImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5BCBF1EA9B82D0034497D /* BDImagePicker.m */; };
+		77B5BCC91EA9C0290034497D /* UIColor+YYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5BCC21EA9C0290034497D /* UIColor+YYExtension.m */; };
+		77B5BCCA1EA9C0290034497D /* UIImage+YYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5BCC41EA9C0290034497D /* UIImage+YYExtension.m */; };
+		77B5BCCB1EA9C0290034497D /* UIImageView+YYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5BCC61EA9C0290034497D /* UIImageView+YYExtension.m */; };
+		77B5BCCC1EA9C0290034497D /* UIView+YYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5BCC81EA9C0290034497D /* UIView+YYExtension.m */; };
+		77B5BCCD1EA9C1E60034497D /* UIImageView+YYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5BCC61EA9C0290034497D /* UIImageView+YYExtension.m */; };
 		77B5C9E71E7A2F000028CB9E /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5C9E51E7A2F000028CB9E /* OrderDetailViewController.m */; };
 		77B5C9E81E7A2F000028CB9E /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B5C9E61E7A2F000028CB9E /* OrderDetailViewController.xib */; };
 		77B5C9EC1E7A4AF50028CB9E /* CompleteOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5C9EA1E7A4AF50028CB9E /* CompleteOrderViewController.m */; };
@@ -545,6 +551,16 @@
 		77A17B791E7F9A2900569558 /* WebArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebArticleViewController.m; sourceTree = "<group>"; };
 		77A17B811E7FA20B00569558 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		77A17B821E7FA20B00569558 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
+		77B5BCBE1EA9B82D0034497D /* BDImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDImagePicker.h; sourceTree = "<group>"; };
+		77B5BCBF1EA9B82D0034497D /* BDImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDImagePicker.m; sourceTree = "<group>"; };
+		77B5BCC11EA9C0290034497D /* UIColor+YYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+YYExtension.h"; sourceTree = "<group>"; };
+		77B5BCC21EA9C0290034497D /* UIColor+YYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+YYExtension.m"; sourceTree = "<group>"; };
+		77B5BCC31EA9C0290034497D /* UIImage+YYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+YYExtension.h"; sourceTree = "<group>"; };
+		77B5BCC41EA9C0290034497D /* UIImage+YYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YYExtension.m"; sourceTree = "<group>"; };
+		77B5BCC51EA9C0290034497D /* UIImageView+YYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YYExtension.h"; sourceTree = "<group>"; };
+		77B5BCC61EA9C0290034497D /* UIImageView+YYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YYExtension.m"; sourceTree = "<group>"; };
+		77B5BCC71EA9C0290034497D /* UIView+YYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YYExtension.h"; sourceTree = "<group>"; };
+		77B5BCC81EA9C0290034497D /* UIView+YYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YYExtension.m"; sourceTree = "<group>"; };
 		77B5C9E41E7A2F000028CB9E /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		77B5C9E51E7A2F000028CB9E /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		77B5C9E61E7A2F000028CB9E /* OrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
@@ -1151,6 +1167,7 @@
 				096DE4561E82591C00C57DDF /* LRTextField */,
 				7784D8A01E6D587D004AB0CC /* GQControls.h */,
 				7784D8A11E6D587D004AB0CC /* GQControls.m */,
+				77B5BCBD1EA9B82D0034497D /* BDImagePicker */,
 				772064061E95E74000D94698 /* MBHudSet.h */,
 				772064071E95E74000D94698 /* MBHudSet.m */,
 				77FF303C1EA0BEC100F3A1C9 /* RefreshFooter.h */,
@@ -1163,6 +1180,14 @@
 				77E10CEA1E88D06B00E1A254 /* Foundation+Log.m */,
 				09A64DD71E7290C300DCE8D9 /* UIView+Layout.h */,
 				09A64DD81E7290C300DCE8D9 /* UIView+Layout.m */,
+				77B5BCC11EA9C0290034497D /* UIColor+YYExtension.h */,
+				77B5BCC21EA9C0290034497D /* UIColor+YYExtension.m */,
+				77B5BCC31EA9C0290034497D /* UIImage+YYExtension.h */,
+				77B5BCC41EA9C0290034497D /* UIImage+YYExtension.m */,
+				77B5BCC51EA9C0290034497D /* UIImageView+YYExtension.h */,
+				77B5BCC61EA9C0290034497D /* UIImageView+YYExtension.m */,
+				77B5BCC71EA9C0290034497D /* UIView+YYExtension.h */,
+				77B5BCC81EA9C0290034497D /* UIView+YYExtension.m */,
 				09A64DEE1E76486F00DCE8D9 /* GQSegment.h */,
 				09A64DEF1E76486F00DCE8D9 /* GQSegment.m */,
 				7769CA611E8253F300646619 /* GQNetworkManager.h */,
@@ -1256,6 +1281,15 @@
 				771F90111E9B695B003B1806 /* weixin@3x.png */,
 			);
 			name = share;
+			sourceTree = "<group>";
+		};
+		77B5BCBD1EA9B82D0034497D /* BDImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				77B5BCBE1EA9B82D0034497D /* BDImagePicker.h */,
+				77B5BCBF1EA9B82D0034497D /* BDImagePicker.m */,
+			);
+			path = BDImagePicker;
 			sourceTree = "<group>";
 		};
 		77D2BF991E66B928000B9978 /* 图标 */ = {
@@ -1757,17 +1791,20 @@
 				77DCE05D1E8BAA1C00178A70 /* CALayer+Transition.m in Sources */,
 				7769CA631E8253F300646619 /* GQNetworkManager.m in Sources */,
 				09A64DF01E76486F00DCE8D9 /* GQSegment.m in Sources */,
+				77B5BCCA1EA9C0290034497D /* UIImage+YYExtension.m in Sources */,
 				77DCE05E1E8BAA1C00178A70 /* NSDictionary+Safe.m in Sources */,
 				09FBE01D1E70EE60003452A6 /* ConfirmPageVC.m in Sources */,
 				77DCE0611E8BAA1C00178A70 /* UIColor+YYExtension.m in Sources */,
 				7752C7B31E70EC360093ED37 /* MessageCell.m in Sources */,
 				0953C2261E514B5800FB165C /* AppDelegate.m in Sources */,
 				772061CE1E94C44C00D94698 /* CYUserManager.m in Sources */,
+				77B5BCCC1EA9C0290034497D /* UIView+YYExtension.m in Sources */,
 				77E10CEB1E88D06B00E1A254 /* Foundation+Log.m in Sources */,
 				09FBE0271E70FE12003452A6 /* CounselorInfoVC.m in Sources */,
 				77F3D8621E7670D2008B5FC0 /* OrderCell.m in Sources */,
 				09A64DD91E7290C300DCE8D9 /* UIView+Layout.m in Sources */,
 				0965FBB51E7A918900C0FBAD /* HZQDatePickerView.m in Sources */,
+				77B5BCCB1EA9C0290034497D /* UIImageView+YYExtension.m in Sources */,
 				77FF30371EA0705F00F3A1C9 /* WebArticleCell.m in Sources */,
 				77F3D85D1E764E22008B5FC0 /* OrderViewController.m in Sources */,
 				77DCE0601E8BAA1C00178A70 /* NSString+YYExtension.m in Sources */,
@@ -1779,6 +1816,8 @@
 				77B5C9E71E7A2F000028CB9E /* OrderDetailViewController.m in Sources */,
 				093DA77D1E960F08003CEDD9 /* ChatListViewController.m in Sources */,
 				094FC5161E8CE1D500BFFBBB /* AboutUsPageVC.m in Sources */,
+				77B5BCC01EA9B82D0034497D /* BDImagePicker.m in Sources */,
+				77B5BCC91EA9C0290034497D /* UIColor+YYExtension.m in Sources */,
 				0953C2231E514B5800FB165C /* main.m in Sources */,
 				7784D8A21E6D587D004AB0CC /* GQControls.m in Sources */,
 				77B5C9EC1E7A4AF50028CB9E /* CompleteOrderViewController.m in Sources */,
@@ -1802,6 +1841,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77B5BCCD1EA9C1E60034497D /* UIImageView+YYExtension.m in Sources */,
 				0953C2471E514B5900FB165C /* letianUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

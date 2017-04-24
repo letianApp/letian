@@ -16,21 +16,15 @@
 @interface WebArticleListViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
-
 @property (nonatomic,strong) NSMutableArray <WebArticleModel *> *webArticleList;
-
 @property(nonatomic,assign)NSInteger pageIndex;
-
-
 
 @end
 
 @implementation WebArticleListViewController
 
 -(void)viewWillAppear:(BOOL)animated {
-    
     self.navigationController.navigationBarHidden=NO;
-    
 }
 
 /**
@@ -39,18 +33,12 @@
 -(void)setUpRefresh
 {
     MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
-    
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
-    
     self.tableView.mj_header = header;
-    
     self.tableView.mj_header.automaticallyChangeAlpha = YES;
-    
     self.tableView.mj_footer.hidden = YES;
-    
     self.tableView.mj_footer = [RefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
-    
     self.tableView.mj_footer.hidden = YES;
 }
 
@@ -63,9 +51,9 @@
     return _webArticleList;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     [self setUpNavigationBar];
     
@@ -76,46 +64,37 @@
     [self viewAmimationPlay];
     
     [self setUpRefresh];
-    
 }
-//请求数据
+
+
+#pragma mark-------获取网站文章列表
+
 -(void)requestData
 {
-    
     self.pageIndex=1;
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_WEBARTICLE];
     [requestString appendString:API_NAME_GETWEBACTIVELIST];
     __weak typeof(self) weakSelf = self;
-    
-    
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    
     params[@"pageIndex"]=@(self.pageIndex);
     params[@"pageSize"]=@(10);
-    
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [weakSelf.tableView.mj_header endRefreshing];
-
         weakSelf.webArticleList=[WebArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-        NSLog(@"responseObject=%@",responseObject);
-        
         if (weakSelf.webArticleList.count >= 10) {
             weakSelf.tableView.mj_footer.hidden = NO;
         }else{
             weakSelf.tableView.mj_footer.hidden=YES;
         }
-        
         [weakSelf.tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];
-
     }];
-    
-    
 }
 
+//获取更多网站文章
 -(void)requestMoreData
 {
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
@@ -123,62 +102,26 @@
     [requestString appendFormat:@"%@/",API_MODULE_WEBARTICLE];
     [requestString appendString:API_NAME_GETWEBACTIVELIST];
     __weak typeof(self) weakSelf = self;
-    
-    
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    
     params[@"pageIndex"]=@(++self.pageIndex);
     params[@"pageSize"]=@(10);
-    
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSArray *array=[WebArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-        
         if (array.count >= 10) {
             weakSelf.tableView.mj_footer.hidden = NO;
             [weakSelf.tableView.mj_footer endRefreshing];
         }else{
             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
         }
-        
         [weakSelf.webArticleList addObjectsFromArray:array];
-        
         [weakSelf.tableView reloadData];
-
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_footer endRefreshing];
-
     }];
-    
-    
 }
 
 
--(void) setUpNavigationBar
-{
-    
-    self.navigationItem.title=@"心理文章";
-    
-    
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    
-    backButton.frame=CGRectMake(30, 12, 20, 20);
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
-    
-    //设置navigationBar不透明
-    self.navigationController.navigationBar.translucent = NO;
-    
-}
-
-
-
--(void) back
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
+#pragma mark-----创建tableview
 
 -(void)createTableView
 {
@@ -187,12 +130,9 @@
     tableView.dataSource = self;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     tableView.showsVerticalScrollIndicator=NO;
-
     [self.view addSubview:tableView];
     self.tableView = tableView;
-
 }
-
 
 
 #pragma mark -----------------tableViewDelegate
@@ -201,25 +141,6 @@
 {
     return self.webArticleList.count;
 }
-
-//cell定制
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    WebArticleCell *cell=[WebArticleCell cellWithTableView:tableView];
-    
-    cell.titleLabel.text=self.webArticleList[indexPath.row].Title;
-    
-    cell.contentLabel.text=self.webArticleList[indexPath.row].Abstract;
-    
-    cell.readNumLabel.text=[NSString stringWithFormat:@"%ld人看过",self.webArticleList[indexPath.row].ReadNum];
-    
-    cell.dateLabel.text=self.webArticleList[indexPath.row].PostDate;
-    
-        return cell;
-}
-
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.webArticleList[indexPath.row].Abstract isEqualToString:@""]) {
@@ -227,19 +148,24 @@
     }
     return 120;
 }
+//cell定制
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    WebArticleCell *cell=[WebArticleCell cellWithTableView:tableView];
+    cell.titleLabel.text=self.webArticleList[indexPath.row].Title;
+    cell.contentLabel.text=self.webArticleList[indexPath.row].Abstract;
+    cell.readNumLabel.text=[NSString stringWithFormat:@"%ld人看过",self.webArticleList[indexPath.row].ReadNum];
+    cell.dateLabel.text=self.webArticleList[indexPath.row].PostDate;
+    return cell;
+}
 
 //cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
-    
     WebArticleViewController *webArticleVc=[[WebArticleViewController alloc]init];
-    
     webArticleVc.articleID=self.webArticleList[indexPath.row].ID;
-    
     [self.navigationController pushViewController:webArticleVc animated:YES];
-    
 }
 
 
@@ -252,22 +178,31 @@
     self.tableView.layer.shadowOffset = CGSizeMake(10, 10);
     self.tableView.alpha = 0;
     self.tableView.layer.transform = rotation;
-    
     self.tableView.layer.anchorPoint = CGPointMake(0.5, 0.5);
-    
     [UIView beginAnimations:@"rotaion" context:NULL];
-    
     [UIView setAnimationDuration:0.3];
-    
     self.tableView.layer.transform = CATransform3DIdentity;
-    
     self.tableView.alpha = 1;
     self.tableView.layer.shadowOffset = CGSizeMake(0, 0);
-    
     [UIView commitAnimations];
-
-    
 }
+
+
+-(void) setUpNavigationBar
+{
+    self.navigationItem.title=@"心理文章";
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    backButton.frame=CGRectMake(30, 12, 20, 20);
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    self.navigationController.navigationBar.translucent = NO;
+}
+-(void) back
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

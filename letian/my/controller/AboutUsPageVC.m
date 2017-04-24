@@ -20,20 +20,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
 
     [self customNavigation];
+    
     [self customTableView];
 }
 
-#pragma mark 定制导航栏
+#pragma mark---------定制导航栏
 - (void)customNavigation {
-    
     self.navigationItem.title = @"关于我们";
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
     self.navigationController.navigationBar.barTintColor = MAINCOLOR;
-    
 }
 
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target
@@ -51,7 +50,6 @@
     
     UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, navigationBar_H + statusBar_H, SCREEN_W, SCREEN_H - navigationBar_H - statusBar_H) style:UITableViewStyleGrouped];
     [self.view addSubview:tableView];
-//    tableView.backgroundColor = [UIColor whiteColor];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.rowHeight = 50;
@@ -60,7 +58,6 @@
     
     UILabel *companyLab = [[UILabel alloc]initWithFrame:CGRectMake(0, SCREEN_H - 40 - navigationBar_H - statusBar_H, SCREEN_W, 15)];
     [tableView addSubview:companyLab];
-//    companyLab.backgroundColor = MAINCOLOR;
     companyLab.text = @"上海乐天心理咨询中心";
     companyLab.textAlignment = NSTextAlignmentCenter;
     companyLab.textColor = [UIColor darkGrayColor];

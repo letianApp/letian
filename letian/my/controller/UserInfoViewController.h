@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UserInfoModel.h"
+
 @interface UserInfoViewController : UIViewController
 
 @property(nonatomic,strong)UserInfoModel *userInfoModel;

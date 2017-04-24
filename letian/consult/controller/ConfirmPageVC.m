@@ -704,8 +704,8 @@
 
         params[@"ConsultUserID"]       = @1;
         params[@"AppointmentDate"]     = _orderModel.orderDate;
-        params[@"StartTime"]           = @"001";
-        params[@"EndTime"]             = @"002";
+        params[@"StartTime"]           = @"1492916400";
+        params[@"EndTime"]             = @"1492920000";
         params[@"EnumConsultType"]     = @1;
         params[@"TotalFee"]            = @3000;
         params[@"ConSultName"]         = @"nnn";
@@ -730,7 +730,7 @@
             __strong typeof(self) strongself = weakSelf;
             
             NSLog(@"错误代码：%ld",error.code);
-            
+            NSLog(@"错误%@",error);
             [MBHudSet dismiss:strongself.view];
             [MBHudSet showText:[NSString stringWithFormat:@"创建订单失败，错误代码：%ld",error.code]andOnView:strongself.view];
 
@@ -739,7 +739,7 @@
         
         
         
-        PayPageVC *payPage = [[PayPageVC alloc]init];
+//        PayPageVC *payPage = [[PayPageVC alloc]init];
 //        [self.navigationController pushViewController:payPage animated:YES];
 //    }
     

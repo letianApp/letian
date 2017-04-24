@@ -16,13 +16,13 @@
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSArray *dataArray;
 
-
 @end
 
 @implementation SettingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.dataArray=@[@"修改密码",@"清除缓存"];
 
     [self createTableView];
@@ -33,8 +33,9 @@
 }
 
 
+#pragma mark-----创建tableview
+
 - (void)createTableView {
-    
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-44) style:UITableViewStylePlain];
     tableView.backgroundColor=[UIColor groupTableViewBackgroundColor];
     tableView.delegate = self;
@@ -43,9 +44,10 @@
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableView];
     self.tableView = tableView;
-    
-    
 }
+
+
+#pragma mark-----创建退出登录按钮
 
 -(void)createCancelButton
 {
@@ -55,19 +57,13 @@
     [self.view addSubview:cancalButton];
 }
 
-//注销登录
+
+#pragma mark--------注销登录
+
 -(void)cancelButtonClick{
-    
-    
-    [CYUserManager removeAllUserInfo];
-    
-    
-    LoginViewController *loginVc=[[LoginViewController alloc]init];
-    
-    [self.navigationController pushViewController:loginVc animated:YES];
-    
-    
-    
+   [CYUserManager removeAllUserInfo];
+   LoginViewController *loginVc=[[LoginViewController alloc]init];
+   [self.navigationController pushViewController:loginVc animated:YES];
 }
 
 
@@ -83,22 +79,17 @@
         [view addSubview:lineView];
         return view;
     }
-    
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 30)];
     view.backgroundColor=[UIColor groupTableViewBackgroundColor];
     [view addSubview:[GQControls createLabelWithFrame:CGRectMake(15, 5, 80, 19) andText:@"通知" andTextColor:[UIColor darkGrayColor] andFontSize:15]];
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 29, SCREEN_W, 1)];
     lineView.backgroundColor=[UIColor lightGrayColor];
     [view addSubview:lineView];
-
     return view;
 }
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
     return 2;
 }
-
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section==0) {
@@ -113,89 +104,60 @@
     }
     return 1;
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     return 50;
-    
 }
-
+//cell定制
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
-    
     cell.textLabel.font=[UIFont systemFontOfSize:15];
-    
     cell.textLabel.textColor=[UIColor darkGrayColor];
-    
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    
-    
     UIView *lineView=[[UIView alloc]init];
-    
+    //分割线
     if (indexPath.row==0) {
         lineView.frame=CGRectMake(15, 49, SCREEN_W-15, 1);
     }else if (indexPath.row==1){
         lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
     }
     lineView.backgroundColor=[UIColor lightGrayColor];
-
     [cell.contentView addSubview:lineView];
-    
+    //cell赋值
     if (indexPath.section==0) {
         cell.textLabel.text=self.dataArray[indexPath.row];
-        
         [cell.contentView addSubview:[GQControls createImageButtonWithFrame:CGRectMake(SCREEN_W-30, 17.5, 15, 15) withImageName:@"detail"]];
-        
-
     }else if (indexPath.section==1){
         cell.textLabel.text=@"文章更新推送";
         lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
-
     }
-    
     return cell;
-    
-    
 }
 
+#pragma mark--------cell点击事件
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
-    
     if (indexPath.section==0) {
         //修改密码
         ChangePwCodeViewController *changePwCodeVc=[[ChangePwCodeViewController alloc]init];
-        
         [self.navigationController pushViewController:changePwCodeVc animated:YES];
-        
         if (indexPath.row==0) {
             
         }
-        
-        
     }else if (indexPath.section==1){
         
     }
 }
 
-/*** 设置导航栏信息*/
+
 -(void) setUpNavigationBar
 {
-    
     self.navigationItem.title=@"系统设置";
-    
-    
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    
     backButton.frame=CGRectMake(30, 12, 20, 20);
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 }
-
-
-
 -(void) back
 {
     [self.navigationController popViewControllerAnimated:YES];

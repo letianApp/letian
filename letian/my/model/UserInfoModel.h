@@ -11,19 +11,11 @@
 @interface UserInfoModel : NSObject
 
 @property(nonatomic,copy)NSString *Email;
-
 @property(nonatomic,assign)NSInteger EnumSexType;
-
 @property(nonatomic,copy)NSString *HeadImg;//头像
-
 @property(nonatomic,copy)NSString *MobilePhone;
-
 @property(nonatomic,copy)NSString *NickName;
-
 @property(nonatomic,copy)NSString *SexString;//性别
-
 @property(nonatomic,assign)NSInteger UserID;
-
-
 
 @end

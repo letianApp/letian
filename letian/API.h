@@ -12,7 +12,8 @@
 //域名
 #define API_HTTP_PREFIX            @"http://121.41.11.23:8080/api/"
 
-
+//图片域名
+#define API_HTTP_IMAGEPREFIX            @"http://121.41.11.23:8090/api/"
 
 
 
@@ -36,6 +37,16 @@
 
 
 //============接口名称============
+
+//上传头像
+#define API_NAME_UPLOADPHOTO       @"UploadPhoto"
+
+
+//修改昵称
+#define API_NAME_CHANGENICKNAME    @"ModifyNickName"
+
+//修改性别
+#define API_NAME_CHANGESEX         @"ModifyUserSex"
 
 //用户注册
 #define API_NAME_REGISTER       @"Register"

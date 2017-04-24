@@ -10,8 +10,6 @@
 
 @interface OrderCell : UITableViewCell
 
-
 +(instancetype) cellWithTableView:(UITableView *)tableView;
-
 
 @end

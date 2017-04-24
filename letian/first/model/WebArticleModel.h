@@ -11,22 +11,12 @@
 @interface WebArticleModel : NSObject
 
 @property(nonatomic,copy)NSString *Abstract;//
-
 @property(nonatomic,copy)NSString *Content;//
-
 @property(nonatomic,copy)NSString *CreatedBy;//
-
 @property(nonatomic,copy)NSString *OriginalUrl;//
-
 @property(nonatomic,copy)NSString *PostDate;//
-
 @property(nonatomic,copy)NSString *Title;//
-
-
-
 @property(nonatomic,assign)NSInteger ID;//
-
 @property(nonatomic,assign)NSInteger ReadNum;//
-
 
 @end

@@ -78,6 +78,11 @@
 			<key>orderHint</key>
 			<integer>10</integer>
 		</dict>
+		<key>SnailPopupController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
 		<key>YYCache.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -107,6 +112,16 @@
 			<true/>
 		</dict>
 		<key>0C1D89EAE68EF4D4ABEDB611EC44AAB0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0E9F81DE7A485AB79AE30AAD4C153D79</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>133C4618870C23D4553610ABC353E38F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -156,6 +171,16 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>378909DD109033230753054D3B0E7DCC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3B15DE1A6A7D1921E07BFB0D36C50A59</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3B9798321645D759E60D19060426546B</key>
 		<dict>
 			<key>primary</key>
@@ -176,7 +201,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>4EF3AF825CA0ECC2F0F70E72FFCC7A21</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>557D2A99DEE4B491F4EF4E8D242328DD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>589177A8598F08FF295CDD85D9F0D958</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -236,6 +271,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9A263EBF9B2A64ED4033F49B36709BB3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9C8C22335BAFBC66B1F3F5975793B053</key>
 		<dict>
 			<key>primary</key>
@@ -252,6 +292,11 @@
 			<true/>
 		</dict>
 		<key>A434F235B96DCAD5B4A6AD74C3FDDBFF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A72C7545C754E1CE4462E315243BBEEE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

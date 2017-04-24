@@ -149,14 +149,9 @@
                                               categories:nil];
     }
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-    
-    
-    
-    
     [JPUSHService setupWithOption:launchOptions appKey:JPUSH_APPKEY
                           channel:@"APPStore"
                  apsForProduction:false];
-    
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {

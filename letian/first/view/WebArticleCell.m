@@ -18,9 +18,9 @@
     self.bgView.layer.borderWidth=1;
     self.bgView.layer.borderColor=[MAINCOLOR CGColor] ;
     self.bgView.alpha=0.5;
-    
     // Initialization code
 }
+
 
 +(instancetype) cellWithTableView:(UITableView *)tableView
 {
@@ -31,8 +31,6 @@
     cell.contentView.backgroundColor=[UIColor whiteColor];
     return cell;
 }
-
-
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {

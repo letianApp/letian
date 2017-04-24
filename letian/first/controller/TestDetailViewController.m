@@ -15,12 +15,12 @@
 
 @property (nonatomic,strong) WKWebView *webView;
 
-
 @end
 
 @implementation TestDetailViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self setUpNavigationBar];
@@ -29,35 +29,10 @@
    
 }
 
--(void) setUpNavigationBar
-{
-    
-    self.navigationItem.title=@"心理测试";
-    
-    
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    
-    backButton.frame=CGRectMake(30, 12, 20, 20);
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
-    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [shareButton setImage:[UIImage imageNamed:@"pinkshare"] forState:UIControlStateNormal];
-    [shareButton addTarget:self action:@selector(shareButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    
-    shareButton.frame=CGRectMake(30, 12, 20, 20);
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    
-    //设置navigationBar不透明
-    self.navigationController.navigationBar.translucent = NO;
-    
-}
+
+#pragma mark---------弹出分享面板
 
 -(void)shareButtonClick{
-    
-    
-    //        分享
     NSArray *titles = @[@"分享到朋友圈",@"分享到微信",@"分享到微博",@"分享到空间",@"分享到短信",@"分享到QQ"];
     NSArray *imageNames = @[@"pengyou",@"weixin",@"weibo",@"kongjian",@"mess",@"qq"];
     GQActionSheet *sheet = [[GQActionSheet alloc] initWithTitles:titles iconNames:imageNames];
@@ -77,118 +52,90 @@
         }else {
             platformType=4;
         }
-        
         [self shareWebPageToPlatformType:platformType];
-        
-    } cancelBlock:^{
-        NSLog(@"取消");
-    }];
-    
-    
-
-    
+    } cancelBlock:nil];
 }
 
+
+#pragma mark---------分享网页
 
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
 {
-    //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    //创建网页内容对象
     UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:[NSString stringWithFormat:@"心理测试：%@",self.testModel.title] descr:self.testModel.content thumImage:[UIImage imageNamed:@"乐天logo"]];
-    //设置网页地址
     shareObject.webpageUrl =self.testUrl;
-    //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
-    //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-        if (error) {
-            NSLog(@"************Share fail with error %@*********",error);
-        }else{
-            NSLog(@"response data is %@",data);
-        }
+        [MBHudSet showText:@"请分享失败" andOnView:self.view];
     }];
 }
 
 
--(void) back
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
+#pragma mark---------创建webView
 
 -(void)createWebView
 {
-    
     NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:self.testUrl]];
-    
     WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, -45, SCREEN_W, SCREEN_H+45 )];
-    
     webView.allowsBackForwardNavigationGestures=YES;
-    
     [webView loadRequest:request];
-    
     webView.navigationDelegate=self;
-    
     webView.UIDelegate = self;
-    
     webView.scrollView.showsVerticalScrollIndicator=NO;
-    
     webView.scrollView.bounces = NO;//禁止下拉
-    
     [self.view addSubview:webView];
-    
     webView.hidden=YES;
-    
     self.webView=webView;
-    
     [MBHudSet showStatusOnView:self.view];
-    
-    
 }
 
 
+#pragma mark---------嵌入JS代码
+
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    
     [webView evaluateJavaScript:@"document.getElementsByClassName('mediaList')[0].style.display = 'none'; " completionHandler:nil];
-    
     [webView evaluateJavaScript:@"document.getElementsById('nativeShare').style.display = 'none';" completionHandler:nil];
-    
     [webView evaluateJavaScript:@"document.getElementsByClassName('card')[0].style.display = 'none';" completionHandler:nil];
-    
     [webView evaluateJavaScript:@"document.getElementsByClassName('po_footer')[0].style.display = 'none';" completionHandler:nil];
-    
     [webView evaluateJavaScript:@"document.getElementsByClassName('mediaTitle')[0].style.display = 'none'; ;" completionHandler:nil];
-    
     [webView evaluateJavaScript:@"document.getElementsByClassName('recomend-payTest')[0].style.display = 'none';" completionHandler:nil];
-    
     [webView evaluateJavaScript:@"document.getElementsByClassName('test-jumpBtn')[0].style.display = 'none' ;" completionHandler:nil];
-    
     [webView evaluateJavaScript:@"document.getElementsByClassName('mediaList')[1].style.display = 'none';" completionHandler:nil];
-    
-    
     if (![self.webView.URL.absoluteString isEqualToString:self.testUrl]) {
         self.webView.hidden=YES;
         [webView evaluateJavaScript:@"document.getElementsByClassName('test-result')[0].getElementsByTagName('div')[1].style.display='none';" completionHandler:nil];
-        
         [webView evaluateJavaScript:@"var parent = document.getElementsByClassName('test-result')[0].getElementsByTagName('div')[2];var child = parent.lastChild ;parent.removeChild(child)" completionHandler:nil];
-        
-
     }
-
     [MBHudSet dismiss:self.view];
-    
-    [self performSelector:@selector(webViewHidden) withObject:nil afterDelay:0.3f];
-
-    
+    [self performSelector:@selector(webViewHidden) withObject:nil afterDelay:0.3f];    
 }
 
 
 -(void)webViewHidden{
     self.webView.hidden=NO;
-    
 }
 
+
+-(void) setUpNavigationBar
+{
+    self.navigationItem.title=@"心理测试";
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    backButton.frame=CGRectMake(30, 12, 20, 20);
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [shareButton setImage:[UIImage imageNamed:@"pinkshare"] forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(shareButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    shareButton.frame=CGRectMake(30, 12, 20, 20);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+    self.navigationController.navigationBar.translucent = NO;
+}
+-(void) back
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 - (void)didReceiveMemoryWarning {

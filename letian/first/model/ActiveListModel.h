@@ -16,12 +16,9 @@
 @property(nonatomic,copy)NSString *EndDate;//
 @property(nonatomic,copy)NSString *Name;//
 @property(nonatomic,copy)NSString *StartDate;//
-
 @property(nonatomic,assign)NSInteger ActiveTypeID;//
 @property(nonatomic,assign)NSInteger CreatedBy;//
 @property(nonatomic,assign)NSInteger ID;//
 @property(nonatomic,assign)NSInteger IsAbort;//
-
-
 
 @end
