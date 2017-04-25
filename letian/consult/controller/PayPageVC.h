@@ -10,4 +10,7 @@
 
 @interface PayPageVC : UIViewController
 
+@property (nonatomic) NSInteger orderID;
+
+
 @end

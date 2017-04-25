@@ -93,6 +93,10 @@
 //提交订单
 #define API_NAME_POSTORDER      @"DoConsultAppointment"
 
+//检查支付宝状态
+#define API_NAME_CHECKALIPAY    @"CheckAliParamsState"
+
+
 
 
 #endif /* API_h */

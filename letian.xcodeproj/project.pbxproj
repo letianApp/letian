@@ -26,6 +26,7 @@
 		090733951E655B0600F21E02 /* consultPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 090733931E655B0600F21E02 /* consultPageCell.m */; };
 		090733961E655B0600F21E02 /* consultPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 090733941E655B0600F21E02 /* consultPageCell.xib */; };
 		0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 090733991E65665A00F21E02 /* counselorInfoModel.m */; };
+		092F4ADE1EAF23B3004CCEE0 /* AliPayOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 092F4ADD1EAF23B3004CCEE0 /* AliPayOrderModel.m */; };
 		0935872E1E94BD6A0007B1D9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */; };
 		093587301E94BD9D0007B1D9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872F1E94BD9D0007B1D9 /* AVFoundation.framework */; };
 		093587321E94BDB30007B1D9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093587311E94BDB30007B1D9 /* MobileCoreServices.framework */; };
@@ -315,6 +316,8 @@
 		090733941E655B0600F21E02 /* consultPageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = consultPageCell.xib; sourceTree = "<group>"; };
 		090733981E65665A00F21E02 /* counselorInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = counselorInfoModel.h; sourceTree = "<group>"; };
 		090733991E65665A00F21E02 /* counselorInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = counselorInfoModel.m; sourceTree = "<group>"; };
+		092F4ADC1EAF23B3004CCEE0 /* AliPayOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliPayOrderModel.h; sourceTree = "<group>"; };
+		092F4ADD1EAF23B3004CCEE0 /* AliPayOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliPayOrderModel.m; sourceTree = "<group>"; };
 		0935872C1E94A1C10007B1D9 /* letian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = letian.entitlements; sourceTree = "<group>"; };
 		0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0935872F1E94BD9D0007B1D9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -826,6 +829,8 @@
 				090733991E65665A00F21E02 /* counselorInfoModel.m */,
 				0965FBB81E82155500C0FBAD /* OrderModel.h */,
 				0965FBB91E82155500C0FBAD /* OrderModel.m */,
+				092F4ADC1EAF23B3004CCEE0 /* AliPayOrderModel.h */,
+				092F4ADD1EAF23B3004CCEE0 /* AliPayOrderModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2163,6 +2168,7 @@
 				7787B3701EAEF2FE00306527 /* RSADataVerifier.m in Sources */,
 				0970CFEC1E517EB8007480CB /* FirstViewController.m in Sources */,
 				77B5BD1A1EAD9B460034497D /* UIView+Layout.m in Sources */,
+				092F4ADE1EAF23B3004CCEE0 /* AliPayOrderModel.m in Sources */,
 				096DE4591E82591C00C57DDF /* LRTextField.m in Sources */,
 				77B5BD181EAD9B460034497D /* UIImageView+YYExtension.m in Sources */,
 				77B5BD5A1EADA6A50034497D /* YYCycleScrollView.m in Sources */,
