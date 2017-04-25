@@ -63,6 +63,7 @@
 //忘记密码
 #define API_NAME_FORGETPW       @"ForgetPwd"
 
+//修改密码
 #define API_NAME_CHANGEPW       @"ModifyPassword"
 
 //获取用户信息
@@ -70,6 +71,12 @@
 
 //获取活动列表
 #define API_NAME_GETACTIVELIST  @"GetActiveList"
+
+//获取活动详情
+#define API_NAME_GETACTIVEINFO  @"GetActiveInfo"
+
+//活动更新推送
+#define API_NAME_SETPOSTACTIVE  @"SetPostActive"
 
 //获取网页文章列表
 #define API_NAME_GETWEBACTIVELIST  @"GetWebArticleList"

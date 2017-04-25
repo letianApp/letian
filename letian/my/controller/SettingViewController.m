@@ -127,24 +127,61 @@
         cell.textLabel.text=self.dataArray[indexPath.row];
         [cell.contentView addSubview:[GQControls createImageButtonWithFrame:CGRectMake(SCREEN_W-30, 17.5, 15, 15) withImageName:@"detail"]];
     }else if (indexPath.section==1){
-        cell.textLabel.text=@"文章更新推送";
+        cell.textLabel.text=@"活动更新推送";
         lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
+        UISwitch *switchView=[GQControls createSwitchWithFrame:CGRectMake(SCREEN_W-65, 10, 0, 0)];
+        [switchView addTarget:self action:@selector(changePostActiveState:) forControlEvents:UIControlEventValueChanged];
+        [cell.contentView addSubview:switchView];
     }
     return cell;
 }
 
+
+#pragma mark--------活动更新推送开关
+
+-(void)changePostActiveState:(UISwitch *)switchView
+{
+    //推送默认是打开的
+    switchView.selected=!switchView.selected;
+    BOOL state;
+    if (switchView.selected==1) {
+        state=NO;
+    }else{
+        state=YES;
+    }
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_USER];
+    [requestString appendString:API_NAME_SETPOSTACTIVE];
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    params[@"isPostActive"]=@(state);
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBHudSet dismiss:self.view];
+        NSLog(@"活动更新推送responseObject=%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+    }];    
+}
+
+
 #pragma mark--------cell点击事件
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
     if (indexPath.section==0) {
-        //修改密码
-        ChangePwCodeViewController *changePwCodeVc=[[ChangePwCodeViewController alloc]init];
-        [self.navigationController pushViewController:changePwCodeVc animated:YES];
         if (indexPath.row==0) {
+            //修改密码
+            ChangePwCodeViewController *changePwCodeVc=[[ChangePwCodeViewController alloc]init];
+            [self.navigationController pushViewController:changePwCodeVc animated:YES];
+        }else if (indexPath.row==1){
+            //清除缓存
             
         }
     }else if (indexPath.section==1){
-        
+        if (indexPath.row==0) {
+            //是否推送活动消息
+        }
     }
 }
 

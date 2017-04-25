@@ -11,8 +11,8 @@
 #import "HomeCell.h"
 #import "LoginViewController.h"
 #import "WebArticleViewController.h"
-#import "TestViewController.h"
-#import "ActivityViewController.h"
+#import "TestListViewController.h"
+#import "ActivityListViewController.h"
 #import "CustomCYLTabBar.h"
 #import "ConsultViewController.h"
 #import "AppDelegate.h"
@@ -186,12 +186,12 @@
         [self.navigationController pushViewController:articleVc animated:YES];
     //跳到测试
     }else if (tap.view.tag==102) {
-       TestViewController *testVc=[[TestViewController alloc]init];
+       TestListViewController *testVc=[[TestListViewController alloc]init];
         testVc.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:testVc animated:YES];
     //跳到活动
     }else if (tap.view.tag==103){
-        ActivityViewController *activityVc=[[ActivityViewController alloc]init];
+        ActivityListViewController *activityVc=[[ActivityListViewController alloc]init];
         activityVc.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:activityVc animated:YES];
     }

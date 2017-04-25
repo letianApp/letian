@@ -51,6 +51,11 @@
     return button;
 }
 
-
+//创建开关
++(UISwitch *)createSwitchWithFrame:(CGRect)frame{
+    UISwitch *switchView = [[UISwitch alloc]initWithFrame:frame];
+    switchView.on = YES;//设置初始为ON的一边
+    return switchView;
+}
 
 @end
