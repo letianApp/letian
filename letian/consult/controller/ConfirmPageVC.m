@@ -20,7 +20,7 @@
 #import "OrderPageVC.h"
 #import "PayPageVC.h"
 
-@interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate>
+@interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) OrderModel             *orderModel;
 @property (nonatomic, strong) UITableView            *mainTableView;
@@ -37,6 +37,9 @@
 @property (nonatomic, strong) UILabel                *dateDisplayLab;
 
 @property (nonatomic, strong) UIDatePicker           *timePicker;
+@property (nonatomic, strong) UIPickerView           *chooseHoursView;
+@property (nonatomic, strong) NSArray                *hoursData;
+@property (nonatomic, strong) NSString               *hourStr;
 
 @property (nonatomic, strong) UIButton               *startBtn;
 @property (nonatomic, strong) UIButton               *endBtn;
@@ -304,7 +307,6 @@
 #pragma mark 点击日历方法
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition {
     
-    
     //改变图标
     calendar.appearance.todayColor      = [UIColor whiteColor];
     calendar.appearance.titleTodayColor = MAINCOLOR;
@@ -362,7 +364,13 @@
         
     } else if (btn == _endBtn) {
         
-        //        [self setupDateView:DateTypeOfEnd];
+        if ([_startBtn.titleLabel.text isEqual: @"预约时间"]) {
+            [MBHudSet showText:@"请确认预约时间" andOnView:self.view];
+        } else {
+            [self.sl_popupController presentContentView:[self setupChooseHoursView]];
+
+        }
+        
     }
     [self reflashInfo];
 }
@@ -420,6 +428,62 @@
     }
 }
 
+- (UIView *)setupChooseHoursView {
+    
+    _hoursData                  = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8"];
+    _hourStr                    = @"1";
+    UIView *backView            = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
+
+    _chooseHoursView            = [[UIPickerView alloc]initWithFrame:CGRectMake(SCREEN_W*0.3, 0, SCREEN_W*0.4, backView.height*0.7)];
+    [backView addSubview:_chooseHoursView];
+    _chooseHoursView.dataSource = self;
+    _chooseHoursView.delegate   = self;
+
+    UIButton *btn               = [GQControls createButtonWithFrame:CGRectMake(SCREEN_W/4, _chooseHoursView.bottom+10, SCREEN_W/2, 30) andTitle:@"确定" andTitleColor:MAINCOLOR andFontSize:15 andTag:234 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    [backView addSubview:btn];
+    [btn addTarget:self action:@selector(clickAffirmHoursBtn:) forControlEvents:UIControlEventTouchUpInside];
+
+    return backView;
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 2;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if (component == 0) {
+        return _hoursData.count;
+    }
+    return 1;
+}
+
+- (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    if (component == 0) {
+        return _hoursData[row];
+    }
+    return @"小时";
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    _hourStr = _hoursData[row];
+}
+
+- (void)clickAffirmHoursBtn:(UIButton *)btn {
+    
+    [self animationbegin:btn];
+    [_endBtn setTitle:[NSString stringWithFormat:@"%@ 小时",_hourStr] forState:UIControlStateNormal];
+    
+    NSRange rag = {0,2};
+    NSInteger startTime = [[_orderModel.orderDateTimeStart substringWithRange:rag] integerValue];
+    NSInteger endTime = startTime + [_hourStr integerValue];
+    NSString *endStr = [_orderModel.orderDateTimeStart stringByReplacingCharactersInRange:rag withString:[NSString stringWithFormat:@"%ld",endTime]];
+    _orderModel.orderDateTimeEnd = endStr;
+    NSLog(@"%@",endStr);
+
+    [self reflashInfo];
+    [self.sl_popupController dismiss];
+}
 
 #pragma mark 输入个人信息cell
 - (void)inputInfoWithBackView:(UIView *)bgView {
@@ -443,22 +507,12 @@
     _sexTextField.placeholder              = @"性别";
     _sexTextField.placeholderActiveColor   = MAINCOLOR;
     _sexTextField.hintText                 = @"请输入 \"男\" \"女\" 或\"其他\"";
-    __weak typeof(self) weakSelf   = self;
     [_sexTextField setValidationBlock:^NSDictionary *(LRTextField *textField, NSString *text) {
         [NSThread sleepForTimeInterval:1.0];
-        __strong typeof(self) strongself = weakSelf;
         
-        if ([text isEqualToString:@"男"]) {
-            strongself.orderModel.orderInfoSex = Male;
-            return @{ VALIDATION_INDICATOR_COLOR : MAINCOLOR };
-        } else if ([textField.text isEqualToString:@"女"]) {
-            strongself.orderModel.orderInfoSex = Female;
-            return @{ VALIDATION_INDICATOR_COLOR : MAINCOLOR };
-        } else if ([textField.text isEqualToString:@"其他"]) {
-            strongself.orderModel.orderInfoSex = Other;
+        if ([text isEqualToString:@"男"] || [textField.text isEqualToString:@"女"] || [textField.text isEqualToString:@"其他"]) {
             return @{ VALIDATION_INDICATOR_COLOR : MAINCOLOR };
         }
-        strongself.orderModel.orderInfoSex = Error;
         return @{ VALIDATION_INDICATOR_NO : @"请输入 \"男\" \"女\" 或\"其他\"" };
     }];
     
@@ -494,6 +548,15 @@
     _orderModel.orderInfoAge   = [_ageTextField.text integerValue];
     _orderModel.orderInfoPhone = _phoneTextField.text;
     _orderModel.orderInfoEmail = _emailTextField.text;
+    if ([_sexTextField.text isEqualToString:@"男"]) {
+        _orderModel.orderInfoSex = Male;
+    } else if ([_sexTextField.text isEqualToString:@"女"]) {
+        _orderModel.orderInfoSex = Female;
+    } else if ([_sexTextField.text isEqualToString:@"其他"]) {
+        _orderModel.orderInfoSex = Other;
+    } else {
+        _orderModel.orderInfoSex = Error;
+    }
     
     [self reflashInfo];
     
@@ -559,10 +622,10 @@
 - (void)reflashInfo {
     
     if (NULLString(_orderModel.orderDateTimeStart) ||  NULLString(_orderModel.orderDateTimeEnd) || NULLString(_nameTextField.text) ||  NULLString(_sexTextField.text) || (_orderModel.orderInfoSex == Error)  ||  NULLString(_ageTextField.text) || NULLString(_phoneTextField.text)) {
-        _confirmBtn.backgroundColor = [UIColor lightGrayColor];
+        self.confirmBtn.backgroundColor = [UIColor lightGrayColor];
         
     } else {
-        _confirmBtn.backgroundColor = MAINCOLOR;
+        self.confirmBtn.backgroundColor = MAINCOLOR;
         
     }
     
@@ -587,19 +650,20 @@
     NSMutableDictionary *params    = [[NSMutableDictionary alloc]init];
     params[@"ConsultUserID"]       = @6;
     params[@"AppointmentDate"]     = _orderModel.orderDate;
-    params[@"StartTime"]           = @"14:00";
-    params[@"EndTime"]             = @"17:00";
-    params[@"EnumConsultType"]     = @(1);
+    params[@"StartTime"]           = _orderModel.orderDateTimeStart;
+    params[@"EndTime"]             = _orderModel.orderDateTimeEnd;
+    params[@"EnumConsultType"]     = @(_orderModel.consultType);
     params[@"TotalFee"]            = @20.0;
-    params[@"ConSultName"]         = @"111";
-    params[@"EnumSexType"]         = @(1);
-    params[@"ConsultAge"]          = @(18);
-    params[@"ConsultPhone"]        = @"11111";
-    params[@"ConsultEmail"]        = @"222";
+    params[@"ConSultName"]         = _orderModel.conserlorName;
+    params[@"EnumSexType"]         = @(_orderModel.orderInfoSex);
+    params[@"ConsultAge"]          = @(_orderModel.orderInfoAge);
+    params[@"ConsultPhone"]        = _orderModel.orderInfoPhone;
+    if (_emailTextField.text) {
+        params[@"ConsultEmail"]        = _orderModel.orderInfoEmail;
+    }
     
     [PPNetworkHelper setValue:@"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOjQsImxvZ2lubmFtZSI6IjE4OTc3MzQzODQzIiwicmVhbG5hbWUiOm51bGwsImV4cGlyZXRpbWUiOjE0OTI3NDE0ODV9.GczqZEMSZTDEXHK2AHhhkDeUGm5f0o2rmVu9h79JsfE" forHTTPHeaderField:@"token"];
     NSLog(@"Params=%@",params);
-    
     
     [PPNetworkHelper POST:requestString parameters:params success:^(id responseObject) {
         
@@ -634,18 +698,7 @@
         [MBHudSet showText:[NSString stringWithFormat:@"创建订单失败，错误代码：%ld",error.code]andOnView:strongself.view];
         
     }];
-    
-    
-    
-    
-    //        PayPageVC *payPage = [[PayPageVC alloc]init];
-    //        [self.navigationController pushViewController:payPage animated:YES];
-    //    }
-    
-    //    OrderPageVC *ovc = [[OrderPageVC alloc]init];
-    //    ovc.orderModel = self.orderModel;
-    //    [self.navigationController pushViewController:ovc animated:YES];
-    
+   
 }
 
 - (void)dismissKeyboard {

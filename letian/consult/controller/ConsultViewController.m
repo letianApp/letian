@@ -13,12 +13,16 @@
 #import "CYUserManager.h"
 #import "LoginViewController.h"
 
+#import "MJExtension.h"
+
 #import "ChatListViewController.h"
 
 
 @interface ConsultViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, copy ) NSMutableArray *mainDataSource;
+@property (nonatomic,strong) NSMutableArray <counselorInfoModel *> *counselorArr;
+
 
 @property (nonatomic, copy  ) NSArray      *mainClassifiedDataSource;
 @property (nonatomic, copy  ) NSArray      *counselorStatusDataSource;
@@ -48,6 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _counselorArr = [NSMutableArray new];
     
     [self getCounsultDataSource];
     
@@ -113,27 +118,21 @@
     __weak typeof(self) weakSelf   = self;
 
     NSMutableDictionary *params    = [[NSMutableDictionary alloc]init];
-//    params[@"searchName"] = @"aaa";
     params[@"enumPsyCategory"]     = @0;
     params[@"enumUserTitle"]       = @0;
-//    params[@"minFee"] = @(122);
-//    params[@"maxFee"] = @(233);
-//    params[@"pageIndex"] = @(1);
-//    params[@"pageSize"] = @(10);
-    
+
     [PPNetworkHelper GET:requestString parameters:params success:^(id responseObject) {
         
-        // 将 JSON (NSData,NSString,NSDictionary) 转换为 Model:
-//        counselorInfoModel *user = [counselorInfoModel yy_modelWithJSON:responseObject];
-//        NSDictionary *dataDict = [user valueForKey:@"data"];
-        
         __strong typeof(self) strongself = weakSelf;
+        NSLog(@"%@",responseObject);
+        
+        strongself.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         
         strongself.mainDataSource = responseObject[@"Result"][@"Source"];
-        for (NSDictionary *consultDic in strongself.mainDataSource) {
+        for (counselorInfoModel *consultDic in strongself.counselorArr) {
             
-            NSLog(@"%@",consultDic);
-            counselorInfoModel *consultModel = [[counselorInfoModel alloc]init];
+            NSLog(@"%@",consultDic.UserName);
+//            counselorInfoModel *consultModel = [[counselorInfoModel alloc]init];
 
         }
         
