@@ -96,7 +96,13 @@
 //检查支付宝状态
 #define API_NAME_CHECKALIPAY    @"CheckAliParamsState"
 
+//获取订单列表
+#define API_NAME_GETORDERLIST   @"GetMyConsultList"
 
+//获取订单详情
+#define API_NAME_GETORDERINFO   @"GetConsultOrderInfo"
 
+//取消订单
+#define API_NAME_DOCANCELORDER  @"DoCancelConsultOrder"
 
 #endif /* API_h */

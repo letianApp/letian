@@ -183,7 +183,7 @@
     return 50;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 100;
+    return 110;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
@@ -201,20 +201,20 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *orderView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 100)];
     //全部订单
-    UILabel *label=[GQControls createLabelWithFrame:CGRectMake(10, 0, 100, 30) andText:@"全部订单" andTextColor:[UIColor darkGrayColor] andFontSize:14];
+    UILabel *label=[GQControls createLabelWithFrame:CGRectMake(10, 0, 100, 40) andText:@"全部订单" andTextColor:[UIColor darkGrayColor] andFontSize:14];
     [orderView addSubview:label];
-    UILabel *allOrderLabel=[GQControls createLabelWithFrame:CGRectMake(SCREEN_W-160, 0, 150, 30) andText:@"查看全部订单 >>" andTextColor:[UIColor darkGrayColor] andFontSize:12];
+    UILabel *allOrderLabel=[GQControls createLabelWithFrame:CGRectMake(SCREEN_W-160, 0, 150, 40) andText:@"查看全部订单 >>" andTextColor:[UIColor darkGrayColor] andFontSize:12];
     allOrderLabel.textAlignment=NSTextAlignmentRight;
     [orderView addSubview:allOrderLabel];
-    //添加手势
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(orderSrateButtonClick:)];
+    //添加手势：查看全部订单
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(allOrderLabelTouched)];
     [allOrderLabel addGestureRecognizer:tap];
     allOrderLabel.userInteractionEnabled=YES;
     //分割线
-    UIView *lineView1=[[UIView alloc]initWithFrame:CGRectMake(0, 31, SCREEN_W, 0.5)];
+    UIView *lineView1=[[UIView alloc]initWithFrame:CGRectMake(0, 41, SCREEN_W, 0.5)];
     lineView1.backgroundColor=[UIColor lightGrayColor];
     [orderView addSubview:lineView1];
-    UIView *lineView2=[[UIView alloc]initWithFrame:CGRectMake(0, 99, SCREEN_W, 0.5)];
+    UIView *lineView2=[[UIView alloc]initWithFrame:CGRectMake(0, 109, SCREEN_W, 0.5)];
     lineView2.backgroundColor=[UIColor lightGrayColor];
     [orderView addSubview:lineView2];
     //左边隔 30        按钮  40       中间  (screen-60-40*3)/2
@@ -222,12 +222,13 @@
     NSArray *orderSrateArray=@[@"我的预约",@"待支付",@"已完成"];
     for (NSInteger i=0; i<3; i++) {
        //订单分类按钮
-        UIButton *orderButton=[[UIButton alloc]initWithFrame:CGRectMake(30+((SCREEN_W-60-40*3)/2+40)*i, 38, 40, 40)];
+        UIButton *orderButton=[[UIButton alloc]initWithFrame:CGRectMake(30+((SCREEN_W-60-40*3)/2+40)*i, 48, 40, 40)];
         [orderButton setImage:[UIImage imageNamed:imageNameArray[i]] forState:UIControlStateNormal];
         [orderButton addTarget:self action:@selector(orderSrateButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        orderButton.tag=100+i;
         [orderView addSubview:orderButton];
         //订单分类label
-        UILabel *orderLabel=[GQControls createLabelWithFrame:CGRectMake(20+((SCREEN_W-40-60*3)/2+60)*i, 82, 60, 10) andText:orderSrateArray[i] andTextColor:[UIColor darkGrayColor] andFontSize:11];
+        UILabel *orderLabel=[GQControls createLabelWithFrame:CGRectMake(20+((SCREEN_W-40-60*3)/2+60)*i, 92, 60, 10) andText:orderSrateArray[i] andTextColor:[UIColor darkGrayColor] andFontSize:11];
         orderLabel.textAlignment=NSTextAlignmentCenter;
         [orderView addSubview:orderLabel];
     }
@@ -240,9 +241,22 @@
     NSLog(@"进入订单列表");
     OrderViewController *orderVc=[[OrderViewController alloc]init];
     orderVc.hidesBottomBarWhenPushed=YES;
+    if (btn.tag==100) {
+        orderVc.state=1;
+    }else if (btn.tag==101){
+        orderVc.state=5;
+    }else if (btn.tag==102){
+        orderVc.state=10;
+    }
     [self.navigationController pushViewController:orderVc animated:NO];
 }
-
+//查看所有订单
+-(void)allOrderLabelTouched{
+    OrderViewController *orderVc=[[OrderViewController alloc]init];
+    orderVc.hidesBottomBarWhenPushed=YES;
+    orderVc.state=5;
+    [self.navigationController pushViewController:orderVc animated:NO];
+}
 
 #pragma mark--------cell点击事件
 

@@ -215,6 +215,7 @@
 		7787B36F1EAEF2FE00306527 /* RSADataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B3671EAEF2FE00306527 /* RSADataSigner.m */; };
 		7787B3701EAEF2FE00306527 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B3691EAEF2FE00306527 /* RSADataVerifier.m */; };
 		7787B3711EAEF34000306527 /* AlipaySDK.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105D01E9A34FE00AC8E4F /* AlipaySDK.bundle */; };
+		7787B3741EB0746500306527 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B3731EB0746500306527 /* OrderListModel.m */; };
 		77A17B7A1E7F9A2900569558 /* WebArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A17B791E7F9A2900569558 /* WebArticleViewController.m */; };
 		77A17B831E7FA20B00569558 /* ActivityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A17B821E7FA20B00569558 /* ActivityListViewController.m */; };
 		77B5BD121EAD9B460034497D /* CALayer+Transition.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5BCFF1EAD9B460034497D /* CALayer+Transition.m */; };
@@ -626,6 +627,8 @@
 		7787B3671EAEF2FE00306527 /* RSADataSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataSigner.m; sourceTree = "<group>"; };
 		7787B3681EAEF2FE00306527 /* RSADataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataVerifier.h; sourceTree = "<group>"; };
 		7787B3691EAEF2FE00306527 /* RSADataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataVerifier.m; sourceTree = "<group>"; };
+		7787B3721EB0746500306527 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
+		7787B3731EB0746500306527 /* OrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListModel.m; sourceTree = "<group>"; };
 		77A17B781E7F9A2900569558 /* WebArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebArticleViewController.h; sourceTree = "<group>"; };
 		77A17B791E7F9A2900569558 /* WebArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebArticleViewController.m; sourceTree = "<group>"; };
 		77A17B811E7FA20B00569558 /* ActivityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityListViewController.h; sourceTree = "<group>"; };
@@ -1185,6 +1188,8 @@
 			children = (
 				770FFC661E960548009B81FC /* UserInfoModel.h */,
 				770FFC671E960548009B81FC /* UserInfoModel.m */,
+				7787B3721EB0746500306527 /* OrderListModel.h */,
+				7787B3731EB0746500306527 /* OrderListModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2126,6 +2131,7 @@
 				77B5BD6C1EADA91D0034497D /* BDImagePicker.m in Sources */,
 				774DBC0C1E6420FC00B8798C /* HomeCell.m in Sources */,
 				77B5BD541EADA6A50034497D /* GQControls.m in Sources */,
+				7787B3741EB0746500306527 /* OrderListModel.m in Sources */,
 				77B5BD161EAD9B460034497D /* UIColor+YYExtension.m in Sources */,
 				7787B36C1EAEF2FE00306527 /* base64.m in Sources */,
 				094FC50C1E8CBF0D00BFFBBB /* PayPageVC.m in Sources */,

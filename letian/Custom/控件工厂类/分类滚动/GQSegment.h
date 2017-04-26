@@ -31,4 +31,6 @@
 
 -(void)moveToOffsetX:(CGFloat)X;
 
+-(void)buttonClick:(id)sender;
+
 @end

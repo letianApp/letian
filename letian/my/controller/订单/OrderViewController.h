@@ -10,4 +10,6 @@
 
 @interface OrderViewController : UIViewController
 
+@property(nonatomic,assign)NSInteger state;//订单状态
+
 @end
