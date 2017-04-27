@@ -11,7 +11,7 @@
 #import "FSCalendar.h"
 
 
-@interface CustomDateViewController ()
+@interface CustomDateViewController () <FSCalendarDelegate, FSCalendarDataSource>
 
 @property (nonatomic, weak  ) FSCalendar             *calendar;
 @property (nonatomic, strong) NSDateFormatter        *dateFormatter;
@@ -27,7 +27,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
+    
     [self customNavigation];
+    [self setupCalendarWithBGView:self.view];
     
     
 }
@@ -50,7 +54,46 @@
     return item;
 }
 
+#pragma mark 日历
+- (void)setupCalendarWithBGView:(UIView *)view {
+    
+    FSCalendar *calendar                 = [[FSCalendar alloc] initWithFrame:CGRectMake(10, statusBar_H+navigationBar_H+ 10, SCREEN_W-20, SCREEN_H*0.45)];
+    [view addSubview:calendar];
+    
+    calendar.dataSource                  = self;
+    calendar.delegate                    = self;
+    calendar.backgroundColor             = [UIColor whiteColor];
+    calendar.appearance.headerTitleColor = MAINCOLOR;
+    calendar.appearance.weekdayTextColor = MAINCOLOR;
+    calendar.appearance.todayColor       = MAINCOLOR;
+    calendar.appearance.selectionColor   = MAINCOLOR;
+    
+    self.calendar                        = calendar;
+    
+    self.gregorianCalendar               = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    self.dateFormatter                   = [[NSDateFormatter alloc] init];
+    self.dateFormatter.timeZone          = [NSTimeZone systemTimeZone];
+    self.dateFormatter.dateFormat        = @"yyyy-MM-dd";//时间格式用来判断日期
+}
 
+- (NSString *)calendar:(FSCalendar *)calendar titleForDate:(NSDate *)date {
+    if ([self.gregorianCalendar isDateInToday:date]) {
+        
+//        NSString *todayStr = [self.dateFormatter stringFromDate:date];
+        //        NSLog(@"%@",_orderModel.orderDate);
+        return @"今";
+    }
+    return nil;
+}
+
+#pragma mark 点击日历方法
+- (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition {
+    
+    //改变图标
+    calendar.appearance.todayColor      = [UIColor whiteColor];
+    calendar.appearance.titleTodayColor = MAINCOLOR;
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
