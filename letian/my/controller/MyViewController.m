@@ -12,6 +12,7 @@
 #import "OrderViewController.h"
 #import "AboutUsPageVC.h"
 #import "SettingViewController.h"
+#import "CustomDateViewController.h"
 #import "UserInfoModel.h"
 #import "MJExtension.h"
 #import "CYUserManager.h"
@@ -48,7 +49,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dataArray=@[@"系统设置",@"客服电话    021-37702979",@"我要分享",@"关于我们"];
+//    if (//) {
+//        self.dataArray=@[@"系统设置",@"客服电话    021-37702979",@"我要分享",@"关于我们"];
+
+//    } else {
+        self.dataArray=@[@"系统设置",@"设置可预约日期",@"我要分享",@"关于我们"];
+
+//    }
+    
     
     [self createTableView];
 }
@@ -270,10 +278,15 @@
         [self.navigationController pushViewController:settingVc animated:YES];
     }else if(indexPath.row==1) {
         //拨打客服电话，打完之后不会留在通讯录而是回到应用
-        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"021-37702979"];
-        UIWebView * callWebview = [[UIWebView alloc] init];
-        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-        [self.view addSubview:callWebview];
+//        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"021-37702979"];
+//        UIWebView * callWebview = [[UIWebView alloc] init];
+//        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+//        [self.view addSubview:callWebview];
+        
+        CustomDateViewController *customDateVc = [[CustomDateViewController alloc]init];
+        customDateVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:customDateVc animated:YES];
+        
     }else if(indexPath.row==2) {
         //分享
         NSArray *titles = @[@"分享到朋友圈",@"分享到微信",@"分享到微博",@"分享到空间",@"分享到短信",@"分享到QQ"];

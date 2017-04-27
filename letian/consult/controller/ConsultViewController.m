@@ -14,19 +14,28 @@
 #import "LoginViewController.h"
 
 #import "MJExtension.h"
+#import "SnailPopupController.h"
+#import "MJRefresh.h"
+
 
 #import "ChatListViewController.h"
 
 
-@interface ConsultViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface ConsultViewController ()<UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
-@property (nonatomic, copy ) NSMutableArray *mainDataSource;
-@property (nonatomic,strong) NSMutableArray <counselorInfoModel *> *counselorArr;
+@property (nonatomic, copy  ) NSMutableArray *mainDataSource;
+@property (nonatomic, strong) NSMutableArray <counselorInfoModel *> *counselorArr;
 
 
 @property (nonatomic, copy  ) NSArray      *mainClassifiedDataSource;
 @property (nonatomic, copy  ) NSArray      *counselorStatusDataSource;
 @property (nonatomic, copy  ) NSArray      *priceDataSource;
+
+@property (nonatomic, strong) NSMutableArray      *priceData;
+@property (nonatomic, copy  ) NSString     *minPriceStr;
+@property (nonatomic, copy  ) NSString     *maxPriceStr;
+@property (nonatomic) BOOL isMinPrice;
+@property (nonatomic, strong) UIPickerView *choosePriceView;
 
 @property (nonatomic, strong) UISearchBar  *searchBar;
 @property (nonatomic, strong) UIScrollView *classifiedSectionFirstLine;
@@ -53,6 +62,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _counselorArr = [NSMutableArray new];
+    
     
     [self getCounsultDataSource];
     
@@ -136,12 +146,14 @@
 
         }
         
+        [strongself.counselorInfoTableview.mj_header endRefreshing];
 //        NSLog(@"%@",sourceArr);
 
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongself = weakSelf;
-
+        
+        [strongself.counselorInfoTableview.mj_header endRefreshing];
         [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师列表错误，错误代码：%ld",error.code]andOnView:strongself.view];
 
     }];
@@ -199,6 +211,27 @@
 
 }
 
+#pragma mark 定制价格界面
+- (void)customPriceSection {
+    
+    UIScrollView *scroview      = [self.view viewWithTag:52];
+    
+    UIButton *minPriceBtn       = [self.view viewWithTag:202];
+    minPriceBtn.backgroundColor = [UIColor whiteColor];
+    [minPriceBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    minPriceBtn.frame           = CGRectMake(SCREEN_W/4+10, 8, SCREEN_W/4, navigationBar_H-16);
+    
+    UILabel *line               = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/2+20, navigationBar_H/2, 20, 2)];
+    [scroview addSubview:line];
+    line.backgroundColor        = MAINCOLOR;
+    
+    UIButton *maxPriceBtn       = [self.view viewWithTag:203];
+    maxPriceBtn.backgroundColor = [UIColor whiteColor];
+    [maxPriceBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    maxPriceBtn.frame           = CGRectMake(SCREEN_W/2+50, 8, SCREEN_W/4, navigationBar_H-16);
+    
+}
+
 //首按钮初始点击状态
 - (void)beginningButtonSelectedWithTag:(int)tagg {
     
@@ -209,50 +242,163 @@
 
 //点击按钮方法
 - (void)clickBtn:(UIButton *)btn {
-
+    
     [self animationbegin:btn];
     if (btn.tag < 100) {
-    for (int i           = 1; i < _mainClassifiedDataSource.count+1; i++) {
-    UIButton *btnn       = [self.view viewWithTag:i];
-    btnn.selected        = NO;
-    btnn.backgroundColor = [UIColor whiteColor];
+        for (int i = 1; i < _mainClassifiedDataSource.count+1; i++) {
+            UIButton *otherBtn       = [self.view viewWithTag:i];
+            otherBtn.selected        = NO;
+            otherBtn.backgroundColor = [UIColor whiteColor];
         }
-    }
-    else if (btn.tag < 200) {
-    for (int i           = 1; i < _counselorStatusDataSource.count+1; i++) {
-    UIButton *btnn       = [self.view viewWithTag:i+100];
-    btnn.selected        = NO;
-    btnn.backgroundColor = [UIColor whiteColor];
-        }
-    }
+        btn.selected         = YES;
+        btn.backgroundColor  = MAINCOLOR;
 
-    btn.selected         = YES;
-    btn.backgroundColor  = MAINCOLOR;
+    } else if (btn.tag < 200) {
+        for (int i = 1; i < _counselorStatusDataSource.count+1; i++) {
+            UIButton *otherBtn       = [self.view viewWithTag:i+100];
+            otherBtn.selected        = NO;
+            otherBtn.backgroundColor = [UIColor whiteColor];
+        }
+        btn.selected         = YES;
+        btn.backgroundColor  = MAINCOLOR;
+
+    } else {
+        
+        self.sl_popupController                          = [[SnailPopupController alloc] init];
+        self.sl_popupController.layoutType               = PopupLayoutTypeCenter;
+        self.sl_popupController.maskType                 = PopupMaskTypeWhiteBlur;
+        self.sl_popupController.transitStyle             = PopupTransitStyleSlightScale;
+        self.sl_popupController.dismissOppositeDirection = YES;
+        
+        UIButton *allPriceBtn    = [self.view viewWithTag:201];
+        UIButton *minPriceBtn    = [self.view viewWithTag:202];
+        UIButton *maxPriceBtn    = [self.view viewWithTag:203];
+
+        if (btn == allPriceBtn) {
+            
+            [minPriceBtn setTitle:@"最低价" forState:UIControlStateNormal];
+            [minPriceBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+
+            [maxPriceBtn setTitle:@"最高价" forState:UIControlStateNormal];
+            [maxPriceBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+
+            allPriceBtn.selected         = YES;
+            allPriceBtn.backgroundColor  = MAINCOLOR;
+            
+        } else if (btn == minPriceBtn) {
+            
+            _isMinPrice = YES;
+            [self.sl_popupController presentContentView:[self setupChoosePriceViewForBtn:btn]];
+            
+        } else {
+            
+            if ([minPriceBtn.titleLabel.text isEqualToString:@"最低价"]) {
+                [MBHudSet showText:@"请确认最低价" andOnView:self.view];
+            } else {
+                _isMinPrice = NO;
+                [self.sl_popupController presentContentView:[self setupChoosePriceViewForBtn:btn]];
+            }
+        }
+    }
 }
 
-//定制价格栏
-- (void)customPriceSection {
+#pragma mark 选择价格界面
+- (UIView *)setupChoosePriceViewForBtn:(UIButton *)btn {
     
-    UIScrollView *scroview      = [self.view viewWithTag:52];
+    if (_isMinPrice == YES) {
+        _priceData = [[NSMutableArray alloc]initWithArray:@[@"300",@"400",@"500",@"600",@"700",@"800",@"900",@"1000",@"1100"]];
+        _minPriceStr = _priceData[0];
 
-    UIButton *minPriceBtn       = [self.view viewWithTag:202];
-    minPriceBtn.backgroundColor = [UIColor whiteColor];
-    minPriceBtn.selected        = NO;
-    [minPriceBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [minPriceBtn removeTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
-    minPriceBtn.frame           = CGRectMake(SCREEN_W/4+10, 8, SCREEN_W/4, navigationBar_H-16);
+    } else {
+        
+        if (_minPriceStr == _priceData[_priceData.count-1]) {
+            
+            _priceData = [[NSMutableArray alloc]initWithObjects:_minPriceStr, nil];
+            _maxPriceStr = _priceData[0];
+            
+        } else {
+            int index = 0;
+            for (int i = 0; i < _priceData.count; i++) {
+                if (_priceData[i] == _minPriceStr) {
+                    index = i;
+                    NSRange range = {0,index+1};
+                    [_priceData removeObjectsInRange:range];
+                    break;
+                }
+            }
+            _maxPriceStr = _priceData[0];
 
-    UILabel *line               = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/2+20, navigationBar_H/2, 20, 2)];
-    [scroview addSubview:line];
-    line.backgroundColor        = MAINCOLOR;
+        }
+    }
+    
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
+    
+    _choosePriceView = [[UIPickerView alloc]initWithFrame:CGRectMake(SCREEN_W*0.3, 0, SCREEN_W*0.4, backView.height*0.7)];
+    [backView addSubview:_choosePriceView];
+    _choosePriceView.dataSource = self;
+    _choosePriceView.delegate   = self;
+    
+    UIButton *affirmBtn = [GQControls createButtonWithFrame:CGRectMake(SCREEN_W/4, _choosePriceView.bottom+10, SCREEN_W/2, 30) andTitle:@"确定" andTitleColor:MAINCOLOR andFontSize:15 andTag:234 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    [backView addSubview:affirmBtn];
+    [affirmBtn addTarget:self action:@selector(clickAffirmBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    return backView;
+}
 
-    UIButton *maxPriceBtn       = [self.view viewWithTag:203];
-    maxPriceBtn.backgroundColor = [UIColor whiteColor];
-    maxPriceBtn.selected        = NO;
-    [maxPriceBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [maxPriceBtn removeTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
-    maxPriceBtn.frame           = CGRectMake(SCREEN_W/2+50, 8, SCREEN_W/4, navigationBar_H-16);
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 2;
+}
 
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if (component == 0) {
+        return _priceData.count;
+    }
+    return 1;
+}
+
+- (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    if (component == 0) {
+        return _priceData[row];
+    }
+    return @"元";
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    if (_isMinPrice) {
+        _minPriceStr = _priceData[row];
+    } else {
+        _maxPriceStr = _priceData[row];
+    }
+}
+
+- (void)clickAffirmBtn:(UIButton *)btn {
+    
+    [self animationbegin:btn];
+    
+    UIButton *allPriceBtn    = [self.view viewWithTag:201];
+    UIButton *minPriceBtn = [self.view viewWithTag:202];
+    UIButton *maxPriceBtn = [self.view viewWithTag:203];
+
+    if (_isMinPrice == YES) {
+        
+        [maxPriceBtn setTitle:@"最高价" forState:UIControlStateNormal];
+        [maxPriceBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+
+        [minPriceBtn setTitle:[NSString stringWithFormat:@"%@ 元",_minPriceStr] forState:UIControlStateNormal];
+        [minPriceBtn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
+        
+    } else {
+        
+        [maxPriceBtn setTitle:[NSString stringWithFormat:@"%@ 元",_maxPriceStr] forState:UIControlStateNormal];
+        [maxPriceBtn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
+
+    }
+    allPriceBtn.selected        = NO;
+    allPriceBtn.backgroundColor = [UIColor whiteColor];
+
+    
+    [self.sl_popupController dismiss];
 }
 
 #pragma mark 创建tabview
@@ -266,6 +412,9 @@
     _counselorInfoTableview.rowHeight       = 100;
     _mainHeadView                           = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, navigationBar_H*3)];
     _counselorInfoTableview.tableHeaderView = _mainHeadView;
+    
+    _counselorInfoTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getCounsultDataSource)];
+
 
 }
 
