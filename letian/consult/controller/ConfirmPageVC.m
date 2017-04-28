@@ -43,8 +43,6 @@
 
 @property (nonatomic, strong) UIButton               *startBtn;
 @property (nonatomic, strong) UIButton               *endBtn;
-//@property (nonatomic, strong) UIView                 *lineView;
-//@property (nonatomic, assign) NSDate                 *startDate;
 
 @property (nonatomic, strong) LRTextField            *nameTextField;
 @property (nonatomic, strong) LRTextField            *sexTextField;
@@ -52,11 +50,8 @@
 @property (nonatomic, strong) LRTextField            *phoneTextField;
 @property (nonatomic, strong) LRTextField            *emailTextField;
 
-
-
 @property (nonatomic, strong) ZYKeyboardUtil         *keyboardUtil;
 @property (nonatomic, strong) UIButton               *confirmBtn;
-//@property (nonatomic, assign) BOOL                   isSexRight;
 
 @property (nonatomic, strong) UITabBar               *tabBar;
 @property (nonatomic, strong) UILabel                *priceLab;

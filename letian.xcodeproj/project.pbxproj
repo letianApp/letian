@@ -26,6 +26,9 @@
 		090733951E655B0600F21E02 /* consultPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 090733931E655B0600F21E02 /* consultPageCell.m */; };
 		090733961E655B0600F21E02 /* consultPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 090733941E655B0600F21E02 /* consultPageCell.xib */; };
 		0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 090733991E65665A00F21E02 /* counselorInfoModel.m */; };
+		09243E8C1EB1B30B003D2C62 /* CustomDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09243E8A1EB1B30B003D2C62 /* CustomDateViewController.m */; };
+		09243E8D1EB1B30B003D2C62 /* CustomDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09243E8B1EB1B30B003D2C62 /* CustomDateViewController.xib */; };
+		092F4ADE1EAF23B3004CCEE0 /* AliPayOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 092F4ADD1EAF23B3004CCEE0 /* AliPayOrderModel.m */; };
 		0935872E1E94BD6A0007B1D9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */; };
 		093587301E94BD9D0007B1D9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872F1E94BD9D0007B1D9 /* AVFoundation.framework */; };
 		093587321E94BDB30007B1D9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093587311E94BDB30007B1D9 /* MobileCoreServices.framework */; };
@@ -326,6 +329,11 @@
 		090733941E655B0600F21E02 /* consultPageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = consultPageCell.xib; sourceTree = "<group>"; };
 		090733981E65665A00F21E02 /* counselorInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = counselorInfoModel.h; sourceTree = "<group>"; };
 		090733991E65665A00F21E02 /* counselorInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = counselorInfoModel.m; sourceTree = "<group>"; };
+		09243E891EB1B30B003D2C62 /* CustomDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDateViewController.h; sourceTree = "<group>"; };
+		09243E8A1EB1B30B003D2C62 /* CustomDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDateViewController.m; sourceTree = "<group>"; };
+		09243E8B1EB1B30B003D2C62 /* CustomDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomDateViewController.xib; sourceTree = "<group>"; };
+		092F4ADC1EAF23B3004CCEE0 /* AliPayOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliPayOrderModel.h; sourceTree = "<group>"; };
+		092F4ADD1EAF23B3004CCEE0 /* AliPayOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliPayOrderModel.m; sourceTree = "<group>"; };
 		0935872C1E94A1C10007B1D9 /* letian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = letian.entitlements; sourceTree = "<group>"; };
 		0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0935872F1E94BD9D0007B1D9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -883,6 +891,16 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		09243E881EB1B2D4003D2C62 /* 设置可预约日期 */ = {
+			isa = PBXGroup;
+			children = (
+				09243E891EB1B30B003D2C62 /* CustomDateViewController.h */,
+				09243E8A1EB1B30B003D2C62 /* CustomDateViewController.m */,
+				09243E8B1EB1B30B003D2C62 /* CustomDateViewController.xib */,
+			);
+			path = "设置可预约日期";
+			sourceTree = "<group>";
+		};
 		093587431E94C14F0007B1D9 /* chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -1205,6 +1223,7 @@
 				0970CFF21E5180DF007480CB /* MyViewController.h */,
 				0970CFF31E5180DF007480CB /* MyViewController.m */,
 				0970CFF41E5180DF007480CB /* MyViewController.xib */,
+				09243E881EB1B2D4003D2C62 /* 设置可预约日期 */,
 				77F3D8591E764E22008B5FC0 /* 订单 */,
 				77B5BCCE1EAD96E50034497D /* 个人资料 */,
 				77B5BCCF1EAD97260034497D /* 设置 */,
@@ -2032,6 +2051,7 @@
 				090733801E64105A00F21E02 /* firstPageTab@2x.png in Resources */,
 				0907338A1E64105A00F21E02 /* myPagTabSel@2x.png in Resources */,
 				7784D8A81E6E532E004AB0CC /* whiteMessage@3x.png in Resources */,
+				09243E8D1EB1B30B003D2C62 /* CustomDateViewController.xib in Resources */,
 				77FF9B7B1E696E18008C0FE7 /* whiteback@3x.png in Resources */,
 				77B5C9ED1E7A4AF50028CB9E /* CompleteOrderViewController.xib in Resources */,
 				77D07EEA1E962D7900904AD9 /* ChangePwCodeViewController.xib in Resources */,
@@ -2208,6 +2228,7 @@
 				7787B36C1EAEF2FE00306527 /* base64.m in Sources */,
 				094FC50C1E8CBF0D00BFFBBB /* PayPageVC.m in Sources */,
 				0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */,
+				09243E8C1EB1B30B003D2C62 /* CustomDateViewController.m in Sources */,
 				770FFC681E960548009B81FC /* UserInfoModel.m in Sources */,
 				7769CA5C1E82539C00646619 /* TestDetailViewController.m in Sources */,
 				77B5BD661EADA78E0034497D /* GQNetworkManager.m in Sources */,
