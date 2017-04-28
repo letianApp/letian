@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface PayPageVC : UIViewController
 
 @property (nonatomic) NSInteger orderID;
 
+@property(nonatomic,copy)NSString *orderNo;
+
+@property(nonatomic,copy)NSString *orderTypeString;
+
+@property(nonatomic,copy)NSString *consultorName;
 
 @end
