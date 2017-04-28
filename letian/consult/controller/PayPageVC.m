@@ -241,7 +241,6 @@
             //跳到预约订单
             OrderViewController *orderVc = [[OrderViewController alloc] init];
             orderVc.state = 1;
-            NSLog(@"00000000000000");
             [self.navigationController pushViewController:orderVc animated:YES];
             return;
         }
@@ -256,6 +255,10 @@
     [self payFailedAlertWithMessage:strMsg];
    }
 
+
+-(void)alipayAction:(NSNotification *)notification{
+    
+}
 #pragma mark-------支付失败时弹出提醒
 
 -(void)payFailedAlertWithMessage:(NSString *)message{

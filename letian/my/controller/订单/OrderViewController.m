@@ -13,6 +13,8 @@
 #import "MJExtension.h"
 #import "OrderListModel.h"
 #import "PayPageVC.h"
+#import "UIImageView+WebCache.h"
+
 @interface OrderViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,SegmentDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -136,24 +138,51 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OrderCell *cell=[OrderCell cellWithTableView:tableView];
-//    cell.headImageView
+    [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.orderList[indexPath.row].HeadImg]];
     cell.nameLabel.text=self.orderList[indexPath.row].DoctorName;
-//    cell.wayLabel.text
-//    cell.timeLabel.text=
+    //咨询方式
+    if (self.orderList[indexPath.row].EnumConsultType==1) {
+        cell.wayLabel.text=[NSString stringWithFormat:@"咨询方式：面对面咨询"];
+    }else if (self.orderList[indexPath.row].EnumConsultType==11){
+        cell.wayLabel.text=[NSString stringWithFormat:@"咨询方式：文字语音视频"];
+    }else if (self.orderList[indexPath.row].EnumConsultType==21){
+        cell.wayLabel.text=[NSString stringWithFormat:@"咨询方式：电话咨询"];
+    }
+    //咨询时间
+    NSString *dataStr=[self.orderList[indexPath.row].AppointmentDate substringWithRange:NSMakeRange(0, 10)];
+    NSString *startTime=[self.orderList[indexPath.row].StartTime substringWithRange:NSMakeRange(0, 5)];
+    NSString *endTime=[self.orderList[indexPath.row].EndTime substringWithRange:NSMakeRange(0, 5)];
+    cell.timeLabel.text=[NSString stringWithFormat:@"咨询时间：%@ %@～%@",dataStr,startTime,endTime];
+    //总计金额
     cell.moneyLabel.text=[NSString stringWithFormat:@"共%li小时，总计%li元",self.orderList[indexPath.row].ConsultTimeLength,self.orderList[indexPath.row].TotalFee];
+    //订单状态
     if (self.orderList[indexPath.row].EnumOrderState==5) {
-        cell.stateButton.tag=self.orderList[indexPath.row].EnumOrderState;
+        //去支付
         [cell.stateButton addTarget:self action:@selector(toPayVc:) forControlEvents:UIControlEventTouchUpInside];
-
+    }else if (self.orderList[indexPath.row].EnumOrderState==1){
+        //已预约
+        [cell.stateButton setTitle:@"已预约" forState:UIControlStateNormal];
+        [cell.stateButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        cell.stateButton.layer.borderColor=[[UIColor lightGrayColor] CGColor];
+        cell.stateButton.userInteractionEnabled=NO;
+    }else if (self.orderList[indexPath.row].EnumOrderState==10){
+        //已完成
+        [cell.stateButton setTitle:@"已完成" forState:UIControlStateNormal];
+        [cell.stateButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        cell.stateButton.layer.borderColor=[[UIColor lightGrayColor] CGColor];
+        cell.stateButton.userInteractionEnabled=NO;
     }
     return cell;
 }
 
 -(void)toPayVc:(UIButton *)btn{
-    PayPageVC *payVc=[[PayPageVC alloc]init];
-    payVc.orderID=btn.tag;
+    PayPageVC *payVc=[[PayPageVC alloc]init];    
+    OrderCell *cell=(OrderCell *)btn.superview.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    payVc.orderID=self.orderList[indexPath.row].OrderID;
+    payVc.orderNo=self.orderList[indexPath.row].OrderNo;
+    NSLog(@"token------%@",kFetchToken);
     [self.navigationController pushViewController:payVc animated:YES];
-    
 }
 #pragma mark------跳到订单详情
 

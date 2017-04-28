@@ -70,7 +70,6 @@
     [self creatTableView];
     [self creatClassifiedSection];
     
-    
 }
 
 - (void)customSearchBar {

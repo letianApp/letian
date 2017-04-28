@@ -17,5 +17,11 @@
 @property(nonatomic,assign)NSInteger IsCancel;//是否退款
 @property(nonatomic,assign)NSInteger OrderID;//订单ID
 @property(nonatomic,assign)NSInteger TotalFee;//订单价格
+@property(nonatomic,copy)NSString *OrderNo;//订单号
+@property(nonatomic,copy)NSString *AppointmentDate;//预约日期
+@property(nonatomic,copy)NSString *CreatedDate;//订单创建时间
+@property(nonatomic,copy)NSString *StartTime;//开始时间
+@property(nonatomic,copy)NSString *EndTime;//结束时间
+@property(nonatomic,assign)NSInteger EnumConsultType;//咨询方式
 
 @end

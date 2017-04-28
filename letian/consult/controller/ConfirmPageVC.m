@@ -682,8 +682,6 @@
             [MBHudSet showText:responseObject[@"Msg"] andOnView:strongself.view];
         }
         
-        
-        
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongself = weakSelf;

@@ -17,5 +17,6 @@
 @property(nonatomic,copy)NSString *NickName;
 @property(nonatomic,copy)NSString *SexString;//性别
 @property(nonatomic,assign)NSInteger UserID;
+@property(nonatomic,copy)NSString *EnumUserType;//身份
 
 @end

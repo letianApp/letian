@@ -112,11 +112,6 @@
             
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:kLoginSuccessNotification object:nil];
-            
-            [weakSelf dismissViewControllerAnimated:YES completion:nil];
-            
-            
             
             CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
             [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
