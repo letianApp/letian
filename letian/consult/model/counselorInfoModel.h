@@ -36,6 +36,11 @@
 @property (nonatomic, assign) NSInteger  ConsultDisCount;
 
 /**
+ 咨询师达到多少时间有折扣
+ */
+@property (nonatomic, assign) NSInteger  ConsultPreferDateLength;
+
+/**
  咨询师折扣Tag
  */
 @property (nonatomic, assign) NSInteger  ConsultTag;
@@ -73,14 +78,13 @@
 /**
  咨询师擅长领域
  */
-@property (nonatomic, copy  ) NSString  *Expertise;
+@property (nonatomic, copy  ) NSArray   *Expertise;
 
 /**
  咨询师价格
  */
 @property (nonatomic, assign) NSInteger  ConsultFee;
 
-@property (nonatomic, copy  ) NSString  *ConsultPreferDateLength;
 
 
 @end

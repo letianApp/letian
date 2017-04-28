@@ -139,7 +139,7 @@
     //咨询师名字
     UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*2/5, _headView.height-lineHeight*6, SCREEN_W/5, lineHeight*2)];
     nameLab.textAlignment = NSTextAlignmentCenter;
-    nameLab.text = @"孙晓平";
+    nameLab.text = self.counselModel.UserName;
     nameLab.textColor = [UIColor whiteColor];
     nameLab.font = [UIFont systemFontOfSize:14 weight:2];
     [_headView addSubview:nameLab];
