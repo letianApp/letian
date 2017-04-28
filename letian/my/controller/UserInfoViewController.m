@@ -182,7 +182,7 @@
     image = [image scaleFromImage:image toSize:CGSizeMake(200 , 200)];
     [MBHudSet showStatusOnView:self.view];
     [manager POST:requestString parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        NSData *imageData  = UIImageJPEGRepresentation(image, 0.2);
+        NSData *imageData  = UIImageJPEGRepresentation(image, 0.1);
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddHHmmss";
         NSString *str = [formatter stringFromDate:[NSDate date]];

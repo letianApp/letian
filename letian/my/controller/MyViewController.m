@@ -262,7 +262,7 @@
 -(void)allOrderLabelTouched{
     OrderViewController *orderVc=[[OrderViewController alloc]init];
     orderVc.hidesBottomBarWhenPushed=YES;
-    orderVc.state=5;
+    orderVc.state=100;
     [self.navigationController pushViewController:orderVc animated:NO];
 }
 

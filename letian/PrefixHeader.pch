@@ -48,6 +48,7 @@
 //================================= 通知名 =================================
 #define kLoginSuccessNotification           @"LoginSuccessNotification"          //登录成功通知名
 #define kLogoutSuccessNotification          @"LogoutSuccessNotification"         //登出成功通知名
+#define kWeChatPayNotifacation              @"WeChatPayNotifacation"             //微信支付通知名
 
 
 

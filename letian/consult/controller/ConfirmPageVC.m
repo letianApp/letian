@@ -19,7 +19,7 @@
 
 #import "OrderPageVC.h"
 #import "PayPageVC.h"
-
+#import "MJExtension.h"
 @interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) OrderModel             *orderModel;
@@ -657,7 +657,7 @@
         params[@"ConsultEmail"]        = _orderModel.orderInfoEmail;
     }
     
-    [PPNetworkHelper setValue:@"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOjQsImxvZ2lubmFtZSI6IjE4OTc3MzQzODQzIiwicmVhbG5hbWUiOm51bGwsImV4cGlyZXRpbWUiOjE0OTI3NDE0ODV9.GczqZEMSZTDEXHK2AHhhkDeUGm5f0o2rmVu9h79JsfE" forHTTPHeaderField:@"token"];
+    [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
     NSLog(@"Params=%@",params);
     
     [PPNetworkHelper POST:requestString parameters:params success:^(id responseObject) {
@@ -672,8 +672,10 @@
             NSLog(@"%@",responseObject[@"Result"][@"Source"][@"OrderID"]);
             PayPageVC *payPage = [[PayPageVC alloc]init];
             payPage.orderID = [responseObject[@"Result"][@"Source"][@"OrderID"] integerValue];
+            payPage.orderNo = responseObject[@"Result"][@"Source"][@"OrderNo"];
+            payPage.orderTypeString=responseObject[@"Result"][@"Source"][@"ConsultTypeIDString"];
+            payPage.consultorName=self.orderModel.conserlorName;
             [strongself.navigationController pushViewController:payPage animated:YES];
-            
             
         }else{
             

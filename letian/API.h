@@ -93,6 +93,9 @@
 //提交订单
 #define API_NAME_POSTORDER      @"DoConsultAppointment"
 
+//微信预支付
+#define API_NAME_WECHATPAY      @"GetTencentParams"
+
 //检查支付宝状态
 #define API_NAME_CHECKALIPAY    @"CheckAliParamsState"
 

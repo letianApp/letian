@@ -12,7 +12,7 @@
 #import "OrderDetailViewController.h"
 #import "MJExtension.h"
 #import "OrderListModel.h"
-
+#import "PayPageVC.h"
 @interface OrderViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,SegmentDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.automaticallyAdjustsScrollViewInsets=NO;
     self.navigationController.navigationBarHidden=NO;
     
     [self setUpNavigationBar];
@@ -50,7 +50,7 @@
     GQSegment *segment = [[GQSegment alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     segment.delegate = self;
     [self.view addSubview:segment];
-    if (self.state==0) {
+    if (self.state==100) {
         [segment moveToOffsetX:0];
     }else if (self.state==1){
         [segment moveToOffsetX:SCREEN_W];
@@ -64,11 +64,12 @@
 
 
 #pragma mark-------点击分类滑动到页面
+
 -(void)scrollToPage:(int)Page {
     [UIView animateWithDuration:0.3 animations:^{
         NSLog(@"滑动到地%i页",Page);
         if (Page==0) {
-            [self requestData:5];//全部订单
+            [self requestData:100];//全部订单
         }else if (Page==1){
             [self requestData:1];//预约订单
         }else if (Page==2){
@@ -117,7 +118,7 @@
 
 -(void)createTableView
 {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H-64) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
@@ -140,10 +141,20 @@
 //    cell.wayLabel.text
 //    cell.timeLabel.text=
     cell.moneyLabel.text=[NSString stringWithFormat:@"共%li小时，总计%li元",self.orderList[indexPath.row].ConsultTimeLength,self.orderList[indexPath.row].TotalFee];
+    if (self.orderList[indexPath.row].EnumOrderState==5) {
+        cell.stateButton.tag=self.orderList[indexPath.row].EnumOrderState;
+        [cell.stateButton addTarget:self action:@selector(toPayVc:) forControlEvents:UIControlEventTouchUpInside];
+
+    }
     return cell;
 }
 
-
+-(void)toPayVc:(UIButton *)btn{
+    PayPageVC *payVc=[[PayPageVC alloc]init];
+    payVc.orderID=btn.tag;
+    [self.navigationController pushViewController:payVc animated:YES];
+    
+}
 #pragma mark------跳到订单详情
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -165,7 +176,7 @@
 }
 -(void) back
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 
