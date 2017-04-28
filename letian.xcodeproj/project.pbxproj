@@ -278,6 +278,8 @@
 		77FF9B791E696E18008C0FE7 /* whiteback.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FF9B731E696E18008C0FE7 /* whiteback.png */; };
 		77FF9B7A1E696E18008C0FE7 /* whiteback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FF9B741E696E18008C0FE7 /* whiteback@2x.png */; };
 		77FF9B7B1E696E18008C0FE7 /* whiteback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FF9B751E696E18008C0FE7 /* whiteback@3x.png */; };
+		7B0D0C8C1EB32682002F626C /* male@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B0D0C8B1EB32682002F626C /* male@3x.png */; };
+		7B0D0C8E1EB3268D002F626C /* female@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B0D0C8D1EB3268D002F626C /* female@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -733,6 +735,8 @@
 		77FF9B731E696E18008C0FE7 /* whiteback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteback.png; sourceTree = "<group>"; };
 		77FF9B741E696E18008C0FE7 /* whiteback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteback@2x.png"; sourceTree = "<group>"; };
 		77FF9B751E696E18008C0FE7 /* whiteback@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteback@3x.png"; sourceTree = "<group>"; };
+		7B0D0C8B1EB32682002F626C /* male@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "male@3x.png"; sourceTree = "<group>"; };
+		7B0D0C8D1EB3268D002F626C /* female@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "female@3x.png"; sourceTree = "<group>"; };
 		7DE455D051C315B06E3F4C61 /* Pods-letian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-letian.release.xcconfig"; path = "Pods/Target Support Files/Pods-letian/Pods-letian.release.xcconfig"; sourceTree = "<group>"; };
 		F8550220C06BB0D4BA36D36F /* Pods-letian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-letian.debug.xcconfig"; path = "Pods/Target Support Files/Pods-letian/Pods-letian.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -814,11 +818,13 @@
 				090733731E64105A00F21E02 /* mainMessage.png */,
 				0945B1391E67E7F2005B7560 /* female.png */,
 				0945B13A1E67E7F2005B7560 /* female@2x.png */,
+				7B0D0C8D1EB3268D002F626C /* female@3x.png */,
 				09F1E6FF1E6E6506007FBE81 /* share.png */,
 				09F1E7001E6E6506007FBE81 /* share@2x.png */,
 				09F1E7011E6E6506007FBE81 /* share@3x.png */,
 				0945B13B1E67E7F2005B7560 /* male.png */,
 				0945B13C1E67E7F2005B7560 /* male@2x.png */,
+				7B0D0C8B1EB32682002F626C /* male@3x.png */,
 				090733741E64105A00F21E02 /* mainMessage@2x.png */,
 				090733751E64105A00F21E02 /* mainMessageSel.png */,
 				090733761E64105A00F21E02 /* mainMessageSel@2x.png */,
@@ -1885,6 +1891,8 @@
 			files = (
 				7787B30F1EADACC300306527 /* ActivityDetailViewController.xib in Resources */,
 				093DA77E1E960F08003CEDD9 /* ChatListViewController.xib in Resources */,
+				7B0D0C8C1EB32682002F626C /* male@3x.png in Resources */,
+				7B0D0C8E1EB3268D002F626C /* female@3x.png in Resources */,
 				090733861E64105A00F21E02 /* mainMessageSel@2x.png in Resources */,
 				771F902C1E9B7FC9003B1806 /* pinkshare@2x.png in Resources */,
 				0965FBC91E824AF900C0FBAD /* OrderPageVC.xib in Resources */,

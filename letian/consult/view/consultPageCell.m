@@ -7,6 +7,7 @@
 //
 
 #import "consultPageCell.h"
+//#import "counselorInfoModel.h"
 
 @implementation consultPageCell
 
@@ -15,7 +16,7 @@
     // Initialization code
     
     [self customCell];
-    [self test];
+//    [self test];
     
 }
 
