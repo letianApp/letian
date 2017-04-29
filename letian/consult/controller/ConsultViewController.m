@@ -21,16 +21,20 @@
 #import "ChatListViewController.h"
 
 
-@interface ConsultViewController ()<UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface ConsultViewController ()<UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UISearchBarDelegate>
 
-//@property (nonatomic, copy  ) NSMutableArray *mainDataSource;
 @property (nonatomic, strong) NSMutableArray <counselorInfoModel *> *counselorArr;
-@property (nonatomic, strong) NSMutableArray <counselorInfoModel *> *showCounselorArr;
 
+@property (nonatomic, strong) NSDictionary      *counselorCategoryDic;
+@property (nonatomic, strong) NSDictionary      *counselorTitleDic;
 
-@property (nonatomic, copy  ) NSArray      *mainClassifiedDataSource;
-@property (nonatomic, copy  ) NSArray      *counselorStatusDataSource;
+@property (nonatomic, strong) NSMutableArray      *counselorCategoryArr;
+@property (nonatomic, strong) NSMutableArray      *counselorTitleArr;
+
 @property (nonatomic, copy  ) NSArray      *priceDataSource;
+
+@property (nonatomic, strong) NSMutableDictionary      *requestParams;
+
 
 @property (nonatomic, strong) NSMutableArray      *priceData;
 @property (nonatomic, copy  ) NSString     *minPriceStr;
@@ -66,13 +70,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _counselorArr = [NSMutableArray new];
-    _showCounselorArr = [NSMutableArray new];
-    
-    [self getCounsultDataSource];
-    
+    _requestParams = [NSMutableDictionary new];
+    [_requestParams setValue:@(0) forKey:@"enumPsyCategory"];
+    [_requestParams setValue:@(0) forKey:@"enumUserTitle"];
+
     [self customNavigation];
+    
+    [self getCounsultTypeSource];
+    [self getCounsultListSource];
+    
     [self creatTableView];
-    [self creatClassifiedSection];
+//    [self creatClassifiedSection];
     
 }
 
@@ -80,9 +88,32 @@
     
     _searchBar             = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W/2, 40)];
     _searchBar.placeholder = @"搜索";
+    _searchBar.delegate = self;
     [_searchBar setTranslucent:YES];
 //    _searchBar.searchBarStyle = UISearchBarStyleProminent;
     
+}
+
+//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+//    NSLog(@"%@",searchBar.text);
+//    [_requestParams setValue:searchBar.text forKey:@"SearchName"];
+//
+//}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    NSLog(@"---%@",searchBar.text);
+    [_requestParams setValue:searchBar.text forKey:@"SearchName"];
+    [self getCounsultListSource];
+    [self.searchBar resignFirstResponder];// 放弃第一响应者
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [_searchBar resignFirstResponder];
 }
 
 #pragma mark 定制Navigation
@@ -90,14 +121,6 @@
     
     self.navigationController.navigationBar.tintColor = MAINCOLOR;
     self.navigationItem.titleView                     = _searchBar;
-
-//    UIBarButtonItem *leftButton                       = [[UIBarButtonItem alloc]initWithTitle:@"乐天心理" style:UIBarButtonItemStyleDone target:self action:nil];
-//    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:MAINCOLOR} forState:UIControlStateDisabled];
-//    self.navigationItem.leftBarButtonItem             = leftButton;
-
-//    UIBarButtonItem *rightButton                      = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"mainMessage"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]style:UIBarButtonItemStylePlain target:self action:@selector(selRightButton)];
-//    self.navigationItem.rightBarButtonItem = rightButton;
-    
 }
 
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target
@@ -120,35 +143,90 @@
     
 }
 
-#pragma mark 获取咨询师信息
-- (void)getCounsultDataSource {
+#pragma mark 获取咨询师类型信息
+- (void)getCounsultTypeSource {
     
+    _counselorCategoryDic = [NSMutableDictionary new];
+    _counselorTitleDic = [NSMutableDictionary new];
+    _counselorCategoryArr = [NSMutableArray new];
+    _counselorTitleArr = [NSMutableArray new];
+    
+    __weak typeof(self) weakSelf   = self;
+    
+    NSMutableString *requestConsultPsyAndTitleListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestConsultPsyAndTitleListString appendFormat:@"%@/",API_MODULE_UTILS];
+    [requestConsultPsyAndTitleListString appendFormat:@"%@",API_NAME_GETCONSULTTITLELIST];
+    
+    [PPNetworkHelper GET:requestConsultPsyAndTitleListString parameters:nil success:^(id responseObject) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        strongSelf.counselorCategoryDic = responseObject[@"Result"][@"Source"][@"PsyCategoryDic"];
+        strongSelf.counselorCategoryArr = [strongSelf arrangeForKeyWithDic:strongSelf.counselorCategoryDic];
+        
+        strongSelf.counselorTitleDic = responseObject[@"Result"][@"Source"][@"UserTitleDic"];
+        strongSelf.counselorTitleArr = [strongSelf arrangeForKeyWithDic:strongSelf.counselorTitleDic];
+        
+        [strongSelf creatClassifiedSection];
+        
+    } failure:^(NSError *error) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        [strongSelf.counselorInfoTableview.mj_header endRefreshing];
+        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师类型错误，错误代码：%ld",error.code]andOnView:strongSelf.view];
+    }];
+}
 
-    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
-    [requestString appendFormat:@"%@/",API_MODULE_CONSULT];
-    [requestString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
-    NSLog(@"%@",requestString);
+#pragma mark 根据key排列dic
+- (NSMutableArray *)arrangeForKeyWithDic:(NSDictionary *)dic {
+    
+    NSMutableArray *keyArr = [[NSMutableArray alloc]initWithArray:dic.allKeys];
+    for (int i = 0; i < keyArr.count; i++) {
+        for (int k = 0; k < keyArr.count-1; k++) {
+            if (keyArr[k] > keyArr[k+1]) {
+                [keyArr exchangeObjectAtIndex:k withObjectAtIndex:k+1];
+            }
+        }
+    }
+    
+    NSMutableArray *valuesArr = [NSMutableArray new];
+    for (int i = 0; i < keyArr.count; i++) {
+        [valuesArr addObject:dic[keyArr[i]]];
+    }
+    
+    return valuesArr;
+}
+
+#pragma mark 获取咨询师列表
+- (void)getCounsultListSource {
+    
     __weak typeof(self) weakSelf   = self;
 
-    NSMutableDictionary *params    = [[NSMutableDictionary alloc]init];
-    params[@"enumPsyCategory"]     = @0;
-    params[@"enumUserTitle"]       = @0;
+    NSMutableString *requestConsultListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestConsultListString appendFormat:@"%@/",API_MODULE_CONSULT];
+    [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
 
-    [PPNetworkHelper GET:requestString parameters:params success:^(id responseObject) {
+    [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
         
         __strong typeof(self) strongself = weakSelf;
-        NSLog(@"%@",responseObject);
-        
         strongself.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-        strongself.showCounselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];;
+        
+        for (int i = 0; i < strongself.counselorArr.count; i++) {
+            NSLog(@"%@",strongself.counselorArr[i].Expertise);
+
+        }
+        
+        if (strongself.counselorArr.count == 0) {
+            [MBHudSet showText:@"哈哈哈哈哈" andOnView:strongself.view];
+        }
+        
         [strongself.counselorInfoTableview reloadData];
         [strongself.counselorInfoTableview.mj_header endRefreshing];
-//        NSLog(@"%@",sourceArr);
 
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongself = weakSelf;
-        
         [strongself.counselorInfoTableview.mj_header endRefreshing];
         [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师列表错误，错误代码：%ld",error.code]andOnView:strongself.view];
 
@@ -156,7 +234,6 @@
     
    
 }
-    
 
 
 #pragma mark 创建分类栏
@@ -166,14 +243,12 @@
     _isAllTitle = YES;
     _isAllPrice = YES;
     
-    _mainClassifiedDataSource                 = @[@"全部类型",@"自我成长",@"婚姻情感",@"孩子教育",@"职场心理",@"人际关系",@"情绪压力",@"神经症"];
-    _counselorStatusDataSource                = @[@"全部资历",@"首席",@"主任",@"专家",@"资深",@"心理咨询师"];
-    _priceDataSource                          = @[@"全部价格",@"最低价",@"最高价"];
+    _priceDataSource = @[@"全部价格",@"最低价",@"最高价"];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    [self customClassifiedSectionBtnFotData:_mainClassifiedDataSource withLineNumber:0];
-    [self customClassifiedSectionBtnFotData:_counselorStatusDataSource withLineNumber:1];
+    [self customClassifiedSectionBtnFotData:_counselorCategoryArr withLineNumber:0];
+    [self customClassifiedSectionBtnFotData:_counselorTitleArr withLineNumber:1];
     [self customClassifiedSectionBtnFotData:_priceDataSource withLineNumber:2];
 
     [self customPriceSection];
@@ -233,9 +308,9 @@
 }
 
 //首按钮初始点击状态
-- (void)beginningButtonSelectedWithTag:(int)tagg {
+- (void)beginningButtonSelectedWithTag:(int)tag {
     
-    UIButton *beginningButton       = [self.view viewWithTag:tagg];
+    UIButton *beginningButton       = [self.view viewWithTag:tag];
     beginningButton.selected        = YES;
     beginningButton.backgroundColor = MAINCOLOR;
 }
@@ -246,46 +321,38 @@
     [self animationbegin:btn];
     
     NSLog(@"%@",btn.titleLabel.text);
-    
-    if ([btn.titleLabel.text isEqualToString:@"全部类型"]) {
-        _isAllExpertise = YES;
-    } else if ([btn.titleLabel.text isEqualToString:@"全部资历"]) {
-        _isAllTitle = YES;
-    } else if ([btn.titleLabel.text isEqualToString:@"全部价格"]) {
-        _isMinPrice = YES;
-    }
-    
+
     if (btn.tag < 100) {
-        for (int i = 1; i < _mainClassifiedDataSource.count+1; i++) {
+        for (int i = 1; i < _counselorCategoryArr.count+1; i++) {
             UIButton *otherBtn = [self.view viewWithTag:i];
             otherBtn.selected = NO;
             otherBtn.backgroundColor = [UIColor whiteColor];
         }
+        NSArray *keyArr = _counselorCategoryDic.allKeys;
+        for (id key in keyArr) {
+            if ([btn.titleLabel.text isEqual:_counselorCategoryDic[key]]) {
+                [_requestParams setValue:key forKey:@"enumPsyCategory"];
+            }
+        }
         btn.selected         = YES;
         btn.backgroundColor  = MAINCOLOR;
-        
-        
 
     } else if (btn.tag < 200) {
-        for (int i = 1; i < _counselorStatusDataSource.count+1; i++) {
+        for (int i = 1; i < _counselorTitleArr.count+1; i++) {
             UIButton *otherBtn       = [self.view viewWithTag:i+100];
             otherBtn.selected        = NO;
             otherBtn.backgroundColor = [UIColor whiteColor];
         }
-        btn.selected         = YES;
-        btn.backgroundColor  = MAINCOLOR;
-        
-        NSString *str = btn.titleLabel.text;
-        
-        [_showCounselorArr removeAllObjects];
-        for (int i = 0; i < _counselorArr.count; i++) {
-            counselorInfoModel *model = _counselorArr[i];
-            if ([str isEqualToString:model.UserTitleString]) {
-                [_showCounselorArr addObject:model];
+        NSArray *keyArr = _counselorTitleDic.allKeys;
+        for (id key in keyArr) {
+            if ([btn.titleLabel.text isEqual:_counselorTitleDic[key]]) {
+                [_requestParams setValue:key forKey:@"enumUserTitle"];
             }
         }
-        [_counselorInfoTableview reloadData];
+        btn.selected         = YES;
+        btn.backgroundColor  = MAINCOLOR;
 
+        
     } else {
         
         self.sl_popupController                          = [[SnailPopupController alloc] init];
@@ -308,6 +375,8 @@
 
             allPriceBtn.selected         = YES;
             allPriceBtn.backgroundColor  = MAINCOLOR;
+            [_requestParams removeObjectForKey:@"MinFee"];
+            [_requestParams removeObjectForKey:@"MaxFee"];
             
         } else if (btn == minPriceBtn) {
             
@@ -324,27 +393,19 @@
             }
         }
     }
+    
+    [self getCounsultListSource];
 }
-
-#pragma mark 重新排列咨询师列表
-//- (void)reflashDataForClickBtn:(UIButton *)btn {
-//    
-//    NSString *str = btn.titleLabel.text;
-//    for (counselorInfoModel *model in _counselorArr) {
-//        if ([str isEqualToString:model.UserTitleString]) {
-//            [_counselorArr removeObject:model];
-//        }
-//    }
-//    [_counselorInfoTableview reloadData];
-//    
-//}
-
 
 #pragma mark 选择价格界面
 - (UIView *)setupChoosePriceViewForBtn:(UIButton *)btn {
     
     if (_isMinPrice == YES) {
-        _priceData = [[NSMutableArray alloc]initWithArray:@[@"300",@"400",@"500",@"600",@"700",@"800",@"900",@"1000",@"1100"]];
+        _priceData = [NSMutableArray new];
+        for (int i = 0; i < 50; i++) {
+            [_priceData addObject:[NSString stringWithFormat:@"%d",i*100]];
+        }
+        
         _minPriceStr = _priceData[0];
 
     } else {
@@ -425,18 +486,20 @@
 
         [minPriceBtn setTitle:[NSString stringWithFormat:@"%@ 元",_minPriceStr] forState:UIControlStateNormal];
         [minPriceBtn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
+        [_requestParams setValue:@([_minPriceStr intValue]) forKey:@"MinFee"];
         
     } else {
         
         [maxPriceBtn setTitle:[NSString stringWithFormat:@"%@ 元",_maxPriceStr] forState:UIControlStateNormal];
         [maxPriceBtn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
+        [_requestParams setValue:@([_maxPriceStr intValue]) forKey:@"MaxFee"];
 
     }
     allPriceBtn.selected        = NO;
     allPriceBtn.backgroundColor = [UIColor whiteColor];
 
-    
     [self.sl_popupController dismiss];
+    [self getCounsultListSource];
 }
 
 #pragma mark 创建tabview
@@ -450,8 +513,9 @@
     _counselorInfoTableview.rowHeight       = 100;
     _mainHeadView                           = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, navigationBar_H*3)];
     _counselorInfoTableview.tableHeaderView = _mainHeadView;
-    
-    _counselorInfoTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getCounsultDataSource)];
+    _counselorInfoTableview.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+
+    _counselorInfoTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getCounsultListSource)];
 
 
 }
@@ -461,21 +525,21 @@
     
     consultPageCell *cell = [consultPageCell cellWithTableView:tableView];
     
-    cell.conselorName.text = _showCounselorArr[indexPath.row].UserName;
-    [cell.conselorImage sd_setImageWithURL:[NSURL URLWithString:_showCounselorArr[indexPath.row].HeadImg]];
-    if (_showCounselorArr[indexPath.row].EnumSexType == 0) {
+    cell.conselorName.text = _counselorArr[indexPath.row].UserName;
+    [cell.conselorImage sd_setImageWithURL:[NSURL URLWithString:_counselorArr[indexPath.row].HeadImg]];
+    if (_counselorArr[indexPath.row].EnumSexType == 0) {
         cell.conserlorSex.image = [UIImage imageNamed:@"male"];
     } else {
         cell.conserlorSex.image = [UIImage imageNamed:@"female"];
     }
-    if ([_showCounselorArr[indexPath.row].UserTitleString containsString:@"心理咨询师"]) {
-        cell.conselorStatus.text = _showCounselorArr[indexPath.row].UserTitleString;
+    if ([_counselorArr[indexPath.row].UserTitleString containsString:@"心理咨询师"]) {
+        cell.conselorStatus.text = _counselorArr[indexPath.row].UserTitleString;
     } else {
-        cell.conselorStatus.text = [NSString stringWithFormat:@"%@心理咨询师",_showCounselorArr[indexPath.row].UserTitleString];
+        cell.conselorStatus.text = [NSString stringWithFormat:@"%@心理咨询师",_counselorArr[indexPath.row].UserTitleString];
     }
-    cell.conserlorAbout.text = _showCounselorArr[indexPath.row].Description;
-    cell.conserlorPrice.text = [NSString stringWithFormat:@"%ld元/小时",_showCounselorArr[indexPath.row].ConsultFee];
-    cell.conserVisitors.text = [NSString stringWithFormat:@"%ld人咨询过",_showCounselorArr[indexPath.row].ConsultFee];
+    cell.conserlorAbout.text = _counselorArr[indexPath.row].Description;
+    cell.conserlorPrice.text = [NSString stringWithFormat:@"%ld元/小时",_counselorArr[indexPath.row].ConsultFee];
+    cell.conserVisitors.text = [NSString stringWithFormat:@"%ld人咨询过",_counselorArr[indexPath.row].ConsultFee];
     
     return cell;
     
@@ -483,7 +547,7 @@
 
 //行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _showCounselorArr.count;
+    return _counselorArr.count;
 }
 
 
@@ -492,7 +556,7 @@
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
 
     CounselorInfoVC *counselorInfoMainVC = [[CounselorInfoVC alloc]init];
-    counselorInfoMainVC.counselModel = _showCounselorArr[indexPath.row];
+    counselorInfoMainVC.counselModel = _counselorArr[indexPath.row];
 //    counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
     [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];    
     

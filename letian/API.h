@@ -84,6 +84,9 @@
 //获取网页文章
 #define API_NAME_GETWEBACTIVEL  @"GetWebArticleInfo"
 
+//获取咨询师类型
+#define API_NAME_GETCONSULTTITLELIST  @"GetUserPsyAndTitleList"
+
 //获取咨询师列表
 #define API_NAME_GETCONSULTLIST @"GetConsultDoctorList"
 
