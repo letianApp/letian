@@ -7,34 +7,32 @@
 //
 
 #import "PayPageVC.h"
-
 #import "WXApi.h"
-
 #import <AlipaySDK/AlipaySDK.h>
 #import "AlipayHelper.h"
 #import "RSADataSigner.h"
 #import "Order.h"
 #import "OrderViewController.h"
+#import "AppDelegate.h"
 
-
-@interface PayPageVC ()<UITableViewDelegate,UITableViewDataSource,WXApiDelegate>
+@interface PayPageVC ()<UITableViewDelegate,UITableViewDataSource,WXApiDelegate,UIApplicationDelegate>
 
 @end
 
 @implementation PayPageVC
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    //    self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self customNavigation];
     
     [self customTableView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wechatPayAction:) name:kWeChatPayNotifacation object:nil];
+    
+    [self aliPayAction];
 
-    // Do any additional setup after loading the view.
 }
 
 -(void)dealloc
@@ -51,7 +49,6 @@
 
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target
                                        action:(SEL)action {
-    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(0, 0, 20, 20)];
@@ -186,8 +183,6 @@
         
         __strong typeof(self) strongself = weakSelf;
         [MBHudSet showText:[NSString stringWithFormat:@"错误代码：%ld",error.code]andOnView:strongself.view];
-        
-        
     }];
 
 }
@@ -230,6 +225,9 @@
 
 }
 
+
+#pragma mark--------微信支付回调
+
 -(void) wechatPayAction:(NSNotification *)notification
 {
     NSString *strMsg = [NSString stringWithFormat:@"支付结果"];
@@ -253,13 +251,40 @@
         break;
     }
     [self payFailedAlertWithMessage:strMsg];
-   }
-
-
--(void)alipayAction:(NSNotification *)notification{
-    
 }
-#pragma mark-------支付失败时弹出提醒
+
+
+#pragma mark--------支付宝回调
+
+-(void)aliPayAction{
+    AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    __weak typeof(self) weakSelf   = self;
+    appdelegate.pushToOrderVc=^(NSInteger alipayCode){
+        NSString *message = @"";
+        switch (alipayCode) {
+            case 9000:
+            {message = @"订单支付成功";
+                OrderViewController *orderVc = [[OrderViewController alloc] init];
+                orderVc.state = 1;
+                [weakSelf.navigationController pushViewController:orderVc animated:YES];
+                return;
+            }
+            case 8000:
+            {
+                message = @"正在处理中";
+                break;
+            }
+            case 4000:message = @"订单支付失败";break;
+            case 6001:message = @"取消了支付";break;
+            case 6002:message = @"网络连接错误";break;
+            default:message = @"未知错误";
+        }
+        [self payFailedAlertWithMessage:message];
+    };
+}
+
+
+#pragma mark-------支付失败时跳到待支付订单列表
 
 -(void)payFailedAlertWithMessage:(NSString *)message{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"支付结果" message:message preferredStyle:UIAlertControllerStyleAlert];

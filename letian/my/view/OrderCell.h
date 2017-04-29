@@ -16,6 +16,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
 @property (weak, nonatomic) IBOutlet UIButton *stateButton;
+@property(nonatomic,strong)NSTimer * timer;
+@property (nonatomic,assign)NSInteger secondsCountDown;
+@property (weak, nonatomic) IBOutlet UILabel *timeChangeLabel;
 
 +(instancetype) cellWithTableView:(UITableView *)tableView;
 

@@ -14,12 +14,15 @@
 #import "OrderListModel.h"
 #import "PayPageVC.h"
 #import "UIImageView+WebCache.h"
+#import "DateTools.h"
 
 @interface OrderViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,SegmentDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic, weak) GQSegment *segment;
+@property (nonatomic, strong) GQSegment *segment;
 @property(nonatomic,strong)NSMutableArray<OrderListModel*> *orderList;
+@property(nonatomic,strong)UIView *topView;
+@property (nonatomic, copy) NSString *showText;
 
 @end
 
@@ -43,25 +46,36 @@
     [self setSegment];
     
     [self requestData:self.state];//订单
+    
+    
 }
 
-
+-(void)createBackgroundView{
+    if (self.orderList.count==0) {
+        UILabel *showLabel= [GQControls createLabelWithFrame:CGRectMake((SCREEN_W-200)/2, 100, 200, 40) andText:self.showText andTextColor:MAINCOLOR andFontSize:15];
+    }
+}
 #pragma mark-------创建Segment
 
 -(void)setSegment {
-    GQSegment *segment = [[GQSegment alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
-    segment.delegate = self;
-    [self.view addSubview:segment];
+    self.topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 50)];
+    
+    self.segment = [[GQSegment alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    self.segment.delegate = self;
+    self.segment.backgroundColor=[UIColor whiteColor];
+    [self.topView addSubview:self.segment];
     if (self.state==100) {
-        [segment moveToOffsetX:0];
+        [self.segment moveToOffsetX:0];
     }else if (self.state==1){
-        [segment moveToOffsetX:SCREEN_W];
+        [self.segment moveToOffsetX:SCREEN_W];
     }else if (self.state==5){
-        [segment moveToOffsetX:2*SCREEN_W];
+        [self.segment moveToOffsetX:2*SCREEN_W];
     }else if (self.state==10){
-        [segment moveToOffsetX:3*SCREEN_W];
+        [self.segment moveToOffsetX:3*SCREEN_W];
     }
-    self.segment = segment;
+    UIView *marginView=[[UIView alloc]initWithFrame:CGRectMake(0, self.segment.height-3, SCREEN_W, 3)];
+    marginView.backgroundColor=WEAKPINK;
+    [self.topView addSubview:marginView];
 }
 
 
@@ -123,10 +137,18 @@
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H-64) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
+    tableView.backgroundColor=WEAKPINK;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableView];
-    tableView.tableHeaderView=self.segment;
     self.tableView = tableView;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return self.topView;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.orderList.count;
@@ -157,19 +179,32 @@
     cell.moneyLabel.text=[NSString stringWithFormat:@"共%li小时，总计%li元",self.orderList[indexPath.row].ConsultTimeLength,self.orderList[indexPath.row].TotalFee];
     //订单状态
     if (self.orderList[indexPath.row].EnumOrderState==5) {
-        //去支付
-        [cell.stateButton addTarget:self action:@selector(toPayVc:) forControlEvents:UIControlEventTouchUpInside];
+        //计算未支付的订单创建时间与当前时间  间隔多少秒
+        DTTimePeriod *timePeriod = [[DTTimePeriod alloc] initWithStartDate:[NSDate dateWithString:self.orderList[indexPath.row].CreatedDate formatString:@"yyyy-MM-dd HH:mm:ss"]  endDate:[NSDate date]];
+        //超过一小时（即3600秒）未支付  则该订单失效
+        if (timePeriod.durationInSeconds<=3600) {
+            //去支付
+            [cell.stateButton setTitleColor:MAINCOLOR forState:UIControlStateNormal];
+            cell.stateButton.layer.borderColor=[MAINCOLOR CGColor];
+            [cell.stateButton addTarget:self action:@selector(toPayVc:) forControlEvents:UIControlEventTouchUpInside];
+            //倒计时
+            cell.secondsCountDown=(int)(3600-timePeriod.durationInSeconds);
+        }else{
+//            //订单失效
+//            cell.timeChangeLabel.textColor=[UIColor lightGrayColor];
+//            [cell.stateButton setTitle:@"已失效" forState:UIControlStateNormal];
+//            cell.stateButton.userInteractionEnabled=NO;
+            [self.orderList removeObject:self.orderList[indexPath.row]];
+            [self.tableView reloadData];
+        }
+        cell.timeChangeLabel.hidden=NO;
     }else if (self.orderList[indexPath.row].EnumOrderState==1){
         //已预约
         [cell.stateButton setTitle:@"已预约" forState:UIControlStateNormal];
-        [cell.stateButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        cell.stateButton.layer.borderColor=[[UIColor lightGrayColor] CGColor];
         cell.stateButton.userInteractionEnabled=NO;
     }else if (self.orderList[indexPath.row].EnumOrderState==10){
         //已完成
         [cell.stateButton setTitle:@"已完成" forState:UIControlStateNormal];
-        [cell.stateButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        cell.stateButton.layer.borderColor=[[UIColor lightGrayColor] CGColor];
         cell.stateButton.userInteractionEnabled=NO;
     }
     return cell;

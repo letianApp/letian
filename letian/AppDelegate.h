@@ -10,8 +10,12 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+/**
+ *  定义了一个pushToOrderVc的Block。参数为字符串类型
+ */
+@property (nonatomic, copy) void(^pushToOrderVc)(NSInteger alipayCode);
 
+@property (strong, nonatomic) UIWindow *window;
 
 @end
 

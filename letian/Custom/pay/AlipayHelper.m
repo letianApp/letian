@@ -106,6 +106,7 @@
 
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             NSLog(@"reslut = %@",resultDic);
+            block(resultDic);
         }];
 
         

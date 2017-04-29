@@ -126,32 +126,23 @@
         if ([url.host isEqualToString:@"safepay"]) {
             // 支付跳转支付宝钱包进行支付，处理支付结果
             [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-                NSLog(@"result = %@",resultDic);
+                NSLog(@"回调啊擦result = %@",resultDic);
             }];
             
             // 授权跳转支付宝钱包进行支付，处理支付结果
             [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-                NSLog(@"result = %@",resultDic);
-                // 解析 auth code
-                NSString *result = resultDic[@"result"];
-                NSString *authCode = nil;
-                if (result.length>0) {
-                    NSArray *resultArr = [result componentsSeparatedByString:@"&"];
-                    for (NSString *subResult in resultArr) {
-                        if (subResult.length > 10 && [subResult hasPrefix:@"auth_code="]) {
-                            authCode = [subResult substringFromIndex:10];
-                            break;
-                        }
-                    }
-                }
-                NSLog(@"授权结果 authCode = %@", authCode?:@"");
+                NSLog(@"支付宝回调 = %@",resultDic);
+                self.pushToOrderVc([resultDic[@"resultStatus"] integerValue]);
+
+                
+                
             }];
         }else if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
             [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-                NSLog(@"支付宝钱包result = %@",resultDic);
+                NSLog(@"支付宝钱包快登授权返回 = %@",resultDic);
             }];
         }else if([url.host isEqualToString:@"pay"]){
-//            return  [WXApi handleOpenURL:url delegate:self];
+            return  [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
         }else{
             
         }
@@ -159,29 +150,29 @@
     }
     return result;
 }
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-    
-    if ([url.host isEqualToString:@"safepay"]) {
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"-----result = %@",resultDic);
-            NSLog(@"-----result = %@",resultDic[@"result"]);
-        }];
-        [[AlipaySDK defaultService]
-         processOrderWithPaymentResult:url
-         standbyCallback:^(NSDictionary *resultDic) {
-             NSLog(@"----result = %@",resultDic);//返回的支付结果 //【由于在跳转支付宝客户端支付的过程中,商户 app 在后台很可能被系统 kill 了,所以 pay 接 口的 callback 就会失效,请商户对 standbyCallback 返回的回调结果进行处理,就是在这个方法 里面处理跟 callback 一样的逻辑】
-         }];
-    }else if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
-        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
-        }];
-    }else if([url.host isEqualToString:@"pay"]){
-        return  [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
-    }else{
-        
-    }
-    return  YES;
-}
+//- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+//    
+//    if ([url.host isEqualToString:@"safepay"]) {
+//        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+//            NSLog(@"-----result = %@",resultDic);
+//            NSLog(@"-----result = %@",resultDic[@"result"]);
+//        }];
+//        [[AlipaySDK defaultService]
+//         processOrderWithPaymentResult:url
+//         standbyCallback:^(NSDictionary *resultDic) {
+//             NSLog(@"----result = %@",resultDic);//返回的支付结果 //【由于在跳转支付宝客户端支付的过程中,商户 app 在后台很可能被系统 kill 了,所以 pay 接 口的 callback 就会失效,请商户对 standbyCallback 返回的回调结果进行处理,就是在这个方法 里面处理跟 callback 一样的逻辑】
+//         }];
+//    }else if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
+//        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
+//            NSLog(@"result = %@",resultDic);
+//        }];
+//    }else if([url.host isEqualToString:@"pay"]){
+//        return  [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+//    }else{
+//        
+//    }
+//    return  YES;
+//}
 
 -(void)ConfigJPush:(NSDictionary *)launchOptions{
     //Required
