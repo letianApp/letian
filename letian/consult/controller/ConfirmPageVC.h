@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "counselorInfoModel.h"
 
 @interface ConfirmPageVC : UIViewController
+
+@property (nonatomic, strong) counselorInfoModel *counselModel;
 
 @end

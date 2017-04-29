@@ -28,7 +28,6 @@
 		0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 090733991E65665A00F21E02 /* counselorInfoModel.m */; };
 		09243E8C1EB1B30B003D2C62 /* CustomDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09243E8A1EB1B30B003D2C62 /* CustomDateViewController.m */; };
 		09243E8D1EB1B30B003D2C62 /* CustomDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09243E8B1EB1B30B003D2C62 /* CustomDateViewController.xib */; };
-		092F4ADE1EAF23B3004CCEE0 /* AliPayOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 092F4ADD1EAF23B3004CCEE0 /* AliPayOrderModel.m */; };
 		0935872E1E94BD6A0007B1D9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */; };
 		093587301E94BD9D0007B1D9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872F1E94BD9D0007B1D9 /* AVFoundation.framework */; };
 		093587321E94BDB30007B1D9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093587311E94BDB30007B1D9 /* MobileCoreServices.framework */; };
@@ -334,8 +333,6 @@
 		09243E891EB1B30B003D2C62 /* CustomDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDateViewController.h; sourceTree = "<group>"; };
 		09243E8A1EB1B30B003D2C62 /* CustomDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDateViewController.m; sourceTree = "<group>"; };
 		09243E8B1EB1B30B003D2C62 /* CustomDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomDateViewController.xib; sourceTree = "<group>"; };
-		092F4ADC1EAF23B3004CCEE0 /* AliPayOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliPayOrderModel.h; sourceTree = "<group>"; };
-		092F4ADD1EAF23B3004CCEE0 /* AliPayOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliPayOrderModel.m; sourceTree = "<group>"; };
 		0935872C1E94A1C10007B1D9 /* letian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = letian.entitlements; sourceTree = "<group>"; };
 		0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0935872F1E94BD9D0007B1D9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };

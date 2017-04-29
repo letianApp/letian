@@ -81,7 +81,7 @@
 #pragma mark 定制导航栏
 - (void)customNavigation {
     
-    self.navigationItem.title = @"孙晓平";
+    self.navigationItem.title = self.counselModel.UserName;
     _orderModel.conserlorName = self.navigationItem.title;
     
 }
@@ -426,7 +426,7 @@
 - (UIView *)setupChooseHoursView {
     
     _hoursData                  = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8"];
-    _hourStr                    = @"1";
+    _hourStr                    = _hoursData[0];
     UIView *backView            = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
 
     _chooseHoursView            = [[UIPickerView alloc]initWithFrame:CGRectMake(SCREEN_W*0.3, 0, SCREEN_W*0.4, backView.height*0.7)];
@@ -559,7 +559,7 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if ([textField isEqual:[self.view viewWithTag:113]]) {
+    if (textField == _ageTextField) {
         if(range.length + range.location > textField.text.length) {
             return NO;
         }
@@ -643,7 +643,7 @@
     __weak typeof(self) weakSelf   = self;
     
     NSMutableDictionary *params    = [[NSMutableDictionary alloc]init];
-    params[@"ConsultUserID"]       = @6;
+    params[@"ConsultUserID"]       = @(self.counselModel.UserID);
     params[@"AppointmentDate"]     = _orderModel.orderDate;
     params[@"StartTime"]           = _orderModel.orderDateTimeStart;
     params[@"EndTime"]             = _orderModel.orderDateTimeEnd;
@@ -674,7 +674,7 @@
             payPage.orderID = [responseObject[@"Result"][@"Source"][@"OrderID"] integerValue];
             payPage.orderNo = responseObject[@"Result"][@"Source"][@"OrderNo"];
             payPage.orderTypeString=responseObject[@"Result"][@"Source"][@"ConsultTypeIDString"];
-            payPage.consultorName=self.orderModel.conserlorName;
+            payPage.consultorName=strongself.orderModel.conserlorName;
             [strongself.navigationController pushViewController:payPage animated:YES];
             
         }else{

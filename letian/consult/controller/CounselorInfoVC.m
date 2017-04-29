@@ -14,6 +14,8 @@
 #import "CYUserManager.h"
 #import "LoginViewController.h"
 
+#import "UIImageView+WebCache.h"
+
 
 @interface CounselorInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -97,10 +99,9 @@
     ConfirmPageCell *cell = [ConfirmPageCell cellWithTableView:tableView];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;                        //设置cell不可以点
     
-    NSArray *lableTagArr = @[@"简介",@"擅长领域",@"咨询风格"];
+    NSArray *lableTagArr = @[@"简介",@"擅长领域",@"咨询特点",@"咨询理念"];
     cell.labelTag.text = lableTagArr[indexPath.row];
-    
-    NSArray *detialArr = @[@"国家二级心理咨询师，北京师范大学应用心理学博士，上海心理卫生学会会员，上海某国际中学心理专家，《中学生报》专栏心理专家，心理咨询师考试培训教师，国家注册高级青少年心理成长导师，海南省职业教育研究所名誉顾问",@"青少年成长问题、亲子关系，焦虑、强迫、恐惧等神经症问题，家庭情感问题、人际交往、职场压力。",@"善于通过细致耐心的心理系统分析，准确把握来访者的心理结构、人格特质，以亲和与平易的咨询风格启发和引导来访者的自我探索，陪伴来访者一起心理成长，深度挖掘来访者内在心理资源，发展其自身的心理能量。"];
+    NSArray *detialArr = @[self.counselModel.Description,self.counselModel.Expertise,self.counselModel.Specific,self.counselModel.Idea];
     cell.detialLab.text = detialArr[indexPath.row];
     
     return cell;
@@ -109,7 +110,7 @@
 
 //行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 #pragma mark 头部视图
@@ -118,9 +119,9 @@
     _headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H*0.3)];
     _headView.backgroundColor = MAINCOLOR;
     _mainTableView.tableHeaderView = _headView;
-    //咨询师头像
+//咨询师头像
     UIImageView *picView = [[UIImageView alloc]init];
-    [picView setImage:[UIImage imageNamed:@"wowomen"]];
+    [picView sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg]];
     picView.layer.cornerRadius = SCREEN_W/10;
     picView.layer.borderWidth = 1;
     picView.layer.borderColor = ([UIColor whiteColor].CGColor);
@@ -136,17 +137,15 @@
     
     float lineHeight = (_headView.height/2-_headView.width*0.1)/7;
     NSLog(@"%f",lineHeight);
-    //咨询师名字
+//咨询师名字
     UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*2/5, _headView.height-lineHeight*6, SCREEN_W/5, lineHeight*2)];
     nameLab.textAlignment = NSTextAlignmentCenter;
     nameLab.text = self.counselModel.UserName;
     nameLab.textColor = [UIColor whiteColor];
     nameLab.font = [UIFont systemFontOfSize:14 weight:2];
     [_headView addSubview:nameLab];
-//    nameLab.backgroundColor = [UIColor yellowColor];
-    //咨询师称号
+//咨询师称号
     UILabel *statusLab = [[UILabel alloc]init];
-//    statusLab.backgroundColor = [UIColor yellowColor];
     [_headView addSubview:statusLab];
     [statusLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(nameLab.mas_centerX);
@@ -155,9 +154,14 @@
         make.height.equalTo(nameLab.mas_height);
     }];
     statusLab.textAlignment = NSTextAlignmentCenter;
-    statusLab.text = @"专家心理咨询师";
     statusLab.textColor = [UIColor whiteColor];
-    statusLab.font = [UIFont systemFontOfSize:12];
+    statusLab.font = [UIFont systemFontOfSize:12];    
+    if ([_counselModel.UserTitleString containsString:@"心理咨询师"]) {
+        statusLab.text = _counselModel.UserTitleString;
+    } else {
+        statusLab.text = [NSString stringWithFormat:@"%@心理咨询师",_counselModel.UserTitleString];
+    }
+
 
 }
 
@@ -202,7 +206,7 @@
         make.height.equalTo(_tabBar.mas_height);
     }];
     priceLab.textColor                 = MAINCOLOR;
-    priceLab.text                      = @"1000元／小时";
+    priceLab.text                      = [NSString stringWithFormat:@"%ld元／小时",_counselModel.ConsultFee];
     priceLab.textAlignment             = NSTextAlignmentRight;
     priceLab.font                      = [UIFont boldSystemFontOfSize:15];
     //优惠lable
@@ -230,8 +234,9 @@
     
 //    if ([CYUserManager isHaveLogin]) {
     
-        ConfirmPageVC *cvc = [[ConfirmPageVC alloc]init];
-        [self.rt_navigationController pushViewController:cvc animated:YES];
+        ConfirmPageVC *confirmPagevc = [[ConfirmPageVC alloc]init];
+        confirmPagevc.counselModel = self.counselModel;
+        [self.rt_navigationController pushViewController:confirmPagevc animated:YES];
 //    } else {
 //        
 //        UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
