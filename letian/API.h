@@ -26,13 +26,14 @@
 #define API_MODULE_UTILS       @"Utils"
 //咨询
 #define API_MODULE_CONSULT     @"Consult"
+//咨询师设置
+#define API_MODULE_DOCTORSET   @"DoctorSet"
 //活动
 #define API_MODULE_ACTIVE      @"Active"
 //文章
 #define API_MODULE_ARTICLE     @"Article"
 //网页文章
 #define API_MODULE_WEBARTICLE     @"WebArticle"
-
 
 
 
@@ -92,6 +93,15 @@
 
 //获取咨询师详情
 #define API_NAME_GETCONSULTINFO @"GetConsultDoctorInfo"
+
+//获取咨询师在某个月份的咨询情况和设置信息
+#define API_NAME_GETCONSULTSETFORMONTH @"GetMonthCousultListInfo"
+
+//获取咨询师在某天的咨询情况和设置信息
+#define API_NAME_GETCONSULTSETFORDAY @"GetDayConsultInfo"
+
+//咨询师设置咨询时间段
+#define API_NAME_DOSETCONSULTSET @"DoSetDoctorConsultDate"
 
 //提交订单
 #define API_NAME_POSTORDER      @"DoConsultAppointment"

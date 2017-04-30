@@ -27,27 +27,22 @@
 
 @property (nonatomic, strong) NSDictionary      *counselorCategoryDic;
 @property (nonatomic, strong) NSDictionary      *counselorTitleDic;
-
 @property (nonatomic, strong) NSMutableArray      *counselorCategoryArr;
 @property (nonatomic, strong) NSMutableArray      *counselorTitleArr;
-
 @property (nonatomic, copy  ) NSArray      *priceDataSource;
-
 @property (nonatomic, strong) NSMutableDictionary      *requestParams;
 
 
 @property (nonatomic, strong) NSMutableArray      *priceData;
 @property (nonatomic, copy  ) NSString     *minPriceStr;
 @property (nonatomic, copy  ) NSString     *maxPriceStr;
-@property (nonatomic) BOOL isAllExpertise;
-@property (nonatomic) BOOL isAllTitle;
-@property (nonatomic) BOOL isAllPrice;
 @property (nonatomic) BOOL isMinPrice;
 @property (nonatomic, strong) UIPickerView *choosePriceView;
 
 @property (nonatomic, strong) UISearchBar  *searchBar;
 @property (nonatomic, strong) UIScrollView *classifiedSectionFirstLine;
 @property (nonatomic, strong) UITableView  *counselorInfoTableview;
+@property (nonatomic, strong) UILabel *noDataLab;
 @property (nonatomic, strong) UIView       *mainHeadView;
 
 
@@ -55,16 +50,6 @@
 
 @implementation ConsultViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [self customSearchBar];
-
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    
-    [self customNavigation];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -73,47 +58,59 @@
     _requestParams = [NSMutableDictionary new];
     [_requestParams setValue:@(0) forKey:@"enumPsyCategory"];
     [_requestParams setValue:@(0) forKey:@"enumUserTitle"];
-
-    [self customNavigation];
     
+    [self customSearchBar];
+    [self customNavigation];
+
     [self getCounsultTypeSource];
     [self getCounsultListSource];
     
     [self creatTableView];
 //    [self creatClassifiedSection];
+    [self setupMJRefresh];
     
 }
 
 - (void)customSearchBar {
     
-    _searchBar             = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W/2, 40)];
+    _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W/2, 40)];
     _searchBar.placeholder = @"搜索";
     _searchBar.delegate = self;
     [_searchBar setTranslucent:YES];
+    [_searchBar setShowsCancelButton:YES animated:YES];
 //    _searchBar.searchBarStyle = UISearchBarStyleProminent;
     
 }
 
-//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-//    NSLog(@"%@",searchBar.text);
-//    [_requestParams setValue:searchBar.text forKey:@"SearchName"];
-//
-//}
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    if (NULLString(searchText)) {
+        [_requestParams removeObjectForKey:@"SearchName"];
+        [self getCounsultListSource];
+    }
+}
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    NSLog(@"---%@",searchBar.text);
-    [_requestParams setValue:searchBar.text forKey:@"SearchName"];
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    if (NULLString(searchBar.text)) {
+        [_requestParams removeObjectForKey:@"SearchName"];
+    } else {
+        [_requestParams setValue:searchBar.text forKey:@"SearchName"];
+    }
     [self getCounsultListSource];
     [self.searchBar resignFirstResponder];// 放弃第一响应者
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return YES;
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    [_requestParams setValue:searchBar.text forKey:@"SearchName"];
+    [self getCounsultListSource];
+    [self.searchBar resignFirstResponder];
+
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [_searchBar resignFirstResponder];
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    searchBar.text = @"";
+    [self.searchBar resignFirstResponder];
 }
 
 #pragma mark 定制Navigation
@@ -210,6 +207,7 @@
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
         
         __strong typeof(self) strongself = weakSelf;
+        [strongself.counselorArr removeAllObjects];
         strongself.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         
         for (int i = 0; i < strongself.counselorArr.count; i++) {
@@ -218,7 +216,10 @@
         }
         
         if (strongself.counselorArr.count == 0) {
-            [MBHudSet showText:@"哈哈哈哈哈" andOnView:strongself.view];
+            [strongself.counselorInfoTableview addSubview:strongself.noDataLab];
+        } else {
+            [strongself.noDataLab removeFromSuperview];
+
         }
         
         [strongself.counselorInfoTableview reloadData];
@@ -229,19 +230,16 @@
         __strong typeof(self) strongself = weakSelf;
         [strongself.counselorInfoTableview.mj_header endRefreshing];
         [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师列表错误，错误代码：%ld",error.code]andOnView:strongself.view];
-
     }];
-    
-   
 }
 
 
 #pragma mark 创建分类栏
 - (void)creatClassifiedSection {
     
-    _isAllExpertise = YES;
-    _isAllTitle = YES;
-    _isAllPrice = YES;
+//    _isAllExpertise = YES;
+//    _isAllTitle = YES;
+//    _isAllPrice = YES;
     
     _priceDataSource = @[@"全部价格",@"最低价",@"最高价"];
 
@@ -266,17 +264,17 @@
     ParentView.tag                            = 50+n;
 
     for (int i                                = 0; i < dataArr.count; i++) {
-    UIButton *btn                             = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W/4*i+10, 8, SCREEN_W/4-12, navigationBar_H-16)];
+        UIButton *btn                             = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W/4*i+10, 8, SCREEN_W/4-12, navigationBar_H-16)];
         [btn setTitle:dataArr[i] forState:UIControlStateNormal];
         [btn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    btn.backgroundColor                       = [UIColor whiteColor];
-    btn.layer.borderColor                     = MAINCOLOR.CGColor;
-    btn.layer.borderWidth                     = 1;
-    btn.layer.cornerRadius                    = 15;
-    btn.titleLabel.font                       = [UIFont systemFontOfSize:12];
+        btn.backgroundColor                       = [UIColor whiteColor];
+        btn.layer.borderColor                     = MAINCOLOR.CGColor;
+        btn.layer.borderWidth                     = 1;
+        btn.layer.cornerRadius                    = 15;
+        btn.titleLabel.font                       = [UIFont systemFontOfSize:12];
 
-    btn.tag                                   = n*100+i+1;
+        btn.tag                                   = n*100+i+1;
         [btn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
 
         [ParentView addSubview:btn];
@@ -515,10 +513,29 @@
     _counselorInfoTableview.tableHeaderView = _mainHeadView;
     _counselorInfoTableview.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 
-    _counselorInfoTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getCounsultListSource)];
-
-
+    
+    _noDataLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*0.3, SCREEN_H*0.4, SCREEN_W*0.4, SCREEN_W*0.2)];
+    _noDataLab.layer.borderColor = MAINCOLOR.CGColor;
+    _noDataLab.layer.borderWidth = 1;
+    _noDataLab.layer.cornerRadius = 15;
+    _noDataLab.text = @"哈哈哈哈哈";
+    _noDataLab.textColor = MAINCOLOR;
+    _noDataLab.textAlignment = NSTextAlignmentCenter;
 }
+
+- (void)setupMJRefresh {
+    
+    MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getCounsultListSource)];
+    //    header.lastUpdatedTimeLabel.textColor = MAINCOLOR;
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.textColor = MAINCOLOR;
+    header.stateLabel.hidden = YES;
+    _counselorInfoTableview.mj_header = header;
+    _counselorInfoTableview.mj_header.automaticallyChangeAlpha = YES;
+
+    
+}
+
 
 //cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
