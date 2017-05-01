@@ -26,8 +26,6 @@
 		090733951E655B0600F21E02 /* consultPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 090733931E655B0600F21E02 /* consultPageCell.m */; };
 		090733961E655B0600F21E02 /* consultPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 090733941E655B0600F21E02 /* consultPageCell.xib */; };
 		0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 090733991E65665A00F21E02 /* counselorInfoModel.m */; };
-		09243E8C1EB1B30B003D2C62 /* CustomDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09243E8A1EB1B30B003D2C62 /* CustomDateViewController.m */; };
-		09243E8D1EB1B30B003D2C62 /* CustomDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09243E8B1EB1B30B003D2C62 /* CustomDateViewController.xib */; };
 		0935872E1E94BD6A0007B1D9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */; };
 		093587301E94BD9D0007B1D9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872F1E94BD9D0007B1D9 /* AVFoundation.framework */; };
 		093587321E94BDB30007B1D9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093587311E94BDB30007B1D9 /* MobileCoreServices.framework */; };
@@ -299,6 +297,10 @@
 		77FF9B7B1E696E18008C0FE7 /* whiteback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FF9B751E696E18008C0FE7 /* whiteback@3x.png */; };
 		7B0D0C8C1EB32682002F626C /* male@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B0D0C8B1EB32682002F626C /* male@3x.png */; };
 		7B0D0C8E1EB3268D002F626C /* female@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B0D0C8D1EB3268D002F626C /* female@3x.png */; };
+		7B7502731EB71B9B00A0C084 /* CustomDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7502711EB71B9B00A0C084 /* CustomDateViewController.m */; };
+		7B7502741EB71B9B00A0C084 /* CustomDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B7502721EB71B9B00A0C084 /* CustomDateViewController.xib */; };
+		7B75027B1EB71D3600A0C084 /* ConsultSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7502791EB71D3600A0C084 /* ConsultSetCell.m */; };
+		7B75027C1EB71D3600A0C084 /* ConsultSetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B75027A1EB71D3600A0C084 /* ConsultSetCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -340,9 +342,6 @@
 		090733941E655B0600F21E02 /* consultPageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = consultPageCell.xib; sourceTree = "<group>"; };
 		090733981E65665A00F21E02 /* counselorInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = counselorInfoModel.h; sourceTree = "<group>"; };
 		090733991E65665A00F21E02 /* counselorInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = counselorInfoModel.m; sourceTree = "<group>"; };
-		09243E891EB1B30B003D2C62 /* CustomDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDateViewController.h; sourceTree = "<group>"; };
-		09243E8A1EB1B30B003D2C62 /* CustomDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDateViewController.m; sourceTree = "<group>"; };
-		09243E8B1EB1B30B003D2C62 /* CustomDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomDateViewController.xib; sourceTree = "<group>"; };
 		0935872C1E94A1C10007B1D9 /* letian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = letian.entitlements; sourceTree = "<group>"; };
 		0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0935872F1E94BD9D0007B1D9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -794,6 +793,12 @@
 		77FF9B751E696E18008C0FE7 /* whiteback@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteback@3x.png"; sourceTree = "<group>"; };
 		7B0D0C8B1EB32682002F626C /* male@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "male@3x.png"; sourceTree = "<group>"; };
 		7B0D0C8D1EB3268D002F626C /* female@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "female@3x.png"; sourceTree = "<group>"; };
+		7B7502701EB71B9B00A0C084 /* CustomDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDateViewController.h; sourceTree = "<group>"; };
+		7B7502711EB71B9B00A0C084 /* CustomDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDateViewController.m; sourceTree = "<group>"; };
+		7B7502721EB71B9B00A0C084 /* CustomDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomDateViewController.xib; sourceTree = "<group>"; };
+		7B7502781EB71D3600A0C084 /* ConsultSetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultSetCell.h; sourceTree = "<group>"; };
+		7B7502791EB71D3600A0C084 /* ConsultSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsultSetCell.m; sourceTree = "<group>"; };
+		7B75027A1EB71D3600A0C084 /* ConsultSetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsultSetCell.xib; sourceTree = "<group>"; };
 		7DE455D051C315B06E3F4C61 /* Pods-letian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-letian.release.xcconfig"; path = "Pods/Target Support Files/Pods-letian/Pods-letian.release.xcconfig"; sourceTree = "<group>"; };
 		F8550220C06BB0D4BA36D36F /* Pods-letian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-letian.debug.xcconfig"; path = "Pods/Target Support Files/Pods-letian/Pods-letian.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -925,9 +930,9 @@
 		09243E881EB1B2D4003D2C62 /* 设置可预约日期 */ = {
 			isa = PBXGroup;
 			children = (
-				09243E891EB1B30B003D2C62 /* CustomDateViewController.h */,
-				09243E8A1EB1B30B003D2C62 /* CustomDateViewController.m */,
-				09243E8B1EB1B30B003D2C62 /* CustomDateViewController.xib */,
+				7B7502771EB71CD800A0C084 /* view */,
+				7B7502761EB71CCA00A0C084 /* controller */,
+				7B7502751EB71CB200A0C084 /* model */,
 			);
 			path = "设置可预约日期";
 			sourceTree = "<group>";
@@ -1873,6 +1878,33 @@
 			path = "订单";
 			sourceTree = "<group>";
 		};
+		7B7502751EB71CB200A0C084 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		7B7502761EB71CCA00A0C084 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				7B7502701EB71B9B00A0C084 /* CustomDateViewController.h */,
+				7B7502711EB71B9B00A0C084 /* CustomDateViewController.m */,
+				7B7502721EB71B9B00A0C084 /* CustomDateViewController.xib */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		7B7502771EB71CD800A0C084 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				7B7502781EB71D3600A0C084 /* ConsultSetCell.h */,
+				7B7502791EB71D3600A0C084 /* ConsultSetCell.m */,
+				7B75027A1EB71D3600A0C084 /* ConsultSetCell.xib */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
 		7C97B37F8435D00E98815F82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2035,6 +2067,7 @@
 				094FC5591E8CF6A500BFFBBB /* 乐天logoiPhoneApp_60pt@2x.png in Resources */,
 				0970CFF11E5180BF007480CB /* ConsultViewController.xib in Resources */,
 				09F6F95E1EA5D45C00A95CD5 /* consultPagTabWhite.png in Resources */,
+				7B75027C1EB71D3600A0C084 /* ConsultSetCell.xib in Resources */,
 				77F3D8631E7670D2008B5FC0 /* OrderCell.xib in Resources */,
 				770FFC6D1E961070009B81FC /* UserInfoViewController.xib in Resources */,
 				09F1E7041E6E6506007FBE81 /* share@3x.png in Resources */,
@@ -2091,6 +2124,7 @@
 				7784D89B1E6D5512004AB0CC /* date@2x.png in Resources */,
 				771F902B1E9B7FC9003B1806 /* pinkshare.png in Resources */,
 				0945B13F1E67E7F2005B7560 /* male.png in Resources */,
+				7B7502741EB71B9B00A0C084 /* CustomDateViewController.xib in Resources */,
 				77D2BF931E668D83000B9978 /* mainMessageWhite.png in Resources */,
 				771F901B1E9B69AC003B1806 /* qq@3x.png in Resources */,
 				09F1E7031E6E6506007FBE81 /* share@2x.png in Resources */,
@@ -2118,7 +2152,6 @@
 				090733801E64105A00F21E02 /* firstPageTab@2x.png in Resources */,
 				0907338A1E64105A00F21E02 /* myPagTabSel@2x.png in Resources */,
 				7784D8A81E6E532E004AB0CC /* whiteMessage@3x.png in Resources */,
-				09243E8D1EB1B30B003D2C62 /* CustomDateViewController.xib in Resources */,
 				77FF9B7B1E696E18008C0FE7 /* whiteback@3x.png in Resources */,
 				77B5C9ED1E7A4AF50028CB9E /* CompleteOrderViewController.xib in Resources */,
 				77D07EEA1E962D7900904AD9 /* ChangePwCodeViewController.xib in Resources */,
@@ -2273,6 +2306,7 @@
 				7787B36E1EAEF2FE00306527 /* openssl_wrapper.m in Sources */,
 				7722F0971EB4500B001DCF5F /* DTTimePeriodCollection.m in Sources */,
 				7769CA601E8253D000646619 /* TestListModel.m in Sources */,
+				7B7502731EB71B9B00A0C084 /* CustomDateViewController.m in Sources */,
 				0970CFF51E5180DF007480CB /* MyViewController.m in Sources */,
 				77D2BFA61E67D6A9000B9978 /* ForgetPwViewController.m in Sources */,
 				77D07EED1E9637CC00904AD9 /* ActiveModel.m in Sources */,
@@ -2300,7 +2334,6 @@
 				7787B36C1EAEF2FE00306527 /* base64.m in Sources */,
 				094FC50C1E8CBF0D00BFFBBB /* PayPageVC.m in Sources */,
 				0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */,
-				09243E8C1EB1B30B003D2C62 /* CustomDateViewController.m in Sources */,
 				770FFC681E960548009B81FC /* UserInfoModel.m in Sources */,
 				7769CA5C1E82539C00646619 /* TestDetailViewController.m in Sources */,
 				77B5BD661EADA78E0034497D /* GQNetworkManager.m in Sources */,
@@ -2324,6 +2357,7 @@
 				7787B3A91EB18DDA00306527 /* WXApiResponseHandler.m in Sources */,
 				77B5BD5B1EADA6A50034497D /* MBHudSet.m in Sources */,
 				0965FBB51E7A918900C0FBAD /* HZQDatePickerView.m in Sources */,
+				7B75027B1EB71D3600A0C084 /* ConsultSetCell.m in Sources */,
 				77B5BD141EAD9B460034497D /* NSString+Additions.m in Sources */,
 				7722F0931EB4500B001DCF5F /* DTConstants.m in Sources */,
 				7722F0991EB4500B001DCF5F /* NSDate+DateTools.m in Sources */,
