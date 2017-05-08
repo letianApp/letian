@@ -49,6 +49,7 @@
 - (IBAction)clickStartTimeBtn:(id)sender {
     
     UIView *view = [[UIView alloc]init];
+//    UIButton *btn = sender;
     
     NSLog(@"点击aa");
     [self animationbegin:sender];
