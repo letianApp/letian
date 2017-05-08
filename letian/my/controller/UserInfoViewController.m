@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "UIImage+YYExtension.h"
 #import "MJExtension.h"
+#import "BindingPhoneViewController.h"
 
 @interface UserInfoViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -20,6 +21,10 @@
 @property (nonatomic,strong)UILabel *nameLabel;
 @property (nonatomic,strong)UILabel *sexLabel;
 @property (nonatomic,strong)UILabel *phoneLabel;
+@property (nonatomic,strong)UIButton *getCodeBtn;
+@property (nonatomic,strong) NSTimer *timer;
+@property (nonatomic,assign) NSInteger time;
+@property (nonatomic,copy)NSString *inputPhoneStr;
 
 @end
 
@@ -27,6 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.time=60;
     
     self.dataArray=@[@"头像",@"昵称",@"性别"];
     
@@ -102,6 +108,7 @@
     cell.textLabel.font=[UIFont systemFontOfSize:15];
     cell.textLabel.textColor=[UIColor darkGrayColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
+
     UIView *lineView=[[UIView alloc]init];
     if (indexPath.row==0) {
         lineView.frame=CGRectMake(15, 49, SCREEN_W-15, 1);
@@ -111,8 +118,8 @@
     lineView.backgroundColor=[UIColor lightGrayColor];
     [cell.contentView addSubview:lineView];
     if (indexPath.section==0) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text=self.dataArray[indexPath.row];
-        [cell.contentView addSubview:[GQControls createImageButtonWithFrame:CGRectMake(SCREEN_W-30, 17.5, 15, 15) withImageName:@"detail"]];
         lineView.frame=CGRectMake(15, 49, SCREEN_W-15, 1);
         if (indexPath.row==0) {
             //头像
@@ -139,11 +146,13 @@
         }
     }else if (indexPath.section==1){
         //手机号
-        cell.textLabel.text=@"手机号";
+        cell.textLabel.text=[NSString stringWithFormat:@"手机号"];
         lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
-        self.phoneLabel=[GQControls createLabelWithFrame:CGRectMake(SCREEN_W-165, 15, 150, 20) andText:self.userInfoModel.MobilePhone andTextColor:[UIColor darkGrayColor] andFontSize:15];
-        self.phoneLabel.textAlignment=NSTextAlignmentRight;
-        [cell.contentView addSubview:self.phoneLabel];
+        
+        self.getCodeBtn=[GQControls createButtonWithFrame:CGRectMake(SCREEN_W-130, 5, 120, 40) andTitle:self.userInfoModel.MobilePhone andTitleColor:[UIColor darkGrayColor] andFontSize:15 andBackgroundColor:[UIColor whiteColor]];
+//        [self.getCodeBtn addTarget:self action:@selector(showInputPhoneAlert) forControlEvents:UIControlEventTouchUpInside];
+        [self.getCodeBtn.titleLabel setTextAlignment:NSTextAlignmentRight];
+        [cell.contentView addSubview:self.getCodeBtn];
     }
     return cell;
 }
@@ -168,6 +177,11 @@
             //修改性别
             [self changeSex];
         }
+    }else{
+        //绑定手机
+        if (self.getCodeBtn.userInteractionEnabled==NO) {
+//            [self inputMsgCode];
+        }
     }
 }
 
@@ -190,8 +204,11 @@
         [formData appendPartWithFileData:imageData name:@"image" fileName:fileName mimeType:@"image/jpeg"];
     } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
+        NSLog(@"上传头像result%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             [self requestData];
+        }else{
+            [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
@@ -200,6 +217,7 @@
             [MBHudSet showText:@"请求超时" andOnView:self.view];
         } else{
             [MBHudSet showText:@"请求失败" andOnView:self.view];
+            NSLog(@"%@",error);
         }
     }];
 }
@@ -213,10 +231,6 @@
         textField.placeholder=@"请输入昵称";
     }];
     [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if ([self.nameLabel.text isEqualToString:@""]) {
-            [MBHudSet showText:@"昵称不能为空！" andOnView:self.view];
-            return ;
-        }
         [self requestChangeNickName:alertController.textFields[0].text];;
     }]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
@@ -255,39 +269,32 @@
 
 -(void)changeSex{
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改性别" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder=@"请输入性别：男／女";
-    }];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self requestChangeSex:alertController.textFields[0].text];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"男" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self requestChangeSex:0];
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"女" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self requestChangeSex:1];
     }]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alertController animated:true completion:nil];
     
 }
 
--(void)requestChangeSex:(NSString *)sex{
-    NSInteger sexNum;
-    if ([sex isEqualToString:@"男"]) {
-        sexNum=0;
-    }else if ([sex isEqualToString:@"女"]){
-        sexNum=1;
-    }else {
-        sexNum=2;
-        [MBHudSet showText:@"性别为空" andOnView:self.view];
-    }
-    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+-(void)requestChangeSex:(NSInteger )sexNum{
+    
+    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_USER];
     [requestString appendString:API_NAME_CHANGESEX];
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    params[@"enumSexType"] = @(sexNum);
+    params[@"enumSexType"]         = @(sexNum);
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
-            [self requestData];//刷新界面
+            [self requestData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
@@ -300,6 +307,157 @@
     }];
 }
 
+
+#pragma mark------------发送验证码
+
+-(void)sendBindingPhoneMsgCode{
+    
+    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_UTILS];
+    [requestString appendFormat:@"%@",API_NAME_SENDMSG];
+    __weak typeof(self) weakSelf   = self;
+    NSMutableDictionary *params    = [NSMutableDictionary dictionary];
+    params[@"authCode"]            =AUTHCODE;
+    params[@"phone"]               = self.userInfoModel.MobilePhone;
+    params[@"enumSmsType"]         = @(5);
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        [MBHudSet dismiss:self.view];
+        NSLog(@"绑定手机发送验证码%@",responseObject);
+        NSLog(@"Msg%@",responseObject[@"Msg"]);
+        if([responseObject[@"Code"] integerValue] == 200){
+            [weakSelf inputMsgCode];
+        }else{
+            [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+        }
+    }];
+}
+
+#pragma mark------------输入验证码
+
+-(void)inputMsgCode{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"短信验证" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder=@"请输入验证码";
+    }];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self checkMsgCode:alertController.textFields[0].text];;
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alertController animated:true completion:nil];
+}
+
+#pragma mark--------------验证验证码
+- (void)checkMsgCode:(NSString *)msgCode{
+    
+    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_UTILS];
+    [requestString appendFormat:@"%@",API_NAME_CHECKCODE];
+    NSMutableDictionary *params    = [NSMutableDictionary dictionary];
+    params[@"verifyCode"]            =msgCode;
+    params[@"phone"]               = self.userInfoModel.MobilePhone;
+    params[@"enumSmsType"]         = @(5);
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        [MBHudSet dismiss:self.view];
+        NSLog(@"验证短信验证码%@",responseObject);
+        if([responseObject[@"Code"] integerValue] == 200){
+            [self bindingMoblePhone:self.inputPhoneStr andMsgCode:msgCode];
+        }else{
+            [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+        if (error.code == NSURLErrorCancelled) return;
+        
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+        }    }];
+    
+}
+
+#pragma mark------------输入新手机号
+
+-(void)showInputPhoneAlert{
+    
+    self.getCodeBtn.userInteractionEnabled = NO;
+    [self.getCodeBtn setTitle:[NSString stringWithFormat:@"重新发送(%ld)",(long)self.time] forState:UIControlStateNormal];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeText) userInfo:nil repeats:YES];
+    [self.getCodeBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    self.timer = timer;
+
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"绑定新号码" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder=@"请输入需要绑定的手机号";
+    }];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"发送验证码" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.inputPhoneStr=alertController.textFields[0].text;
+        [self sendBindingPhoneMsgCode];
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alertController animated:true completion:nil];
+}
+
+#pragma mark------------绑定新手机
+
+- (void)bindingMoblePhone:(NSString *)phone andMsgCode:(NSString *)msgCode{
+    
+    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_USER];
+    [requestString appendFormat:@"%@",API_NAME_BINDINGPHONE];
+    NSMutableDictionary *params    = [NSMutableDictionary dictionary];
+    params[@"VerifyCode"]            =msgCode;
+    params[@"Phone"]               = phone;
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        [MBHudSet dismiss:self.view];
+        NSLog(@"修改绑定手机%@",responseObject);
+        if([responseObject[@"Code"] integerValue] == 200){
+            [self.tableView reloadData];
+        }else{
+            [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+        }    }];
+    
+}
+
+
+//发送验证码倒计时文字
+-(void) changeText
+{
+    self.time--;
+    if (self.time < 0) {
+        [self.timer invalidate];
+        self.timer = nil;
+        self.time = 60;
+        self.getCodeBtn.userInteractionEnabled = YES;
+        [self.getCodeBtn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
+        [self.getCodeBtn setTitle:[NSString stringWithFormat:@"重新发送"] forState:UIControlStateNormal];
+        return;
+    }
+    [self.getCodeBtn setTitle:[NSString stringWithFormat:@"重新发送(%ld)",(long)self.time] forState:UIControlStateNormal];
+}
 
 #pragma mark------------获取用户信息
 

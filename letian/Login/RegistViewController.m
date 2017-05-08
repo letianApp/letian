@@ -54,9 +54,9 @@
 
     [self.nextButton addTarget:self action:@selector(nextButtonClick) forControlEvents:UIControlEventTouchUpInside];
     
-    
 
 }
+
 
 #pragma mark   ----------获取验证码
 
@@ -167,7 +167,8 @@
 
 //下一步
 - (void)nextButtonClick{
-    
+    [self.phoneTextField resignFirstResponder];
+    [self.codeTextField resignFirstResponder];
     
     GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     

@@ -40,17 +40,17 @@
         NSLog(@"btnIndex:%d",btnIndex);
         NSInteger platformType;
         if (btnIndex==0) {
-            platformType=2;
+            platformType=ShareTo_WechatTimeLine;
         }else if (btnIndex==1){
-            platformType=1;
+            platformType=ShareTo_WechatSession;
         }else if (btnIndex==2){
-            platformType=0;
+            platformType=ShareTo_Sina;
         }else if (btnIndex==3){
-            platformType=5;
+            platformType=ShareTo_Qzone;
         }else if (btnIndex==4){
-            platformType=13;
+            platformType=ShareTo_Sms;
         }else {
-            platformType=4;
+            platformType=ShareTo_QQ;
         }
         [self shareWebPageToPlatformType:platformType];
     } cancelBlock:nil];
@@ -66,7 +66,11 @@
     shareObject.webpageUrl =self.testUrl;
     messageObject.shareObject = shareObject;
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-        [MBHudSet showText:@"请分享失败" andOnView:self.view];
+        if (error) {
+            [MBHudSet showText:@"分享失败" andOnView:self.view];
+        }else{
+            [MBHudSet showText:@"分享成功" andOnView:self.view];
+        }
     }];
 }
 

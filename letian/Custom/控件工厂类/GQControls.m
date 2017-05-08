@@ -58,4 +58,9 @@
     return switchView;
 }
 
++(UIView *)createViewWithFrame:(CGRect)frame andBackgroundColor:(UIColor *)color{
+    UIView *view=[[UIView alloc]initWithFrame:frame];
+    view.backgroundColor=color;
+    return view;
+}
 @end

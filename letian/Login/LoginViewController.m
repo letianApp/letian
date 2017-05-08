@@ -12,9 +12,8 @@
 #import "RegistViewController.h"
 #import "ForgetPwViewController.h"
 #import "CustomCYLTabBar.h"
-#import "NSString+YYExtension.h"
 #import "JPUSHService.h"
-#import "CYUserManager.h"
+#import "GQUserManager.h"
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *acountTextField;
 
@@ -54,11 +53,14 @@
 
 -(void)loginBtnClicked{
     
+    [self.acountTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    
     if ([self.acountTextField.text isEqualToString:@""]) {
         [MBHudSet showText:@"请输入账号" andOnView:self.view];
         return;
     }
-    
+
     GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_USER];
@@ -68,84 +70,41 @@
     NSString *timeSp               = [NSString timestamp];//时间戳
     NSString* nonce                = [NSString randomString];//随机数
     //用户名
-    params[@"LoginName"]               = [self.acountTextField.text.trim stringByReplacingOccurrencesOfString:@" " withString:@""];
-    //密码
-    params[@"Password"]            =self.passwordTextField.text;
-    
-    //加密签名字符串
+    params[@"LoginName"]           = [self.acountTextField.text.trim stringByReplacingOccurrencesOfString:@" " withString:@""];
+    params[@"Password"]            = self.passwordTextField.text;
     params[@"Signature"]           = [signature YYApi_SHA1Encryption:nonce timeSp:timeSp];
-    
-    //时间戳
     params[@"Timestamp"]           = timeSp;
-
-    //随机数
     params[@"Nonce"]               = nonce;
-
-    //应用接入ID
     params[@"AppId"]               = APPID;
+    params[@"PushNo"]              = [JPUSHService registrationID];;
 
-    
-    params[@"PushNo"]               = [JPUSHService registrationID];;
-
-    params[@"enumUserType"]         =@1;
-    
+    NSLog(@"推送号：。。。。。%@",params[@"PushNo"]);
     __weak typeof(self) weakSelf   = self;
-    
     [MBHudSet showStatusOnView:self.view];
-    
-    NSLog(@"%@",requestString);
-    
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
         [MBHudSet dismiss:self.view];
-            
         NSLog(@"登录%@",responseObject);
         NSLog(@"Msg%@",responseObject[@"Msg"]);
-
         if([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES){
-            //存储用户信息
-            [CYUserManager saveUserData:@{@"UserId":responseObject[@"Result"][@"Source"][@"userid"]} andToken:responseObject[@"Result"][@"Source"][@"access_token"]];
-            
+            [GQUserManager saveUserData:@{@"UserId":responseObject[@"Result"][@"Source"][@"userid"]} andToken:responseObject[@"Result"][@"Source"][@"access_token"]];
             NSLog(@"token:%@",kFetchToken);
-
-            [[NSUserDefaults standardUserDefaults] setObject:self.acountTextField.text.trim forKey:kUserPhoneKey];
-            
+            [[NSUserDefaults standardUserDefaults] setObject:weakSelf.acountTextField.text.trim forKey:kUserPhoneKey];
+            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"enumUserType"] forKey:kUserType];
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
-            
-            
-            CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
+            CustomCYLTabBar *tabBarController                              = [[CustomCYLTabBar alloc] init];
             [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
-            
-            
-            
         }else{
-            
-
             [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
         }
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
         [MBHudSet dismiss:self.view];
-
-        
-        // 如果是取消了任务，就不算请求失败，就直接返回
         if (error.code == NSURLErrorCancelled) return;
-        
         if (error.code == NSURLErrorTimedOut) {
-            
             [MBHudSet showText:@"登录超时" andOnView:self.view];
-        
-        } else{
-            
+        }else{
             [MBHudSet showText:@"登录失败" andOnView:self.view];
-
         }
     }];
-    
-    
-  
-    
 }
 
 
@@ -186,7 +145,6 @@
     [self.acountTextField resignFirstResponder];
     
     [self.passwordTextField resignFirstResponder];
-    
     
 }
 - (void)didReceiveMemoryWarning {

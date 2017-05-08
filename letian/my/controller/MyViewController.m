@@ -15,7 +15,7 @@
 #import "CustomDateViewController.h"
 #import "UserInfoModel.h"
 #import "MJExtension.h"
-#import "CYUserManager.h"
+#import "GQUserManager.h"
 #import "LoginViewController.h"
 #import "UserInfoViewController.h"
 #import <UShareUI/UShareUI.h>
@@ -29,7 +29,7 @@
 @property(nonatomic,strong)UserInfoModel *userInfoModel;
 @property(nonatomic,strong)UILabel *nameLabel;
 @property(nonatomic,strong)UIImageView *headImageView;
-@property (nonatomic, strong) UIView *holdView;//下拉遮罩层
+//@property (nonatomic, strong) UIView *holdView;//下拉遮罩层
 
 @end
 
@@ -71,6 +71,7 @@
     [requestString appendString:API_NAME_GETUSERINFO];
     __weak typeof(self) weakSelf = self;
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    NSLog(@"token------------%@",kFetchToken);
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
@@ -78,7 +79,7 @@
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             weakSelf.userInfoModel=[UserInfoModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
             self.nameLabel.text=weakSelf.userInfoModel.NickName;
-            [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.userInfoModel.HeadImg] placeholderImage:[UIImage imageNamed:@"headImage"]];
+            [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.userInfoModel.HeadImg] placeholderImage:[UIImage imageNamed:@"emptyHeadImage"]];
             [_tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -104,30 +105,37 @@
     [self.view addSubview:tableView];
     self.tableView = tableView;
     self.tableView.tableHeaderView=[self createHeadView];
-    _holdView = [[UIView alloc]init];
-    _holdView.backgroundColor = MAINCOLOR;
-    [tableView addSubview:_holdView];
+//    _holdView = [[UIView alloc]init];
+//    _holdView.backgroundColor = MAINCOLOR;
+//    [tableView addSubview:_holdView];
 }
 
 
 #pragma mark--------下拉显示遮罩层
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.tag == 10) {
-        _holdView.frame = CGRectMake(0, 0, SCREEN_W, scrollView.contentOffset.y);
-    }
+//    if (scrollView.tag == 10) {
+//        _holdView.frame = CGRectMake(0, 0, SCREEN_W, scrollView.contentOffset.y);
+//    }
 }
 
 
 #pragma mark--------账户头像
 
-- (UIView *)createHeadView {
-    UIView *headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 220)];
-    headView.backgroundColor=MAINCOLOR;
+- (UIImageView *)createHeadView {
+    UIImageView *headView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_W*0.7)];
+    headView.image=[UIImage imageNamed:@"mine_bg"];
+    headView.contentMode=UIViewContentModeScaleToFill;
+    headView.userInteractionEnabled=YES;
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:headView.bounds];
+    toolbar.barStyle = UIBarStyleBlackOpaque;
+    toolbar.alpha=0.7;
+    [headView addSubview:toolbar];
+    
     //已登录则显示头像昵称
-    if ([CYUserManager isHaveLogin]) {
+    if ([GQUserManager isHaveLogin]) {
         //头像
-        UIImageView *headImageView=[[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_W-100)/2, 55, 100, 100)];
+        UIImageView *headImageView=[[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_W-100)/2, (headView.height-130)/2, 100, 100)];
         headImageView.layer.masksToBounds=YES;
         headImageView.layer.cornerRadius=50;
         [headView addSubview:headImageView];
@@ -136,7 +144,7 @@
         headImageView.userInteractionEnabled=YES;
         self.headImageView=headImageView;
         //用户名
-        UILabel *nameLabel=[GQControls createLabelWithFrame:CGRectMake((SCREEN_W-150)/2, 160, 150, 20) andText:@"" andTextColor:[UIColor whiteColor] andFontSize:16];
+        UILabel *nameLabel=[GQControls createLabelWithFrame:CGRectMake((SCREEN_W-150)/2, headImageView.height+((headView.height-130)/2)+10, 150, 20) andText:@"" andTextColor:[UIColor whiteColor] andFontSize:16];
         nameLabel.textAlignment=NSTextAlignmentCenter;
         [headView addSubview:nameLabel];
         self.nameLabel=nameLabel;
@@ -147,7 +155,7 @@
         [headView addSubview:messageBtn];
     }else{
         //未登录则显示登录按钮
-        UIButton *loginBtn=[GQControls createButtonWithFrame:CGRectMake((SCREEN_W-100)/2, (220-40)/2, 100, 40) andTitle:@"登录/注册" andTitleColor:[UIColor whiteColor] andFontSize:15 andTag:100 andMaskToBounds:YES andRadius:20 andBorderWidth:1 andBorderColor:[UIColor whiteColor].CGColor];
+        UIButton *loginBtn=[GQControls createButtonWithFrame:CGRectMake((SCREEN_W-100)/2, (headView.height-40)/2, 100, 40) andTitle:@"登录/注册" andTitleColor:[UIColor whiteColor] andFontSize:15 andTag:100 andMaskToBounds:YES andRadius:20 andBorderWidth:1 andBorderColor:[UIColor whiteColor].CGColor];
         [loginBtn addTarget:self action:@selector(loginButtonClick) forControlEvents:UIControlEventTouchUpInside];
         [headView addSubview:loginBtn];
     }
@@ -178,7 +186,7 @@
 - (void)messageButtonClicked {
     MessageViewController *messageVc=[[MessageViewController alloc]init];
     messageVc.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:messageVc animated:YES];
+    [self.navigationController pushViewController:messageVc animated:NO];
 }
 
 
@@ -246,15 +254,14 @@
 
 #pragma mark--------点击进入订单列表
 - (void)orderSrateButtonClick:(UIButton *)btn {
-    NSLog(@"进入订单列表");
     OrderViewController *orderVc=[[OrderViewController alloc]init];
     orderVc.hidesBottomBarWhenPushed=YES;
     if (btn.tag==100) {
-        orderVc.state=1;
+        orderVc.orderState=1;
     }else if (btn.tag==101){
-        orderVc.state=5;
+        orderVc.orderState=5;
     }else if (btn.tag==102){
-        orderVc.state=10;
+        orderVc.orderState=10;
     }
     [self.navigationController pushViewController:orderVc animated:NO];
 }
@@ -262,7 +269,7 @@
 -(void)allOrderLabelTouched{
     OrderViewController *orderVc=[[OrderViewController alloc]init];
     orderVc.hidesBottomBarWhenPushed=YES;
-    orderVc.state=100;
+    orderVc.orderState=100;
     [self.navigationController pushViewController:orderVc animated:NO];
 }
 
@@ -275,7 +282,7 @@
         //跳到系统设置
         SettingViewController *settingVc=[[SettingViewController alloc]init];
         settingVc.hidesBottomBarWhenPushed=YES;
-        [self.navigationController pushViewController:settingVc animated:YES];
+        [self.navigationController pushViewController:settingVc animated:NO];
     }else if(indexPath.row==1) {
         //拨打客服电话，打完之后不会留在通讯录而是回到应用
 //        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"021-37702979"];
@@ -285,7 +292,7 @@
         
         CustomDateViewController *customDateVc = [[CustomDateViewController alloc]init];
         customDateVc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:customDateVc animated:YES];
+        [self.navigationController pushViewController:customDateVc animated:NO];
         
     }else if(indexPath.row==2) {
         //分享
@@ -296,17 +303,17 @@
             NSLog(@"btnIndex:%d",btnIndex);
             NSInteger platformType;
             if (btnIndex==0) {
-                platformType=2;
+                platformType=ShareTo_WechatTimeLine;
             }else if (btnIndex==1){
-                platformType=1;
+                platformType=ShareTo_WechatSession;
             }else if (btnIndex==2){
-                platformType=0;
+                platformType=ShareTo_Sina;
             }else if (btnIndex==3){
-                platformType=5;
+                platformType=ShareTo_Qzone;
             }else if (btnIndex==4){
-                platformType=13;
+                platformType=ShareTo_Sms;
             }else {
-                platformType=4;
+                platformType=ShareTo_QQ;
             }
             [self shareWebPageToPlatformType:platformType];
         } cancelBlock:^{
@@ -317,7 +324,7 @@
         AboutUsPageVC *aboutUsPage = [[AboutUsPageVC alloc]init];
         aboutUsPage.hidesBottomBarWhenPushed = YES;
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        [self.navigationController pushViewController:aboutUsPage animated:YES];
+        [self.navigationController pushViewController:aboutUsPage animated:NO];
     }
 }
 
@@ -331,7 +338,11 @@
     shareObject.webpageUrl =@"http://www.wzright.com/";
     messageObject.shareObject = shareObject;
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-        [MBHudSet showText:@"分享失败" andOnView:self.view];
+        if (error) {
+            [MBHudSet showText:@"分享失败" andOnView:self.view];
+        }else{
+            [MBHudSet showText:@"分享成功" andOnView:self.view];
+        }
     }];
 }
 

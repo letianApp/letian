@@ -1,9 +1,9 @@
 //
 //  GQSegment.h
-//  GQSegment
+//  letian
 //
-//  Created by 郭茜 on 12/19/15.
-//  Copyright © 2015 letian. All rights reserved.
+//  Created by 郭茜 on 2017/3/6.
+//  Copyright © 2017年 J. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

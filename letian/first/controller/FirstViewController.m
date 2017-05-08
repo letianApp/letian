@@ -7,10 +7,9 @@
 //
 
 #import "FirstViewController.h"
-#import "YYCycleScrollView.h"
 #import "HomeCell.h"
 #import "LoginViewController.h"
-#import "WebArticleViewController.h"
+#import "CategoryViewController.h"
 #import "TestListViewController.h"
 #import "ActivityListViewController.h"
 #import "CustomCYLTabBar.h"
@@ -19,25 +18,24 @@
 #import "MJExtension.h"
 #import "UIImageView+WebCache.h"
 #import "TestListModel.h"
-#import "CYUserManager.h"
+#import "GQUserManager.h"
 #import "MessageViewController.h"
-#import "WebArticleListViewController.h"
 #import "TestDetailViewController.h"
+#import "GQScrollView.h"
 
-@interface FirstViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface FirstViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
-@property(nonatomic,strong)UIView *headBgView;
+@property (nonatomic,strong) UILabel *sectionHeaderLabel;
 @property (nonatomic,strong) NSMutableArray <TestListModel *> *testList;
-
 
 @end
 
 @implementation FirstViewController
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
+//- (UIStatusBarStyle)preferredStatusBarStyle {
+//    return UIStatusBarStyleLightContent;
+//}
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden=YES;
@@ -57,27 +55,43 @@
     
     self.automaticallyAdjustsScrollViewInsets=NO;
     
-    [self createHeadBgView];
-    
     [self createTableView];
     
     [self requestData];
     
+    [self setUpRefresh];
+    
 }
 
+#pragma mark-------下拉刷新
+
+-(void)setUpRefresh
+{
+    MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+}
 
 #pragma mark-------创建TableView
 
 -(void)createTableView
 {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-44) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-49) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    tableView.showsVerticalScrollIndicator=NO;
     [self.view addSubview:tableView];
     self.tableView = tableView;
-    self.tableView.tableHeaderView=self.headBgView;
+    self.tableView.tableHeaderView=[self createHeadBgView];
+    UILabel *footLabel=[GQControls createLabelWithFrame:CGRectMake(0, 0, SCREEN_W, 30) andText:@"没有更多内容咯～" andTextColor:MAINCOLOR andFontSize:10];
+    footLabel.textAlignment=NSTextAlignmentCenter;
+    self.tableView.tableFooterView=footLabel;
+
 }
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -87,6 +101,33 @@
 {
     return 85;
 }
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UILabel *funnyTestModuleLabel=[GQControls createLabelWithFrame:CGRectMake(0, 0, SCREEN_W, 40) andText:@"**** 趣味小测试 ****" andTextColor:MAINCOLOR andFontSize:15];
+    funnyTestModuleLabel.backgroundColor=WEAKPINK;
+    funnyTestModuleLabel.textAlignment=NSTextAlignmentCenter;
+    self.sectionHeaderLabel=funnyTestModuleLabel;
+    return self.sectionHeaderLabel;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 40;
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (self.tableView.contentOffset.y>=325) {
+        
+        self.sectionHeaderLabel.hidden=YES;
+        self.navigationItem.title=@"趣味心理测试";
+        self.navigationController.navigationBarHidden=NO;
+    }else{
+        self.sectionHeaderLabel.hidden=NO;
+        self.navigationController.navigationBarHidden=YES;
+    }
+}
+
+
+
 #pragma mark------cell定制
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -106,19 +147,23 @@
     [self.navigationController pushViewController:articleVc animated:NO];
 }
 
+
 #pragma mark------获取趣味测试列表
 
 -(void)requestData
 {
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
-    NSMutableString *requestString = [NSMutableString stringWithString:@"http://bapi.xinli001.com/ceshi/ceshis.json/?rows=10&offset=0&category_id=2&rmd=-1&key=86467ca472d76f198f8aa89d186fa85e"];
+    NSMutableString *requestString = [NSMutableString stringWithString:@"http://bapi.xinli001.com/ceshi/ceshis.json/?rows=50&offset=0&category_id=2&rmd=-1&key=86467ca472d76f198f8aa89d186fa85e"];
     __weak typeof(self) weakSelf = self;
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [weakSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:self.view];
+        NSLog(@"趣味测试列表%@",responseObject);
         weakSelf.testList=[TestListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [_tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [weakSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:self.view];
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
@@ -132,11 +177,11 @@
 
 #pragma mark------头视图
 
--(void)createHeadBgView
+-(UIView *)createHeadBgView
 {
-    self.headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 325)];
+    UIView *headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 325)];
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 220, SCREEN_W, 100)];
-    NSArray *nameArray=@[@"- 咨询 -",@"- 文章 -",@"- 测试 -",@"- 活动 -"];
+    NSArray *nameArray=@[@"- 预约咨询 -",@"- 心理专栏 -",@"- 专业测试 -",@"- 沙龙活动 -"];
     for (NSInteger i=0; i<2; i++) {
         for (NSInteger j=0; j<2; j++) {
             UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/2*j, i*50, SCREEN_W/2, 50)];
@@ -154,20 +199,16 @@
     }
     //模块分割线
     for (NSInteger i=0; i<2; i++) {
-        UIView *horizontalLine=[[UIView alloc]initWithFrame:CGRectMake(20*(i+1)+i*((SCREEN_W-100)/2)+40*i, 50, (SCREEN_W-100)/2, 1)];
-        horizontalLine.backgroundColor=[UIColor groupTableViewBackgroundColor];
+        UIView *horizontalLine=[GQControls createViewWithFrame:CGRectMake(20*(i+1)+i*((SCREEN_W-100)/2)+40*i, 50, (SCREEN_W-100)/2, 1) andBackgroundColor:[UIColor groupTableViewBackgroundColor]];
         [view addSubview:horizontalLine];
-        UIView *verticalLine=[[UIView alloc]initWithFrame:CGRectMake(SCREEN_W/2, 15*i+15*(i+1)+i*15, 1, 20)];
-        verticalLine.backgroundColor=[UIColor groupTableViewBackgroundColor];
+        
+        UIView *verticalLine=[GQControls createViewWithFrame:CGRectMake(SCREEN_W/2, 15*i+15*(i+1)+i*15, 1, 20) andBackgroundColor:[UIColor groupTableViewBackgroundColor]];
         [view addSubview:verticalLine];
     }
-    UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 320, SCREEN_W, 5)];
-    lineView.backgroundColor=[UIColor groupTableViewBackgroundColor];
-    [self.headBgView addSubview:lineView];
-    [self.headBgView addSubview:[self createScrollView]];
-    [self.headBgView addSubview:view];
-//    [self createSearchBarOnView:self.headBgView];
-    [self createmsgBtnOnView:self.headBgView];
+    [headBgView addSubview:[self createScrollView]];
+    [headBgView addSubview:view];
+    [self createmsgBtnOnView:headBgView];
+    return headBgView;
 }
 
 
@@ -182,9 +223,9 @@
         [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
     //跳到文章列表
     }else if (tap.view.tag==101) {
-        WebArticleListViewController *articleVc=[[WebArticleListViewController alloc]init];
+        CategoryViewController *articleVc=[[CategoryViewController alloc]init];
         articleVc.hidesBottomBarWhenPushed=YES;
-        [self.navigationController pushViewController:articleVc animated:YES];
+        [self.navigationController pushViewController:articleVc animated:NO];
     //跳到测试
     }else if (tap.view.tag==102) {
        TestListViewController *testVc=[[TestListViewController alloc]init];
@@ -199,45 +240,22 @@
 }
 
 
-#pragma mark 定制首页轮播图
+#pragma mark 轮播图
 
--(YYCycleScrollView *)createScrollView
+-(GQScrollView *)createScrollView
 {
-    YYCycleScrollView *cycleScrollView = [[YYCycleScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, 220) animationDuration:4.0];
-    NSMutableArray *viewArray = [[NSMutableArray alloc] init];
+    NSMutableArray *imageArray = [[NSMutableArray alloc] init];
     for (int i = 0; i < 4; i++) {
-        UIImageView *tempImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, 220)];
-        tempImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"index_slide_0%d.jpg",i+1]];
-        tempImageView.contentMode = UIViewContentModeScaleAspectFill;
-        tempImageView.clipsToBounds = true;
-        [viewArray addObject:tempImageView];
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"index_slide_0%d.jpg",i+1]];
+        [imageArray addObject:image];
     }
-    [cycleScrollView setFetchContentViewAtIndex:^UIView *(NSInteger(pageIndex)) {
-        return [viewArray objectAtIndex:pageIndex];
+    GQScrollView *scrollView = [[GQScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, 220) withImages:imageArray withIsRunloop:YES withBlock:^(NSInteger index) {
+        NSLog(@"点击了index%zd",index);
     }];
-    [cycleScrollView setTotalPagesCount:^NSInteger{
-        return 4;
-    }];
-    [cycleScrollView setTapActionBlock:^(NSInteger(pageIndex)) {
-        NSLog(@"点击的相关的页面%ld",(long)pageIndex);
-    }];
-    return cycleScrollView;
+    scrollView.color_currentPageControl=MAINCOLOR;
+    return scrollView;
 }
 
-
-#pragma mark 搜索栏
-
--(void)createSearchBarOnView:(UIView *)bgView
-{
-    UISearchBar * searchbar = [[UISearchBar alloc]initWithFrame:CGRectMake(100, 20, SCREEN_W-160, 40)];
-    searchbar.delegate=self;
-    searchbar.barStyle=UISearchBarStyleDefault;
-    searchbar.searchBarStyle=UISearchBarStyleDefault;
-    searchbar.placeholder=@"请输入关键字";
-    [bgView addSubview:searchbar];
-    UIImage* searchBarBg = [self GetImageWithColor:[UIColor clearColor] andHeight:32.0f];
-    [searchbar setBackgroundImage:searchBarBg];
-}
 
 
 #pragma mark ----创建消息按钮
@@ -256,7 +274,7 @@
 -(void)msgBtnClick
 {
     //已登陆
-    if ([CYUserManager isHaveLogin]) {
+    if ([GQUserManager isHaveLogin]) {
         MessageViewController *messageVc=[[MessageViewController alloc]init];
         messageVc.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:messageVc animated:YES];
@@ -275,57 +293,23 @@
 }
 
 
-#pragma mark -----------------searchBarDelegate
-
-//即将开始编辑
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-    searchBar.showsCancelButton=YES;
-}
-//点击返回按钮
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-    [searchBar resignFirstResponder];
-    searchBar.showsCancelButton=NO;
-}
-//点击搜索
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-    [searchBar resignFirstResponder];
-    searchBar.showsCancelButton=NO;
-}
-
-
-#pragma mark------实现搜索条背景透明化
-
-- (UIImage*) GetImageWithColor:(UIColor*)color andHeight:(CGFloat)height{
-    CGRect r= CGRectMake(0.0f, 0.0f, 1.0f, height);
-    UIGraphicsBeginImageContext(r.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, r);
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return img;
-}
-
-
 #pragma mark------特效
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    CATransform3D rotation;
-    rotation = CATransform3DMakeRotation((90.0*M_PI/180), 0.0, 0.7, 0.4);
-    rotation.m44 = 1.0/-600;
-    cell.layer.shadowColor = [[UIColor blackColor]CGColor];
-    cell.layer.shadowOffset = CGSizeMake(10, 10);
-    cell.alpha = 0;
-    cell.layer.transform = rotation;
-    cell.layer.anchorPoint = CGPointMake(0.5, 0.5);
-    [UIView beginAnimations:@"rotaion" context:NULL];
-    [UIView setAnimationDuration:0.3];
-    cell.layer.transform = CATransform3DIdentity;
-    cell.alpha = 1;
-    cell.layer.shadowOffset = CGSizeMake(0, 0);
-    [UIView commitAnimations];
+//    CATransform3D rotation;
+//    rotation = CATransform3DMakeRotation((90.0*M_PI/180), 0.0, 0.7, 0.4);
+//    rotation.m44 = 1.0/-600;
+//    cell.layer.shadowColor = [[UIColor blackColor]CGColor];
+//    cell.layer.shadowOffset = CGSizeMake(10, 10);
+//    cell.alpha = 0;
+//    cell.layer.transform = rotation;
+//    cell.layer.anchorPoint = CGPointMake(0.5, 0.5);
+//    [UIView beginAnimations:@"rotaion" context:NULL];
+//    [UIView setAnimationDuration:0.3];
+//    cell.layer.transform = CATransform3DIdentity;
+//    cell.alpha = 1;
+//    cell.layer.shadowOffset = CGSizeMake(0, 0);
+//    [UIView commitAnimations];
 }
 
 - (void)didReceiveMemoryWarning {

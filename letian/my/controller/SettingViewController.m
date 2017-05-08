@@ -7,14 +7,14 @@
 //
 
 #import "SettingViewController.h"
-#import "CYUserManager.h"
+#import "GQUserManager.h"
 #import "LoginViewController.h"
 #import "ChangePwCodeViewController.h"
+#import "SDImageCache.h"
 
 @interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic,strong) NSArray *dataArray;
 
 @end
 
@@ -23,8 +23,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dataArray=@[@"修改密码",@"清除缓存"];
-
     [self createTableView];
     
     [self createCancelButton];
@@ -61,7 +59,7 @@
 #pragma mark--------注销登录
 
 -(void)cancelButtonClick{
-   [CYUserManager removeAllUserInfo];
+   [GQUserManager removeAllUserInfo];
    LoginViewController *loginVc=[[LoginViewController alloc]init];
    [self.navigationController pushViewController:loginVc animated:YES];
 }
@@ -113,6 +111,7 @@
     cell.textLabel.font=[UIFont systemFontOfSize:15];
     cell.textLabel.textColor=[UIColor darkGrayColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    
     UIView *lineView=[[UIView alloc]init];
     //分割线
     if (indexPath.row==0) {
@@ -124,8 +123,42 @@
     [cell.contentView addSubview:lineView];
     //cell赋值
     if (indexPath.section==0) {
-        cell.textLabel.text=self.dataArray[indexPath.row];
-        [cell.contentView addSubview:[GQControls createImageButtonWithFrame:CGRectMake(SCREEN_W-30, 17.5, 15, 15) withImageName:@"detail"]];
+        if (indexPath.row==0) {
+            cell.textLabel.text=@"修改密码";
+        }else if (indexPath.row==1) {
+            cell.textLabel.text  = @"清除缓存(正在计算中........)";
+            cell.userInteractionEnabled = NO;
+            
+            UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            [indicatorView startAnimating];
+            cell.accessoryView =indicatorView;            
+            [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
+                NSString *cachesFile = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"default"];
+                NSInteger size = cachesFile.fileSize;
+                CGFloat unit = 1000.0;
+                NSString *sizeText = @"";
+                //大于1GB
+                if (size>= pow(10, 9)) {
+                    sizeText = [NSString stringWithFormat:@"%.1fGB",size / unit / unit/unit];
+                }else if (size>= pow(10, 6) ){//大于1MB
+                    sizeText = [NSString stringWithFormat:@"%.1fMB",size / unit / unit];
+                }else if (size>= pow(10, 3)  ){//大于1KB
+                    sizeText = [NSString stringWithFormat:@"%.1fKB",size / unit];
+                }else{
+                    sizeText = [NSString stringWithFormat:@"%zdB",size];
+                }
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [sizeText isEqualToString:@"0B"] ? (cell.textLabel.text  = @"清除缓存") : (cell.textLabel.text = [NSString stringWithFormat:@"清除缓存(%@)",sizeText]);
+                    cell.userInteractionEnabled = YES;
+                    cell.accessoryView = nil;
+                    
+                }];
+                
+            }];
+
+        }
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
     }else if (indexPath.section==1){
         cell.textLabel.text=@"活动更新推送";
         lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
@@ -143,22 +176,23 @@
 {
     //推送默认是打开的
     switchView.selected=!switchView.selected;
-    BOOL state;
+    NSString *state;
     if (switchView.selected==1) {
-        state=NO;
+        state=@"false";
     }else{
-        state=YES;
+        state=@"true";
     }
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_USER];
     [requestString appendString:API_NAME_SETPOSTACTIVE];
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    params[@"isPostActive"]=@(state);
+    params[@"isPostActive"]=state;
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
         NSLog(@"活动更新推送responseObject=%@",responseObject);
+        [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
     }];    
@@ -176,7 +210,19 @@
             [self.navigationController pushViewController:changePwCodeVc animated:YES];
         }else if (indexPath.row==1){
             //清除缓存
+            UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
             
+            [[SDImageCache sharedImageCache] cleanDiskWithCompletionBlock:^{
+                [NSThread sleepForTimeInterval:0.5];
+                NSString *cachesFile = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"default"];
+                [[NSFileManager defaultManager] removeItemAtPath:cachesFile error:nil];
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [MBHudSet showText:@"缓存清除成功！" andOnView:self.view];
+                    cell.textLabel.text  = @"清除缓存";
+                    cell.userInteractionEnabled = YES;
+                    
+                }];
+            }];
         }
     }else if (indexPath.section==1){
         if (indexPath.row==0) {

@@ -9,25 +9,26 @@
 #import "SetAcountViewController.h"
 #import "CustomCYLTabBar.h"
 #import "MJExtension.h"
-@interface SetAcountViewController ()
-
-@property (weak, nonatomic) IBOutlet UIImageView *headImageView;
+#import "BDImagePicker.h"
+#import "UIImage+YYExtension.h"
+@interface SetAcountViewController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
-@property (weak, nonatomic) IBOutlet UITextField *sexTextField;
-
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
 
-
-
+@property (weak, nonatomic) IBOutlet UISegmentedControl *sexSegment;
 
 
 @end
 
 @implementation SetAcountViewController
+
+- (IBAction)sexChoose:(id)sender {
+    NSLog(@"选择性别：%li",self.sexSegment.selectedSegmentIndex);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,19 +38,17 @@
     self.confirmBtn.layer.cornerRadius=8;
     
     [self.confirmBtn addTarget:self action:@selector(confirmBtnClick) forControlEvents:UIControlEventTouchUpInside];
-
     
 }
+
+
 
 //确认
 -(void)confirmBtnClick
 {
-    if (![self.sexTextField.text isEqualToString:@"男"] && ![self.sexTextField.text isEqualToString:@"女"]) {
-        
-        NSLog(@"请输入“男”或“女”");
-        
-        return;
-    }
+    [self.nameTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    
     
     
     GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
@@ -60,17 +59,12 @@
 
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     
-    params[@"NickName"]=self.nameTextField.text;
+    params[@"NickName"]=self.nameTextField.text.trim;
     params[@"Phone"]=self.phone;
-    params[@"Password"]=self.passwordTextField.text;
+    params[@"Password"]=self.passwordTextField.text.trim;
     params[@"VerifyCode"]=self.msgCode;
     
-    if ([self.sexTextField.text isEqualToString:@"男"]) {
-        params[@"EnumSexType"]=@(0);
-    }else if ([self.sexTextField.text isEqualToString:@"女"]){
-        params[@"EnumSexType"]=@(1);
-        
-    }
+    params[@"EnumSexType"]=@(self.sexSegment.selectedSegmentIndex);
     params[@"EnumUserType"]=@(1);
     
     NSLog(@"Params=%@",params);
@@ -114,12 +108,9 @@
         }
     }];
     
-
-    
-    
-
     
 }
+
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -128,10 +119,8 @@
     
     [self.passwordTextField resignFirstResponder];
     
-    [self.sexTextField resignFirstResponder];
-
-    
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

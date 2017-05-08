@@ -10,7 +10,7 @@
 #import "consultPageCell.h"
 #import "counselorInfoModel.h"
 #import "CounselorInfoVC.h"
-#import "CYUserManager.h"
+#import "GQUserManager.h"
 #import "LoginViewController.h"
 
 #import "MJExtension.h"
@@ -61,12 +61,12 @@
     
     [self customSearchBar];
     [self customNavigation];
-
+    
     [self getCounsultTypeSource];
     [self getCounsultListSource];
     
     [self creatTableView];
-//    [self creatClassifiedSection];
+    //    [self creatClassifiedSection];
     [self setupMJRefresh];
     
 }
@@ -78,7 +78,7 @@
     _searchBar.delegate = self;
     [_searchBar setTranslucent:YES];
     [_searchBar setShowsCancelButton:YES animated:YES];
-//    _searchBar.searchBarStyle = UISearchBarStyleProminent;
+    //    _searchBar.searchBarStyle = UISearchBarStyleProminent;
     
 }
 
@@ -105,7 +105,7 @@
     [_requestParams setValue:searchBar.text forKey:@"SearchName"];
     [self getCounsultListSource];
     [self.searchBar resignFirstResponder];
-
+    
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -199,11 +199,11 @@
 - (void)getCounsultListSource {
     
     __weak typeof(self) weakSelf   = self;
-
+    
     NSMutableString *requestConsultListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestConsultListString appendFormat:@"%@/",API_MODULE_CONSULT];
     [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
-
+    
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
         
         __strong typeof(self) strongself = weakSelf;
@@ -212,19 +212,19 @@
         
         for (int i = 0; i < strongself.counselorArr.count; i++) {
             NSLog(@"%@",strongself.counselorArr[i].Expertise);
-
+            
         }
         
         if (strongself.counselorArr.count == 0) {
             [strongself.counselorInfoTableview addSubview:strongself.noDataLab];
         } else {
             [strongself.noDataLab removeFromSuperview];
-
+            
         }
         
         [strongself.counselorInfoTableview reloadData];
         [strongself.counselorInfoTableview.mj_header endRefreshing];
-
+        
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongself = weakSelf;
@@ -237,18 +237,18 @@
 #pragma mark 创建分类栏
 - (void)creatClassifiedSection {
     
-//    _isAllExpertise = YES;
-//    _isAllTitle = YES;
-//    _isAllPrice = YES;
+    //    _isAllExpertise = YES;
+    //    _isAllTitle = YES;
+    //    _isAllPrice = YES;
     
     _priceDataSource = @[@"全部价格",@"最低价",@"最高价"];
-
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
-
+    
     [self customClassifiedSectionBtnFotData:_counselorCategoryArr withLineNumber:0];
     [self customClassifiedSectionBtnFotData:_counselorTitleArr withLineNumber:1];
     [self customClassifiedSectionBtnFotData:_priceDataSource withLineNumber:2];
-
+    
     [self customPriceSection];
     
 }
@@ -262,7 +262,7 @@
     ParentView.showsHorizontalScrollIndicator = NO;
     ParentView.contentSize                    = CGSizeMake(dataArr.count * SCREEN_W/4 , navigationBar_H);
     ParentView.tag                            = 50+n;
-
+    
     for (int i                                = 0; i < dataArr.count; i++) {
         UIButton *btn                             = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W/4*i+10, 8, SCREEN_W/4-12, navigationBar_H-16)];
         [btn setTitle:dataArr[i] forState:UIControlStateNormal];
@@ -273,20 +273,20 @@
         btn.layer.borderWidth                     = 1;
         btn.layer.cornerRadius                    = 15;
         btn.titleLabel.font                       = [UIFont systemFontOfSize:12];
-
+        
         btn.tag                                   = n*100+i+1;
         [btn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
-
+        
         [ParentView addSubview:btn];
     }
     [self beginningButtonSelectedWithTag:n*100 + 1];
     ParentView.contentSize                    = CGSizeMake(SCREEN_W/4 * dataArr.count , navigationBar_H);
-
+    
 }
 
 #pragma mark 定制价格界面
 - (void)customPriceSection {
-
+    
     UIScrollView *scroview      = [self.view viewWithTag:52];
     
     UIButton *minPriceBtn       = [self.view viewWithTag:202];
@@ -319,7 +319,7 @@
     [self animationbegin:btn];
     
     NSLog(@"%@",btn.titleLabel.text);
-
+    
     if (btn.tag < 100) {
         for (int i = 1; i < _counselorCategoryArr.count+1; i++) {
             UIButton *otherBtn = [self.view viewWithTag:i];
@@ -334,7 +334,7 @@
         }
         btn.selected         = YES;
         btn.backgroundColor  = MAINCOLOR;
-
+        
     } else if (btn.tag < 200) {
         for (int i = 1; i < _counselorTitleArr.count+1; i++) {
             UIButton *otherBtn       = [self.view viewWithTag:i+100];
@@ -349,7 +349,7 @@
         }
         btn.selected         = YES;
         btn.backgroundColor  = MAINCOLOR;
-
+        
         
     } else {
         
@@ -362,15 +362,15 @@
         UIButton *allPriceBtn    = [self.view viewWithTag:201];
         UIButton *minPriceBtn    = [self.view viewWithTag:202];
         UIButton *maxPriceBtn    = [self.view viewWithTag:203];
-
+        
         if (btn == allPriceBtn) {
             
             [minPriceBtn setTitle:@"最低价" forState:UIControlStateNormal];
             [minPriceBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-
+            
             [maxPriceBtn setTitle:@"最高价" forState:UIControlStateNormal];
             [maxPriceBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-
+            
             allPriceBtn.selected         = YES;
             allPriceBtn.backgroundColor  = MAINCOLOR;
             [_requestParams removeObjectForKey:@"MinFee"];
@@ -405,7 +405,7 @@
         }
         
         _minPriceStr = _priceData[0];
-
+        
     } else {
         
         if (_minPriceStr == _priceData[_priceData.count-1]) {
@@ -424,7 +424,7 @@
                 }
             }
             _maxPriceStr = _priceData[0];
-
+            
         }
     }
     
@@ -476,12 +476,12 @@
     UIButton *allPriceBtn = [self.view viewWithTag:201];
     UIButton *minPriceBtn = [self.view viewWithTag:202];
     UIButton *maxPriceBtn = [self.view viewWithTag:203];
-
+    
     if (_isMinPrice == YES) {
         
         [maxPriceBtn setTitle:@"最高价" forState:UIControlStateNormal];
         [maxPriceBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-
+        
         [minPriceBtn setTitle:[NSString stringWithFormat:@"%@ 元",_minPriceStr] forState:UIControlStateNormal];
         [minPriceBtn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
         [_requestParams setValue:@([_minPriceStr intValue]) forKey:@"MinFee"];
@@ -491,11 +491,11 @@
         [maxPriceBtn setTitle:[NSString stringWithFormat:@"%@ 元",_maxPriceStr] forState:UIControlStateNormal];
         [maxPriceBtn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
         [_requestParams setValue:@([_maxPriceStr intValue]) forKey:@"MaxFee"];
-
+        
     }
     allPriceBtn.selected        = NO;
     allPriceBtn.backgroundColor = [UIColor whiteColor];
-
+    
     [self.sl_popupController dismiss];
     [self getCounsultListSource];
 }
@@ -512,7 +512,7 @@
     _mainHeadView                           = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, navigationBar_H*3)];
     _counselorInfoTableview.tableHeaderView = _mainHeadView;
     _counselorInfoTableview.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-
+    
     
     _noDataLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*0.3, SCREEN_H*0.4, SCREEN_W*0.4, SCREEN_W*0.2)];
     _noDataLab.layer.borderColor = MAINCOLOR.CGColor;
@@ -532,7 +532,7 @@
     header.stateLabel.hidden = YES;
     _counselorInfoTableview.mj_header = header;
     _counselorInfoTableview.mj_header.automaticallyChangeAlpha = YES;
-
+    
     
 }
 
@@ -571,11 +571,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-
+    
     CounselorInfoVC *counselorInfoMainVC = [[CounselorInfoVC alloc]init];
     counselorInfoMainVC.counselModel = _counselorArr[indexPath.row];
-//    counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
-    [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];    
+    //    counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
+    [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];
     
 }
 
@@ -609,13 +609,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

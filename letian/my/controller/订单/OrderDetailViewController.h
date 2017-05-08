@@ -10,4 +10,10 @@
 
 @interface OrderDetailViewController : UIViewController
 
+@property(nonatomic,assign)NSInteger orderID;
+
+@property(nonatomic,copy)NSString *doctorImg;
+
+@property(nonatomic,copy)NSString *userImg;
+
 @end

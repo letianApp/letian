@@ -20,4 +20,6 @@
 
 +(UISwitch *)createSwitchWithFrame:(CGRect)frame;
 
++(UIView *)createViewWithFrame:(CGRect)frame andBackgroundColor:(UIColor *)color;
+
 @end

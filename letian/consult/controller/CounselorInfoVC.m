@@ -11,7 +11,7 @@
 #import "ConfirmPageVC.h"
 #import "CYLTabBarController.h"
 
-#import "CYUserManager.h"
+#import "GQUserManager.h"
 #import "LoginViewController.h"
 
 #import "UIImageView+WebCache.h"

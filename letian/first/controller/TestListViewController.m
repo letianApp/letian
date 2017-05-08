@@ -78,6 +78,7 @@
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-64) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
+    tableView.showsVerticalScrollIndicator=NO;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableView];
     self.tableView = tableView;
@@ -113,19 +114,15 @@
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
     
     TestDetailViewController *testDetailVc=[[TestDetailViewController alloc]init];
-    
     testDetailVc.testUrl=self.testList[indexPath.row].absolute_url;
     testDetailVc.testModel=self.testList[indexPath.row];
-    
     [self.navigationController pushViewController:testDetailVc animated:NO];
-    
-    NSLog(@"cell被点击%li",indexPath.row);
     
 }
 
 //cell动画
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    //
+
     CATransform3D rotation;
     rotation = CATransform3DMakeRotation((90.0*M_PI/180), 0.0, 0.7, 0.4);
     rotation.m44 = 1.0/-600;

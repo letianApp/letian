@@ -19,10 +19,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yI5-Ww-myD">
-                        <rect key="frame" x="0.0" y="126.5" width="321" height="3"/>
-                        <color key="backgroundColor" red="0.96862745098039216" green="0.92156862745098034" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <rect key="frame" x="0.0" y="119.5" width="321" height="10"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="3" id="Joz-Bi-Vlx"/>
+                            <constraint firstAttribute="height" constant="10" id="Joz-Bi-Vlx"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JmY-EY-Mtb">
@@ -39,7 +39,7 @@
                             <constraint firstAttribute="height" constant="1" id="2j3-8E-FLQ"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wowomen.png" translatesAutoresizingMaskIntoConstraints="NO" id="RnO-uu-ap9">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RnO-uu-ap9">
                         <rect key="frame" x="10" y="10" width="65" height="65"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="65" id="ITz-h0-wJc"/>
@@ -140,10 +140,7 @@
                 <outlet property="timeLabel" destination="yex-1J-Wxc" id="sKH-zR-A5L"/>
                 <outlet property="wayLabel" destination="3c0-4y-vZs" id="mbG-hp-7Zr"/>
             </connections>
-            <point key="canvasLocation" x="-152.5" y="85"/>
+            <point key="canvasLocation" x="-378" y="0.0"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="wowomen.png" width="232" height="230"/>
-    </resources>
 </document>

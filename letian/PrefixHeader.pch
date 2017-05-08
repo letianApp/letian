@@ -22,6 +22,12 @@
 #define tabBar_H 49
 
 
+//============================颜色=========================
+#define MAINCOLOR [UIColor colorWithRed:227/255.0 green:111/255.0 blue:117/255.0 alpha:1]   //主色调
+#define WEAKPINK [UIColor colorWithRed:247/255.0 green:235/255.0 blue:242/255.0 alpha:1]    //页面底色
+
+
+
 //=================================保存用户信息 ==============================
 #define kUniqueCode              @"kUniqueCode"          //手机unique_code
 #define kUserIdKey               @"kNewUserIdKey"        //用户ID
@@ -33,6 +39,7 @@
 #define kCityNameKey             @"kCityName"            //用户所在的城市名称
 #define kValidateKey             @"kValidate"            //用于登录校验的key
 #define kUserPhoneKey            @"kUserPhone"           //用户的手机号码
+#define kUserType                @"kUserType"            //用户的身份
 #define kTokenKey                @"kToken"               //用户的Token用于与服务器进行校验
 
 
@@ -43,14 +50,11 @@
 #define kFetchPassword      [[NSUserDefaults standardUserDefaults] objectForKey:kUserPasswordKey]
 #define kFetchUserPhone     [[NSUserDefaults standardUserDefaults] objectForKey:kUserPhoneKey]
 #define kFetchToken         [[NSUserDefaults standardUserDefaults] objectForKey:kTokenKey]
+#define kFetchUserType      [[NSUserDefaults standardUserDefaults] objectForKey:kUserType]
 
 
 //================================= 通知名 =================================
-#define kLoginSuccessNotification           @"LoginSuccessNotification"          //登录成功通知名
-#define kLogoutSuccessNotification          @"LogoutSuccessNotification"         //登出成功通知名
-
 #define kWeChatPayNotifacation              @"WeChatPayNotifacation"             //微信支付通知名
-#define kAliPayNotifacation                 @"kAliPayNotifacation"               //支付宝支付通知名
 
 
 
@@ -85,8 +89,8 @@
 #define WEIXIN_PARTNERID   @"1456039302"
 
 //腾讯
-#define TENCENT_APPID               @"1106011955"
-#define TENCENT_APPKEY              @"MZhuBmhdANQ8IvYH"
+#define TENCENT_APPID      @"1106011955"
+#define TENCENT_APPKEY     @"MZhuBmhdANQ8IvYH"
 
 
 
@@ -103,27 +107,26 @@
 #define APPKEY             @"6a2f401d291349b193f7fe5688bd8aba"
 
 
-//============================颜色=========================
-#define MAINCOLOR [UIColor colorWithRed:227/255.0 green:111/255.0 blue:117/255.0 alpha:1]   //主色调
-#define WEAKPINK [UIColor colorWithRed:247/255.0 green:235/255.0 blue:242/255.0 alpha:1]    //预约页面分类栏底色
+
 
 
 //============================第三方=========================
-#import "RTRootNavigationController.h"                                                      //自定义导航栏
-#import "Masonry.h"                                                                         //约束
-#import "UIView+Layout.h"                                                                   //改变view frame
+#import "RTRootNavigationController.h"
+#import "Masonry.h"
+#import "UIView+Layout.h"
 #import "GQControls.h"
 #import "GQNetworkManager.h"
 #import "UIColor+YYExtension.h"
 #import "UIView+YYExtension.h"
-
+#import "NSString+YYExtension.h"
 #import "PPNetworkHelper.h"
-
 #import "MBHudSet.h"
 #include "API.h"
 #import "MBProgressHUD.h"
-
-
+#import "MJRefresh.h"
+#import "RefreshFooter.h"
+#import "MJExtension.h"
+#include "EnumList.h"
 #endif
 
 

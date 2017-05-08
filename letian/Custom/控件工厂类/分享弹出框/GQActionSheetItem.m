@@ -1,9 +1,9 @@
 //
 //  GQActionSheetItem.m
-//  PracticeDemo
+//  letian
 //
-//  Created by guoqian on 15/11/11.
-//  Copyright © 2015年 guoqian. All rights reserved.
+//  Created by 郭茜 on 2017/3/6.
+//  Copyright © 2017年 J. All rights reserved.
 //
 
 #import "GQActionSheetItem.h"

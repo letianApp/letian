@@ -48,6 +48,7 @@
     params[@"articleID"]=@(self.articleID);
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"什么情况？文章详情%@",responseObject);
         [MBHudSet dismiss:self.view];
         weakSelf.articleModel=[WebArticleModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
         NSLog(@"responseObject=%@",responseObject);
@@ -67,7 +68,7 @@
     textview.showsVerticalScrollIndicator=NO;
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 10;
-    paragraphStyle.firstLineHeadIndent = 30;
+    paragraphStyle.paragraphSpacing = 15;
     NSMutableAttributedString *str=[[NSMutableAttributedString alloc]initWithData:[textStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     NSDictionary *attributes=@{
                                NSFontAttributeName:[UIFont systemFontOfSize:15],

@@ -32,6 +32,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wechatPayAction:) name:kWeChatPayNotifacation object:nil];
     
     [self aliPayAction];
+    
 
 }
 
@@ -117,7 +118,7 @@
     } else if (indexPath.row == 1) {
         NSLog(@"支付宝");
         
-        [self aliPay];
+        [self checkAlipay];
         
         
     }
@@ -141,7 +142,7 @@
                 message = @"订单支付成功";
                 [MBHudSet showText:message andOnView:self.view];
                 OrderViewController *orderVc = [[OrderViewController alloc] init];
-                orderVc.state = 1;
+                orderVc.orderState = 1;
                 [self.navigationController pushViewController:orderVc animated:YES];
                 return;
             }
@@ -177,7 +178,13 @@
     
     [PPNetworkHelper GET:requestString parameters:params success:^(id responseObject) {
         NSLog(@"支付宝预支付%@%@",responseObject,responseObject[@"Msg"]);
-        
+        if ([responseObject[@"IsSuccess"] boolValue] == YES){
+            
+            [self aliPay];
+        }else{
+            [MBHudSet showText:[NSString stringWithFormat:@"%@",responseObject[@"IsSuccess"]]andOnView:weakSelf.view];
+
+        }
         
     } failure:^(NSError *error) {
         
@@ -238,7 +245,7 @@
             strMsg = @"订单支付成功！";
             //跳到预约订单
             OrderViewController *orderVc = [[OrderViewController alloc] init];
-            orderVc.state = 1;
+            orderVc.orderState = 1;
             [self.navigationController pushViewController:orderVc animated:YES];
             return;
         }
@@ -265,7 +272,7 @@
             case 9000:
             {message = @"订单支付成功";
                 OrderViewController *orderVc = [[OrderViewController alloc] init];
-                orderVc.state = 1;
+                orderVc.orderState = 1;
                 [weakSelf.navigationController pushViewController:orderVc animated:YES];
                 return;
             }
@@ -291,7 +298,7 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         //跳到待支付订单
         OrderViewController *orderVc = [[OrderViewController alloc] init];
-        orderVc.state = 5;
+        orderVc.orderState = 5;
         [self.navigationController pushViewController:orderVc animated:YES];
     }]];
     [self presentViewController:alert animated:YES completion:nil];

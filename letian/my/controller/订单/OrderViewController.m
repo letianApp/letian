@@ -45,36 +45,47 @@
     
     [self setSegment];
     
-    [self requestData:self.state];//订单
+    [self createTableView];
+    
+    [self requestData];//订单
+    
+    [self setUpRefresh];
     
     
 }
 
--(void)createBackgroundView{
-    if (self.orderList.count==0) {
-        UILabel *showLabel= [GQControls createLabelWithFrame:CGRectMake((SCREEN_W-200)/2, 100, 200, 40) andText:self.showText andTextColor:MAINCOLOR andFontSize:15];
-    }
+-(void)setUpRefresh
+{
+    MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    self.tableView.mj_header.automaticallyChangeAlpha = NO;
+    self.tableView.mj_footer.hidden = YES;
+    //    self.tableView.mj_footer = [RefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
+    //    self.tableView.mj_footer.hidden = YES;
 }
+
+
 #pragma mark-------创建Segment
 
 -(void)setSegment {
     self.topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 50)];
-    
     self.segment = [[GQSegment alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     self.segment.delegate = self;
     self.segment.backgroundColor=[UIColor whiteColor];
     [self.topView addSubview:self.segment];
-    if (self.state==100) {
+    if (self.orderState==AllOrder) {
         [self.segment moveToOffsetX:0];
-    }else if (self.state==1){
+    }else if (self.orderState==ConsultOrder){
         [self.segment moveToOffsetX:SCREEN_W];
-    }else if (self.state==5){
+    }else if (self.orderState==WaitPayOrder){
         [self.segment moveToOffsetX:2*SCREEN_W];
-    }else if (self.state==10){
+    }else if (self.orderState==SuccessOrder){
         [self.segment moveToOffsetX:3*SCREEN_W];
     }
-    UIView *marginView=[[UIView alloc]initWithFrame:CGRectMake(0, self.segment.height-3, SCREEN_W, 3)];
-    marginView.backgroundColor=WEAKPINK;
+    UIView *marginView=[[UIView alloc]initWithFrame:CGRectMake(0, self.segment.height-3, SCREEN_W, 5)];
+    marginView.backgroundColor=[UIColor groupTableViewBackgroundColor];
     [self.topView addSubview:marginView];
 }
 
@@ -85,21 +96,22 @@
     [UIView animateWithDuration:0.3 animations:^{
         NSLog(@"滑动到地%i页",Page);
         if (Page==0) {
-            [self requestData:100];//全部订单
+            self.orderState=AllOrder;//全部订单
         }else if (Page==1){
-            [self requestData:1];//预约订单
+            self.orderState=ConsultOrder;//预约订单
         }else if (Page==2){
-            [self requestData:5];//待支付订单
+            self.orderState=WaitPayOrder;//待支付订单
         }else if (Page==3){
-            [self requestData:10];//已完成订单
+            self.orderState=SuccessOrder;//已完成订单
         }
+        [self requestData];
     }];
 }
 
 
 #pragma mark------------获取订单列表
 
--(void)requestData:(NSInteger)orderType
+-(void)requestData
 {
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
@@ -107,18 +119,20 @@
     [requestString appendString:API_NAME_GETORDERLIST];
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    params[@"enumOrderState"]=@(orderType);
+    params[@"enumOrderState"]=@(self.orderState);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [weakSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:self.view];
         NSLog(@"&&&&&&&&&*获取订单列表%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             weakSelf.orderList=[OrderListModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
             NSLog(@"Msg%@",responseObject[@"Msg"]);
-            [self createTableView];
+            [weakSelf.tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [weakSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:self.view];
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
@@ -137,7 +151,7 @@
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H-64) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
-    tableView.backgroundColor=WEAKPINK;
+    tableView.backgroundColor=[UIColor groupTableViewBackgroundColor];
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableView];
     self.tableView = tableView;
@@ -150,18 +164,26 @@
 {
     return 50;
 }
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return self.orderList.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 140;
+    return 145;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OrderCell *cell=[OrderCell cellWithTableView:tableView];
-    [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.orderList[indexPath.row].HeadImg]];
-    cell.nameLabel.text=self.orderList[indexPath.row].DoctorName;
+    if ([kFetchUserType integerValue]==1) {
+        //如果用户是咨客
+        [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.orderList[indexPath.row].DoctorHeadImg]];
+        cell.nameLabel.text=self.orderList[indexPath.row].DoctorName;
+    }else{
+        //如果用户是咨询师
+        [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.orderList[indexPath.row].UserHeadImg]];
+        cell.nameLabel.text=self.orderList[indexPath.row].UserName;
+    }
     //咨询方式
     if (self.orderList[indexPath.row].EnumConsultType==1) {
         cell.wayLabel.text=[NSString stringWithFormat:@"咨询方式：面对面咨询"];
@@ -176,7 +198,7 @@
     NSString *endTime=[self.orderList[indexPath.row].EndTime substringWithRange:NSMakeRange(0, 5)];
     cell.timeLabel.text=[NSString stringWithFormat:@"咨询时间：%@ %@～%@",dataStr,startTime,endTime];
     //总计金额
-    cell.moneyLabel.text=[NSString stringWithFormat:@"共%li小时，总计%li元",self.orderList[indexPath.row].ConsultTimeLength,self.orderList[indexPath.row].TotalFee];
+    cell.moneyLabel.text=[NSString stringWithFormat:@"共%li小时，总计%.2f元",self.orderList[indexPath.row].ConsultTimeLength,self.orderList[indexPath.row].TotalFee];
     //订单状态
     if (self.orderList[indexPath.row].EnumOrderState==5) {
         //计算未支付的订单创建时间与当前时间  间隔多少秒
@@ -225,6 +247,9 @@
 {
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
     OrderDetailViewController *orderDetailVc=[[OrderDetailViewController alloc]init];
+    orderDetailVc.orderID=self.orderList[indexPath.row].OrderID;
+    orderDetailVc.doctorImg=self.orderList[indexPath.row].DoctorHeadImg;
+    orderDetailVc.userImg=self.orderList[indexPath.row].UserHeadImg;
     [self.navigationController pushViewController:orderDetailVc animated:YES];
 }
 
