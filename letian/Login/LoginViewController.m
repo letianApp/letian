@@ -91,7 +91,8 @@
         [MBHudSet dismiss:strongSelf.view];
         NSLog(@"登录%@",responseObject);
         NSLog(@"Msg%@",responseObject[@"Msg"]);
-        if([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES){
+        if([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
+            
             [GQUserManager saveUserData:@{@"UserId":[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"userid"]]} andToken:responseObject[@"Result"][@"Source"][@"access_token"]];
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"rongCloudToken"] forKey:kRongYunToken];
             NSLog(@"token:%@",kFetchRToken);
@@ -100,13 +101,10 @@
 
             [self getUserInfo];
             
-            }else{
+            } else {
                 
             [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.view];
-
-        }else{
-            [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
-        }
+            }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         __strong typeof(self) strongSelf = weakSelf;
