@@ -98,7 +98,7 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:newDic forKey:kUserInfoKey];
     
-    NSString * userID = newDic[@"UserId"];
+    NSString *userID = newDic[@"UserId"];
     
     [[NSUserDefaults standardUserDefaults] setObject:userID forKey:kUserIdKey];
     

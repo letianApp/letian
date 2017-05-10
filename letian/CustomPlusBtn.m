@@ -8,6 +8,7 @@
 
 #import "CustomPlusBtn.h"
 
+#import "ChatListViewController.h"
 #import "ConsultViewController.h"
 #import "ChatViewController.h"
 
@@ -75,9 +76,14 @@
 - (void)clickConsultBtn {
     
     NSLog(@"点击咨询按钮");
+    
+    ChatListViewController *chatListVc  = [[ChatListViewController alloc]init];
+    chatListVc.hidesBottomBarWhenPushed = YES;
+
+    
     ChatViewController *secondViewController           = [[ChatViewController alloc] init];
     RTRootNavigationController *secondNavigationController = [[RTRootNavigationController alloc]
-                                                    initWithRootViewController:secondViewController];
+                                                    initWithRootViewController:chatListVc];
     UITabBarController *tabBarController               = (UITabBarController *)self.window.rootViewController;
     [tabBarController presentViewController:secondNavigationController animated:YES completion:nil];
     

@@ -54,6 +54,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
     _counselorArr = [NSMutableArray new];
     _requestParams = [NSMutableDictionary new];
     [_requestParams setValue:@(0) forKey:@"enumPsyCategory"];
@@ -117,7 +120,7 @@
 - (void)customNavigation {
     
     self.navigationController.navigationBar.tintColor = MAINCOLOR;
-    self.navigationItem.titleView                     = _searchBar;
+    self.navigationItem.titleView = _searchBar;
 }
 
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target
@@ -242,9 +245,7 @@
     //    _isAllPrice = YES;
     
     _priceDataSource = @[@"全部价格",@"最低价",@"最高价"];
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
+        
     [self customClassifiedSectionBtnFotData:_counselorCategoryArr withLineNumber:0];
     [self customClassifiedSectionBtnFotData:_counselorTitleArr withLineNumber:1];
     [self customClassifiedSectionBtnFotData:_priceDataSource withLineNumber:2];

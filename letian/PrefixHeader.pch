@@ -31,6 +31,8 @@
 //=================================保存用户信息 ==============================
 #define kUniqueCode              @"kUniqueCode"          //手机unique_code
 #define kUserIdKey               @"kNewUserIdKey"        //用户ID
+#define kUserName                @"kUserName"            //用户名
+#define kUserHeadImageUrl        @"kUserHeadImageUrl"    //用户头像
 #define kUserInfoKey             @"kUserInfoKey"         //用户基本信息
 #define kUserPasswordKey         @"kUserPasswordKey"     //用户登录密码
 #define kHistoryPackageSearchKey @"kHistoryPackageSearch"//搜索套餐历史记录
@@ -41,16 +43,20 @@
 #define kUserPhoneKey            @"kUserPhone"           //用户的手机号码
 #define kUserType                @"kUserType"            //用户的身份
 #define kTokenKey                @"kToken"               //用户的Token用于与服务器进行校验
+#define kRongYunToken            @"kRToken"              //融云token
 
 
 //=================================获取用户信息 =================================
-#define kFetchUserId        [[NSUserDefaults standardUserDefaults] objectForKey:kUserIdKey]
-#define kFetchValidateKey   [[NSUserDefaults standardUserDefaults] objectForKey:kValidateKey]
-#define kFetchUserInfo      [[NSUserDefaults standardUserDefaults] objectForKey:kUserInfoKey]
-#define kFetchPassword      [[NSUserDefaults standardUserDefaults] objectForKey:kUserPasswordKey]
-#define kFetchUserPhone     [[NSUserDefaults standardUserDefaults] objectForKey:kUserPhoneKey]
-#define kFetchToken         [[NSUserDefaults standardUserDefaults] objectForKey:kTokenKey]
-#define kFetchUserType      [[NSUserDefaults standardUserDefaults] objectForKey:kUserType]
+#define kFetchUserId            [[NSUserDefaults standardUserDefaults] objectForKey:kUserIdKey]
+#define kFetchUserName          [[NSUserDefaults standardUserDefaults] objectForKey:kUserName]
+#define kFetchUserHeadImageUrl  [[NSUserDefaults standardUserDefaults] objectForKey:kUserHeadImageUrl]
+#define kFetchValidateKey       [[NSUserDefaults standardUserDefaults] objectForKey:kValidateKey]
+#define kFetchUserInfo          [[NSUserDefaults standardUserDefaults] objectForKey:kUserInfoKey]
+#define kFetchPassword          [[NSUserDefaults standardUserDefaults] objectForKey:kUserPasswordKey]
+#define kFetchUserPhone         [[NSUserDefaults standardUserDefaults] objectForKey:kUserPhoneKey]
+#define kFetchToken             [[NSUserDefaults standardUserDefaults] objectForKey:kTokenKey]
+#define kFetchUserType          [[NSUserDefaults standardUserDefaults] objectForKey:kUserType]
+#define kFetchRToken            [[NSUserDefaults standardUserDefaults] objectForKey:kRongYunToken]
 
 
 //================================= 通知名 =================================

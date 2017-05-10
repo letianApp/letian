@@ -19,8 +19,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    
     [self customNavigation];
+    
+    
 }
+
 
 
 #pragma mark 定制导航栏
@@ -51,7 +55,22 @@
     [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
 }
 
+- (void)willDisplayMessageCell:(RCMessageBaseCell *)cell
+                   atIndexPath:(NSIndexPath *)indexPath {
+    
+    if (cell.model.messageDirection == MessageDirection_SEND ) {
 
+        if ([cell isMemberOfClass:[RCTextMessageCell class]]) {
+        
+//            RCTextMessageCell *textCell = (RCTextMessageCell *)cell;
+//            textCell.textLabel.backgroundColor = MAINCOLOR;
+        
+        }
+        
+        
+    }
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -211,8 +211,8 @@
 
     NSLog(@"%@",selDateStr);
 
-//    [self setCounsultSetForDay:[NSString stringWithFormat:@"%@ 00:00:00",selDateStr]];
-//    [self getCounsultSetForDay:selDateStr];
+    [self setCounsultSetForDay:[NSString stringWithFormat:@"%@ 00:00:00",selDateStr]];
+    [self getCounsultSetForDay:selDateStr];
 
 }
 
@@ -234,7 +234,7 @@
     NSMutableDictionary *parames = [[NSMutableDictionary alloc]init];
     parames[@"date"] = dayStr;
     
-    [PPNetworkHelper setValue:@"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOjQsImxvZ2lubmFtZSI6IjE4OTc3MzQzODQzIiwicmVhbG5hbWUiOm51bGwsImV4cGlyZXRpbWUiOjE0OTI3NDE0ODV9.GczqZEMSZTDEXHK2AHhhkDeUGm5f0o2rmVu9h79JsfE" forHTTPHeaderField:@"token"];
+    [PPNetworkHelper setValue:@"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOjEwLCJsb2dpbm5hbWUiOiIxMTEiLCJyZWFsbmFtZSI6Iueci-eci-eciyIsImV4cGlyZXRpbWUiOjE0OTQzODI1OTJ9.mPyutAzQnOBQABC9jXya1UNvHYrVeYvX6qq-5TSzNl4" forHTTPHeaderField:@"token"];
     
     [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
         __strong typeof(self) strongself = weakSelf;

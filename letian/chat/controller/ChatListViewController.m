@@ -8,6 +8,8 @@
 
 #import "ChatListViewController.h"
 #import "ChatViewController.h"
+//#import <RongIMKit/RongIMKit.h>
+
 
 @interface ChatListViewController ()
 
@@ -35,8 +37,32 @@
     
     [self customNavigation];
 
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 50, 50)];
+    btn.backgroundColor = MAINCOLOR;
+    [btn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
+    self.emptyConversationView = btn;
     
 }
+
+- (void)clickBtn:(UIButton *)btn {
+    
+    ChatViewController *chatVc = [[ChatViewController alloc]initWithConversationType:ConversationType_PRIVATE targetId:@"002"];
+    chatVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:chatVc animated:YES];
+
+}
+
+//- (void)refreshUserInfoCache:(RCUserInfo *)userInfo
+//                  withUserId:(NSString *)userId {
+//    
+//    if ([userId isEqualToString:kFetchUserId]) {
+//        NSLog(@"新的");
+//        userInfo.name = kUserName;
+//        userInfo.portraitUri = kFetchUserHeadImageUrl;
+//    }
+//    
+//}
+
 
 #pragma mark 定制导航栏
 - (void)customNavigation {

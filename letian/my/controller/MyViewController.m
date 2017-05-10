@@ -21,6 +21,7 @@
 #import <UShareUI/UShareUI.h>
 #import "GQActionSheet.h"
 #import "UIImageView+WebCache.h"
+#import <RongIMKit/RongIMKit.h>
 
 @interface MyViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -74,21 +75,30 @@
     NSLog(@"token------------%@",kFetchToken);
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [MBHudSet dismiss:self.view];
+        
+        __strong typeof(self) strongSelf = weakSelf;
+
+        [MBHudSet dismiss:strongSelf.view];
         NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
-            weakSelf.userInfoModel=[UserInfoModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
-            self.nameLabel.text=weakSelf.userInfoModel.NickName;
-            [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.userInfoModel.HeadImg] placeholderImage:[UIImage imageNamed:@"emptyHeadImage"]];
+            strongSelf.userInfoModel = [UserInfoModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
+            strongSelf.nameLabel.text = strongSelf.userInfoModel.NickName;
+            [strongSelf.headImageView sd_setImageWithURL:[NSURL URLWithString:strongSelf.userInfoModel.HeadImg] placeholderImage:[UIImage imageNamed:@"emptyHeadImage"]];
+            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"NickName"] forKey:kUserName];
+            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"HeadImg"] forKey:kUserHeadImageUrl];
+
             [_tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [MBHudSet dismiss:self.view];
+        
+        __strong typeof(self) strongSelf = weakSelf;
+
+        [MBHudSet dismiss:strongSelf.view];
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
-            [MBHudSet showText:@"请求超时" andOnView:self.view];
+            [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
         } else{
-            [MBHudSet showText:@"请求失败" andOnView:self.view];
+            [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
         }
     }];
 }
@@ -324,7 +334,7 @@
         AboutUsPageVC *aboutUsPage = [[AboutUsPageVC alloc]init];
         aboutUsPage.hidesBottomBarWhenPushed = YES;
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        [self.navigationController pushViewController:aboutUsPage animated:NO];
+        [self.navigationController pushViewController:aboutUsPage animated:YES];
     }
 }
 

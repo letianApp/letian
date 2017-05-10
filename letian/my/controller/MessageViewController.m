@@ -42,23 +42,23 @@
     self.segment = [[GQSegmentedControl alloc] initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H - 64)];
     self.segment.delegate = self;
     self.segment.tintColor = MAINCOLOR;
-    self.segment.viewControllers=vcArray;
-    self.segment.segmentedControl.width=60;
+    self.segment.viewControllers = vcArray;
+    self.segment.segmentedControl.width = 60;
     [self.segment showsInNavBarOf:self withFrame:CGRectMake(5, 5, 120, 30)];
     [self.view addSubview:self.segment];
     
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    backButton.frame=CGRectMake(30, 12, 20, 20);
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+//    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+//    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+//    backButton.frame=CGRectMake(30, 12, 20, 20);
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 }
 
 
--(void) back
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
+//-(void) back
+//{
+//    [self.navigationController popViewControllerAnimated:YES];
+//}
 
 -(void)segmentDidselectTab:(NSUInteger)index
 {

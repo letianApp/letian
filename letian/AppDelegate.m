@@ -35,7 +35,7 @@
 #import "CALayer+Transition.h"
 
 #import "CustomCYLTabBar.h"
-#import "CustomPlusBtn.h"
+//#import "CustomPlusBtn.h"
 
 #import "FirstViewController.h"
 #import "ConsultViewController.h"
@@ -79,7 +79,7 @@
     
     [self setUSharePlatforms];
     
-//    [self customEM];
+    [self customEM];
     
     return YES;
     
@@ -127,7 +127,7 @@
 
 -(void)createTabbarController{
     
-    [CustomPlusBtn registerPlusButton];
+//    [CustomPlusBtn registerPlusButton];
     CustomCYLTabBar *tabBarControllerConfig = [[CustomCYLTabBar alloc] init];
     [self.window setRootViewController:tabBarControllerConfig.tabBarController];
     
@@ -173,11 +173,15 @@
     __weak typeof(self) weakSelf   = self;
     
     [[RCIM sharedRCIM] initWithAppKey:RONGYUN_APPKEY];
-    [[RCIM sharedRCIM] connectWithToken:@"pdtQ2qT6ucmSKegQZEReC9Bpol8+z5qA20RkCIv9EwyxLoLjlDnHcnfdX2W+xKvA7piGIbRreIQ="     success:^(NSString *userId) {
+    
+    [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
         
         __strong typeof(self) strongself = weakSelf;
         NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+        NSLog(@"ID：%@",kFetchUserId);
+
         [[RCIM sharedRCIM] setUserInfoDataSource:strongself];
+//        [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc]initWithUserId:userId name:kFetchUserName portrait:kFetchUserHeadImageUrl];
         
     } error:^(RCConnectErrorCode status) {
         NSLog(@"登陆的错误码为:%ld", (long)status);
@@ -191,18 +195,37 @@
 
 - (void)getUserInfoWithUserId:(NSString *)userId
                    completion:(void (^)(RCUserInfo *userInfo))completion {
-    //
-    //    if ([userId isEqualToString:@"002"]) {
-    //        RCUserInfo *userInfo = [[RCUserInfo alloc]init];
-    //        userInfo.userId = userId;
-    //        userInfo.name = @"测试2";
-    //        userInfo.portraitUri = @"http://www.wzright.com/upload/201610311133447158.jpg";
-    //
-    //        return completion(userInfo);
-    //    }
-    //    return completion(nil);
+    
+    if ([userId isEqualToString:kFetchUserId]) {
+        
+        RCUserInfo *currentUser = [[RCUserInfo alloc]init];
+        currentUser.userId = userId;
+        currentUser.name = kFetchUserName;
+        currentUser.portraitUri = kFetchUserHeadImageUrl;
+        
+        return completion(currentUser);
+
+    } else if ([userId isEqualToString:@"002"]) {
+            RCUserInfo *userInfo = [[RCUserInfo alloc]init];
+            userInfo.userId = userId;
+            userInfo.name = @"测试2";
+            userInfo.portraitUri = @"http://www.wzright.com/upload/201610311133447158.jpg";
+    
+            return completion(userInfo);
+    }
+    return completion(nil);
 }
 
+//- (void)refreshUserInfoCache:(RCUserInfo *)userInfo
+//                  withUserId:(NSString *)userId {
+//    
+//    if ([userId isEqualToString:kFetchUserId]) {
+//        
+//        userInfo.name = kFetchUserName;
+//        userInfo.portraitUri = kFetchUserHeadImageUrl;
+//    }
+//
+//}
 
 #pragma mark---------------------第三方回调------------------------
 

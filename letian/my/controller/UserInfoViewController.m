@@ -12,8 +12,10 @@
 #import "UIImage+YYExtension.h"
 #import "MJExtension.h"
 #import "BindingPhoneViewController.h"
+#import <RongIMKit/RongIMKit.h>
 
-@interface UserInfoViewController ()<UITableViewDataSource,UITableViewDelegate>
+
+@interface UserInfoViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSArray *dataArray;
@@ -477,6 +479,15 @@
             weakSelf.userInfoModel=[UserInfoModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
             self.nameLabel.text=weakSelf.userInfoModel.NickName;
             [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.userInfoModel.HeadImg] placeholderImage:[UIImage imageNamed:@"headImage"]];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"NickName"] forKey:kUserName];
+            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"HeadImg"] forKey:kUserHeadImageUrl];
+            
+            RCUserInfo *currentUser = [RCIM sharedRCIM].currentUserInfo;
+            currentUser.name = kFetchUserName;
+            currentUser.portraitUri = kFetchUserHeadImageUrl;
+            [[RCIM sharedRCIM]refreshUserInfoCache:currentUser withUserId:kFetchUserId];
+
             [_tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -489,8 +500,6 @@
         }
     }];
 }
-
-
 
 -(void) setUpNavigationBar
 {

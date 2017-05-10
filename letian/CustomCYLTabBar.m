@@ -28,6 +28,7 @@
 #import "FirstViewController.h"
 #import "ConsultViewController.h"
 #import "MyViewController.h"
+#import "ChatListViewController.h"
 
 @interface CustomCYLTabBar ()
 
@@ -58,9 +59,9 @@
     UIViewController *firstNavigationController = [[RTRootNavigationController alloc]
                                                    initWithRootViewController:firstViewController];
     
-//    ConsultViewController *secondViewController = [[ConsultViewController alloc] init];
-//    UIViewController *secondNavigationController = [[RTRootNavigationController alloc]
-//                                                    initWithRootViewController:secondViewController];
+    ChatListViewController *secondViewController = [[ChatListViewController alloc] init];
+    UIViewController *secondNavigationController = [[RTRootNavigationController alloc]
+                                                    initWithRootViewController:secondViewController];
     
     MyViewController *thirdViewController = [[MyViewController alloc] init];
     UIViewController *thirdNavigationController = [[RTRootNavigationController alloc]
@@ -75,7 +76,7 @@
     //tabBarController.titlePositionAdjustment = UIOffsetMake(0, MAXFLOAT);
     NSArray *viewControllers = @[
                                  firstNavigationController,
-//                                 secondNavigationController,
+                                 secondNavigationController,
                                  thirdNavigationController,
                                  ];
     return viewControllers;
@@ -87,11 +88,11 @@
                                                  CYLTabBarItemImage : @"firstPageTab",  /* NSString and UIImage are supported*/
                                                  CYLTabBarItemSelectedImage : @"firstPageTabSel", /* NSString and UIImage are supported*/
                                                  };
-//    NSDictionary *secondTabBarItemsAttributes = @{
-//                                                  CYLTabBarItemTitle : @"预约",
-//                                                  CYLTabBarItemImage : @"consultPagTab",
-//                                                  CYLTabBarItemSelectedImage : @"consultPagTabSel",
-//                                                  };
+    NSDictionary *secondTabBarItemsAttributes = @{
+                                                  CYLTabBarItemTitle : @"咨询",
+                                                  CYLTabBarItemImage : @"consultPagTab",
+                                                  CYLTabBarItemSelectedImage : @"consultPagTabSel",
+                                                  };
     NSDictionary *thirdTabBarItemsAttributes = @{
                                                  CYLTabBarItemTitle : @"我的",
                                                  CYLTabBarItemImage : @"myPagTab",
@@ -99,7 +100,7 @@
                                                  };
     NSArray *tabBarItemsAttributes = @[
                                        firstTabBarItemsAttributes,
-//                                       secondTabBarItemsAttributes,
+                                       secondTabBarItemsAttributes,
                                        thirdTabBarItemsAttributes,
                                        ];
     return tabBarItemsAttributes;

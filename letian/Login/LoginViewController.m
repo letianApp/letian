@@ -14,6 +14,9 @@
 #import "CustomCYLTabBar.h"
 #import "JPUSHService.h"
 #import "GQUserManager.h"
+
+#import <RongIMKit/RongIMKit.h>
+
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *acountTextField;
 
@@ -82,27 +85,74 @@
     __weak typeof(self) weakSelf   = self;
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [MBHudSet dismiss:self.view];
+        
+        __strong typeof(self) strongSelf = weakSelf;
+
+        [MBHudSet dismiss:strongSelf.view];
         NSLog(@"登录%@",responseObject);
         NSLog(@"Msg%@",responseObject[@"Msg"]);
         if([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES){
-            [GQUserManager saveUserData:@{@"UserId":responseObject[@"Result"][@"Source"][@"userid"]} andToken:responseObject[@"Result"][@"Source"][@"access_token"]];
-            NSLog(@"token:%@",kFetchToken);
-            [[NSUserDefaults standardUserDefaults] setObject:weakSelf.acountTextField.text.trim forKey:kUserPhoneKey];
+            [GQUserManager saveUserData:@{@"UserId":[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"userid"]]} andToken:responseObject[@"Result"][@"Source"][@"access_token"]];
+            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"rongCloudToken"] forKey:kRongYunToken];
+            NSLog(@"token:%@",kFetchRToken);
+            [[NSUserDefaults standardUserDefaults] setObject:strongSelf.acountTextField.text.trim forKey:kUserPhoneKey];
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"enumUserType"] forKey:kUserType];
-            [weakSelf dismissViewControllerAnimated:YES completion:nil];
-            CustomCYLTabBar *tabBarController                              = [[CustomCYLTabBar alloc] init];
-            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
-        }else{
-            [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
+            [self getUserInfo];
+            
+            }else{
+                
+            [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.view];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [MBHudSet dismiss:self.view];
+        
+        __strong typeof(self) strongSelf = weakSelf;
+
+        [MBHudSet dismiss:strongSelf.view];
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
-            [MBHudSet showText:@"登录超时" andOnView:self.view];
+            [MBHudSet showText:@"登录超时" andOnView:strongSelf.view];
         }else{
-            [MBHudSet showText:@"登录失败" andOnView:self.view];
+            [MBHudSet showText:@"登录失败" andOnView:strongSelf.view];
+        }
+    }];
+}
+
+-(void)getUserInfo {
+    
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_USER];
+    [requestString appendString:API_NAME_GETUSERINFO];
+    __weak typeof(self) weakSelf = self;
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+
+        [MBHudSet dismiss:strongSelf.view];
+        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
+        if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
+            
+            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"NickName"] forKey:kUserName];
+            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"HeadImg"] forKey:kUserHeadImageUrl];
+//            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"UserID"]] forKey:kUserIdKey];
+            
+            [strongSelf dismissViewControllerAnimated:YES completion:nil];
+            CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
+            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
+
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+
+        [MBHudSet dismiss:strongSelf.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
         }
     }];
 }
