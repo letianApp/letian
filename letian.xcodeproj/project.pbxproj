@@ -141,6 +141,7 @@
 		779C4DD01EBEF2B300EBEDE9 /* OrderMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 779C4DCE1EBEF2B300EBEDE9 /* OrderMoneyCell.xib */; };
 		779C4DDE1EBEF74700EBEDE9 /* OrderPayDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 779C4DDC1EBEF74700EBEDE9 /* OrderPayDetailCell.m */; };
 		779C4DDF1EBEF74700EBEDE9 /* OrderPayDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 779C4DDD1EBEF74700EBEDE9 /* OrderPayDetailCell.xib */; };
+		779C4DE71EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 779C4DE61EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.m */; };
 		77A17B7A1E7F9A2900569558 /* WebArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A17B791E7F9A2900569558 /* WebArticleViewController.m */; };
 		77A17B831E7FA20B00569558 /* ActivityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A17B821E7FA20B00569558 /* ActivityListViewController.m */; };
 		77B3397A1EBA0C5A004BC8B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77B339781EBA0C5A004BC8B3 /* LaunchScreen.storyboard */; };
@@ -166,8 +167,6 @@
 		77B5BD6C1EADA91D0034497D /* BDImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5BD6B1EADA91D0034497D /* BDImagePicker.m */; };
 		77B5C9E71E7A2F000028CB9E /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5C9E51E7A2F000028CB9E /* OrderDetailViewController.m */; };
 		77B5C9E81E7A2F000028CB9E /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B5C9E61E7A2F000028CB9E /* OrderDetailViewController.xib */; };
-		77B5C9EC1E7A4AF50028CB9E /* CompleteOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B5C9EA1E7A4AF50028CB9E /* CompleteOrderViewController.m */; };
-		77B5C9ED1E7A4AF50028CB9E /* CompleteOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B5C9EB1E7A4AF50028CB9E /* CompleteOrderViewController.xib */; };
 		77D07EDF1E962CB200904AD9 /* ResetPwViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D07EDD1E962CB200904AD9 /* ResetPwViewController.m */; };
 		77D07EE01E962CB200904AD9 /* ResetPwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D07EDE1E962CB200904AD9 /* ResetPwViewController.xib */; };
 		77D07EE41E962D2A00904AD9 /* ChangePwViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D07EE21E962D2A00904AD9 /* ChangePwViewController.m */; };
@@ -512,6 +511,8 @@
 		779C4DDB1EBEF74700EBEDE9 /* OrderPayDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPayDetailCell.h; sourceTree = "<group>"; };
 		779C4DDC1EBEF74700EBEDE9 /* OrderPayDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPayDetailCell.m; sourceTree = "<group>"; };
 		779C4DDD1EBEF74700EBEDE9 /* OrderPayDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderPayDetailCell.xib; sourceTree = "<group>"; };
+		779C4DE51EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiDoctorConsultDateModel.h; sourceTree = "<group>"; };
+		779C4DE61EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiDoctorConsultDateModel.m; sourceTree = "<group>"; };
 		77A17B781E7F9A2900569558 /* WebArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebArticleViewController.h; sourceTree = "<group>"; };
 		77A17B791E7F9A2900569558 /* WebArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebArticleViewController.m; sourceTree = "<group>"; };
 		77A17B811E7FA20B00569558 /* ActivityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityListViewController.h; sourceTree = "<group>"; };
@@ -560,9 +561,6 @@
 		77B5C9E41E7A2F000028CB9E /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		77B5C9E51E7A2F000028CB9E /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		77B5C9E61E7A2F000028CB9E /* OrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
-		77B5C9E91E7A4AF50028CB9E /* CompleteOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteOrderViewController.h; sourceTree = "<group>"; };
-		77B5C9EA1E7A4AF50028CB9E /* CompleteOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompleteOrderViewController.m; sourceTree = "<group>"; };
-		77B5C9EB1E7A4AF50028CB9E /* CompleteOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompleteOrderViewController.xib; sourceTree = "<group>"; };
 		77D07EDC1E962CB200904AD9 /* ResetPwViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPwViewController.h; sourceTree = "<group>"; };
 		77D07EDD1E962CB200904AD9 /* ResetPwViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwViewController.m; sourceTree = "<group>"; };
 		77D07EDE1E962CB200904AD9 /* ResetPwViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPwViewController.xib; sourceTree = "<group>"; };
@@ -957,6 +955,8 @@
 				7787B3731EB0746500306527 /* OrderListModel.m */,
 				779C4DC41EBEBF1000EBEDE9 /* OrderInfoModel.h */,
 				779C4DC51EBEBF1000EBEDE9 /* OrderInfoModel.m */,
+				779C4DE51EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.h */,
+				779C4DE61EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1290,24 +1290,14 @@
 			name = "关于我们";
 			sourceTree = "<group>";
 		};
-		77B5BCD31EAD97DB0034497D /* 待支付详情 */ = {
+		77B5BCD31EAD97DB0034497D /* 订单详情 */ = {
 			isa = PBXGroup;
 			children = (
 				77B5C9E41E7A2F000028CB9E /* OrderDetailViewController.h */,
 				77B5C9E51E7A2F000028CB9E /* OrderDetailViewController.m */,
 				77B5C9E61E7A2F000028CB9E /* OrderDetailViewController.xib */,
 			);
-			name = "待支付详情";
-			sourceTree = "<group>";
-		};
-		77B5BCD41EAD97F70034497D /* 已完成详情 */ = {
-			isa = PBXGroup;
-			children = (
-				77B5C9E91E7A4AF50028CB9E /* CompleteOrderViewController.h */,
-				77B5C9EA1E7A4AF50028CB9E /* CompleteOrderViewController.m */,
-				77B5C9EB1E7A4AF50028CB9E /* CompleteOrderViewController.xib */,
-			);
-			name = "已完成详情";
+			name = "订单详情";
 			sourceTree = "<group>";
 		};
 		77B5BCD51EAD987C0034497D /* 心理沙龙活动 */ = {
@@ -1517,8 +1507,7 @@
 				77F3D85A1E764E22008B5FC0 /* OrderViewController.h */,
 				77F3D85B1E764E22008B5FC0 /* OrderViewController.m */,
 				77F3D85C1E764E22008B5FC0 /* OrderViewController.xib */,
-				77B5BCD31EAD97DB0034497D /* 待支付详情 */,
-				77B5BCD41EAD97F70034497D /* 已完成详情 */,
+				77B5BCD31EAD97DB0034497D /* 订单详情 */,
 			);
 			path = "订单";
 			sourceTree = "<group>";
@@ -1694,7 +1683,6 @@
 				09FBE0231E70F609003452A6 /* ConfirmPageCell.xib in Resources */,
 				774DBC0D1E6420FC00B8798C /* HomeCell.xib in Resources */,
 				77D2BFA71E67D6A9000B9978 /* ForgetPwViewController.xib in Resources */,
-				77B5C9ED1E7A4AF50028CB9E /* CompleteOrderViewController.xib in Resources */,
 				77D07EEA1E962D7900904AD9 /* ChangePwCodeViewController.xib in Resources */,
 				779C4DDF1EBEF74700EBEDE9 /* OrderPayDetailCell.xib in Resources */,
 				7752C7B41E70EC360093ED37 /* MessageCell.xib in Resources */,
@@ -1845,6 +1833,7 @@
 				77B5BD661EADA78E0034497D /* GQNetworkManager.m in Sources */,
 				77B5BD571EADA6A50034497D /* GQActionSheetItem.m in Sources */,
 				09FBE0221E70F609003452A6 /* ConfirmPageCell.m in Sources */,
+				779C4DE71EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.m in Sources */,
 				77B5BD551EADA6A50034497D /* RefreshFooter.m in Sources */,
 				7722F0981EB4500B001DCF5F /* DTTimePeriodGroup.m in Sources */,
 				094FC5111E8CC1E500BFFBBB /* PayPageCell.m in Sources */,
@@ -1889,7 +1878,6 @@
 				779C4DCF1EBEF2B300EBEDE9 /* OrderMoneyCell.m in Sources */,
 				77B5BD581EADA6A50034497D /* GQSegment.m in Sources */,
 				0953C2231E514B5800FB165C /* main.m in Sources */,
-				77B5C9EC1E7A4AF50028CB9E /* CompleteOrderViewController.m in Sources */,
 				77D2BFA11E66C404000B9978 /* SetAcountViewController.m in Sources */,
 				7787B3701EAEF2FE00306527 /* RSADataVerifier.m in Sources */,
 				0970CFEC1E517EB8007480CB /* FirstViewController.m in Sources */,

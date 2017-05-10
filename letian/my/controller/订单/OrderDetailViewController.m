@@ -13,6 +13,7 @@
 #import "OrderPayDetailCell.h"
 #import "UIImageView+WebCache.h"
 #import "PayPageVC.h"
+#import "ChatViewController.h"
 
 @interface OrderDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -25,7 +26,10 @@
 typedef NS_ENUM(NSInteger,OrderButtonTag)
 {
     PayButtonTag           = 10,
-    CancelButtonTag           = 20,
+    CancelButtonTag        = 20,
+    BackButtonTag          = 30,
+    FinishButtonTag        = 40,
+    AskButtonTag           = 50,
 };
 
 @implementation OrderDetailViewController
@@ -87,16 +91,46 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
     
     [bottomView addSubview:[GQControls createViewWithFrame:CGRectMake(0, 0, SCREEN_W, 0.5) andBackgroundColor:MAINCOLOR]];
     
-    UIButton *cancelButton=[GQControls createButtonWithFrame:CGRectMake(SCREEN_W-95, 10, 80, 30) andTitle:@"取消订单" andTitleColor:MAINCOLOR andFontSize:13 andTag:CancelButtonTag andMaskToBounds:YES andRadius:8 andBorderWidth:0.5 andBorderColor:MAINCOLOR.CGColor];
-    [cancelButton addTarget:self action:@selector(bottombtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [bottomView addSubview:cancelButton];
     
-    if ([self.orderInfoModel.EnumOrderStateString isEqualToString:@"待支付"]) {
-      
-        UIButton *payButton=[GQControls createButtonWithFrame:CGRectMake(SCREEN_W-190, 10, 80, 30) andTitle:@"现在支付" andTitleColor:MAINCOLOR andFontSize:13 andTag:PayButtonTag andMaskToBounds:YES andRadius:8 andBorderWidth:0.5 andBorderColor:MAINCOLOR.CGColor];
+    if ([kFetchUserType integerValue]==1) {
+        //待支付的订单，可以取消，可以支付
+        if (self.orderInfoModel.EnumOrderState == WaitPayOrder) {
+            
+            UIButton *cancelButton=[GQControls createButtonWithFrame:CGRectMake(SCREEN_W-95, 10, 80, 30) andTitle:@"取消订单" andTitleColor:MAINCOLOR andFontSize:13 andTag:CancelButtonTag andMaskToBounds:YES andRadius:8 andBorderWidth:0.5 andBorderColor:MAINCOLOR.CGColor];
+            [cancelButton addTarget:self action:@selector(bottombtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            [bottomView addSubview:cancelButton];
+            
+            UIButton *payButton=[GQControls createButtonWithFrame:CGRectMake(SCREEN_W-190, 10, 80, 30) andTitle:@"现在支付" andTitleColor:MAINCOLOR andFontSize:13 andTag:PayButtonTag andMaskToBounds:YES andRadius:8 andBorderWidth:0.5 andBorderColor:MAINCOLOR.CGColor];
+            [payButton addTarget:self action:@selector(bottombtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            [bottomView addSubview:payButton];
+            //已经支付的订单，可以申请退款
+        }else if (self.orderInfoModel.EnumOrderState!=WaitPayOrder && self.orderInfoModel.EnumOrderState!=BackIngOrder && self.orderInfoModel.EnumOrderState!=CancelOrder && self.orderInfoModel.EnumOrderState!=SuccessOrder){
+            
+            UIButton *payButton=[GQControls createButtonWithFrame:CGRectMake(SCREEN_W-95, 10, 80, 30) andTitle:@"申请退款" andTitleColor:MAINCOLOR andFontSize:13 andTag:BackButtonTag andMaskToBounds:YES andRadius:8 andBorderWidth:0.5 andBorderColor:MAINCOLOR.CGColor];
+            [payButton addTarget:self action:@selector(bottombtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            [bottomView addSubview:payButton];
+            //已完成，退款中或已退款的订单，在此联系客服
+        }else if (self.orderInfoModel.EnumOrderState==SuccessOrder || self.orderInfoModel.EnumOrderState==CancelOrder || self.orderInfoModel.EnumOrderState==BackIngOrder){
+        
+        UIButton *payButton=[GQControls createButtonWithFrame:CGRectMake(SCREEN_W-95, 10, 80, 30) andTitle:@"在线客服" andTitleColor:MAINCOLOR andFontSize:13 andTag:AskButtonTag andMaskToBounds:YES andRadius:8 andBorderWidth:0.5 andBorderColor:MAINCOLOR.CGColor];
         [payButton addTarget:self action:@selector(bottombtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [bottomView addSubview:payButton];
+        
+        
     }
+        //如果用户是咨询师，可将预约订单修改为完成状态
+    else if ([kFetchUserType integerValue]==11){
+        
+        if (self.orderInfoModel.EnumOrderState==ConsultOrder) {
+            UIButton *finishButton=[GQControls createButtonWithFrame:CGRectMake(SCREEN_W-95, 10, 80, 30) andTitle:@"咨询已完成" andTitleColor:MAINCOLOR andFontSize:13 andTag:FinishButtonTag andMaskToBounds:YES andRadius:8 andBorderWidth:0.5 andBorderColor:MAINCOLOR.CGColor];
+            [finishButton addTarget:self action:@selector(bottombtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            [bottomView addSubview:finishButton];
+            
+        }
+        
+    }
+    
+}
 }
 
 -(void)bottombtnClick:(UIButton *)btn{
@@ -109,6 +143,16 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
         //点击取消订单
     }else if (btn.tag==CancelButtonTag){
         [self cancelOrder];
+        //申请退款
+    }else if (btn.tag==BackButtonTag){
+        [self applyToRefundOrder];
+        //咨询已完成
+    }else if (btn.tag==FinishButtonTag){
+        [self finishOrder];
+    }else if (btn.tag==AskButtonTag){
+        //联系客服
+        ChatViewController *chatVc=[[ChatViewController alloc]init];
+        [self.navigationController pushViewController:chatVc animated:YES];
     }
     
 }
@@ -143,6 +187,69 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
     }];
 
 }
+
+#pragma mark-------申请退款
+
+-(void)applyToRefundOrder
+{
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_CONSULT];
+    [requestString appendString:API_NAME_REFUNDORDER];
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    params[@"orderID"]=@(self.orderID);
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBHudSet dismiss:self.view];
+        NSLog(@"&&&&&&&&&*申请退款%@",responseObject);
+        if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
+            NSLog(@"Msg%@",responseObject[@"Msg"]);
+            [MBHudSet showText:@"申请成功！退款中……" andOnView:self.view];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+        }
+    }];
+    
+}
+
+#pragma mark-------咨询已完成
+
+-(void)finishOrder
+{
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_CONSULT];
+    [requestString appendString:API_NAME_FINISHORDER];
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    params[@"orderID"]=@(self.orderID);
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBHudSet dismiss:self.view];
+        NSLog(@"&&&&&&&&&*修改订单为已完成%@",responseObject);
+        if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
+            NSLog(@"Msg%@",responseObject[@"Msg"]);
+            [MBHudSet showText:@"确认成功！" andOnView:self.view];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+        }
+    }];
+    
+}
+
 #pragma mark-------创建TableView
 
 -(void)createTableView
@@ -167,16 +274,16 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
         OrderConsultCell *consultCell=[OrderConsultCell cellWithTableView:tableView];
         consultCell.orderNoLabel.text=[NSString stringWithFormat:@"订单号：%@",self.orderInfoModel.OrderNo];
         consultCell.orderStateLabel.text=self.orderInfoModel.EnumOrderStateString;
-        [consultCell.doctorHeadImgView sd_setImageWithURL:[NSURL URLWithString:self.doctorImg]];
-        [consultCell.userHeadImgView sd_setImageWithURL:[NSURL URLWithString:self.userImg]];
+        [consultCell.doctorHeadImgView sd_setImageWithURL:[NSURL URLWithString:self.orderInfoModel.DoctorHeadImg]];
+        [consultCell.userHeadImgView sd_setImageWithURL:[NSURL URLWithString:self.orderInfoModel.UserHeadImg]];
         consultCell.doctorNameLabel.text=[NSString stringWithFormat:@"咨询师：%@",self.orderInfoModel.DoctorName];
         consultCell.consultTypeLabel.text=[NSString stringWithFormat:@"咨询方式：%@",self.orderInfoModel.ConsultTypeIDString];
         consultCell.consultTimeLabel.text=[NSString stringWithFormat:@"咨询时间：%@",self.orderInfoModel.ConsultTime];
         consultCell.userNameLabel.text=[NSString stringWithFormat:@"咨客：%@",self.orderInfoModel.UserName];
 //        consultCell.userInfoLabel.text=[];
 //        consultCell.userPhoneLabel.text=self.orderInfoModel.;
-//        consultCell.doctorNameLabel.text=self.orderInfoModel.DoctorName;
-        consultCell.consultDetailLabel.text=[NSString stringWithFormat:@"咨询内容：心情不好心情不好心情不好心情不好心情不好心情不好心情不好心情不好心情不好心情不好"];
+//        consultCell.userEmailLabel.text=
+//        consultCell.consultDetailLabel.text=[NSString stringWithFormat:@"咨询内容：心情不好心情不好心情不好心情不好心情不好心情不好心情不好心情不好心情不好心情不好"];
         return consultCell;
         //订单金额
     }else if (indexPath.row==1){
@@ -207,7 +314,7 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
         [cell.contentView addSubview:bgView];
         
         [bgView addSubview:[GQControls createLabelWithFrame:CGRectMake(15, 10, SCREEN_W-30, 10) andText:@"温馨提示:" andTextColor:[UIColor lightGrayColor] andFontSize:11]];
-        UILabel *detailLabel=[GQControls createLabelWithFrame:CGRectMake(15, 25, SCREEN_W-60,100) andText:@"1.  订单创建后，请于一小时内支付。超时未支付的订单将失效。\n2.  下单成功后，请记住您预约的时间，并及时进行咨询。如果您想更改咨询的时间，可在预约好的时间之前将原订单取消，并重新下单。\n3.  如果您未及时进行咨询，订单已处于完成状态，可联系客服退款。但您预约的这段时间，咨询师无法接受其他咨询，因此退款中将扣除10%的违约费用。\n4.  所有退款将在48小时内到账。\n5.  若您有任何疑问，可在线询问乐天客服，或致电021-37702979。" andTextColor:[UIColor lightGrayColor] andFontSize:11];
+        UILabel *detailLabel=[GQControls createLabelWithFrame:CGRectMake(15, 25, SCREEN_W-60,120) andText:@"1.  订单创建后，请于一小时内支付。超时未支付的订单将失效。\n2.  下单成功后，请记住您预约的时间，并及时进行咨询。如果您想更改咨询的时间，可在预约好的时间之前将原订单取消，并重新下单。\n3.  如果您未及时进行咨询，订单已处于完成状态，可联系客服退款。但您预约的这段时间，咨询师无法接受其他咨询，因此退款中将扣除10%的违约费用。\n4.  所有退款将在48小时内到账。\n5.  若您有任何疑问，可在线询问乐天客服，或致电021-37702979。" andTextColor:[UIColor lightGrayColor] andFontSize:11];
         detailLabel.numberOfLines=0;
         [bgView addSubview:detailLabel];
         return cell;

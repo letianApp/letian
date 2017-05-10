@@ -87,6 +87,18 @@
     _mainTableView.estimatedRowHeight = 44.0;
     _mainTableView.rowHeight = UITableViewAutomaticDimension;
     
+    UIButton *setbutton=[GQControls createButtonWithFrame:CGRectMake(0, 0, SCREEN_W, 40) andTitle:@"set" andTitleColor:MAINCOLOR andFontSize:15 andBackgroundColor:WEAKPINK];
+    [setbutton addTarget:self action:@selector(setTime) forControlEvents:UIControlEventTouchUpInside];
+    _mainTableView.tableFooterView=setbutton;
+    
+}
+
+-(void)setTime{
+    
+    [self setCounsultSetForDay:@"2017-05-10 00:00:00"];
+    //    [self setCounsultSetForDay:[NSString stringWithFormat:@"%@ 00:00",selDateStr]];
+
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -211,8 +223,7 @@
 
     NSLog(@"%@",selDateStr);
 
-//    [self setCounsultSetForDay:[NSString stringWithFormat:@"%@ 00:00:00",selDateStr]];
-//    [self getCounsultSetForDay:selDateStr];
+    [self getCounsultSetForDay:selDateStr];
 
 }
 
@@ -221,6 +232,7 @@
     NSLog(@"%f",self.calendar.bottom);
 
 }
+
 
 #pragma mark 根据日期获得咨询师设置
 - (void)getCounsultSetForDay:(NSString *)dayStr {
@@ -238,7 +250,7 @@
     
     [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
         __strong typeof(self) strongself = weakSelf;
-        NSLog(@"%@",responseObject);
+        NSLog(@"获取咨询时间返回的数据%@",responseObject);
         
     } failure:^(NSError *error) {
         __strong typeof(self) strongself = weakSelf;
@@ -259,31 +271,38 @@
     
     NSMutableDictionary *parames = [[NSMutableDictionary alloc]init];
     
-    NSDictionary *consultTimeDic = @{@"StartTime":@"05:00:00",@"EndTime":@"13:00:00"};
+    NSMutableDictionary *DoctorConsultTime=[[NSMutableDictionary alloc]init];
+    DoctorConsultTime[@"StartTime"]= @"09:00";
+    DoctorConsultTime[@"EndTime"]=@"19:00";
+    
+
+//    NSDictionary *consultTimeDic = @{@"StartTime":@"09:00:00.1234567",@"EndTime":@"13:00:00.1234567"};
 //    consultTimeDic[@"StartTime"] = @"05:00:00";
 //    consultTimeDic[@"EndTime"] = @"13:00:00";
-    NSArray *arr = @[@{@"StartTime":@"05:00:00",@"EndTime":@"13:00:00"}];
+//    NSArray *arr = @[@{@"StartTime":@"05:00:00",@"EndTime":@"13:00:00"}];
     NSMutableArray *consultTimeArr = [[NSMutableArray alloc]init];
-    [consultTimeArr addObject:consultTimeDic];
+    [consultTimeArr addObject:DoctorConsultTime];
     
     
     
     parames[@"CousultDate"] = dayStr;
-    parames[@"IsEnableConsult"] = @"false";
-    parames[@"ConsultTimeList"] = arr;
+    parames[@"IsEnableConsult"] = @"true";
+    parames[@"ConsultTimeList"] = consultTimeArr;
     
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parames options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parames options:NSJSONWritingPrettyPrinted error:nil];
+//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
     
-    NSLog(@"parames:%@",parames);
+    NSLog(@"修改咨询时间上传的数据：params:%@",parames);
     
     [PPNetworkHelper setValue:@"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOjQsImxvZ2lubmFtZSI6IjE4OTc3MzQzODQzIiwicmVhbG5hbWUiOm51bGwsImV4cGlyZXRpbWUiOjE0OTI3NDE0ODV9.GczqZEMSZTDEXHK2AHhhkDeUGm5f0o2rmVu9h79JsfE" forHTTPHeaderField:@"token"];
     
     [PPNetworkHelper POST:requestString parameters:parames success:^(id responseObject) {
         
 //        __strong typeof(self) strongself = weakSelf;
-        NSLog(@"%@",responseObject);
+        NSLog(@"修改咨询时间返回的数据%@",responseObject);
 
     } failure:^(NSError *error) {
         __strong typeof(self) strongself = weakSelf;

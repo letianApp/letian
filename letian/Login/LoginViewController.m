@@ -90,6 +90,7 @@
             NSLog(@"token:%@",kFetchToken);
             [[NSUserDefaults standardUserDefaults] setObject:weakSelf.acountTextField.text.trim forKey:kUserPhoneKey];
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"enumUserType"] forKey:kUserType];
+            NSLog(@"用户身份%@",kFetchUserType);
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
             CustomCYLTabBar *tabBarController                              = [[CustomCYLTabBar alloc] init];
             [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;

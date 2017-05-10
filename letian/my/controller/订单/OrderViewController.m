@@ -51,7 +51,6 @@
     
     [self setUpRefresh];
     
-    
 }
 
 -(void)setUpRefresh
@@ -70,7 +69,9 @@
 #pragma mark-------创建Segment
 
 -(void)setSegment {
-    self.topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 50)];
+    self.topView=[[UIView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_W, 50)];
+    [self.view addSubview:self.topView];
+    
     self.segment = [[GQSegment alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     self.segment.delegate = self;
     self.segment.backgroundColor=[UIColor whiteColor];
@@ -87,6 +88,7 @@
     UIView *marginView=[[UIView alloc]initWithFrame:CGRectMake(0, self.segment.height-3, SCREEN_W, 5)];
     marginView.backgroundColor=[UIColor groupTableViewBackgroundColor];
     [self.topView addSubview:marginView];
+    
 }
 
 
@@ -121,6 +123,7 @@
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     params[@"enumOrderState"]=@(self.orderState);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    NSLog(@"订单列表的token%@",kFetchToken);
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [weakSelf.tableView.mj_header endRefreshing];
@@ -148,7 +151,7 @@
 
 -(void)createTableView
 {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H-64) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64+50, SCREEN_W, SCREEN_H-64-50) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.backgroundColor=[UIColor groupTableViewBackgroundColor];
@@ -156,14 +159,7 @@
     [self.view addSubview:tableView];
     self.tableView = tableView;
 }
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return self.topView;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 50;
-}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.orderList.count;
@@ -179,6 +175,10 @@
         //如果用户是咨客
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.orderList[indexPath.row].DoctorHeadImg]];
         cell.nameLabel.text=self.orderList[indexPath.row].DoctorName;
+        
+        UIGestureRecognizer *tap=[[UIGestureRecognizer alloc]initWithTarget:self action:@selector(getDoctorInfo:)];
+        cell.headImageView.userInteractionEnabled=YES;
+        [cell.headImageView addGestureRecognizer:tap];
     }else{
         //如果用户是咨询师
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.orderList[indexPath.row].UserHeadImg]];
@@ -206,7 +206,6 @@
         //超过一小时（即3600秒）未支付  则该订单失效
         if (timePeriod.durationInSeconds<=3600) {
             //去支付
-            [cell.stateButton setTitleColor:MAINCOLOR forState:UIControlStateNormal];
             cell.stateButton.layer.borderColor=[MAINCOLOR CGColor];
             [cell.stateButton addTarget:self action:@selector(toPayVc:) forControlEvents:UIControlEventTouchUpInside];
             //倒计时
@@ -228,8 +227,23 @@
         //已完成
         [cell.stateButton setTitle:@"已完成" forState:UIControlStateNormal];
         cell.stateButton.userInteractionEnabled=NO;
+    }else if (self.orderList[indexPath.row].EnumOrderState==15){
+        //退款中
+        [cell.stateButton setTitle:@"退款中" forState:UIControlStateNormal];
+        cell.stateButton.userInteractionEnabled=NO;
+    }else if (self.orderList[indexPath.row].EnumOrderState==30){
+        //已退款
+        [cell.stateButton setTitle:@"已退款" forState:UIControlStateNormal];
+        cell.stateButton.userInteractionEnabled=NO;
     }
     return cell;
+}
+
+//点击咨询师头像查看咨询师详情
+-(void)getDoctorInfo:(NSInteger)doctorId{
+    
+    
+    
 }
 
 -(void)toPayVc:(UIButton *)btn{
@@ -248,8 +262,6 @@
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
     OrderDetailViewController *orderDetailVc=[[OrderDetailViewController alloc]init];
     orderDetailVc.orderID=self.orderList[indexPath.row].OrderID;
-    orderDetailVc.doctorImg=self.orderList[indexPath.row].DoctorHeadImg;
-    orderDetailVc.userImg=self.orderList[indexPath.row].UserHeadImg;
     [self.navigationController pushViewController:orderDetailVc animated:YES];
 }
 

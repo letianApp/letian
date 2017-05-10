@@ -36,4 +36,12 @@
 
 @property(nonatomic,copy)NSString *UserName;//咨客名称
 
+@property(nonatomic,copy)NSString *DoctorHeadImg;//咨询师头像
+
+@property(nonatomic,copy)NSString *UserHeadImg;//咨客头像
+
+
+
+
+
 @end

@@ -25,6 +25,8 @@ typedef NS_ENUM(NSInteger,OrderState)
     ConsultOrder           = 1,//预约订单
     WaitPayOrder           = 5,//待支付订单
     SuccessOrder           = 10,//已完成订单
+    BackIngOrder           = 15,//退款中订单
+    CancelOrder            = 30,//已退款订单
 };
 
 #endif /* EnumList_h */
