@@ -97,11 +97,15 @@
             NSLog(@"token:%@",kFetchRToken);
             [[NSUserDefaults standardUserDefaults] setObject:strongSelf.acountTextField.text.trim forKey:kUserPhoneKey];
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"enumUserType"] forKey:kUserType];
+
             [self getUserInfo];
             
             }else{
                 
             [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.view];
+
+        }else{
+            [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

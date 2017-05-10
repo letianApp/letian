@@ -18,7 +18,7 @@
     
     [super awakeFromNib];
     
-    self.stateButton.layer.borderColor=[UIColor lightGrayColor].CGColor;
+    self.stateButton.layer.borderColor=[UIColor clearColor].CGColor;
     self.stateButton.layer.borderWidth=0.8;
     self.stateButton.layer.masksToBounds=YES;
     self.stateButton.layer.cornerRadius=8;

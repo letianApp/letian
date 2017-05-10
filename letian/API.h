@@ -133,5 +133,12 @@
 //取消订单
 #define API_NAME_DOCANCELORDER       @"DoCancelConsultOrder"
 
+//申请退款
+#define API_NAME_REFUNDORDER         @"DoBackConsultOrder"
+
+//咨询师修改订单为已完成状态
+#define API_NAME_FINISHORDER         @"DoFinishConsultOrder"
+
+
 
 #endif /* API_h */

@@ -200,6 +200,8 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kTokenKey];
     
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserType];
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

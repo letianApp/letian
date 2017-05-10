@@ -472,9 +472,9 @@
     NSRange rag = {0,2};
     NSInteger startTime = [[_orderModel.orderDateTimeStart substringWithRange:rag] integerValue];
     NSInteger endTime = startTime + [_hourStr integerValue];
-    NSString *endStr = [_orderModel.orderDateTimeStart stringByReplacingCharactersInRange:rag withString:[NSString stringWithFormat:@"%ld",endTime]];
+    NSString *endStr = [_orderModel.orderDateTimeStart stringByReplacingCharactersInRange:rag withString:[NSString stringWithFormat:@"%li",endTime]];
     _orderModel.orderDateTimeEnd = endStr;
-    NSLog(@"%@",endStr);
+    NSLog(@"结束时间%@",endStr);
 
     [self reflashInfo];
     [self.sl_popupController dismiss];

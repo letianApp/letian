@@ -149,6 +149,7 @@
         headImageView.layer.masksToBounds=YES;
         headImageView.layer.cornerRadius=50;
         [headView addSubview:headImageView];
+        
         UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(userInfoClick)];
         [headImageView addGestureRecognizer:tap];
         headImageView.userInteractionEnabled=YES;
@@ -216,6 +217,7 @@
     cell.textLabel.text=self.dataArray[indexPath.row];
     cell.textLabel.font=[UIFont systemFontOfSize:15];
     cell.textLabel.textColor=[UIColor darkGrayColor];
+    
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 49, SCREEN_W, 0.5)];
     lineView.backgroundColor=[UIColor lightGrayColor];
     [cell.contentView addSubview:lineView];
@@ -229,6 +231,7 @@
     //全部订单
     UILabel *label=[GQControls createLabelWithFrame:CGRectMake(10, 0, 100, 40) andText:@"全部订单" andTextColor:[UIColor darkGrayColor] andFontSize:14];
     [orderView addSubview:label];
+    
     UILabel *allOrderLabel=[GQControls createLabelWithFrame:CGRectMake(SCREEN_W-160, 0, 150, 40) andText:@"查看全部订单 >>" andTextColor:[UIColor darkGrayColor] andFontSize:12];
     allOrderLabel.textAlignment=NSTextAlignmentRight;
     [orderView addSubview:allOrderLabel];
@@ -240,6 +243,7 @@
     UIView *lineView1=[[UIView alloc]initWithFrame:CGRectMake(0, 41, SCREEN_W, 0.5)];
     lineView1.backgroundColor=[UIColor lightGrayColor];
     [orderView addSubview:lineView1];
+    
     UIView *lineView2=[[UIView alloc]initWithFrame:CGRectMake(0, 109, SCREEN_W, 0.5)];
     lineView2.backgroundColor=[UIColor lightGrayColor];
     [orderView addSubview:lineView2];
@@ -267,11 +271,11 @@
     OrderViewController *orderVc=[[OrderViewController alloc]init];
     orderVc.hidesBottomBarWhenPushed=YES;
     if (btn.tag==100) {
-        orderVc.orderState=1;
+        orderVc.orderState=ConsultOrder;
     }else if (btn.tag==101){
-        orderVc.orderState=5;
+        orderVc.orderState=WaitPayOrder;
     }else if (btn.tag==102){
-        orderVc.orderState=10;
+        orderVc.orderState=SuccessOrder;
     }
     [self.navigationController pushViewController:orderVc animated:NO];
 }
@@ -279,7 +283,7 @@
 -(void)allOrderLabelTouched{
     OrderViewController *orderVc=[[OrderViewController alloc]init];
     orderVc.hidesBottomBarWhenPushed=YES;
-    orderVc.orderState=100;
+    orderVc.orderState=AllOrder;
     [self.navigationController pushViewController:orderVc animated:NO];
 }
 
