@@ -57,6 +57,8 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
 
+    [MBHudSet showStatusOnView:self.view];
+    
     _counselorArr = [NSMutableArray new];
     _requestParams = [NSMutableDictionary new];
     [_requestParams setValue:@(0) forKey:@"enumPsyCategory"];
@@ -167,6 +169,7 @@
         strongSelf.counselorTitleDic = responseObject[@"Result"][@"Source"][@"UserTitleDic"];
         strongSelf.counselorTitleArr = [strongSelf arrangeForKeyWithDic:strongSelf.counselorTitleDic];
         
+        [strongSelf.mainHeadView removeAllSubviews];
         [strongSelf creatClassifiedSection];
         
     } failure:^(NSError *error) {
@@ -210,11 +213,12 @@
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
         
         __strong typeof(self) strongself = weakSelf;
+        [MBHudSet dismiss:strongself.view];
         [strongself.counselorArr removeAllObjects];
         strongself.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         
         for (int i = 0; i < strongself.counselorArr.count; i++) {
-            NSLog(@"%@",strongself.counselorArr[i].Expertise);
+//            NSLog(@"%@",strongself.counselorArr[i].Expertise);
             
         }
         
@@ -231,6 +235,7 @@
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongself = weakSelf;
+        [MBHudSet dismiss:strongself.view];
         [strongself.counselorInfoTableview.mj_header endRefreshing];
         [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师列表错误，错误代码：%ld",error.code]andOnView:strongself.view];
     }];

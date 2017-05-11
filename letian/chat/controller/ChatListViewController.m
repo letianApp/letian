@@ -52,18 +52,6 @@
 
 }
 
-//- (void)refreshUserInfoCache:(RCUserInfo *)userInfo
-//                  withUserId:(NSString *)userId {
-//    
-//    if ([userId isEqualToString:kFetchUserId]) {
-//        NSLog(@"新的");
-//        userInfo.name = kUserName;
-//        userInfo.portraitUri = kFetchUserHeadImageUrl;
-//    }
-//    
-//}
-
-
 #pragma mark 定制导航栏
 - (void)customNavigation {
     

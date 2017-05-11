@@ -138,7 +138,32 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"NickName"] forKey:kUserName];
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"HeadImg"] forKey:kUserHeadImageUrl];
-//            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"UserID"]] forKey:kUserIdKey];
+            RCUserInfo *currentUser = [RCIM sharedRCIM].currentUserInfo;
+            currentUser.name = kFetchUserName;
+            currentUser.portraitUri = kFetchUserHeadImageUrl;
+            [[RCIM sharedRCIM]refreshUserInfoCache:currentUser withUserId:kFetchUserId];
+            
+            [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
+                
+//                __strong typeof(self) strongself = weakSelf;
+                NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+                NSLog(@"ID：%@",kFetchUserId);
+                
+                //        [[RCIM sharedRCIM] setUserInfoDataSource:strongself];
+                //        [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc]initWithUserId:userId name:kFetchUserName portrait:kFetchUserHeadImageUrl];
+                
+            } error:^(RCConnectErrorCode status) {
+                NSLog(@"登陆的错误码为:%ld", (long)status);
+                
+                
+                
+            } tokenIncorrect:^{
+                //token过期或者不正确。
+                //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
+                //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
+                NSLog(@"token错误");
+            }];
+
             
             [strongSelf dismissViewControllerAnimated:YES completion:nil];
             CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
@@ -173,11 +198,13 @@
 //不登录随便看看
 - (IBAction)doNotLogin:(id)sender {
     
-    CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
-    
-    [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
-    
-    tabBarController.tabBarController.selectedIndex = self.tabbarIndex;
+//    CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
+//    
+//    [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
+//    
+//    tabBarController.tabBarController.selectedIndex = self.tabbarIndex;
+        
+    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 
@@ -186,7 +213,8 @@
     
     ForgetPwViewController *forgetPwVc=[[ForgetPwViewController alloc]init];
     
-    [self.navigationController pushViewController:forgetPwVc animated:YES];
+//    [self.navigationController pushViewController:forgetPwVc animated:YES];
+    [self presentViewController:forgetPwVc animated:YES completion:nil];
     
 }
 

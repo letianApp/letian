@@ -231,10 +231,9 @@
 //登录
 - (IBAction)loginButtonClick:(id)sender {
     
-    LoginViewController *loginVc=[[LoginViewController alloc]init];
-    
-    [self presentViewController:loginVc animated:YES completion:nil];
-    
+//    LoginViewController *loginVc=[[LoginViewController alloc]init];
+//    [self presentViewController:loginVc animated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

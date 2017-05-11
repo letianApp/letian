@@ -79,7 +79,7 @@
         __strong typeof(self) strongSelf = weakSelf;
 
         [MBHudSet dismiss:strongSelf.view];
-        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
+//        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             strongSelf.userInfoModel = [UserInfoModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
             strongSelf.nameLabel.text = strongSelf.userInfoModel.NickName;
@@ -186,10 +186,12 @@
 #pragma mark--------点击登录
 
 -(void)loginButtonClick{
-    LoginViewController *loginVc=[[LoginViewController alloc]init];
-    loginVc.hidesBottomBarWhenPushed=YES;
+    LoginViewController *loginVc = [[LoginViewController alloc]init];
+    loginVc.hidesBottomBarWhenPushed = YES;
     loginVc.tabbarIndex=2;
-    [self.navigationController pushViewController:loginVc animated:YES];
+//    [self.navigationController pushViewController:loginVc animated:YES];
+    [self presentViewController:loginVc animated:YES completion:nil];
+    
 }
 
 #pragma mark--------点击进入消息界面

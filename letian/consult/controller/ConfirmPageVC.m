@@ -198,6 +198,7 @@
     
     [self animationbegin:btn];
     UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"导航到设备" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
     __weak typeof(self) weakSelf   = self;
     
     [alertController addAction:[UIAlertAction actionWithTitle:@"复制地址" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -221,7 +222,7 @@
             
             __strong typeof(self) strongself = weakSelf;
             NSString *urlsting = [[NSString stringWithFormat:@"iosamap://navi?sourceApplication= &backScheme= &lat=%f&lon=%f&dev=0&style=2",strongself.coordinate.latitude,strongself.coordinate.longitude]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            [[UIApplication  sharedApplication]openURL:[NSURL URLWithString:urlsting]];
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:urlsting]];
         }]];
     } else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://"]]) {
         
