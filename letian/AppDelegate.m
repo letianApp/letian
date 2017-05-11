@@ -35,8 +35,10 @@
 #import "CALayer+Transition.h"
 
 #import "CustomCYLTabBar.h"
-//#import "CustomPlusBtn.h"
+#import "GQUserManager.h"
 
+//#import "CustomPlusBtn.h"
+#import "LoginViewController.h"
 #import "FirstViewController.h"
 #import "ConsultViewController.h"
 #import "MyViewController.h"
@@ -57,7 +59,7 @@
 
 
 
-@interface AppDelegate ()<WXApiDelegate,JPUSHRegisterDelegate,RCIMUserInfoDataSource>
+@interface AppDelegate ()<WXApiDelegate, JPUSHRegisterDelegate, RCIMUserInfoDataSource, RCIMReceiveMessageDelegate, UITabBarControllerDelegate>
 
 @end
 
@@ -79,7 +81,7 @@
     
     [self setUSharePlatforms];
     
-    [self customEM];
+    [self customEMwithApp:application withLaunchOptions:launchOptions];
     
     return YES;
     
@@ -129,10 +131,60 @@
     
 //    [CustomPlusBtn registerPlusButton];
     CustomCYLTabBar *tabBarControllerConfig = [[CustomCYLTabBar alloc] init];
+    tabBarControllerConfig.tabBarController.delegate = self;
     [self.window setRootViewController:tabBarControllerConfig.tabBarController];
     
 }
 
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController*)viewController {
+    
+    NSLog(@"点击tab：%@",viewController.tabBarItem.title);
+    if ([viewController.tabBarItem.title isEqualToString:@"咨询"]) {
+        if (![GQUserManager isHaveLogin]) {
+            
+            //未登录
+            UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
+            [self.window.rootViewController presentViewController:alertControl animated:YES completion:nil];
+            [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                LoginViewController *loginVc = [[LoginViewController alloc]init];
+//                loginVc.tabbarIndex = 0;
+                loginVc.hidesBottomBarWhenPushed = YES;
+                
+                [self.window.rootViewController presentViewController:loginVc animated:YES completion:nil];
+            }]];
+            [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+            return NO;
+
+        }
+        
+    }
+
+    return YES;
+}
+
+//- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+//    NSUInteger selectedIndex = tabBarController.selectedIndex;
+//    NSLog(@"点击tab：%ld",selectedIndex);
+//    if (selectedIndex == 1) {
+//        if (![GQUserManager isHaveLogin]) {
+//            
+//            NSLog(@"没登录");
+//            //未登录
+//            UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
+//            [self.window.rootViewController presentViewController:alertControl animated:YES completion:nil];
+//            [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+//                LoginViewController *loginVc=[[LoginViewController alloc]init];
+//                loginVc.tabbarIndex=0;
+//                loginVc.hidesBottomBarWhenPushed=YES;
+//                [self.window.rootViewController presentViewController:loginVc animated:YES completion:nil];
+//            }]];
+//            [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+//        }
+//
+//    }
+//    
+//
+//}
 
 #pragma mark------------------设置全局的navigationBar样式--------------------
 
@@ -168,30 +220,78 @@
 
 #pragma mark----------------------融云--------------------------
 
-- (void)customEM {
+- (void)customEMwithApp:(UIApplication *)application withLaunchOptions:(NSDictionary *)launchOptions {
     
     __weak typeof(self) weakSelf   = self;
     
     [[RCIM sharedRCIM] initWithAppKey:RONGYUN_APPKEY];
-    
-    [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
-        
-        __strong typeof(self) strongself = weakSelf;
-        NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
-        NSLog(@"ID：%@",kFetchUserId);
 
-        [[RCIM sharedRCIM] setUserInfoDataSource:strongself];
-//        [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc]initWithUserId:userId name:kFetchUserName portrait:kFetchUserHeadImageUrl];
+    [RCIMClient sharedRCIMClient].logLevel = RC_Log_Level_Error;
+
+    [RCIM sharedRCIM].enablePersistentUserInfoCache = YES;
+    [[RCIM sharedRCIM] setUserInfoDataSource:self];
+    [RCIM sharedRCIM].receiveMessageDelegate = self;                            //  设置接收消息代理
+    [RCIM sharedRCIM].enableTypingStatus =YES;                                  //  开启输入状态监听
+    [RCIM sharedRCIM].disableMessageAlertSound = YES;                       //  声音提示
+    [RCIM sharedRCIM].enableSyncReadStatus = YES;
+
+    if ( [GQUserManager isHaveLogin] ) {
         
-    } error:^(RCConnectErrorCode status) {
-        NSLog(@"登陆的错误码为:%ld", (long)status);
-    } tokenIncorrect:^{
-        //token过期或者不正确。
-        //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
-        //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
-        NSLog(@"token错误");
-    }];
+        [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
+            
+            __strong typeof(self) strongself = weakSelf;
+            NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+            
+            //        [[RCIM sharedRCIM] setUserInfoDataSource:strongself];
+            //        [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc]initWithUserId:userId name:kFetchUserName portrait:kFetchUserHeadImageUrl];
+            
+        } error:^(RCConnectErrorCode status) {
+            NSLog(@"登陆的错误码为:%ld", (long)status);
+            
+            
+            
+        } tokenIncorrect:^{
+            //token过期或者不正确。
+            //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
+            //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
+            NSLog(@"token错误");
+        }];
+
+    }
+    
+    if ([application
+         respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        //注册推送, 用于iOS8以及iOS8之后的系统
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings
+                                                settingsForTypes:(UIUserNotificationTypeBadge |
+                                                                  UIUserNotificationTypeSound |
+                                                                  UIUserNotificationTypeAlert)
+                                                categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }  else {
+        //注册推送，用于iOS8之前的系统
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge |
+        UIRemoteNotificationTypeAlert |
+        UIRemoteNotificationTypeSound;
+        [application registerForRemoteNotificationTypes:myTypes];
+    }
+
+    // 远程推送的内容
+    NSDictionary *remoteNotificationUserInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    NSLog(@"远程推送：%@",remoteNotificationUserInfo);
 }
+
+/**
+ * 推送处理2
+ */
+//注册用户通知设置
+- (void)application:(UIApplication *)application
+didRegisterUserNotificationSettings:
+(UIUserNotificationSettings *)notificationSettings {
+    // register to receive notifications
+    [application registerForRemoteNotifications];
+}
+
 
 - (void)getUserInfoWithUserId:(NSString *)userId
                    completion:(void (^)(RCUserInfo *userInfo))completion {
@@ -205,27 +305,29 @@
         
         return completion(currentUser);
 
-    } else if ([userId isEqualToString:@"002"]) {
+    } else if ([userId isEqualToString:@"4"]) {
             RCUserInfo *userInfo = [[RCUserInfo alloc]init];
             userInfo.userId = userId;
-            userInfo.name = @"测试2";
+            userInfo.name = @"J";
             userInfo.portraitUri = @"http://www.wzright.com/upload/201610311133447158.jpg";
     
             return completion(userInfo);
+    } else if ([userId isEqualToString:@"10"]) {
+        RCUserInfo *userInfo = [[RCUserInfo alloc]init];
+        userInfo.userId = userId;
+        userInfo.name = @"222";
+        userInfo.portraitUri = @"http://www.wzright.com/upload/201610311133447158.jpg";
+        
+        return completion(userInfo);
     }
+
     return completion(nil);
 }
 
-//- (void)refreshUserInfoCache:(RCUserInfo *)userInfo
-//                  withUserId:(NSString *)userId {
-//    
-//    if ([userId isEqualToString:kFetchUserId]) {
-//        
-//        userInfo.name = kFetchUserName;
-//        userInfo.portraitUri = kFetchUserHeadImageUrl;
-//    }
-//
-//}
+- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
+    
+}
+
 
 #pragma mark---------------------第三方回调------------------------
 
@@ -276,6 +378,15 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     [JPUSHService registerDeviceToken:deviceToken];
+    NSString *token = [deviceToken description];
+    token = [token stringByReplacingOccurrencesOfString:@"<"
+                                             withString:@""];
+    token = [token stringByReplacingOccurrencesOfString:@">"
+                                             withString:@""];
+    token = [token stringByReplacingOccurrencesOfString:@" "
+                                             withString:@""];
+    [[RCIMClient sharedRCIMClient] setDeviceToken:token];
+
 }
 
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler
@@ -296,14 +407,25 @@
     completionHandler();
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-{
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
     [JPUSHService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient]
+                                     getPushExtraFromRemoteNotification:userInfo];
+    if (pushServiceData) {
+        NSLog(@"该远程推送包含来自融云的推送服务");
+        for (id key in [pushServiceData allKeys]) {
+            NSLog(@"key = %@, value = %@", key, pushServiceData[key]);
+        }
+    } else {
+        NSLog(@"该远程推送不包含来自融云的推送服务");
+    }
+
     [JPUSHService handleRemoteNotification:userInfo];
 }
 
@@ -340,6 +462,9 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

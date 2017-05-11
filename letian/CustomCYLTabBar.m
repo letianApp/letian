@@ -30,7 +30,7 @@
 #import "MyViewController.h"
 #import "ChatListViewController.h"
 
-@interface CustomCYLTabBar ()
+@interface CustomCYLTabBar ()<UITabBarControllerDelegate>
 
 @property (nonatomic, readwrite, strong) CYLTabBarController *tabBarController;
 
@@ -46,8 +46,7 @@
  */
 - (CYLTabBarController *)tabBarController {
     if (_tabBarController == nil) {
-        CYLTabBarController *tabBarController = [CYLTabBarController tabBarControllerWithViewControllers:self.viewControllers
-                                                                                   tabBarItemsAttributes:self.tabBarItemsAttributesForController];
+        CYLTabBarController *tabBarController = [CYLTabBarController tabBarControllerWithViewControllers:self.viewControllers tabBarItemsAttributes:self.tabBarItemsAttributesForController];
         [self customizeTabBarAppearance:tabBarController];
         _tabBarController = tabBarController;
     }

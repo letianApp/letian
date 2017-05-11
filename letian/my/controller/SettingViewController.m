@@ -11,6 +11,8 @@
 #import "LoginViewController.h"
 #import "ChangePwCodeViewController.h"
 #import "SDImageCache.h"
+#import <RongIMKit/RongIMKit.h>
+
 
 @interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -60,6 +62,7 @@
 
 -(void)cancelButtonClick{
    [GQUserManager removeAllUserInfo];
+    [[RCIM sharedRCIM] logout];
    LoginViewController *loginVc=[[LoginViewController alloc]init];
    [self.navigationController pushViewController:loginVc animated:YES];
 }

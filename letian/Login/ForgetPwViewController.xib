@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -78,6 +78,16 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Bi-aw-mf4">
+                    <rect key="frame" x="258" y="317" width="72" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="还想再试试">
+                        <color key="titleColor" red="0.91772586107254028" green="0.51975303888320923" blue="0.53392493724822998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="clickBackBtn:" destination="-1" eventType="touchUpInside" id="e6h-3R-4hy"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -88,6 +98,8 @@
                 <constraint firstItem="TXw-9C-nn2" firstAttribute="top" secondItem="ANc-ST-n2J" secondAttribute="bottom" constant="5" id="MLT-l8-ZPZ"/>
                 <constraint firstAttribute="trailing" secondItem="ANc-ST-n2J" secondAttribute="trailing" constant="45" id="MhD-0z-Jqs"/>
                 <constraint firstAttribute="trailing" secondItem="TXw-9C-nn2" secondAttribute="trailing" constant="45" id="PWP-mB-BCS"/>
+                <constraint firstItem="1Bi-aw-mf4" firstAttribute="top" secondItem="vVs-KR-WXf" secondAttribute="bottom" constant="30" id="QRk-WO-WbJ"/>
+                <constraint firstAttribute="trailing" secondItem="1Bi-aw-mf4" secondAttribute="trailing" constant="45" id="VKE-z2-why"/>
                 <constraint firstAttribute="trailing" secondItem="yJj-iN-lWN" secondAttribute="trailing" constant="45" id="XJp-cX-bmt"/>
                 <constraint firstItem="TXw-9C-nn2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="bDs-Md-h3o"/>
                 <constraint firstItem="yJj-iN-lWN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="bji-f6-ecp"/>
