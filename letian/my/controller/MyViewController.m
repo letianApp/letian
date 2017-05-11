@@ -8,7 +8,7 @@
 
 #import "MyViewController.h"
 #import "GQControls.h"
-#import "MessageViewController.h"
+#import "SystomMsgViewController.h"
 #import "OrderViewController.h"
 #import "AboutUsPageVC.h"
 #import "SettingViewController.h"
@@ -195,7 +195,7 @@
 #pragma mark--------点击进入消息界面
 
 - (void)messageButtonClicked {
-    MessageViewController *messageVc=[[MessageViewController alloc]init];
+    SystomMsgViewController *messageVc=[[SystomMsgViewController alloc]init];
     messageVc.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:messageVc animated:NO];
 }

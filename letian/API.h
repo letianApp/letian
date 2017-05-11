@@ -40,6 +40,11 @@
 //网页文章
 #define API_MODULE_WEBARTICLE        @"WebArticle"
 
+//消息
+#define API_MODULE_MESSAGE           @"Message"
+
+
+
 
 
 
@@ -85,7 +90,7 @@
 //获取活动详情
 #define API_NAME_GETACTIVEINFO       @"GetActiveInfo"
 
-//活动更新推送
+//消息推送
 #define API_NAME_SETPOSTACTIVE       @"SetPostActive"
 
 //获取心理健康专栏类别
@@ -139,6 +144,8 @@
 //咨询师修改订单为已完成状态
 #define API_NAME_FINISHORDER         @"DoFinishConsultOrder"
 
+//系统消息列表
+#define API_NAME_GETMESSAGELIST      @"GetMessageList"
 
 
 #endif /* API_h */

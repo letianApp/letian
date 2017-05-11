@@ -81,6 +81,8 @@
 		770FFC681E960548009B81FC /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 770FFC671E960548009B81FC /* UserInfoModel.m */; };
 		770FFC6C1E961070009B81FC /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 770FFC6A1E961070009B81FC /* UserInfoViewController.m */; };
 		770FFC6D1E961070009B81FC /* UserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 770FFC6B1E961070009B81FC /* UserInfoViewController.xib */; };
+		771E81221EC461210008E58A /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 771E81201EC461210008E58A /* ActivityCell.m */; };
+		771E81231EC461210008E58A /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771E81211EC461210008E58A /* ActivityCell.xib */; };
 		77221D931E6FB63400022AAF /* SystomMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77221D921E6FB63400022AAF /* SystomMsgViewController.m */; };
 		7722F0921EB4500B001DCF5F /* DateTools.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7722F0801EB4500B001DCF5F /* DateTools.bundle */; };
 		7722F0931EB4500B001DCF5F /* DTConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7722F0831EB4500B001DCF5F /* DTConstants.m */; };
@@ -324,6 +326,9 @@
 		770FFC691E961070009B81FC /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
 		770FFC6A1E961070009B81FC /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
 		770FFC6B1E961070009B81FC /* UserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoViewController.xib; sourceTree = "<group>"; };
+		771E811F1EC461210008E58A /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
+		771E81201EC461210008E58A /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
+		771E81211EC461210008E58A /* ActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
 		77221D911E6FB63400022AAF /* SystomMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystomMsgViewController.h; path = ../../my/controller/SystomMsgViewController.h; sourceTree = "<group>"; };
 		77221D921E6FB63400022AAF /* SystomMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystomMsgViewController.m; path = ../../my/controller/SystomMsgViewController.m; sourceTree = "<group>"; };
 		7722F0801EB4500B001DCF5F /* DateTools.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DateTools.bundle; sourceTree = "<group>"; };
@@ -888,6 +893,9 @@
 				774DBC091E6420FC00B8798C /* HomeCell.h */,
 				774DBC0A1E6420FC00B8798C /* HomeCell.m */,
 				774DBC0B1E6420FC00B8798C /* HomeCell.xib */,
+				771E811F1EC461210008E58A /* ActivityCell.h */,
+				771E81201EC461210008E58A /* ActivityCell.m */,
+				771E81211EC461210008E58A /* ActivityCell.xib */,
 				77FF30341EA0705F00F3A1C9 /* WebArticleCell.h */,
 				77FF30351EA0705F00F3A1C9 /* WebArticleCell.m */,
 				77FF30361EA0705F00F3A1C9 /* WebArticleCell.xib */,
@@ -935,13 +943,13 @@
 		0970CFE71E517D3E007480CB /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				09BFEF1A1EC0099E00A2731C /* 设置可预约日期 */,
 				0970CFF21E5180DF007480CB /* MyViewController.h */,
 				0970CFF31E5180DF007480CB /* MyViewController.m */,
 				0970CFF41E5180DF007480CB /* MyViewController.xib */,
 				77F3D8591E764E22008B5FC0 /* 订单 */,
-				77B5BCCE1EAD96E50034497D /* 个人资料 */,
 				77B5BCCF1EAD97260034497D /* 设置 */,
+				09BFEF1A1EC0099E00A2731C /* 设置可预约日期 */,
+				77B5BCCE1EAD96E50034497D /* 个人资料 */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1290,16 +1298,6 @@
 			name = "关于我们";
 			sourceTree = "<group>";
 		};
-		77B5BCD31EAD97DB0034497D /* 订单详情 */ = {
-			isa = PBXGroup;
-			children = (
-				77B5C9E41E7A2F000028CB9E /* OrderDetailViewController.h */,
-				77B5C9E51E7A2F000028CB9E /* OrderDetailViewController.m */,
-				77B5C9E61E7A2F000028CB9E /* OrderDetailViewController.xib */,
-			);
-			name = "订单详情";
-			sourceTree = "<group>";
-		};
 		77B5BCD51EAD987C0034497D /* 心理沙龙活动 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1507,7 +1505,9 @@
 				77F3D85A1E764E22008B5FC0 /* OrderViewController.h */,
 				77F3D85B1E764E22008B5FC0 /* OrderViewController.m */,
 				77F3D85C1E764E22008B5FC0 /* OrderViewController.xib */,
-				77B5BCD31EAD97DB0034497D /* 订单详情 */,
+				77B5C9E41E7A2F000028CB9E /* OrderDetailViewController.h */,
+				77B5C9E51E7A2F000028CB9E /* OrderDetailViewController.m */,
+				77B5C9E61E7A2F000028CB9E /* OrderDetailViewController.xib */,
 			);
 			path = "订单";
 			sourceTree = "<group>";
@@ -1658,6 +1658,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7787B30F1EADACC300306527 /* ActivityDetailViewController.xib in Resources */,
+				771E81231EC461210008E58A /* ActivityCell.xib in Resources */,
 				093DA77E1E960F08003CEDD9 /* ChatListViewController.xib in Resources */,
 				0965FBC91E824AF900C0FBAD /* OrderPageVC.xib in Resources */,
 				0970CFF11E5180BF007480CB /* ConsultViewController.xib in Resources */,
@@ -1825,6 +1826,7 @@
 				776CF2B91EB7900A00CE9620 /* TYLaunchBaseAnimation.m in Sources */,
 				7787B36C1EAEF2FE00306527 /* base64.m in Sources */,
 				77D0EA081EB5B33500254806 /* BindingPhoneViewController.m in Sources */,
+				771E81221EC461210008E58A /* ActivityCell.m in Sources */,
 				094FC50C1E8CBF0D00BFFBBB /* PayPageVC.m in Sources */,
 				0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */,
 				776CF2AB1EB78E9D00CE9620 /* GQFeatureCell.m in Sources */,

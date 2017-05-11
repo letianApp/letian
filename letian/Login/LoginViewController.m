@@ -43,7 +43,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     [self.loginBtn.layer setMasksToBounds:YES];
     [self.loginBtn.layer setCornerRadius:8];
     [self.registBtn.layer setMasksToBounds:YES];
@@ -166,7 +165,6 @@
     RegistViewController *registVc=[[RegistViewController alloc]init];
     
     [self presentViewController:registVc animated:YES completion:nil];
-    
     
 }
 

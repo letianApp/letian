@@ -100,7 +100,7 @@
     if (section==0) {
         return 2;
     }
-    return 1;
+    return 2;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 50;
@@ -160,11 +160,20 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     }else if (indexPath.section==1){
-        cell.textLabel.text=@"活动更新推送";
-        lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
-        UISwitch *switchView=[GQControls createSwitchWithFrame:CGRectMake(SCREEN_W-65, 10, 0, 0)];
-        [switchView addTarget:self action:@selector(changePostActiveState:) forControlEvents:UIControlEventValueChanged];
-        [cell.contentView addSubview:switchView];
+        if (indexPath.row==0) {
+            cell.textLabel.text=@"活动更新推送";
+            lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
+            UISwitch *switchView=[GQControls createSwitchWithFrame:CGRectMake(SCREEN_W-65, 10, 0, 0)];
+            [switchView addTarget:self action:@selector(changePostActiveState:) forControlEvents:UIControlEventValueChanged];
+            [cell.contentView addSubview:switchView];
+        }else if (indexPath.row==1){
+            cell.textLabel.text=@"订单消息推送";
+            lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
+            UISwitch *switchView=[GQControls createSwitchWithFrame:CGRectMake(SCREEN_W-65, 10, 0, 0)];
+            [switchView addTarget:self action:@selector(changePostOrderState:) forControlEvents:UIControlEventValueChanged];
+            [cell.contentView addSubview:switchView];
+        }
+        
     }
     return cell;
 }
@@ -196,6 +205,35 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
     }];    
+}
+
+#pragma mark--------订单消息推送开关
+
+-(void)changePostOrderState:(UISwitch *)switchView{
+    
+    //推送默认是打开的
+    switchView.selected=!switchView.selected;
+    NSString *state;
+    if (switchView.selected==1) {
+        state=@"false";
+    }else{
+        state=@"true";
+    }
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_USER];
+    [requestString appendString:API_NAME_SETPOSTACTIVE];
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    params[@"isPostOrder"]=state;
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBHudSet dismiss:self.view];
+        NSLog(@"订单消息推送responseObject=%@",responseObject);
+        [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+    }];
+    
 }
 
 

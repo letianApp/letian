@@ -19,7 +19,7 @@
 #import "UIImageView+WebCache.h"
 #import "TestListModel.h"
 #import "GQUserManager.h"
-#import "MessageViewController.h"
+#import "SystomMsgViewController.h"
 #import "TestDetailViewController.h"
 #import "GQScrollView.h"
 
@@ -275,7 +275,7 @@
 {
     //已登陆
     if ([GQUserManager isHaveLogin]) {
-        MessageViewController *messageVc=[[MessageViewController alloc]init];
+        SystomMsgViewController *messageVc=[[SystomMsgViewController alloc]init];
         messageVc.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:messageVc animated:YES];
     }else{

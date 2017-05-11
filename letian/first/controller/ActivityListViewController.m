@@ -7,11 +7,12 @@
 //
 
 #import "ActivityListViewController.h"
-#import "HomeCell.h"
+#import "ActivityCell.h"
 #import <WebKit/WebKit.h>
 #import "ActiveModel.h"
 #import "MJExtension.h"
 #import "ActivityDetailViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface ActivityListViewController ()<WKNavigationDelegate,WKUIDelegate,UITableViewDataSource,UITableViewDelegate>
 
@@ -100,14 +101,15 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 85;
+    return 120;
 }
 #pragma mark-------cell定制
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    HomeCell *cell=[HomeCell cellWithTableView:tableView];
-    cell.titleLabel.text=self.activeListArray[indexPath.row].Name;
-    cell.detailLabel.text=self.activeListArray[indexPath.row].Description;
+    ActivityCell *cell=[ActivityCell cellWithTableView:tableView];
+//    [cell.ActivityImageView sd_setImageWithURL:[NSURL URLWithString:self.activeListArray[indexPath.row].ActiveImg]];
+    cell.TitleLabel.text=self.activeListArray[indexPath.row].Name;
+    cell.timeLabel.text=[NSString stringWithFormat:@"%@ ~ %@",self.activeListArray[indexPath.row].StartDate,self.activeListArray[indexPath.row].EndDate];
     return cell;
 }
 
