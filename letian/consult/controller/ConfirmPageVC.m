@@ -544,12 +544,12 @@
     _detailTextView=[[UITextView alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, 330 , SCREEN_W*0.7, 80)];
     _detailTextView.delegate=self;
     _detailTextView.font=[UIFont systemFontOfSize:17];
-    _placeholderLabel=[GQControls createLabelWithFrame:CGRectMake(10, 10, 200, 20) andText:@"请简述您的咨询内容" andTextColor:[UIColor lightGrayColor] andFontSize:17];
+    _placeholderLabel=[GQControls createLabelWithFrame:CGRectMake(5, 10, 200, 20) andText:@"请简述您的咨询内容*" andTextColor:[UIColor lightGrayColor] andFontSize:17];
     [_detailTextView addSubview:_placeholderLabel];
     _detailTextView.layer.masksToBounds=YES;
     _detailTextView.layer.cornerRadius=5;
-    _detailTextView.layer.borderWidth=0.5;
-//    _detailTextView.layer.borderColor=
+    _detailTextView.layer.borderWidth=0.7;
+    _detailTextView.layer.borderColor=[[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0] CGColor];
     [bgView addSubview:_detailTextView];
     
 }
@@ -658,6 +658,7 @@
 - (void)clickConfirmBtn {
     NSLog(@"确认预约");
     
+    
     [MBHudSet showStatusOnView:self.view];
     
     //    if (_confirmBtn.backgroundColor == [UIColor lightGrayColor]) {
@@ -683,9 +684,9 @@
     params[@"ConsultAge"]          = @(_orderModel.orderInfoAge);
     params[@"ConsultPhone"]        = _orderModel.orderInfoPhone;
     if (_emailTextField.text) {
-        params[@"ConsultEmail"]        = _orderModel.orderInfoEmail;
+        params[@"ConsultEmail"]    = _orderModel.orderInfoEmail;
     }
-    
+    params[@"ConsultDescription"]  = self.detailTextView.text;
     [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
     NSLog(@"Params=%@",params);
     
