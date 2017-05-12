@@ -83,6 +83,7 @@
 		770FFC6D1E961070009B81FC /* UserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 770FFC6B1E961070009B81FC /* UserInfoViewController.xib */; };
 		771E81221EC461210008E58A /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 771E81201EC461210008E58A /* ActivityCell.m */; };
 		771E81231EC461210008E58A /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771E81211EC461210008E58A /* ActivityCell.xib */; };
+		771E81261EC5691E0008E58A /* GQTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 771E81251EC5691E0008E58A /* GQTextView.m */; };
 		77221D931E6FB63400022AAF /* SystomMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77221D921E6FB63400022AAF /* SystomMsgViewController.m */; };
 		7722F0921EB4500B001DCF5F /* DateTools.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7722F0801EB4500B001DCF5F /* DateTools.bundle */; };
 		7722F0931EB4500B001DCF5F /* DTConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7722F0831EB4500B001DCF5F /* DTConstants.m */; };
@@ -329,6 +330,8 @@
 		771E811F1EC461210008E58A /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
 		771E81201EC461210008E58A /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
 		771E81211EC461210008E58A /* ActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
+		771E81241EC5691E0008E58A /* GQTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTextView.h; sourceTree = "<group>"; };
+		771E81251EC5691E0008E58A /* GQTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTextView.m; sourceTree = "<group>"; };
 		77221D911E6FB63400022AAF /* SystomMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystomMsgViewController.h; path = ../../my/controller/SystomMsgViewController.h; sourceTree = "<group>"; };
 		77221D921E6FB63400022AAF /* SystomMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystomMsgViewController.m; path = ../../my/controller/SystomMsgViewController.m; sourceTree = "<group>"; };
 		7722F0801EB4500B001DCF5F /* DateTools.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DateTools.bundle; sourceTree = "<group>"; };
@@ -1411,6 +1414,8 @@
 			children = (
 				77B5BD3C1EADA6A50034497D /* GQControls.h */,
 				77B5BD3D1EADA6A50034497D /* GQControls.m */,
+				771E81241EC5691E0008E58A /* GQTextView.h */,
+				771E81251EC5691E0008E58A /* GQTextView.m */,
 				776CF2A31EB78E9D00CE9620 /* GQNewFeature */,
 				7753122D1EB64512008AA19D /* GQSegmentView */,
 				77D0EA521EB6275100254806 /* GQScrollView */,
@@ -1776,6 +1781,7 @@
 				7787B3A81EB18DDA00306527 /* WXApiRequestHandler.m in Sources */,
 				779C4DDE1EBEF74700EBEDE9 /* OrderPayDetailCell.m in Sources */,
 				779C4DC61EBEBF1000EBEDE9 /* OrderInfoModel.m in Sources */,
+				771E81261EC5691E0008E58A /* GQTextView.m in Sources */,
 				7787B36D1EAEF2FE00306527 /* NSDataEx.m in Sources */,
 				77D07EDF1E962CB200904AD9 /* ResetPwViewController.m in Sources */,
 				0965FBB71E7A918900C0FBAD /* UIColor+HexString.m in Sources */,
