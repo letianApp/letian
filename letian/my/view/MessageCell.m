@@ -28,7 +28,8 @@
     if (cell == nil) {
         cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.bgView.layer.borderWidth=1;
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    cell.bgView.layer.borderWidth=0.5;
     cell.bgView.layer.borderColor=[[UIColor lightGrayColor] CGColor];
     cell.bgView.layer.masksToBounds=YES;
     cell.bgView.layer.cornerRadius=8;

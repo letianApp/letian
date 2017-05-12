@@ -10,21 +10,38 @@
 #import "GQUserManager.h"
 #import "LoginViewController.h"
 #import "ChangePwCodeViewController.h"
+
 #import "SDImageCache.h"
 #import <RongIMKit/RongIMKit.h>
+#import "Colours.h"
 
 
-@interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface SettingViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
+@property (nonatomic,strong) UIButton *cancalButton;
 
 @end
 
 @implementation SettingViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [self.cancalButton removeFromSuperview];
+    if ([GQUserManager isHaveLogin]) {
+        
+        [self.view addSubview:self.cancalButton];
+    } else {
+        
+        [self.cancalButton removeFromSuperview];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
     [self createTableView];
     
     [self createCancelButton];
@@ -36,12 +53,13 @@
 #pragma mark-----创建tableview
 
 - (void)createTableView {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-44) style:UITableViewStylePlain];
-    tableView.backgroundColor=[UIColor groupTableViewBackgroundColor];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H - 64) style:UITableViewStylePlain];
+//    tableView.backgroundColor=[UIColor groupTableViewBackgroundColor];
     tableView.delegate = self;
     tableView.dataSource = self;
-    tableView.scrollEnabled=NO;
-    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    tableView.backgroundColor = [UIColor snowColor];
+//    tableView.scrollEnabled = NO;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableView];
     self.tableView = tableView;
 }
@@ -49,22 +67,44 @@
 
 #pragma mark-----创建退出登录按钮
 
--(void)createCancelButton
-{
-    UIButton *cancalButton=[GQControls createButtonWithFrame:CGRectMake(0, SCREEN_H-44, SCREEN_W, 44) andTitle:@"退出登录" andTitleColor:[UIColor whiteColor] andFontSize:15 andBackgroundColor:MAINCOLOR];
+-(void)createCancelButton {
+    
+    UIButton *cancalButton = [GQControls createButtonWithFrame:CGRectMake(0, SCREEN_H-44, SCREEN_W, 44) andTitle:@"退出登录" andTitleColor:[UIColor whiteColor] andFontSize:15 andBackgroundColor:MAINCOLOR];
     cancalButton.titleLabel.font=[UIFont boldSystemFontOfSize:15];
     [cancalButton addTarget:self action:@selector(cancelButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancalButton];
+    self.cancalButton = cancalButton;
 }
 
 
 #pragma mark--------注销登录
 
--(void)cancelButtonClick{
-   [GQUserManager removeAllUserInfo];
-    [[RCIM sharedRCIM] logout];
-   LoginViewController *loginVc=[[LoginViewController alloc]init];
-   [self.navigationController pushViewController:loginVc animated:YES];
+- (void)cancelButtonClick {
+    
+    UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"确定要退出？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertControl animated:YES completion:nil];
+    __weak typeof(self) weakSelf = self;
+    [alertControl addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+        [GQUserManager removeAllUserInfo];
+        [[RCIM sharedRCIM] logout];
+        LoginViewController *loginVc = [[LoginViewController alloc]init];
+        
+        [strongSelf presentViewController:loginVc animated:YES completion:^{
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+                });  
+            });
+        }];
+
+    }]];
+    [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    
 }
 
 
@@ -74,14 +114,14 @@
 {
     if (section==0) {
         UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 10)];
-        view.backgroundColor=[UIColor groupTableViewBackgroundColor];
+        view.backgroundColor=[UIColor snowColor];
         UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 9, SCREEN_W, 1)];
         lineView.backgroundColor=[UIColor lightGrayColor];
         [view addSubview:lineView];
         return view;
     }
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 30)];
-    view.backgroundColor=[UIColor groupTableViewBackgroundColor];
+    view.backgroundColor=[UIColor snowColor];
     [view addSubview:[GQControls createLabelWithFrame:CGRectMake(15, 5, 80, 19) andText:@"通知" andTextColor:[UIColor darkGrayColor] andFontSize:15]];
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 29, SCREEN_W, 1)];
     lineView.backgroundColor=[UIColor lightGrayColor];
@@ -103,7 +143,7 @@
     if (section==0) {
         return 2;
     }
-    return 1;
+    return 2;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 50;
@@ -163,11 +203,20 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     }else if (indexPath.section==1){
-        cell.textLabel.text=@"活动更新推送";
-        lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
-        UISwitch *switchView=[GQControls createSwitchWithFrame:CGRectMake(SCREEN_W-65, 10, 0, 0)];
-        [switchView addTarget:self action:@selector(changePostActiveState:) forControlEvents:UIControlEventValueChanged];
-        [cell.contentView addSubview:switchView];
+        if (indexPath.row==0) {
+            cell.textLabel.text=@"活动更新推送";
+            lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
+            UISwitch *switchView=[GQControls createSwitchWithFrame:CGRectMake(SCREEN_W-65, 10, 0, 0)];
+            [switchView addTarget:self action:@selector(changePostActiveState:) forControlEvents:UIControlEventValueChanged];
+            [cell.contentView addSubview:switchView];
+        }else if (indexPath.row==1){
+            cell.textLabel.text=@"订单消息推送";
+            lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
+            UISwitch *switchView=[GQControls createSwitchWithFrame:CGRectMake(SCREEN_W-65, 10, 0, 0)];
+            [switchView addTarget:self action:@selector(changePostOrderState:) forControlEvents:UIControlEventValueChanged];
+            [cell.contentView addSubview:switchView];
+        }
+        
     }
     return cell;
 }
@@ -199,6 +248,35 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
     }];    
+}
+
+#pragma mark--------订单消息推送开关
+
+-(void)changePostOrderState:(UISwitch *)switchView{
+    
+    //推送默认是打开的
+    switchView.selected=!switchView.selected;
+    NSString *state;
+    if (switchView.selected==1) {
+        state=@"false";
+    }else{
+        state=@"true";
+    }
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_USER];
+    [requestString appendString:API_NAME_SETPOSTACTIVE];
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    params[@"isPostOrder"]=state;
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBHudSet dismiss:self.view];
+        NSLog(@"订单消息推送responseObject=%@",responseObject);
+        [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+    }];
+    
 }
 
 

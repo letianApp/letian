@@ -43,7 +43,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     [self.loginBtn.layer setMasksToBounds:YES];
     [self.loginBtn.layer setCornerRadius:8];
     [self.registBtn.layer setMasksToBounds:YES];
@@ -149,6 +148,8 @@
                 NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
                 NSLog(@"ID：%@",kFetchUserId);
                 
+                [strongSelf dismissViewControllerAnimated:YES completion:nil];
+
                 //        [[RCIM sharedRCIM] setUserInfoDataSource:strongself];
                 //        [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc]initWithUserId:userId name:kFetchUserName portrait:kFetchUserHeadImageUrl];
                 
@@ -164,10 +165,8 @@
                 NSLog(@"token错误");
             }];
 
-            
-            [strongSelf dismissViewControllerAnimated:YES completion:nil];
-            CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
-            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
+//            CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
+//            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
 
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -191,7 +190,6 @@
     RegistViewController *registVc=[[RegistViewController alloc]init];
     
     [self presentViewController:registVc animated:YES completion:nil];
-    
     
 }
 

@@ -77,18 +77,18 @@
 #pragma mark 主界面tableview
 - (void)customMainTableView {
     
-    _mainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-tabBar_H) style:UITableViewStyleGrouped];
+    _mainTableView                    = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-tabBar_H) style:UITableViewStyleGrouped];
     [self.view addSubview:_mainTableView];
-    _mainTableView.backgroundColor = [UIColor whiteColor];
-    _mainTableView.delegate = self;
-    _mainTableView.dataSource = self;
+    _mainTableView.backgroundColor    = [UIColor whiteColor];
+    _mainTableView.delegate           = self;
+    _mainTableView.dataSource         = self;
     //自动计算高度 iOS8
     _mainTableView.estimatedRowHeight = 44.0;
-    _mainTableView.rowHeight = UITableViewAutomaticDimension;
-    _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    _holdView = [[UIView alloc]init];
-    _holdView.backgroundColor = MAINCOLOR;
+    _mainTableView.rowHeight          = UITableViewAutomaticDimension;
+    _mainTableView.separatorStyle     = UITableViewCellSeparatorStyleNone;
+
+    _holdView                         = [[UIView alloc]init];
+    _holdView.backgroundColor         = MAINCOLOR;
     [_mainTableView addSubview:_holdView];
 
 }
@@ -232,25 +232,26 @@
 - (void)clickAppointmentBtn {
     NSLog(@"点击预约按钮");
     
-//    if ([CYUserManager isHaveLogin]) {
+    if ([GQUserManager isHaveLogin]) {
     
         ConfirmPageVC *confirmPagevc = [[ConfirmPageVC alloc]init];
-        confirmPagevc.counselModel = self.counselModel;
+        confirmPagevc.counselModel   = self.counselModel;
         [self.rt_navigationController pushViewController:confirmPagevc animated:YES];
-//    } else {
-//        
-//        UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
-//        [self presentViewController:alertControl animated:YES completion:nil];
-//        [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-//            
-//            LoginViewController *loginVc=[[LoginViewController alloc]init];
-//            loginVc.tabbarIndex= 1;
-//            loginVc.hidesBottomBarWhenPushed=YES;
-//            [self.navigationController pushViewController:loginVc animated:YES];
-//        }]];
-//        
-//        [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-//    }
+    } else {
+        
+        UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alertControl animated:YES completion:nil];
+
+        __weak typeof(self) weakSelf    = self;
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            
+            __strong typeof(self) strongSelf = weakSelf;
+            LoginViewController *loginVc     = [[LoginViewController alloc]init];
+            loginVc.hidesBottomBarWhenPushed = YES;
+            [strongSelf presentViewController:loginVc animated:YES completion:nil];
+        }]];
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    }
 
 }
 

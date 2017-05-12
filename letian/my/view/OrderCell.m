@@ -33,6 +33,11 @@
     OrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }else{//取消cell的复用
+        while ([cell.contentView.subviews lastObject] != nil)
+        {
+            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
+        }
     }
     
     return cell;

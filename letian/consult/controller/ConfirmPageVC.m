@@ -20,7 +20,8 @@
 #import "OrderPageVC.h"
 #import "PayPageVC.h"
 #import "MJExtension.h"
-@interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate, UITextFieldDelegate>
+
+@interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate, UITextFieldDelegate,UITextViewDelegate>
 
 @property (nonatomic, strong) OrderModel             *orderModel;
 @property (nonatomic, strong) UITableView            *mainTableView;
@@ -49,6 +50,9 @@
 @property (nonatomic, strong) LRTextField            *ageTextField;
 @property (nonatomic, strong) LRTextField            *phoneTextField;
 @property (nonatomic, strong) LRTextField            *emailTextField;
+
+@property (nonatomic, strong) UITextView              *detailTextView;
+@property (nonatomic, strong) UILabel                 *placeholderLabel;
 
 @property (nonatomic, strong) ZYKeyboardUtil         *keyboardUtil;
 @property (nonatomic, strong) UIButton               *confirmBtn;
@@ -121,6 +125,7 @@
     
     [self customCell:cell withBgView:cell.backView forRowAtIndexPath:indexPath];
     
+    
     return cell;
     
 }
@@ -173,7 +178,7 @@
         CGFloat height = _timeChoicesView.y + 115;
         return height;
     } else {
-        return 420;
+        return 520;
     }
 }
 
@@ -536,7 +541,30 @@
     _emailTextField.hintText               = @"*选填";
     _emailTextField.hintTextColor          = [UIColor blackColor];
     
+    _detailTextView=[[UITextView alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, 330 , SCREEN_W*0.7, 80)];
+    _detailTextView.delegate=self;
+    _detailTextView.font=[UIFont systemFontOfSize:17];
+    _placeholderLabel=[GQControls createLabelWithFrame:CGRectMake(10, 10, 200, 20) andText:@"请简述您的咨询内容" andTextColor:[UIColor lightGrayColor] andFontSize:17];
+    [_detailTextView addSubview:_placeholderLabel];
+    _detailTextView.layer.masksToBounds=YES;
+    _detailTextView.layer.cornerRadius=5;
+    _detailTextView.layer.borderWidth=0.5;
+//    _detailTextView.layer.borderColor=
+    [bgView addSubview:_detailTextView];
+    
 }
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if (![text isEqualToString:@""]) {
+        _placeholderLabel.hidden = YES;
+    }
+    
+    if ([text isEqualToString:@""] && range.location == 0 && range.length == 1) {
+        _placeholderLabel.hidden = NO;
+    }
+    return YES;
+}
+
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     

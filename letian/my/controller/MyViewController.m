@@ -8,7 +8,7 @@
 
 #import "MyViewController.h"
 #import "GQControls.h"
-#import "MessageViewController.h"
+#import "SystomMsgViewController.h"
 #import "OrderViewController.h"
 #import "AboutUsPageVC.h"
 #import "SettingViewController.h"
@@ -25,11 +25,13 @@
 
 @interface MyViewController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic,strong) NSArray *dataArray;
-@property(nonatomic,strong)UserInfoModel *userInfoModel;
-@property(nonatomic,strong)UILabel *nameLabel;
-@property(nonatomic,strong)UIImageView *headImageView;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) UserInfoModel *userInfoModel;
+@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UIImageView *headImageView;
+@property (nonatomic, strong) UIButton *messageBtn;
+@property (nonatomic, strong) UIButton *loginBtn;
 //@property (nonatomic, strong) UIView *holdView;//下拉遮罩层
 
 @end
@@ -44,6 +46,11 @@
     self.navigationController.navigationBarHidden=YES;
     self.automaticallyAdjustsScrollViewInsets=NO;
     [self requestData];
+    NSLog(@"my登录:%d",[GQUserManager isHaveLogin]);
+//    self.tableView.tableHeaderView = [self createHeadView];
+
+    [self isLogin];
+
 }
 
 
@@ -114,7 +121,7 @@
     tableView.tag = 10;
     [self.view addSubview:tableView];
     self.tableView = tableView;
-    self.tableView.tableHeaderView=[self createHeadView];
+    self.tableView.tableHeaderView = [self createHeadView];
 //    _holdView = [[UIView alloc]init];
 //    _holdView.backgroundColor = MAINCOLOR;
 //    [tableView addSubview:_holdView];
@@ -143,7 +150,7 @@
     [headView addSubview:toolbar];
     
     //已登录则显示头像昵称
-    if ([GQUserManager isHaveLogin]) {
+//    if ([GQUserManager isHaveLogin]) {
         //头像
         UIImageView *headImageView=[[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_W-100)/2, (headView.height-130)/2, 100, 100)];
         headImageView.layer.masksToBounds=YES;
@@ -160,19 +167,41 @@
         [headView addSubview:nameLabel];
         self.nameLabel=nameLabel;
         //消息
-        UIButton *messageBtn=[[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W-35, 30, 25, 25)];
+        UIButton *messageBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W-35, 30, 25, 25)];
         [messageBtn setImage:[UIImage imageNamed:@"whiteMessage"] forState:UIControlStateNormal];
         [messageBtn addTarget:self action:@selector(messageButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        self.messageBtn = messageBtn;
         [headView addSubview:messageBtn];
-    }else{
+//    }else{
         //未登录则显示登录按钮
-        UIButton *loginBtn=[GQControls createButtonWithFrame:CGRectMake((SCREEN_W-100)/2, (headView.height-40)/2, 100, 40) andTitle:@"登录/注册" andTitleColor:[UIColor whiteColor] andFontSize:15 andTag:100 andMaskToBounds:YES andRadius:20 andBorderWidth:1 andBorderColor:[UIColor whiteColor].CGColor];
+        UIButton *loginBtn = [GQControls createButtonWithFrame:CGRectMake((SCREEN_W-100)/2, (headView.height-40)/2, 100, 40) andTitle:@"登录/注册" andTitleColor:[UIColor whiteColor] andFontSize:15 andTag:100 andMaskToBounds:YES andRadius:20 andBorderWidth:1 andBorderColor:[UIColor whiteColor].CGColor];
         [loginBtn addTarget:self action:@selector(loginButtonClick) forControlEvents:UIControlEventTouchUpInside];
         [headView addSubview:loginBtn];
-    }
+        self.loginBtn = loginBtn;
+//    }
+    
+    [self isLogin];
+    
     return headView;
 }
 
+#pragma mark--------判断是否登陆
+- (void)isLogin {
+    
+    [self.loginBtn removeFromSuperview];
+    [self.headImageView removeFromSuperview];
+    [self.nameLabel removeFromSuperview];
+    [self.messageBtn removeFromSuperview];
+    if ([GQUserManager isHaveLogin]) {
+        
+        [self.tableView.tableHeaderView addSubview:self.headImageView];
+        [self.tableView.tableHeaderView addSubview:self.nameLabel];
+        [self.tableView.tableHeaderView addSubview:self.messageBtn];
+    } else {
+        
+        [self.tableView.tableHeaderView addSubview:self.loginBtn];
+    }
+}
 
 #pragma mark--------点击头像进入个人资料
 
@@ -197,7 +226,7 @@
 #pragma mark--------点击进入消息界面
 
 - (void)messageButtonClicked {
-    MessageViewController *messageVc=[[MessageViewController alloc]init];
+    SystomMsgViewController *messageVc=[[SystomMsgViewController alloc]init];
     messageVc.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:messageVc animated:NO];
 }

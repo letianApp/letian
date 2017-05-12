@@ -20,5 +20,5 @@
 @property(nonatomic,assign)NSInteger CreatedBy;//
 @property(nonatomic,assign)NSInteger ID;//
 @property(nonatomic,assign)NSInteger IsAbort;//
-
+@property(nonatomic,copy)NSString *ActiveImg;
 @end
