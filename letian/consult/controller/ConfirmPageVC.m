@@ -474,6 +474,7 @@
     
     [self animationbegin:btn];
     [_endBtn setTitle:[NSString stringWithFormat:@"%@ 小时",_hourStr] forState:UIControlStateNormal];
+    [_priceLab setText:[NSString stringWithFormat:@"%ld 元",[_hourStr integerValue] * self.counselModel.ConsultFee]];
     
     NSRange rag = {0,2};
     NSInteger startTime = [[_orderModel.orderDateTimeStart substringWithRange:rag] integerValue];
@@ -541,15 +542,15 @@
     _emailTextField.hintText               = @"*选填";
     _emailTextField.hintTextColor          = [UIColor blackColor];
     
-    _detailTextView=[[UITextView alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, 330 , SCREEN_W*0.7, 80)];
-    _detailTextView.delegate=self;
-    _detailTextView.font=[UIFont systemFontOfSize:17];
-    _placeholderLabel=[GQControls createLabelWithFrame:CGRectMake(5, 10, 200, 20) andText:@"请简述您的咨询内容*" andTextColor:[UIColor lightGrayColor] andFontSize:17];
+    _detailTextView                     = [[UITextView alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, 330 , SCREEN_W*0.7, 80)];
+    _detailTextView.delegate            = self;
+    _detailTextView.font                = [UIFont systemFontOfSize:17];
+    _placeholderLabel                   = [GQControls createLabelWithFrame:CGRectMake(5, 10, 200, 20) andText:@"请简述您的咨询内容*" andTextColor:[UIColor lightGrayColor] andFontSize:17];
     [_detailTextView addSubview:_placeholderLabel];
-    _detailTextView.layer.masksToBounds=YES;
-    _detailTextView.layer.cornerRadius=5;
-    _detailTextView.layer.borderWidth=0.7;
-    _detailTextView.layer.borderColor=[[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0] CGColor];
+    _detailTextView.layer.masksToBounds = YES;
+    _detailTextView.layer.cornerRadius  = 5;
+    _detailTextView.layer.borderWidth   = 0.7;
+    _detailTextView.layer.borderColor   = [[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0] CGColor];
     [bgView addSubview:_detailTextView];
     
 }
@@ -636,7 +637,7 @@
         make.height.equalTo(_tabBar.mas_height);
     }];
     _priceLab.textColor = MAINCOLOR;
-    _priceLab.text = @"1000元";
+//    _priceLab.text = @"1000元";
     _priceLab.textAlignment = NSTextAlignmentRight;
     _priceLab.font = [UIFont boldSystemFontOfSize:15];
     
@@ -678,15 +679,19 @@
     params[@"StartTime"]           = _orderModel.orderDateTimeStart;
     params[@"EndTime"]             = _orderModel.orderDateTimeEnd;
     params[@"EnumConsultType"]     = @(_orderModel.consultType);
-    params[@"TotalFee"]            = @20.0;
-    params[@"ConSultName"]         = _orderModel.conserlorName;
+    NSString *priceStr = _priceLab.text;
+    [priceStr stringByReplacingOccurrencesOfString:@" 元" withString:@""];
+    params[@"TotalFee"]            = @([priceStr integerValue]);
+    params[@"ConSultName"]         = _orderModel.orderInfoName;
     params[@"EnumSexType"]         = @(_orderModel.orderInfoSex);
     params[@"ConsultAge"]          = @(_orderModel.orderInfoAge);
     params[@"ConsultPhone"]        = _orderModel.orderInfoPhone;
     if (_emailTextField.text) {
         params[@"ConsultEmail"]    = _orderModel.orderInfoEmail;
     }
-    params[@"ConsultDescription"]  = self.detailTextView.text;
+    if (_detailTextView.text) {
+        params[@"ConsultDescription"]  = self.detailTextView.text;
+    }
     [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
     NSLog(@"Params=%@",params);
     

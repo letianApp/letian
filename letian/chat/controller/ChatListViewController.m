@@ -37,20 +37,21 @@
     
     [self customNavigation];
 
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 50, 50)];
+    UIButton *btn = [[UIButton alloc] init];
+    btn.frame = CGRectMake(100, 100, 50, 50);
     btn.backgroundColor = MAINCOLOR;
     [btn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     self.emptyConversationView = btn;
     
 }
 
-- (void)clickBtn:(UIButton *)btn {
-    
-    ChatViewController *chatVc = [[ChatViewController alloc]initWithConversationType:ConversationType_PRIVATE targetId:@"002"];
-    chatVc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:chatVc animated:YES];
-
-}
+//- (void)clickBtn:(UIButton *)btn {
+//    
+//    ChatViewController *chatVc = [[ChatViewController alloc]initWithConversationType:ConversationType_PRIVATE targetId:@"002"];
+//    chatVc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:chatVc animated:YES];
+//
+//}
 
 #pragma mark 定制导航栏
 - (void)customNavigation {
@@ -59,16 +60,16 @@
     
 }
 
-- (UIBarButtonItem *)customBackItemWithTarget:(id)target
-                                       action:(SEL)action {
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [btn setFrame:CGRectMake(0, 0, 20, 20)];
-    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    return item;
-}
+//- (UIBarButtonItem *)customBackItemWithTarget:(id)target
+//                                       action:(SEL)action {
+//    
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+//    [btn setFrame:CGRectMake(0, 0, 20, 20)];
+//    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//    return item;
+//}
 
 #pragma mark 定制cell
 - (void)willDisplayConversationTableCell:(RCConversationBaseCell *)cell atIndexPath:(NSIndexPath *)indexPath {

@@ -33,17 +33,29 @@
     self.navigationItem.title = @"小乐";
     self.navigationController.navigationBar.tintColor = MAINCOLOR;
     
-    UIButton *btn                          = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
-    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(clickBackBtn) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *btn                          = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+//    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+//    [btn addTarget:self action:@selector(clickBackBtn) forControlEvents:UIControlEventTouchUpInside];
 //    UIBarButtonItem *backItem              = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"pinkback"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(clickNcBtn:)];
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
 
-    backItem.tag                           = 10;
-    self.navigationItem.leftBarButtonItem  = backItem;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"预约" style:UIBarButtonItemStylePlain target:self action:@selector(clickNcRightBtn)];
+//    backItem.tag                           = 10;
+//    self.navigationItem.leftBarButtonItem  = backItem;
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"预约" style:UIBarButtonItemStylePlain target:self action:@selector(clickNcRightBtn)];
 
 }
+
+- (UIBarButtonItem *)customBackItemWithTarget:(id)target
+                                       action:(SEL)action {
+
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+    [btn setFrame:CGRectMake(0, 0, 20, 20)];
+    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    return item;
+}
+
 
 - (void)clickBackBtn {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -71,6 +83,23 @@
     }
     
 }
+
+- (void)onBeginRecordEvent {
+    
+}
+
+
+//- (RCMessage *)sendMessage:(RCConversationType)conversationType
+//                  targetId:(NSString *)targetId
+//                   content:(RCMessageContent *)content
+//               pushContent:(NSString *)pushContent
+//                  pushData:(NSString *)pushData
+//                   success:(void (^)(long messageId))successBlock
+//                     error:(void (^)(RCErrorCode nErrorCode, long messageId))errorBlock {
+//    
+//    
+//    
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

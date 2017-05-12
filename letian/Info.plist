@@ -216,6 +216,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>要定位啊大嫂</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>要通话啊大哥</string>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>

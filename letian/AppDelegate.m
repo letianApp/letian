@@ -277,31 +277,59 @@ didRegisterUserNotificationSettings:
 - (void)getUserInfoWithUserId:(NSString *)userId
                    completion:(void (^)(RCUserInfo *userInfo))completion {
     
+    NSLog(@"userIddddd:%@",userId);
+    
     if ([userId isEqualToString:kFetchUserId]) {
         
         RCUserInfo *currentUser = [[RCUserInfo alloc]init];
-        currentUser.userId = userId;
-        currentUser.name = kFetchUserName;
+        currentUser.userId      = userId;
+        currentUser.name        = kFetchUserName;
         currentUser.portraitUri = kFetchUserHeadImageUrl;
-        
-        return completion(currentUser);
 
-    } else if ([userId isEqualToString:@"4"]) {
-            RCUserInfo *userInfo = [[RCUserInfo alloc]init];
-            userInfo.userId = userId;
-            userInfo.name = @"J";
-            userInfo.portraitUri = @"http://www.wzright.com/upload/201610311133447158.jpg";
-    
-            return completion(userInfo);
-    } else if ([userId isEqualToString:@"10"]) {
-        RCUserInfo *userInfo = [[RCUserInfo alloc]init];
-        userInfo.userId = userId;
-        userInfo.name = @"222";
-        userInfo.portraitUri = @"http://www.wzright.com/upload/201610311133447158.jpg";
-        
-        return completion(userInfo);
+        return completion(currentUser);
+//    } else if ([userId isEqualToString:@"4"]) {
+//        
+//        RCUserInfo *userInfo = [[RCUserInfo alloc]init];
+//        userInfo.userId = userId;
+//        userInfo.name = @"J";
+//        userInfo.portraitUri = @"http://www.wzright.com/upload/201610311133447158.jpg";
+//
+//        return completion(userInfo);
+//    } else if ([userId isEqualToString:@"10"]) {
+//        
+//        RCUserInfo *userInfo = [[RCUserInfo alloc]init];
+//        userInfo.userId = userId;
+//        userInfo.name = @"222";
+//        userInfo.portraitUri = @"http://www.wzright.com/upload/201610311133447158.jpg";
+//        
+//        return completion(userInfo);
     }
 
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_USER];
+    [requestString appendString:API_NAME_GETUSERINFO];
+    
+    NSMutableDictionary *parames = [[NSMutableDictionary alloc]init];
+    parames[@"userID"] = userId;
+    
+    [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
+//    __weak typeof(self) weakSelf = self;
+
+    [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
+        
+        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
+        RCUserInfo *user = [[RCUserInfo alloc]init];
+        user.userId      = userId;
+        user.name        = responseObject[@"Result"][@"Source"][@"NickName"];
+        user.portraitUri = responseObject[@"Result"][@"Source"][@"HeadImg"];
+
+        return completion(user);
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
     return completion(nil);
 }
 
