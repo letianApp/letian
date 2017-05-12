@@ -34,14 +34,23 @@
 
 @property(nonatomic,assign)CGFloat TotalFee;//订单金额
 
-@property(nonatomic,copy)NSString *UserName;//咨客名称
+@property(nonatomic,copy)NSString *ConsultName;//咨客名称
 
 @property(nonatomic,copy)NSString *DoctorHeadImg;//咨询师头像
 
 @property(nonatomic,copy)NSString *UserHeadImg;//咨客头像
 
+@property(nonatomic,copy)NSString *ConsultDescription;//咨询内容
 
+@property(nonatomic,copy)NSString *ConsultEnumSexTypeString;//咨客性别
 
+@property(nonatomic,copy)NSString *ConsultPhone;//咨客电话
+
+@property(nonatomic,assign)NSInteger ConsultAge;//咨客年龄
+
+@property(nonatomic,copy)NSString *ConsultEmail;//咨客邮箱
+
+@property(nonatomic,copy)NSString *UserName;//用户名
 
 
 @end

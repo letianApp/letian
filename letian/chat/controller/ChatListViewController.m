@@ -80,7 +80,6 @@
 //        conversationCell.conversationTitle.textColor = MAINCOLOR;
         conversationCell.bubbleTipView.bubbleTipBackgroundColor = MAINCOLOR;
     }
-    
 }
 
 #pragma mark 点击cell方法

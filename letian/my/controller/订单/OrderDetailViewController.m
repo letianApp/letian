@@ -279,11 +279,11 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
         consultCell.doctorNameLabel.text=[NSString stringWithFormat:@"咨询师：%@",self.orderInfoModel.DoctorName];
         consultCell.consultTypeLabel.text=[NSString stringWithFormat:@"咨询方式：%@",self.orderInfoModel.ConsultTypeIDString];
         consultCell.consultTimeLabel.text=[NSString stringWithFormat:@"咨询时间：%@",self.orderInfoModel.ConsultTime];
-        consultCell.userNameLabel.text=[NSString stringWithFormat:@"咨客：%@",self.orderInfoModel.UserName];
-//        consultCell.userInfoLabel.text=[];
-//        consultCell.userPhoneLabel.text=self.orderInfoModel.;
-//        consultCell.userEmailLabel.text=
-//        consultCell.consultDetailLabel.text=[NSString stringWithFormat:@"咨询内容：心情不好心情不好心情不好心情不好心情不好心情不好心情不好心情不好心情不好心情不好"];
+        consultCell.userNameLabel.text=[NSString stringWithFormat:@"咨客：%@",self.orderInfoModel.ConsultName];
+        consultCell.userInfoLabel.text=[NSString stringWithFormat:@"%@  %li",self.orderInfoModel.ConsultEnumSexTypeString,self.orderInfoModel.ConsultAge];
+        consultCell.userPhoneLabel.text=[NSString stringWithFormat:@"电话：%@",self.orderInfoModel.ConsultPhone];
+        consultCell.userEmailLabel.text=[NSString stringWithFormat:@"邮箱：%@",self.orderInfoModel.ConsultEmail];
+        consultCell.consultDetailLabel.text=[NSString stringWithFormat:@"咨询内容：%@",self.orderInfoModel.ConsultDescription];
         return consultCell;
         //订单金额
     }else if (indexPath.row==1){

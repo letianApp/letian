@@ -14,9 +14,9 @@
 #import "ActivityDetailViewController.h"
 #import "UIImageView+WebCache.h"
 
-@interface ActivityListViewController ()<WKNavigationDelegate,WKUIDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface ActivityListViewController ()<WKNavigationDelegate,WKUIDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 
-@property (nonatomic,strong) UITableView *tableView;
+@property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) NSArray *dataArray;
 @property(nonatomic,strong)NSMutableArray <ActiveModel *> *activeListArray;
 @property (nonatomic,strong) WKWebView *webView;
@@ -39,12 +39,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets=NO;
     [self setUpNavigationBar];
     
-    [self createTableView];
+    [self createCollectionView];
     
     [self requestData];
-//    [self createWebView];
    
 }
 
@@ -70,7 +70,7 @@
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             weakSelf.activeListArray=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
             NSLog(@"activeListArray=%@",weakSelf.activeListArray);
-            [_tableView reloadData];
+            [self.collectionView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
@@ -84,41 +84,43 @@
 }
 
 
-#pragma mark-------创建TableView
+#pragma mark-------创建CollectionView
 
--(void)createTableView
+-(void)createCollectionView
 {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H) style:UITableViewStylePlain];
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:tableView];
-    self.tableView = tableView;
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.itemSize=CGSizeMake((SCREEN_W-30)/2,130);
+    flowLayout.minimumLineSpacing=5;
+    flowLayout.minimumInteritemSpacing=5;
+    flowLayout.sectionInset=UIEdgeInsetsMake(5, 5, 5, 5);
+    flowLayout.scrollDirection=UICollectionViewScrollDirectionVertical;
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H-64) collectionViewLayout:flowLayout];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    [self.collectionView registerNib:[UINib nibWithNibName:@"ActivityCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"ActivityCell"];
+    
+    [self.view addSubview:self.collectionView];
 }
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.activeListArray.count;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 120;
-}
+
 #pragma mark-------cell定制
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ActivityCell *cell=[ActivityCell cellWithTableView:tableView];
+    ActivityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ActivityCell" forIndexPath:indexPath];
 //    [cell.ActivityImageView sd_setImageWithURL:[NSURL URLWithString:self.activeListArray[indexPath.row].ActiveImg]];
-    cell.TitleLabel.text=self.activeListArray[indexPath.row].Name;
-    cell.timeLabel.text=[NSString stringWithFormat:@"%@ ~ %@",self.activeListArray[indexPath.row].StartDate,self.activeListArray[indexPath.row].EndDate];
+    cell.ActivityTitleLabel.text=self.activeListArray[indexPath.row].Name;
     return cell;
 }
 
 #pragma mark-------跳到活动详情
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
     ActivityDetailViewController *detailVc=[[ActivityDetailViewController alloc] init];
-    detailVc.activeModel=self.activeListArray[indexPath.row];
+    detailVc.activeModel=self.activeListArray[indexPath.item];
     [self.navigationController pushViewController:detailVc animated:YES];
 }
 
@@ -136,18 +138,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)createWebView
-{
-    NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://mp.weixin.qq.com/mp/homepage?__biz=MzA3NjA4ODcxMQ==&hid=5&sn=066abcaccc743b1b8149c260ddf7e05d#wechat_redirect"]];
-    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H )];
-    webView.allowsBackForwardNavigationGestures=YES;
-    [webView loadRequest:request];
-    webView.navigationDelegate=self;
-    webView.scrollView.showsVerticalScrollIndicator=NO;
-    webView.UIDelegate = self;
-    self.webView=webView;
-    [self.view addSubview:webView];
-}
+
 
 
 

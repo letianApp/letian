@@ -586,7 +586,7 @@
     
     return YES;
 }
-
+                               
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField == _ageTextField) {
         if(range.length + range.location > textField.text.length) {
@@ -679,7 +679,7 @@
     params[@"EndTime"]             = _orderModel.orderDateTimeEnd;
     params[@"EnumConsultType"]     = @(_orderModel.consultType);
     params[@"TotalFee"]            = @20.0;
-    params[@"ConSultName"]         = _orderModel.conserlorName;
+    params[@"ConSultName"]         = self.nameTextField.text;
     params[@"EnumSexType"]         = @(_orderModel.orderInfoSex);
     params[@"ConsultAge"]          = @(_orderModel.orderInfoAge);
     params[@"ConsultPhone"]        = _orderModel.orderInfoPhone;
