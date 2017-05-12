@@ -133,24 +133,29 @@
     CustomCYLTabBar *tabBarControllerConfig = [[CustomCYLTabBar alloc] init];
     tabBarControllerConfig.tabBarController.delegate = self;
     [self.window setRootViewController:tabBarControllerConfig.tabBarController];
+    [self.window makeKeyAndVisible];
     
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController*)viewController {
     
-    NSLog(@"点击tab：%@",viewController.tabBarItem.title);
     if ([viewController.tabBarItem.title isEqualToString:@"咨询"]) {
+        NSLog(@"tabbar登录:%d",[GQUserManager isHaveLogin]);
         if (![GQUserManager isHaveLogin]) {
             
             //未登录
             UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
             [self.window.rootViewController presentViewController:alertControl animated:YES completion:nil];
+           
+            __weak typeof(self) weakSelf = self;
+
             [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-                LoginViewController *loginVc = [[LoginViewController alloc]init];
-//                loginVc.tabbarIndex = 0;
-                loginVc.hidesBottomBarWhenPushed = YES;
                 
-                [self.window.rootViewController presentViewController:loginVc animated:YES completion:nil];
+                __strong typeof(self) strongSelf = weakSelf;
+
+                LoginViewController *loginVc = [[LoginViewController alloc]init];
+                loginVc.hidesBottomBarWhenPushed = YES;
+                [strongSelf.window.rootViewController presentViewController:loginVc animated:YES completion:nil];
             }]];
             [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
             return NO;
@@ -161,30 +166,6 @@
 
     return YES;
 }
-
-//- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-//    NSUInteger selectedIndex = tabBarController.selectedIndex;
-//    NSLog(@"点击tab：%ld",selectedIndex);
-//    if (selectedIndex == 1) {
-//        if (![GQUserManager isHaveLogin]) {
-//            
-//            NSLog(@"没登录");
-//            //未登录
-//            UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
-//            [self.window.rootViewController presentViewController:alertControl animated:YES completion:nil];
-//            [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-//                LoginViewController *loginVc=[[LoginViewController alloc]init];
-//                loginVc.tabbarIndex=0;
-//                loginVc.hidesBottomBarWhenPushed=YES;
-//                [self.window.rootViewController presentViewController:loginVc animated:YES completion:nil];
-//            }]];
-//            [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-//        }
-//
-//    }
-//    
-//
-//}
 
 #pragma mark------------------设置全局的navigationBar样式--------------------
 

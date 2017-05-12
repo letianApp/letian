@@ -30,7 +30,7 @@
 #import "MyViewController.h"
 #import "ChatListViewController.h"
 
-@interface CustomCYLTabBar ()<UITabBarControllerDelegate>
+@interface CustomCYLTabBar ()
 
 @property (nonatomic, readwrite, strong) CYLTabBarController *tabBarController;
 

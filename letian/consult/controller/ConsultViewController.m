@@ -23,27 +23,27 @@
 
 @interface ConsultViewController ()<UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UISearchBarDelegate>
 
-@property (nonatomic, strong) NSMutableArray <counselorInfoModel *> *counselorArr;
+@property (nonatomic, strong) NSMutableArray <counselorInfoModel  *> *counselorArr;
 
-@property (nonatomic, strong) NSDictionary      *counselorCategoryDic;
-@property (nonatomic, strong) NSDictionary      *counselorTitleDic;
+@property (nonatomic, strong) NSDictionary        *counselorCategoryDic;
+@property (nonatomic, strong) NSDictionary        *counselorTitleDic;
 @property (nonatomic, strong) NSMutableArray      *counselorCategoryArr;
 @property (nonatomic, strong) NSMutableArray      *counselorTitleArr;
-@property (nonatomic, copy  ) NSArray      *priceDataSource;
-@property (nonatomic, strong) NSMutableDictionary      *requestParams;
+@property (nonatomic, copy  ) NSArray             *priceDataSource;
+@property (nonatomic, strong) NSMutableDictionary *requestParams;
 
 
 @property (nonatomic, strong) NSMutableArray      *priceData;
-@property (nonatomic, copy  ) NSString     *minPriceStr;
-@property (nonatomic, copy  ) NSString     *maxPriceStr;
-@property (nonatomic) BOOL isMinPrice;
-@property (nonatomic, strong) UIPickerView *choosePriceView;
+@property (nonatomic, copy  ) NSString            *minPriceStr;
+@property (nonatomic, copy  ) NSString            *maxPriceStr;
+@property (nonatomic        ) BOOL                isMinPrice;
+@property (nonatomic, strong) UIPickerView        *choosePriceView;
 
-@property (nonatomic, strong) UISearchBar  *searchBar;
-@property (nonatomic, strong) UIScrollView *classifiedSectionFirstLine;
-@property (nonatomic, strong) UITableView  *counselorInfoTableview;
-@property (nonatomic, strong) UILabel *noDataLab;
-@property (nonatomic, strong) UIView       *mainHeadView;
+@property (nonatomic, strong) UISearchBar         *searchBar;
+@property (nonatomic, strong) UIScrollView        *classifiedSectionFirstLine;
+@property (nonatomic, strong) UITableView         *counselorInfoTableview;
+@property (nonatomic, strong) UILabel             *noDataLab;
+@property (nonatomic, strong) UIView              *mainHeadView;
 
 
 @end
@@ -78,9 +78,9 @@
 
 - (void)customSearchBar {
     
-    _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W/2, 40)];
+    _searchBar             = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W/2, 40)];
     _searchBar.placeholder = @"搜索";
-    _searchBar.delegate = self;
+    _searchBar.delegate    = self;
     [_searchBar setTranslucent:YES];
     [_searchBar setShowsCancelButton:YES animated:YES];
     //    _searchBar.searchBarStyle = UISearchBarStyleProminent;
@@ -175,7 +175,7 @@
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongSelf = weakSelf;
-        
+        [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorInfoTableview.mj_header endRefreshing];
         [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师类型错误，错误代码：%ld",error.code]andOnView:strongSelf.view];
     }];
@@ -212,35 +212,34 @@
     
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
         
-        __strong typeof(self) strongself = weakSelf;
-        [MBHudSet dismiss:strongself.view];
-        [strongself.counselorArr removeAllObjects];
-        strongself.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        __strong typeof(self) strongSelf = weakSelf;
+        [strongSelf.counselorArr removeAllObjects];
+        strongSelf.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         
-        for (int i = 0; i < strongself.counselorArr.count; i++) {
+        for (int i = 0; i < strongSelf.counselorArr.count; i++) {
 //            NSLog(@"%@",strongself.counselorArr[i].Expertise);
             
         }
         
-        if (strongself.counselorArr.count == 0) {
-            [strongself.counselorInfoTableview addSubview:strongself.noDataLab];
+        if (strongSelf.counselorArr.count == 0) {
+            [strongSelf.counselorInfoTableview addSubview:strongSelf.noDataLab];
         } else {
-            [strongself.noDataLab removeFromSuperview];
+            [strongSelf.noDataLab removeFromSuperview];
             
         }
         
-        [strongself.counselorInfoTableview reloadData];
-        [strongself.counselorInfoTableview.mj_header endRefreshing];
+        [strongSelf.counselorInfoTableview reloadData];
+        [MBHudSet dismiss:strongSelf.view];
+        [strongSelf.counselorInfoTableview.mj_header endRefreshing];
         
     } failure:^(NSError *error) {
         
-        __strong typeof(self) strongself = weakSelf;
-        [MBHudSet dismiss:strongself.view];
-        [strongself.counselorInfoTableview.mj_header endRefreshing];
-        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师列表错误，错误代码：%ld",error.code]andOnView:strongself.view];
+        __strong typeof(self) strongSelf = weakSelf;
+        [MBHudSet dismiss:strongSelf.view];
+        [strongSelf.counselorInfoTableview.mj_header endRefreshing];
+        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师列表错误，错误代码：%ld",error.code]andOnView:strongSelf.view];
     }];
 }
-
 
 #pragma mark 创建分类栏
 - (void)creatClassifiedSection {
