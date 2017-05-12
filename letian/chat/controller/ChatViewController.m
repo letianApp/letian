@@ -32,7 +32,9 @@
     
     self.navigationItem.title = @"小乐";
     self.navigationController.navigationBar.tintColor = MAINCOLOR;
-    
+    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:nil];
+    self.navigationItem.backBarButtonItem = backBtn;
+
 //    UIButton *btn                          = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
 //    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
 //    [btn addTarget:self action:@selector(clickBackBtn) forControlEvents:UIControlEventTouchUpInside];

@@ -172,6 +172,9 @@
 - (void)setUpStatusBar
 {
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:MAINCOLOR}];
+    [[UINavigationBar appearance] setTintColor:MAINCOLOR];
+//    [[UINavigationBar appearance] setBarTintColor:<#(UIColor * _Nullable)#>
+
 }
 
 

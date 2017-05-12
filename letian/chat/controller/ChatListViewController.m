@@ -38,7 +38,7 @@
     [self customNavigation];
 
     UIButton *btn = [[UIButton alloc] init];
-    btn.frame = CGRectMake(100, 100, 50, 50);
+//    btn.frame = CGRectMake(100, 100, 50, 50);
     btn.backgroundColor = MAINCOLOR;
     [btn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     self.emptyConversationView = btn;
@@ -81,7 +81,6 @@
 //        conversationCell.conversationTitle.textColor = MAINCOLOR;
         conversationCell.bubbleTipView.bubbleTipBackgroundColor = MAINCOLOR;
     }
-    
 }
 
 #pragma mark 点击cell方法
