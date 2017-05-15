@@ -45,9 +45,21 @@
     [self createCollectionView];
     
     [self requestData];
+    
+    [self setUpRefresh];
    
 }
 
+#pragma mark-------下拉刷新
+
+-(void)setUpRefresh
+{
+    MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    self.collectionView.mj_header = header;
+    self.collectionView.mj_header.automaticallyChangeAlpha = YES;
+}
 
 #pragma mark-------获取活动列表
 
@@ -60,11 +72,12 @@
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     params[@"pageIndex"]=@(1);
-    params[@"pageSize"]=@(10);
+    params[@"pageSize"]=@(20);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
+        [self.collectionView.mj_header endRefreshing];
         NSLog(@"&&&&&&&&&*获取活动列表%@",responseObject);
         NSLog(@"ActiveTypeIDString=%@",responseObject[@"Result"][@"Source"][0][@"ActiveTypeIDString"]);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
@@ -74,6 +87,7 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
+        [self.collectionView.mj_header endRefreshing];
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
             [MBHudSet showText:@"请求超时" andOnView:self.view];
@@ -92,12 +106,13 @@
     flowLayout.itemSize=CGSizeMake((SCREEN_W-30)/2,130);
     flowLayout.minimumLineSpacing=5;
     flowLayout.minimumInteritemSpacing=5;
-    flowLayout.sectionInset=UIEdgeInsetsMake(5, 5, 5, 5);
+    flowLayout.sectionInset=UIEdgeInsetsMake(10, 10, 10, 10);
     flowLayout.scrollDirection=UICollectionViewScrollDirectionVertical;
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H-64) collectionViewLayout:flowLayout];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
+    self.collectionView.showsVerticalScrollIndicator=NO;
     [self.collectionView registerNib:[UINib nibWithNibName:@"ActivityCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"ActivityCell"];
     
     [self.view addSubview:self.collectionView];
@@ -111,7 +126,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ActivityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ActivityCell" forIndexPath:indexPath];
-//    [cell.ActivityImageView sd_setImageWithURL:[NSURL URLWithString:self.activeListArray[indexPath.row].ActiveImg]];
+    [cell.ActivityImageView sd_setImageWithURL:[NSURL URLWithString:self.activeListArray[indexPath.row].ActiveImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
+
     cell.ActivityTitleLabel.text=self.activeListArray[indexPath.row].Name;
     return cell;
 }

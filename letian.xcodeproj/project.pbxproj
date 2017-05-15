@@ -117,7 +117,6 @@
 		7784D8AC1E6E80C5004AB0CC /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7784D8AA1E6E80C5004AB0CC /* MessageViewController.m */; };
 		7784D8AD1E6E80C5004AB0CC /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */; };
 		7787B30E1EADACC300306527 /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B30C1EADACC300306527 /* ActivityDetailViewController.m */; };
-		7787B30F1EADACC300306527 /* ActivityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7787B30D1EADACC300306527 /* ActivityDetailViewController.xib */; };
 		7787B36A1EAEF2FE00306527 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7787B3101EAEF2FE00306527 /* libcrypto.a */; };
 		7787B36B1EAEF2FE00306527 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7787B3111EAEF2FE00306527 /* libssl.a */; };
 		7787B36C1EAEF2FE00306527 /* base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B3601EAEF2FE00306527 /* base64.m */; };
@@ -177,8 +176,6 @@
 		77D07EE91E962D7900904AD9 /* ChangePwCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D07EE71E962D7900904AD9 /* ChangePwCodeViewController.m */; };
 		77D07EEA1E962D7900904AD9 /* ChangePwCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D07EE81E962D7900904AD9 /* ChangePwCodeViewController.xib */; };
 		77D07EED1E9637CC00904AD9 /* ActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D07EEC1E9637CC00904AD9 /* ActiveModel.m */; };
-		77D0EA081EB5B33500254806 /* BindingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D0EA061EB5B33500254806 /* BindingPhoneViewController.m */; };
-		77D0EA091EB5B33500254806 /* BindingPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D0EA071EB5B33500254806 /* BindingPhoneViewController.xib */; };
 		77D0EA0C1EB5DD4700254806 /* WebArticleCateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D0EA0B1EB5DD4700254806 /* WebArticleCateModel.m */; };
 		77D0EA511EB60FDD00254806 /* ArticleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D0EA501EB60FDD00254806 /* ArticleListViewController.m */; };
 		77D0EA551EB6276700254806 /* GQScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D0EA541EB6276700254806 /* GQScrollView.m */; };
@@ -395,7 +392,6 @@
 		7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageViewController.xib; path = ../../my/controller/MessageViewController.xib; sourceTree = "<group>"; };
 		7787B30B1EADACC300306527 /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailViewController.h; sourceTree = "<group>"; };
 		7787B30C1EADACC300306527 /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailViewController.m; sourceTree = "<group>"; };
-		7787B30D1EADACC300306527 /* ActivityDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityDetailViewController.xib; sourceTree = "<group>"; };
 		7787B3101EAEF2FE00306527 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		7787B3111EAEF2FE00306527 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		7787B3131EAEF2FE00306527 /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
@@ -580,9 +576,6 @@
 		77D07EE81E962D7900904AD9 /* ChangePwCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePwCodeViewController.xib; sourceTree = "<group>"; };
 		77D07EEB1E9637CC00904AD9 /* ActiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveModel.h; sourceTree = "<group>"; };
 		77D07EEC1E9637CC00904AD9 /* ActiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveModel.m; sourceTree = "<group>"; };
-		77D0EA051EB5B33500254806 /* BindingPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingPhoneViewController.h; sourceTree = "<group>"; };
-		77D0EA061EB5B33500254806 /* BindingPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingPhoneViewController.m; sourceTree = "<group>"; };
-		77D0EA071EB5B33500254806 /* BindingPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingPhoneViewController.xib; sourceTree = "<group>"; };
 		77D0EA0A1EB5DD4700254806 /* WebArticleCateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebArticleCateModel.h; sourceTree = "<group>"; };
 		77D0EA0B1EB5DD4700254806 /* WebArticleCateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebArticleCateModel.m; sourceTree = "<group>"; };
 		77D0EA4F1EB60FDD00254806 /* ArticleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListViewController.h; sourceTree = "<group>"; };
@@ -1261,9 +1254,6 @@
 				770FFC691E961070009B81FC /* UserInfoViewController.h */,
 				770FFC6A1E961070009B81FC /* UserInfoViewController.m */,
 				770FFC6B1E961070009B81FC /* UserInfoViewController.xib */,
-				77D0EA051EB5B33500254806 /* BindingPhoneViewController.h */,
-				77D0EA061EB5B33500254806 /* BindingPhoneViewController.m */,
-				77D0EA071EB5B33500254806 /* BindingPhoneViewController.xib */,
 			);
 			name = "个人资料";
 			sourceTree = "<group>";
@@ -1310,7 +1300,6 @@
 				77A17B821E7FA20B00569558 /* ActivityListViewController.m */,
 				7787B30B1EADACC300306527 /* ActivityDetailViewController.h */,
 				7787B30C1EADACC300306527 /* ActivityDetailViewController.m */,
-				7787B30D1EADACC300306527 /* ActivityDetailViewController.xib */,
 			);
 			name = "心理沙龙活动";
 			sourceTree = "<group>";
@@ -1662,7 +1651,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7787B30F1EADACC300306527 /* ActivityDetailViewController.xib in Resources */,
 				771E812B1EC5A5D40008E58A /* ActivityCell.xib in Resources */,
 				093DA77E1E960F08003CEDD9 /* ChatListViewController.xib in Resources */,
 				0965FBC91E824AF900C0FBAD /* OrderPageVC.xib in Resources */,
@@ -1677,7 +1665,6 @@
 				0953C22E1E514B5800FB165C /* Assets.xcassets in Resources */,
 				77D2BFA21E66C404000B9978 /* SetAcountViewController.xib in Resources */,
 				0953C22C1E514B5800FB165C /* Main.storyboard in Resources */,
-				77D0EA091EB5B33500254806 /* BindingPhoneViewController.xib in Resources */,
 				097105D21E9A34FE00AC8E4F /* AlipaySDK.bundle in Resources */,
 				093DA7831E9628C6003CEDD9 /* ChatViewController.xib in Resources */,
 				77D2BF981E66B3D0000B9978 /* RegistViewController.xib in Resources */,
@@ -1831,7 +1818,6 @@
 				77B5BD161EAD9B460034497D /* UIColor+YYExtension.m in Sources */,
 				776CF2B91EB7900A00CE9620 /* TYLaunchBaseAnimation.m in Sources */,
 				7787B36C1EAEF2FE00306527 /* base64.m in Sources */,
-				77D0EA081EB5B33500254806 /* BindingPhoneViewController.m in Sources */,
 				771E812A1EC5A5D40008E58A /* ActivityCell.m in Sources */,
 				094FC50C1E8CBF0D00BFFBBB /* PayPageVC.m in Sources */,
 				0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */,

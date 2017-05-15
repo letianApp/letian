@@ -11,7 +11,6 @@
 #import "UIImageView+WebCache.h"
 #import "UIImage+YYExtension.h"
 #import "MJExtension.h"
-#import "BindingPhoneViewController.h"
 #import <RongIMKit/RongIMKit.h>
 
 

@@ -171,7 +171,6 @@
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [weakSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:self.view];
-//        NSLog(@"趣味测试列表%@",responseObject);
         weakSelf.testList=[TestListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [_tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

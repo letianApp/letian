@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="145" height="130"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_bg" translatesAutoresizingMaskIntoConstraints="NO" id="X3G-KH-UMI">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X3G-KH-UMI">
                         <rect key="frame" x="0.0" y="0.0" width="145" height="100"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="XOG-Ec-RbW"/>
@@ -51,7 +51,4 @@
             <point key="canvasLocation" x="-182" y="52"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="mine_bg" width="320" height="213"/>
-    </resources>
 </document>

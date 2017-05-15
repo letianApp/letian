@@ -174,6 +174,17 @@
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:MAINCOLOR}];
     [[UINavigationBar appearance] setTintColor:MAINCOLOR];
 //    [[UINavigationBar appearance] setBarTintColor:<#(UIColor * _Nullable)#>
+//    UIImage *backButtonImage = [[UIImage imageNamed:@"pinkback"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 30, 0, 0)];
+//    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+//    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin) forBarMetrics:UIBarMetricsDefault];
+    
+    UIImage *image = [UIImage imageNamed:@"pinkback"];
+    
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    [UINavigationBar appearance].backIndicatorImage = image;
+    
+    [UINavigationBar appearance].backIndicatorTransitionMaskImage = image;
 
 }
 
