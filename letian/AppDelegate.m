@@ -223,7 +223,7 @@
         
         [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
             
-            __strong typeof(self) strongself = weakSelf;
+            __strong typeof(self) strongSelf = weakSelf;
             NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
             
             //        [[RCIM sharedRCIM] setUserInfoDataSource:strongself];
@@ -252,14 +252,7 @@
                                                                   UIUserNotificationTypeAlert)
                                                 categories:nil];
         [application registerUserNotificationSettings:settings];
-    }  else {
-        //注册推送，用于iOS8之前的系统
-        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge |
-        UIRemoteNotificationTypeAlert |
-        UIRemoteNotificationTypeSound;
-        [application registerForRemoteNotificationTypes:myTypes];
     }
-
     // 远程推送的内容
     NSDictionary *remoteNotificationUserInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     NSLog(@"远程推送：%@",remoteNotificationUserInfo);
@@ -280,8 +273,6 @@ didRegisterUserNotificationSettings:
 - (void)getUserInfoWithUserId:(NSString *)userId
                    completion:(void (^)(RCUserInfo *userInfo))completion {
     
-    NSLog(@"userIddddd:%@",userId);
-    
     if ([userId isEqualToString:kFetchUserId]) {
         
         RCUserInfo *currentUser = [[RCUserInfo alloc]init];
@@ -290,22 +281,6 @@ didRegisterUserNotificationSettings:
         currentUser.portraitUri = kFetchUserHeadImageUrl;
 
         return completion(currentUser);
-//    } else if ([userId isEqualToString:@"4"]) {
-//        
-//        RCUserInfo *userInfo = [[RCUserInfo alloc]init];
-//        userInfo.userId = userId;
-//        userInfo.name = @"J";
-//        userInfo.portraitUri = @"http://www.wzright.com/upload/201610311133447158.jpg";
-//
-//        return completion(userInfo);
-//    } else if ([userId isEqualToString:@"10"]) {
-//        
-//        RCUserInfo *userInfo = [[RCUserInfo alloc]init];
-//        userInfo.userId = userId;
-//        userInfo.name = @"222";
-//        userInfo.portraitUri = @"http://www.wzright.com/upload/201610311133447158.jpg";
-//        
-//        return completion(userInfo);
     }
 
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
@@ -316,21 +291,36 @@ didRegisterUserNotificationSettings:
     parames[@"userID"] = userId;
     
     [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
-//    __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
 
     [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
         
+        __strong typeof(self) strongSelf = weakSelf;
         NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
-        RCUserInfo *user = [[RCUserInfo alloc]init];
-        user.userId      = userId;
-        user.name        = responseObject[@"Result"][@"Source"][@"NickName"];
-        user.portraitUri = responseObject[@"Result"][@"Source"][@"HeadImg"];
+        if([responseObject[@"Code"] integerValue] == 200) {
 
-        return completion(user);
-        
+            RCUserInfo *user = [[RCUserInfo alloc]init];
+            user.userId      = userId;
+            user.name        = responseObject[@"Result"][@"Source"][@"NickName"];
+            user.portraitUri = responseObject[@"Result"][@"Source"][@"HeadImg"];
+            return completion(user);
+        }else{
+            
+            [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.window.rootViewController.view];
+            return completion(nil);
+        }
     } failure:^(NSError *error) {
         
+        __strong typeof(self) strongSelf = weakSelf;
         
+        [MBHudSet dismiss:strongSelf.window.rootViewController.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:strongSelf.window.rootViewController.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:strongSelf.window.rootViewController.view];
+        }
+
     }];
     
     return completion(nil);

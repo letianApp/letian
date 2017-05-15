@@ -121,8 +121,6 @@
     NSArray *lableTagArr = @[@"咨询方式及时间",@"个人信息"];
     cell.labelTag.text = lableTagArr[indexPath.row];
     cell.detialLab.hidden = YES;
-    //    cell.backView.backgroundColor = [UIColor yellowColor];
-    
     [self customCell:cell withBgView:cell.backView forRowAtIndexPath:indexPath];
     
     
@@ -178,7 +176,7 @@
         CGFloat height = _timeChoicesView.y + 115;
         return height;
     } else {
-        return 520;
+        return 600;
     }
 }
 
@@ -495,14 +493,26 @@
     [bgView addGestureRecognizer:tap];
     tap.delegate                          = self;
     
-    _nameTextField            = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 30, SCREEN_W*0.7, 30) labelHeight:15];
+    UILabel *selfInfoBtn = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, 30, SCREEN_W*0.5, 30)];
+    [bgView addSubview:selfInfoBtn];
+//    selfInfoBtn.backgroundColor = MAINCOLOR;
+    selfInfoBtn.text = @"是否输入本人信息";
+    selfInfoBtn.textColor = [UIColor blackColor];
+    selfInfoBtn.adjustsFontSizeToFitWidth = YES;
+
+    UISwitch *selfInfoSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(selfInfoBtn.right, 30, 0, 0)];
+    [bgView addSubview:selfInfoSwitch];
+    selfInfoSwitch.onTintColor = MAINCOLOR;
+//    selfInfoSwitch 
+    
+    _nameTextField            = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 90, SCREEN_W*0.7, 30) labelHeight:15];
     [bgView addSubview:_nameTextField];
     _nameTextField.delegate                = self;
     _nameTextField.placeholder             = @"姓名";
     _nameTextField.placeholderActiveColor  = MAINCOLOR;
     _nameTextField.clearButtonMode         = UITextFieldViewModeWhileEditing;
     
-    _sexTextField             = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 90, SCREEN_W*0.7, 30) labelHeight:15];
+    _sexTextField             = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 150, SCREEN_W*0.7, 30) labelHeight:15];
     [bgView addSubview:_sexTextField];
     _sexTextField.clearButtonMode          = UITextFieldViewModeWhileEditing;
     _sexTextField.delegate                 = self;
@@ -518,7 +528,7 @@
         return @{ VALIDATION_INDICATOR_NO : @"请输入 \"男\" \"女\" 或\"其他\"" };
     }];
     
-    _ageTextField             = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 150, SCREEN_W*0.7, 30) labelHeight:15];
+    _ageTextField             = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 210, SCREEN_W*0.7, 30) labelHeight:15];
     [bgView addSubview:_ageTextField];
     _ageTextField.clearButtonMode          = UITextFieldViewModeWhileEditing;
     _ageTextField.delegate                 = self;
@@ -526,14 +536,14 @@
     _ageTextField.placeholderActiveColor   = MAINCOLOR;
     _ageTextField.keyboardType             = UIKeyboardTypeNumberPad;
     
-    _phoneTextField           = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 210, SCREEN_W*0.7, 30) labelHeight:15 style:LRTextFieldStylePhone];
+    _phoneTextField           = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 270, SCREEN_W*0.7, 30) labelHeight:15 style:LRTextFieldStylePhone];
     [bgView addSubview:_phoneTextField];
     _phoneTextField.clearButtonMode        = UITextFieldViewModeWhileEditing;
     _phoneTextField.delegate               = self;
     _phoneTextField.placeholder            = @"电话";
     _phoneTextField.placeholderActiveColor = MAINCOLOR;
     
-    _emailTextField           = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 270, SCREEN_W*0.7, 30) labelHeight:15 style:LRTextFieldStyleEmail];
+    _emailTextField           = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 330, SCREEN_W*0.7, 30) labelHeight:15 style:LRTextFieldStyleEmail];
     [bgView addSubview:_emailTextField];
     _emailTextField.clearButtonMode        = UITextFieldViewModeWhileEditing;
     _emailTextField.delegate               = self;
@@ -542,7 +552,7 @@
     _emailTextField.hintText               = @"*选填";
     _emailTextField.hintTextColor          = [UIColor blackColor];
     
-    _detailTextView                     = [[UITextView alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, 330 , SCREEN_W*0.7, 80)];
+    _detailTextView                     = [[UITextView alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, 390 , SCREEN_W*0.7, 80)];
     _detailTextView.delegate            = self;
     _detailTextView.font                = [UIFont systemFontOfSize:17];
     _placeholderLabel                   = [GQControls createLabelWithFrame:CGRectMake(5, 10, 200, 20) andText:@"请简述您的咨询内容*" andTextColor:[UIColor lightGrayColor] andFontSize:17];
@@ -697,38 +707,37 @@
     
     [PPNetworkHelper POST:requestString parameters:params success:^(id responseObject) {
         
-        __strong typeof(self) strongself = weakSelf;
+        __strong typeof(self) strongSelf = weakSelf;
         NSLog(@"%@",responseObject);
-        [MBHudSet dismiss:strongself.view];
+        [MBHudSet dismiss:strongSelf.view];
         
         if([responseObject[@"Code"] integerValue] == 200) {
             
-            [MBHudSet showText:@"下单成功" andOnView:strongself.view];
+            [MBHudSet showText:@"下单成功" andOnView:strongSelf.view];
             NSLog(@"%@",responseObject[@"Result"][@"Source"][@"OrderID"]);
             PayPageVC *payPage = [[PayPageVC alloc]init];
             payPage.orderID = [responseObject[@"Result"][@"Source"][@"OrderID"] integerValue];
             payPage.orderNo = responseObject[@"Result"][@"Source"][@"OrderNo"];
             payPage.orderTypeString=responseObject[@"Result"][@"Source"][@"ConsultTypeIDString"];
-            payPage.consultorName=strongself.orderModel.conserlorName;
-            [strongself.navigationController pushViewController:payPage animated:YES];
+            payPage.consultorName=strongSelf.orderModel.conserlorName;
+            [strongSelf.navigationController pushViewController:payPage animated:YES];
             
         }else{
             
-            [MBHudSet showText:responseObject[@"Msg"] andOnView:strongself.view];
+            [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.view];
         }
         
     } failure:^(NSError *error) {
         
-        __strong typeof(self) strongself = weakSelf;
-        
-        NSLog(@"错误代码：%ld",error.code);
-        
-        NSLog(@"错误%@",error);
-        [MBHudSet dismiss:strongself.view];
-        [MBHudSet showText:[NSString stringWithFormat:@"创建订单失败，错误代码：%ld",error.code]andOnView:strongself.view];
-        
+        __strong typeof(self) strongSelf = weakSelf;
+        [MBHudSet dismiss:strongSelf.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
+        }
     }];
-   
 }
 
 - (void)dismissKeyboard {

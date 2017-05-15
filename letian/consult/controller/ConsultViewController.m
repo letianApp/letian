@@ -57,7 +57,7 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    [MBHudSet showStatusOnView:self.view];
+//    [MBHudSet showStatusOnView:self.view];
     
     _counselorArr = [NSMutableArray new];
     _requestParams = [NSMutableDictionary new];
@@ -177,7 +177,13 @@
         __strong typeof(self) strongSelf = weakSelf;
         [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorInfoTableview.mj_header endRefreshing];
-        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师类型错误，错误代码：%ld",error.code]andOnView:strongSelf.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
+        }
+
     }];
 }
 
@@ -212,14 +218,14 @@
     
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
         
+        NSLog(@"%@",responseObject);
         __strong typeof(self) strongSelf = weakSelf;
         [strongSelf.counselorArr removeAllObjects];
         strongSelf.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         
-        for (int i = 0; i < strongSelf.counselorArr.count; i++) {
+//        for (int i = 0; i < strongSelf.counselorArr.count; i++) {
 //            NSLog(@"%@",strongself.counselorArr[i].Expertise);
-            
-        }
+//        }
         
         if (strongSelf.counselorArr.count == 0) {
             [strongSelf.counselorInfoTableview addSubview:strongSelf.noDataLab];
@@ -228,16 +234,21 @@
             
         }
         
+//        [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorInfoTableview reloadData];
-        [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorInfoTableview.mj_header endRefreshing];
         
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongSelf = weakSelf;
-        [MBHudSet dismiss:strongSelf.view];
+//        [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorInfoTableview.mj_header endRefreshing];
-        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师列表错误，错误代码：%ld",error.code]andOnView:strongSelf.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
+        } else {
+            [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
+        }
     }];
 }
 
@@ -579,7 +590,7 @@
     
     CounselorInfoVC *counselorInfoMainVC = [[CounselorInfoVC alloc]init];
     counselorInfoMainVC.counselModel = _counselorArr[indexPath.row];
-    //    counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
+    counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
     [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];
     
 }

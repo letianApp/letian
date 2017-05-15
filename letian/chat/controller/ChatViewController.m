@@ -30,7 +30,7 @@
 #pragma mark 定制导航栏
 - (void)customNavigation {
     
-    self.navigationItem.title = @"小乐";
+//    self.navigationItem.title = @"小乐";
     self.navigationController.navigationBar.tintColor = MAINCOLOR;
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:nil];
     self.navigationItem.backBarButtonItem = backBtn;

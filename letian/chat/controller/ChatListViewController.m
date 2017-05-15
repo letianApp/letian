@@ -8,7 +8,7 @@
 
 #import "ChatListViewController.h"
 #import "ChatViewController.h"
-//#import <RongIMKit/RongIMKit.h>
+#import "RCDCustomerServiceViewController.h"
 
 
 @interface ChatListViewController ()
@@ -37,21 +37,18 @@
     
     [self customNavigation];
 
+//    self.conversationListTableView.delegate = self;
+//    self.conversationListTableView.dataSource = self;
+    
+//    RCConversationModel *mod = [[RCConversationModel alloc]init];
+//    mod.targetId = @"6";
+//    [self refreshConversationTableViewWithConversationModel:mod];
+    
     UIButton *btn = [[UIButton alloc] init];
-//    btn.frame = CGRectMake(100, 100, 50, 50);
     btn.backgroundColor = MAINCOLOR;
-    [btn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     self.emptyConversationView = btn;
     
 }
-
-//- (void)clickBtn:(UIButton *)btn {
-//    
-//    ChatViewController *chatVc = [[ChatViewController alloc]initWithConversationType:ConversationType_PRIVATE targetId:@"002"];
-//    chatVc.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:chatVc animated:YES];
-//
-//}
 
 #pragma mark 定制导航栏
 - (void)customNavigation {
@@ -60,18 +57,26 @@
     
 }
 
-//- (UIBarButtonItem *)customBackItemWithTarget:(id)target
-//                                       action:(SEL)action {
-//    
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-//    [btn setFrame:CGRectMake(0, 0, 20, 20)];
-//    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-//    return item;
-//}
-
 #pragma mark 定制cell
+
+//插入自定义会话model
+- (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource {
+    
+    RCConversation *con = [[RCConversation alloc] init];
+    con.targetId = @"6";
+    con.isTop = YES;
+//    con.conversationTitle = @"客服";
+    con.senderUserId = @"6";
+    con.lastestMessage = [RCTextMessage messageWithContent:@"aaaaa"];
+    con.lastestMessageDirection = MessageDirection_RECEIVE;
+    con.conversationType = ConversationType_PRIVATE;
+    con.sentTime = 1494837417;
+    con.receivedTime = 1494837417;
+    RCConversationModel *model = [[RCConversationModel alloc]initWithConversation:con extend:nil];
+    [dataSource insertObject:model atIndex:0];
+    return dataSource;
+}
+
 - (void)willDisplayConversationTableCell:(RCConversationBaseCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     RCConversationModel *model = self.conversationListDataSource[indexPath.row];
@@ -82,6 +87,27 @@
         conversationCell.bubbleTipView.bubbleTipBackgroundColor = MAINCOLOR;
     }
 }
+
+- (void)refreshConversationTableViewWithConversationModel:(RCConversationModel *)conversationModel {
+    
+    NSLog(@"ddd");
+    
+    
+}
+
+//- (RCConversationBaseCell *)rcConversationListTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    RCConversationModel *mod = [[RCConversationModel alloc]init];
+//    mod.conversationType = ConversationType_PRIVATE;
+//    mod.targetId = @"6";
+//    mod.conversationTitle = @"77";
+//    
+//    RCConversationBaseCell *cell = [[RCConversationBaseCell alloc]init];
+//    cell.model = mod;
+//    
+//    
+//    return cell;
+//}
 
 #pragma mark 点击cell方法
 - (void)onSelectedTableRow:(RCConversationModelType)conversationModelType
@@ -103,10 +129,17 @@
         chatVc.hidesBottomBarWhenPushed = YES;
         chatVc.conversationType = model.conversationType;
         chatVc.targetId = model.targetId;
-        chatVc.title = @"002";
-    
+        chatVc.title = model.conversationTitle;
         [self.navigationController pushViewController:chatVc animated:YES];
     
+    } else if (conversationModelType == ConversationType_CUSTOMERSERVICE) {
+        
+        RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
+        chatService.conversationType = ConversationType_CUSTOMERSERVICE;
+        chatService.targetId = @"KEFU149145862082595";
+        chatService.title = @"客服";
+//        chatService.csInfo = csInfo; //用户的详细信息，此数据用于上传用户信息到客服后台，数据的nickName和portraitUrl必须填写。(目前该字段暂时没用到，客服后台显示的用户信息是你获取token时传的参数，之后会用到）
+        [self.navigationController pushViewController :chatService animated:YES];
     }
 }
 

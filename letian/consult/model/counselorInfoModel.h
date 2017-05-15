@@ -68,7 +68,7 @@
 /**
  咨询师折扣
  */
-@property (nonatomic, assign) NSInteger  ConsultDisCount;
+@property (nonatomic, assign) float      ConsultDisCount;
 
 /**
  咨询师达到多少时间有折扣
@@ -78,7 +78,7 @@
 /**
  咨询师折扣Tag
  */
-@property (nonatomic, assign) NSInteger  ConsultTag;
+@property (nonatomic, copy ) NSString  *ConsultTag;
 
 /**
  咨询师总咨询次数

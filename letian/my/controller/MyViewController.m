@@ -146,7 +146,7 @@
     headView.userInteractionEnabled=YES;
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:headView.bounds];
     toolbar.barStyle = UIBarStyleBlackOpaque;
-    toolbar.alpha=0.7;
+    toolbar.alpha = 0.7;
     [headView addSubview:toolbar];
     
     //已登录则显示头像昵称

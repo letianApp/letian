@@ -148,6 +148,15 @@
                 NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
                 NSLog(@"ID：%@",kFetchUserId);
                 
+                RCTextMessage *textMessage = [RCTextMessage messageWithContent:@"你好，欢迎来到乐天心理"];
+                RCMessage *message = [[RCMessage alloc]init];
+                message.conversationType = ConversationType_PRIVATE;
+                message.targetId = kFetchUserId;
+                message.messageDirection = MessageDirection_RECEIVE;
+                message.senderUserId = @"222";
+                message.content = textMessage;
+//                [RCIM sharedRCIM] send
+                
                 [strongSelf dismissViewControllerAnimated:YES completion:nil];
 
                 //        [[RCIM sharedRCIM] setUserInfoDataSource:strongself];

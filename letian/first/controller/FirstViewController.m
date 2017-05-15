@@ -33,9 +33,16 @@
 
 @implementation FirstViewController
 
-//- (UIStatusBarStyle)preferredStatusBarStyle {
-//    return UIStatusBarStyleLightContent;
-//}
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    
+    if (self.tableView.contentOffset.y >= 220) {
+
+        return UIStatusBarStyleDefault;
+    } else {
+        
+        return UIStatusBarStyleLightContent;
+    }
+}
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden=YES;
@@ -115,14 +122,19 @@
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (self.tableView.contentOffset.y>=325) {
+    
+    [self setNeedsStatusBarAppearanceUpdate];
+    if (self.tableView.contentOffset.y >= 325) {
         
-        self.sectionHeaderLabel.hidden=YES;
-        self.navigationItem.title=@"趣味心理测试";
-        self.navigationController.navigationBarHidden=NO;
+        self.sectionHeaderLabel.hidden = YES;
+        self.navigationItem.title = @"趣味心理测试";
+        self.navigationController.navigationBarHidden = NO;
     }else{
-        self.sectionHeaderLabel.hidden=NO;
-        self.navigationController.navigationBarHidden=YES;
+        
+        self.sectionHeaderLabel.hidden = NO;
+        self.navigationController.navigationBarHidden = YES;
+//        self.preferredStatusBarStyle = UIStatusBarStyleLightContent
+        
     }
 }
 
@@ -252,7 +264,7 @@
     GQScrollView *scrollView = [[GQScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, 220) withImages:imageArray withIsRunloop:YES withBlock:^(NSInteger index) {
         NSLog(@"点击了index%zd",index);
     }];
-    scrollView.color_currentPageControl=MAINCOLOR;
+    scrollView.color_currentPageControl = MAINCOLOR;
     return scrollView;
 }
 

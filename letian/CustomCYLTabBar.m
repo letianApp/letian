@@ -62,9 +62,13 @@
     UIViewController *secondNavigationController = [[RTRootNavigationController alloc]
                                                     initWithRootViewController:secondViewController];
     
-    MyViewController *thirdViewController = [[MyViewController alloc] init];
+    ConsultViewController *thirdViewController = [[ConsultViewController alloc]init];
     UIViewController *thirdNavigationController = [[RTRootNavigationController alloc]
-                                                   initWithRootViewController:thirdViewController];
+                                                    initWithRootViewController:thirdViewController];
+
+    MyViewController *fourthViewController = [[MyViewController alloc] init];
+    UIViewController *fourthNavigationController = [[RTRootNavigationController alloc]
+                                                   initWithRootViewController:fourthViewController];
     
     /**
      * 以下两行代码目的在于手动设置让TabBarItem只显示图标，不显示文字，并让图标垂直居中。
@@ -77,6 +81,7 @@
                                  firstNavigationController,
                                  secondNavigationController,
                                  thirdNavigationController,
+                                 fourthNavigationController,
                                  ];
     return viewControllers;
 }
@@ -89,10 +94,15 @@
                                                  };
     NSDictionary *secondTabBarItemsAttributes = @{
                                                   CYLTabBarItemTitle : @"咨询",
-                                                  CYLTabBarItemImage : @"consultPagTab",
-                                                  CYLTabBarItemSelectedImage : @"consultPagTabSel",
+                                                  CYLTabBarItemImage : @"chatPagTab",
+                                                  CYLTabBarItemSelectedImage : @"chatPagTabSel",
                                                   };
     NSDictionary *thirdTabBarItemsAttributes = @{
+                                                 CYLTabBarItemTitle : @"预约",
+                                                 CYLTabBarItemImage : @"consultPagTab",
+                                                 CYLTabBarItemSelectedImage : @"consultPagTabSel",
+                                                 };
+    NSDictionary *fourthTabBarItemsAttributes = @{
                                                  CYLTabBarItemTitle : @"我的",
                                                  CYLTabBarItemImage : @"myPagTab",
                                                  CYLTabBarItemSelectedImage : @"myPagTabSel",
@@ -101,6 +111,7 @@
                                        firstTabBarItemsAttributes,
                                        secondTabBarItemsAttributes,
                                        thirdTabBarItemsAttributes,
+                                       fourthTabBarItemsAttributes,
                                        ];
     return tabBarItemsAttributes;
 }

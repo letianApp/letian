@@ -10,19 +10,22 @@
 #import "ConfirmPageCell.h"
 #import "ConfirmPageVC.h"
 #import "CYLTabBarController.h"
+#import "ChatViewController.h"
 
 #import "GQUserManager.h"
 #import "LoginViewController.h"
 
 #import "UIImageView+WebCache.h"
-
+#import "Colours.h"
 
 @interface CounselorInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic, strong) UIView      *headView;
-@property (nonatomic, strong) UITableView *mainTableView;
-@property (nonatomic, strong) UIView      *holdView;
-@property (nonatomic, strong) UITabBar    *tabBar;
+@property (nonatomic, strong) UIImageView  *headView;
+@property (nonatomic, strong) UIVisualEffectView *effectview;
+@property (nonatomic, strong) UITableView  *mainTableView;
+@property (nonatomic, strong) UIView       *holdView;
+@property (nonatomic, strong) UITabBar     *tabBar;
+
 
 @end
 
@@ -116,9 +119,22 @@
 #pragma mark 头部视图
 - (void)customHeadView {
     
-    _headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H*0.3)];
-    _headView.backgroundColor = MAINCOLOR;
-    _mainTableView.tableHeaderView = _headView;
+    _headView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H*0.3)];
+    [_headView sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg]];
+    _headView.contentMode = UIViewContentModeScaleAspectFill;
+    _headView.clipsToBounds = YES;
+    
+    UIView *view = [[UIView alloc]init];
+    view.frame = _headView.frame;
+    [view addSubview:_headView];
+    
+    _mainTableView.tableHeaderView = view;
+
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    _effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
+    _effectview.frame = _headView.frame;
+    [view addSubview:_effectview];
+    
 //咨询师头像
     UIImageView *picView = [[UIImageView alloc]init];
     [picView sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg]];
@@ -126,7 +142,7 @@
     picView.layer.borderWidth = 1;
     picView.layer.borderColor = ([UIColor whiteColor].CGColor);
     picView.layer.masksToBounds = YES;
-    [_headView addSubview:picView];
+    [view addSubview:picView];
     [picView mas_updateConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(_headView.mas_centerX);
@@ -135,18 +151,35 @@
         make.height.equalTo(_headView.mas_width).multipliedBy(0.2);
     }];
     
+    UIImageView *sexView = [[UIImageView alloc]init];
+    [view addSubview:sexView];
+    [sexView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.equalTo(picView.mas_bottom);
+        make.right.equalTo(picView.mas_right);
+        make.width.equalTo(picView.mas_width).multipliedBy(0.3);
+        make.height.equalTo(picView.mas_height).multipliedBy(0.3);
+    }];
+    
     float lineHeight = (_headView.height/2-_headView.width*0.1)/7;
     NSLog(@"%f",lineHeight);
 //咨询师名字
-    UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*2/5, _headView.height-lineHeight*6, SCREEN_W/5, lineHeight*2)];
+    UILabel *nameLab = [[UILabel alloc]init];
+    [view addSubview:nameLab];
+    [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(picView.mas_centerX);
+        make.top.equalTo(picView.mas_bottom).offset(lineHeight);
+        make.width.equalTo(self.view.mas_width).multipliedBy(0.3);
+        make.height.equalTo(picView.mas_height).multipliedBy(0.25);
+    }];
     nameLab.textAlignment = NSTextAlignmentCenter;
     nameLab.text = self.counselModel.UserName;
     nameLab.textColor = [UIColor whiteColor];
+    nameLab.shadowOffset = CGSizeMake(0, 1);
     nameLab.font = [UIFont systemFontOfSize:14 weight:2];
-    [_headView addSubview:nameLab];
 //咨询师称号
     UILabel *statusLab = [[UILabel alloc]init];
-    [_headView addSubview:statusLab];
+    [view addSubview:statusLab];
     [statusLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(nameLab.mas_centerX);
         make.top.equalTo(nameLab.mas_bottom).offset(lineHeight);
@@ -155,11 +188,24 @@
     }];
     statusLab.textAlignment = NSTextAlignmentCenter;
     statusLab.textColor = [UIColor whiteColor];
-    statusLab.font = [UIFont systemFontOfSize:12];    
+    statusLab.shadowOffset = CGSizeMake(0, 1);
+    statusLab.font = [UIFont systemFontOfSize:12];
     if ([_counselModel.UserTitleString containsString:@"心理咨询师"]) {
         statusLab.text = _counselModel.UserTitleString;
     } else {
         statusLab.text = [NSString stringWithFormat:@"%@心理咨询师",_counselModel.UserTitleString];
+    }
+
+    if (self.counselModel.EnumSexType == 0) {
+        
+        sexView.image = [UIImage imageNamed:@"male"];
+//        nameLab.shadowColor = [UIColor robinEggColor];
+//        statusLab.shadowColor = [UIColor robinEggColor];
+    } else {
+        
+        sexView.image = [UIImage imageNamed:@"female"];
+//        nameLab.shadowColor = MAINCOLOR;
+//        statusLab.shadowColor = MAINCOLOR;
     }
 
 
@@ -167,8 +213,14 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    if (scrollView == _mainTableView) {
-        _holdView.frame = CGRectMake(0, 0, SCREEN_W, _mainTableView.contentOffset.y);
+    CGPoint offset = scrollView.contentOffset;
+    if (offset.y < 0) {
+        
+        CGRect rect = self.headView.frame;
+        rect.origin.y = offset.y;
+        rect.size.height = (SCREEN_H*0.3) - offset.y;
+        _headView.frame = rect;
+        _effectview.frame = rect;
     }
 }
 
@@ -218,7 +270,8 @@
         make.width.equalTo(priceLab.mas_width);
         make.height.equalTo(priceLab.mas_height).multipliedBy(0.5);
     }];
-    couponLab.text                     = @"4小时以上88折";
+    NSLog(@"%.2f",_counselModel.ConsultDisCount);
+    couponLab.text                     = [NSString stringWithFormat:@"%@",_counselModel.ConsultTag];
     couponLab.textColor                = [UIColor orangeColor];
     couponLab.textAlignment            = NSTextAlignmentRight;
     couponLab.font                     = [UIFont boldSystemFontOfSize:10];
@@ -226,11 +279,34 @@
 }
 
 - (void)clickAskBrn {
-    NSLog(@"点击咨询按钮");
+    
+    if ([GQUserManager isHaveLogin]) {
+
+        ChatViewController *chatVc = [[ChatViewController alloc]init];
+        chatVc.hidesBottomBarWhenPushed = YES;
+        chatVc.conversationType = ConversationType_PRIVATE;
+        chatVc.targetId = [NSString stringWithFormat:@"%ld",self.counselModel.UserID];
+        chatVc.title = self.counselModel.UserName;
+        [self.navigationController pushViewController:chatVc animated:YES];
+    } else {
+        
+        UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"登陆后可以享受15分钟免费咨询哦" preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alertControl animated:YES completion:nil];
+        
+        __weak typeof(self) weakSelf    = self;
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            
+            __strong typeof(self) strongSelf = weakSelf;
+            LoginViewController *loginVc     = [[LoginViewController alloc]init];
+            loginVc.hidesBottomBarWhenPushed = YES;
+            [strongSelf presentViewController:loginVc animated:YES completion:nil];
+        }]];
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    }
+
 }
 
 - (void)clickAppointmentBtn {
-    NSLog(@"点击预约按钮");
     
     if ([GQUserManager isHaveLogin]) {
     
