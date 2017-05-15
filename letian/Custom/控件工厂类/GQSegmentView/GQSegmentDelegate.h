@@ -15,7 +15,7 @@
  切换位置
  */
 - (void)segmentDidselectTab:(NSUInteger)index;
-/*
+/**
  滑动到左边界时调用
  */
 - (void)slideSwitchPanLeftEdge:(UIPanGestureRecognizer *)panParam;

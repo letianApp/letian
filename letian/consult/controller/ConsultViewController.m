@@ -211,7 +211,7 @@
     [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
     
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
-        
+        NSLog(@"%@",responseObject);
         __strong typeof(self) strongSelf = weakSelf;
         [strongSelf.counselorArr removeAllObjects];
         strongSelf.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];

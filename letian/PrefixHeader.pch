@@ -14,6 +14,18 @@
 
 #ifdef __OBJC__
 
+
+//==========================打印重定义==============解决控制台数据打印不全的问题
+#ifdef DEBUG
+
+#define NSLog(FORMAT, ...) fprintf(stderr, "%s:%zd\t%s\n", [[[NSString stringWithUTF8String: __FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat: FORMAT, ## __VA_ARGS__] UTF8String]);
+
+#else
+
+#define NSLog(FORMAT, ...) nil
+
+#endif
+
 //===========================屏幕宽度、高度==================
 #define SCREEN_W [UIScreen mainScreen].bounds.size.width
 #define SCREEN_H [UIScreen mainScreen].bounds.size.height
@@ -134,6 +146,8 @@
 #import "MJExtension.h"
 #include "EnumList.h"
 #endif
+
+
 
 
 #endif /* PrefixHeader_pch */

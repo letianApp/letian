@@ -174,6 +174,17 @@
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:MAINCOLOR}];
     [[UINavigationBar appearance] setTintColor:MAINCOLOR];
 //    [[UINavigationBar appearance] setBarTintColor:<#(UIColor * _Nullable)#>
+//    UIImage *backButtonImage = [[UIImage imageNamed:@"pinkback"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 30, 0, 0)];
+//    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+//    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin) forBarMetrics:UIBarMetricsDefault];
+    
+    UIImage *image = [UIImage imageNamed:@"pinkback"];
+    
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    [UINavigationBar appearance].backIndicatorImage = image;
+    
+    [UINavigationBar appearance].backIndicatorTransitionMaskImage = image;
 
 }
 
@@ -254,10 +265,10 @@
         [application registerUserNotificationSettings:settings];
     }  else {
         //注册推送，用于iOS8之前的系统
-        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge |
-        UIRemoteNotificationTypeAlert |
-        UIRemoteNotificationTypeSound;
-        [application registerForRemoteNotificationTypes:myTypes];
+//        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge |
+//        UIRemoteNotificationTypeAlert |
+//        UIRemoteNotificationTypeSound;
+//        [application registerForRemoteNotificationTypes:myTypes];
     }
 
     // 远程推送的内容

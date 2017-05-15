@@ -14,7 +14,16 @@ typedef void (^ImageViewClick)(NSInteger index);
 @property (nonatomic,strong)UIColor *color_pageControl;//
 @property (nonatomic,strong)UIColor *color_currentPageControl;
 @property (nonatomic,strong)ImageViewClick click;
-- (instancetype)initWithFrame:(CGRect)frame
+
+/**轮播图
+
+ @param frame frame
+ @param images 图片数组
+ @param isRunloop 是否需要轮播
+ @param block 点击图片的block
+ @return return value description
+ */
+-(instancetype)initWithFrame:(CGRect)frame
                    withImages:(NSArray *)images
                 withIsRunloop:(BOOL)isRunloop
                     withBlock:(ImageViewClick)block;

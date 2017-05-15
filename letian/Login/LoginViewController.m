@@ -78,8 +78,8 @@
     params[@"Timestamp"]           = timeSp;
     params[@"Nonce"]               = nonce;
     params[@"AppId"]               = APPID;
-    params[@"PushNo"]              = [JPUSHService registrationID];;
-
+    params[@"PushNo"]              = @"121c83f76014d24bc2d";
+//    [JPUSHService registrationID];
     NSLog(@"推送号：。。。。。%@",params[@"PushNo"]);
     __weak typeof(self) weakSelf   = self;
     [MBHudSet showStatusOnView:self.view];
