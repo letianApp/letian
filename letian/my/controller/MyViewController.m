@@ -87,7 +87,6 @@
         __strong typeof(self) strongSelf = weakSelf;
 
         [MBHudSet dismiss:strongSelf.view];
-//        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             strongSelf.userInfoModel = [UserInfoModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
             strongSelf.nameLabel.text = strongSelf.userInfoModel.NickName;
@@ -127,15 +126,14 @@
 }
 
 
-#pragma mark--------下拉显示遮罩层
+#pragma mark--------下拉显示
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint offset = scrollView.contentOffset;
     if (offset.y < 0) {
-        
         CGRect rect = self.headView.frame;
         rect.origin.y = offset.y;
-        rect.size.height = (SCREEN_H*0.3) - offset.y;
+        rect.size.height = (SCREEN_W*0.6) - offset.y;
         _headView.frame = rect;
         self.toolbar.frame = rect;
     }
@@ -144,17 +142,25 @@
 
 #pragma mark--------账户头像
 
-- (UIImageView *)createHeadView {
-    UIImageView *headView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_W*0.7)];
+- (UIView *)createHeadView {
+    
+    UIImageView *headView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_W*0.6)];
     headView.image=[UIImage imageNamed:@"mine_bg"];
     headView.contentMode=UIViewContentModeScaleToFill;
     headView.userInteractionEnabled=YES;
+    
+    UIView *view = [[UIView alloc]init];
+    view.frame = headView.frame;
+    [view addSubview:headView];
+    
     self.headView=headView;
-    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:headView.bounds];
+    
+    UIToolbar *toolbar = [[UIToolbar alloc] init];
+    toolbar.frame=view.frame;
     toolbar.barStyle = UIBarStyleBlackOpaque;
     toolbar.alpha = 0.7;
     self.toolbar=toolbar;
-    [headView addSubview:toolbar];
+    [view addSubview:toolbar];
     
     //已登录则显示头像昵称
 //    if ([GQUserManager isHaveLogin]) {
@@ -187,7 +193,7 @@
     
     [self isLogin];
     
-    return headView;
+    return view;
 }
 
 

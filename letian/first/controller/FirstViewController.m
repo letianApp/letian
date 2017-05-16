@@ -133,8 +133,6 @@
         
         self.sectionHeaderLabel.hidden = NO;
         self.navigationController.navigationBarHidden = YES;
-//        self.preferredStatusBarStyle = UIStatusBarStyleLightContent
-        
     }
 }
 

@@ -8,20 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-@class ConsultTimeList;
-@interface ApiDoctorConsultDateModel : NSObject
+@class ConsultTimeArray;
+@interface ConsultDateModel : NSObject
 
 @property (nonatomic,copy) NSString *CousultDate;
 
-@property (nonatomic,assign) BOOL IsEnableConsult;
+@property (nonatomic,copy) NSString* IsEnableConsult;
 
 
-@property (nonatomic,strong) NSArray <ConsultTimeList *> *DoctorConsultTime;
+@property (nonatomic,strong) NSArray <ConsultTimeArray *> *ConsultTimeList;
 
 @end
 
 
-@interface ConsultTimeList : NSObject
+@interface ConsultTimeArray : NSObject
 
 @property (nonatomic,copy) NSString* StartTime;
 

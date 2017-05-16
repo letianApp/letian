@@ -13,7 +13,7 @@
 #import "FSCalendar.h"
 #import "Colours.h"
 #import "SnailPopupController.h"
-
+#import "ConsultDateModel.h"
 
 @interface CustomDateViewController () <FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource>
 
@@ -247,7 +247,7 @@
     NSMutableDictionary *parames = [[NSMutableDictionary alloc]init];
     parames[@"date"] = dayStr;
     
-    [PPNetworkHelper setValue:@"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOjEwLCJsb2dpbm5hbWUiOiIxMTEiLCJyZWFsbmFtZSI6Iueci-eci-eciyIsImV4cGlyZXRpbWUiOjE0OTQzODI1OTJ9.mPyutAzQnOBQABC9jXya1UNvHYrVeYvX6qq-5TSzNl4" forHTTPHeaderField:@"token"];
+    [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
     
     [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
         __strong typeof(self) strongself = weakSelf;
@@ -264,51 +264,42 @@
 
 - (void)setCounsultSetForDay:(NSString *)dayStr {
     
-    __weak typeof(self) weakSelf   = self;
-    
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_DOCTORSET];
     [requestString appendFormat:@"%@",API_NAME_DOSETCONSULTSET];
     
-    NSMutableDictionary *parames = [[NSMutableDictionary alloc]init];
     
-    NSMutableDictionary *DoctorConsultTime=[[NSMutableDictionary alloc]init];
-    DoctorConsultTime[@"StartTime"]= @"09:00";
-    DoctorConsultTime[@"EndTime"]=@"19:00";
+    ConsultDateModel *model=[[ConsultDateModel alloc]init];
+    model.CousultDate=dayStr;
+    model.IsEnableConsult=@"true";
+    NSMutableArray *arr=[NSMutableArray array];
     
-
-//    NSDictionary *consultTimeDic = @{@"StartTime":@"09:00:00.1234567",@"EndTime":@"13:00:00.1234567"};
-//    consultTimeDic[@"StartTime"] = @"05:00:00";
-//    consultTimeDic[@"EndTime"] = @"13:00:00";
-//    NSArray *arr = @[@{@"StartTime":@"05:00:00",@"EndTime":@"13:00:00"}];
-    NSMutableArray *consultTimeArr = [[NSMutableArray alloc]init];
-    [consultTimeArr addObject:DoctorConsultTime];
+    NSArray *start=@[@"12:00:00",@"17:00:00"];
+    NSArray *end=@[@"15:00:00",@"19:00:00"];
+    for (NSInteger i=0; i<2; i++) {
+        ConsultTimeArray *array=[[ConsultTimeArray alloc]init];
+        array.StartTime=start[i];
+        array.EndTime=end[i];
+        [arr addObject:array];
+    }
     
+    model.ConsultTimeList=arr;
+    NSLog(@"上传%@",model.mj_keyValues);
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    [manager POST:requestString parameters:model.mj_keyValues progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"修改咨询时间result%@",responseObject);
     
-    
-    parames[@"CousultDate"] = dayStr;
-    parames[@"IsEnableConsult"] = @"true";
-    parames[@"ConsultTimeList"] = consultTimeArr;
-    
-    
-    
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parames options:NSJSONWritingPrettyPrinted error:nil];
-//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-
-    
-    NSLog(@"修改咨询时间上传的数据：params:%@",parames);
-    
-    [PPNetworkHelper setValue:@"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOjQsImxvZ2lubmFtZSI6IjE4OTc3MzQzODQzIiwicmVhbG5hbWUiOm51bGwsImV4cGlyZXRpbWUiOjE0OTI3NDE0ODV9.GczqZEMSZTDEXHK2AHhhkDeUGm5f0o2rmVu9h79JsfE" forHTTPHeaderField:@"token"];
-    
-    [PPNetworkHelper POST:requestString parameters:parames success:^(id responseObject) {
-        
-//        __strong typeof(self) strongself = weakSelf;
-        NSLog(@"修改咨询时间返回的数据%@",responseObject);
-
-    } failure:^(NSError *error) {
-        __strong typeof(self) strongself = weakSelf;
-        [MBHudSet showText:[NSString stringWithFormat:@"上传咨询师订单列表错误，错误代码：%ld",error.code]andOnView:strongself.view];
-
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+            NSLog(@"errer%@",error);
+        }
     }];
 
 
@@ -328,10 +319,9 @@
     parames[@"year"] = @(2017);
     parames[@"month"] = @(5);
     
-    [PPNetworkHelper setValue:@"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOjQsImxvZ2lubmFtZSI6IjE4OTc3MzQzODQzIiwicmVhbG5hbWUiOm51bGwsImV4cGlyZXRpbWUiOjE0OTI3NDE0ODV9.GczqZEMSZTDEXHK2AHhhkDeUGm5f0o2rmVu9h79JsfE" forHTTPHeaderField:@"token"];
+    [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
     
     [PPNetworkHelper GET:requestConsultOrderListString parameters:parames success:^(id responseObject) {
-        __strong typeof(self) strongself = weakSelf;
         NSLog(@"%@",responseObject);
         
     } failure:^(NSError *error) {
