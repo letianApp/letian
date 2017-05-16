@@ -18,6 +18,10 @@
 #import "UIImageView+WebCache.h"
 #import "Colours.h"
 
+#import "GQActionSheet.h"
+#import <UShareUI/UShareUI.h>
+
+
 @interface CounselorInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) UIImageView  *headView;
@@ -73,8 +77,51 @@
     return item;
 }
 
-- (void)clickShareBtn {
-    NSLog(@"分享");
+
+#pragma mark---------弹出分享面板
+
+-(void)clickShareBtn{
+    NSArray *titles = @[@"分享到朋友圈",@"分享到微信",@"分享到微博",@"分享到空间",@"分享到短信",@"分享到QQ"];
+    NSArray *imageNames = @[@"pengyou",@"weixin",@"weibo",@"kongjian",@"mess",@"qq"];
+    GQActionSheet *sheet = [[GQActionSheet alloc] initWithTitles:titles iconNames:imageNames];
+    [sheet showActionSheetWithClickBlock:^(int btnIndex) {
+        NSLog(@"btnIndex:%d",btnIndex);
+        NSInteger platformType;
+        if (btnIndex==0) {
+            platformType=ShareTo_WechatTimeLine;
+        }else if (btnIndex==1){
+            platformType=ShareTo_WechatSession;
+        }else if (btnIndex==2){
+            platformType=ShareTo_Sina;
+        }else if (btnIndex==3){
+            platformType=ShareTo_Qzone;
+        }else if (btnIndex==4){
+            platformType=ShareTo_Sms;
+        }else {
+            platformType=ShareTo_QQ;
+        }
+        [self shareWebPageToPlatformType:platformType];
+    } cancelBlock:nil];
+}
+
+#pragma mark---------分享截图
+
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+{
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
+    //创建图片内容对象
+    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+    [shareObject setShareImage:[GQControls captureScrollView:self.mainTableView]];
+    messageObject.shareObject = shareObject;
+    
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            [MBHudSet showText:@"分享失败" andOnView:self.view];
+        }else{
+            [MBHudSet showText:@"分享成功" andOnView:self.view];
+        }
+    }];
 }
 
 #pragma mark 主界面tableview
@@ -133,6 +180,7 @@
     UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     _effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
     _effectview.frame = _headView.frame;
+    _effectview.alpha=0.8;
     [view addSubview:_effectview];
     
 //咨询师头像

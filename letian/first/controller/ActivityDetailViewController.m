@@ -153,7 +153,7 @@
     } cancelBlock:nil];
 }
 
-#pragma mark---------分享网页
+#pragma mark---------分享截图
 
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
 {
@@ -161,8 +161,6 @@
     
     //创建图片内容对象
     UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-    //如果有缩略图，则设置缩略图
-    shareObject.thumbImage = [UIImage imageNamed:@"乐天logo"];
     [shareObject setShareImage:[GQControls captureScrollView:self.tableView]];
     messageObject.shareObject = shareObject;
 

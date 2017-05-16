@@ -218,7 +218,6 @@
     }
     [headBgView addSubview:[self createScrollView]];
     [headBgView addSubview:view];
-    [self createmsgBtnOnView:headBgView];
     return headBgView;
 }
 
@@ -267,41 +266,6 @@
     return scrollView;
 }
 
-
-
-#pragma mark ----创建消息按钮
-
--(void)createmsgBtnOnView:(UIView *)bgView
-{
-    UIButton *msgBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W-50, 25, 25, 25)];
-    [msgBtn setImage:[UIImage imageNamed:@"mainMessageWhite"] forState:UIControlStateNormal];
-    [msgBtn addTarget:self action:@selector(msgBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [bgView addSubview:msgBtn];
-}
-
-
-#pragma mark------消息按钮点击
-
--(void)msgBtnClick
-{
-    //已登陆
-    if ([GQUserManager isHaveLogin]) {
-        SystomMsgViewController *messageVc=[[SystomMsgViewController alloc]init];
-        messageVc.hidesBottomBarWhenPushed=YES;
-        [self.navigationController pushViewController:messageVc animated:YES];
-    }else{
-    //未登录
-    UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController:alertControl animated:YES completion:nil];
-    [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        LoginViewController *loginVc=[[LoginViewController alloc]init];
-        loginVc.tabbarIndex=0;
-        loginVc.hidesBottomBarWhenPushed=YES;
-        [self presentViewController:loginVc animated:YES completion:nil];
-    }]];
-    [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    }
-}
 
 
 #pragma mark------特效

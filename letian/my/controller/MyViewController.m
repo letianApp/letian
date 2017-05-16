@@ -32,7 +32,8 @@
 @property (nonatomic, strong) UIImageView *headImageView;
 @property (nonatomic, strong) UIButton *messageBtn;
 @property (nonatomic, strong) UIButton *loginBtn;
-//@property (nonatomic, strong) UIView *holdView;//下拉遮罩层
+@property (nonatomic, strong) UIImageView *headView;
+@property (nonatomic, strong) UIToolbar *toolbar;
 
 @end
 
@@ -122,18 +123,22 @@
     [self.view addSubview:tableView];
     self.tableView = tableView;
     self.tableView.tableHeaderView = [self createHeadView];
-//    _holdView = [[UIView alloc]init];
-//    _holdView.backgroundColor = MAINCOLOR;
-//    [tableView addSubview:_holdView];
+
 }
 
 
 #pragma mark--------下拉显示遮罩层
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    if (scrollView.tag == 10) {
-//        _holdView.frame = CGRectMake(0, 0, SCREEN_W, scrollView.contentOffset.y);
-//    }
+    CGPoint offset = scrollView.contentOffset;
+    if (offset.y < 0) {
+        
+        CGRect rect = self.headView.frame;
+        rect.origin.y = offset.y;
+        rect.size.height = (SCREEN_H*0.3) - offset.y;
+        _headView.frame = rect;
+        self.toolbar.frame = rect;
+    }
 }
 
 
@@ -144,9 +149,11 @@
     headView.image=[UIImage imageNamed:@"mine_bg"];
     headView.contentMode=UIViewContentModeScaleToFill;
     headView.userInteractionEnabled=YES;
+    self.headView=headView;
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:headView.bounds];
     toolbar.barStyle = UIBarStyleBlackOpaque;
     toolbar.alpha = 0.7;
+    self.toolbar=toolbar;
     [headView addSubview:toolbar];
     
     //已登录则显示头像昵称
@@ -166,24 +173,23 @@
         nameLabel.textAlignment=NSTextAlignmentCenter;
         [headView addSubview:nameLabel];
         self.nameLabel=nameLabel;
-        //消息
+        //系统消息
         UIButton *messageBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W-35, 30, 25, 25)];
         [messageBtn setImage:[UIImage imageNamed:@"whiteMessage"] forState:UIControlStateNormal];
         [messageBtn addTarget:self action:@selector(messageButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         self.messageBtn = messageBtn;
         [headView addSubview:messageBtn];
-//    }else{
         //未登录则显示登录按钮
         UIButton *loginBtn = [GQControls createButtonWithFrame:CGRectMake((SCREEN_W-100)/2, (headView.height-40)/2, 100, 40) andTitle:@"登录/注册" andTitleColor:[UIColor whiteColor] andFontSize:15 andTag:100 andMaskToBounds:YES andRadius:20 andBorderWidth:1 andBorderColor:[UIColor whiteColor].CGColor];
         [loginBtn addTarget:self action:@selector(loginButtonClick) forControlEvents:UIControlEventTouchUpInside];
         [headView addSubview:loginBtn];
         self.loginBtn = loginBtn;
-//    }
     
     [self isLogin];
     
     return headView;
 }
+
 
 #pragma mark--------判断是否登陆
 - (void)isLogin {
