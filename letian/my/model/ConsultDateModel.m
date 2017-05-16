@@ -6,12 +6,12 @@
 //  Copyright © 2017年 J. All rights reserved.
 //
 
-#import "ApiDoctorConsultDateModel.h"
+#import "ConsultDateModel.h"
 
-@implementation ApiDoctorConsultDateModel
+@implementation ConsultDateModel
 
 @end
 
-@implementation ConsultTimeList
+@implementation ConsultTimeArray
 
 @end

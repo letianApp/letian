@@ -144,7 +144,7 @@
 		779C4DD01EBEF2B300EBEDE9 /* OrderMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 779C4DCE1EBEF2B300EBEDE9 /* OrderMoneyCell.xib */; };
 		779C4DDE1EBEF74700EBEDE9 /* OrderPayDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 779C4DDC1EBEF74700EBEDE9 /* OrderPayDetailCell.m */; };
 		779C4DDF1EBEF74700EBEDE9 /* OrderPayDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 779C4DDD1EBEF74700EBEDE9 /* OrderPayDetailCell.xib */; };
-		779C4DE71EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 779C4DE61EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.m */; };
+		779C4DE71EC0345D00EBEDE9 /* ConsultDateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 779C4DE61EC0345D00EBEDE9 /* ConsultDateModel.m */; };
 		77A17B7A1E7F9A2900569558 /* WebArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A17B791E7F9A2900569558 /* WebArticleViewController.m */; };
 		77A17B831E7FA20B00569558 /* ActivityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A17B821E7FA20B00569558 /* ActivityListViewController.m */; };
 		77B3397A1EBA0C5A004BC8B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77B339781EBA0C5A004BC8B3 /* LaunchScreen.storyboard */; };
@@ -518,8 +518,8 @@
 		779C4DDB1EBEF74700EBEDE9 /* OrderPayDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPayDetailCell.h; sourceTree = "<group>"; };
 		779C4DDC1EBEF74700EBEDE9 /* OrderPayDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPayDetailCell.m; sourceTree = "<group>"; };
 		779C4DDD1EBEF74700EBEDE9 /* OrderPayDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderPayDetailCell.xib; sourceTree = "<group>"; };
-		779C4DE51EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiDoctorConsultDateModel.h; sourceTree = "<group>"; };
-		779C4DE61EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiDoctorConsultDateModel.m; sourceTree = "<group>"; };
+		779C4DE51EC0345D00EBEDE9 /* ConsultDateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultDateModel.h; sourceTree = "<group>"; };
+		779C4DE61EC0345D00EBEDE9 /* ConsultDateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsultDateModel.m; sourceTree = "<group>"; };
 		77A17B781E7F9A2900569558 /* WebArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebArticleViewController.h; sourceTree = "<group>"; };
 		77A17B791E7F9A2900569558 /* WebArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebArticleViewController.m; sourceTree = "<group>"; };
 		77A17B811E7FA20B00569558 /* ActivityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityListViewController.h; sourceTree = "<group>"; };
@@ -973,8 +973,8 @@
 				7787B3731EB0746500306527 /* OrderListModel.m */,
 				779C4DC41EBEBF1000EBEDE9 /* OrderInfoModel.h */,
 				779C4DC51EBEBF1000EBEDE9 /* OrderInfoModel.m */,
-				779C4DE51EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.h */,
-				779C4DE61EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.m */,
+				779C4DE51EC0345D00EBEDE9 /* ConsultDateModel.h */,
+				779C4DE61EC0345D00EBEDE9 /* ConsultDateModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1841,7 +1841,7 @@
 				77B5BD661EADA78E0034497D /* GQNetworkManager.m in Sources */,
 				77B5BD571EADA6A50034497D /* GQActionSheetItem.m in Sources */,
 				09FBE0221E70F609003452A6 /* ConfirmPageCell.m in Sources */,
-				779C4DE71EC0345D00EBEDE9 /* ApiDoctorConsultDateModel.m in Sources */,
+				779C4DE71EC0345D00EBEDE9 /* ConsultDateModel.m in Sources */,
 				77B5BD551EADA6A50034497D /* RefreshFooter.m in Sources */,
 				7722F0981EB4500B001DCF5F /* DTTimePeriodGroup.m in Sources */,
 				094FC5111E8CC1E500BFFBBB /* PayPageCell.m in Sources */,
