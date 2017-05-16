@@ -17,6 +17,7 @@
 #import "SnailPopupController.h"
 #import "MJRefresh.h"
 #import "UIImageView+WebCache.h"
+#import "Colours.h"
 
 #import "ChatListViewController.h"
 
@@ -274,7 +275,7 @@
     
     UIScrollView *ParentView                  = [[UIScrollView alloc]initWithFrame:CGRectMake(0, n*navigationBar_H, SCREEN_W, navigationBar_H)];
     [_mainHeadView addSubview:ParentView];
-    ParentView.backgroundColor                = WEAKPINK;
+    ParentView.backgroundColor                = [UIColor snowColor];
     ParentView.showsHorizontalScrollIndicator = NO;
     ParentView.contentSize                    = CGSizeMake(dataArr.count * SCREEN_W/4 , navigationBar_H);
     ParentView.tag                            = 50+n;
@@ -522,21 +523,20 @@
     _counselorInfoTableview                 = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, SCREEN_H-statusBar_H - navigationBar_H) style:UITableViewStylePlain];
     _counselorInfoTableview.dataSource      = self;
     _counselorInfoTableview.delegate        = self;
-    _counselorInfoTableview.backgroundColor = WEAKPINK;
+    _counselorInfoTableview.backgroundColor = [UIColor snowColor];
     [self.view addSubview:_counselorInfoTableview];
     _counselorInfoTableview.rowHeight       = 100;
     _mainHeadView                           = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, navigationBar_H*3)];
     _counselorInfoTableview.tableHeaderView = _mainHeadView;
     _counselorInfoTableview.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
-    
-    _noDataLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*0.3, SCREEN_H*0.4, SCREEN_W*0.4, SCREEN_W*0.2)];
-    _noDataLab.layer.borderColor = MAINCOLOR.CGColor;
-    _noDataLab.layer.borderWidth = 1;
+    _noDataLab                    = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*0.3, SCREEN_H*0.4, SCREEN_W*0.4, SCREEN_W*0.2)];
+    _noDataLab.layer.borderColor  = MAINCOLOR.CGColor;
+    _noDataLab.layer.borderWidth  = 1;
     _noDataLab.layer.cornerRadius = 15;
-    _noDataLab.text = @"哈哈哈哈哈";
-    _noDataLab.textColor = MAINCOLOR;
-    _noDataLab.textAlignment = NSTextAlignmentCenter;
+    _noDataLab.text               = @"哈哈哈哈哈";
+    _noDataLab.textColor          = MAINCOLOR;
+    _noDataLab.textAlignment      = NSTextAlignmentCenter;
 }
 
 - (void)setupMJRefresh {

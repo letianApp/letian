@@ -43,6 +43,7 @@
 		0953C22E1E514B5800FB165C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0953C22D1E514B5800FB165C /* Assets.xcassets */; };
 		0953C23C1E514B5800FB165C /* letianTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0953C23B1E514B5800FB165C /* letianTests.m */; };
 		0953C2471E514B5900FB165C /* letianUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0953C2461E514B5900FB165C /* letianUITests.m */; };
+		09591B7B1ECAB9BA0040CD1C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 09591B7A1ECAB9BA0040CD1C /* UIImage+ImageEffects.m */; };
 		0965FBB51E7A918900C0FBAD /* HZQDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0965FBB11E7A918900C0FBAD /* HZQDatePickerView.m */; };
 		0965FBB61E7A918900C0FBAD /* HZQDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0965FBB21E7A918900C0FBAD /* HZQDatePickerView.xib */; };
 		0965FBB71E7A918900C0FBAD /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 0965FBB41E7A918900C0FBAD /* UIColor+HexString.m */; };
@@ -268,6 +269,8 @@
 		0953C2421E514B5900FB165C /* letianUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = letianUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0953C2461E514B5900FB165C /* letianUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = letianUITests.m; sourceTree = "<group>"; };
 		0953C2481E514B5900FB165C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09591B791ECAB9BA0040CD1C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		09591B7A1ECAB9BA0040CD1C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		0965FBB01E7A918900C0FBAD /* HZQDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZQDatePickerView.h; sourceTree = "<group>"; };
 		0965FBB11E7A918900C0FBAD /* HZQDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZQDatePickerView.m; sourceTree = "<group>"; };
 		0965FBB21E7A918900C0FBAD /* HZQDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HZQDatePickerView.xib; sourceTree = "<group>"; };
@@ -811,6 +814,15 @@
 				0953C2481E514B5900FB165C /* Info.plist */,
 			);
 			path = letianUITests;
+			sourceTree = "<group>";
+		};
+		09591B721ECAB00A0040CD1C /* ImageEffects */ = {
+			isa = PBXGroup;
+			children = (
+				09591B791ECAB9BA0040CD1C /* UIImage+ImageEffects.h */,
+				09591B7A1ECAB9BA0040CD1C /* UIImage+ImageEffects.m */,
+			);
+			path = ImageEffects;
 			sourceTree = "<group>";
 		};
 		0965FBAF1E7A918900C0FBAD /* HZQDatePickerView */ = {
@@ -1405,6 +1417,7 @@
 			children = (
 				77B5BD3C1EADA6A50034497D /* GQControls.h */,
 				77B5BD3D1EADA6A50034497D /* GQControls.m */,
+				09591B721ECAB00A0040CD1C /* ImageEffects */,
 				776CF2A31EB78E9D00CE9620 /* GQNewFeature */,
 				7753122D1EB64512008AA19D /* GQSegmentView */,
 				77D0EA521EB6275100254806 /* GQScrollView */,
@@ -1778,6 +1791,7 @@
 				775312371EB6583B008AA19D /* CategoryViewController.m in Sources */,
 				776CF2BB1EB7900A00CE9620 /* UIImage+TYLaunchImage.m in Sources */,
 				09F6F95A1EA5C26700A95CD5 /* CustomPlusBtn.m in Sources */,
+				09591B7B1ECAB9BA0040CD1C /* UIImage+ImageEffects.m in Sources */,
 				7787B3C11EB20D8100306527 /* Order.m in Sources */,
 				776CF2AA1EB78E9D00CE9620 /* GQCoreNewFeatureViewController.m in Sources */,
 				77B5BD191EAD9B460034497D /* UILabel+CustomLab.m in Sources */,

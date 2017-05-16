@@ -44,9 +44,9 @@
 //    mod.targetId = @"6";
 //    [self refreshConversationTableViewWithConversationModel:mod];
     
-    UIButton *btn = [[UIButton alloc] init];
-    btn.backgroundColor = MAINCOLOR;
-    self.emptyConversationView = btn;
+    UIView *bgView = [[UIView alloc] init];
+    bgView.backgroundColor = [UIColor whiteColor];
+    self.emptyConversationView = bgView;
     
 }
 
@@ -65,14 +65,12 @@
     RCConversation *con = [[RCConversation alloc] init];
     con.targetId = @"6";
     con.isTop = YES;
-//    con.conversationTitle = @"客服";
     con.senderUserId = @"6";
-    con.lastestMessage = [RCTextMessage messageWithContent:@"aaaaa"];
-    con.lastestMessageDirection = MessageDirection_RECEIVE;
     con.conversationType = ConversationType_PRIVATE;
-    con.sentTime = 1494837417;
-    con.receivedTime = 1494837417;
     RCConversationModel *model = [[RCConversationModel alloc]initWithConversation:con extend:nil];
+//    model.conversationModelType = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;
+    model.unreadMessageCount = 1;
+    model.lastestMessage = [RCTextMessage messageWithContent:@"sssssss"];
     [dataSource insertObject:model atIndex:0];
     return dataSource;
 }
@@ -81,33 +79,15 @@
     
     RCConversationModel *model = self.conversationListDataSource[indexPath.row];
     
-    if (model.conversationType == ConversationType_PRIVATE) {
+    if (indexPath.row == 0) {
         RCConversationCell *conversationCell = (RCConversationCell *)cell;
 //        conversationCell.conversationTitle.textColor = MAINCOLOR;
         conversationCell.bubbleTipView.bubbleTipBackgroundColor = MAINCOLOR;
+//        conversationCell.messageCreatedTimeLabel.text = @"1000";
+        conversationCell.messageContentLabel.text = @"aaaaa";
     }
+//    cell.bubbleTipView.bubbleTipBackgroundColor = MAINCOLOR;
 }
-
-- (void)refreshConversationTableViewWithConversationModel:(RCConversationModel *)conversationModel {
-    
-    NSLog(@"ddd");
-    
-    
-}
-
-//- (RCConversationBaseCell *)rcConversationListTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    RCConversationModel *mod = [[RCConversationModel alloc]init];
-//    mod.conversationType = ConversationType_PRIVATE;
-//    mod.targetId = @"6";
-//    mod.conversationTitle = @"77";
-//    
-//    RCConversationBaseCell *cell = [[RCConversationBaseCell alloc]init];
-//    cell.model = mod;
-//    
-//    
-//    return cell;
-//}
 
 #pragma mark 点击cell方法
 - (void)onSelectedTableRow:(RCConversationModelType)conversationModelType
@@ -125,22 +105,30 @@
         
     } else if (conversationModelType == ConversationType_PRIVATE) {
     
-        ChatViewController *chatVc = [[ChatViewController alloc]init];
+        ChatViewController *chatVc      = [[ChatViewController alloc]init];
         chatVc.hidesBottomBarWhenPushed = YES;
-        chatVc.conversationType = model.conversationType;
-        chatVc.targetId = model.targetId;
-        chatVc.title = model.conversationTitle;
+        chatVc.conversationType         = model.conversationType;
+        chatVc.targetId                 = model.targetId;
+        chatVc.title                    = model.conversationTitle;
         [self.navigationController pushViewController:chatVc animated:YES];
-    
-    } else if (conversationModelType == ConversationType_CUSTOMERSERVICE) {
         
-        RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
-        chatService.conversationType = ConversationType_CUSTOMERSERVICE;
-        chatService.targetId = @"KEFU149145862082595";
-        chatService.title = @"客服";
-//        chatService.csInfo = csInfo; //用户的详细信息，此数据用于上传用户信息到客服后台，数据的nickName和portraitUrl必须填写。(目前该字段暂时没用到，客服后台显示的用户信息是你获取token时传的参数，之后会用到）
-        [self.navigationController pushViewController :chatService animated:YES];
+        [self.conversationListDataSource removeObjectAtIndex:indexPath.row];
+        [self.conversationListTableView reloadData];
+
     }
+    
+//    if (indexPath.row == 0) {
+    
+//    }
+//    } else if (conversationModelType == ConversationType_CUSTOMERSERVICE) {
+//        
+//        RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
+//        chatService.conversationType = ConversationType_CUSTOMERSERVICE;
+//        chatService.targetId = @"KEFU149145862082595";
+//        chatService.title = @"客服";
+////        chatService.csInfo = csInfo; //用户的详细信息，此数据用于上传用户信息到客服后台，数据的nickName和portraitUrl必须填写。(目前该字段暂时没用到，客服后台显示的用户信息是你获取token时传的参数，之后会用到）
+//        [self.navigationController pushViewController :chatService animated:YES];
+//    }
 }
 
 

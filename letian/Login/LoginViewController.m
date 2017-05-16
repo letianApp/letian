@@ -78,8 +78,8 @@
     params[@"Timestamp"]           = timeSp;
     params[@"Nonce"]               = nonce;
     params[@"AppId"]               = APPID;
-    params[@"PushNo"]              = @"121c83f76014d24bc2d";
-//    [JPUSHService registrationID];
+    params[@"PushNo"]              = [JPUSHService registrationID];;
+    
     NSLog(@"推送号：。。。。。%@",params[@"PushNo"]);
     __weak typeof(self) weakSelf   = self;
     [MBHudSet showStatusOnView:self.view];
@@ -87,7 +87,6 @@
         
         __strong typeof(self) strongSelf = weakSelf;
 
-        [MBHudSet dismiss:strongSelf.view];
         NSLog(@"登录%@",responseObject);
         NSLog(@"Msg%@",responseObject[@"Msg"]);
         if([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
@@ -98,7 +97,7 @@
             [[NSUserDefaults standardUserDefaults] setObject:strongSelf.acountTextField.text.trim forKey:kUserPhoneKey];
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"enumUserType"] forKey:kUserType];
 
-            [self getUserInfo];
+            [strongSelf getUserInfo];
             
             } else {
                 
@@ -144,24 +143,11 @@
             
             [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
                 
-//                __strong typeof(self) strongself = weakSelf;
                 NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
                 NSLog(@"ID：%@",kFetchUserId);
                 
-                RCTextMessage *textMessage = [RCTextMessage messageWithContent:@"你好，欢迎来到乐天心理"];
-                RCMessage *message = [[RCMessage alloc]init];
-                message.conversationType = ConversationType_PRIVATE;
-                message.targetId = kFetchUserId;
-                message.messageDirection = MessageDirection_RECEIVE;
-                message.senderUserId = @"222";
-                message.content = textMessage;
-//                [RCIM sharedRCIM] send
-                
                 [strongSelf dismissViewControllerAnimated:YES completion:nil];
 
-                //        [[RCIM sharedRCIM] setUserInfoDataSource:strongself];
-                //        [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc]initWithUserId:userId name:kFetchUserName portrait:kFetchUserHeadImageUrl];
-                
             } error:^(RCConnectErrorCode status) {
                 NSLog(@"登陆的错误码为:%ld", (long)status);
                 
@@ -173,10 +159,9 @@
                 //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
                 NSLog(@"token错误");
             }];
-
-//            CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
-//            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
-
+        } else {
+            
+            [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.view];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

@@ -202,6 +202,13 @@
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserType];
     
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserName];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserHeadImageUrl];
+
+//    [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"enumUserType"] forKey:kUserType];
+
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
