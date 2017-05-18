@@ -17,6 +17,7 @@
 
 #import "UIImageView+WebCache.h"
 #import "Colours.h"
+#import "UIImage+ImageEffects.h"
 
 #import "GQActionSheet.h"
 #import <UShareUI/UShareUI.h>
@@ -25,7 +26,7 @@
 @interface CounselorInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) UIImageView  *headView;
-@property (nonatomic, strong) UIVisualEffectView *effectview;
+//@property (nonatomic, strong) UIVisualEffectView *effectview;
 @property (nonatomic, strong) UITableView  *mainTableView;
 @property (nonatomic, strong) UIView       *holdView;
 @property (nonatomic, strong) UITabBar     *tabBar;
@@ -80,7 +81,7 @@
 
 #pragma mark---------弹出分享面板
 
--(void)clickShareBtn{
+- (void)clickShareBtn {
     NSArray *titles = @[@"分享到朋友圈",@"分享到微信",@"分享到微博",@"分享到空间",@"分享到短信",@"分享到QQ"];
     NSArray *imageNames = @[@"pengyou",@"weixin",@"weibo",@"kongjian",@"mess",@"qq"];
     GQActionSheet *sheet = [[GQActionSheet alloc] initWithTitles:titles iconNames:imageNames];
@@ -106,8 +107,8 @@
 
 #pragma mark---------分享截图
 
-- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
-{
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType {
+    
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
     //创建图片内容对象
@@ -166,23 +167,21 @@
 #pragma mark 头部视图
 - (void)customHeadView {
     
-    _headView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H*0.3)];
+    _headView                      = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H*0.3)];
     [_headView sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg]];
-    _headView.contentMode = UIViewContentModeScaleAspectFill;
-    _headView.clipsToBounds = YES;
-    
-    UIView *view = [[UIView alloc]init];
-    view.frame = _headView.frame;
+    _headView.contentMode          = UIViewContentModeScaleAspectFill;
+    _headView.clipsToBounds        = YES;
+
+    UIView *view                   = [[UIView alloc]init];
+    view.frame                     = _headView.frame;
     [view addSubview:_headView];
-    
+
     _mainTableView.tableHeaderView = view;
 
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    _effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
-    _effectview.frame = _headView.frame;
-    _effectview.alpha=0.8;
-    [view addSubview:_effectview];
-    
+    UIImage *image                 = _headView.image;
+    UIImage * blurImage            = [image blurImageWithRadius:15];
+    _headView.image                = blurImage;
+
 //咨询师头像
     UIImageView *picView = [[UIImageView alloc]init];
     [picView sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg]];
@@ -268,7 +267,7 @@
         rect.origin.y = offset.y;
         rect.size.height = (SCREEN_H*0.3) - offset.y;
         _headView.frame = rect;
-        _effectview.frame = rect;
+//        _effectview.frame = rect;
     }
 }
 
