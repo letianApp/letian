@@ -49,7 +49,13 @@
     [self requestData];
     NSLog(@"my登录:%d",[GQUserManager isHaveLogin]);
 //    self.tableView.tableHeaderView = [self createHeadView];
-
+    if ([kFetchUserType integerValue]==11) {
+        self.dataArray=@[@"系统设置",@"设置可预约日期",@"我要分享",@"关于我们"];
+        
+    }else{
+        self.dataArray=@[@"系统设置",@"客服电话    021-37702979",@"我要分享",@"关于我们"];
+        
+    }
     [self isLogin];
 
 }
@@ -57,14 +63,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    if (//) {
-//        self.dataArray=@[@"系统设置",@"客服电话    021-37702979",@"我要分享",@"关于我们"];
 
-//    } else {
-        self.dataArray=@[@"系统设置",@"设置可预约日期",@"我要分享",@"关于我们"];
-
-//    }
     
     
     [self createTableView];
@@ -261,6 +260,7 @@
     cell.textLabel.font=[UIFont systemFontOfSize:15];
     cell.textLabel.textColor=[UIColor darkGrayColor];
     
+    
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 49, SCREEN_W, 0.5)];
     lineView.backgroundColor=[UIColor lightGrayColor];
     [cell.contentView addSubview:lineView];
@@ -341,15 +341,20 @@
         settingVc.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:settingVc animated:NO];
     }else if(indexPath.row==1) {
-        //拨打客服电话，打完之后不会留在通讯录而是回到应用
-//        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"021-37702979"];
-//        UIWebView * callWebview = [[UIWebView alloc] init];
-//        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-//        [self.view addSubview:callWebview];
+
         
-        CustomDateViewController *customDateVc = [[CustomDateViewController alloc]init];
-        customDateVc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:customDateVc animated:NO];
+        if ([kFetchUserType integerValue]==11) {
+            CustomDateViewController *customDateVc = [[CustomDateViewController alloc]init];
+            customDateVc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:customDateVc animated:NO];
+        }else{
+            //        拨打客服电话，打完之后不会留在通讯录而是回到应用
+            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"021-37702979"];
+            UIWebView * callWebview = [[UIWebView alloc] init];
+            [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+            [self.view addSubview:callWebview];
+        }
+        
         
     }else if(indexPath.row==2) {
         //分享
