@@ -135,6 +135,8 @@
     
     self.mobile = [infoDic safeObjectForKey:@"MobilePhone"];
     
+    self.enumUserType=[infoDic safeObjectForKey:@"EnumUserType"];
+    
     //self.lastloginip = [infoDic safeObjectForKey:@"lastloginip"];
     
     //self.lastlogintime =[infoDic safeObjectForKey:@"lastlogintime"];

@@ -89,11 +89,11 @@
 
     [textview addSubview:titleLabel];
     
-    UILabel *authorLabel=[GQControls createLabelWithFrame:CGRectMake(30, titleLabel.height+25, SCREEN_W-60, 15) andText:[NSString stringWithFormat:@"作者：%@",self.articleModel.CreatedBy] andTextColor:[UIColor darkGrayColor] andFontSize:12];
+    UILabel *authorLabel=[GQControls createLabelWithFrame:CGRectMake(30, titleLabel.height+35, SCREEN_W-60, 15) andText:[NSString stringWithFormat:@"作者：%@",self.articleModel.CreatedBy] andTextColor:[UIColor darkGrayColor] andFontSize:12];
     authorLabel.textAlignment=NSTextAlignmentRight;
     [textview addSubview:authorLabel];
     
-    textview.textContainerInset=UIEdgeInsetsMake(titleLabel.height+35+authorLabel.height, 15, 0, 15);
+    textview.textContainerInset=UIEdgeInsetsMake(titleLabel.height+45+authorLabel.height, 15, 0, 15);
     [self.view addSubview:textview];
     
     self.textView=textview;

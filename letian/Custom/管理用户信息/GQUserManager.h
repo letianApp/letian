@@ -32,6 +32,9 @@
 @property(nonatomic,strong)NSString * lastlogintime;//上次登录时间戳
 
 @property(nonatomic,strong)NSString * gender;//性别
+
+@property(nonatomic,strong)NSString * enumUserType;//身份
+
 /**
  *  获取UUID
  */
