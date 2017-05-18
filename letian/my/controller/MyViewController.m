@@ -339,7 +339,7 @@
         //跳到系统设置
         SettingViewController *settingVc=[[SettingViewController alloc]init];
         settingVc.hidesBottomBarWhenPushed=YES;
-        [self.navigationController pushViewController:settingVc animated:NO];
+        [self.rt_navigationController pushViewController:settingVc animated:YES];
     }else if(indexPath.row==1) {
         //拨打客服电话，打完之后不会留在通讯录而是回到应用
 //        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"021-37702979"];
@@ -349,7 +349,7 @@
         
         CustomDateViewController *customDateVc = [[CustomDateViewController alloc]init];
         customDateVc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:customDateVc animated:NO];
+        [self.rt_navigationController pushViewController:customDateVc animated:YES];
         
     }else if(indexPath.row==2) {
         //分享
@@ -381,7 +381,7 @@
         AboutUsPageVC *aboutUsPage = [[AboutUsPageVC alloc]init];
         aboutUsPage.hidesBottomBarWhenPushed = YES;
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        [self.navigationController pushViewController:aboutUsPage animated:YES];
+        [self.rt_navigationController pushViewController:aboutUsPage animated:YES];
     }
 }
 

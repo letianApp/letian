@@ -22,9 +22,14 @@
 @property (nonatomic, strong) NSDateFormatter        *dateFormatter;
 @property (nonatomic, strong) NSCalendar             *gregorianCalendar;
 @property (nonatomic, assign) BOOL                   isToday;
+@property (nonatomic, strong) UISwitch               *isEnableConsultSwitch;
+@property (nonatomic, strong) UIButton               *startBtn;
+@property (nonatomic, strong) UIButton               *endBtn;
+@property (nonatomic, strong) UIDatePicker           *timePicker;
 
-@property (nonatomic, strong) NSMutableDictionary      *requestParams;
-
+@property (nonatomic, strong) NSMutableDictionary    *requestParams;
+//@property (nonatomic, strong) NSMutableArray         *getInfoArr;
+@property (nonatomic, strong) ConsultDateModel       *getInfoModel;
 
 @end
 
@@ -35,12 +40,18 @@
     // Do any additional setup after loading the view from its nib.
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    _requestParams = [NSMutableDictionary new];
+    self.requestParams = [NSMutableDictionary new];
+//    self.getInfoModel = [ConsultDateModel new];
     
     [self customMainTableView];
     [self customNavigation];
     [self setupCalendarWithBGView:self.view];
     
+    NSString *todayStr = [NSString stringWithFormat:@"%@ 00:00:00",[self.dateFormatter stringFromDate:[NSDate new]]];
+    NSLog(@"今天：%@",todayStr);
+    
+    [self getCounsultSetForDay:todayStr];
+
 
     
 }
@@ -87,45 +98,48 @@
     _mainTableView.estimatedRowHeight = 44.0;
     _mainTableView.rowHeight = UITableViewAutomaticDimension;
     
-    UIButton *setbutton=[GQControls createButtonWithFrame:CGRectMake(0, 0, SCREEN_W, 40) andTitle:@"set" andTitleColor:MAINCOLOR andFontSize:15 andBackgroundColor:WEAKPINK];
-    [setbutton addTarget:self action:@selector(setTime) forControlEvents:UIControlEventTouchUpInside];
-    _mainTableView.tableFooterView=setbutton;
+//    UIButton *setbutton=[GQControls createButtonWithFrame:CGRectMake(0, 0, SCREEN_W, 40) andTitle:@"set" andTitleColor:MAINCOLOR andFontSize:15 andBackgroundColor:WEAKPINK];
+//    [setbutton addTarget:self action:@selector(setTime) forControlEvents:UIControlEventTouchUpInside];
+//    _mainTableView.tableFooterView=setbutton;
     
 }
 
--(void)setTime{
-    
-    [self setCounsultSetForDay:@"2017-05-10 00:00:00"];
-    //    [self setCounsultSetForDay:[NSString stringWithFormat:@"%@ 00:00",selDateStr]];
-
-
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
-        ConsultSetCell *cell = [ConsultSetCell cellWithTableView:tableView];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        [cell.startTimeBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        return cell;
+//    if (indexPath.section == 0) {
+    ConsultSetCell *cell = [ConsultSetCell cellWithTableView:tableView];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    [cell.startTimeBtn addTarget:self action:@selector(clickTimeBtn:) forControlEvents:UIControlEventTouchUpInside];
+    self.isEnableConsultSwitch = cell.isEnableSwitch;
+    self.startBtn = cell.startTimeBtn;
+    [self.startBtn addTarget:self action:@selector(clickTimeBtn:) forControlEvents:UIControlEventTouchUpInside];
+    self.endBtn = cell.endTimeBtn;
+    [self.endBtn addTarget:self action:@selector(clickTimeBtn:) forControlEvents:UIControlEventTouchUpInside];
 
-    } else {
-        
-        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"setCellId"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        return cell;
+    
+    [cell.affirmBtn addTarget:self action:@selector(affirmSetTime:) forControlEvents:UIControlEventTouchUpInside];
+    
+    return cell;
 
-    }
+//    } else {
+//        
+//        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"setCellId"];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        
+//        return cell;
+//
+//    }
 
 }
 
-- (void)clickBtn:(UIButton *)btn {
+- (void)clickTimeBtn:(UIButton *)btn {
     
-    NSLog(@"点击aa");
     [self animationbegin:btn];
+    
+    self.startBtn.selected = NO;
+    self.endBtn.selected = NO;
+    btn.selected = YES;
     
     self.sl_popupController                          = [[SnailPopupController alloc] init];
     self.sl_popupController.layoutType               = PopupLayoutTypeCenter;
@@ -133,28 +147,89 @@
     self.sl_popupController.transitStyle             = PopupTransitStyleSlightScale;
     self.sl_popupController.dismissOppositeDirection = YES;
     
-    [self.sl_popupController presentContentView:btn];
+    [self.sl_popupController presentContentView:[self setupDatePiker]];
 
+}
+
+- (UIView *)setupDatePiker {
     
+    NSLog(@"btn:%d",self.startBtn.isSelected);
+    
+    UIView *backView                                 = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
+    _timePicker                                      = [[UIDatePicker alloc]init];
+    [backView addSubview:_timePicker];
+    _timePicker.centerX                              = backView.centerX;
+    _timePicker.datePickerMode                       = UIDatePickerModeTime;
+    _timePicker.minuteInterval                       = 30;
+    
+    UIButton *btn                                    = [GQControls createButtonWithFrame:CGRectMake(SCREEN_W/4, _timePicker.bottom+5, SCREEN_W/2, 30) andTitle:@"确定" andTitleColor:MAINCOLOR andFontSize:15 andTag:233 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    [backView addSubview:btn];
+    [btn addTarget:self action:@selector(clickAffirmTimeBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    NSDateFormatter *selDateFormatter                = [[NSDateFormatter alloc]init];
+    [selDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    //真机运行需要设置Local
+    NSLocale *locale                                 = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    [selDateFormatter setLocale:locale];
+    
+    UILabel *dateLab = [[UILabel alloc]init];
+    [backView addSubview:dateLab];
+    dateLab.x = 0;
+    dateLab.bottom = _timePicker.top - 40;
+    dateLab.width = SCREEN_W;
+    dateLab.height = _startBtn.height;
+    if (self.calendar.selectedDate != nil && ![self.calendar.selectedDate isKindOfClass:[NSNull class]]) {
+        dateLab.text = [NSString stringWithFormat:@"%@",[self.dateFormatter stringFromDate:self.calendar.selectedDate]];
+    } else {
+        dateLab.text = [NSString stringWithFormat:@"%@",[self.dateFormatter stringFromDate:[NSDate new]]];
+    }
+    
+    dateLab.textAlignment = NSTextAlignmentCenter;
+    dateLab.font = [UIFont systemFontOfSize:30];
+    
+    return backView;
+}
+
+- (void)clickAffirmTimeBtn:(UIButton *)btn {
+    
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    NSString *selTimeStr = [dateFormatter stringFromDate:_timePicker.date];
+    
+    [self animationbegin:btn];
+    if ([selTimeStr containsString:@":00"] || [selTimeStr containsString:@":30"]) {
+        [self.sl_popupController dismiss];
+        
+        if (_startBtn.isSelected) {
+            [_startBtn setTitle:selTimeStr forState:UIControlStateNormal];
+        } else {
+            [_endBtn setTitle:selTimeStr forState:UIControlStateNormal];
+        }
+    } else {
+        [MBHudSet showText:@"请选择正确的时间" andOnView:btn.superview];
+    }
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return section+1;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    return 2;
+//}
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *secHeadView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 20)];
-    UIView *tagView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 20)];
+    
+    UIView *secHeadView     = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 20)];
+    UIView *tagView         = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 20)];
     [secHeadView addSubview:tagView];
     tagView.backgroundColor = MAINCOLOR;
-    UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, 100, 20)];
-    titleLab.text = @"自定义";
-    titleLab.textColor = [UIColor lightGrayColor];
-    titleLab.font = [UIFont systemFontOfSize:12];
+    UILabel *titleLab       = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, 100, 20)];
+    titleLab.text           = @"自定义";
+    titleLab.textColor      = [UIColor lightGrayColor];
+    titleLab.font           = [UIFont systemFontOfSize:12];
     [secHeadView addSubview:titleLab];
     return secHeadView;
 }
@@ -170,7 +245,7 @@
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target
                                        action:(SEL)action {
     
-    UIButton *btn         = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(0, 0, 20, 20)];
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
@@ -195,10 +270,7 @@
     
     self.calendar                        = calendar;
     _mainTableView.tableHeaderView       = self.calendar;
-
-//    self.calendar.scrollEnabled          = YES;
     
-
     self.gregorianCalendar               = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     self.dateFormatter                   = [[NSDateFormatter alloc] init];
     self.dateFormatter.timeZone          = [NSTimeZone systemTimeZone];
@@ -223,7 +295,7 @@
 
     NSLog(@"%@",selDateStr);
 
-    [self setCounsultSetForDay:[NSString stringWithFormat:@"%@ 00:00:00",selDateStr]];
+//    [self setCounsultSetForDay:[NSString stringWithFormat:@"%@ 00:00:00",selDateStr]];
     [self getCounsultSetForDay:selDateStr];
 
 }
@@ -238,7 +310,9 @@
 #pragma mark 根据日期获得咨询师设置
 - (void)getCounsultSetForDay:(NSString *)dayStr {
     
-    __weak typeof(self) weakSelf   = self;
+    __weak typeof(self) weakSelf = self;
+    
+    [MBHudSet showStatusOnView:self.view];
     
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_DOCTORSET];
@@ -248,19 +322,69 @@
     parames[@"date"] = dayStr;
     
     [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
-    
     [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
-        __strong typeof(self) strongself = weakSelf;
+        __strong typeof(self) strongSelf = weakSelf;
+        [MBHudSet dismiss:strongSelf.view];
+
         NSLog(@"获取咨询时间返回的数据%@",responseObject);
         
-    } failure:^(NSError *error) {
-        __strong typeof(self) strongself = weakSelf;
+        if([responseObject[@"Code"] integerValue] == 200) {
+
+            strongSelf.getInfoModel = [ConsultDateModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
+            NSLog(@"ddd:%@",strongSelf.getInfoModel.ConsultTimeList);
+            [strongSelf reflashInfo:strongSelf.getInfoModel];
+        }
         
-        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师订单列表错误，错误代码：%ld",error.code]andOnView:strongself.view];
+    } failure:^(NSError *error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        [MBHudSet dismiss:strongSelf.view];
+        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师订单列表错误，错误代码：%ld",error.code]andOnView:strongSelf.view];
     }];
     
     
 }
+
+- (void)reflashInfo:(ConsultDateModel *)model {
+    
+    if ([model.IsEnableConsult isEqual: @"1"]) {
+        self.isEnableConsultSwitch.on = YES;
+    } else {
+        self.isEnableConsultSwitch.on = NO;
+    }
+    
+    if (model.ConsultTimeList != nil && ![model.ConsultTimeList isKindOfClass:[NSNull class]] && model.ConsultTimeList.count != 0) {
+        
+        NSLog(@"%@",model.ConsultTimeList[0]);
+        NSDictionary *set = (NSDictionary *)model.ConsultTimeList[0];
+        NSLog(@"%@",set[@"StartTime"]);
+
+        NSRange rag = {5,3};
+        NSString *startTime = [set[@"StartTime"] stringByReplacingCharactersInRange:rag withString:@""];
+        NSString *endTime = [set[@"EndTime"] stringByReplacingCharactersInRange:rag withString:@""];
+        
+        [_startBtn setTitle:startTime forState:UIControlStateNormal];
+        [_endBtn setTitle:endTime forState:UIControlStateNormal];
+    } else {
+        
+        NSLog(@"空空空");
+        [_startBtn setTitle:@"09:00" forState:UIControlStateNormal];
+        [_endBtn setTitle:@"21:00" forState:UIControlStateNormal];
+    }
+}
+
+#define mark 点击确认更改按钮
+- (void)affirmSetTime:(UIButton *)btn{
+    
+    [self animationbegin:btn];
+    NSString *selDayStr = [NSString stringWithFormat:@"%@ 00:00:00",[self.dateFormatter stringFromDate:self.calendar.selectedDate]];
+    NSLog(@"%@",selDayStr);
+    [self setCounsultSetForDay:selDayStr];
+//        [self setCounsultSetForDay:[NSString stringWithFormat:@"%@ 00:00",selDateStr]];
+    
+    
+}
+
 
 - (void)setCounsultSetForDay:(NSString *)dayStr {
     
@@ -271,22 +395,21 @@
     [requestString appendFormat:@"%@/",API_MODULE_DOCTORSET];
     [requestString appendFormat:@"%@",API_NAME_DOSETCONSULTSET];
     
-    
-    ConsultDateModel *model=[[ConsultDateModel alloc]init];
-    model.CousultDate=dayStr;
-    model.IsEnableConsult=@"true";
-    NSMutableArray *arr=[NSMutableArray array];
-    
-    NSArray *start=@[@"12:00:00",@"17:00:00"];
-    NSArray *end=@[@"15:00:00",@"19:00:00"];
-    for (NSInteger i=0; i<2; i++) {
-        ConsultTimeArray *array=[[ConsultTimeArray alloc]init];
-        array.StartTime=start[i];
-        array.EndTime=end[i];
-        [arr addObject:array];
+    ConsultDateModel *model = [[ConsultDateModel alloc]init];
+    model.CousultDate = dayStr;
+    if ([self.isEnableConsultSwitch isOn]) {
+        model.IsEnableConsult = @"true";
+    } else {
+        model.IsEnableConsult = @"false";
     }
+    NSMutableArray *arr = [NSMutableArray array];
     
-    model.ConsultTimeList=arr;
+    ConsultTimeArray *array=[[ConsultTimeArray alloc]init];
+    array.StartTime = self.startBtn.titleLabel.text;
+    array.EndTime = self.endBtn.titleLabel.text;
+    [arr addObject:array];
+
+    model.ConsultTimeList = arr;
     NSLog(@"上传%@",model.mj_keyValues);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [manager POST:requestString parameters:model.mj_keyValues progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

@@ -58,8 +58,6 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-//    [MBHudSet showStatusOnView:self.view];
-    
     _counselorArr = [NSMutableArray new];
     _requestParams = [NSMutableDictionary new];
     [_requestParams setValue:@(0) forKey:@"enumPsyCategory"];
@@ -67,14 +65,17 @@
     
     [self customSearchBar];
     [self customNavigation];
+    [self creatTableView];
+
+    [MBHudSet showStatusOnView:self.view];
     
     [self getCounsultTypeSource];
     [self getCounsultListSource];
     
-    [self creatTableView];
     //    [self creatClassifiedSection];
     [self setupMJRefresh];
     
+
 }
 
 - (void)customSearchBar {
@@ -224,10 +225,6 @@
         [strongSelf.counselorArr removeAllObjects];
         strongSelf.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         
-//        for (int i = 0; i < strongSelf.counselorArr.count; i++) {
-//            NSLog(@"%@",strongself.counselorArr[i].Expertise);
-//        }
-        
         if (strongSelf.counselorArr.count == 0) {
             [strongSelf.counselorInfoTableview addSubview:strongSelf.noDataLab];
         } else {
@@ -235,7 +232,7 @@
             
         }
         
-//        [MBHudSet dismiss:strongSelf.view];
+        [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorInfoTableview reloadData];
         [strongSelf.counselorInfoTableview.mj_header endRefreshing];
         

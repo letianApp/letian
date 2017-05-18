@@ -13,7 +13,7 @@
 
 @property (nonatomic,copy) NSString *CousultDate;
 
-@property (nonatomic,copy) NSString* IsEnableConsult;
+@property (nonatomic,copy) NSString *IsEnableConsult;
 
 
 @property (nonatomic,strong) NSArray <ConsultTimeArray *> *ConsultTimeList;
@@ -23,8 +23,8 @@
 
 @interface ConsultTimeArray : NSObject
 
-@property (nonatomic,copy) NSString* StartTime;
+@property (nonatomic,copy) NSString *StartTime;
 
-@property (nonatomic,copy) NSString* EndTime;
+@property (nonatomic,copy) NSString *EndTime;
 
 @end

@@ -21,7 +21,7 @@
 #import "PayPageVC.h"
 #import "MJExtension.h"
 
-@interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate, UITextFieldDelegate,UITextViewDelegate>
+@interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) OrderModel             *orderModel;
 @property (nonatomic, strong) UITableView            *mainTableView;
@@ -273,7 +273,6 @@
         
         NSString *todayStr = [self.dateFormatter stringFromDate:date];
         _orderModel.orderDate = todayStr;
-        //        NSLog(@"%@",_orderModel.orderDate);
         return @"今";
     }
     return nil;
@@ -399,6 +398,16 @@
     NSDate *selDateStart                             = [selDateFormatter dateFromString:selDateStartStr];
     NSDate *selDateEnd                               = [selDateFormatter dateFromString:selDateEndStr];
     
+    UILabel *dateLab = [[UILabel alloc]init];
+    [backView addSubview:dateLab];
+    dateLab.x = 0;
+    dateLab.bottom = _timePicker.top - 40;
+    dateLab.width = SCREEN_W;
+    dateLab.height = _startBtn.height;
+    dateLab.text = _orderModel.orderDate;
+    dateLab.textAlignment = NSTextAlignmentCenter;
+    dateLab.font = [UIFont systemFontOfSize:30];
+    
     if (_isToday == YES) {
         [_timePicker setMinimumDate:[NSDate new]];
     } else {
@@ -503,6 +512,7 @@
     UISwitch *selfInfoSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(selfInfoBtn.right, 30, 0, 0)];
     [bgView addSubview:selfInfoSwitch];
     selfInfoSwitch.onTintColor = MAINCOLOR;
+    [selfInfoSwitch addTarget:self action:@selector(infoSwitch:) forControlEvents:UIControlEventValueChanged];
 //    selfInfoSwitch 
     
     _nameTextField            = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 90, SCREEN_W*0.7, 30) labelHeight:15];
@@ -551,21 +561,33 @@
     _emailTextField.placeholderActiveColor = MAINCOLOR;
     _emailTextField.hintText               = @"*选填";
     _emailTextField.hintTextColor          = [UIColor blackColor];
-    
-    _detailTextView                     = [[UITextView alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, 390 , SCREEN_W*0.7, 80)];
-    _detailTextView.delegate            = self;
-    _detailTextView.font                = [UIFont systemFontOfSize:17];
-    _placeholderLabel                   = [GQControls createLabelWithFrame:CGRectMake(5, 10, 200, 20) andText:@"请简述您的咨询内容*" andTextColor:[UIColor lightGrayColor] andFontSize:17];
+
+    _detailTextView                        = [[UITextView alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, 390 , SCREEN_W*0.7, 80)];
+    _detailTextView.delegate               = self;
+    _detailTextView.font                   = [UIFont systemFontOfSize:17];
+    _placeholderLabel                      = [GQControls createLabelWithFrame:CGRectMake(5, 10, 200, 20) andText:@"请简述您的咨询内容*" andTextColor:[UIColor lightGrayColor] andFontSize:17];
     [_detailTextView addSubview:_placeholderLabel];
-    _detailTextView.layer.masksToBounds = YES;
-    _detailTextView.layer.cornerRadius  = 5;
-    _detailTextView.layer.borderWidth   = 0.7;
-    _detailTextView.layer.borderColor   = [[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0] CGColor];
+    _detailTextView.layer.masksToBounds    = YES;
+    _detailTextView.layer.cornerRadius     = 5;
+    _detailTextView.layer.borderWidth      = 0.7;
+    _detailTextView.layer.borderColor      = [[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0] CGColor];
     [bgView addSubview:_detailTextView];
     
 }
 
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+- (void)infoSwitch:(UISwitch *)infoSwitch {
+    
+    if (infoSwitch.isOn == YES) {
+        NSLog(@"%@",kFetchUserName);
+        [_nameTextField setText:kFetchUserName];
+        
+    } else {
+        NSLog(@"aaaaaa");
+    }
+    
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if (![text isEqualToString:@""]) {
         _placeholderLabel.hidden = YES;
     }
@@ -610,6 +632,18 @@
     return YES;
 }
 
+- (void)textViewDidChange:(UITextView *)textView {
+    
+    if ([textView.text length] > 60) {
+        textView.text = [textView.text substringWithRange:NSMakeRange(0, 60)];
+        [textView.undoManager removeAllActions];
+        [textView becomeFirstResponder];
+        return;
+    } else if ([textView.text isEqualToString:@""]) {
+        _placeholderLabel.hidden = NO;
+    }
+
+}
 
 //行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

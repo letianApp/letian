@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *setTimeTitleLab;
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *affirmBtn;
 
 
 

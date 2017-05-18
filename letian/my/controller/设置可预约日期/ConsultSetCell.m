@@ -34,41 +34,22 @@
     self.startTimeBtn.layer.borderWidth = 1;
     self.startTimeBtn.layer.cornerRadius = 15;
     [self.startTimeBtn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
+    [self.startTimeBtn setTitleColor:MAINCOLOR forState:UIControlStateSelected];
+    self.startTimeBtn.tintColor = [UIColor whiteColor];
     
     self.endTimeBtn.layer.borderColor = MAINCOLOR.CGColor;
     self.endTimeBtn.layer.borderWidth = 1;
     self.endTimeBtn.layer.cornerRadius = 15;
     self.endTimeBtn.titleLabel.textColor = MAINCOLOR;
     [self.endTimeBtn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
+    [self.endTimeBtn setTitleColor:MAINCOLOR forState:UIControlStateSelected];
+    self.endTimeBtn.tintColor = [UIColor whiteColor];
 
-    
-    
-    
-}
-
-- (IBAction)clickStartTimeBtn:(id)sender {
-    
-    UIView *view = [[UIView alloc]init];
-//    UIButton *btn = sender;
-    
-    NSLog(@"点击aa");
-    [self animationbegin:sender];
-    
-    self.sl_popupController                          = [[SnailPopupController alloc] init];
-    self.sl_popupController.layoutType               = PopupLayoutTypeCenter;
-    self.sl_popupController.maskType                 = PopupMaskTypeWhiteBlur;
-    self.sl_popupController.transitStyle             = PopupTransitStyleSlightScale;
-    self.sl_popupController.dismissOppositeDirection = YES;
-
-    [self.sl_popupController presentContentView:view];
-
-    
-}
-
-- (IBAction)clickEndTimeBtn:(id)sender {
-    
-    NSLog(@"点击bb");
-    [self animationbegin:sender];
+    self.affirmBtn.layer.borderColor = MAINCOLOR.CGColor;
+    self.affirmBtn.layer.borderWidth = 1;
+    self.affirmBtn.layer.cornerRadius = 15;
+    self.affirmBtn.titleLabel.textColor = MAINCOLOR;
+    [self.affirmBtn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
 
     
 }
