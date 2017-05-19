@@ -128,7 +128,11 @@
     
 }
 
-#pragma mark 主界面cell
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 2;
+}
+
+#pragma mark - 咨询方式及时间cell
 - (void)customCell:(UITableViewCell *)cell withBgView:(UIView *)view forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if(indexPath.row == 0){
@@ -176,10 +180,11 @@
         CGFloat height = _timeChoicesView.y + 115;
         return height;
     } else {
-        return 600;
+        return _detailTextView.bottom + 100;
     }
 }
 
+#pragma mark 点击咨询方式选择按钮
 - (void)clickChoiceBtn:(UIButton *)btn {
     
     [self animationbegin:btn];
@@ -278,30 +283,6 @@
     return nil;
 }
 
-#pragma mark 时间选择View
-- (void)creatTimeChoicesViewWithBGView:(UIView *)view {
-    
-    _timeChoicesView                               = [[UIView alloc]initWithFrame:CGRectMake(30, _calendar.bottom+10, SCREEN_W-60, 80)];
-    //    _timeChoicesView.backgroundColor = WEAKPINK;
-    _dateDisplayLab                                = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, _timeChoicesView.width, _timeChoicesView.height)];
-    [view addSubview:_timeChoicesView];
-    
-    _startBtn                                      = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 5, _timeChoicesView.width*0.8, 30) andTitle:@"预约时间" andTitleColor:MAINCOLOR andFontSize:15 andTag:102 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
-    _startBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
-    _startBtn.titleLabel.textAlignment             = NSTextAlignmentCenter;
-    
-    _endBtn                                        = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 45, _timeChoicesView.width*0.8, 30) andTitle:@"预约时长" andTitleColor:MAINCOLOR andFontSize:15 andTag:103 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
-    _endBtn.titleLabel.adjustsFontSizeToFitWidth   = YES;
-    _endBtn.titleLabel.textAlignment               = NSTextAlignmentCenter;
-    
-    [_startBtn addTarget:self action:@selector(clickTimeChoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [_endBtn addTarget:self action:@selector(clickTimeChoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [_timeChoicesView addSubview:_startBtn];
-    [_timeChoicesView addSubview:_endBtn];
-    
-}
-
 #pragma mark 点击日历方法
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition {
     
@@ -345,6 +326,30 @@
     
 }
 
+#pragma mark 预约时间View
+- (void)creatTimeChoicesViewWithBGView:(UIView *)view {
+    
+    _timeChoicesView                               = [[UIView alloc]initWithFrame:CGRectMake(30, _calendar.bottom+10, SCREEN_W-60, 80)];
+    //    _timeChoicesView.backgroundColor = WEAKPINK;
+    _dateDisplayLab                                = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, _timeChoicesView.width, _timeChoicesView.height)];
+    [view addSubview:_timeChoicesView];
+    
+    _startBtn                                      = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 5, _timeChoicesView.width*0.8, 30) andTitle:@"预约时间" andTitleColor:MAINCOLOR andFontSize:15 andTag:102 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    _startBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
+    _startBtn.titleLabel.textAlignment             = NSTextAlignmentCenter;
+    
+    _endBtn                                        = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 45, _timeChoicesView.width*0.8, 30) andTitle:@"预约时长" andTitleColor:MAINCOLOR andFontSize:15 andTag:103 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    _endBtn.titleLabel.adjustsFontSizeToFitWidth   = YES;
+    _endBtn.titleLabel.textAlignment               = NSTextAlignmentCenter;
+    
+    [_startBtn addTarget:self action:@selector(clickTimeChoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_endBtn addTarget:self action:@selector(clickTimeChoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_timeChoicesView addSubview:_startBtn];
+    [_timeChoicesView addSubview:_endBtn];
+    
+}
+
 #pragma mark 选择时间方法
 - (void)clickTimeChoiceBtn:(UIButton *)btn {
     
@@ -373,6 +378,7 @@
     [self reflashInfo];
 }
 
+#pragma mark 选择时间pick
 - (UIView *)setupDatePiker {
     
     UIView *backView                                 = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
@@ -436,6 +442,7 @@
     }
 }
 
+#pragma mark 选择小时pick
 - (UIView *)setupChooseHoursView {
     
     _hoursData                  = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8"];
@@ -494,7 +501,7 @@
     [self.sl_popupController dismiss];
 }
 
-#pragma mark 输入个人信息cell
+#pragma mark - 输入个人信息cell
 - (void)inputInfoWithBackView:(UIView *)bgView {
     
     //点击空白收键盘
@@ -502,27 +509,26 @@
     [bgView addGestureRecognizer:tap];
     tap.delegate                          = self;
     
-    UILabel *selfInfoBtn = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, 30, SCREEN_W*0.5, 30)];
-    [bgView addSubview:selfInfoBtn];
-//    selfInfoBtn.backgroundColor = MAINCOLOR;
-    selfInfoBtn.text = @"是否输入本人信息";
-    selfInfoBtn.textColor = [UIColor blackColor];
-    selfInfoBtn.adjustsFontSizeToFitWidth = YES;
-
-    UISwitch *selfInfoSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(selfInfoBtn.right, 30, 0, 0)];
-    [bgView addSubview:selfInfoSwitch];
-    selfInfoSwitch.onTintColor = MAINCOLOR;
-    [selfInfoSwitch addTarget:self action:@selector(infoSwitch:) forControlEvents:UIControlEventValueChanged];
-//    selfInfoSwitch 
+//    UILabel *selfInfoBtn = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, 30, SCREEN_W*0.5, 30)];
+//    [bgView addSubview:selfInfoBtn];
+//    selfInfoBtn.text = @"是否输入本人信息";
+//    selfInfoBtn.textColor = [UIColor blackColor];
+//    selfInfoBtn.adjustsFontSizeToFitWidth = YES;
+//
+//    UISwitch *selfInfoSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(selfInfoBtn.right, 30, 0, 0)];
+//    [bgView addSubview:selfInfoSwitch];
+//    selfInfoSwitch.onTintColor = MAINCOLOR;
+//    [selfInfoSwitch addTarget:self action:@selector(infoSwitch:) forControlEvents:UIControlEventValueChanged];
+//    selfInfoSwitch
     
-    _nameTextField            = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 90, SCREEN_W*0.7, 30) labelHeight:15];
+    _nameTextField            = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 30, SCREEN_W*0.7, 30) labelHeight:15];
     [bgView addSubview:_nameTextField];
     _nameTextField.delegate                = self;
     _nameTextField.placeholder             = @"姓名";
     _nameTextField.placeholderActiveColor  = MAINCOLOR;
     _nameTextField.clearButtonMode         = UITextFieldViewModeWhileEditing;
     
-    _sexTextField             = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 150, SCREEN_W*0.7, 30) labelHeight:15];
+    _sexTextField             = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, _nameTextField.y + 60, SCREEN_W*0.7, 30) labelHeight:15];
     [bgView addSubview:_sexTextField];
     _sexTextField.clearButtonMode          = UITextFieldViewModeWhileEditing;
     _sexTextField.delegate                 = self;
@@ -537,8 +543,24 @@
         }
         return @{ VALIDATION_INDICATOR_NO : @"请输入 \"男\" \"女\" 或\"其他\"" };
     }];
-    
-    _ageTextField             = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 210, SCREEN_W*0.7, 30) labelHeight:15];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 30)];
+    view.layer.borderWidth = 0.5;
+    view.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    view.backgroundColor = [UIColor whiteColor];
+    _sexTextField.inputAccessoryView = view;
+    NSArray *arr = @[@"男",@"女",@"其他"];
+    for (int i = 0; i < arr.count; i++) {
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(5+i*55, 0, 50, 30)];
+        [btn setTitle:arr[i] forState:UIControlStateNormal];
+        btn.titleLabel.textAlignment = NSTextAlignmentCenter;//设置title的字体居中
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        btn.backgroundColor = [UIColor whiteColor];
+        [btn sizeToFit];
+        [view addSubview:btn];
+        [btn addTarget:self action:@selector(sexBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+
+    _ageTextField             = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, _sexTextField.y + 60, SCREEN_W*0.7, 30) labelHeight:15];
     [bgView addSubview:_ageTextField];
     _ageTextField.clearButtonMode          = UITextFieldViewModeWhileEditing;
     _ageTextField.delegate                 = self;
@@ -546,14 +568,14 @@
     _ageTextField.placeholderActiveColor   = MAINCOLOR;
     _ageTextField.keyboardType             = UIKeyboardTypeNumberPad;
     
-    _phoneTextField           = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 270, SCREEN_W*0.7, 30) labelHeight:15 style:LRTextFieldStylePhone];
+    _phoneTextField           = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, _ageTextField.y + 60, SCREEN_W*0.7, 30) labelHeight:15 style:LRTextFieldStylePhone];
     [bgView addSubview:_phoneTextField];
     _phoneTextField.clearButtonMode        = UITextFieldViewModeWhileEditing;
     _phoneTextField.delegate               = self;
     _phoneTextField.placeholder            = @"电话";
     _phoneTextField.placeholderActiveColor = MAINCOLOR;
     
-    _emailTextField           = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 330, SCREEN_W*0.7, 30) labelHeight:15 style:LRTextFieldStyleEmail];
+    _emailTextField           = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, _phoneTextField.y + 60, SCREEN_W*0.7, 30) labelHeight:15 style:LRTextFieldStyleEmail];
     [bgView addSubview:_emailTextField];
     _emailTextField.clearButtonMode        = UITextFieldViewModeWhileEditing;
     _emailTextField.delegate               = self;
@@ -562,7 +584,7 @@
     _emailTextField.hintText               = @"*选填";
     _emailTextField.hintTextColor          = [UIColor blackColor];
 
-    _detailTextView                        = [[UITextView alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, 390 , SCREEN_W*0.7, 80)];
+    _detailTextView                        = [[UITextView alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, _emailTextField.y + 60 , SCREEN_W*0.7, 80)];
     _detailTextView.delegate               = self;
     _detailTextView.font                   = [UIFont systemFontOfSize:17];
     _placeholderLabel                      = [GQControls createLabelWithFrame:CGRectMake(5, 10, 200, 20) andText:@"请简述您的咨询内容*" andTextColor:[UIColor lightGrayColor] andFontSize:17];
@@ -575,30 +597,46 @@
     
 }
 
-- (void)infoSwitch:(UISwitch *)infoSwitch {
+- (void)sexBtnClick:(UIButton *)btn {
     
-    if (infoSwitch.isOn == YES) {
-        NSLog(@"%@",kFetchUserName);
-        [_nameTextField setText:kFetchUserName];
-        
-    } else {
-        NSLog(@"aaaaaa");
-    }
-    
+    _sexTextField.text = btn.titleLabel.text;
 }
 
+//- (void)infoSwitch:(UISwitch *)infoSwitch {
+//    
+//    if (infoSwitch.isOn == YES) {
+//        NSLog(@"%@",kFetchUserInfo);
+//        _nameTextField.text = kFetchUserName;
+//        _nameTextField.enabled = NO;
+//        _nameTextField.placeholder = @"";
+//
+//        
+//    } else {
+//        NSLog(@"aaaaaa");
+//        
+//        _nameTextField.text = @"";
+//        _nameTextField.enabled = YES;
+//        _nameTextField.placeholder = @"姓名";
+//
+//
+//    }
+//    
+//}
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if (![text isEqualToString:@""]) {
-        _placeholderLabel.hidden = YES;
-    }
+//    if (![text isEqualToString:@""]) {
+//        _placeholderLabel.hidden = YES;
+//    }
     
     if ([text isEqualToString:@""] && range.location == 0 && range.length == 1) {
         _placeholderLabel.hidden = NO;
+    } else {
+        _placeholderLabel.hidden = YES;
     }
     return YES;
 }
 
-
+#pragma mark 结束编辑
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     
     _orderModel.orderInfoName  = _nameTextField.text;
@@ -619,7 +657,8 @@
     
     return YES;
 }
-                               
+
+#pragma mark textField限制长度
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField == _ageTextField) {
         if(range.length + range.location > textField.text.length) {
@@ -632,6 +671,7 @@
     return YES;
 }
 
+#pragma mark textView限制长度
 - (void)textViewDidChange:(UITextView *)textView {
     
     if ([textView.text length] > 60) {
@@ -645,11 +685,7 @@
 
 }
 
-//行数
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
-}
-
+#pragma mark 键盘处理
 - (void)configKeyBoardRespond {
     __weak ConfirmPageVC *weakSelf = self;
 #pragma explain - 全自动键盘弹出/收起处理 (需调用keyboardUtil 的 adaptiveViewHandleWithController:adaptiveView:)
@@ -658,8 +694,16 @@
     }];
 }
 
+- (void)dismissKeyboard {
+    [self.view endEditing:YES];
+}
 
-#pragma mark 定制底部TabBar
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+#pragma mark - 底部TabBar
 - (void)creatBottomBar {
     
     _tabBar = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
@@ -688,6 +732,7 @@
     
 }
 
+#pragma mark 刷新信息
 - (void)reflashInfo {
     
     if (NULLString(_orderModel.orderDateTimeStart) ||  NULLString(_orderModel.orderDateTimeEnd) || NULLString(_nameTextField.text) ||  NULLString(_sexTextField.text) || (_orderModel.orderInfoSex == Error)  ||  NULLString(_ageTextField.text) || NULLString(_phoneTextField.text)) {
@@ -695,15 +740,11 @@
         
     } else {
         self.confirmBtn.backgroundColor = MAINCOLOR;
-        
     }
-    
 }
 
 - (void)clickConfirmBtn {
     NSLog(@"确认预约");
-    
-    
     [MBHudSet showStatusOnView:self.view];
     
     //    if (_confirmBtn.backgroundColor == [UIColor lightGrayColor]) {
@@ -752,8 +793,8 @@
             PayPageVC *payPage = [[PayPageVC alloc]init];
             payPage.orderID = [responseObject[@"Result"][@"Source"][@"OrderID"] integerValue];
             payPage.orderNo = responseObject[@"Result"][@"Source"][@"OrderNo"];
-            payPage.orderTypeString=responseObject[@"Result"][@"Source"][@"ConsultTypeIDString"];
-            payPage.consultorName=strongSelf.orderModel.conserlorName;
+            payPage.orderTypeString = responseObject[@"Result"][@"Source"][@"ConsultTypeIDString"];
+            payPage.consultorName = strongSelf.orderModel.conserlorName;
             [strongSelf.navigationController pushViewController:payPage animated:YES];
             
         }else{
@@ -772,15 +813,6 @@
             [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
         }
     }];
-}
-
-- (void)dismissKeyboard {
-    [self.view endEditing:YES];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return YES;
 }
 
 #pragma mark 按钮动画

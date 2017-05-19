@@ -135,6 +135,18 @@
     [self.window setRootViewController:tabBarControllerConfig.tabBarController];
     [self.window makeKeyAndVisible];
     
+    int badge = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
+    NSLog(@"%d",badge);
+    UITabBarItem *item = [tabBarControllerConfig.tabBarController.tabBar.items objectAtIndex:2];
+
+    if (badge >= 0) {
+        
+        NSString *badgeStr = [NSString stringWithFormat:@"%d",badge];
+        item.badgeValue = badgeStr;
+    } else {
+        item.badgeValue = @"";
+    }
+    
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController*)viewController {
@@ -142,7 +154,6 @@
     if ([viewController.tabBarItem.title isEqualToString:@"咨询"]) {
         NSLog(@"tabbar登录:%d",[GQUserManager isHaveLogin]);
         if (![GQUserManager isHaveLogin]) {
-            
             //未登录
             UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
             [self.window.rootViewController presentViewController:alertControl animated:YES completion:nil];
@@ -339,6 +350,24 @@ didRegisterUserNotificationSettings:
 
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
     
+    NSString *badgeStr = [NSString stringWithFormat:@"%d",[[RCIMClient sharedRCIMClient] getTotalUnreadCount]];
+    
+    CYLTabBarController *tab = (CYLTabBarController *)self.window.rootViewController;
+    
+    NSLog(@"收到啦%@",badgeStr);
+    UITabBarItem *item = [tab.tabBar.items objectAtIndex:2];
+    
+    if ([badgeStr isEqualToString:@"0"]) {
+        
+        item.badgeValue = nil;
+    } else {
+        
+        item.badgeValue = badgeStr;
+    }
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
+
+
 }
 
 
@@ -447,8 +476,8 @@ didRegisterUserNotificationSettings:
     NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
 
--(void)applicationWillEnterForeground:(UIApplication *)application
-{
+-(void)applicationWillEnterForeground:(UIApplication *)application {
+    
     [JPUSHService resetBadge];
 }
 
@@ -462,6 +491,9 @@ didRegisterUserNotificationSettings:
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
+
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
 }
@@ -476,7 +508,9 @@ didRegisterUserNotificationSettings:
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//    int bg = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
 
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }

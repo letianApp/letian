@@ -44,18 +44,16 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.navigationController.navigationBarHidden=YES;
-    self.automaticallyAdjustsScrollViewInsets=NO;
+    self.navigationController.navigationBarHidden = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self requestData];
-    NSLog(@"my登录:%d",[GQUserManager isHaveLogin]);
+    NSLog(@"my登录类型:%@",kFetchUserType);
 //    self.tableView.tableHeaderView = [self createHeadView];
-    if ([kFetchUserType integerValue]==11) {
-        self.dataArray=@[@"系统设置",@"设置可预约日期",@"我要分享",@"关于我们"];
-        
-    }else{
-        self.dataArray=@[@"系统设置",@"客服电话    021-37702979",@"我要分享",@"关于我们"];
-        
+    self.dataArray = @[@"系统设置",@"客服电话    021-37702979",@"我要分享",@"关于我们"];
+    if ([kFetchUserType integerValue] == 11) {
+        self.dataArray = @[@"系统设置",@"设置可预约日期",@"我要分享",@"关于我们"];
     }
+    [self.tableView reloadData];
     [self isLogin];
 
 }

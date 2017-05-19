@@ -229,7 +229,6 @@
             [strongSelf.counselorInfoTableview addSubview:strongSelf.noDataLab];
         } else {
             [strongSelf.noDataLab removeFromSuperview];
-            
         }
         
         [MBHudSet dismiss:strongSelf.view];

@@ -27,9 +27,19 @@
                                               @(ConversationType_SYSTEM)]];
         //设置需要将哪些类型的会话在会话列表中聚合显示
         [self setCollectionConversationType:@[@(ConversationType_SYSTEM)]];
+        
+        
     }
     return self;
 }
+
+//- (void)viewWillAppear:(BOOL)animated {
+//    
+//    UITabBarItem * item = [self.tabBarController.tabBar.items objectAtIndex:2];
+//    NSString *badgeStr = [NSString stringWithFormat:@"%d",[[RCIMClient sharedRCIMClient] getTotalUnreadCount]];
+//    item.badgeValue = badgeStr;
+//    
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,6 +47,7 @@
     
     [self customNavigation];
 
+    [self emptyConversationBackView];
 //    self.conversationListTableView.delegate = self;
 //    self.conversationListTableView.dataSource = self;
     
@@ -44,9 +55,6 @@
 //    mod.targetId = @"6";
 //    [self refreshConversationTableViewWithConversationModel:mod];
     
-    UIView *bgView = [[UIView alloc] init];
-    bgView.backgroundColor = [UIColor whiteColor];
-    self.emptyConversationView = bgView;
     
 }
 
@@ -57,35 +65,88 @@
     
 }
 
+#pragma mark 列表为空时显示Cell
+- (void)emptyConversationBackView {
+    
+    UIView *bgView = [[UIView alloc] init];
+    bgView.backgroundColor = [UIColor whiteColor];
+    bgView.frame = CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, SCREEN_H);
+    
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, statusBar_H + navigationBar_H)];
+    [bgView addSubview:btn];
+    btn.backgroundColor = MAINCOLOR;
+    [btn addTarget:self action:@selector(clickEmptyCell:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.emptyConversationView = bgView;
+    
+}
+
+- (void)clickEmptyCell:(UIButton *)btn {
+    
+    ChatViewController *chatVc      = [[ChatViewController alloc]init];
+    chatVc.hidesBottomBarWhenPushed = YES;
+    chatVc.conversationType         = ConversationType_PRIVATE;
+    chatVc.targetId                 = @"6";
+    chatVc.title                    = @"乐天";
+    [self.navigationController pushViewController:chatVc animated:YES];
+    
+    
+}
+
 #pragma mark 定制cell
 
 //插入自定义会话model
-- (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource {
-    
-    RCConversation *con = [[RCConversation alloc] init];
-    con.targetId = @"6";
-    con.isTop = YES;
-    con.senderUserId = @"6";
-    con.conversationType = ConversationType_PRIVATE;
-    RCConversationModel *model = [[RCConversationModel alloc]initWithConversation:con extend:nil];
-//    model.conversationModelType = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;
-    model.unreadMessageCount = 1;
-    model.lastestMessage = [RCTextMessage messageWithContent:@"sssssss"];
-    [dataSource insertObject:model atIndex:0];
-    return dataSource;
-}
+//- (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource {
+//    
+//    RCConversation *con = [[RCConversation alloc] init];
+//    con.targetId = @"6";
+//    con.isTop = YES;
+//    con.senderUserId = @"6";
+//    con.conversationType = ConversationType_PRIVATE;
+//    RCConversationModel *model = [[RCConversationModel alloc]initWithConversation:con extend:nil];
+//    model.unreadMessageCount = 1;
+//    model.lastestMessage = [RCTextMessage messageWithContent:@"sssssss"];
+//    [dataSource insertObject:model atIndex:0];
+//    return dataSource;
+//}
 
 - (void)willDisplayConversationTableCell:(RCConversationBaseCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
+    UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:2];
+    NSString *badgeStr = [NSString stringWithFormat:@"%d",[[RCIMClient sharedRCIMClient] getTotalUnreadCount]];
+    NSLog(@"总：%@",badgeStr);
+    if ([badgeStr isEqualToString:@"0"]) {
+        
+        item.badgeValue = nil;
+    } else {
+        
+        item.badgeValue = badgeStr;
+    }
+    
     RCConversationModel *model = self.conversationListDataSource[indexPath.row];
     
-    if (indexPath.row == 0) {
-        RCConversationCell *conversationCell = (RCConversationCell *)cell;
-//        conversationCell.conversationTitle.textColor = MAINCOLOR;
-        conversationCell.bubbleTipView.bubbleTipBackgroundColor = MAINCOLOR;
-//        conversationCell.messageCreatedTimeLabel.text = @"1000";
-        conversationCell.messageContentLabel.text = @"aaaaa";
+//    if (indexPath.row == 0) {
+    RCConversationCell *conversationCell = (RCConversationCell *)cell;
+    if ([conversationCell.conversationTitle.text isEqual: @"测试药师2"]) {
+        
+        NSLog(@"hhhhhhh");
+        model.isTop = YES;
     }
+//    conversationCell.bubbleTipView.bubbleTipBackgroundColor = MAINCOLOR;
+//    conversationCell.isShowNotificationNumber = NO;
+//    NSLog(@"cell:%f",cell.height);
+    NSInteger unreadCount = conversationCell.model.unreadMessageCount;
+    NSLog(@"未读：%ld",model.unreadMessageCount);
+    if (unreadCount > 0){
+        conversationCell.bubbleTipView.bubbleTipText = (unreadCount > 99) ? @"99+" : [NSString stringWithFormat:@"%ld",(long)unreadCount];
+    }else{
+        conversationCell.bubbleTipView.bubbleTipText = nil;
+    }
+    
+    
+//        conversationCell.messageCreatedTimeLabel.text = @"1000";
+//        conversationCell.messageContentLabel.text = @"aaaaa";
+//    }
 //    cell.bubbleTipView.bubbleTipBackgroundColor = MAINCOLOR;
 }
 
@@ -110,10 +171,11 @@
         chatVc.conversationType         = model.conversationType;
         chatVc.targetId                 = model.targetId;
         chatVc.title                    = model.conversationTitle;
+        model.unreadMessageCount        = 0;
         [self.navigationController pushViewController:chatVc animated:YES];
         
-        [self.conversationListDataSource removeObjectAtIndex:indexPath.row];
-        [self.conversationListTableView reloadData];
+//        [self.conversationListDataSource removeObjectAtIndex:indexPath.row];
+//        [self.conversationListTableView reloadData];
 
     }
     
