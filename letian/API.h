@@ -10,10 +10,10 @@
 #define API_h
 
 //域名
-#define API_HTTP_PREFIX              @"http://webapi.rightpsy.com/"
+#define API_HTTP_PREFIX              @"http://webapi.rightpsy.com/api/"
 
 //图片域名
-#define API_HTTP_IMAGEPREFIX         @"http://image.rightpsy.com/"
+#define API_HTTP_IMAGEPREFIX         @"http://image.rightpsy.com/api/"
 
 
 //============模块============
