@@ -283,8 +283,16 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
         consultCell.userNameLabel.text=[NSString stringWithFormat:@"咨客：%@",self.orderInfoModel.ConsultName];
         consultCell.userInfoLabel.text=[NSString stringWithFormat:@"%@  %li",self.orderInfoModel.ConsultEnumSexTypeString,self.orderInfoModel.ConsultAge];
         consultCell.userPhoneLabel.text=[NSString stringWithFormat:@"电话：%@",self.orderInfoModel.ConsultPhone];
-        consultCell.userEmailLabel.text=[NSString stringWithFormat:@"邮箱：%@",self.orderInfoModel.ConsultEmail];
-        consultCell.consultDetailLabel.text=[NSString stringWithFormat:@"咨询内容：%@",self.orderInfoModel.ConsultDescription];
+        if (self.orderInfoModel.ConsultEmail==nil) {
+            consultCell.userEmailLabel.text=@"邮箱：未填";
+        }else{
+            consultCell.userEmailLabel.text=[NSString stringWithFormat:@"邮箱：%@",self.orderInfoModel.ConsultEmail];
+        }
+        if (self.orderInfoModel.ConsultDescription==nil) {
+            consultCell.consultDetailLabel.text=@"咨询内容：未填";
+        }else{
+            consultCell.consultDetailLabel.text=[NSString stringWithFormat:@"咨询内容：%@",self.orderInfoModel.ConsultDescription];
+        }
         return consultCell;
         //订单金额
     }else if (indexPath.row==1){

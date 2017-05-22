@@ -192,7 +192,7 @@
  -(void)uploadPhoto:(UIImage *)image
 {
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
-    NSString *requestString = @"http://121.41.11.23:8090/api/Utils/UploadPhoto?enumUpdatePictureType=1";
+    NSString *requestString = @"http://image.rightpsy.com/api/Utils/UploadPhoto?enumUpdatePictureType=1";
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     image = [image scaleFromImage:image toSize:CGSizeMake(200 , 200)];
     [MBHudSet showStatusOnView:self.view];

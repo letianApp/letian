@@ -8,11 +8,14 @@
 
 #import "SystomMsgViewController.h"
 #import "MessageCell.h"
+#import "SystemMsgModel.h"
+#import "OrderDetailViewController.h"
+
 @interface SystomMsgViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *tableView;
 
-
+@property(nonatomic,strong)NSMutableArray<SystemMsgModel *> *systemModelList;
 @end
 
 @implementation SystomMsgViewController
@@ -23,6 +26,14 @@
     [self setUpNavigationBar];
     [self createTableView];
     [self requestData];
+}
+
+-(NSMutableArray *)systemModelList
+{
+    if (_systemModelList == nil) {
+        _systemModelList = [NSMutableArray array];
+    }
+    return _systemModelList;
 }
 
 #pragma mark------------获取系统消息列表
@@ -46,9 +57,9 @@
         [MBHudSet dismiss:weakSelf.view];
         NSLog(@"&&&&&&&&&*获取系统消息列表%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
-//            weakSelf.orderList=[OrderListModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+            weakSelf.systemModelList=[SystemMsgModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
             NSLog(@"Msg%@",responseObject[@"Msg"]);
-//            [weakSelf.tableView reloadData];
+            [weakSelf.tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];
@@ -78,13 +89,20 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return self.systemModelList.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     MessageCell *cell=[MessageCell cellWithTableView:tableView];
+    if (self.systemModelList[indexPath.row].MessageTypeID==1) {
+        cell.messageTypeLabel.text=@"订单消息";
+    }else{
+        cell.messageTypeLabel.text=@"活动消息";
+    }
+    cell.msgDetailLabel.text=self.systemModelList[indexPath.row].Remark;
+    cell.dateLabel.text=self.systemModelList[indexPath.row].CreatedDate;
     
     return cell;
     
@@ -96,8 +114,12 @@
 //cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
+    if (self.systemModelList[indexPath.row].MessageTypeID==1) {
+        OrderDetailViewController *orderDetailVc=[[OrderDetailViewController alloc]init];
+        orderDetailVc.orderID=self.systemModelList[indexPath.row].RefferID1;
+        [self.navigationController pushViewController:orderDetailVc animated:YES];
+    }
+     
     
     NSLog(@"cell被点击%li",indexPath.row);
     

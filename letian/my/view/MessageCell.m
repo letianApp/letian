@@ -10,9 +10,7 @@
 
 @interface MessageCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UIView *bgView;
-@property (weak, nonatomic) IBOutlet UILabel *msgDetailLabel;
+
 
 @end
 

@@ -226,9 +226,7 @@
 {
     //跳到咨询页面
     if (tap.view.tag==100) {
-        ConsultViewController *vc   = [[ConsultViewController alloc]init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
+        self.tabBarController.selectedIndex=1;
     //跳到文章列表
     }else if (tap.view.tag==101) {
         CategoryViewController *articleVc=[[CategoryViewController alloc]init];
