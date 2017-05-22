@@ -9,6 +9,7 @@
 #import "ConfirmPageVC.h"
 #import "ConfirmPageCell.h"
 #import "OrderModel.h"
+#import "ConsultDateModel.h"
 
 #import <MapKit/MapKit.h>
 #import "FSCalendar.h"
@@ -24,6 +25,7 @@
 @interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) OrderModel             *orderModel;
+@property (nonatomic, strong) ConsultDateModel       *getInfoModel;
 @property (nonatomic, strong) UITableView            *mainTableView;
 
 @property (nonatomic, strong) UIButton               *mapBtn;
@@ -36,6 +38,7 @@
 
 @property (nonatomic, strong) UIView                 *timeChoicesView;
 @property (nonatomic, strong) UILabel                *dateDisplayLab;
+@property (nonatomic, strong) UILabel                *consultSetLab;
 
 @property (nonatomic, strong) UIDatePicker           *timePicker;
 @property (nonatomic, strong) UIPickerView           *chooseHoursView;
@@ -51,8 +54,8 @@
 @property (nonatomic, strong) LRTextField            *phoneTextField;
 @property (nonatomic, strong) LRTextField            *emailTextField;
 
-@property (nonatomic, strong) UITextView              *detailTextView;
-@property (nonatomic, strong) UILabel                 *placeholderLabel;
+@property (nonatomic, strong) UITextView             *detailTextView;
+@property (nonatomic, strong) UILabel                *placeholderLabel;
 
 @property (nonatomic, strong) ZYKeyboardUtil         *keyboardUtil;
 @property (nonatomic, strong) UIButton               *confirmBtn;
@@ -73,7 +76,6 @@
     self.keyboardUtil                         = [[ZYKeyboardUtil alloc] init];
     _orderModel                               = [[OrderModel alloc]init];
     _isToday                                  = YES;
-    //    _isSexRight                               = NO;
     
     [self customNavigation];
     [self customMainTableView];
@@ -177,7 +179,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) {
-        CGFloat height = _timeChoicesView.y + 115;
+        CGFloat height = _timeChoicesView.bottom + 30;
         return height;
     } else {
         return _detailTextView.bottom + 100;
@@ -277,6 +279,8 @@
     if ([self.gregorianCalendar isDateInToday:date]) {
         
         NSString *todayStr = [self.dateFormatter stringFromDate:date];
+        NSString *todayGetInfoStr = [NSString stringWithFormat:@"%@ 00:00:00",todayStr];
+        [self getCounsultSetForDay:todayGetInfoStr];
         _orderModel.orderDate = todayStr;
         return @"今";
     }
@@ -298,22 +302,23 @@
     
     NSComparisonResult result           = [selDate compare:todayDate];
     if (result == NSOrderedAscending) {
-        _isToday                               = NO;
-        _dateDisplayLab.textColor              = MAINCOLOR;
-        _dateDisplayLab.textAlignment          = 1;
-        _dateDisplayLab.text                   = @"不可以穿越到过去预约哦";
-        _dateDisplayLab.font                   = [UIFont systemFontOfSize:20];
-        _dateDisplayLab.backgroundColor        = [UIColor whiteColor];
-        _dateDisplayLab.userInteractionEnabled = YES;
-        [_timeChoicesView addSubview:_dateDisplayLab];
-        _orderModel.orderDate                  = nil;
+        _isToday = NO;
+        _dateDisplayLab.text = @"不可以穿越到过去预约哦";
+        [_timeChoicesView.superview addSubview:_dateDisplayLab];
+//        [_timeChoicesView addSubview:_dateDisplayLab];
+        [_timeChoicesView removeFromSuperview];
+        _orderModel.orderDate = nil;
         
     } else if (result == NSOrderedSame) {
-        _isToday                               = YES;
+        _isToday = YES;
+        NSString *selDayStrGetInfo = [NSString stringWithFormat:@"%@ 00:00:00",selDateStr];
+        [self getCounsultSetForDay:selDayStrGetInfo];
         [_dateDisplayLab removeFromSuperview];
         
     } else {
-        _isToday                               = NO;
+        _isToday = NO;
+        NSString *selDayStrGetInfo = [NSString stringWithFormat:@"%@ 00:00:00",selDateStr];
+        [self getCounsultSetForDay:selDayStrGetInfo];
         [_dateDisplayLab removeFromSuperview];
     }
     NSLog(@"点击日历：%@",_orderModel.orderDate);
@@ -329,16 +334,27 @@
 #pragma mark 预约时间View
 - (void)creatTimeChoicesViewWithBGView:(UIView *)view {
     
-    _timeChoicesView                               = [[UIView alloc]initWithFrame:CGRectMake(30, _calendar.bottom+10, SCREEN_W-60, 80)];
-    //    _timeChoicesView.backgroundColor = WEAKPINK;
-    _dateDisplayLab                                = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, _timeChoicesView.width, _timeChoicesView.height)];
+    _timeChoicesView = [[UIView alloc]initWithFrame:CGRectMake(30, _calendar.bottom+10, SCREEN_W-60, 120)];
     [view addSubview:_timeChoicesView];
+    _timeChoicesView.backgroundColor = [UIColor snowColor];
     
-    _startBtn                                      = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 5, _timeChoicesView.width*0.8, 30) andTitle:@"预约时间" andTitleColor:MAINCOLOR andFontSize:15 andTag:102 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    _dateDisplayLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, _timeChoicesView.width, _timeChoicesView.height)];
+    _dateDisplayLab.textColor              = MAINCOLOR;
+    _dateDisplayLab.textAlignment          = 1;
+    _dateDisplayLab.font                   = [UIFont systemFontOfSize:20];
+    _dateDisplayLab.backgroundColor        = [UIColor whiteColor];
+
+    _consultSetLab = [[UILabel alloc]initWithFrame:CGRectMake(_timeChoicesView.width*0.1, 5, _timeChoicesView.width*0.8, 30)];
+    [_timeChoicesView addSubview:_consultSetLab];
+    _consultSetLab.text = [NSString stringWithFormat:@"当日可预约时间："];
+    _consultSetLab.textColor = MAINCOLOR;
+    _consultSetLab.textAlignment = NSTextAlignmentCenter;
+    
+    _startBtn                                      = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 45, _timeChoicesView.width*0.8, 30) andTitle:@"预约时间" andTitleColor:MAINCOLOR andFontSize:15 andTag:102 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
     _startBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
     _startBtn.titleLabel.textAlignment             = NSTextAlignmentCenter;
     
-    _endBtn                                        = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 45, _timeChoicesView.width*0.8, 30) andTitle:@"预约时长" andTitleColor:MAINCOLOR andFontSize:15 andTag:103 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    _endBtn                                        = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 85, _timeChoicesView.width*0.8, 30) andTitle:@"预约时长" andTitleColor:MAINCOLOR andFontSize:15 andTag:103 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
     _endBtn.titleLabel.adjustsFontSizeToFitWidth   = YES;
     _endBtn.titleLabel.textAlignment               = NSTextAlignmentCenter;
     
@@ -501,6 +517,62 @@
     [self.sl_popupController dismiss];
 }
 
+#pragma mark - 获取咨询师设置
+- (void)getCounsultSetForDay:(NSString *)dayStr {
+    
+    __weak typeof(self) weakSelf = self;
+    [MBHudSet showStatusOnView:self.view];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_DOCTORSET];
+    [requestString appendFormat:@"%@",API_NAME_GETCONSULTSETFORDAY];
+    
+    NSMutableDictionary *parames = [[NSMutableDictionary alloc]init];
+    parames[@"date"] = dayStr;
+    parames[@"userID"] = @(self.counselModel.UserID);
+    
+    
+    [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
+    [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
+        __strong typeof(self) strongSelf = weakSelf;
+        [MBHudSet dismiss:strongSelf.view];
+        
+        NSLog(@"获取咨询时间返回的数据%@",responseObject);
+        
+        if([responseObject[@"Code"] integerValue] == 200) {
+            
+            strongSelf.getInfoModel = [ConsultDateModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
+            if ([strongSelf.getInfoModel.IsEnableConsult isEqualToString:@"1"]) {
+                
+                [_dateDisplayLab removeFromSuperview];
+                
+
+            } else {
+                _dateDisplayLab.text = @"今天不可以预约哦";
+
+            }
+
+                
+//            if ([model.IsEnableConsult isEqual: @"1"]) {
+//                self.isEnableConsultSwitch.on = YES;
+//            } else {
+//                self.isEnableConsultSwitch.on = NO;
+//            }
+
+//            NSLog(@"ddd:%@",strongSelf.getInfoModel.ConsultTimeList);
+//            [strongSelf reflashInfo:strongSelf.getInfoModel];
+        }
+        
+    } failure:^(NSError *error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        [MBHudSet dismiss:strongSelf.view];
+        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师订单列表错误，错误代码：%ld",error.code]andOnView:strongSelf.view];
+    }];
+    
+    
+}
+
+
 #pragma mark - 输入个人信息cell
 - (void)inputInfoWithBackView:(UIView *)bgView {
     
@@ -602,31 +674,7 @@
     _sexTextField.text = btn.titleLabel.text;
 }
 
-//- (void)infoSwitch:(UISwitch *)infoSwitch {
-//    
-//    if (infoSwitch.isOn == YES) {
-//        NSLog(@"%@",kFetchUserInfo);
-//        _nameTextField.text = kFetchUserName;
-//        _nameTextField.enabled = NO;
-//        _nameTextField.placeholder = @"";
-//
-//        
-//    } else {
-//        NSLog(@"aaaaaa");
-//        
-//        _nameTextField.text = @"";
-//        _nameTextField.enabled = YES;
-//        _nameTextField.placeholder = @"姓名";
-//
-//
-//    }
-//    
-//}
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-//    if (![text isEqualToString:@""]) {
-//        _placeholderLabel.hidden = YES;
-//    }
     
     if ([text isEqualToString:@""] && range.location == 0 && range.length == 1) {
         _placeholderLabel.hidden = NO;

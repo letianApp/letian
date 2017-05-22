@@ -144,7 +144,7 @@
         NSString *badgeStr = [NSString stringWithFormat:@"%d",badge];
         item.badgeValue = badgeStr;
     } else {
-        item.badgeValue = @"";
+        item.badgeValue = nil;
     }
     
 }
