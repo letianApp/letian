@@ -72,7 +72,7 @@
     order.version = @"1.0";
     
     order.sign_type = (rsa2PrivateKey.length > 1)?@"RSA2":@"RSA";
-    order.notify_url=@"http://121.41.11.23:8080/PayCallBack/AliPayNoticefy";
+    order.notify_url=@"http://webapi.rightpsy.com/PayCallBack/AliPayNoticefy";
     
     //  商品数据
     order.biz_content = [BizContent new];
