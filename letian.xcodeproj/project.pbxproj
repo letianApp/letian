@@ -11,6 +11,7 @@
 		090733961E655B0600F21E02 /* consultPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 090733941E655B0600F21E02 /* consultPageCell.xib */; };
 		0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 090733991E65665A00F21E02 /* counselorInfoModel.m */; };
 		091991791EC9950E007AEC8F /* RCDCustomerServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 091991781EC9950E007AEC8F /* RCDCustomerServiceViewController.m */; };
+		0932B85C1ED2B04D00C8131E /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0932B85B1ED2B04D00C8131E /* ServiceModel.m */; };
 		0935872E1E94BD6A0007B1D9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */; };
 		093587301E94BD9D0007B1D9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872F1E94BD9D0007B1D9 /* AVFoundation.framework */; };
 		093587321E94BDB30007B1D9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093587311E94BDB30007B1D9 /* MobileCoreServices.framework */; };
@@ -115,6 +116,7 @@
 		776CF2BB1EB7900A00CE9620 /* UIImage+TYLaunchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 776CF2B51EB7900A00CE9620 /* UIImage+TYLaunchImage.m */; };
 		776CF2BC1EB7900A00CE9620 /* UIView+TYLaunchAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 776CF2B71EB7900A00CE9620 /* UIView+TYLaunchAnimation.m */; };
 		776CF2BF1EB795CD00CE9620 /* DrawCircleProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 776CF2BE1EB795CD00CE9620 /* DrawCircleProgressButton.m */; };
+		7772CAB51ECEE8C00096C3C5 /* SystemMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7772CAB41ECEE8C00096C3C5 /* SystemMsgModel.m */; };
 		7784D8AC1E6E80C5004AB0CC /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7784D8AA1E6E80C5004AB0CC /* MessageViewController.m */; };
 		7784D8AD1E6E80C5004AB0CC /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */; };
 		7787B30E1EADACC300306527 /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B30C1EADACC300306527 /* ActivityDetailViewController.m */; };
@@ -222,6 +224,8 @@
 		090733991E65665A00F21E02 /* counselorInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = counselorInfoModel.m; sourceTree = "<group>"; };
 		091991771EC9950E007AEC8F /* RCDCustomerServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCustomerServiceViewController.h; sourceTree = "<group>"; };
 		091991781EC9950E007AEC8F /* RCDCustomerServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCustomerServiceViewController.m; sourceTree = "<group>"; };
+		0932B85A1ED2B04D00C8131E /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceModel.h; path = letian/chat/controller/ServiceModel.h; sourceTree = SOURCE_ROOT; };
+		0932B85B1ED2B04D00C8131E /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServiceModel.m; path = letian/chat/controller/ServiceModel.m; sourceTree = SOURCE_ROOT; };
 		0935872C1E94A1C10007B1D9 /* letian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = letian.entitlements; sourceTree = "<group>"; };
 		0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0935872F1E94BD9D0007B1D9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -332,8 +336,8 @@
 		771E81271EC5A5D40008E58A /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
 		771E81281EC5A5D40008E58A /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
 		771E81291EC5A5D40008E58A /* ActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
-		77221D911E6FB63400022AAF /* SystomMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystomMsgViewController.h; path = ../../my/controller/SystomMsgViewController.h; sourceTree = "<group>"; };
-		77221D921E6FB63400022AAF /* SystomMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystomMsgViewController.m; path = ../../my/controller/SystomMsgViewController.m; sourceTree = "<group>"; };
+		77221D911E6FB63400022AAF /* SystomMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystomMsgViewController.h; sourceTree = "<group>"; };
+		77221D921E6FB63400022AAF /* SystomMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystomMsgViewController.m; sourceTree = "<group>"; };
 		7722F0801EB4500B001DCF5F /* DateTools.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DateTools.bundle; sourceTree = "<group>"; };
 		7722F0811EB4500B001DCF5F /* DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTools.h; sourceTree = "<group>"; };
 		7722F0821EB4500B001DCF5F /* DTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTConstants.h; sourceTree = "<group>"; };
@@ -390,6 +394,8 @@
 		776CF2B71EB7900A00CE9620 /* UIView+TYLaunchAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYLaunchAnimation.m"; sourceTree = "<group>"; };
 		776CF2BD1EB795CD00CE9620 /* DrawCircleProgressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawCircleProgressButton.h; sourceTree = "<group>"; };
 		776CF2BE1EB795CD00CE9620 /* DrawCircleProgressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawCircleProgressButton.m; sourceTree = "<group>"; };
+		7772CAB31ECEE8C00096C3C5 /* SystemMsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMsgModel.h; sourceTree = "<group>"; };
+		7772CAB41ECEE8C00096C3C5 /* SystemMsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMsgModel.m; sourceTree = "<group>"; };
 		7784D8A91E6E80C5004AB0CC /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageViewController.h; path = ../../my/controller/MessageViewController.h; sourceTree = "<group>"; };
 		7784D8AA1E6E80C5004AB0CC /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageViewController.m; path = ../../my/controller/MessageViewController.m; sourceTree = "<group>"; };
 		7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageViewController.xib; path = ../../my/controller/MessageViewController.xib; sourceTree = "<group>"; };
@@ -716,8 +722,6 @@
 				7784D8A91E6E80C5004AB0CC /* MessageViewController.h */,
 				7784D8AA1E6E80C5004AB0CC /* MessageViewController.m */,
 				7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */,
-				77221D911E6FB63400022AAF /* SystomMsgViewController.h */,
-				77221D921E6FB63400022AAF /* SystomMsgViewController.m */,
 				093DA77A1E960F08003CEDD9 /* ChatListViewController.h */,
 				093DA77B1E960F08003CEDD9 /* ChatListViewController.m */,
 				093DA77C1E960F08003CEDD9 /* ChatListViewController.xib */,
@@ -733,6 +737,8 @@
 		093DA7791E960EE2003CEDD9 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				0932B85A1ED2B04D00C8131E /* ServiceModel.h */,
+				0932B85B1ED2B04D00C8131E /* ServiceModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -956,6 +962,7 @@
 				0970CFF21E5180DF007480CB /* MyViewController.h */,
 				0970CFF31E5180DF007480CB /* MyViewController.m */,
 				0970CFF41E5180DF007480CB /* MyViewController.xib */,
+				7772CAB21ECEE87A0096C3C5 /* 系统消息 */,
 				77F3D8591E764E22008B5FC0 /* 订单 */,
 				77B5BCCF1EAD97260034497D /* 设置 */,
 				09BFEF1A1EC0099E00A2731C /* 设置可预约日期 */,
@@ -975,6 +982,8 @@
 				779C4DC51EBEBF1000EBEDE9 /* OrderInfoModel.m */,
 				779C4DE51EC0345D00EBEDE9 /* ConsultDateModel.h */,
 				779C4DE61EC0345D00EBEDE9 /* ConsultDateModel.m */,
+				7772CAB31ECEE8C00096C3C5 /* SystemMsgModel.h */,
+				7772CAB41ECEE8C00096C3C5 /* SystemMsgModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1126,6 +1135,15 @@
 				776CF2B71EB7900A00CE9620 /* UIView+TYLaunchAnimation.m */,
 			);
 			path = GQNewFeature;
+			sourceTree = "<group>";
+		};
+		7772CAB21ECEE87A0096C3C5 /* 系统消息 */ = {
+			isa = PBXGroup;
+			children = (
+				77221D911E6FB63400022AAF /* SystomMsgViewController.h */,
+				77221D921E6FB63400022AAF /* SystomMsgViewController.m */,
+			);
+			name = "系统消息";
 			sourceTree = "<group>";
 		};
 		7787B3121EAEF2FE00306527 /* openssl */ = {
@@ -1841,6 +1859,7 @@
 				77B5BD661EADA78E0034497D /* GQNetworkManager.m in Sources */,
 				77B5BD571EADA6A50034497D /* GQActionSheetItem.m in Sources */,
 				09FBE0221E70F609003452A6 /* ConfirmPageCell.m in Sources */,
+				7772CAB51ECEE8C00096C3C5 /* SystemMsgModel.m in Sources */,
 				779C4DE71EC0345D00EBEDE9 /* ConsultDateModel.m in Sources */,
 				77B5BD551EADA6A50034497D /* RefreshFooter.m in Sources */,
 				7722F0981EB4500B001DCF5F /* DTTimePeriodGroup.m in Sources */,
@@ -1894,6 +1913,7 @@
 				77B5BD181EAD9B460034497D /* UIImageView+YYExtension.m in Sources */,
 				7787B30E1EADACC300306527 /* ActivityDetailViewController.m in Sources */,
 				770FFC5E1E95F51E009B81FC /* SettingViewController.m in Sources */,
+				0932B85C1ED2B04D00C8131E /* ServiceModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

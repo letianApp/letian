@@ -179,7 +179,7 @@
     _mainTableView.tableHeaderView = view;
 
     UIImage *image                 = _headView.image;
-    UIImage * blurImage            = [image blurImageWithRadius:15];
+    UIImage *blurImage             = [image blurImageWithRadius:15];
     _headView.image                = blurImage;
 
 //咨询师头像

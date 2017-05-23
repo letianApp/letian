@@ -135,17 +135,6 @@
     [self.window setRootViewController:tabBarControllerConfig.tabBarController];
     [self.window makeKeyAndVisible];
     
-    int badge = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
-    NSLog(@"%d",badge);
-    UITabBarItem *item = [tabBarControllerConfig.tabBarController.tabBar.items objectAtIndex:2];
-
-    if (badge >= 0) {
-        
-        NSString *badgeStr = [NSString stringWithFormat:@"%d",badge];
-        item.badgeValue = badgeStr;
-    } else {
-        item.badgeValue = nil;
-    }
     
 }
 
@@ -248,9 +237,23 @@
             __strong typeof(self) strongSelf = weakSelf;
             NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
             
-            //        [[RCIM sharedRCIM] setUserInfoDataSource:strongself];
-            //        [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc]initWithUserId:userId name:kFetchUserName portrait:kFetchUserHeadImageUrl];
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                CYLTabBarController *tab = (CYLTabBarController *)strongSelf.window.rootViewController;
+                UITabBarItem *item = [tab.tabBar.items objectAtIndex:2];
+                int badge = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
+                NSLog(@"总：%d",badge);
+                if (badge > 0) {
+                    
+                    NSString *badgeStr = [NSString stringWithFormat:@"%d",badge];
+                    item.badgeValue = badgeStr;
+                } else {
+                    item.badgeValue = nil;
+                }
+                
+                NSLog(@"显示的：%@",item.badgeValue);
+            });
+
         } error:^(RCConnectErrorCode status) {
             NSLog(@"登陆的错误码为:%ld", (long)status);
             
@@ -350,21 +353,24 @@ didRegisterUserNotificationSettings:
 
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
     
-    NSString *badgeStr = [NSString stringWithFormat:@"%d",[[RCIMClient sharedRCIMClient] getTotalUnreadCount]];
     
-    CYLTabBarController *tab = (CYLTabBarController *)self.window.rootViewController;
-    
-    NSLog(@"收到啦%@",badgeStr);
-    UITabBarItem *item = [tab.tabBar.items objectAtIndex:2];
-    
-    if ([badgeStr isEqualToString:@"0"]) {
+    __weak typeof(self) weakSelf   = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
         
-        item.badgeValue = nil;
-    } else {
+        CYLTabBarController *tab = (CYLTabBarController *)weakSelf.window.rootViewController;
+        UITabBarItem *item = [tab.tabBar.items objectAtIndex:2];
+        int badge = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
+        NSLog(@"总：%d",badge);
+        if (badge > 0) {
+            
+            NSString *badgeStr = [NSString stringWithFormat:@"%d",badge];
+            item.badgeValue = badgeStr;
+        } else {
+            item.badgeValue = nil;
+        }
         
-        item.badgeValue = badgeStr;
-    }
-    
+        NSLog(@"显示的：%@",item.badgeValue);
+    });
     [UIApplication sharedApplication].applicationIconBadgeNumber = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
 
 

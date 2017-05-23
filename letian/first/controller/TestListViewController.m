@@ -53,15 +53,17 @@
 -(void)requestData
 {
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
-    NSMutableString *requestString = [NSMutableString stringWithString:@"http://bapi.xinli001.com/ceshi/ceshis.json/?rows=10&offset=0&category_id=2&rmd=-1&key=86467ca472d76f198f8aa89d186fa85e"];
+    NSMutableString *requestString = [NSMutableString stringWithString:@"http://trc.adsage.com/trc/sdk/x.gif?ver=M3_02&md=iPhone8,2&pid=a6f51282b702499ca67c4555148375c9&uid=&ns=NS_NA&nsr=%E4%B8%AD%E5%9B%BD%E7%94%B5%E4%BF%A1&av=5.2.0&eid=In&eb=%E5%85%A8%E8%83%BD%E6%B5%8B%E8%AF%95%E7%8E%8B&se=1&st=0&et=2017-05-22&scr=1136x640&ol=1&sv=10.3.1&sl=zh-Hans-CN&cv=1.4&ib=0&tm=11%3A32%3A16&tz=Asia%2FShanghai&sid=1495423936.055280&ich=MobiSageSDK&mid=02:00:00:00:00:00&ct=1&loc=0%200&oid=1"];
     __weak typeof(self) weakSelf = self;
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
+        NSLog(@"心理测试%@",responseObject);
         weakSelf.testList=[TestListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [_tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
+        NSLog(@"%@",error);
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
             [MBHudSet showText:@"请求超时" andOnView:self.view];

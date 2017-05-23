@@ -70,7 +70,7 @@
     NSMutableDictionary *params    = [NSMutableDictionary dictionary];
     NSString *signature            = @"";//加密字符串
     NSString *timeSp               = [NSString timestamp];//时间戳
-    NSString* nonce                = [NSString randomString];//随机数
+    NSString *nonce                = [NSString randomString];//随机数
     //用户名
     params[@"LoginName"]           = [self.acountTextField.text.trim stringByReplacingOccurrencesOfString:@" " withString:@""];
     params[@"Password"]            = self.passwordTextField.text;

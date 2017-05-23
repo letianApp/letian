@@ -322,6 +322,9 @@
     parames[@"date"] = dayStr;
     
     [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
+    
+    NSLog(@"token:%@",kFetchToken);
+    NSLog(@"parames:%@",parames)
     [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
         __strong typeof(self) strongSelf = weakSelf;
         [MBHudSet dismiss:strongSelf.view];
@@ -331,7 +334,7 @@
         if([responseObject[@"Code"] integerValue] == 200) {
 
             strongSelf.getInfoModel = [ConsultDateModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
-            NSLog(@"ddd:%@",strongSelf.getInfoModel.ConsultTimeList);
+//            NSLog(@"ddd:%@",strongSelf.getInfoModel.ConsultTimeList);
             [strongSelf reflashInfo:strongSelf.getInfoModel];
         }
         
