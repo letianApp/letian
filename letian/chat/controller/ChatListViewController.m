@@ -75,7 +75,7 @@
 #pragma mark 定制导航栏
 - (void)customNavigation {
     
-    self.navigationItem.title = @"消息列表";
+    self.navigationItem.title = @"咨询列表";
     
 }
 
@@ -141,7 +141,7 @@
     btn.layer.borderWidth = 0.5;
     btn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     
-    self.headView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, btn.height - 10, btn.height - 10)];
+    self.headView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, btn.height - 20, btn.height - 20)];
     [btn addSubview:self.headView];
     [self.headView sd_setImageWithURL:[NSURL URLWithString:self.serviceInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"乐天logo"]];
     

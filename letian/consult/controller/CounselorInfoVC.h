@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) counselorInfoModel *counselModel;
 
+@property (nonatomic, strong) UIImage *headImage;
+
 @end

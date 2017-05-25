@@ -185,8 +185,7 @@
     _mainTableView.tableHeaderView = view;
 
     UIImageView *primaryPic = [UIImageView new];
-    [primaryPic sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg]];
-
+    [primaryPic sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
     UIImage *blurImage             = [primaryPic.image blurImageWithRadius:15];
     _headView.image                = blurImage;
 

@@ -413,7 +413,9 @@
     self.sl_popupController.dismissOppositeDirection = YES;
     
     if (btn == _startBtn) {
-        [self setupDatePiker];
+//        [self setupDatePiker];
+        [_endBtn setTitle:@"预约时长" forState:0];
+        _orderModel.orderDateTimeEnd = nil;
         [self.sl_popupController presentContentView:[self setupDatePiker]];
         
     } else if (btn == _endBtn) {
@@ -454,6 +456,7 @@
     [selDateFormatter setLocale:locale];
     NSDate *selDateStart              = [selDateFormatter dateFromString:selDateStartStr];
     NSDate *selDateEnd                = [selDateFormatter dateFromString:selDateEndStr];
+    NSDate *endDate = [NSDate dateWithTimeInterval:- 60 * 60 sinceDate:selDateEnd];
 
     UILabel *dateLab = [[UILabel alloc]init];
     [backView addSubview:dateLab];
@@ -467,10 +470,10 @@
     
     if (_isToday == YES) {
         [_timePicker setMinimumDate:[NSDate new]];
-        [_timePicker setMaximumDate:selDateEnd];
+        [_timePicker setMaximumDate:endDate];
     } else {
         [_timePicker setMinimumDate:selDateStart];
-        [_timePicker setMaximumDate:selDateEnd];
+        [_timePicker setMaximumDate:endDate];
     }
     
     return backView;
@@ -645,56 +648,22 @@
     [bgView addGestureRecognizer:tap];
     tap.delegate                          = self;
     
-//    UILabel *selfInfoBtn = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, 30, SCREEN_W*0.5, 30)];
-//    [bgView addSubview:selfInfoBtn];
-//    selfInfoBtn.text = @"是否输入本人信息";
-//    selfInfoBtn.textColor = [UIColor blackColor];
-//    selfInfoBtn.adjustsFontSizeToFitWidth = YES;
-//
-//    UISwitch *selfInfoSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(selfInfoBtn.right, 30, 0, 0)];
-//    [bgView addSubview:selfInfoSwitch];
-//    selfInfoSwitch.onTintColor = MAINCOLOR;
-//    [selfInfoSwitch addTarget:self action:@selector(infoSwitch:) forControlEvents:UIControlEventValueChanged];
-//    selfInfoSwitch
-    
-    _nameTextField            = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 30, SCREEN_W*0.7, 30) labelHeight:15];
+    _nameTextField = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, 30, SCREEN_W*0.7, 30) labelHeight:15];
     [bgView addSubview:_nameTextField];
     _nameTextField.delegate                = self;
     _nameTextField.placeholder             = @"姓名";
     _nameTextField.placeholderActiveColor  = MAINCOLOR;
     _nameTextField.clearButtonMode         = UITextFieldViewModeWhileEditing;
     
-    _sexTextField             = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, _nameTextField.y + 60, SCREEN_W*0.7, 30) labelHeight:15];
+    _sexTextField = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, _nameTextField.y + 60, SCREEN_W*0.7, 30) labelHeight:15];
     [bgView addSubview:_sexTextField];
-    _sexTextField.clearButtonMode          = UITextFieldViewModeWhileEditing;
-    _sexTextField.delegate                 = self;
-    _sexTextField.placeholder              = @"性别";
-    _sexTextField.placeholderActiveColor   = MAINCOLOR;
-    _sexTextField.hintText                 = @"请输入 \"男\" \"女\"";
-    [_sexTextField setValidationBlock:^NSDictionary *(LRTextField *textField, NSString *text) {
-        [NSThread sleepForTimeInterval:1.0];
-        
-        if ([text isEqualToString:@"男"] || [textField.text isEqualToString:@"女"]) {
-            return @{ VALIDATION_INDICATOR_COLOR : MAINCOLOR };
-        }
-        return @{ VALIDATION_INDICATOR_NO : @"请输入 \"男\" \"女\"" };
-    }];
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 30)];
-    view.layer.borderWidth = 0.5;
-    view.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    view.backgroundColor = [UIColor whiteColor];
-    _sexTextField.inputAccessoryView = view;
-    NSArray *arr = @[@"男",@"女"];
-    for (int i = 0; i < arr.count; i++) {
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(5+i*55, 0, 50, 30)];
-        [btn setTitle:arr[i] forState:UIControlStateNormal];
-        btn.titleLabel.textAlignment = NSTextAlignmentCenter;//设置title的字体居中
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        btn.backgroundColor = [UIColor whiteColor];
-        [btn sizeToFit];
-        [view addSubview:btn];
-        [btn addTarget:self action:@selector(sexBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
+    _sexTextField.placeholder = @"性别";
+    _sexTextField.userInteractionEnabled = NO;
+    UIButton *sexBtn = [UIButton new];
+//    sexBtn.backgroundColor = MAINCOLOR;
+    sexBtn.frame = _sexTextField.frame;
+    [bgView addSubview:sexBtn];
+    [sexBtn addTarget:self action:@selector(sexBtnClick:) forControlEvents:UIControlEventTouchUpInside];
 
     _ageTextField             = [[LRTextField alloc] initWithFrame:CGRectMake(SCREEN_W*0.15, _sexTextField.y + 60, SCREEN_W*0.7, 30) labelHeight:15];
     [bgView addSubview:_ageTextField];
@@ -735,7 +704,21 @@
 
 - (void)sexBtnClick:(UIButton *)btn {
     
-    _sexTextField.text = btn.titleLabel.text;
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"性别" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"男" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        _sexTextField.text = @"男";
+        _orderModel.orderInfoSex = @"男";
+        _sexTextField.enableAnimation = NO;
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"女" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        _sexTextField.text = @"女";
+        _orderModel.orderInfoSex = @"女";
+        _sexTextField.enableAnimation = NO;
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alertController animated:true completion:nil];
+
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -755,13 +738,13 @@
     _ageTextField.enableAnimation = YES;
     _phoneTextField.enableAnimation = YES;
     _emailTextField.enableAnimation = YES;
-    _sexTextField.enableAnimation = YES;
+//    _sexTextField.enableAnimation = YES;
     
     _orderModel.orderInfoName  = _nameTextField.text;
     _orderModel.orderInfoAge   = [_ageTextField.text integerValue];
     _orderModel.orderInfoPhone = _phoneTextField.text;
     _orderModel.orderInfoEmail = _emailTextField.text;
-    _orderModel.orderInfoSex = _sexTextField.text;
+//    _orderModel.orderInfoSex = _sexTextField.text;
     
     [self reflashInfo];
     
@@ -887,7 +870,7 @@
     params[@"ConSultName"]         = _orderModel.orderInfoName;
     if ([_orderModel.orderInfoSex isEqualToString:@"男"]) {
         params[@"EnumSexType"] = @(0);
-    } else if ([_orderModel.orderInfoSex isEqualToString:@"男"]) {
+    } else if ([_orderModel.orderInfoSex isEqualToString:@"女"]) {
         params[@"EnumSexType"] = @(1);
     }
     params[@"ConsultAge"]          = @(_orderModel.orderInfoAge);

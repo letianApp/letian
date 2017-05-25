@@ -23,6 +23,10 @@
     self.stateButton.layer.masksToBounds=YES;
     self.stateButton.layer.cornerRadius=8;
     
+    self.askBtn.layer.borderColor = MAINCOLOR.CGColor;
+    self.askBtn.layer.borderWidth = 1;
+    self.askBtn.layer.cornerRadius = 5;
+    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDownAction) userInfo:nil repeats:YES]; //启动倒计时后会每秒钟调用一次方法 countDownAction
     
     self.timeChangeLabel.hidden=YES;

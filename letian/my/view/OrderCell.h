@@ -19,6 +19,8 @@
 @property(nonatomic,strong)NSTimer * timer;
 @property (nonatomic,assign)NSInteger secondsCountDown;
 @property (weak, nonatomic) IBOutlet UILabel *timeChangeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *askBtn;
+
 
 +(instancetype) cellWithTableView:(UITableView *)tableView;
 

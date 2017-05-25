@@ -7,6 +7,7 @@
 //
 
 #import "OrderViewController.h"
+#import "ChatViewController.h"
 #import "GQSegment.h"
 #import "OrderCell.h"
 #import "OrderDetailViewController.h"
@@ -185,6 +186,9 @@
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.orderList[indexPath.row].UserHeadImg]];
         cell.nameLabel.text=self.orderList[indexPath.row].UserName;
     }
+    
+    [cell.askBtn addTarget:self action:@selector(clickAskBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
     //咨询方式
     if (self.orderList[indexPath.row].EnumConsultType==1) {
         cell.wayLabel.text=[NSString stringWithFormat:@"咨询方式：面对面咨询"];
@@ -247,6 +251,19 @@
     
 }
 
+- (void)clickAskBtn:(UIButton *)btn {
+    
+    [self animationbegin:btn];
+    ChatViewController *chatVc = [[ChatViewController alloc]init];
+    chatVc.hidesBottomBarWhenPushed = YES;
+    chatVc.conversationType = ConversationType_PRIVATE;
+//    chatVc.targetId = [NSString stringWithFormat:@"%ld",self.counselModel.UserID];
+//    chatVc.title = self.counselModel.UserName;
+    [self.navigationController pushViewController:chatVc animated:YES];
+
+    
+}
+
 -(void)toPayVc:(UIButton *)btn{
     PayPageVC *payVc=[[PayPageVC alloc]init];    
     OrderCell *cell=(OrderCell *)btn.superview.superview;
@@ -279,6 +296,27 @@
 -(void) back
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+#pragma mark 按钮动画
+- (void)animationbegin:(UIView *)view {
+    /* 放大缩小 */
+    
+    // 设定为缩放
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    
+    // 动画选项设定
+    animation.duration = 0.1; // 动画持续时间
+    animation.repeatCount = -1; // 重复次数
+    animation.autoreverses = YES; // 动画结束时执行逆动画
+    
+    // 缩放倍数
+    animation.fromValue = [NSNumber numberWithFloat:1.0]; // 开始时的倍率
+    animation.toValue = [NSNumber numberWithFloat:0.9]; // 结束时的倍率
+    
+    // 添加动画
+    [view.layer addAnimation:animation forKey:@"scale-layer"];
+    
 }
 
 

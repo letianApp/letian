@@ -601,7 +601,7 @@
     }
     cell.conserlorAbout.text = _counselorArr[indexPath.row].Description;
     cell.conserlorPrice.text = [NSString stringWithFormat:@"%ld元/小时",_counselorArr[indexPath.row].ConsultFee];
-    cell.conserVisitors.text = [NSString stringWithFormat:@"%ld人咨询过",_counselorArr[indexPath.row].ConsultFee];
+    cell.conserVisitors.text = [NSString stringWithFormat:@"%@人咨询过",_counselorArr[indexPath.row].TotalConsultCount];
     
     return cell;
     
@@ -619,6 +619,7 @@
     
     CounselorInfoVC *counselorInfoMainVC = [[CounselorInfoVC alloc]init];
     counselorInfoMainVC.counselModel = _counselorArr[indexPath.row];
+//    counselorInfoMainVC.headImage = _counselorArr[indexPath.row].HeadImg;
     counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
     [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];
     
