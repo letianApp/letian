@@ -1,18 +1,18 @@
 //
-//  TestListViewController.m
+//  TestHistoryViewController.m
 //  letian
 //
 //  Created by 郭茜 on 2017/5/25.
 //  Copyright © 2017年 J. All rights reserved.
 //
 
-#import "TestListViewController.h"
+#import "TestHistoryViewController.h"
 
-@interface TestListViewController ()
+@interface TestHistoryViewController ()
 
 @end
 
-@implementation TestListViewController
+@implementation TestHistoryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

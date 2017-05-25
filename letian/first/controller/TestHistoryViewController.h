@@ -1,5 +1,5 @@
 //
-//  TestListViewController.h
+//  TestHistoryViewController.h
 //  letian
 //
 //  Created by 郭茜 on 2017/5/25.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestListViewController : UIViewController
+@interface TestHistoryViewController : UIViewController
 
 @end

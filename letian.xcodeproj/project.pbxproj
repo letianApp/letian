@@ -97,6 +97,8 @@
 		7722F0991EB4500B001DCF5F /* NSDate+DateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 7722F08F1EB4500B001DCF5F /* NSDate+DateTools.m */; };
 		7722F09A1EB4500B001DCF5F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7722F0901EB4500B001DCF5F /* LICENSE */; };
 		7722F09B1EB4500B001DCF5F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7722F0911EB4500B001DCF5F /* README.md */; };
+		77283D8C1ED67232004BF2F5 /* TestListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77283D8B1ED67232004BF2F5 /* TestListViewController.m */; };
+		77283D8F1ED67247004BF2F5 /* TestHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77283D8E1ED67247004BF2F5 /* TestHistoryViewController.m */; };
 		774DBC0C1E6420FC00B8798C /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 774DBC0A1E6420FC00B8798C /* HomeCell.m */; };
 		774DBC0D1E6420FC00B8798C /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774DBC0B1E6420FC00B8798C /* HomeCell.xib */; };
 		7752C7B31E70EC360093ED37 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7752C7B11E70EC360093ED37 /* MessageCell.m */; };
@@ -105,7 +107,7 @@
 		775312341EB64512008AA19D /* GQSegmentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 775312311EB64512008AA19D /* GQSegmentButton.m */; };
 		775312371EB6583B008AA19D /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 775312361EB6583B008AA19D /* CategoryViewController.m */; };
 		7769CA5C1E82539C00646619 /* TestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7769CA591E82539C00646619 /* TestDetailViewController.m */; };
-		7769CA5D1E82539C00646619 /* TestListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7769CA5B1E82539C00646619 /* TestListViewController.m */; };
+		7769CA5D1E82539C00646619 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7769CA5B1E82539C00646619 /* TestViewController.m */; };
 		7769CA601E8253D000646619 /* TestListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7769CA5F1E8253D000646619 /* TestListModel.m */; };
 		776CF2AA1EB78E9D00CE9620 /* GQCoreNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 776CF2A51EB78E9D00CE9620 /* GQCoreNewFeatureViewController.m */; };
 		776CF2AB1EB78E9D00CE9620 /* GQFeatureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 776CF2A71EB78E9D00CE9620 /* GQFeatureCell.m */; };
@@ -356,6 +358,10 @@
 		7722F08F1EB4500B001DCF5F /* NSDate+DateTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateTools.m"; sourceTree = "<group>"; };
 		7722F0901EB4500B001DCF5F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		7722F0911EB4500B001DCF5F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		77283D8A1ED67232004BF2F5 /* TestListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestListViewController.h; sourceTree = "<group>"; };
+		77283D8B1ED67232004BF2F5 /* TestListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestListViewController.m; sourceTree = "<group>"; };
+		77283D8D1ED67247004BF2F5 /* TestHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHistoryViewController.h; sourceTree = "<group>"; };
+		77283D8E1ED67247004BF2F5 /* TestHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHistoryViewController.m; sourceTree = "<group>"; };
 		774DBC091E6420FC00B8798C /* HomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCell.h; sourceTree = "<group>"; };
 		774DBC0A1E6420FC00B8798C /* HomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCell.m; sourceTree = "<group>"; };
 		774DBC0B1E6420FC00B8798C /* HomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCell.xib; sourceTree = "<group>"; };
@@ -371,8 +377,8 @@
 		775312361EB6583B008AA19D /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
 		7769CA581E82539C00646619 /* TestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDetailViewController.h; sourceTree = "<group>"; };
 		7769CA591E82539C00646619 /* TestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDetailViewController.m; sourceTree = "<group>"; };
-		7769CA5A1E82539C00646619 /* TestListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestListViewController.h; sourceTree = "<group>"; };
-		7769CA5B1E82539C00646619 /* TestListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestListViewController.m; sourceTree = "<group>"; };
+		7769CA5A1E82539C00646619 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		7769CA5B1E82539C00646619 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		7769CA5E1E8253D000646619 /* TestListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestListModel.h; sourceTree = "<group>"; };
 		7769CA5F1E8253D000646619 /* TestListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestListModel.m; sourceTree = "<group>"; };
 		776CF2A41EB78E9D00CE9620 /* GQCoreNewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQCoreNewFeatureViewController.h; sourceTree = "<group>"; };
@@ -1337,8 +1343,12 @@
 		77B5BCD61EAD98900034497D /* 专业心理测试 */ = {
 			isa = PBXGroup;
 			children = (
-				7769CA5A1E82539C00646619 /* TestListViewController.h */,
-				7769CA5B1E82539C00646619 /* TestListViewController.m */,
+				7769CA5A1E82539C00646619 /* TestViewController.h */,
+				7769CA5B1E82539C00646619 /* TestViewController.m */,
+				77283D8A1ED67232004BF2F5 /* TestListViewController.h */,
+				77283D8B1ED67232004BF2F5 /* TestListViewController.m */,
+				77283D8D1ED67247004BF2F5 /* TestHistoryViewController.h */,
+				77283D8E1ED67247004BF2F5 /* TestHistoryViewController.m */,
 				7769CA581E82539C00646619 /* TestDetailViewController.h */,
 				7769CA591E82539C00646619 /* TestDetailViewController.m */,
 			);
@@ -1834,13 +1844,14 @@
 				7787B3B41EB1BF4E00306527 /* AlipayHelper.m in Sources */,
 				7784D8AC1E6E80C5004AB0CC /* MessageViewController.m in Sources */,
 				776CF2BC1EB7900A00CE9620 /* UIView+TYLaunchAnimation.m in Sources */,
+				77283D8F1ED67247004BF2F5 /* TestHistoryViewController.m in Sources */,
 				0965FBC81E824AF900C0FBAD /* OrderPageVC.m in Sources */,
 				0965FBC31E8230B400C0FBAD /* KuroTextField.m in Sources */,
 				7722F0951EB4500B001DCF5F /* DTTimePeriod.m in Sources */,
 				776CF2B81EB7900A00CE9620 /* TAdLaunchImageView.m in Sources */,
 				77A17B7A1E7F9A2900569558 /* WebArticleViewController.m in Sources */,
 				770FFC6C1E961070009B81FC /* UserInfoViewController.m in Sources */,
-				7769CA5D1E82539C00646619 /* TestListViewController.m in Sources */,
+				7769CA5D1E82539C00646619 /* TestViewController.m in Sources */,
 				77B5BD6C1EADA91D0034497D /* BDImagePicker.m in Sources */,
 				774DBC0C1E6420FC00B8798C /* HomeCell.m in Sources */,
 				77B5BD541EADA6A50034497D /* GQControls.m in Sources */,
@@ -1859,6 +1870,7 @@
 				77B5BD661EADA78E0034497D /* GQNetworkManager.m in Sources */,
 				77B5BD571EADA6A50034497D /* GQActionSheetItem.m in Sources */,
 				09FBE0221E70F609003452A6 /* ConfirmPageCell.m in Sources */,
+				77283D8C1ED67232004BF2F5 /* TestListViewController.m in Sources */,
 				7772CAB51ECEE8C00096C3C5 /* SystemMsgModel.m in Sources */,
 				779C4DE71EC0345D00EBEDE9 /* ConsultDateModel.m in Sources */,
 				77B5BD551EADA6A50034497D /* RefreshFooter.m in Sources */,
