@@ -78,13 +78,13 @@
     params[@"Timestamp"]           = timeSp;
     params[@"Nonce"]               = nonce;
     params[@"AppId"]               = APPID;
-    params[@"PushNo"]              = [JPUSHService registrationID];;
+    params[@"PushNo"]              =[JPUSHService registrationID];;
     
     NSLog(@"推送号：。。。。。%@",params[@"PushNo"]);
     __weak typeof(self) weakSelf   = self;
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+        [MBHudSet dismiss:self.view];
         __strong typeof(self) strongSelf = weakSelf;
 
         NSLog(@"登录%@",responseObject);

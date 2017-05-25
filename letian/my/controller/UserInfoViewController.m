@@ -228,6 +228,7 @@
 
 -(void)changeNickName{
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改昵称" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    alertController.view.tintColor = [UIColor blackColor];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder=@"请输入昵称";
     }];
@@ -270,7 +271,7 @@
 
 -(void)changeSex{
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改性别" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-    
+    alertController.view.tintColor = [UIColor blackColor];
     [alertController addAction:[UIAlertAction actionWithTitle:@"男" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self requestChangeSex:0];
     }]];
@@ -347,6 +348,7 @@
 
 -(void)inputMsgCode{
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"短信验证" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    alertController.view.tintColor = [UIColor blackColor];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder=@"请输入验证码";
     }];
@@ -401,6 +403,7 @@
     self.timer = timer;
 
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"绑定新号码" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    alertController.view.tintColor = [UIColor blackColor];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder=@"请输入需要绑定的手机号";
     }];
@@ -520,6 +523,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /*
 #pragma mark - Navigation
