@@ -10,7 +10,7 @@
 #import "HomeCell.h"
 #import "LoginViewController.h"
 #import "CategoryViewController.h"
-#import "TestListViewController.h"
+#import "TestViewController.h"
 #import "ActivityListViewController.h"
 #import "CustomCYLTabBar.h"
 #import "ConsultViewController.h"
@@ -234,7 +234,7 @@
         [self.navigationController pushViewController:articleVc animated:NO];
     //跳到测试
     }else if (tap.view.tag==102) {
-       TestListViewController *testVc=[[TestListViewController alloc]init];
+       TestViewController *testVc=[[TestViewController alloc]init];
         testVc.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:testVc animated:YES];
     //跳到活动
