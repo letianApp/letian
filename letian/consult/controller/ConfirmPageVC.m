@@ -42,7 +42,7 @@
 
 @property (nonatomic, strong) UIDatePicker           *timePicker;
 @property (nonatomic, strong) UIPickerView           *chooseHoursView;
-@property (nonatomic, strong) NSArray                *hoursData;
+@property (nonatomic, strong) NSMutableArray         *hoursData;
 @property (nonatomic, strong) NSString               *hourStr;
 @property (nonatomic, strong) NSString               *customTimeStartStr;
 @property (nonatomic, strong) NSString               *customTimeEndStr;
@@ -78,6 +78,7 @@
     self.keyboardUtil                         = [[ZYKeyboardUtil alloc] init];
     _orderModel                               = [[OrderModel alloc]init];
     _isToday                                  = YES;
+    _hoursData = [NSMutableArray new];
     
     [self customNavigation];
     [self customMainTableView];
@@ -127,6 +128,30 @@
     cell.detialLab.hidden = YES;
     [self customCell:cell withBgView:cell.backView forRowAtIndexPath:indexPath];
     
+    if (_orderModel.orderInfoName) {
+        _nameTextField.enableAnimation = NO;
+        _nameTextField.text = _orderModel.orderInfoName;
+    }
+    if (_orderModel.orderInfoSex) {
+        _sexTextField.enableAnimation = NO;
+        _sexTextField.text = _orderModel.orderInfoSex;
+    }
+    if (_orderModel.orderInfoAge) {
+        _ageTextField.enableAnimation = NO;
+        _ageTextField.text = [NSString stringWithFormat:@"%ld",_orderModel.orderInfoAge];
+    }
+    if (_orderModel.orderInfoPhone) {
+        _phoneTextField.enableAnimation = NO;
+        _phoneTextField.text = _orderModel.orderInfoPhone;
+    }
+    if (_orderModel.orderInfoEmail) {
+        _emailTextField.enableAnimation = NO;
+        _emailTextField.text = _orderModel.orderInfoEmail;
+    }
+    if (_orderModel.orderInfoDetail) {
+        _detailTextView.text = _orderModel.orderInfoDetail;
+        _placeholderLabel.hidden = YES;
+    }
     
     return cell;
     
@@ -134,6 +159,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 2;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSLog(@"框：%@",self.detailTextView.text);
+    NSLog(@"%@",self.orderModel.orderInfoDetail);
+    
+    
 }
 
 #pragma mark - 咨询方式及时间cell
@@ -413,16 +445,16 @@
     
 //    _customTimeStartStr                     = @"9:00";
 //    _customTimeEndStr                       = @"21:00";
-    NSMutableString *selDateStartStr                 = [NSMutableString stringWithFormat:@"%@ %@", _orderModel.orderDate,_customTimeStartStr];
-    NSMutableString *selDateEndStr                   = [NSMutableString stringWithFormat:@"%@ %@", _orderModel.orderDate,_customTimeEndStr];
-    NSDateFormatter *selDateFormatter                = [[NSDateFormatter alloc]init];
+    NSMutableString *selDateStartStr  = [NSMutableString stringWithFormat:@"%@ %@", _orderModel.orderDate,_customTimeStartStr];
+    NSMutableString *selDateEndStr    = [NSMutableString stringWithFormat:@"%@ %@", _orderModel.orderDate,_customTimeEndStr];
+    NSDateFormatter *selDateFormatter = [[NSDateFormatter alloc]init];
     [selDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     //真机运行需要设置Local
-    NSLocale *locale                                 = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    NSLocale *locale                  = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
     [selDateFormatter setLocale:locale];
-    NSDate *selDateStart                             = [selDateFormatter dateFromString:selDateStartStr];
-    NSDate *selDateEnd                               = [selDateFormatter dateFromString:selDateEndStr];
-    
+    NSDate *selDateStart              = [selDateFormatter dateFromString:selDateStartStr];
+    NSDate *selDateEnd                = [selDateFormatter dateFromString:selDateEndStr];
+
     UILabel *dateLab = [[UILabel alloc]init];
     [backView addSubview:dateLab];
     dateLab.x = 0;
@@ -435,6 +467,7 @@
     
     if (_isToday == YES) {
         [_timePicker setMinimumDate:[NSDate new]];
+        [_timePicker setMaximumDate:selDateEnd];
     } else {
         [_timePicker setMinimumDate:selDateStart];
         [_timePicker setMaximumDate:selDateEnd];
@@ -464,7 +497,15 @@
 #pragma mark 选择小时pick
 - (UIView *)setupChooseHoursView {
     
-    _hoursData                  = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8"];
+    NSLog(@"%@",_orderModel.orderDateTimeStart);
+    NSRange rag = {0,2};
+    int startHour = [[_orderModel.orderDateTimeStart substringWithRange:rag] intValue];
+    int endHour = [[self.customTimeEndStr substringWithRange:rag] intValue];
+    
+    [_hoursData removeAllObjects];
+    for (int i = 0; i < (endHour - startHour); i++) {
+        [_hoursData addObject:[NSString stringWithFormat:@"%d",i+1]];
+    }
     _hourStr                    = _hoursData[0];
     UIView *backView            = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
 
@@ -507,12 +548,12 @@
     
     [self animationbegin:btn];
     [_endBtn setTitle:[NSString stringWithFormat:@"%@ 小时",_hourStr] forState:UIControlStateNormal];
-    [_priceLab setText:[NSString stringWithFormat:@"%d 元",[_hourStr integerValue] * self.counselModel.ConsultFee]];
+    [_priceLab setText:[NSString stringWithFormat:@"%ld 元",[_hourStr integerValue] * self.counselModel.ConsultFee]];
     
     NSRange rag = {0,2};
     NSInteger startTime = [[_orderModel.orderDateTimeStart substringWithRange:rag] integerValue];
     NSInteger endTime = startTime + [_hourStr integerValue];
-    NSString *endStr = [_orderModel.orderDateTimeStart stringByReplacingCharactersInRange:rag withString:[NSString stringWithFormat:@"%d",endTime]];
+    NSString *endStr = [_orderModel.orderDateTimeStart stringByReplacingCharactersInRange:rag withString:[NSString stringWithFormat:@"%ld",endTime]];
     _orderModel.orderDateTimeEnd = endStr;
     NSLog(@"结束时间%@",endStr);
 
@@ -600,7 +641,7 @@
 - (void)inputInfoWithBackView:(UIView *)bgView {
     
     //点击空白收键盘
-    UITapGestureRecognizer *tap           = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    UITapGestureRecognizer *tap           = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideKeyboard)];
     [bgView addGestureRecognizer:tap];
     tap.delegate                          = self;
     
@@ -629,21 +670,21 @@
     _sexTextField.delegate                 = self;
     _sexTextField.placeholder              = @"性别";
     _sexTextField.placeholderActiveColor   = MAINCOLOR;
-    _sexTextField.hintText                 = @"请输入 \"男\" \"女\" 或\"其他\"";
+    _sexTextField.hintText                 = @"请输入 \"男\" \"女\"";
     [_sexTextField setValidationBlock:^NSDictionary *(LRTextField *textField, NSString *text) {
         [NSThread sleepForTimeInterval:1.0];
         
-        if ([text isEqualToString:@"男"] || [textField.text isEqualToString:@"女"] || [textField.text isEqualToString:@"其他"]) {
+        if ([text isEqualToString:@"男"] || [textField.text isEqualToString:@"女"]) {
             return @{ VALIDATION_INDICATOR_COLOR : MAINCOLOR };
         }
-        return @{ VALIDATION_INDICATOR_NO : @"请输入 \"男\" \"女\" 或\"其他\"" };
+        return @{ VALIDATION_INDICATOR_NO : @"请输入 \"男\" \"女\"" };
     }];
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 30)];
     view.layer.borderWidth = 0.5;
     view.layer.borderColor = [UIColor lightGrayColor].CGColor;
     view.backgroundColor = [UIColor whiteColor];
     _sexTextField.inputAccessoryView = view;
-    NSArray *arr = @[@"男",@"女",@"其他"];
+    NSArray *arr = @[@"男",@"女"];
     for (int i = 0; i < arr.count; i++) {
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(5+i*55, 0, 50, 30)];
         [btn setTitle:arr[i] forState:UIControlStateNormal];
@@ -710,22 +751,26 @@
 #pragma mark 结束编辑
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     
+    _nameTextField.enableAnimation = YES;
+    _ageTextField.enableAnimation = YES;
+    _phoneTextField.enableAnimation = YES;
+    _emailTextField.enableAnimation = YES;
+    _sexTextField.enableAnimation = YES;
+    
     _orderModel.orderInfoName  = _nameTextField.text;
     _orderModel.orderInfoAge   = [_ageTextField.text integerValue];
     _orderModel.orderInfoPhone = _phoneTextField.text;
     _orderModel.orderInfoEmail = _emailTextField.text;
-    if ([_sexTextField.text isEqualToString:@"男"]) {
-        _orderModel.orderInfoSex = Male;
-    } else if ([_sexTextField.text isEqualToString:@"女"]) {
-        _orderModel.orderInfoSex = Female;
-    } else if ([_sexTextField.text isEqualToString:@"其他"]) {
-        _orderModel.orderInfoSex = Other;
-    } else {
-        _orderModel.orderInfoSex = Error;
-    }
+    _orderModel.orderInfoSex = _sexTextField.text;
     
     [self reflashInfo];
     
+    return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    
+    _orderModel.orderInfoDetail = _detailTextView.text;
     return YES;
 }
 
@@ -765,8 +810,9 @@
     }];
 }
 
-- (void)dismissKeyboard {
-    [self.view endEditing:YES];
+- (void)hideKeyboard {
+//    [self.view endEditing:YES];
+    [[[UIApplication sharedApplication]keyWindow]endEditing:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -806,7 +852,7 @@
 #pragma mark 刷新信息
 - (void)reflashInfo {
     
-    if (NULLString(_orderModel.orderDateTimeStart) ||  NULLString(_orderModel.orderDateTimeEnd) || NULLString(_nameTextField.text) ||  NULLString(_sexTextField.text) || (_orderModel.orderInfoSex == Error)  ||  NULLString(_ageTextField.text) || NULLString(_phoneTextField.text)) {
+    if (NULLString(_orderModel.orderDateTimeStart) ||  NULLString(_orderModel.orderDateTimeEnd) || NULLString(_nameTextField.text) ||  NULLString(_sexTextField.text) ||  NULLString(_ageTextField.text) || NULLString(_phoneTextField.text)) {
         self.confirmBtn.backgroundColor = [UIColor lightGrayColor];
         
     } else {
@@ -839,7 +885,11 @@
     [priceStr stringByReplacingOccurrencesOfString:@" 元" withString:@""];
     params[@"TotalFee"]            = @([priceStr integerValue]);
     params[@"ConSultName"]         = _orderModel.orderInfoName;
-    params[@"EnumSexType"]         = @(_orderModel.orderInfoSex);
+    if ([_orderModel.orderInfoSex isEqualToString:@"男"]) {
+        params[@"EnumSexType"] = @(0);
+    } else if ([_orderModel.orderInfoSex isEqualToString:@"男"]) {
+        params[@"EnumSexType"] = @(1);
+    }
     params[@"ConsultAge"]          = @(_orderModel.orderInfoAge);
     params[@"ConsultPhone"]        = _orderModel.orderInfoPhone;
     if (_emailTextField.text) {

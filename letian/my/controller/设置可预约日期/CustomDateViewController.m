@@ -417,6 +417,7 @@
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [manager POST:requestString parameters:model.mj_keyValues progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"修改咨询时间result%@",responseObject);
+        [MBHudSet showText:@"更改成功" andOnView:self.view];
     
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (error.code == NSURLErrorCancelled) return;
