@@ -11,6 +11,7 @@
 		090733961E655B0600F21E02 /* consultPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 090733941E655B0600F21E02 /* consultPageCell.xib */; };
 		0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 090733991E65665A00F21E02 /* counselorInfoModel.m */; };
 		091991791EC9950E007AEC8F /* RCDCustomerServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 091991781EC9950E007AEC8F /* RCDCustomerServiceViewController.m */; };
+		0932B85C1ED2B04D00C8131E /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0932B85B1ED2B04D00C8131E /* ServiceModel.m */; };
 		0935872E1E94BD6A0007B1D9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */; };
 		093587301E94BD9D0007B1D9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872F1E94BD9D0007B1D9 /* AVFoundation.framework */; };
 		093587321E94BDB30007B1D9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093587311E94BDB30007B1D9 /* MobileCoreServices.framework */; };
@@ -225,6 +226,8 @@
 		090733991E65665A00F21E02 /* counselorInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = counselorInfoModel.m; sourceTree = "<group>"; };
 		091991771EC9950E007AEC8F /* RCDCustomerServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCustomerServiceViewController.h; sourceTree = "<group>"; };
 		091991781EC9950E007AEC8F /* RCDCustomerServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCustomerServiceViewController.m; sourceTree = "<group>"; };
+		0932B85A1ED2B04D00C8131E /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceModel.h; path = letian/chat/controller/ServiceModel.h; sourceTree = SOURCE_ROOT; };
+		0932B85B1ED2B04D00C8131E /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServiceModel.m; path = letian/chat/controller/ServiceModel.m; sourceTree = SOURCE_ROOT; };
 		0935872C1E94A1C10007B1D9 /* letian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = letian.entitlements; sourceTree = "<group>"; };
 		0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0935872F1E94BD9D0007B1D9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -740,6 +743,8 @@
 		093DA7791E960EE2003CEDD9 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				0932B85A1ED2B04D00C8131E /* ServiceModel.h */,
+				0932B85B1ED2B04D00C8131E /* ServiceModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1920,6 +1925,7 @@
 				77B5BD181EAD9B460034497D /* UIImageView+YYExtension.m in Sources */,
 				7787B30E1EADACC300306527 /* ActivityDetailViewController.m in Sources */,
 				770FFC5E1E95F51E009B81FC /* SettingViewController.m in Sources */,
+				0932B85C1ED2B04D00C8131E /* ServiceModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

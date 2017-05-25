@@ -15,12 +15,34 @@
 
 @implementation ChatViewController
 
+//- (instancetype)init
+//{
+//    self = [super init];
+//    if (self) {
+//        
+//        if ([self.targetId isEqualToString:@"12"]) {
+//            
+//            [self.chatSessionInputBarControl.pluginBoardView removeItemAtIndex:3];
+//            [self.chatSessionInputBarControl.pluginBoardView removeItemAtIndex:3];
+//        }
+//    }
+//    return self;
+//}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
     
     [self customNavigation];
+    
+    if ([self.targetId isEqualToString:@"12"]) {
+        
+        [self.chatSessionInputBarControl.pluginBoardView removeItemAtIndex:3];
+        [self.chatSessionInputBarControl.pluginBoardView removeItemAtIndex:3];
+    }
     
     
 }

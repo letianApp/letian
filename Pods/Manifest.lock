@@ -30,6 +30,11 @@ PODS:
   - PPNetworkHelper (0.8.0):
     - AFNetworking (~> 3.1.0)
     - YYCache (~> 1.0.4)
+  - RongCloudIM/CallKit (2.8.9):
+    - RongCloudIM/CallLib
+    - RongCloudIM/IMKit
+  - RongCloudIM/CallLib (2.8.9):
+    - RongCloudIM/IMLib
   - RongCloudIM/IMKit (2.8.9):
     - RongCloudIM/IMLib
   - RongCloudIM/IMLib (2.8.9)
@@ -172,6 +177,8 @@ DEPENDENCIES:
   - MJExtension (~> 3.0.13)
   - MJRefresh
   - PPNetworkHelper
+  - RongCloudIM/CallKit
+  - RongCloudIM/CallLib
   - RongCloudIM/IMKit
   - RongCloudIM/IMLib
   - RTRootNavigationController
@@ -205,6 +212,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   ZYKeyboardUtil: c4b920eed9af063c46af2e9ea62e851d9331fbd9
 
-PODFILE CHECKSUM: 468a7f33a1e51c4ba30149a0cb88e3fc3a344de9
+PODFILE CHECKSUM: 6f2f48040c0938381c4639efc6f95f6edd015dc7
 
 COCOAPODS: 1.2.1

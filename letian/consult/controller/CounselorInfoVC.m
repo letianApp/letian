@@ -25,7 +25,9 @@
 
 @interface CounselorInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
+
 @property (nonatomic, strong) UIImageView  *headView;
+@property (nonatomic, strong) UIImageView  *naviView;
 //@property (nonatomic, strong) UIVisualEffectView *effectview;
 @property (nonatomic, strong) UITableView  *mainTableView;
 @property (nonatomic, strong) UIView       *holdView;
@@ -64,7 +66,11 @@
     [btn addTarget:self action:@selector(clickShareBtn) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item                  = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = item;
-
+    
+    self.naviView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, navigationBar_H + statusBar_H)];
+    self.naviView.contentMode = UIViewContentModeScaleAspectFill;
+    self.naviView.clipsToBounds = YES;
+    
 }
 
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target
@@ -168,7 +174,7 @@
 - (void)customHeadView {
     
     _headView                      = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H*0.3)];
-    [_headView sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg]];
+//    [_headView sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg]];
     _headView.contentMode          = UIViewContentModeScaleAspectFill;
     _headView.clipsToBounds        = YES;
 
@@ -178,8 +184,10 @@
 
     _mainTableView.tableHeaderView = view;
 
-    UIImage *image                 = _headView.image;
-    UIImage * blurImage            = [image blurImageWithRadius:15];
+    UIImageView *primaryPic = [UIImageView new];
+    [primaryPic sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg]];
+
+    UIImage *blurImage             = [primaryPic.image blurImageWithRadius:15];
     _headView.image                = blurImage;
 
 //咨询师头像
@@ -261,13 +269,30 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     CGPoint offset = scrollView.contentOffset;
+    
+    NSLog(@"%f",self.mainTableView.contentOffset.y - self.headView.height + navigationBar_H + statusBar_H);
+    NSLog(@"原：%f",offset.y);
     if (offset.y < 0) {
         
         CGRect rect = self.headView.frame;
         rect.origin.y = offset.y;
         rect.size.height = (SCREEN_H*0.3) - offset.y;
         _headView.frame = rect;
-//        _effectview.frame = rect;
+    } else if (offset.y > (self.headView.height - navigationBar_H - statusBar_H)) {
+        
+        NSLog(@"aaa");
+        [self.view addSubview:self.naviView];
+        self.naviView.image = self.headView.image;
+        self.naviView.height = self.headView.height;
+        self.naviView.bottom = navigationBar_H + statusBar_H;
+        self.navigationItem.title = self.counselModel.UserName;
+        [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
+        
+    } else {
+        NSLog(@"ddd");
+        [self.naviView removeFromSuperview];
+        self.navigationItem.title = nil;
+
     }
 }
 

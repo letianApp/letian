@@ -32,13 +32,13 @@ typedef NS_ENUM (NSInteger, EnumSexType) {
 /**
  咨询师ID
  */
-@property (nonatomic) NSInteger             conserlorID;
+@property (nonatomic        ) NSInteger             conserlorID;
 
 /**
  * 选择咨询方式: 面对面咨询, 文字语音视频, 电话咨询
  * 默认面对面咨询
  */
-@property (nonatomic) EnumConsultType       consultType;
+@property (nonatomic        ) EnumConsultType       consultType;
 
 /**
  咨询日期
@@ -58,7 +58,7 @@ typedef NS_ENUM (NSInteger, EnumSexType) {
 /**
  咨询价格
  */
-@property (nonatomic) float                 orderPrice;
+@property (nonatomic        ) float                 orderPrice;
 
 /*!
  咨询人名字
@@ -68,12 +68,12 @@ typedef NS_ENUM (NSInteger, EnumSexType) {
 /*!
  咨询人性别: 男, 女, 其他
  */
-@property (nonatomic) EnumSexType           orderInfoSex;
+@property (nonatomic, copy  ) NSString              *orderInfoSex;
 
 /*!
  咨询人年龄
  */
-@property (nonatomic) NSInteger             orderInfoAge;
+@property (nonatomic        ) NSInteger             orderInfoAge;
 
 /*!
  咨询人手机号
@@ -84,6 +84,11 @@ typedef NS_ENUM (NSInteger, EnumSexType) {
  咨询人Email
  */
 @property (nonatomic, copy  ) NSString              *orderInfoEmail;
+
+/*!
+ 咨询人备注
+ */
+@property (nonatomic, copy  ) NSString              *orderInfoDetail;
 
 /**
  订单创建时间

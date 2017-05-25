@@ -9,6 +9,7 @@
 #import "ConfirmPageVC.h"
 #import "ConfirmPageCell.h"
 #import "OrderModel.h"
+#import "ConsultDateModel.h"
 
 #import <MapKit/MapKit.h>
 #import "FSCalendar.h"
@@ -24,6 +25,7 @@
 @interface ConfirmPageVC ()<UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) OrderModel             *orderModel;
+@property (nonatomic, strong) ConsultDateModel       *getInfoModel;
 @property (nonatomic, strong) UITableView            *mainTableView;
 
 @property (nonatomic, strong) UIButton               *mapBtn;
@@ -36,11 +38,14 @@
 
 @property (nonatomic, strong) UIView                 *timeChoicesView;
 @property (nonatomic, strong) UILabel                *dateDisplayLab;
+@property (nonatomic, strong) UILabel                *consultSetLab;
 
 @property (nonatomic, strong) UIDatePicker           *timePicker;
 @property (nonatomic, strong) UIPickerView           *chooseHoursView;
-@property (nonatomic, strong) NSArray                *hoursData;
+@property (nonatomic, strong) NSMutableArray         *hoursData;
 @property (nonatomic, strong) NSString               *hourStr;
+@property (nonatomic, strong) NSString               *customTimeStartStr;
+@property (nonatomic, strong) NSString               *customTimeEndStr;
 
 @property (nonatomic, strong) UIButton               *startBtn;
 @property (nonatomic, strong) UIButton               *endBtn;
@@ -51,8 +56,8 @@
 @property (nonatomic, strong) LRTextField            *phoneTextField;
 @property (nonatomic, strong) LRTextField            *emailTextField;
 
-@property (nonatomic, strong) UITextView              *detailTextView;
-@property (nonatomic, strong) UILabel                 *placeholderLabel;
+@property (nonatomic, strong) UITextView             *detailTextView;
+@property (nonatomic, strong) UILabel                *placeholderLabel;
 
 @property (nonatomic, strong) ZYKeyboardUtil         *keyboardUtil;
 @property (nonatomic, strong) UIButton               *confirmBtn;
@@ -73,7 +78,7 @@
     self.keyboardUtil                         = [[ZYKeyboardUtil alloc] init];
     _orderModel                               = [[OrderModel alloc]init];
     _isToday                                  = YES;
-    //    _isSexRight                               = NO;
+    _hoursData = [NSMutableArray new];
     
     [self customNavigation];
     [self customMainTableView];
@@ -123,6 +128,30 @@
     cell.detialLab.hidden = YES;
     [self customCell:cell withBgView:cell.backView forRowAtIndexPath:indexPath];
     
+    if (_orderModel.orderInfoName) {
+        _nameTextField.enableAnimation = NO;
+        _nameTextField.text = _orderModel.orderInfoName;
+    }
+    if (_orderModel.orderInfoSex) {
+        _sexTextField.enableAnimation = NO;
+        _sexTextField.text = _orderModel.orderInfoSex;
+    }
+    if (_orderModel.orderInfoAge) {
+        _ageTextField.enableAnimation = NO;
+        _ageTextField.text = [NSString stringWithFormat:@"%ld",_orderModel.orderInfoAge];
+    }
+    if (_orderModel.orderInfoPhone) {
+        _phoneTextField.enableAnimation = NO;
+        _phoneTextField.text = _orderModel.orderInfoPhone;
+    }
+    if (_orderModel.orderInfoEmail) {
+        _emailTextField.enableAnimation = NO;
+        _emailTextField.text = _orderModel.orderInfoEmail;
+    }
+    if (_orderModel.orderInfoDetail) {
+        _detailTextView.text = _orderModel.orderInfoDetail;
+        _placeholderLabel.hidden = YES;
+    }
     
     return cell;
     
@@ -130,6 +159,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 2;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSLog(@"框：%@",self.detailTextView.text);
+    NSLog(@"%@",self.orderModel.orderInfoDetail);
+    
+    
 }
 
 #pragma mark - 咨询方式及时间cell
@@ -177,7 +213,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) {
-        CGFloat height = _timeChoicesView.y + 115;
+        CGFloat height = _timeChoicesView.bottom + 30;
         return height;
     } else {
         return _detailTextView.bottom + 100;
@@ -277,6 +313,9 @@
     if ([self.gregorianCalendar isDateInToday:date]) {
         
         NSString *todayStr = [self.dateFormatter stringFromDate:date];
+        NSString *todayGetInfoStr = [NSString stringWithFormat:@"%@ 00:00:00",todayStr];
+        NSLog(@"今天：%@",todayGetInfoStr);
+        [self getCounsultSetForDay:todayGetInfoStr];
         _orderModel.orderDate = todayStr;
         return @"今";
     }
@@ -298,23 +337,23 @@
     
     NSComparisonResult result           = [selDate compare:todayDate];
     if (result == NSOrderedAscending) {
-        _isToday                               = NO;
-        _dateDisplayLab.textColor              = MAINCOLOR;
-        _dateDisplayLab.textAlignment          = 1;
-        _dateDisplayLab.text                   = @"不可以穿越到过去预约哦";
-        _dateDisplayLab.font                   = [UIFont systemFontOfSize:20];
-        _dateDisplayLab.backgroundColor        = [UIColor whiteColor];
-        _dateDisplayLab.userInteractionEnabled = YES;
+        _isToday = NO;
+        [_timeChoicesView removeAllSubviews];
         [_timeChoicesView addSubview:_dateDisplayLab];
-        _orderModel.orderDate                  = nil;
+        _dateDisplayLab.text = @"不可以穿越到过去预约哦";
+        _orderModel.orderDate = nil;
         
     } else if (result == NSOrderedSame) {
-        _isToday                               = YES;
-        [_dateDisplayLab removeFromSuperview];
+        _isToday = YES;
+        NSString *selDayStrGetInfo = [NSString stringWithFormat:@"%@ 00:00:00",selDateStr];
+        [self getCounsultSetForDay:selDayStrGetInfo];
+//        [_dateDisplayLab removeFromSuperview];
         
     } else {
-        _isToday                               = NO;
-        [_dateDisplayLab removeFromSuperview];
+        _isToday = NO;
+        NSString *selDayStrGetInfo = [NSString stringWithFormat:@"%@ 00:00:00",selDateStr];
+        [self getCounsultSetForDay:selDayStrGetInfo];
+//        [_dateDisplayLab removeFromSuperview];
     }
     NSLog(@"点击日历：%@",_orderModel.orderDate);
     
@@ -329,16 +368,28 @@
 #pragma mark 预约时间View
 - (void)creatTimeChoicesViewWithBGView:(UIView *)view {
     
-    _timeChoicesView                               = [[UIView alloc]initWithFrame:CGRectMake(30, _calendar.bottom+10, SCREEN_W-60, 80)];
-    //    _timeChoicesView.backgroundColor = WEAKPINK;
-    _dateDisplayLab                                = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, _timeChoicesView.width, _timeChoicesView.height)];
+    _timeChoicesView = [[UIView alloc]initWithFrame:CGRectMake(30, _calendar.bottom+10, SCREEN_W-60, 120)];
     [view addSubview:_timeChoicesView];
+//    _timeChoicesView.backgroundColor = [UIColor snowColor];
     
-    _startBtn                                      = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 5, _timeChoicesView.width*0.8, 30) andTitle:@"预约时间" andTitleColor:MAINCOLOR andFontSize:15 andTag:102 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    _dateDisplayLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, _timeChoicesView.width, _timeChoicesView.height)];
+    _dateDisplayLab.textColor              = MAINCOLOR;
+    _dateDisplayLab.textAlignment          = 1;
+    _dateDisplayLab.font                   = [UIFont systemFontOfSize:20];
+    _dateDisplayLab.backgroundColor        = [UIColor whiteColor];
+
+    _consultSetLab = [[UILabel alloc]initWithFrame:CGRectMake(_timeChoicesView.width*0.1, 5, _timeChoicesView.width*0.8, 30)];
+    [_timeChoicesView addSubview:_consultSetLab];
+//    _consultSetLab.text = [NSString stringWithFormat:@"当日可预约时间："];
+    _consultSetLab.textColor = MAINCOLOR;
+    _consultSetLab.font = [UIFont systemFontOfSize:15];
+    _consultSetLab.textAlignment = NSTextAlignmentCenter;
+    
+    _startBtn = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 45, _timeChoicesView.width*0.8, 30) andTitle:@"预约时间" andTitleColor:MAINCOLOR andFontSize:15 andTag:102 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
     _startBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
     _startBtn.titleLabel.textAlignment             = NSTextAlignmentCenter;
     
-    _endBtn                                        = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 45, _timeChoicesView.width*0.8, 30) andTitle:@"预约时长" andTitleColor:MAINCOLOR andFontSize:15 andTag:103 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    _endBtn = [GQControls createButtonWithFrame:CGRectMake(_timeChoicesView.width*0.1, 85, _timeChoicesView.width*0.8, 30) andTitle:@"预约时长" andTitleColor:MAINCOLOR andFontSize:15 andTag:103 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
     _endBtn.titleLabel.adjustsFontSizeToFitWidth   = YES;
     _endBtn.titleLabel.textAlignment               = NSTextAlignmentCenter;
     
@@ -392,18 +443,18 @@
     [backView addSubview:btn];
     [btn addTarget:self action:@selector(clickAffirmTimeBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-    NSString *customTimeStartStr                     = @"9:00";
-    NSString *customTimeEndStr                       = @"21:00";
-    NSMutableString *selDateStartStr                 = [NSMutableString stringWithFormat:@"%@ %@", _orderModel.orderDate,customTimeStartStr];
-    NSMutableString *selDateEndStr                   = [NSMutableString stringWithFormat:@"%@ %@", _orderModel.orderDate,customTimeEndStr];
-    NSDateFormatter *selDateFormatter                = [[NSDateFormatter alloc]init];
+//    _customTimeStartStr                     = @"9:00";
+//    _customTimeEndStr                       = @"21:00";
+    NSMutableString *selDateStartStr  = [NSMutableString stringWithFormat:@"%@ %@", _orderModel.orderDate,_customTimeStartStr];
+    NSMutableString *selDateEndStr    = [NSMutableString stringWithFormat:@"%@ %@", _orderModel.orderDate,_customTimeEndStr];
+    NSDateFormatter *selDateFormatter = [[NSDateFormatter alloc]init];
     [selDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     //真机运行需要设置Local
-    NSLocale *locale                                 = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    NSLocale *locale                  = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
     [selDateFormatter setLocale:locale];
-    NSDate *selDateStart                             = [selDateFormatter dateFromString:selDateStartStr];
-    NSDate *selDateEnd                               = [selDateFormatter dateFromString:selDateEndStr];
-    
+    NSDate *selDateStart              = [selDateFormatter dateFromString:selDateStartStr];
+    NSDate *selDateEnd                = [selDateFormatter dateFromString:selDateEndStr];
+
     UILabel *dateLab = [[UILabel alloc]init];
     [backView addSubview:dateLab];
     dateLab.x = 0;
@@ -416,6 +467,7 @@
     
     if (_isToday == YES) {
         [_timePicker setMinimumDate:[NSDate new]];
+        [_timePicker setMaximumDate:selDateEnd];
     } else {
         [_timePicker setMinimumDate:selDateStart];
         [_timePicker setMaximumDate:selDateEnd];
@@ -445,7 +497,15 @@
 #pragma mark 选择小时pick
 - (UIView *)setupChooseHoursView {
     
-    _hoursData                  = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8"];
+    NSLog(@"%@",_orderModel.orderDateTimeStart);
+    NSRange rag = {0,2};
+    int startHour = [[_orderModel.orderDateTimeStart substringWithRange:rag] intValue];
+    int endHour = [[self.customTimeEndStr substringWithRange:rag] intValue];
+    
+    [_hoursData removeAllObjects];
+    for (int i = 0; i < (endHour - startHour); i++) {
+        [_hoursData addObject:[NSString stringWithFormat:@"%d",i+1]];
+    }
     _hourStr                    = _hoursData[0];
     UIView *backView            = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
 
@@ -493,7 +553,7 @@
     NSRange rag = {0,2};
     NSInteger startTime = [[_orderModel.orderDateTimeStart substringWithRange:rag] integerValue];
     NSInteger endTime = startTime + [_hourStr integerValue];
-    NSString *endStr = [_orderModel.orderDateTimeStart stringByReplacingCharactersInRange:rag withString:[NSString stringWithFormat:@"%li",endTime]];
+    NSString *endStr = [_orderModel.orderDateTimeStart stringByReplacingCharactersInRange:rag withString:[NSString stringWithFormat:@"%ld",endTime]];
     _orderModel.orderDateTimeEnd = endStr;
     NSLog(@"结束时间%@",endStr);
 
@@ -501,11 +561,87 @@
     [self.sl_popupController dismiss];
 }
 
+#pragma mark - 获取咨询师设置
+- (void)getCounsultSetForDay:(NSString *)dayStr {
+    
+    __weak typeof(self) weakSelf = self;
+    [MBHudSet showStatusOnView:self.view];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_DOCTORSET];
+    [requestString appendFormat:@"%@",API_NAME_GETCONSULTSETFORDAY];
+    
+    NSMutableDictionary *parames = [[NSMutableDictionary alloc]init];
+    parames[@"date"] = dayStr;
+    parames[@"userID"] = @(self.counselModel.UserID);
+    NSLog(@"咨询师ID：%ld",(long)self.counselModel.UserID)
+    
+    [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
+    NSLog(@"token:%@",kFetchToken);
+    [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
+        __strong typeof(self) strongSelf = weakSelf;
+        [MBHudSet dismiss:strongSelf.view];
+        
+        NSLog(@"获取咨询时间返回的数据%@",responseObject);
+        
+        if([responseObject[@"Code"] integerValue] == 200) {
+            
+            strongSelf.getInfoModel = [ConsultDateModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
+            if ([strongSelf.getInfoModel.IsEnableConsult isEqualToString:@"1"]) {
+                
+                [strongSelf.timeChoicesView removeAllSubviews];
+                [strongSelf.timeChoicesView addSubview:strongSelf.consultSetLab];
+                [strongSelf.timeChoicesView addSubview:strongSelf.startBtn];
+                [strongSelf.timeChoicesView addSubview:strongSelf.endBtn];
+                
+                if (strongSelf.getInfoModel.ConsultTimeList != nil && ![strongSelf.getInfoModel.ConsultTimeList isKindOfClass:[NSNull class]] && strongSelf.getInfoModel.ConsultTimeList.count != 0) {
+                    
+                    NSLog(@"%@",strongSelf.getInfoModel.ConsultTimeList[0]);
+                    NSDictionary *set = (NSDictionary *)strongSelf.getInfoModel.ConsultTimeList[0];
+                    NSLog(@"%@",set[@"StartTime"]);
+                    
+                    NSRange rag = {5,3};
+                    strongSelf.customTimeStartStr = [set[@"StartTime"] stringByReplacingCharactersInRange:rag withString:@""];
+                    strongSelf.customTimeEndStr = [set[@"EndTime"] stringByReplacingCharactersInRange:rag withString:@""];
+                    
+                    NSMutableString *setStr = [[NSMutableString alloc]initWithString:@"当日可预约时间："];
+                    [setStr appendFormat:@" %@ ",strongSelf.customTimeStartStr];
+                    [setStr appendFormat:@"- %@",strongSelf.customTimeEndStr];
+                    strongSelf.consultSetLab.text = setStr;
+                    [strongSelf.consultSetLab sizeToFit];
+                    strongSelf.consultSetLab.centerX = strongSelf.startBtn.centerX;
+
+                } else {
+                    
+                    NSLog(@"空空空");
+                    
+
+                }
+
+            } else {
+                
+                [strongSelf.timeChoicesView removeAllSubviews];
+                [strongSelf.timeChoicesView addSubview:_dateDisplayLab];
+                strongSelf.dateDisplayLab.text = @"今天不可以预约哦";
+//                NSLog(@"%@",strongSelf.dateDisplayLab.text);
+            }
+        }
+        
+    } failure:^(NSError *error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        [MBHudSet dismiss:strongSelf.view];
+        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师订单列表错误，错误代码：%ld",error.code]andOnView:strongSelf.view];
+    }];
+    
+    
+}
+
+
 #pragma mark - 输入个人信息cell
 - (void)inputInfoWithBackView:(UIView *)bgView {
     
     //点击空白收键盘
-    UITapGestureRecognizer *tap           = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    UITapGestureRecognizer *tap           = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideKeyboard)];
     [bgView addGestureRecognizer:tap];
     tap.delegate                          = self;
     
@@ -534,21 +670,21 @@
     _sexTextField.delegate                 = self;
     _sexTextField.placeholder              = @"性别";
     _sexTextField.placeholderActiveColor   = MAINCOLOR;
-    _sexTextField.hintText                 = @"请输入 \"男\" \"女\" 或\"其他\"";
+    _sexTextField.hintText                 = @"请输入 \"男\" \"女\"";
     [_sexTextField setValidationBlock:^NSDictionary *(LRTextField *textField, NSString *text) {
         [NSThread sleepForTimeInterval:1.0];
         
-        if ([text isEqualToString:@"男"] || [textField.text isEqualToString:@"女"] || [textField.text isEqualToString:@"其他"]) {
+        if ([text isEqualToString:@"男"] || [textField.text isEqualToString:@"女"]) {
             return @{ VALIDATION_INDICATOR_COLOR : MAINCOLOR };
         }
-        return @{ VALIDATION_INDICATOR_NO : @"请输入 \"男\" \"女\" 或\"其他\"" };
+        return @{ VALIDATION_INDICATOR_NO : @"请输入 \"男\" \"女\"" };
     }];
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 30)];
     view.layer.borderWidth = 0.5;
     view.layer.borderColor = [UIColor lightGrayColor].CGColor;
     view.backgroundColor = [UIColor whiteColor];
     _sexTextField.inputAccessoryView = view;
-    NSArray *arr = @[@"男",@"女",@"其他"];
+    NSArray *arr = @[@"男",@"女"];
     for (int i = 0; i < arr.count; i++) {
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(5+i*55, 0, 50, 30)];
         [btn setTitle:arr[i] forState:UIControlStateNormal];
@@ -602,31 +738,7 @@
     _sexTextField.text = btn.titleLabel.text;
 }
 
-//- (void)infoSwitch:(UISwitch *)infoSwitch {
-//    
-//    if (infoSwitch.isOn == YES) {
-//        NSLog(@"%@",kFetchUserInfo);
-//        _nameTextField.text = kFetchUserName;
-//        _nameTextField.enabled = NO;
-//        _nameTextField.placeholder = @"";
-//
-//        
-//    } else {
-//        NSLog(@"aaaaaa");
-//        
-//        _nameTextField.text = @"";
-//        _nameTextField.enabled = YES;
-//        _nameTextField.placeholder = @"姓名";
-//
-//
-//    }
-//    
-//}
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-//    if (![text isEqualToString:@""]) {
-//        _placeholderLabel.hidden = YES;
-//    }
     
     if ([text isEqualToString:@""] && range.location == 0 && range.length == 1) {
         _placeholderLabel.hidden = NO;
@@ -639,22 +751,26 @@
 #pragma mark 结束编辑
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     
+    _nameTextField.enableAnimation = YES;
+    _ageTextField.enableAnimation = YES;
+    _phoneTextField.enableAnimation = YES;
+    _emailTextField.enableAnimation = YES;
+    _sexTextField.enableAnimation = YES;
+    
     _orderModel.orderInfoName  = _nameTextField.text;
     _orderModel.orderInfoAge   = [_ageTextField.text integerValue];
     _orderModel.orderInfoPhone = _phoneTextField.text;
     _orderModel.orderInfoEmail = _emailTextField.text;
-    if ([_sexTextField.text isEqualToString:@"男"]) {
-        _orderModel.orderInfoSex = Male;
-    } else if ([_sexTextField.text isEqualToString:@"女"]) {
-        _orderModel.orderInfoSex = Female;
-    } else if ([_sexTextField.text isEqualToString:@"其他"]) {
-        _orderModel.orderInfoSex = Other;
-    } else {
-        _orderModel.orderInfoSex = Error;
-    }
+    _orderModel.orderInfoSex = _sexTextField.text;
     
     [self reflashInfo];
     
+    return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    
+    _orderModel.orderInfoDetail = _detailTextView.text;
     return YES;
 }
 
@@ -694,8 +810,9 @@
     }];
 }
 
-- (void)dismissKeyboard {
-    [self.view endEditing:YES];
+- (void)hideKeyboard {
+//    [self.view endEditing:YES];
+    [[[UIApplication sharedApplication]keyWindow]endEditing:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -735,7 +852,7 @@
 #pragma mark 刷新信息
 - (void)reflashInfo {
     
-    if (NULLString(_orderModel.orderDateTimeStart) ||  NULLString(_orderModel.orderDateTimeEnd) || NULLString(_nameTextField.text) ||  NULLString(_sexTextField.text) || (_orderModel.orderInfoSex == Error)  ||  NULLString(_ageTextField.text) || NULLString(_phoneTextField.text)) {
+    if (NULLString(_orderModel.orderDateTimeStart) ||  NULLString(_orderModel.orderDateTimeEnd) || NULLString(_nameTextField.text) ||  NULLString(_sexTextField.text) ||  NULLString(_ageTextField.text) || NULLString(_phoneTextField.text)) {
         self.confirmBtn.backgroundColor = [UIColor lightGrayColor];
         
     } else {
@@ -768,7 +885,11 @@
     [priceStr stringByReplacingOccurrencesOfString:@" 元" withString:@""];
     params[@"TotalFee"]            = @([priceStr integerValue]);
     params[@"ConSultName"]         = _orderModel.orderInfoName;
-    params[@"EnumSexType"]         = @(_orderModel.orderInfoSex);
+    if ([_orderModel.orderInfoSex isEqualToString:@"男"]) {
+        params[@"EnumSexType"] = @(0);
+    } else if ([_orderModel.orderInfoSex isEqualToString:@"男"]) {
+        params[@"EnumSexType"] = @(1);
+    }
     params[@"ConsultAge"]          = @(_orderModel.orderInfoAge);
     params[@"ConsultPhone"]        = _orderModel.orderInfoPhone;
     if (_emailTextField.text) {

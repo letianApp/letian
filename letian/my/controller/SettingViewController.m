@@ -87,6 +87,7 @@
     [alertControl addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         
         __strong typeof(self) strongSelf = weakSelf;
+        [[RCIMClient sharedRCIMClient] clearMessagesUnreadStatus:ConversationType_PRIVATE targetId:kFetchUserId];
         [GQUserManager removeAllUserInfo];
         [[RCIM sharedRCIM] logout];
         LoginViewController *loginVc = [[LoginViewController alloc]init];

@@ -32,7 +32,7 @@
 @property (nonatomic, strong) NSMutableArray      *counselorTitleArr;
 @property (nonatomic, copy  ) NSArray             *priceDataSource;
 @property (nonatomic, strong) NSMutableDictionary *requestParams;
-
+@property (nonatomic        ) NSInteger           maxPrice;
 
 @property (nonatomic, strong) NSMutableArray      *priceData;
 @property (nonatomic, copy  ) NSString            *minPriceStr;
@@ -67,10 +67,11 @@
     [self customNavigation];
     [self creatTableView];
 
-    [MBHudSet showStatusOnView:self.view];
+//    [MBHudSet showStatusOnView:self.view];
     
-    [self getCounsultTypeSource];
-    [self getCounsultListSource];
+    [self relodeDate];
+//    [self getCounsultTypeSource];
+//    [self getCounsultListSource];
     
     //    [self creatClassifiedSection];
     [self setupMJRefresh];
@@ -147,6 +148,13 @@
     
 }
 
+- (void)relodeDate {
+    
+    [self getCounsultTypeSource];
+    [self getCounsultListSource];
+    
+}
+
 #pragma mark 获取咨询师类型信息
 - (void)getCounsultTypeSource {
     
@@ -214,13 +222,15 @@
     
     __weak typeof(self) weakSelf   = self;
     
+    [MBHudSet showStatusOnView:self.view];
+
     NSMutableString *requestConsultListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestConsultListString appendFormat:@"%@/",API_MODULE_CONSULT];
     [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
     
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
         
-        NSLog(@"%@",responseObject);
+//        NSLog(@"%@",responseObject);
         __strong typeof(self) strongSelf = weakSelf;
         [strongSelf.counselorArr removeAllObjects];
         strongSelf.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
@@ -229,6 +239,15 @@
             [strongSelf.counselorInfoTableview addSubview:strongSelf.noDataLab];
         } else {
             [strongSelf.noDataLab removeFromSuperview];
+            
+            strongSelf.maxPrice = self.counselorArr[0].ConsultFee;
+            for (int i = 0; i < self.counselorArr.count; i++) {
+                
+                NSInteger price = self.counselorArr[i].ConsultFee;
+                if (price > strongSelf.maxPrice) {
+                    strongSelf.maxPrice = price;
+                }
+            }
         }
         
         [MBHudSet dismiss:strongSelf.view];
@@ -238,7 +257,7 @@
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongSelf = weakSelf;
-//        [MBHudSet dismiss:strongSelf.view];
+        [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorInfoTableview.mj_header endRefreshing];
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
@@ -251,11 +270,7 @@
 
 #pragma mark 创建分类栏
 - (void)creatClassifiedSection {
-    
-    //    _isAllExpertise = YES;
-    //    _isAllTitle = YES;
-    //    _isAllPrice = YES;
-    
+
     _priceDataSource = @[@"全部价格",@"最低价",@"最高价"];
         
     [self customClassifiedSectionBtnFotData:_counselorCategoryArr withLineNumber:0];
@@ -384,8 +399,8 @@
             [maxPriceBtn setTitle:@"最高价" forState:UIControlStateNormal];
             [maxPriceBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
             
-            allPriceBtn.selected         = YES;
-            allPriceBtn.backgroundColor  = MAINCOLOR;
+            allPriceBtn.selected = YES;
+            allPriceBtn.backgroundColor = MAINCOLOR;
             [_requestParams removeObjectForKey:@"MinFee"];
             [_requestParams removeObjectForKey:@"MaxFee"];
             
@@ -398,6 +413,7 @@
             
             if ([minPriceBtn.titleLabel.text isEqualToString:@"最低价"]) {
                 [MBHudSet showText:@"请确认最低价" andOnView:self.view];
+                return;
             } else {
                 _isMinPrice = NO;
                 [self.sl_popupController presentContentView:[self setupChoosePriceViewForBtn:btn]];
@@ -412,8 +428,23 @@
 - (UIView *)setupChoosePriceViewForBtn:(UIButton *)btn {
     
     if (_isMinPrice == YES) {
+        
+//        NSInteger price = self.counselorArr[0].ConsultFee;
+//
+//        for (int i = 0; i < self.counselorArr.count; i++) {
+//            
+//            NSLog(@"价格：%ld",self.counselorArr[i].ConsultFee);
+//            NSInteger maxPrice = self.counselorArr[i].ConsultFee;
+//            if (maxPrice > price) {
+//                price = maxPrice;
+//            }
+//            
+//        }
+//        NSLog(@"价格：%ld",price);
+        
+        
         _priceData = [NSMutableArray new];
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < (_maxPrice / 100 + 2); i++) {
             [_priceData addObject:[NSString stringWithFormat:@"%d",i*100]];
         }
         
@@ -516,7 +547,7 @@
 #pragma mark 创建tabview
 - (void)creatTableView {
     
-    _counselorInfoTableview                 = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, SCREEN_H-statusBar_H - navigationBar_H) style:UITableViewStylePlain];
+    _counselorInfoTableview                 = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, SCREEN_H - statusBar_H - navigationBar_H - tabBar_H) style:UITableViewStylePlain];
     _counselorInfoTableview.dataSource      = self;
     _counselorInfoTableview.delegate        = self;
     _counselorInfoTableview.backgroundColor = [UIColor snowColor];
@@ -526,18 +557,20 @@
     _counselorInfoTableview.tableHeaderView = _mainHeadView;
     _counselorInfoTableview.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
-    _noDataLab                    = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W*0.3, SCREEN_H*0.4, SCREEN_W*0.4, SCREEN_W*0.2)];
-    _noDataLab.layer.borderColor  = MAINCOLOR.CGColor;
-    _noDataLab.layer.borderWidth  = 1;
-    _noDataLab.layer.cornerRadius = 15;
-    _noDataLab.text               = @"哈哈哈哈哈";
+    _noDataLab = [[UILabel alloc]initWithFrame:CGRectMake(0, SCREEN_H*0.4, SCREEN_W, SCREEN_W*0.2)];
+//    _noDataLab.layer.borderColor  = MAINCOLOR.CGColor;
+//    _noDataLab.layer.borderWidth  = 1;
+//    _noDataLab.layer.cornerRadius = 15;
+    _noDataLab.text               = @"没有符合条件的咨询师";
     _noDataLab.textColor          = MAINCOLOR;
     _noDataLab.textAlignment      = NSTextAlignmentCenter;
+//    [_noDataLab sizeToFit];
+
 }
 
 - (void)setupMJRefresh {
     
-    MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getCounsultListSource)];
+    MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(relodeDate)];
     //    header.lastUpdatedTimeLabel.textColor = MAINCOLOR;
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.textColor = MAINCOLOR;
