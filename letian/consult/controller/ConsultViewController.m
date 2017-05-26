@@ -32,6 +32,7 @@
 @property (nonatomic, strong) NSMutableArray      *counselorTitleArr;
 @property (nonatomic, copy  ) NSArray             *priceDataSource;
 @property (nonatomic, strong) NSMutableDictionary *requestParams;
+@property (nonatomic        ) NSInteger           pageIndex;
 @property (nonatomic        ) NSInteger           maxPrice;
 
 @property (nonatomic, strong) NSMutableArray      *priceData;
@@ -152,8 +153,8 @@
     
     [self getCounsultTypeSource];
     [self getCounsultListSource];
-    
 }
+
 
 #pragma mark 获取咨询师类型信息
 - (void)getCounsultTypeSource {
@@ -220,6 +221,9 @@
 #pragma mark 获取咨询师列表
 - (void)getCounsultListSource {
     
+    _pageIndex = 1;
+    [_counselorInfoTableview.mj_footer endRefreshing];
+
     __weak typeof(self) weakSelf   = self;
     
     [MBHudSet showStatusOnView:self.view];
@@ -228,6 +232,10 @@
     [requestConsultListString appendFormat:@"%@/",API_MODULE_CONSULT];
     [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
     
+//    [_requestParams setValue:@(20) forKey:@"pageSize"];
+    [_requestParams setValue:@(_pageIndex) forKey:@"pageIndex"];
+    NSLog(@"re:%@",_requestParams);
+
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
         
 //        NSLog(@"%@",responseObject);
@@ -236,10 +244,12 @@
         strongSelf.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         
         if (strongSelf.counselorArr.count == 0) {
+            strongSelf.counselorInfoTableview.mj_footer.hidden = YES;
             [strongSelf.counselorInfoTableview addSubview:strongSelf.noDataLab];
         } else {
             [strongSelf.noDataLab removeFromSuperview];
-            
+            strongSelf.counselorInfoTableview.mj_footer.hidden = NO;
+
             strongSelf.maxPrice = self.counselorArr[0].ConsultFee;
             for (int i = 0; i < self.counselorArr.count; i++) {
                 
@@ -253,6 +263,7 @@
         [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorInfoTableview reloadData];
         [strongSelf.counselorInfoTableview.mj_header endRefreshing];
+        [strongSelf.counselorInfoTableview.mj_footer endRefreshing];
         
     } failure:^(NSError *error) {
         
@@ -267,6 +278,56 @@
         }
     }];
 }
+
+- (void)getMoreDate {
+    
+    _pageIndex++;
+    __weak typeof(self) weakSelf   = self;
+    
+//    [MBHudSet showStatusOnView:self.view];
+    
+    NSMutableString *requestConsultListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestConsultListString appendFormat:@"%@/",API_MODULE_CONSULT];
+    [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
+    
+    NSLog(@"re:%@",_requestParams);
+    [_requestParams setValue:@(_pageIndex) forKey:@"pageIndex"];
+    
+    [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+        NSArray <counselorInfoModel  *> *moreConselor =  [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        if (moreConselor.count >= 10) {
+            strongSelf.counselorInfoTableview.mj_footer.hidden = NO;
+            [strongSelf.counselorInfoTableview.mj_footer endRefreshing];
+        }else{
+            [strongSelf.counselorInfoTableview.mj_footer endRefreshingWithNoMoreData];
+        }
+
+        [strongSelf.counselorArr addObjectsFromArray:moreConselor];
+        NSLog(@"底：%ld",strongSelf.counselorArr.count);
+
+        [strongSelf.counselorInfoTableview reloadData];
+        
+        
+    } failure:^(NSError *error) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+        [MBHudSet dismiss:strongSelf.view];
+        [strongSelf.counselorInfoTableview.mj_header endRefreshing];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
+        } else {
+            [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
+        }
+        [strongSelf.counselorInfoTableview.mj_footer endRefreshing];
+
+    }];
+    
+}
+
+
 
 #pragma mark 创建分类栏
 - (void)creatClassifiedSection {
@@ -577,6 +638,10 @@
     header.stateLabel.hidden = YES;
     _counselorInfoTableview.mj_header = header;
     _counselorInfoTableview.mj_header.automaticallyChangeAlpha = YES;
+    
+    _counselorInfoTableview.mj_footer = [RefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(getMoreDate)];
+    _counselorInfoTableview.mj_footer.hidden = YES;
+
     
     
 }
