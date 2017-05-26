@@ -184,6 +184,7 @@
 		77D0EA0C1EB5DD4700254806 /* WebArticleCateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D0EA0B1EB5DD4700254806 /* WebArticleCateModel.m */; };
 		77D0EA511EB60FDD00254806 /* ArticleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D0EA501EB60FDD00254806 /* ArticleListViewController.m */; };
 		77D0EA551EB6276700254806 /* GQScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D0EA541EB6276700254806 /* GQScrollView.m */; };
+		77D2597B1ED71DA000C1EBC1 /* GQDatePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D2597A1ED71DA000C1EBC1 /* GQDatePickView.m */; };
 		77D2BF971E66B3D0000B9978 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D2BF951E66B3D0000B9978 /* RegistViewController.m */; };
 		77D2BF981E66B3D0000B9978 /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BF961E66B3D0000B9978 /* RegistViewController.xib */; };
 		77D2BFA11E66C404000B9978 /* SetAcountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D2BF9F1E66C404000B9978 /* SetAcountViewController.m */; };
@@ -597,6 +598,8 @@
 		77D0EA501EB60FDD00254806 /* ArticleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleListViewController.m; sourceTree = "<group>"; };
 		77D0EA531EB6276700254806 /* GQScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQScrollView.h; sourceTree = "<group>"; };
 		77D0EA541EB6276700254806 /* GQScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQScrollView.m; sourceTree = "<group>"; };
+		77D259791ED71DA000C1EBC1 /* GQDatePickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQDatePickView.h; sourceTree = "<group>"; };
+		77D2597A1ED71DA000C1EBC1 /* GQDatePickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQDatePickView.m; sourceTree = "<group>"; };
 		77D2BF941E66B3D0000B9978 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		77D2BF951E66B3D0000B9978 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		77D2BF961E66B3D0000B9978 /* RegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
@@ -1445,6 +1448,7 @@
 			children = (
 				77B5BD3C1EADA6A50034497D /* GQControls.h */,
 				77B5BD3D1EADA6A50034497D /* GQControls.m */,
+				77D259781ED71DA000C1EBC1 /* GQDatePickView */,
 				09591B721ECAB00A0040CD1C /* ImageEffects */,
 				776CF2A31EB78E9D00CE9620 /* GQNewFeature */,
 				7753122D1EB64512008AA19D /* GQSegmentView */,
@@ -1520,6 +1524,16 @@
 				77D0EA541EB6276700254806 /* GQScrollView.m */,
 			);
 			path = GQScrollView;
+			sourceTree = "<group>";
+		};
+		77D259781ED71DA000C1EBC1 /* GQDatePickView */ = {
+			isa = PBXGroup;
+			children = (
+				77D259791ED71DA000C1EBC1 /* GQDatePickView.h */,
+				77D2597A1ED71DA000C1EBC1 /* GQDatePickView.m */,
+			);
+			name = GQDatePickView;
+			path = HMDatePickView;
 			sourceTree = "<group>";
 		};
 		77DA5DC91E666B92003FAE0C /* Login */ = {
@@ -1845,6 +1859,7 @@
 				7784D8AC1E6E80C5004AB0CC /* MessageViewController.m in Sources */,
 				776CF2BC1EB7900A00CE9620 /* UIView+TYLaunchAnimation.m in Sources */,
 				77283D8F1ED67247004BF2F5 /* TestHistoryViewController.m in Sources */,
+				77D2597B1ED71DA000C1EBC1 /* GQDatePickView.m in Sources */,
 				0965FBC81E824AF900C0FBAD /* OrderPageVC.m in Sources */,
 				0965FBC31E8230B400C0FBAD /* KuroTextField.m in Sources */,
 				7722F0951EB4500B001DCF5F /* DTTimePeriod.m in Sources */,

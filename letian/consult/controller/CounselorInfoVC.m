@@ -362,6 +362,7 @@
     } else {
         
         UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"登陆后可以享受15分钟免费咨询哦" preferredStyle:UIAlertControllerStyleAlert];
+        
         [self presentViewController:alertControl animated:YES completion:nil];
         
         __weak typeof(self) weakSelf    = self;
@@ -387,6 +388,7 @@
     } else {
         
         UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
+        alertControl.view.tintColor=[UIColor blackColor];
         [self presentViewController:alertControl animated:YES completion:nil];
 
         __weak typeof(self) weakSelf    = self;

@@ -236,7 +236,7 @@
     }else if (tap.view.tag==102) {
        TestViewController *testVc=[[TestViewController alloc]init];
         testVc.hidesBottomBarWhenPushed=YES;
-        [self.navigationController pushViewController:testVc animated:YES];
+        [self.navigationController pushViewController:testVc animated:NO];
     //跳到活动
     }else if (tap.view.tag==103){
         ActivityListViewController *activityVc=[[ActivityListViewController alloc]init];

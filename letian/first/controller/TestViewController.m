@@ -12,7 +12,7 @@
 #import "TestListViewController.h"
 #import "TestHistoryViewController.h"
 
-@interface TestViewController ()<UITableViewDataSource,UITableViewDelegate,GQSegmentDelegate>
+@interface TestViewController ()<GQSegmentDelegate>
 
 @property (nonatomic,strong ) GQSegmentedControl *segment;
 

@@ -127,7 +127,9 @@
 {
     ActivityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ActivityCell" forIndexPath:indexPath];
     [cell.ActivityImageView sd_setImageWithURL:[NSURL URLWithString:self.activeListArray[indexPath.row].ActiveImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
-
+    cell.ActivityImageView.contentMode=UIViewContentModeScaleAspectFill;
+//    cell.ActivityImageView.layer.masksToBounds=YES;
+    cell.ActivityImageView.clipsToBounds=YES;
     cell.ActivityTitleLabel.text=self.activeListArray[indexPath.row].Name;
     return cell;
 }
