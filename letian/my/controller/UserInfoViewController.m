@@ -12,6 +12,7 @@
 #import "UIImage+YYExtension.h"
 #import "MJExtension.h"
 #import <RongIMKit/RongIMKit.h>
+#import "GQDatePickView.h"
 
 
 @interface UserInfoViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -21,6 +22,7 @@
 @property (nonatomic,strong)UIImageView *headImageView;
 @property (nonatomic,strong)UILabel *nameLabel;
 @property (nonatomic,strong)UILabel *sexLabel;
+@property (nonatomic,strong)UILabel *birthdayLabel;
 @property (nonatomic,strong)UILabel *phoneLabel;
 @property (nonatomic,strong)UIButton *getCodeBtn;
 @property (nonatomic,strong) NSTimer *timer;
@@ -35,7 +37,7 @@
     [super viewDidLoad];
     self.time=60;
     
-    self.dataArray=@[@"头像",@"昵称",@"性别"];
+    self.dataArray=@[@"头像",@"昵称",@"性别",@"生日"];
     
     [self createTableView];
     
@@ -93,7 +95,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section==0) {
-        return 3;
+        return self.dataArray.count;
     }
     return 1;
 }
@@ -137,13 +139,18 @@
             [cell.contentView addSubview:self.nameLabel];
         }else if (indexPath.row==2) {
             //性别
-            lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
             self.sexLabel=[GQControls createLabelWithFrame:CGRectMake(SCREEN_W-190, 15, 150, 20) andText:self.userInfoModel.SexString andTextColor:[UIColor darkGrayColor] andFontSize:15];
             if ([self.userInfoModel.SexString isEqualToString:@"其他"]) {
                 self.sexLabel.text=@"";
             }
             self.sexLabel.textAlignment=NSTextAlignmentRight;
             [cell.contentView addSubview:self.sexLabel];
+        }else if (indexPath.row==3){
+            //生日
+            lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
+            self.birthdayLabel=[GQControls createLabelWithFrame:CGRectMake(SCREEN_W-190, 15, 150, 20) andText:[self.userInfoModel.Birhtday substringToIndex:11] andTextColor:[UIColor darkGrayColor] andFontSize:15];
+            self.birthdayLabel.textAlignment=NSTextAlignmentRight;
+            [cell.contentView addSubview:self.birthdayLabel];
         }
     }else if (indexPath.section==1){
         //手机号
@@ -177,6 +184,9 @@
         }else if (indexPath.row==2){
             //修改性别
             [self changeSex];
+        }else if (indexPath.row==3){
+            //修改生日
+            [self changeBirthday];
         }
     }else{
         //绑定手机
@@ -253,7 +263,7 @@
         [MBHudSet dismiss:self.view];
         NSLog(@"&&&&&&&&&*修改昵称%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
-            [self requestData];//刷新界面
+            self.nameLabel.text=nickName;
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
@@ -309,6 +319,52 @@
     }];
 }
 
+#pragma mark------------弹出生日选择器
+
+-(void)changeBirthday{
+    
+    GQDatePickView *datePickVC = [[GQDatePickView alloc] initWithFrame:self.view.frame];
+    datePickVC.date = [NSDate date];
+    //日期回调
+    datePickVC.completeBlock = ^(NSString *selectDate) {
+        NSLog(@"时间%@",selectDate);
+        [self requestChangeBirthday:selectDate];
+    };
+    //配置属性
+    [datePickVC configuration];
+    
+    [self.view addSubview:datePickVC];
+    
+}
+
+#pragma mark------------修改生日
+-(void)requestChangeBirthday:(NSString *)birthdayStr{
+    
+    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_USER];
+    [requestString appendString:API_NAME_CHANGEBIRTHDAY];
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    params[@"birthday"]         =birthdayStr;
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBHudSet dismiss:self.view];
+        NSLog(@"修改生日：%@",responseObject);
+        if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
+            self.birthdayLabel.text=birthdayStr;
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+        }
+    }];
+
+}
 
 #pragma mark------------发送验证码
 

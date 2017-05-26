@@ -7,8 +7,9 @@
 //
 
 #import "TestListViewController.h"
+#import <WebKit/WebKit.h>
 
-@interface TestListViewController ()
+@interface TestListViewController ()<WKNavigationDelegate,WKUIDelegate>
 
 @end
 
@@ -16,8 +17,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.automaticallyAdjustsScrollViewInsets=NO;
+    [self createWebView];
 }
+
+
+-(void)createWebView
+{
+    
+    NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://admin.rightpsy.com/PsychTest/MeasureIndex?userid=%@",kFetchUserId]]];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-64 )];
+    webView.allowsBackForwardNavigationGestures=YES;
+    [webView loadRequest:request];
+    webView.navigationDelegate=self;
+    webView.UIDelegate = self;
+    webView.scrollView.showsVerticalScrollIndicator=NO;
+    webView.scrollView.bounces = NO;//禁止下拉
+    [self.view addSubview:webView];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

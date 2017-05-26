@@ -60,6 +60,9 @@
 //修改性别
 #define API_NAME_CHANGESEX           @"ModifyUserSex"
 
+//修改性别
+#define API_NAME_CHANGEBIRTHDAY           @"ModifyUserBirthday"
+
 //绑定手机
 #define API_NAME_BINDINGPHONE        @"BindMobilePhone"
 
