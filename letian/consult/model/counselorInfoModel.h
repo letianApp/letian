@@ -61,7 +61,7 @@
 @property (nonatomic, copy  ) NSString  *Idea;
 
 /**
- 咨询师价格
+ 咨询师单价
  */
 @property (nonatomic, assign) NSInteger  ConsultFee;
 

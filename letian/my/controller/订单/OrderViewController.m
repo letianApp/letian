@@ -176,18 +176,21 @@
     if ([kFetchUserType integerValue]==1) {
         //如果用户是咨客
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.orderList[indexPath.row].DoctorHeadImg]];
-        cell.nameLabel.text=self.orderList[indexPath.row].DoctorName;
-        
-        UIGestureRecognizer *tap=[[UIGestureRecognizer alloc]initWithTarget:self action:@selector(getDoctorInfo:)];
+        cell.nameLabel.text = self.orderList[indexPath.row].DoctorName;
+//        cell.askBtn.tag = self.orderList[indexPath.row].DoctorID;
+//        NSLog(@"ID:%ld",cell.askBtn.tag);
+        UIGestureRecognizer *tap = [[UIGestureRecognizer alloc]initWithTarget:self action:@selector(getDoctorInfo:)];
         cell.headImageView.userInteractionEnabled=YES;
         [cell.headImageView addGestureRecognizer:tap];
     }else{
         //如果用户是咨询师
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.orderList[indexPath.row].UserHeadImg]];
-        cell.nameLabel.text=self.orderList[indexPath.row].UserName;
+        cell.nameLabel.text = self.orderList[indexPath.row].UserName;
+//        cell.askBtn.tag = self.orderList[indexPath.row].UserID;
+//        NSLog(@"ID:%ld",cell.askBtn.tag);
+
     }
-    
-    [cell.askBtn addTarget:self action:@selector(clickAskBtn:) forControlEvents:UIControlEventTouchUpInside];
+
     
     //咨询方式
     if (self.orderList[indexPath.row].EnumConsultType==1) {
@@ -198,9 +201,9 @@
         cell.wayLabel.text=[NSString stringWithFormat:@"咨询方式：电话咨询"];
     }
     //咨询时间
-    NSString *dataStr=[self.orderList[indexPath.row].AppointmentDate substringWithRange:NSMakeRange(0, 10)];
-    NSString *startTime=[self.orderList[indexPath.row].StartTime substringWithRange:NSMakeRange(0, 5)];
-    NSString *endTime=[self.orderList[indexPath.row].EndTime substringWithRange:NSMakeRange(0, 5)];
+    NSString *dataStr = [self.orderList[indexPath.row].AppointmentDate substringWithRange:NSMakeRange(0, 10)];
+    NSString *startTime = [self.orderList[indexPath.row].StartTime substringWithRange:NSMakeRange(0, 5)];
+    NSString *endTime = [self.orderList[indexPath.row].EndTime substringWithRange:NSMakeRange(0, 5)];
     cell.timeLabel.text=[NSString stringWithFormat:@"咨询时间：%@ %@～%@",dataStr,startTime,endTime];
     //总计金额
     cell.moneyLabel.text=[NSString stringWithFormat:@"共%li小时，总计%.2f元",self.orderList[indexPath.row].ConsultTimeLength,self.orderList[indexPath.row].TotalFee];
@@ -224,22 +227,34 @@
             [self.tableView reloadData];
         }
         cell.timeChangeLabel.hidden=NO;
+        cell.askBtn.hidden = YES;
+
     }else if (self.orderList[indexPath.row].EnumOrderState==1){
         //已预约
         [cell.stateButton setTitle:@"已预约" forState:UIControlStateNormal];
         cell.stateButton.userInteractionEnabled=NO;
+        cell.askBtn.hidden = NO;
+        cell.askBtn.tag = indexPath.row + 100;
+        [cell.askBtn addTarget:self action:@selector(clickAskBtn:) forControlEvents:UIControlEventTouchUpInside];
+        NSLog(@"ID:%ld",cell.askBtn.tag);
+
     }else if (self.orderList[indexPath.row].EnumOrderState==10){
         //已完成
         [cell.stateButton setTitle:@"已完成" forState:UIControlStateNormal];
         cell.stateButton.userInteractionEnabled=NO;
+        cell.askBtn.hidden = YES;
     }else if (self.orderList[indexPath.row].EnumOrderState==15){
         //退款中
         [cell.stateButton setTitle:@"退款中" forState:UIControlStateNormal];
         cell.stateButton.userInteractionEnabled=NO;
+        cell.askBtn.hidden = YES;
+
     }else if (self.orderList[indexPath.row].EnumOrderState==30){
         //已退款
         [cell.stateButton setTitle:@"已退款" forState:UIControlStateNormal];
         cell.stateButton.userInteractionEnabled=NO;
+        cell.askBtn.hidden = YES;
+
     }
     return cell;
 }
@@ -257,8 +272,14 @@
     ChatViewController *chatVc = [[ChatViewController alloc]init];
     chatVc.hidesBottomBarWhenPushed = YES;
     chatVc.conversationType = ConversationType_PRIVATE;
-//    chatVc.targetId = [NSString stringWithFormat:@"%ld",self.counselModel.UserID];
-//    chatVc.title = self.counselModel.UserName;
+    chatVc.targetId = [NSString stringWithFormat:@"%ld",self.orderList[btn.tag - 100].DoctorID];
+//    if ([kFetchUserType integerValue] == 1) {
+//        chatVc.title = [NSString stringWithFormat:@"%ld",btn.tag];
+//    }
+//    chatVc.title = [NSString stringWithFormat:@"%ld",btn.tag];
+    chatVc.title = self.orderList[btn.tag - 100].DoctorName;
+
+
     [self.navigationController pushViewController:chatVc animated:YES];
 
     

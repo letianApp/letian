@@ -149,9 +149,7 @@
     [btn addSubview:self.titleLab];
     self.titleLab.text = @"有什么想和小乐说的吗";
     self.titleLab.textColor = MAINCOLOR;
-    
-    NSLog(@"idd:%@",[self.serviceInfo.userId class]);
-    
+
     self.emptyConversationView = bgView;
     
 }

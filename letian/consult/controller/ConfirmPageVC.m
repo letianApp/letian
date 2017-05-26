@@ -63,6 +63,7 @@
 @property (nonatomic, strong) UIButton               *confirmBtn;
 
 @property (nonatomic, strong) UITabBar               *tabBar;
+@property (nonatomic        ) float                  totalPrice;
 @property (nonatomic, strong) UILabel                *priceLab;
 
 @end
@@ -551,7 +552,14 @@
     
     [self animationbegin:btn];
     [_endBtn setTitle:[NSString stringWithFormat:@"%@ 小时",_hourStr] forState:UIControlStateNormal];
-    [_priceLab setText:[NSString stringWithFormat:@"%ld 元",[_hourStr integerValue] * self.counselModel.ConsultFee]];
+    if ([_hourStr intValue] > self.counselModel.ConsultPreferDateLength) {
+        
+        _totalPrice = [_hourStr integerValue] * self.counselModel.ConsultFee * self.counselModel.ConsultDisCount;
+    } else {
+        _totalPrice = [_hourStr integerValue] * self.counselModel.ConsultFee;
+    }
+    _orderModel.orderPrice = _totalPrice;
+    [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_totalPrice]];
     
     NSRange rag = {0,2};
     NSInteger startTime = [[_orderModel.orderDateTimeStart substringWithRange:rag] integerValue];
@@ -864,9 +872,9 @@
     params[@"StartTime"]           = _orderModel.orderDateTimeStart;
     params[@"EndTime"]             = _orderModel.orderDateTimeEnd;
     params[@"EnumConsultType"]     = @(_orderModel.consultType);
-    NSString *priceStr = _priceLab.text;
-    [priceStr stringByReplacingOccurrencesOfString:@" 元" withString:@""];
-    params[@"TotalFee"]            = @([priceStr integerValue]);
+//    NSString *priceStr = _priceLab.text;
+//    [priceStr stringByReplacingOccurrencesOfString:@" 元" withString:@""];
+    params[@"TotalFee"]            = @(_orderModel.orderPrice);
     params[@"ConSultName"]         = _orderModel.orderInfoName;
     if ([_orderModel.orderInfoSex isEqualToString:@"男"]) {
         params[@"EnumSexType"] = @(0);

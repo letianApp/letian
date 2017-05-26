@@ -356,8 +356,8 @@
         ChatViewController *chatVc = [[ChatViewController alloc]init];
         chatVc.hidesBottomBarWhenPushed = YES;
         chatVc.conversationType = ConversationType_PRIVATE;
-        chatVc.targetId = [NSString stringWithFormat:@"%ld",self.counselModel.UserID];
-        chatVc.title = self.counselModel.UserName;
+        chatVc.targetId = @"12";
+        chatVc.title = @"小乐";
         [self.navigationController pushViewController:chatVc animated:YES];
     } else {
         

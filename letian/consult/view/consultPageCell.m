@@ -25,6 +25,7 @@
     
     self.conselorImage.layer.cornerRadius = self.conselorImage.frame.size.width / 2;
     self.conselorImage.clipsToBounds      = YES;
+    self.conselorImage.contentMode        = UIViewContentModeScaleAspectFill;
     self.conselorName.textColor           = MAINCOLOR;
     self.conselorName.font                = [UIFont boldSystemFontOfSize:15];
     self.conselorStatus.textColor         = [UIColor lightGrayColor];

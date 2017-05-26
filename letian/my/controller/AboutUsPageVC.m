@@ -82,7 +82,7 @@
     titleLab.textAlignment       = NSTextAlignmentCenter;
     UILabel *versionLab          = [[UILabel alloc]initWithFrame:CGRectMake(logoView.x, titleLab.bottom, SCREEN_W/4, 20)];
     [headView addSubview:versionLab];
-    versionLab.text              = @"v0.8";
+    versionLab.text              = @"v1.0";
     versionLab.textAlignment     = NSTextAlignmentCenter;
     versionLab.font              = [UIFont systemFontOfSize:15];
     versionLab.textColor         = [UIColor darkGrayColor];
