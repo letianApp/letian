@@ -177,8 +177,6 @@
         //如果用户是咨客
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.orderList[indexPath.row].DoctorHeadImg]];
         cell.nameLabel.text = self.orderList[indexPath.row].DoctorName;
-//        cell.askBtn.tag = self.orderList[indexPath.row].DoctorID;
-//        NSLog(@"ID:%ld",cell.askBtn.tag);
         UIGestureRecognizer *tap = [[UIGestureRecognizer alloc]initWithTarget:self action:@selector(getDoctorInfo:)];
         cell.headImageView.userInteractionEnabled=YES;
         [cell.headImageView addGestureRecognizer:tap];
@@ -186,11 +184,7 @@
         //如果用户是咨询师
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.orderList[indexPath.row].UserHeadImg]];
         cell.nameLabel.text = self.orderList[indexPath.row].UserName;
-//        cell.askBtn.tag = self.orderList[indexPath.row].UserID;
-//        NSLog(@"ID:%ld",cell.askBtn.tag);
-
     }
-
     
     //咨询方式
     if (self.orderList[indexPath.row].EnumConsultType==1) {
@@ -273,15 +267,8 @@
     chatVc.hidesBottomBarWhenPushed = YES;
     chatVc.conversationType = ConversationType_PRIVATE;
     chatVc.targetId = [NSString stringWithFormat:@"%ld",self.orderList[btn.tag - 100].DoctorID];
-//    if ([kFetchUserType integerValue] == 1) {
-//        chatVc.title = [NSString stringWithFormat:@"%ld",btn.tag];
-//    }
-//    chatVc.title = [NSString stringWithFormat:@"%ld",btn.tag];
     chatVc.title = self.orderList[btn.tag - 100].DoctorName;
-
-
     [self.navigationController pushViewController:chatVc animated:YES];
-
     
 }
 
@@ -301,6 +288,7 @@
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
     OrderDetailViewController *orderDetailVc=[[OrderDetailViewController alloc]init];
     orderDetailVc.orderID=self.orderList[indexPath.row].OrderID;
+    orderDetailVc.DoctorID = self.orderList[indexPath.row].DoctorID;
     [self.navigationController pushViewController:orderDetailVc animated:YES];
 }
 

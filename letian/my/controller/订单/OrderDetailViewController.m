@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
     BackButtonTag          = 30,
     FinishButtonTag        = 40,
     AskButtonTag           = 50,
+    ConsultButtonTag       = 60,
 };
 
 @implementation OrderDetailViewController
@@ -109,6 +110,12 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
             UIButton *payButton=[GQControls createButtonWithFrame:CGRectMake(SCREEN_W-95, 10, 80, 30) andTitle:@"申请退款" andTitleColor:MAINCOLOR andFontSize:13 andTag:BackButtonTag andMaskToBounds:YES andRadius:8 andBorderWidth:0.5 andBorderColor:MAINCOLOR.CGColor];
             [payButton addTarget:self action:@selector(bottombtnClick:) forControlEvents:UIControlEventTouchUpInside];
             [bottomView addSubview:payButton];
+            
+            UIButton *consultBtn = [GQControls createButtonWithFrame:CGRectMake(15, 10, 80, 30) andTitle:@"咨询" andTitleColor:MAINCOLOR andFontSize:13 andTag:ConsultButtonTag andMaskToBounds:YES andRadius:8 andBorderWidth:0.5 andBorderColor:MAINCOLOR.CGColor];
+            [consultBtn addTarget:self action:@selector(bottombtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            [bottomView addSubview:consultBtn];
+            
+            
             //已完成，退款中或已退款的订单，在此联系客服
         }else if (self.orderInfoModel.EnumOrderState==SuccessOrder || self.orderInfoModel.EnumOrderState==CancelOrder || self.orderInfoModel.EnumOrderState==BackIngOrder){
         
@@ -134,6 +141,7 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
 }
 
 -(void)bottombtnClick:(UIButton *)btn{
+    [self animationbegin:btn];
     //点击现在付款
     if (btn.tag==PayButtonTag) {
         PayPageVC *payVc=[[PayPageVC alloc]init];
@@ -152,6 +160,17 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
     }else if (btn.tag==AskButtonTag){
         //联系客服
         ChatViewController *chatVc=[[ChatViewController alloc]init];
+        chatVc.hidesBottomBarWhenPushed = YES;
+        chatVc.conversationType = ConversationType_PRIVATE;
+        chatVc.targetId = @"12";
+        chatVc.title = @"小乐";
+        [self.navigationController pushViewController:chatVc animated:YES];
+    } else if (btn.tag == ConsultButtonTag) {
+        ChatViewController *chatVc=[[ChatViewController alloc]init];
+        chatVc.hidesBottomBarWhenPushed = YES;
+        chatVc.conversationType = ConversationType_PRIVATE;
+        chatVc.targetId = [NSString stringWithFormat:@"%ld",self.DoctorID];
+        chatVc.title = _orderInfoModel.DoctorName;
         [self.navigationController pushViewController:chatVc animated:YES];
     }
     
@@ -362,6 +381,26 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark 按钮动画
+- (void)animationbegin:(UIView *)view {
+    /* 放大缩小 */
+    
+    // 设定为缩放
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    
+    // 动画选项设定
+    animation.duration = 0.1; // 动画持续时间
+    animation.repeatCount = -1; // 重复次数
+    animation.autoreverses = YES; // 动画结束时执行逆动画
+    
+    // 缩放倍数
+    animation.fromValue = [NSNumber numberWithFloat:1.0]; // 开始时的倍率
+    animation.toValue = [NSNumber numberWithFloat:0.9]; // 结束时的倍率
+    
+    // 添加动画
+    [view.layer addAnimation:animation forKey:@"scale-layer"];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {
