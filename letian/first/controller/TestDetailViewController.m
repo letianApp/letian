@@ -98,17 +98,36 @@
 
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    [webView evaluateJavaScript:@"document.getElementsByClassName('mediaList')[0].style.display = 'none'; " completionHandler:nil];
+    NSLog(@"当前网页%@",webView.URL.absoluteString);
+//    隐藏下载广告
+    [webView evaluateJavaScript:@"document.getElementsByClassName('advertiseBar')[0].style.display = 'none'; " completionHandler:nil];
+    
+//    隐藏头部导航栏
+    [webView evaluateJavaScript:@"document.getElementsByClassName('header')[0].style.display = 'none';" completionHandler:nil];
+//    隐藏分享
     [webView evaluateJavaScript:@"document.getElementsById('nativeShare').style.display = 'none';" completionHandler:nil];
-    [webView evaluateJavaScript:@"document.getElementsByClassName('card')[0].style.display = 'none';" completionHandler:nil];
+    [webView evaluateJavaScript:@"document.getElementsByClassName('grzy')[0].style.display = 'none';" completionHandler:nil];
+
+//    隐藏底部下一页
     [webView evaluateJavaScript:@"document.getElementsByClassName('po_footer')[0].style.display = 'none';" completionHandler:nil];
+    
     [webView evaluateJavaScript:@"document.getElementsByClassName('mediaTitle')[0].style.display = 'none'; ;" completionHandler:nil];
+//    隐藏付费推荐
     [webView evaluateJavaScript:@"document.getElementsByClassName('recomend-payTest')[0].style.display = 'none';" completionHandler:nil];
+//    隐藏大家都爱的专业测评
     [webView evaluateJavaScript:@"document.getElementsByClassName('test-jumpBtn')[0].style.display = 'none' ;" completionHandler:nil];
     [webView evaluateJavaScript:@"document.getElementsByClassName('mediaList')[1].style.display = 'none';" completionHandler:nil];
+//    隐藏底部广告
+    [webView evaluateJavaScript:@"document.getElementsById('TencentAdContainer').style.display = 'none';" completionHandler:nil];
+//    隐藏头部广告
+    [webView evaluateJavaScript:@"document.getElementsById('datacross').style.display = 'none';" completionHandler:nil];
+    
     if (![self.webView.URL.absoluteString isEqualToString:self.testUrl]) {
         self.webView.hidden=YES;
         [webView evaluateJavaScript:@"document.getElementsByClassName('test-result')[0].getElementsByTagName('div')[1].style.display='none';" completionHandler:nil];
+        
+        
+        
         [webView evaluateJavaScript:@"var parent = document.getElementsByClassName('test-result')[0].getElementsByTagName('div')[2];var child = parent.lastChild ;parent.removeChild(child)" completionHandler:nil];
     }
     [MBHudSet dismiss:self.view];

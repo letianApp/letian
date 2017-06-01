@@ -103,7 +103,7 @@
 -(void)createCollectionView
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize=CGSizeMake((SCREEN_W-30)/2,130);
+    flowLayout.itemSize=CGSizeMake((SCREEN_W-30)/2,SCREEN_W*0.4);
     flowLayout.minimumLineSpacing=5;
     flowLayout.minimumInteritemSpacing=5;
     flowLayout.sectionInset=UIEdgeInsetsMake(10, 10, 10, 10);

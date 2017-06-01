@@ -38,6 +38,22 @@
 }
 
 
+-(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
+    NSLog(@"目前网页%@",webView.URL.absoluteString);
+    if ([webView.URL.absoluteString rangeOfString:@"report/normal/reportviewrdlc.aspx"].location    !=NSNotFound) {
+
+        [webView evaluateJavaScript:@"document.getElementsByTagName('div')[2].style.display = 'none';" completionHandler:nil];
+        
+        [webView evaluateJavaScript:@"document.getElementsByTagName('tbody')[0].style.zoom = '1.4';" completionHandler:nil];
+        
+
+    }
+    
+    
+    
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

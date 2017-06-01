@@ -11,6 +11,7 @@
 #import "GQSegmentedControl.h"
 #import "TestListViewController.h"
 #import "TestHistoryViewController.h"
+#import "AppDelegate.h"
 
 @interface TestViewController ()<GQSegmentDelegate>
 
@@ -20,17 +21,13 @@
 
 @implementation TestViewController
 
-
-
--(void)viewWillAppear:(BOOL)animated {
-    self.navigationController.navigationBarHidden=NO;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBarHidden=NO;
     
     [self createSegment];
 }
+
 
 
 -(void)createSegment
@@ -59,8 +56,29 @@
 
 -(void) back
 {
+    
     [self.navigationController popViewControllerAnimated:YES];
+//    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    appDelegate.rotation_Style = 0;
 }
+//
+//-(void)viewWillAppear:(BOOL)animated{
+//    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    appDelegate.rotation_Style = 1;
+//    NSNumber *orientationUnknown = [NSNumber numberWithInt:UIInterfaceOrientationUnknown];
+//    [[UIDevice currentDevice] setValue:orientationUnknown forKey:@"orientation"];
+//    
+//    NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+//    [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
+//}
+//
+//-(BOOL)shouldAutorotate{
+//    return true;
+//}
+//- (UIInterfaceOrientationMask)supportedInterfaceOrientations//当前viewcontroller支持哪些转屏方向
+//{
+//    return UIInterfaceOrientationMaskLandscapeRight;
+//}
 
 
 -(void)segmentDidselectTab:(NSUInteger)index
