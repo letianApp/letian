@@ -496,9 +496,16 @@ didRegisterUserNotificationSettings:
 
 #pragma mark-----------------禁止横屏
 
-- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window
+
+- (UIInterfaceOrientationMask )application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 {
-    return UIInterfaceOrientationMaskPortrait;
+//    if (_rotation_Style == 1) {//如果是1就让屏幕强制横屏
+//        return UIInterfaceOrientationMaskLandscape;
+//    }
+//    else
+//    {
+        return (UIInterfaceOrientationMaskPortrait);
+//    }
 }
 
 

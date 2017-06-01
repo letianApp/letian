@@ -234,9 +234,27 @@
         [self.navigationController pushViewController:articleVc animated:NO];
     //跳到测试
     }else if (tap.view.tag==102) {
-       TestViewController *testVc=[[TestViewController alloc]init];
-        testVc.hidesBottomBarWhenPushed=YES;
-        [self.navigationController pushViewController:testVc animated:NO];
+        if (![GQUserManager isHaveLogin]) {
+            NSLog(@"登录一下");
+            //未登录
+            UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
+            __weak typeof(self) weakSelf = self;
+            [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                
+                LoginViewController *loginVc = [[LoginViewController alloc]init];
+                loginVc.hidesBottomBarWhenPushed = YES;
+                [weakSelf presentViewController:loginVc animated:YES completion:nil];
+            }]];
+            [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+            
+            [self presentViewController:alertControl animated:YES completion:nil];
+
+        }else{
+
+            TestViewController *testVc=[[TestViewController alloc]init];
+            testVc.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:testVc animated:NO];
+        }
     //跳到活动
     }else if (tap.view.tag==103){
         ActivityListViewController *activityVc=[[ActivityListViewController alloc]init];
@@ -262,8 +280,17 @@
     return scrollView;
 }
 
-
-
+//
+////是否可以旋转
+//- (BOOL)shouldAutorotate
+//{
+//    return false;
+// }
+////支持的方向
+// -(UIInterfaceOrientationMask)supportedInterfaceOrientations
+// {
+//    return UIInterfaceOrientationMaskPortrait;
+// }
 #pragma mark------特效
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{

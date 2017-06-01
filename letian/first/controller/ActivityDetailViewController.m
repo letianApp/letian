@@ -42,12 +42,13 @@
     
     UIView *bgView=[GQControls createViewWithFrame:CGRectMake(0, 0, SCREEN_W, 100) andBackgroundColor:[UIColor whiteColor]];
     
-    UILabel *headLabel=[GQControls createLabelWithFrame:CGRectMake(20, 20, SCREEN_W-40, 30) andText:self.activeModel.Name andTextColor:[UIColor blackColor] andFontSize:20];
-    headLabel.textAlignment=NSTextAlignmentCenter;
+    UILabel *headLabel=[GQControls createLabelWithFrame:CGRectMake(20, 20, SCREEN_W-40, 50) andText:self.activeModel.Name andTextColor:[UIColor blackColor] andFontSize:20];
+//    headLabel.textAlignment=NSTextAlignmentCenter;
+    headLabel.numberOfLines=0;
     headLabel.font=[UIFont boldSystemFontOfSize:20];
     [bgView addSubview:headLabel];
     
-    UILabel *creatTimeLabel=[GQControls createLabelWithFrame:CGRectMake(20, 60, SCREEN_W-40, 20) andText:self.activeModel.CreatedDate andTextColor:[UIColor darkGrayColor] andFontSize:12];
+    UILabel *creatTimeLabel=[GQControls createLabelWithFrame:CGRectMake(20, 70, SCREEN_W-40, 20) andText:self.activeModel.CreatedDate andTextColor:[UIColor darkGrayColor] andFontSize:12];
     creatTimeLabel.textAlignment=NSTextAlignmentRight;
     [bgView addSubview:creatTimeLabel];
     
