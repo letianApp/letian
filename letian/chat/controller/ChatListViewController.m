@@ -60,7 +60,9 @@
     
     [[RCIMClient sharedRCIMClient] setConversationToTop:ConversationType_PRIVATE targetId:@"12" isTop:YES];
     self.topCellBackgroundColor = [UIColor snowColor];
-
+//    self.conversationListTableView.separatorColor = [UIColor clearColor];
+    
+    self.conversationListTableView.tableFooterView = [UIView new];
     
 //    self.conversationListTableView.delegate = self;
 //    self.conversationListTableView.dataSource = self;
@@ -147,7 +149,7 @@
     
     self.titleLab = [[UILabel alloc]initWithFrame:CGRectMake(self.headView.right + 10, self.headView.y, 200, self.headView.height)];
     [btn addSubview:self.titleLab];
-    self.titleLab.text = @"有什么想和小乐说的吗";
+    self.titleLab.text = @"联系客服小乐";
     self.titleLab.textColor = MAINCOLOR;
 
     self.emptyConversationView = bgView;

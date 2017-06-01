@@ -67,6 +67,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    //实时调试
+    Class Test = NSClassFromString(@"UIDebuggingInformationOverlay");
+    [[Test class] performSelector:@selector(prepareDebuggingOverlay)];
+    
+
+    
     self.window = [[UIWindow alloc]init];
     self.window.frame = [UIScreen mainScreen].bounds;
     [self.window makeKeyAndVisible];

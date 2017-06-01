@@ -61,8 +61,6 @@
 
     _counselorArr = [NSMutableArray new];
     _requestParams = [NSMutableDictionary new];
-    [_requestParams setValue:@(0) forKey:@"enumPsyCategory"];
-    [_requestParams setValue:@(0) forKey:@"enumUserTitle"];
     
     [self customSearchBar];
     [self customNavigation];
@@ -71,10 +69,7 @@
 //    [MBHudSet showStatusOnView:self.view];
     
     [self relodeDate];
-//    [self getCounsultTypeSource];
-//    [self getCounsultListSource];
     
-    //    [self creatClassifiedSection];
     [self setupMJRefresh];
     
 
@@ -83,7 +78,7 @@
 - (void)customSearchBar {
     
     _searchBar             = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W/2, 40)];
-    _searchBar.placeholder = @"搜索";
+    _searchBar.placeholder = @"搜索咨询师";
     _searchBar.delegate    = self;
     [_searchBar setTranslucent:YES];
     [_searchBar setShowsCancelButton:YES animated:YES];
@@ -151,6 +146,11 @@
 
 - (void)relodeDate {
     
+    [_requestParams setValue:@(0) forKey:@"enumPsyCategory"];
+    [_requestParams setValue:@(0) forKey:@"enumUserTitle"];
+    [_requestParams removeObjectForKey:@"MinFee"];
+    [_requestParams removeObjectForKey:@"MaxFee"];
+
     [self getCounsultTypeSource];
     [self getCounsultListSource];
 }
@@ -246,18 +246,33 @@
         if (strongSelf.counselorArr.count == 0) {
             strongSelf.counselorInfoTableview.mj_footer.hidden = YES;
             [strongSelf.counselorInfoTableview addSubview:strongSelf.noDataLab];
+        } else if (strongSelf.counselorArr.count < 10) {
+            [strongSelf.noDataLab removeFromSuperview];
+            strongSelf.counselorInfoTableview.mj_footer.hidden = YES;
+
+            strongSelf.maxPrice = 1500;
+//            strongSelf.maxPrice = self.counselorArr[0].ConsultFee;
+//            for (int i = 0; i < self.counselorArr.count; i++) {
+//                
+//                NSInteger price = self.counselorArr[i].ConsultFee;
+//                if (price > strongSelf.maxPrice) {
+//                    strongSelf.maxPrice = price;
+//                }
+//            }
         } else {
             [strongSelf.noDataLab removeFromSuperview];
             strongSelf.counselorInfoTableview.mj_footer.hidden = NO;
+            
+            strongSelf.maxPrice = 1500;
+//            strongSelf.maxPrice = self.counselorArr[0].ConsultFee;
+//            for (int i = 0; i < self.counselorArr.count; i++) {
+//                
+//                NSInteger price = self.counselorArr[i].ConsultFee;
+//                if (price > strongSelf.maxPrice) {
+//                    strongSelf.maxPrice = price;
+//                }
+//            }
 
-            strongSelf.maxPrice = self.counselorArr[0].ConsultFee;
-            for (int i = 0; i < self.counselorArr.count; i++) {
-                
-                NSInteger price = self.counselorArr[i].ConsultFee;
-                if (price > strongSelf.maxPrice) {
-                    strongSelf.maxPrice = price;
-                }
-            }
         }
         
         [MBHudSet dismiss:strongSelf.view];
@@ -608,7 +623,7 @@
 #pragma mark 创建tabview
 - (void)creatTableView {
     
-    _counselorInfoTableview                 = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, SCREEN_H - statusBar_H - navigationBar_H - tabBar_H) style:UITableViewStylePlain];
+    _counselorInfoTableview                 = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, SCREEN_H - statusBar_H - navigationBar_H - tabBar_H) style:UITableViewStyleGrouped];
     _counselorInfoTableview.dataSource      = self;
     _counselorInfoTableview.delegate        = self;
     _counselorInfoTableview.backgroundColor = [UIColor snowColor];
@@ -653,7 +668,7 @@
     consultPageCell *cell = [consultPageCell cellWithTableView:tableView];
     
     cell.conselorName.text = _counselorArr[indexPath.row].UserName;
-    [cell.conselorImage sd_setImageWithURL:[NSURL URLWithString:_counselorArr[indexPath.row].HeadImg]];
+    [cell.conselorImage sd_setImageWithURL:[NSURL URLWithString:_counselorArr[indexPath.row].HeadImg] placeholderImage:[UIImage imageNamed:@"乐天logo"]];
     if (_counselorArr[indexPath.row].EnumSexType == 0) {
         cell.conserlorSex.image = [UIImage imageNamed:@"male"];
     } else {
@@ -665,7 +680,7 @@
         cell.conselorStatus.text = [NSString stringWithFormat:@"%@心理咨询师",_counselorArr[indexPath.row].UserTitleString];
     }
     cell.conserlorAbout.text = _counselorArr[indexPath.row].Description;
-    cell.conserlorPrice.text = [NSString stringWithFormat:@"%ld元/小时",_counselorArr[indexPath.row].ConsultFee];
+    cell.conserlorPrice.text = [NSString stringWithFormat:@"%.0f元/小时",_counselorArr[indexPath.row].ConsultFee*0.8];
     cell.conserVisitors.text = [NSString stringWithFormat:@"%@人咨询过",_counselorArr[indexPath.row].TotalConsultCount];
     
     return cell;

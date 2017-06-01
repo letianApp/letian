@@ -49,6 +49,8 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
         
 //    self.view.backgroundColor = [UIColor whiteColor];
+    
+    
     [self customNavigation];
     [self customMainTableView];
     [self customHeadView];
@@ -156,10 +158,14 @@
     ConfirmPageCell *cell = [ConfirmPageCell cellWithTableView:tableView];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;                        //设置cell不可以点
     
-    NSArray *lableTagArr = @[@"简介",@"擅长领域",@"咨询特点",@"咨询理念"];
+    NSArray *lableTagArr = @[@"简介",@"擅长领域",@"咨询技能",@"咨询风格"];
     cell.labelTag.text = lableTagArr[indexPath.row];
     NSArray *detialArr = @[self.counselModel.Description,self.counselModel.Expertise,self.counselModel.Specific,self.counselModel.Idea];
-    cell.detialLab.text = detialArr[indexPath.row];
+    if (NULLString(detialArr[indexPath.row])) {
+        cell.detialLab.text = @"暂无";
+    } else {
+        cell.detialLab.text = detialArr[indexPath.row];
+    }
     
     return cell;
     
@@ -191,7 +197,7 @@
 
 //咨询师头像
     UIImageView *picView = [[UIImageView alloc]init];
-    [picView sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg]];
+    [picView sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg] placeholderImage:[UIImage imageNamed:@"乐天logo"]];
     picView.layer.cornerRadius = SCREEN_W/10;
     picView.layer.borderWidth = 1;
     picView.layer.borderColor = ([UIColor whiteColor].CGColor);
@@ -329,7 +335,7 @@
         make.height.equalTo(_tabBar.mas_height);
     }];
     priceLab.textColor                 = MAINCOLOR;
-    priceLab.text                      = [NSString stringWithFormat:@"%ld元／小时",_counselModel.ConsultFee];
+    priceLab.text                      = [NSString stringWithFormat:@"%.0f元／小时",_counselModel.ConsultFee*0.8];
     priceLab.textAlignment             = NSTextAlignmentRight;
     priceLab.font                      = [UIFont boldSystemFontOfSize:15];
     //优惠lable

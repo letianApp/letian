@@ -12,4 +12,6 @@
 
 @property(nonatomic,assign)NSInteger orderID;
 
+@property(nonatomic,assign)NSInteger DoctorID;
+
 @end

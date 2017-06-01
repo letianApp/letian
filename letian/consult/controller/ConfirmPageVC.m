@@ -163,8 +163,8 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"框：%@",self.detailTextView.text);
-    NSLog(@"%@",self.orderModel.orderInfoDetail);
+//    NSLog(@"框：%@",self.detailTextView.text);
+//    NSLog(@"%@",self.orderModel.orderInfoDetail);
     
     
 }
@@ -186,10 +186,10 @@
             
         }
         
-        UIButton *defBtn                         = [view viewWithTag:1];
+        UIButton *defBtn                         = [view viewWithTag:11];
         defBtn.selected                          = YES;
         defBtn.backgroundColor                   = MAINCOLOR;
-        _orderModel.consultType                  = 1;
+        _orderModel.consultType                  = 11;
         
         _mapBtn                                  = [[UIButton alloc]init];
         _mapBtn.frame                            = CGRectMake(10, defBtn.bottom+10, SCREEN_W-20, 50);
@@ -229,12 +229,26 @@
         UIButton *btnn          = [self.view viewWithTag:i*10+1];
         btnn.selected           = NO;
         btnn.backgroundColor    = [UIColor whiteColor];
+        btnn.userInteractionEnabled = YES;
+
     }
     
     btn.selected            = YES;
     btn.backgroundColor     = MAINCOLOR;
     _orderModel.consultType = btn.tag;
+    
+    if (btn.tag == 1 || !NULLString(_priceLab.text)) {
+        
+        _orderModel.orderPrice = _totalPrice;
+        [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
+
+    } else if (!NULLString(_priceLab.text)) {
+        _orderModel.orderPrice = _totalPrice*0.8;
+        [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
+    }
+    
     NSLog(@"咨询方式：%ld",(long)_orderModel.consultType);
+    btn.userInteractionEnabled = NO;
     [self reflashInfo];
 }
 
@@ -558,8 +572,14 @@
     } else {
         _totalPrice = [_hourStr integerValue] * self.counselModel.ConsultFee;
     }
-    _orderModel.orderPrice = _totalPrice;
-    [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_totalPrice]];
+    if (_orderModel.consultType == 1) {
+        NSLog(@"面对面");
+        _orderModel.orderPrice = _totalPrice;
+    } else {
+        _orderModel.orderPrice = _totalPrice*0.8;
+    }
+//    _orderModel.orderPrice = _totalPrice;
+    [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
     
     NSRange rag = {0,2};
     NSInteger startTime = [[_orderModel.orderDateTimeStart substringWithRange:rag] integerValue];
