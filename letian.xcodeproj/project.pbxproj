@@ -10,6 +10,8 @@
 		090733951E655B0600F21E02 /* consultPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 090733931E655B0600F21E02 /* consultPageCell.m */; };
 		090733961E655B0600F21E02 /* consultPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 090733941E655B0600F21E02 /* consultPageCell.xib */; };
 		0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 090733991E65665A00F21E02 /* counselorInfoModel.m */; };
+		09106FA41EDFBE8700F5E676 /* ico_make.png in Resources */ = {isa = PBXBuildFile; fileRef = 09106FA11EDFBE8700F5E676 /* ico_make.png */; };
+		09106FA51EDFBE8700F5E676 /* JSDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 09106FA31EDFBE8700F5E676 /* JSDropDownMenu.m */; };
 		091991791EC9950E007AEC8F /* RCDCustomerServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 091991781EC9950E007AEC8F /* RCDCustomerServiceViewController.m */; };
 		0932B85C1ED2B04D00C8131E /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0932B85B1ED2B04D00C8131E /* ServiceModel.m */; };
 		0935872E1E94BD6A0007B1D9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */; };
@@ -67,6 +69,8 @@
 		097105DD1E9A36EB00AC8E4F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105DC1E9A36EB00AC8E4F /* CoreGraphics.framework */; };
 		097105DF1E9A36F700AC8E4F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105DE1E9A36F700AC8E4F /* UIKit.framework */; };
 		097105E11E9A370800AC8E4F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105E01E9A370800AC8E4F /* CFNetwork.framework */; };
+		098D703D1EDE8B0300AC5B09 /* AgreementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 098D703C1EDE8B0300AC5B09 /* AgreementVC.m */; };
+		098D703F1EDE998E00AC5B09 /* 知情同意书.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 098D703E1EDE998E00AC5B09 /* 知情同意书.pdf */; };
 		09BFEF211EC0099E00A2731C /* ConsultSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BFEF1C1EC0099E00A2731C /* ConsultSetCell.m */; };
 		09BFEF221EC0099E00A2731C /* ConsultSetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09BFEF1D1EC0099E00A2731C /* ConsultSetCell.xib */; };
 		09BFEF231EC0099E00A2731C /* CustomDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BFEF1F1EC0099E00A2731C /* CustomDateViewController.m */; };
@@ -225,6 +229,9 @@
 		090733941E655B0600F21E02 /* consultPageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = consultPageCell.xib; sourceTree = "<group>"; };
 		090733981E65665A00F21E02 /* counselorInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = counselorInfoModel.h; sourceTree = "<group>"; };
 		090733991E65665A00F21E02 /* counselorInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = counselorInfoModel.m; sourceTree = "<group>"; };
+		09106FA11EDFBE8700F5E676 /* ico_make.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_make.png; sourceTree = "<group>"; };
+		09106FA21EDFBE8700F5E676 /* JSDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDropDownMenu.h; sourceTree = "<group>"; };
+		09106FA31EDFBE8700F5E676 /* JSDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDropDownMenu.m; sourceTree = "<group>"; };
 		091991771EC9950E007AEC8F /* RCDCustomerServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCustomerServiceViewController.h; sourceTree = "<group>"; };
 		091991781EC9950E007AEC8F /* RCDCustomerServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCustomerServiceViewController.m; sourceTree = "<group>"; };
 		0932B85A1ED2B04D00C8131E /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceModel.h; path = letian/chat/controller/ServiceModel.h; sourceTree = SOURCE_ROOT; };
@@ -309,6 +316,9 @@
 		097105DC1E9A36EB00AC8E4F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		097105DE1E9A36F700AC8E4F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		097105E01E9A370800AC8E4F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		098D703B1EDE8B0300AC5B09 /* AgreementVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreementVC.h; sourceTree = "<group>"; };
+		098D703C1EDE8B0300AC5B09 /* AgreementVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreementVC.m; sourceTree = "<group>"; };
+		098D703E1EDE998E00AC5B09 /* 知情同意书.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "知情同意书.pdf"; sourceTree = "<group>"; };
 		09BFEF1B1EC0099E00A2731C /* ConsultSetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultSetCell.h; sourceTree = "<group>"; };
 		09BFEF1C1EC0099E00A2731C /* ConsultSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsultSetCell.m; sourceTree = "<group>"; };
 		09BFEF1D1EC0099E00A2731C /* ConsultSetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsultSetCell.xib; sourceTree = "<group>"; };
@@ -708,6 +718,16 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		09106FA01EDFBE8700F5E676 /* JSDropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				09106FA11EDFBE8700F5E676 /* ico_make.png */,
+				09106FA21EDFBE8700F5E676 /* JSDropDownMenu.h */,
+				09106FA31EDFBE8700F5E676 /* JSDropDownMenu.m */,
+			);
+			path = JSDropDownMenu;
+			sourceTree = "<group>";
+		};
 		093587431E94C14F0007B1D9 /* chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -955,6 +975,8 @@
 				09FBE01A1E70EE5F003452A6 /* ConfirmPageVC.h */,
 				09FBE01B1E70EE5F003452A6 /* ConfirmPageVC.m */,
 				09FBE01C1E70EE5F003452A6 /* ConfirmPageVC.xib */,
+				098D703B1EDE8B0300AC5B09 /* AgreementVC.h */,
+				098D703C1EDE8B0300AC5B09 /* AgreementVC.m */,
 				094FC5091E8CBF0D00BFFBBB /* PayPageVC.h */,
 				094FC50A1E8CBF0D00BFFBBB /* PayPageVC.m */,
 				094FC50B1E8CBF0D00BFFBBB /* PayPageVC.xib */,
@@ -1061,6 +1083,7 @@
 		77038DE91E63C49F0096C07D /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				098D703E1EDE998E00AC5B09 /* 知情同意书.pdf */,
 				7722F07E1EB4500B001DCF5F /* DateTools */,
 				7787B38F1EB188CE00306527 /* WechatPaySDK */,
 				77B5BD3B1EADA6A50034497D /* 控件工厂类 */,
@@ -1448,6 +1471,7 @@
 			children = (
 				77B5BD3C1EADA6A50034497D /* GQControls.h */,
 				77B5BD3D1EADA6A50034497D /* GQControls.m */,
+				09106FA01EDFBE8700F5E676 /* JSDropDownMenu */,
 				77D259781ED71DA000C1EBC1 /* GQDatePickView */,
 				09591B721ECAB00A0040CD1C /* ImageEffects */,
 				776CF2A31EB78E9D00CE9620 /* GQNewFeature */,
@@ -1714,6 +1738,7 @@
 				770FFC6D1E961070009B81FC /* UserInfoViewController.xib in Resources */,
 				77B5C9E81E7A2F000028CB9E /* OrderDetailViewController.xib in Resources */,
 				779C4DD01EBEF2B300EBEDE9 /* OrderMoneyCell.xib in Resources */,
+				098D703F1EDE998E00AC5B09 /* 知情同意书.pdf in Resources */,
 				77FF30381EA0705F00F3A1C9 /* WebArticleCell.xib in Resources */,
 				094FC50D1E8CBF0E00BFFBBB /* PayPageVC.xib in Resources */,
 				779C4DCB1EBED84300EBEDE9 /* OrderConsultCell.xib in Resources */,
@@ -1738,6 +1763,7 @@
 				090733961E655B0600F21E02 /* consultPageCell.xib in Resources */,
 				094FC5121E8CC1E500BFFBBB /* PayPageCell.xib in Resources */,
 				0965FBB61E7A918900C0FBAD /* HZQDatePickerView.xib in Resources */,
+				09106FA41EDFBE8700F5E676 /* ico_make.png in Resources */,
 				7722F0921EB4500B001DCF5F /* DateTools.bundle in Resources */,
 				7784D8AD1E6E80C5004AB0CC /* MessageViewController.xib in Resources */,
 				09BFEF241EC0099E00A2731C /* CustomDateViewController.xib in Resources */,
@@ -1833,6 +1859,7 @@
 				775312371EB6583B008AA19D /* CategoryViewController.m in Sources */,
 				776CF2BB1EB7900A00CE9620 /* UIImage+TYLaunchImage.m in Sources */,
 				09F6F95A1EA5C26700A95CD5 /* CustomPlusBtn.m in Sources */,
+				09106FA51EDFBE8700F5E676 /* JSDropDownMenu.m in Sources */,
 				09591B7B1ECAB9BA0040CD1C /* UIImage+ImageEffects.m in Sources */,
 				7787B3C11EB20D8100306527 /* Order.m in Sources */,
 				776CF2AA1EB78E9D00CE9620 /* GQCoreNewFeatureViewController.m in Sources */,
@@ -1905,6 +1932,7 @@
 				77B5BD151EAD9B460034497D /* NSString+YYExtension.m in Sources */,
 				09FBE0271E70FE12003452A6 /* CounselorInfoVC.m in Sources */,
 				77F3D8621E7670D2008B5FC0 /* OrderCell.m in Sources */,
+				098D703D1EDE8B0300AC5B09 /* AgreementVC.m in Sources */,
 				7787B3A91EB18DDA00306527 /* WXApiResponseHandler.m in Sources */,
 				77B5BD5B1EADA6A50034497D /* MBHudSet.m in Sources */,
 				0965FBB51E7A918900C0FBAD /* HZQDatePickerView.m in Sources */,

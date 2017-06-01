@@ -10,6 +10,7 @@
 #import "ConfirmPageCell.h"
 #import "OrderModel.h"
 #import "ConsultDateModel.h"
+#import "AgreementVC.h"
 
 #import <MapKit/MapKit.h>
 #import "FSCalendar.h"
@@ -55,6 +56,7 @@
 @property (nonatomic, strong) LRTextField            *ageTextField;
 @property (nonatomic, strong) LRTextField            *phoneTextField;
 @property (nonatomic, strong) LRTextField            *emailTextField;
+@property (nonatomic, strong) UIButton               *doBtn;
 
 @property (nonatomic, strong) UITextView             *detailTextView;
 @property (nonatomic, strong) UILabel                *placeholderLabel;
@@ -193,14 +195,11 @@
         
         _mapBtn                                  = [[UIButton alloc]init];
         _mapBtn.frame                            = CGRectMake(10, defBtn.bottom+10, SCREEN_W-20, 50);
-        NSString *str                            = @"面对面咨询地点：上海市徐汇区零陵路791弄上影广场3号楼20层2002室";
-        NSMutableAttributedString *attrStr       = [[NSMutableAttributedString alloc]initWithString:str];
-        [attrStr addAttribute:NSForegroundColorAttributeName value:MAINCOLOR range:NSMakeRange(8, 28)];
-        [attrStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(8, 28)];
-        [_mapBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
         _mapBtn.titleLabel.font                  = [UIFont systemFontOfSize:15];
         _mapBtn.titleLabel.numberOfLines         = 0;
-        [_mapBtn addTarget:self action:@selector(clickMapBtn:) forControlEvents:UIControlEventTouchUpInside];
+        NSAttributedString *attrStr = [[NSAttributedString alloc]initWithString:@"预约成功后可直接在订单页面与咨询师取得联系，详情请咨询乐天客服"];
+        [_mapBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
+        _mapBtn.userInteractionEnabled = NO;
         [view addSubview:_mapBtn];
         
         [self setupCalendarWithBGView:view];
@@ -217,7 +216,7 @@
         CGFloat height = _timeChoicesView.bottom + 30;
         return height;
     } else {
-        return _detailTextView.bottom + 100;
+        return _detailTextView.bottom + 140;
     }
 }
 
@@ -237,16 +236,46 @@
     btn.backgroundColor     = MAINCOLOR;
     _orderModel.consultType = btn.tag;
     
-    if (btn.tag == 1 || !NULLString(_priceLab.text)) {
+    if (btn.tag == 1) {
         
-        _orderModel.orderPrice = _totalPrice;
-        [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
+        _mapBtn.userInteractionEnabled = YES;
+        NSString *str = @"面对面咨询地点：上海市徐汇区零陵路791弄上影广场3号楼20层2002室";
+        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:str];
+        [attrStr addAttribute:NSForegroundColorAttributeName value:MAINCOLOR range:NSMakeRange(8, 28)];
+        [attrStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(8, 28)];
+        [_mapBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
+        [_mapBtn addTarget:self action:@selector(clickMapBtn:) forControlEvents:UIControlEventTouchUpInside];
 
-    } else if (!NULLString(_priceLab.text)) {
-        _orderModel.orderPrice = _totalPrice*0.8;
-        [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
+        if (!NULLString(_priceLab.text)) {
+            _orderModel.orderPrice = _totalPrice / 0.8;
+            [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
+        }
+        
+
+    } else if (btn.tag == 11) {
+        
+        NSAttributedString *attrStr = [[NSAttributedString alloc]initWithString:@"预约成功后可直接在订单页面与咨询师取得联系，详情请咨询乐天客服"];
+        [_mapBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
+//        [_mapBtn setTitle:btn.titleLabel.text forState:UIControlStateNormal];
+        _mapBtn.userInteractionEnabled = NO;
+        
+        if (!NULLString(_priceLab.text)) {
+            _orderModel.orderPrice = _totalPrice;
+            [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
+        }
+
+    } else {
+        
+        NSAttributedString *attrStr = [[NSAttributedString alloc]initWithString:@"电话咨询请致电乐天客服：021-37702979"];
+        [_mapBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
+        _mapBtn.userInteractionEnabled = NO;
+
+        if (!NULLString(_priceLab.text)) {
+            _orderModel.orderPrice = _totalPrice;
+            [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
+        }
+
     }
-    
     NSLog(@"咨询方式：%ld",(long)_orderModel.consultType);
     btn.userInteractionEnabled = NO;
     [self reflashInfo];
@@ -574,9 +603,9 @@
     }
     if (_orderModel.consultType == 1) {
         NSLog(@"面对面");
-        _orderModel.orderPrice = _totalPrice;
+        _orderModel.orderPrice = _totalPrice / 0.8;
     } else {
-        _orderModel.orderPrice = _totalPrice*0.8;
+        _orderModel.orderPrice = _totalPrice;
     }
 //    _orderModel.orderPrice = _totalPrice;
     [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
@@ -728,6 +757,29 @@
     _detailTextView.layer.borderColor      = [[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0] CGColor];
     [bgView addSubview:_detailTextView];
     
+    _doBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, _detailTextView.y + 102, 15, 15)];
+    _doBtn.layer.borderColor                     = [UIColor lightGrayColor].CGColor;
+    _doBtn.layer.borderWidth                     = 1;
+    _doBtn.layer.cornerRadius                    = 7;
+    [bgView addSubview:_doBtn];
+    [_doBtn setImage:[UIImage imageNamed:@"do"] forState:UIControlStateSelected];
+    [_doBtn addTarget:self action:@selector(clickDoBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *agreementBtn = [[UIButton alloc]initWithFrame:CGRectMake(_doBtn.right+8, _detailTextView.y + 95, _detailTextView.width, 15)];
+    [bgView addSubview:agreementBtn];
+//    agreementBtn.backgroundColor = [UIColor snowColor];
+    NSString *str = @"同意《心理咨询知情同意书》";
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:str];
+    [attrStr addAttribute:NSForegroundColorAttributeName value:MAINCOLOR range:NSMakeRange(2, 11)];
+    [attrStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(2, 11)];
+    [attrStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15.0f] range:NSMakeRange(0,13)];
+    [agreementBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
+    [agreementBtn sizeToFit];
+    
+    [agreementBtn addTarget:self action:@selector(clickAgBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+
+    
 }
 
 - (void)sexBtnClick:(UIButton *)btn {
@@ -831,6 +883,25 @@
     return YES;
 }
 
+- (void)clickDoBtn:(UIButton *)btn {
+    
+    btn.selected = !btn.selected;
+    if (btn.selected) {
+        btn.layer.borderWidth = 0;
+        
+    } else {
+        btn.layer.borderWidth = 1;
+    }
+    [self reflashInfo];
+}
+
+- (void)clickAgBtn:(UIButton *)btn {
+    
+    AgreementVC *aVC = [[AgreementVC alloc]init];
+    [self.navigationController pushViewController:aVC animated:YES];
+    
+}
+
 #pragma mark - 底部TabBar
 - (void)creatBottomBar {
     
@@ -857,18 +928,23 @@
     _priceLab.textAlignment = NSTextAlignmentRight;
     _priceLab.font = [UIFont boldSystemFontOfSize:15];
     
-    
 }
 
 #pragma mark 刷新信息
 - (void)reflashInfo {
     
-    if (NULLString(_orderModel.orderDateTimeStart) ||  NULLString(_orderModel.orderDateTimeEnd) || NULLString(_nameTextField.text) ||  NULLString(_sexTextField.text) ||  NULLString(_ageTextField.text) || NULLString(_phoneTextField.text)) {
+    if (NULLString(_orderModel.orderDateTimeStart) ||  NULLString(_orderModel.orderDateTimeEnd) || NULLString(_nameTextField.text) ||  NULLString(_sexTextField.text) ||  NULLString(_ageTextField.text) || NULLString(_phoneTextField.text) || !_doBtn.isSelected) {
         self.confirmBtn.backgroundColor = [UIColor lightGrayColor];
         
     } else {
         self.confirmBtn.backgroundColor = MAINCOLOR;
     }
+    
+    if (NULLString(_orderModel.orderDateTimeStart) || NULLString(_orderModel.orderDateTimeEnd)) {
+        self.priceLab.text = nil;
+//        _orderModel.orderPrice = _totalPrice;
+    }
+    
 }
 
 - (void)clickConfirmBtn {

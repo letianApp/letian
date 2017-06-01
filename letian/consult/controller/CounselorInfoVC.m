@@ -335,7 +335,7 @@
         make.height.equalTo(_tabBar.mas_height);
     }];
     priceLab.textColor                 = MAINCOLOR;
-    priceLab.text                      = [NSString stringWithFormat:@"%.0f元／小时",_counselModel.ConsultFee*0.8];
+    priceLab.text                      = [NSString stringWithFormat:@"%ld元／小时",_counselModel.ConsultFee];
     priceLab.textAlignment             = NSTextAlignmentRight;
     priceLab.font                      = [UIFont boldSystemFontOfSize:15];
     //优惠lable
