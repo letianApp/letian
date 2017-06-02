@@ -340,7 +340,6 @@
         [self.rt_navigationController pushViewController:settingVc animated:YES];
     }else if(indexPath.row==1) {
 
-        
         if ([kFetchUserType integerValue]==11) {
             CustomDateViewController *customDateVc = [[CustomDateViewController alloc]init];
             customDateVc.hidesBottomBarWhenPushed = YES;

@@ -188,8 +188,8 @@
 
 -(UIView *)createHeadBgView
 {
-    UIView *headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 325)];
-    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 220, SCREEN_W, 100)];
+    UIView *headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 105+SCREEN_W*0.6)];
+    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_W*0.6, SCREEN_W, 100)];
     NSArray *nameArray=@[@"- 预约咨询 -",@"- 心理专栏 -",@"- 专业测试 -",@"- 沙龙活动 -"];
     for (NSInteger i=0; i<2; i++) {
         for (NSInteger j=0; j<2; j++) {
@@ -269,14 +269,22 @@
 -(GQScrollView *)createScrollView
 {
     NSMutableArray *imageArray = [[NSMutableArray alloc] init];
+    
     for (int i = 0; i < 4; i++) {
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"index_slide_0%d.jpg",i+1]];
         [imageArray addObject:image];
+        
     }
-    GQScrollView *scrollView = [[GQScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, 220) withImages:imageArray withIsRunloop:YES withBlock:^(NSInteger index) {
+    
+    GQScrollView *scrollView = [[GQScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_W*0.6) withImages:imageArray withIsRunloop:YES withBlock:^(NSInteger index) {
         NSLog(@"点击了index%zd",index);
+    
     }];
+    
+   
+    
     scrollView.color_currentPageControl = MAINCOLOR;
+    
     return scrollView;
 }
 

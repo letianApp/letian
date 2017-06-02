@@ -14,6 +14,10 @@ typedef void (^ImageViewClick)(NSInteger index);
 @property (nonatomic,strong)UIColor *color_pageControl;//
 @property (nonatomic,strong)UIColor *color_currentPageControl;
 @property (nonatomic,strong)ImageViewClick click;
+@property (nonatomic,strong)UIPageControl *pageControl;
+@property (nonatomic,strong)UIScrollView *scrollView;
+@property (nonatomic,strong)NSMutableArray *imageViews;
+
 
 /**轮播图
 

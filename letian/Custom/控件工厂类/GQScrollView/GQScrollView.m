@@ -17,15 +17,12 @@ typedef enum : NSUInteger {
 
 @interface GQScrollView() <UIScrollViewDelegate>
 
-@property (nonatomic,strong)UIScrollView *scrollView;
 @property (nonatomic,strong)NSArray *dataArry;
 @property (nonatomic,assign)NSInteger currentImageIndex;
 @property (nonatomic,assign)CGFloat lastContentOffset;
 @property (nonatomic,assign)ScrollViewDirection scrollDirection;
-@property (nonatomic,strong)NSMutableArray *imageViews;
 @property (nonatomic,assign)NSInteger imageCount;
 @property (nonatomic,strong)NSTimer *timer;
-@property (nonatomic,strong)UIPageControl *pageControl;
 
 @end
 

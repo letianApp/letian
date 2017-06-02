@@ -65,6 +65,7 @@
 {
     
     UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
     if (indexPath.row==0) {
         UIImageView *mainImageView=[[UIImageView alloc]initWithFrame:CGRectMake(10, 0,SCREEN_W-20 , SCREEN_W*0.6)];
         [mainImageView sd_setImageWithURL:[NSURL URLWithString:self.activeModel.ActiveImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];

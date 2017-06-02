@@ -78,7 +78,7 @@
     params[@"Timestamp"]           = timeSp;
     params[@"Nonce"]               = nonce;
     params[@"AppId"]               = APPID;
-    params[@"PushNo"]              =[JPUSHService registrationID];;
+    params[@"PushNo"]              =@"18171adc033ca89acda";//[JPUSHService registrationID];;
     
     NSLog(@"推送号：。。。。。%@",params[@"PushNo"]);
     __weak typeof(self) weakSelf   = self;

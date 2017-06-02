@@ -56,7 +56,7 @@
          var head = document.getElementsByTagName('head')[0];\
          var style=document.createElement('style');\
          style.type='text/css';\
-         style.innerHTML='.testtable tr td table tr td {vertical-align:middle;} .testtable td {font-size:13pt} .pageNav {font-size:13pt;}';\
+         style.innerHTML='.testtable tr td table tr td {vertical-align:middle;} .testtable td {font-size:12pt} .pageNav {font-size:12pt;}';\
          head.appendChild(meta);\
          head.appendChild(style)" completionHandler:nil];
         
@@ -65,7 +65,7 @@
         
         [webView evaluateJavaScript:@"document.getElementsByTagName('tbody')[0].style.zoom = '1.4';" completionHandler:nil];
     }
-    
+    NSLog(@",,,%@",webView.URL.absoluteString);
     
     [MBHudSet dismiss:self.view];
     [self performSelector:@selector(webViewHidden) withObject:nil afterDelay:0.3f];
