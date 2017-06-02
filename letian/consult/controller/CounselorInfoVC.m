@@ -58,7 +58,7 @@
 }
 
 
-#pragma mark 定制导航栏
+#pragma mark - 定制导航栏
 - (void)customNavigation {
 
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
@@ -133,7 +133,7 @@
     }];
 }
 
-#pragma mark 主界面tableview
+#pragma mark - 主界面tableview
 - (void)customMainTableView {
     
     _mainTableView                    = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-tabBar_H) style:UITableViewStyleGrouped];

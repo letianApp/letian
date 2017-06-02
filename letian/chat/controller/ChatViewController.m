@@ -15,26 +15,10 @@
 
 @implementation ChatViewController
 
-//- (instancetype)init
-//{
-//    self = [super init];
-//    if (self) {
-//        
-//        if ([self.targetId isEqualToString:@"12"]) {
-//            
-//            [self.chatSessionInputBarControl.pluginBoardView removeItemAtIndex:3];
-//            [self.chatSessionInputBarControl.pluginBoardView removeItemAtIndex:3];
-//        }
-//    }
-//    return self;
-//}
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
     
     [self customNavigation];
     
@@ -52,21 +36,9 @@
 #pragma mark 定制导航栏
 - (void)customNavigation {
     
-//    self.navigationItem.title = @"小乐";
     self.navigationController.navigationBar.tintColor = MAINCOLOR;
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:nil];
     self.navigationItem.backBarButtonItem = backBtn;
-
-//    UIButton *btn                          = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
-//    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-//    [btn addTarget:self action:@selector(clickBackBtn) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *backItem              = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"pinkback"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(clickNcBtn:)];
-//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-
-//    backItem.tag                           = 10;
-//    self.navigationItem.leftBarButtonItem  = backItem;
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"预约" style:UIBarButtonItemStylePlain target:self action:@selector(clickNcRightBtn)];
-
 }
 
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target
@@ -98,8 +70,6 @@
 
         if ([cell isMemberOfClass:[RCTextMessageCell class]]) {
         
-//            RCTextMessageCell *textCell = (RCTextMessageCell *)cell;
-//            textCell.textLabel.backgroundColor = MAINCOLOR;
         
         }
         
@@ -111,19 +81,6 @@
 - (void)onBeginRecordEvent {
     
 }
-
-
-//- (RCMessage *)sendMessage:(RCConversationType)conversationType
-//                  targetId:(NSString *)targetId
-//                   content:(RCMessageContent *)content
-//               pushContent:(NSString *)pushContent
-//                  pushData:(NSString *)pushData
-//                   success:(void (^)(long messageId))successBlock
-//                     error:(void (^)(RCErrorCode nErrorCode, long messageId))errorBlock {
-//    
-//    
-//    
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

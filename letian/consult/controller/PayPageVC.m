@@ -24,9 +24,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
     [self customNavigation];
-    
     [self customTableView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wechatPayAction:) name:kWeChatPayNotifacation object:nil];

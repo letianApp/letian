@@ -292,7 +292,7 @@
     [self.navigationController pushViewController:orderDetailVc animated:YES];
 }
 
-
+#pragma mark - 定制导航栏
 -(void) setUpNavigationBar
 {
     self.navigationItem.title=@"我的订单";
@@ -306,6 +306,19 @@
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
+//- (UIBarButtonItem *)customBackItemWithTarget:(id)target
+//                                       action:(SEL)action {
+//    
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btn setImage:[UIImage imageNamed:@"whiteback"] forState:UIControlStateNormal];
+//    [btn setFrame:CGRectMake(0, 0, 20, 20)];
+//    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//    return item;
+//}
+//
+
 
 #pragma mark 按钮动画
 - (void)animationbegin:(UIView *)view {

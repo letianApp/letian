@@ -34,13 +34,7 @@
 @property (nonatomic, copy  ) NSArray             *priceDataSource;
 @property (nonatomic, strong) NSMutableDictionary *requestParams;
 @property (nonatomic        ) NSInteger           pageIndex;
-//@property (nonatomic        ) NSInteger           maxPrice;
-
 @property (nonatomic, strong) NSMutableArray      *priceData;
-//@property (nonatomic, copy  ) NSString            *minPriceStr;
-//@property (nonatomic, copy  ) NSString            *maxPriceStr;
-//@property (nonatomic        ) BOOL                isMinPrice;
-//@property (nonatomic, strong) UIPickerView        *choosePriceView;
 
 @property (nonatomic, strong) UISearchBar         *searchBar;
 @property (nonatomic, strong) UIScrollView        *classifiedSectionFirstLine;
@@ -66,11 +60,8 @@
     [self customSearchBar];
     [self customNavigation];
     [self creatTableView];
-
-//    [MBHudSet showStatusOnView:self.view];
     
     [self relodeDate];
-    
     [self setupMJRefresh];
     
 
@@ -82,9 +73,11 @@
     _searchBar.placeholder = @"搜索咨询师";
     _searchBar.delegate    = self;
     [_searchBar setTranslucent:YES];
-    [_searchBar setShowsCancelButton:YES animated:YES];
-    //    _searchBar.searchBarStyle = UISearchBarStyleProminent;
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     
+    [_searchBar setShowsCancelButton:YES animated:YES];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -95,27 +88,29 @@
     }
 }
 
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    if (NULLString(searchBar.text)) {
-        [_requestParams removeObjectForKey:@"SearchName"];
-    } else {
-        [_requestParams setValue:searchBar.text forKey:@"SearchName"];
-    }
-    [self getCounsultListSource];
-    [self.searchBar resignFirstResponder];// 放弃第一响应者
-}
+//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+//    if (NULLString(searchBar.text)) {
+//        [_requestParams removeObjectForKey:@"SearchName"];
+//    } else {
+//        [_requestParams setValue:searchBar.text forKey:@"SearchName"];
+//    }
+//    [self.searchBar resignFirstResponder];// 放弃第一响应者
+//    [self getCounsultListSource];
+//}
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
     [_requestParams setValue:searchBar.text forKey:@"SearchName"];
-    [self getCounsultListSource];
     [self.searchBar resignFirstResponder];
-    
+    [self getCounsultListSource];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [_requestParams removeObjectForKey:@"SearchName"];
+    [self getCounsultListSource];
     searchBar.text = @"";
     [self.searchBar resignFirstResponder];
+    [self.searchBar setShowsCancelButton:NO animated:YES];
 }
 
 #pragma mark 定制Navigation
@@ -154,7 +149,7 @@
     [_requestParams removeObjectForKey:@"MaxFee"];
 
     [self getCounsultTypeSource];
-    [self getCounsultFeeSource];
+//    [self getCounsultFeeSource];
     [self getCounsultListSource];
 }
 
@@ -190,7 +185,7 @@
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongSelf = weakSelf;
-        [MBHudSet dismiss:strongSelf.view];
+//        [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorInfoTableview.mj_header endRefreshing];
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
@@ -222,52 +217,19 @@
     return valuesArr;
 }
 
-#pragma mark 获取价格信息
-- (void)getCounsultFeeSource {
-        
-    __weak typeof(self) weakSelf   = self;
-    
-    NSMutableString *requestConsultPsyAndTitleListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
-    [requestConsultPsyAndTitleListString appendFormat:@"%@/",API_MODULE_UTILS];
-    [requestConsultPsyAndTitleListString appendFormat:@"%@",API_NAME_GETCONSULFEELIST];
-    
-    [PPNetworkHelper GET:requestConsultPsyAndTitleListString parameters:nil success:^(id responseObject) {
-        
-        __strong typeof(self) strongSelf = weakSelf;
-        NSLog(@"%@",responseObject);
-        
-        
-    } failure:^(NSError *error) {
-        
-        __strong typeof(self) strongSelf = weakSelf;
-        [MBHudSet dismiss:strongSelf.view];
-        [strongSelf.counselorInfoTableview.mj_header endRefreshing];
-        if (error.code == NSURLErrorCancelled) return;
-        if (error.code == NSURLErrorTimedOut) {
-            [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
-        } else{
-            [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
-        }
-        
-    }];
-}
-
-
 #pragma mark 获取咨询师列表
 - (void)getCounsultListSource {
     
     _pageIndex = 1;
     [_counselorInfoTableview.mj_footer endRefreshing];
 
-    __weak typeof(self) weakSelf   = self;
-    
+    __weak typeof(self) weakSelf = self;
     [MBHudSet showStatusOnView:self.view];
 
     NSMutableString *requestConsultListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestConsultListString appendFormat:@"%@/",API_MODULE_CONSULT];
     [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
     
-//    [_requestParams setValue:@(20) forKey:@"pageSize"];
     [_requestParams setValue:@(_pageIndex) forKey:@"pageIndex"];
     NSLog(@"re:%@",_requestParams);
 
@@ -275,6 +237,7 @@
         
 //        NSLog(@"%@",responseObject);
         __strong typeof(self) strongSelf = weakSelf;
+        [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorArr removeAllObjects];
         strongSelf.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         
@@ -284,16 +247,11 @@
         } else if (strongSelf.counselorArr.count < 10) {
             [strongSelf.noDataLab removeFromSuperview];
             strongSelf.counselorInfoTableview.mj_footer.hidden = YES;
-
-//            strongSelf.maxPrice = 1500;
         } else {
             [strongSelf.noDataLab removeFromSuperview];
             strongSelf.counselorInfoTableview.mj_footer.hidden = NO;
-            
-//            strongSelf.maxPrice = 1500;
         }
         
-        [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorInfoTableview reloadData];
         [strongSelf.counselorInfoTableview.mj_header endRefreshing];
         [strongSelf.counselorInfoTableview.mj_footer endRefreshing];
@@ -323,7 +281,7 @@
     [requestConsultListString appendFormat:@"%@/",API_MODULE_CONSULT];
     [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
     
-    NSLog(@"re:%@",_requestParams);
+    NSLog(@"moreRe:%@",_requestParams);
     [_requestParams setValue:@(_pageIndex) forKey:@"pageIndex"];
     
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
@@ -338,7 +296,7 @@
         }
 
         [strongSelf.counselorArr addObjectsFromArray:moreConselor];
-        NSLog(@"底：%ld",strongSelf.counselorArr.count);
+//        NSLog(@"底：%ld",strongSelf.counselorArr.count);
 
         [strongSelf.counselorInfoTableview reloadData];
         
@@ -398,12 +356,11 @@
         }
 //        float wi = [self widthForString:btnTitle fontSize:10 andHeight:10];
         NSInteger wi = [self getStringLength:btnTitle];
-        NSLog(@"宽：%ld",wi);
+//        NSLog(@"宽：%ld",wi);
         
         UIButton *btn                             = [[UIButton alloc]initWithFrame:CGRectMake(btnX+10, 8, wi * SCREEN_W * 0.02 + 20 , navigationBar_H-16)];
-        NSLog(@"btn宽：%f",btn.width);
+//        NSLog(@"btn宽：%f",btn.width);
 
-        
         [btn setTitle:dataArr[i] forState:UIControlStateNormal];
         [btn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];

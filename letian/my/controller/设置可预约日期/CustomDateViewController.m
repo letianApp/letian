@@ -192,7 +192,6 @@
 
 - (void)clickAffirmTimeBtn:(UIButton *)btn {
     
-    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
     NSString *selTimeStr = [dateFormatter stringFromDate:_timePicker.date];

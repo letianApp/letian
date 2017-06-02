@@ -56,7 +56,7 @@
 @property (nonatomic, strong) LRTextField            *ageTextField;
 @property (nonatomic, strong) LRTextField            *phoneTextField;
 @property (nonatomic, strong) LRTextField            *emailTextField;
-@property (nonatomic, strong) UIButton               *doBtn;
+@property (nonatomic, strong) UISwitch               *doSwitch;
 
 @property (nonatomic, strong) UITextView             *detailTextView;
 @property (nonatomic, strong) UILabel                *placeholderLabel;
@@ -613,7 +613,7 @@
     NSRange rag = {0,2};
     NSInteger startTime = [[_orderModel.orderDateTimeStart substringWithRange:rag] integerValue];
     NSInteger endTime = startTime + [_hourStr integerValue];
-    NSString *endStr = [_orderModel.orderDateTimeStart stringByReplacingCharactersInRange:rag withString:[NSString stringWithFormat:@"%ld",endTime]];
+    NSString *endStr = [_orderModel.orderDateTimeStart stringByReplacingCharactersInRange:rag withString:[NSString stringWithFormat:@"%ld",(long)endTime]];
     _orderModel.orderDateTimeEnd = endStr;
     NSLog(@"结束时间%@",endStr);
 
@@ -690,7 +690,7 @@
         __strong typeof(self) strongSelf = weakSelf;
         
         [MBHudSet dismiss:strongSelf.view];
-        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师订单列表错误，错误代码：%ld",error.code]andOnView:strongSelf.view];
+        [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师订单列表错误，错误代码：%ld",(long)error.code]andOnView:strongSelf.view];
     }];
     
     
@@ -757,15 +757,18 @@
     _detailTextView.layer.borderColor      = [[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0] CGColor];
     [bgView addSubview:_detailTextView];
     
-    _doBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, _detailTextView.y + 102, 15, 15)];
-    _doBtn.layer.borderColor                     = [UIColor lightGrayColor].CGColor;
-    _doBtn.layer.borderWidth                     = 1;
-    _doBtn.layer.cornerRadius                    = 7;
-    [bgView addSubview:_doBtn];
-    [_doBtn setImage:[UIImage imageNamed:@"do"] forState:UIControlStateSelected];
-    [_doBtn addTarget:self action:@selector(clickDoBtn:) forControlEvents:UIControlEventTouchUpInside];
+    _doSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(SCREEN_W*0.15, _detailTextView.y + 95, 15, 15)];
+//    _doBtn.layer.borderColor                     = [UIColor lightGrayColor].CGColor;
+//    _doBtn.layer.borderWidth                     = 1;
+//    _doBtn.layer.cornerRadius                    = 7;
+    [bgView addSubview:_doSwitch];
+    _doSwitch.transform = CGAffineTransformMakeScale(0.7, 0.7);
+    _doSwitch.onTintColor = MAINCOLOR;
+
+//    [_doBtn setImage:[UIImage imageNamed:@"do"] forState:UIControlStateSelected];
+    [_doSwitch addTarget:self action:@selector(clickDoSwitch:) forControlEvents:UIControlEventValueChanged];
     
-    UIButton *agreementBtn = [[UIButton alloc]initWithFrame:CGRectMake(_doBtn.right+8, _detailTextView.y + 95, _detailTextView.width, 15)];
+    UIButton *agreementBtn = [[UIButton alloc]initWithFrame:CGRectMake(_doSwitch.right+8, _detailTextView.y + 95, _detailTextView.width, 15)];
     [bgView addSubview:agreementBtn];
 //    agreementBtn.backgroundColor = [UIColor snowColor];
     NSString *str = @"同意《心理咨询知情同意书》";
@@ -883,15 +886,8 @@
     return YES;
 }
 
-- (void)clickDoBtn:(UIButton *)btn {
+- (void)clickDoSwitch:(UISwitch *)doSwitch {
     
-    btn.selected = !btn.selected;
-    if (btn.selected) {
-        btn.layer.borderWidth = 0;
-        
-    } else {
-        btn.layer.borderWidth = 1;
-    }
     [self reflashInfo];
 }
 
@@ -933,7 +929,7 @@
 #pragma mark 刷新信息
 - (void)reflashInfo {
     
-    if (NULLString(_orderModel.orderDateTimeStart) ||  NULLString(_orderModel.orderDateTimeEnd) || NULLString(_nameTextField.text) ||  NULLString(_sexTextField.text) ||  NULLString(_ageTextField.text) || NULLString(_phoneTextField.text) || !_doBtn.isSelected) {
+    if (NULLString(_orderModel.orderDateTimeStart) ||  NULLString(_orderModel.orderDateTimeEnd) || NULLString(_nameTextField.text) ||  NULLString(_sexTextField.text) ||  NULLString(_ageTextField.text) || NULLString(_phoneTextField.text) || !_doSwitch.isOn) {
         self.confirmBtn.backgroundColor = [UIColor lightGrayColor];
         
     } else {
@@ -949,78 +945,76 @@
 
 - (void)clickConfirmBtn {
     NSLog(@"确认预约");
-    [MBHudSet showStatusOnView:self.view];
     
-    //    if (_confirmBtn.backgroundColor == [UIColor lightGrayColor]) {
-    //        [self customHUDWithText:@"请完善预约信息"];
-    //
-    //    } else {
+    if (_confirmBtn.backgroundColor == [UIColor lightGrayColor]) {
+
+        [MBHudSet showText:@"请完善预约信息" andOnView:self.view];
+    } else {
     
-    
-    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
-    [requestString appendFormat:@"%@/",API_MODULE_CONSULT];
-    [requestString appendFormat:@"%@",API_NAME_POSTORDER];
-    __weak typeof(self) weakSelf   = self;
-    
-    NSMutableDictionary *params    = [[NSMutableDictionary alloc]init];
-    params[@"ConsultUserID"]       = @(self.counselModel.UserID);
-    params[@"AppointmentDate"]     = _orderModel.orderDate;
-    params[@"StartTime"]           = _orderModel.orderDateTimeStart;
-    params[@"EndTime"]             = _orderModel.orderDateTimeEnd;
-    params[@"EnumConsultType"]     = @(_orderModel.consultType);
-//    NSString *priceStr = _priceLab.text;
-//    [priceStr stringByReplacingOccurrencesOfString:@" 元" withString:@""];
-    params[@"TotalFee"]            = @(_orderModel.orderPrice);
-    params[@"ConSultName"]         = _orderModel.orderInfoName;
-    if ([_orderModel.orderInfoSex isEqualToString:@"男"]) {
-        params[@"EnumSexType"] = @(0);
-    } else if ([_orderModel.orderInfoSex isEqualToString:@"女"]) {
-        params[@"EnumSexType"] = @(1);
-    }
-    params[@"ConsultAge"]          = @(_orderModel.orderInfoAge);
-    params[@"ConsultPhone"]        = _orderModel.orderInfoPhone;
-    if (_emailTextField.text) {
-        params[@"ConsultEmail"]    = _orderModel.orderInfoEmail;
-    }
-    if (_detailTextView.text) {
-        params[@"ConsultDescription"]  = self.detailTextView.text;
-    }
-    [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
-    NSLog(@"Params=%@",params);
-    
-    [PPNetworkHelper POST:requestString parameters:params success:^(id responseObject) {
+        [MBHudSet showStatusOnView:self.view];
+
+        NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+        [requestString appendFormat:@"%@/",API_MODULE_CONSULT];
+        [requestString appendFormat:@"%@",API_NAME_POSTORDER];
+        __weak typeof(self) weakSelf   = self;
         
-        __strong typeof(self) strongSelf = weakSelf;
-        NSLog(@"%@",responseObject);
-        [MBHudSet dismiss:strongSelf.view];
-        
-        if([responseObject[@"Code"] integerValue] == 200) {
-            
-            [MBHudSet showText:@"下单成功" andOnView:strongSelf.view];
-            NSLog(@"%@",responseObject[@"Result"][@"Source"][@"OrderID"]);
-            PayPageVC *payPage = [[PayPageVC alloc]init];
-            payPage.orderID = [responseObject[@"Result"][@"Source"][@"OrderID"] integerValue];
-            payPage.orderNo = responseObject[@"Result"][@"Source"][@"OrderNo"];
-            payPage.orderTypeString = responseObject[@"Result"][@"Source"][@"ConsultTypeIDString"];
-            payPage.consultorName = strongSelf.orderModel.conserlorName;
-            [strongSelf.navigationController pushViewController:payPage animated:YES];
-            
-        }else{
-            
-            [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.view];
+        NSMutableDictionary *params    = [[NSMutableDictionary alloc]init];
+        params[@"ConsultUserID"]       = @(self.counselModel.UserID);
+        params[@"AppointmentDate"]     = _orderModel.orderDate;
+        params[@"StartTime"]           = _orderModel.orderDateTimeStart;
+        params[@"EndTime"]             = _orderModel.orderDateTimeEnd;
+        params[@"EnumConsultType"]     = @(_orderModel.consultType);
+        params[@"TotalFee"]            = @(_orderModel.orderPrice);
+        params[@"ConSultName"]         = _orderModel.orderInfoName;
+        if ([_orderModel.orderInfoSex isEqualToString:@"男"]) {
+            params[@"EnumSexType"] = @(0);
+        } else if ([_orderModel.orderInfoSex isEqualToString:@"女"]) {
+            params[@"EnumSexType"] = @(1);
         }
-        
-    } failure:^(NSError *error) {
-        
-        __strong typeof(self) strongSelf = weakSelf;
-        [MBHudSet dismiss:strongSelf.view];
-        if (error.code == NSURLErrorCancelled) return;
-        if (error.code == NSURLErrorTimedOut) {
-            [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
-        } else{
-            [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
+        params[@"ConsultAge"] = @(_orderModel.orderInfoAge);
+        params[@"ConsultPhone"] = _orderModel.orderInfoPhone;
+        if (_emailTextField.text) {
+            params[@"ConsultEmail"] = _orderModel.orderInfoEmail;
         }
-    }];
+        if (_detailTextView.text) {
+            params[@"ConsultDescription"]  = self.detailTextView.text;
+        }
+        [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
+        NSLog(@"Params=%@",params);
+        
+        [PPNetworkHelper POST:requestString parameters:params success:^(id responseObject) {
+            
+            __strong typeof(self) strongSelf = weakSelf;
+            NSLog(@"%@",responseObject);
+            [MBHudSet dismiss:strongSelf.view];
+            
+            if([responseObject[@"Code"] integerValue] == 200) {
+                
+                [MBHudSet showText:@"下单成功" andOnView:strongSelf.view];
+                NSLog(@"%@",responseObject[@"Result"][@"Source"][@"OrderID"]);
+                PayPageVC *payPage = [[PayPageVC alloc]init];
+                payPage.orderID = [responseObject[@"Result"][@"Source"][@"OrderID"] integerValue];
+                payPage.orderNo = responseObject[@"Result"][@"Source"][@"OrderNo"];
+                payPage.orderTypeString = responseObject[@"Result"][@"Source"][@"ConsultTypeIDString"];
+                payPage.consultorName = strongSelf.orderModel.conserlorName;
+                [strongSelf.navigationController pushViewController:payPage animated:YES];
+                
+            }else{
+                
+                [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.view];
+            }
+        } failure:^(NSError *error) {
+            
+            __strong typeof(self) strongSelf = weakSelf;
+            [MBHudSet dismiss:strongSelf.view];
+            if (error.code == NSURLErrorCancelled) return;
+            if (error.code == NSURLErrorTimedOut) {
+                [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
+            } else{
+                [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
+            }
+        }];
+    }
 }
 
 #pragma mark 按钮动画

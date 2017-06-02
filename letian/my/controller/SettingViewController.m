@@ -211,11 +211,13 @@
             lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
             UISwitch *switchView=[GQControls createSwitchWithFrame:CGRectMake(SCREEN_W-65, 10, 0, 0)];
             [switchView addTarget:self action:@selector(changePostActiveState:) forControlEvents:UIControlEventValueChanged];
+            switchView.onTintColor = MAINCOLOR;
             [cell.contentView addSubview:switchView];
         }else if (indexPath.row==1){
             cell.textLabel.text=@"订单消息推送";
             lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
             UISwitch *switchView=[GQControls createSwitchWithFrame:CGRectMake(SCREEN_W-65, 10, 0, 0)];
+            switchView.onTintColor = MAINCOLOR;
             [switchView addTarget:self action:@selector(changePostOrderState:) forControlEvents:UIControlEventValueChanged];
             [cell.contentView addSubview:switchView];
         }
