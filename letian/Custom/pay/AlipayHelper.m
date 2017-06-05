@@ -85,7 +85,7 @@
     //将商品信息拼接成字符串
     NSString *orderInfo = [order orderInfoEncoded:NO];
     NSString *orderInfoEncoded = [order orderInfoEncoded:YES];
-    NSLog(@"orderSpec = %@",orderInfo);
+//    NSLog(@"orderSpec = %@",orderInfo);
     
     NSString *signedString = nil;
     RSADataSigner* signer = [[RSADataSigner alloc] initWithPrivateKey:((rsa2PrivateKey.length > 1)?rsa2PrivateKey:rsaPrivateKey)];
@@ -95,17 +95,17 @@
         signedString = [signer signString:orderInfo withRSA2:NO];
     }
     
-    NSLog(@"ssssssssss%@",signedString);
+//    NSLog(@"ssssssssss%@",signedString);
     if (signedString != nil) {
         NSString *appScheme = @"rightpsy";
         
         NSString *orderString = [NSString stringWithFormat:@"%@&sign=%@",
                                  orderInfoEncoded, signedString];
         
-        NSLog(@"厉害了%@",orderString);
+//        NSLog(@"厉害了%@",orderString);
 
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-            NSLog(@"reslut = %@",resultDic);
+//            NSLog(@"reslut = %@",resultDic);
             block(resultDic);
         }];
 

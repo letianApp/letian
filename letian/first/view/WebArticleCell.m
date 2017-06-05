@@ -28,6 +28,8 @@
     if (cell == nil) {
         cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+
     cell.contentView.backgroundColor=[UIColor whiteColor];
     return cell;
 }

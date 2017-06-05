@@ -164,13 +164,6 @@
     return 2;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    NSLog(@"框：%@",self.detailTextView.text);
-//    NSLog(@"%@",self.orderModel.orderInfoDetail);
-    
-    
-}
-
 #pragma mark - 咨询方式及时间cell
 - (void)customCell:(UITableViewCell *)cell withBgView:(UIView *)view forRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -997,6 +990,7 @@
                 payPage.orderNo = responseObject[@"Result"][@"Source"][@"OrderNo"];
                 payPage.orderTypeString = responseObject[@"Result"][@"Source"][@"ConsultTypeIDString"];
                 payPage.consultorName = strongSelf.orderModel.conserlorName;
+                payPage.totalFee = [responseObject[@"Result"][@"Source"][@"TotalFee"] floatValue];
                 [strongSelf.navigationController pushViewController:payPage animated:YES];
                 
             }else{

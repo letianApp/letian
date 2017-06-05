@@ -99,7 +99,7 @@
     [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
         
         __strong typeof(self) strongSelf = weakSelf;
-        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
+//        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
         if([responseObject[@"Code"] integerValue] == 200) {
             
             strongSelf.serviceInfo.userId      = [NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"UserID"]];
@@ -175,7 +175,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         
         int badge = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
-        NSLog(@"总：%d",badge);
+//        NSLog(@"总：%d",badge);
         UITabBarItem *item = [weakSelf.tabBarController.tabBar.items objectAtIndex:2];
         if (badge > 0) {
             
@@ -207,7 +207,7 @@
 //        model.isTop = YES;
 //    }
     NSInteger unreadCount = conversationCell.model.unreadMessageCount;
-    NSLog(@"未读：%ld",(long)model.unreadMessageCount);
+//    NSLog(@"未读：%ld",(long)model.unreadMessageCount);
     if (unreadCount > 0){
         conversationCell.bubbleTipView.bubbleTipText = (unreadCount > 99) ? @"99+" : [NSString stringWithFormat:@"%ld",(long)unreadCount];
     }else{

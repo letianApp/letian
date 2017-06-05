@@ -83,7 +83,7 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [weakSelf.tableView.mj_header endRefreshing];
-        NSLog(@"文章列表%@",responseObject);
+//        NSLog(@"文章列表%@",responseObject);
         [MBHudSet dismiss:self.view];
         weakSelf.webArticleList=[WebArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         if (weakSelf.webArticleList.count >= 10) {
@@ -175,7 +175,7 @@
     WebArticleViewController *webVc=[WebArticleViewController new];
     
     webVc.articleID=self.webArticleList[indexPath.row].ID;
-    NSLog(@"%li,,%@",webVc.articleID,[self getCurrentViewController]);
+//    NSLog(@"%li,,%@",webVc.articleID,[self getCurrentViewController]);
     
     [[self getCurrentViewController].navigationController pushViewController:webVc animated:YES];
     

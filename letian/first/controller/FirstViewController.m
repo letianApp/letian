@@ -17,17 +17,19 @@
 #import "AppDelegate.h"
 #import "MJExtension.h"
 #import "UIImageView+WebCache.h"
-#import "TestListModel.h"
+#import "ActiveModel.h"
 #import "GQUserManager.h"
 #import "SystomMsgViewController.h"
 #import "TestDetailViewController.h"
 #import "GQScrollView.h"
+#import "ActivityDetailViewController.h"
 
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) UILabel *sectionHeaderLabel;
-@property (nonatomic,strong) NSMutableArray <TestListModel *> *testList;
+@property(nonatomic,strong)NSMutableArray <ActiveModel *> *funnyListArray;
+@property(nonatomic,assign)NSInteger pageIndex;
 
 @end
 
@@ -48,12 +50,12 @@
     self.navigationController.navigationBarHidden=YES;
 }
 
--(NSMutableArray *)testList
+-(NSMutableArray *)funnyListArray
 {
-    if (_testList == nil) {
-        _testList = [NSMutableArray array];
+    if (_funnyListArray == nil) {
+        _funnyListArray = [NSMutableArray array];
     }
-    return _testList;
+    return _funnyListArray;
 }
 
 - (void)viewDidLoad {
@@ -79,6 +81,7 @@
     header.stateLabel.hidden = YES;
     self.tableView.mj_header = header;
     self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    
 }
 
 #pragma mark-------创建TableView
@@ -102,7 +105,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.testList.count;
+    return self.funnyListArray.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -110,7 +113,7 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UILabel *funnyTestModuleLabel=[GQControls createLabelWithFrame:CGRectMake(0, 0, SCREEN_W, 40) andText:@"**** 趣味小测试 ****" andTextColor:MAINCOLOR andFontSize:15];
+    UILabel *funnyTestModuleLabel=[GQControls createLabelWithFrame:CGRectMake(0, 0, SCREEN_W, 40) andText:@"**** 幽默趣事 ****" andTextColor:MAINCOLOR andFontSize:15];
     funnyTestModuleLabel.backgroundColor=WEAKPINK;
     funnyTestModuleLabel.textAlignment=NSTextAlignmentCenter;
     self.sectionHeaderLabel=funnyTestModuleLabel;
@@ -127,7 +130,7 @@
     if (self.tableView.contentOffset.y >= 325) {
         
         self.sectionHeaderLabel.hidden = YES;
-        self.navigationItem.title = @"趣味心理测试";
+        self.navigationItem.title = @"幽默趣事";
         self.navigationController.navigationBarHidden = NO;
     }else{
         
@@ -142,34 +145,49 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HomeCell *cell=[HomeCell cellWithTableView:tableView];
-    cell.titleLabel.text=self.testList[indexPath.row].title;
-    cell.detailLabel.text=self.testList[indexPath.row].content;
-    [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.testList[indexPath.row].cover]];
+    cell.titleLabel.text=self.funnyListArray[indexPath.row].Name;
+    cell.detailLabel.text=self.funnyListArray[indexPath.row].Description;
+    [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.funnyListArray[indexPath.row].ActiveImg]];
+
+    
     return cell;
 }
 #pragma mark------cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
-    TestDetailViewController *articleVc=[[TestDetailViewController alloc]init];
-    articleVc.testUrl=self.testList[indexPath.row].absolute_url;
+    ActivityDetailViewController *articleVc=[[ActivityDetailViewController alloc]init];
+    articleVc.activeModel=self.funnyListArray[indexPath.row];
     articleVc.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:articleVc animated:NO];
 }
 
 
-#pragma mark------获取趣味测试列表
+#pragma mark------获取趣味列表
 
 -(void)requestData
 {
+    self.pageIndex=1;
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
-    NSMutableString *requestString = [NSMutableString stringWithString:@"http://bapi.xinli001.com/ceshi/ceshis.json/?rows=50&offset=0&category_id=2&rmd=-1&key=86467ca472d76f198f8aa89d186fa85e"];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_ACTIVE];
+    [requestString appendString:API_NAME_GETACTIVELIST];
     __weak typeof(self) weakSelf = self;
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    params[@"pageIndex"]=@(self.pageIndex);
+    params[@"pageSize"]=@(40);
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [weakSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:self.view];
-        weakSelf.testList=[TestListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        [weakSelf.tableView.mj_header endRefreshing];
+        weakSelf.funnyListArray=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        NSArray *deleArray=[NSArray arrayWithArray:weakSelf.funnyListArray];
+        for (ActiveModel *model in deleArray) {
+            if (model.ActiveTypeID==11) {
+                [weakSelf.funnyListArray removeObject:model];
+            }
+        }
         [_tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];
@@ -183,14 +201,13 @@
     }];
 }
 
-
 #pragma mark------头视图
 
 -(UIView *)createHeadBgView
 {
     UIView *headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 105+SCREEN_W*0.6)];
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_W*0.6, SCREEN_W, 100)];
-    NSArray *nameArray=@[@"- 预约咨询 -",@"- 心理专栏 -",@"- 专业测试 -",@"- 沙龙活动 -"];
+    NSArray *nameArray=@[@"- 预约咨询 -",@"- 心理专栏 -",@"- 专业测试 -",@"- 智慧学院 -"];
     for (NSInteger i=0; i<2; i++) {
         for (NSInteger j=0; j<2; j++) {
             UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/2*j, i*50, SCREEN_W/2, 50)];
@@ -271,19 +288,59 @@
     NSMutableArray *imageArray = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < 4; i++) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"index_slide_0%d.jpg",i+1]];
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"index_%d",i+1]];
         [imageArray addObject:image];
         
     }
     
     GQScrollView *scrollView = [[GQScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_W*0.6) withImages:imageArray withIsRunloop:YES withBlock:^(NSInteger index) {
         NSLog(@"点击了index%zd",index);
+        //跳到咨询页面
+        if (index==0) {
+            self.tabBarController.selectedIndex=1;
+            //跳到文章列表
+        }else if (index==1) {
+            CategoryViewController *articleVc=[[CategoryViewController alloc]init];
+            articleVc.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:articleVc animated:NO];
+            //跳到测试
+        }else if (index==2) {
+            if (![GQUserManager isHaveLogin]) {
+                NSLog(@"登录一下");
+                //未登录
+                UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
+                __weak typeof(self) weakSelf = self;
+                [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                    
+                    LoginViewController *loginVc = [[LoginViewController alloc]init];
+                    loginVc.hidesBottomBarWhenPushed = YES;
+                    [weakSelf presentViewController:loginVc animated:YES completion:nil];
+                }]];
+                [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+                
+                [self presentViewController:alertControl animated:YES completion:nil];
+                
+            }else{
+                
+                TestViewController *testVc=[[TestViewController alloc]init];
+                testVc.hidesBottomBarWhenPushed=YES;
+                [self.navigationController pushViewController:testVc animated:NO];
+            }
+            //跳到活动
+        }else if (index==3){
+            ActivityListViewController *activityVc=[[ActivityListViewController alloc]init];
+            activityVc.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:activityVc animated:YES];
+        }
+
     
     }];
     
    
-    
     scrollView.color_currentPageControl = MAINCOLOR;
+    
+    
+    
     
     return scrollView;
 }

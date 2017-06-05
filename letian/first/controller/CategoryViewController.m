@@ -44,10 +44,10 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        NSLog(@"获取网站文章类别%@",responseObject);
+//        NSLog(@"获取网站文章类别%@",responseObject);
         weakSelf.articleCateList=[WebArticleCateModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         [self createSegment];
-        NSLog(@"%@",weakSelf.articleCateList);
+//        NSLog(@"%@",weakSelf.articleCateList);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
     }];

@@ -335,7 +335,8 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
         //温馨提示
     }else if (indexPath.row==3){
         UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell1"];
-        
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+
         UIView *bgView=[GQControls createViewWithFrame:CGRectMake(15,0, SCREEN_W-30, 150) andBackgroundColor:[UIColor groupTableViewBackgroundColor]];
         bgView.layer.masksToBounds=YES;
         bgView.layer.cornerRadius=25;

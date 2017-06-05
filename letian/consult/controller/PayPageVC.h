@@ -18,8 +18,12 @@
 
 @property(nonatomic,copy)NSString *orderNo;
 
+@property (nonatomic) float totalFee;
+
 @property(nonatomic,copy)NSString *orderTypeString;
 
 @property(nonatomic,copy)NSString *consultorName;
+
+@property(nonatomic,assign)CGFloat price;//应付款
 
 @end

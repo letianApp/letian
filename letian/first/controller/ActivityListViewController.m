@@ -14,12 +14,14 @@
 #import "ActivityDetailViewController.h"
 #import "UIImageView+WebCache.h"
 
-@interface ActivityListViewController ()<WKNavigationDelegate,WKUIDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface ActivityListViewController ()<WKNavigationDelegate,WKUIDelegate,UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic,strong) UICollectionView *collectionView;
+@property (nonatomic,strong) UITableView *tableview;
 @property (nonatomic,strong) NSArray *dataArray;
 @property(nonatomic,strong)NSMutableArray <ActiveModel *> *activeListArray;
 @property (nonatomic,strong) WKWebView *webView;
+@property(nonatomic,assign)NSInteger pageIndex;
+
 
 @end
 
@@ -42,7 +44,7 @@
     self.automaticallyAdjustsScrollViewInsets=NO;
     [self setUpNavigationBar];
     
-    [self createCollectionView];
+    [self createTableView];
     
     [self requestData];
     
@@ -57,37 +59,50 @@
     MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
-    self.collectionView.mj_header = header;
-    self.collectionView.mj_header.automaticallyChangeAlpha = YES;
+    self.tableview.mj_header = header;
+    self.tableview.mj_header.automaticallyChangeAlpha = YES;
+
 }
 
 #pragma mark-------获取活动列表
 
 -(void)requestData
 {
+    self.pageIndex=1;
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_ACTIVE];
     [requestString appendString:API_NAME_GETACTIVELIST];
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    params[@"pageIndex"]=@(1);
-    params[@"pageSize"]=@(20);
+    params[@"pageIndex"]=@(self.pageIndex);
+    params[@"pageSize"]=@(40);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        [self.collectionView.mj_header endRefreshing];
+        [self.tableview.mj_header endRefreshing];
         NSLog(@"&&&&&&&&&*获取活动列表%@",responseObject);
         NSLog(@"ActiveTypeIDString=%@",responseObject[@"Result"][@"Source"][0][@"ActiveTypeIDString"]);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             weakSelf.activeListArray=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-            NSLog(@"activeListArray=%@",weakSelf.activeListArray);
-            [self.collectionView reloadData];
+            if (weakSelf.activeListArray.count >= 3) {
+                weakSelf.tableview.mj_footer.hidden = NO;
+            }else{
+                weakSelf.tableview.mj_footer.hidden=YES;
+            }
+            NSArray *deleArray=[NSArray arrayWithArray:weakSelf.activeListArray];
+            for (ActiveModel *model in deleArray) {
+                if (model.ActiveTypeID==1) {
+                    [weakSelf.activeListArray removeObject:model];
+                }
+            }
+            
+            [self.tableview reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
-        [self.collectionView.mj_header endRefreshing];
+        [self.tableview.mj_header endRefreshing];
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
             [MBHudSet showText:@"请求超时" andOnView:self.view];
@@ -97,54 +112,55 @@
     }];
 }
 
+#pragma mark-------创建tableView
 
-#pragma mark-------创建CollectionView
-
--(void)createCollectionView
+-(void)createTableView
 {
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize=CGSizeMake((SCREEN_W-30)/2,SCREEN_W*0.4);
-    flowLayout.minimumLineSpacing=5;
-    flowLayout.minimumInteritemSpacing=5;
-    flowLayout.sectionInset=UIEdgeInsetsMake(10, 10, 10, 10);
-    flowLayout.scrollDirection=UICollectionViewScrollDirectionVertical;
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H-64) collectionViewLayout:flowLayout];
-    self.collectionView.backgroundColor = [UIColor whiteColor];
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
-    self.collectionView.showsVerticalScrollIndicator=NO;
-    [self.collectionView registerNib:[UINib nibWithNibName:@"ActivityCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"ActivityCell"];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H-64) style:UITableViewStylePlain];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    tableView.showsVerticalScrollIndicator=NO;
+    [self.view addSubview:tableView];
+    self.tableview = tableView;
     
-    [self.view addSubview:self.collectionView];
+    UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_W*0.6)];
+    image.image=[UIImage imageNamed:@"index_4"];
+    self.tableview.tableHeaderView=image;
 }
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.activeListArray.count;
 }
-
-#pragma mark-------cell定制
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ActivityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ActivityCell" forIndexPath:indexPath];
-    [cell.ActivityImageView sd_setImageWithURL:[NSURL URLWithString:self.activeListArray[indexPath.row].ActiveImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
-    cell.ActivityImageView.contentMode=UIViewContentModeScaleAspectFill;
-//    cell.ActivityImageView.layer.masksToBounds=YES;
-    cell.ActivityImageView.clipsToBounds=YES;
-    cell.ActivityTitleLabel.text=self.activeListArray[indexPath.row].Name;
+    return SCREEN_W*0.6+10;
+}
+#pragma mark-------cell定制
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ActivityCell *cell = [ActivityCell cellWithTableView:tableView];
+    [cell.mainImageView sd_setImageWithURL:[NSURL URLWithString:self.activeListArray[indexPath.row].ActiveImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
+    cell.mainImageView.contentMode=UIViewContentModeScaleAspectFill;
+    cell.mainImageView.clipsToBounds=YES;
+    cell.titleLabel.text=self.activeListArray[indexPath.row].Name;
+    
     return cell;
 }
 
 #pragma mark-------跳到活动详情
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ActivityDetailViewController *detailVc=[[ActivityDetailViewController alloc] init];
     detailVc.activeModel=self.activeListArray[indexPath.item];
     [self.navigationController pushViewController:detailVc animated:YES];
 }
 
+
+
 -(void) setUpNavigationBar
 {
-    self.navigationItem.title=@"乐天活动";
+    self.navigationItem.title=@"乐天智慧学院";
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];

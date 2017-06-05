@@ -80,7 +80,7 @@
     titleLab.textAlignment = NSTextAlignmentRight;
     UILabel *priceLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/2, 0, SCREEN_W/2, view.height)];
     [view addSubview:priceLab];
-    priceLab.text = @"¥3000";
+    priceLab.text = [NSString stringWithFormat:@"%.2f",self.totalFee];
     priceLab.textColor = MAINCOLOR;
     
 }
@@ -123,13 +123,13 @@
     
 }
 
-
+#pragma mark - 支付宝
 -(void)aliPay{
     
     Product *product = [Product new];
     product.orderNo = self.orderNo;//订单号
     product.subject = @"乐天心理咨询订单";
-    product.price = @"0.01";//订单价格
+    product.price = [NSString stringWithFormat:@"%.2f",self.totalFee];//订单价格
     
     [[AlipayHelper shared] alipay:product block:^(NSDictionary *result) {
         NSString *message = @"";
@@ -187,11 +187,11 @@
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongself = weakSelf;
-        [MBHudSet showText:[NSString stringWithFormat:@"错误代码：%ld",error.code]andOnView:strongself.view];
+        [MBHudSet showText:[NSString stringWithFormat:@"错误代码：%ld",(long)error.code]andOnView:strongself.view];
     }];
 
 }
-#pragma mark--------微信支付
+#pragma mark - 微信支付
 
 -(void)wechatPay{
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
@@ -200,7 +200,7 @@
     [requestString appendString:API_NAME_WECHATPAY];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"orderID"] = @(self.orderID);
-    params[@"money"] = @(0.01);
+    params[@"money"] = @(self.totalFee);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

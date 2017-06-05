@@ -106,7 +106,7 @@
             [enterButton setTitle:@"进入乐天心理" forState:UIControlStateNormal];
             [enterButton setTitleColor:MAINCOLOR forState:UIControlStateNormal];
             enterButton.bounds = CGRectMake(0, 0, 140, 40);
-            enterButton.center = CGPointMake(SCREEN_W * 0.5, SCREEN_H* 0.87);
+            enterButton.center = CGPointMake(SCREEN_W * 0.5, SCREEN_H* 0.95);
             enterButton.layer.cornerRadius = 4;
             enterButton.layer.borderWidth = 1;
             enterButton.layer.borderColor = MAINCOLOR.CGColor;
@@ -127,7 +127,7 @@
     TAdLaunchImageView *adLaunchImageView = [[TAdLaunchImageView alloc]initWithImage:[UIImage ty_getLaunchImage]];
     [adLaunchImageView sd_setImageWithURL:[NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493667587779&di=28e7dd5cbcf8ef16b8188b77b5a6369e&imgtype=0&src=http%3A%2F%2Fdata.useit.com.cn%2Fuseitdata%2Fforum%2F201512%2F09%2F144210euq2hw5yrypupacw.jpg"]];
     [adLaunchImageView showInWindowWithAnimation:[TYLaunchFadeScaleAnimation fadeAnimationWithDelay:5.0] completion:^(BOOL finished) {
-        NSLog(@"打开app");
+//        NSLog(@"打开app");
     }];
 }
 
@@ -147,7 +147,7 @@
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController*)viewController {
     
     if ([viewController.tabBarItem.title isEqualToString:@"咨询"]) {
-        NSLog(@"tabbar登录:%d",[GQUserManager isHaveLogin]);
+//        NSLog(@"tabbar登录:%d",[GQUserManager isHaveLogin]);
         if (![GQUserManager isHaveLogin]) {
             //未登录
             UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
@@ -241,14 +241,14 @@
         [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
             
             __strong typeof(self) strongSelf = weakSelf;
-            NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+//            NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 CYLTabBarController *tab = (CYLTabBarController *)strongSelf.window.rootViewController;
                 UITabBarItem *item = [tab.tabBar.items objectAtIndex:2];
                 int badge = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
-                NSLog(@"总：%d",badge);
+//                NSLog(@"总：%d",badge);
                 if (badge > 0) {
                     
                     NSString *badgeStr = [NSString stringWithFormat:@"%d",badge];
@@ -257,11 +257,11 @@
                     item.badgeValue = nil;
                 }
                 
-                NSLog(@"显示的：%@",item.badgeValue);
+//                NSLog(@"显示的：%@",item.badgeValue);
             });
 
         } error:^(RCConnectErrorCode status) {
-            NSLog(@"登陆的错误码为:%ld", (long)status);
+//            NSLog(@"登陆的错误码为:%ld", (long)status);
             
             
             
@@ -269,7 +269,7 @@
             //token过期或者不正确。
             //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
             //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
-            NSLog(@"token错误");
+//            NSLog(@"token错误");
         }];
 
     }
@@ -286,7 +286,7 @@
     }
     // 远程推送的内容
     NSDictionary *remoteNotificationUserInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
-    NSLog(@"远程推送：%@",remoteNotificationUserInfo);
+//    NSLog(@"远程推送：%@",remoteNotificationUserInfo);
 }
 
 /**
@@ -327,7 +327,7 @@ didRegisterUserNotificationSettings:
     [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
         
         __strong typeof(self) strongSelf = weakSelf;
-        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
+//        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
         if([responseObject[@"Code"] integerValue] == 200) {
 
             RCUserInfo *user = [[RCUserInfo alloc]init];
@@ -366,7 +366,7 @@ didRegisterUserNotificationSettings:
         CYLTabBarController *tab = (CYLTabBarController *)weakSelf.window.rootViewController;
         UITabBarItem *item = [tab.tabBar.items objectAtIndex:2];
         int badge = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
-        NSLog(@"总：%d",badge);
+//        NSLog(@"总：%d",badge);
         if (badge > 0) {
             
             NSString *badgeStr = [NSString stringWithFormat:@"%d",badge];
@@ -375,7 +375,7 @@ didRegisterUserNotificationSettings:
             item.badgeValue = nil;
         }
         
-        NSLog(@"显示的：%@",item.badgeValue);
+//        NSLog(@"显示的：%@",item.badgeValue);
     });
     [UIApplication sharedApplication].applicationIconBadgeNumber = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
 
@@ -391,15 +391,15 @@ didRegisterUserNotificationSettings:
     if (!result) {
         if ([url.host isEqualToString:@"safepay"]) {
             [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-                NSLog(@"支付宝回调1 = %@",resultDic);
+//                NSLog(@"支付宝回调1 = %@",resultDic);
             }];
             [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-                NSLog(@"支付宝回调2 = %@",resultDic);
+//                NSLog(@"支付宝回调2 = %@",resultDic);
                 self.pushToOrderVc([resultDic[@"resultStatus"] integerValue]);//从支付宝返回app指定界面
             }];
         }else if ([url.host isEqualToString:@"platformapi"]){
             [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-                NSLog(@"支付宝钱包快登授权返回 = %@",resultDic);
+//                NSLog(@"支付宝钱包快登授权返回 = %@",resultDic);
             }];
         }else if([url.host isEqualToString:@"pay"]){
             return  [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
@@ -472,12 +472,12 @@ didRegisterUserNotificationSettings:
     NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient]
                                      getPushExtraFromRemoteNotification:userInfo];
     if (pushServiceData) {
-        NSLog(@"该远程推送包含来自融云的推送服务");
+//        NSLog(@"该远程推送包含来自融云的推送服务");
         for (id key in [pushServiceData allKeys]) {
-            NSLog(@"key = %@, value = %@", key, pushServiceData[key]);
+//            NSLog(@"key = %@, value = %@", key, pushServiceData[key]);
         }
     } else {
-        NSLog(@"该远程推送不包含来自融云的推送服务");
+//        NSLog(@"该远程推送不包含来自融云的推送服务");
     }
 
     [JPUSHService handleRemoteNotification:userInfo];
@@ -485,7 +485,7 @@ didRegisterUserNotificationSettings:
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+//    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
 
 -(void)applicationWillEnterForeground:(UIApplication *)application {

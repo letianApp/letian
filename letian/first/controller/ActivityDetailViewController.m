@@ -122,7 +122,7 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        NSLog(@"活动详情responseObject=%@",responseObject);
+//        NSLog(@"活动详情responseObject=%@",responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
     }];
@@ -136,7 +136,7 @@
     NSArray *imageNames = @[@"pengyou",@"weixin",@"weibo",@"kongjian",@"mess",@"qq"];
     GQActionSheet *sheet = [[GQActionSheet alloc] initWithTitles:titles iconNames:imageNames];
     [sheet showActionSheetWithClickBlock:^(int btnIndex) {
-        NSLog(@"btnIndex:%d",btnIndex);
+//        NSLog(@"btnIndex:%d",btnIndex);
         NSInteger platformType;
         if (btnIndex==0) {
             platformType=ShareTo_WechatTimeLine;
@@ -177,7 +177,7 @@
 
 -(void) setUpNavigationBar
 {
-    self.navigationItem.title=@"活动详情";
+    self.navigationItem.title=@"详情";
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];

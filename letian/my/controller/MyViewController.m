@@ -227,7 +227,6 @@
     LoginViewController *loginVc = [[LoginViewController alloc]init];
     loginVc.hidesBottomBarWhenPushed = YES;
     loginVc.tabbarIndex=2;
-//    [self.navigationController pushViewController:loginVc animated:YES];
     [self presentViewController:loginVc animated:YES completion:nil];
     
 }
@@ -237,7 +236,7 @@
 - (void)messageButtonClicked {
     SystomMsgViewController *messageVc=[[SystomMsgViewController alloc]init];
     messageVc.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:messageVc animated:NO];
+    [self.navigationController pushViewController:messageVc animated:YES];
 }
 
 
@@ -257,7 +256,8 @@
     cell.textLabel.text=self.dataArray[indexPath.row];
     cell.textLabel.font=[UIFont systemFontOfSize:15];
     cell.textLabel.textColor=[UIColor darkGrayColor];
-    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+
     
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 49, SCREEN_W, 0.5)];
     lineView.backgroundColor=[UIColor lightGrayColor];
@@ -309,23 +309,67 @@
 
 #pragma mark--------点击进入订单列表
 - (void)orderSrateButtonClick:(UIButton *)btn {
-    OrderViewController *orderVc=[[OrderViewController alloc]init];
-    orderVc.hidesBottomBarWhenPushed=YES;
-    if (btn.tag==100) {
-        orderVc.orderState=ConsultOrder;
-    }else if (btn.tag==101){
-        orderVc.orderState=WaitPayOrder;
-    }else if (btn.tag==102){
-        orderVc.orderState=SuccessOrder;
+    
+    if ([GQUserManager isHaveLogin]) {
+        
+        OrderViewController *orderVc=[[OrderViewController alloc]init];
+        orderVc.hidesBottomBarWhenPushed=YES;
+        if (btn.tag==100) {
+            orderVc.orderState=ConsultOrder;
+        }else if (btn.tag==101){
+            orderVc.orderState=WaitPayOrder;
+        }else if (btn.tag==102){
+            orderVc.orderState=SuccessOrder;
+        }
+        [self.navigationController pushViewController:orderVc animated:YES];
+        
+    } else {
+        
+        UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
+        alertControl.view.tintColor=[UIColor blackColor];
+        [self presentViewController:alertControl animated:YES completion:nil];
+        
+        __weak typeof(self) weakSelf = self;
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            
+            __strong typeof(self) strongSelf = weakSelf;
+            LoginViewController *loginVc     = [[LoginViewController alloc]init];
+            loginVc.hidesBottomBarWhenPushed = YES;
+            [strongSelf presentViewController:loginVc animated:YES completion:nil];
+        }]];
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        
     }
-    [self.navigationController pushViewController:orderVc animated:NO];
+
+    
 }
 //查看所有订单
--(void)allOrderLabelTouched{
-    OrderViewController *orderVc=[[OrderViewController alloc]init];
-    orderVc.hidesBottomBarWhenPushed=YES;
-    orderVc.orderState=AllOrder;
-    [self.navigationController pushViewController:orderVc animated:NO];
+- (void)allOrderLabelTouched {
+    
+    if ([GQUserManager isHaveLogin]) {
+
+        OrderViewController *orderVc=[[OrderViewController alloc]init];
+        orderVc.hidesBottomBarWhenPushed=YES;
+        orderVc.orderState=AllOrder;
+        [self.navigationController pushViewController:orderVc animated:YES];
+    
+    } else {
+        
+        UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
+        alertControl.view.tintColor=[UIColor blackColor];
+        [self presentViewController:alertControl animated:YES completion:nil];
+        
+        __weak typeof(self) weakSelf = self;
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            
+            __strong typeof(self) strongSelf = weakSelf;
+            LoginViewController *loginVc     = [[LoginViewController alloc]init];
+            loginVc.hidesBottomBarWhenPushed = YES;
+            [strongSelf presentViewController:loginVc animated:YES completion:nil];
+        }]];
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        
+    }
 }
 
 #pragma mark--------cell点击事件

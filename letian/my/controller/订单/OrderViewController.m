@@ -127,13 +127,16 @@
     NSLog(@"订单列表的token%@",kFetchToken);
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [weakSelf.tableView.mj_header endRefreshing];
-        [MBHudSet dismiss:self.view];
+        __strong typeof(self) strongSelf = weakSelf;
+
+        [strongSelf.tableView.mj_header endRefreshing];
+        [MBHudSet dismiss:strongSelf.view];
         NSLog(@"&&&&&&&&&*获取订单列表%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
-            weakSelf.orderList=[OrderListModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+            [strongSelf.orderList removeAllObjects];
+            strongSelf.orderList=[OrderListModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
             NSLog(@"Msg%@",responseObject[@"Msg"]);
-            [weakSelf.tableView reloadData];
+            [strongSelf.tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];
@@ -173,6 +176,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OrderCell *cell=[OrderCell cellWithTableView:tableView];
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+
     if ([kFetchUserType integerValue]==1) {
         //如果用户是咨客
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.orderList[indexPath.row].DoctorHeadImg]];
@@ -214,11 +219,8 @@
             cell.secondsCountDown=(int)(3600-timePeriod.durationInSeconds);
         }else{
 //            //订单失效
-//            cell.timeChangeLabel.textColor=[UIColor lightGrayColor];
-//            [cell.stateButton setTitle:@"已失效" forState:UIControlStateNormal];
-//            cell.stateButton.userInteractionEnabled=NO;
-            [self.orderList removeObject:self.orderList[indexPath.row]];
-            [self.tableView reloadData];
+//            [self.orderList removeObject:self.orderList[indexPath.row]];
+//            [self.tableView reloadData];
         }
         cell.timeChangeLabel.hidden=NO;
         cell.askBtn.hidden = YES;
@@ -278,6 +280,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     payVc.orderID=self.orderList[indexPath.row].OrderID;
     payVc.orderNo=self.orderList[indexPath.row].OrderNo;
+    payVc.price=self.orderList[indexPath.row].TotalFee;
     NSLog(@"token------%@",kFetchToken);
     [self.navigationController pushViewController:payVc animated:YES];
 }
