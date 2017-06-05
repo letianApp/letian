@@ -38,7 +38,7 @@ color_pageControl = _color_pageControl ;
 {
    self = [super initWithFrame:frame];
     if (self) {
-        self.dur = 3;
+        self.dur = 6;
         self.imageCount = images ? images.count : 0;
         self.isRunloop = isRunloop;
         self.dataArry = images;

@@ -22,4 +22,6 @@
 
 @property(nonatomic,copy)NSString *consultorName;
 
+@property(nonatomic,assign)CGFloat price;//应付款
+
 @end

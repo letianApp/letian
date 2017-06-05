@@ -35,6 +35,8 @@
 +(instancetype) cellWithTableView:(UITableView *)tableView
 {
     OrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+
     if (cell == nil) {
         cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }else{//取消cell的复用

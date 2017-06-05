@@ -173,6 +173,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OrderCell *cell=[OrderCell cellWithTableView:tableView];
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+
     if ([kFetchUserType integerValue]==1) {
         //如果用户是咨客
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.orderList[indexPath.row].DoctorHeadImg]];
@@ -214,11 +216,8 @@
             cell.secondsCountDown=(int)(3600-timePeriod.durationInSeconds);
         }else{
 //            //订单失效
-//            cell.timeChangeLabel.textColor=[UIColor lightGrayColor];
-//            [cell.stateButton setTitle:@"已失效" forState:UIControlStateNormal];
-//            cell.stateButton.userInteractionEnabled=NO;
-            [self.orderList removeObject:self.orderList[indexPath.row]];
-            [self.tableView reloadData];
+//            [self.orderList removeObject:self.orderList[indexPath.row]];
+//            [self.tableView reloadData];
         }
         cell.timeChangeLabel.hidden=NO;
         cell.askBtn.hidden = YES;
@@ -278,6 +277,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     payVc.orderID=self.orderList[indexPath.row].OrderID;
     payVc.orderNo=self.orderList[indexPath.row].OrderNo;
+    payVc.price=self.orderList[indexPath.row].TotalFee;
     NSLog(@"token------%@",kFetchToken);
     [self.navigationController pushViewController:payVc animated:YES];
 }

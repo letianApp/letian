@@ -80,7 +80,7 @@
     titleLab.textAlignment = NSTextAlignmentRight;
     UILabel *priceLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/2, 0, SCREEN_W/2, view.height)];
     [view addSubview:priceLab];
-    priceLab.text = @"¥3000";
+    priceLab.text =[NSString stringWithFormat:@"%.2f",self.price];
     priceLab.textColor = MAINCOLOR;
     
 }
@@ -129,7 +129,7 @@
     Product *product = [Product new];
     product.orderNo = self.orderNo;//订单号
     product.subject = @"乐天心理咨询订单";
-    product.price = @"0.01";//订单价格
+    product.price = [NSString stringWithFormat:@"%.2f",self.price];//订单价格
     
     [[AlipayHelper shared] alipay:product block:^(NSDictionary *result) {
         NSString *message = @"";
@@ -200,7 +200,7 @@
     [requestString appendString:API_NAME_WECHATPAY];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"orderID"] = @(self.orderID);
-    params[@"money"] = @(0.01);
+    params[@"money"] = @(self.price);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

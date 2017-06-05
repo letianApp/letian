@@ -106,7 +106,7 @@
             [enterButton setTitle:@"进入乐天心理" forState:UIControlStateNormal];
             [enterButton setTitleColor:MAINCOLOR forState:UIControlStateNormal];
             enterButton.bounds = CGRectMake(0, 0, 140, 40);
-            enterButton.center = CGPointMake(SCREEN_W * 0.5, SCREEN_H* 0.87);
+            enterButton.center = CGPointMake(SCREEN_W * 0.5, SCREEN_H* 0.95);
             enterButton.layer.cornerRadius = 4;
             enterButton.layer.borderWidth = 1;
             enterButton.layer.borderColor = MAINCOLOR.CGColor;

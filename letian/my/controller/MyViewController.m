@@ -257,7 +257,8 @@
     cell.textLabel.text=self.dataArray[indexPath.row];
     cell.textLabel.font=[UIFont systemFontOfSize:15];
     cell.textLabel.textColor=[UIColor darkGrayColor];
-    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+
     
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 49, SCREEN_W, 0.5)];
     lineView.backgroundColor=[UIColor lightGrayColor];

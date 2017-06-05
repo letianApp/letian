@@ -21,7 +21,8 @@
     if (cell == nil) {
         cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"OrderPayDetailCell"];
     }
-    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+
     return cell;
 }
 
