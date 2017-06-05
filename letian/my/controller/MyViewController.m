@@ -227,7 +227,6 @@
     LoginViewController *loginVc = [[LoginViewController alloc]init];
     loginVc.hidesBottomBarWhenPushed = YES;
     loginVc.tabbarIndex=2;
-//    [self.navigationController pushViewController:loginVc animated:YES];
     [self presentViewController:loginVc animated:YES completion:nil];
     
 }
@@ -237,7 +236,7 @@
 - (void)messageButtonClicked {
     SystomMsgViewController *messageVc=[[SystomMsgViewController alloc]init];
     messageVc.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:messageVc animated:NO];
+    [self.navigationController pushViewController:messageVc animated:YES];
 }
 
 
@@ -319,14 +318,14 @@
     }else if (btn.tag==102){
         orderVc.orderState=SuccessOrder;
     }
-    [self.navigationController pushViewController:orderVc animated:NO];
+    [self.navigationController pushViewController:orderVc animated:YES];
 }
 //查看所有订单
 -(void)allOrderLabelTouched{
     OrderViewController *orderVc=[[OrderViewController alloc]init];
     orderVc.hidesBottomBarWhenPushed=YES;
     orderVc.orderState=AllOrder;
-    [self.navigationController pushViewController:orderVc animated:NO];
+    [self.navigationController pushViewController:orderVc animated:YES];
 }
 
 #pragma mark--------cell点击事件

@@ -127,13 +127,16 @@
     NSLog(@"订单列表的token%@",kFetchToken);
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [weakSelf.tableView.mj_header endRefreshing];
-        [MBHudSet dismiss:self.view];
+        __strong typeof(self) strongSelf = weakSelf;
+
+        [strongSelf.tableView.mj_header endRefreshing];
+        [MBHudSet dismiss:strongSelf.view];
         NSLog(@"&&&&&&&&&*获取订单列表%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
-            weakSelf.orderList=[OrderListModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+            [strongSelf.orderList removeAllObjects];
+            strongSelf.orderList=[OrderListModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
             NSLog(@"Msg%@",responseObject[@"Msg"]);
-            [weakSelf.tableView reloadData];
+            [strongSelf.tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];

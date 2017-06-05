@@ -997,7 +997,11 @@
                 payPage.orderNo = responseObject[@"Result"][@"Source"][@"OrderNo"];
                 payPage.orderTypeString = responseObject[@"Result"][@"Source"][@"ConsultTypeIDString"];
                 payPage.consultorName = strongSelf.orderModel.conserlorName;
+<<<<<<< HEAD
                 payPage.price=strongSelf.orderModel.orderPrice;
+=======
+                payPage.totalFee = [responseObject[@"Result"][@"Source"][@"TotalFee"] floatValue];
+>>>>>>> origin/master
                 [strongSelf.navigationController pushViewController:payPage animated:YES];
                 
             }else{
