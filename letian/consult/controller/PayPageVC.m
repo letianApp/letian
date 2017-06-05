@@ -80,11 +80,7 @@
     titleLab.textAlignment = NSTextAlignmentRight;
     UILabel *priceLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/2, 0, SCREEN_W/2, view.height)];
     [view addSubview:priceLab];
-<<<<<<< HEAD
-    priceLab.text =[NSString stringWithFormat:@"%.2f",self.price];
-=======
     priceLab.text = [NSString stringWithFormat:@"%.2f",self.totalFee];
->>>>>>> origin/master
     priceLab.textColor = MAINCOLOR;
     
 }
@@ -133,11 +129,8 @@
     Product *product = [Product new];
     product.orderNo = self.orderNo;//订单号
     product.subject = @"乐天心理咨询订单";
-<<<<<<< HEAD
-    product.price = [NSString stringWithFormat:@"%.2f",self.price];//订单价格
-=======
     product.price = [NSString stringWithFormat:@"%.2f",self.totalFee];//订单价格
->>>>>>> origin/master
+
     
     [[AlipayHelper shared] alipay:product block:^(NSDictionary *result) {
         NSString *message = @"";
@@ -208,11 +201,7 @@
     [requestString appendString:API_NAME_WECHATPAY];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"orderID"] = @(self.orderID);
-<<<<<<< HEAD
-    params[@"money"] = @(self.price);
-=======
     params[@"money"] = @(self.totalFee);
->>>>>>> origin/master
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

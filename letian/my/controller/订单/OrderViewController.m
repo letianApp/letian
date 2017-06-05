@@ -280,7 +280,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     payVc.orderID=self.orderList[indexPath.row].OrderID;
     payVc.orderNo=self.orderList[indexPath.row].OrderNo;
-    payVc.price=self.orderList[indexPath.row].TotalFee;
+    payVc.totalFee=self.orderList[indexPath.row].TotalFee;
     NSLog(@"token------%@",kFetchToken);
     [self.navigationController pushViewController:payVc animated:YES];
 }
