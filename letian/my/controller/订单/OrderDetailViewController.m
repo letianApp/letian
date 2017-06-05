@@ -147,6 +147,7 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
         PayPageVC *payVc=[[PayPageVC alloc]init];
         payVc.orderID=self.orderInfoModel.OrderID;
         payVc.orderNo=self.orderInfoModel.OrderNo;
+        payVc.totalFee=self.orderInfoModel.TotalFee;
         [self.navigationController pushViewController:payVc animated:YES];
         //点击取消订单
     }else if (btn.tag==CancelButtonTag){
