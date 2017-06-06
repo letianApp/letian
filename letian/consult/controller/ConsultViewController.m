@@ -231,7 +231,7 @@
     [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
     
     [_requestParams setValue:@(_pageIndex) forKey:@"pageIndex"];
-    NSLog(@"re:%@",_requestParams);
+//    NSLog(@"re:%@",_requestParams);
 
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
         
@@ -281,7 +281,7 @@
     [requestConsultListString appendFormat:@"%@/",API_MODULE_CONSULT];
     [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
     
-    NSLog(@"moreRe:%@",_requestParams);
+//    NSLog(@"moreRe:%@",_requestParams);
     [_requestParams setValue:@(_pageIndex) forKey:@"pageIndex"];
     
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
@@ -325,7 +325,7 @@
 
     _priceDataSource = @[@"全部价格(元)",@"500及以下",@"500-1000",@"1000及以上"];
     
-    NSLog(@"%@",_counselorCategoryArr);
+//    NSLog(@"%@",_counselorCategoryArr);
     [self customClassifiedSectionBtnFotData:_counselorCategoryArr withLineNumber:0];
     [self customClassifiedSectionBtnFotData:_counselorTitleArr withLineNumber:1];
     [self customClassifiedSectionBtnFotData:_priceDataSource withLineNumber:2];
@@ -401,7 +401,7 @@
     
     [self animationbegin:btn];
     
-    NSLog(@"%@",btn.titleLabel.text);
+//    NSLog(@"%@",btn.titleLabel.text);
     
     if (btn.tag < 100) {
         for (int i = 1; i < _counselorCategoryArr.count+1; i++) {

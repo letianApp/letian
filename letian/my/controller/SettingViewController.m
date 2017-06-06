@@ -248,7 +248,7 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        NSLog(@"活动更新推送responseObject=%@",responseObject);
+//        NSLog(@"活动更新推送responseObject=%@",responseObject);
         [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
@@ -276,7 +276,7 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        NSLog(@"订单消息推送responseObject=%@",responseObject);
+//        NSLog(@"订单消息推送responseObject=%@",responseObject);
         [MBHudSet showText:responseObject[@"Msg"] andOnView:self.view];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];

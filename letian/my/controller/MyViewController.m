@@ -47,7 +47,7 @@
     self.navigationController.navigationBarHidden = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self requestData];
-    NSLog(@"my登录类型:%@",kFetchUserType);
+//    NSLog(@"my登录类型:%@",kFetchUserType);
 //    self.tableView.tableHeaderView = [self createHeadView];
     self.dataArray = @[@"系统设置",@"客服电话    021-37702979",@"我要分享",@"关于我们"];
     if ([kFetchUserType integerValue] == 11) {
@@ -77,7 +77,7 @@
     [requestString appendString:API_NAME_GETUSERINFO];
     __weak typeof(self) weakSelf = self;
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
-    NSLog(@"token------------%@",kFetchToken);
+//    NSLog(@"token------------%@",kFetchToken);
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -376,7 +376,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
-    NSLog(@"cell被点击%li",indexPath.row);
+//    NSLog(@"cell被点击%li",indexPath.row);
     if (indexPath.row==0){
         //跳到系统设置
         SettingViewController *settingVc=[[SettingViewController alloc]init];
@@ -402,7 +402,7 @@
         NSArray *imageNames = @[@"pengyou",@"weixin",@"weibo",@"kongjian",@"mess",@"qq"];
         GQActionSheet *sheet = [[GQActionSheet alloc] initWithTitles:titles iconNames:imageNames];
         [sheet showActionSheetWithClickBlock:^(int btnIndex) {
-            NSLog(@"btnIndex:%d",btnIndex);
+//            NSLog(@"btnIndex:%d",btnIndex);
             NSInteger platformType;
             if (btnIndex==0) {
                 platformType=ShareTo_WechatTimeLine;
@@ -419,7 +419,7 @@
             }
             [self shareWebPageToPlatformType:platformType];
         } cancelBlock:^{
-            NSLog(@"取消");
+//            NSLog(@"取消");
         }];
     } else if (indexPath.row == 3) {
        // 关于我们

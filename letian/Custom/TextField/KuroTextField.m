@@ -79,7 +79,7 @@
         self.placeHolderLabel = [[UILabel alloc] init];
         
         
-        NSLog(@"%f",self.bounds.size.width-50);
+//        NSLog(@"%f",self.bounds.size.width-50);
         self.placeHolderLabel.text = @"Username";
         self.placeHolderLabel.textColor = [UIColor blackColor];
         self.placeHolderLabel.backgroundColor=[UIColor clearColor];

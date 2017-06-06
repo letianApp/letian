@@ -82,8 +82,8 @@
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
         [self.tableview.mj_header endRefreshing];
-        NSLog(@"&&&&&&&&&*获取活动列表%@",responseObject);
-        NSLog(@"ActiveTypeIDString=%@",responseObject[@"Result"][@"Source"][0][@"ActiveTypeIDString"]);
+//        NSLog(@"&&&&&&&&&*获取活动列表%@",responseObject);
+//        NSLog(@"ActiveTypeIDString=%@",responseObject[@"Result"][@"Source"][0][@"ActiveTypeIDString"]);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             weakSelf.activeListArray=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
             if (weakSelf.activeListArray.count >= 3) {

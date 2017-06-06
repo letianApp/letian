@@ -51,10 +51,10 @@
     params[@"articleID"]=@(self.articleID);
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"什么情况？文章详情%@",responseObject);
+//        NSLog(@"什么情况？文章详情%@",responseObject);
         [MBHudSet dismiss:self.view];
         weakSelf.articleModel=[WebArticleModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
-        NSLog(@"responseObject=%@",responseObject);
+//        NSLog(@"responseObject=%@",responseObject);
         [self createRichTextView:self.articleModel.Content];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
     }];
@@ -106,7 +106,7 @@
     NSArray *imageNames = @[@"pengyou",@"weixin",@"weibo",@"kongjian",@"mess",@"qq"];
     GQActionSheet *sheet = [[GQActionSheet alloc] initWithTitles:titles iconNames:imageNames];
     [sheet showActionSheetWithClickBlock:^(int btnIndex) {
-        NSLog(@"btnIndex:%d",btnIndex);
+//        NSLog(@"btnIndex:%d",btnIndex);
         NSInteger platformType;
         if (btnIndex==0) {
             platformType=ShareTo_WechatTimeLine;

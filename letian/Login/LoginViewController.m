@@ -53,7 +53,7 @@
 }
 
 
--(void)loginBtnClicked{
+- (void)loginBtnClicked {
     
     [self.acountTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
@@ -78,22 +78,22 @@
     params[@"Timestamp"]           = timeSp;
     params[@"Nonce"]               = nonce;
     params[@"AppId"]               = APPID;
-    params[@"PushNo"]              =@"18171adc033ca89acda";//[JPUSHService registrationID];;
+    params[@"PushNo"]              = [JPUSHService registrationID];;
     
-    NSLog(@"推送号：。。。。。%@",params[@"PushNo"]);
+//    NSLog(@"推送号：。。。。。%@",params[@"PushNo"]);
     __weak typeof(self) weakSelf   = self;
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
         __strong typeof(self) strongSelf = weakSelf;
 
-        NSLog(@"登录%@",responseObject);
-        NSLog(@"Msg%@",responseObject[@"Msg"]);
+//        NSLog(@"登录%@",responseObject);
+//        NSLog(@"Msg%@",responseObject[@"Msg"]);
         if([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             
             [GQUserManager saveUserData:@{@"UserId":[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"userid"]]} andToken:responseObject[@"Result"][@"Source"][@"access_token"]];
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"rongCloudToken"] forKey:kRongYunToken];
-            NSLog(@"token:%@",kFetchRToken);
+//            NSLog(@"token:%@",kFetchRToken);
             [[NSUserDefaults standardUserDefaults] setObject:strongSelf.acountTextField.text.trim forKey:kUserPhoneKey];
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"enumUserType"] forKey:kUserType];
 
@@ -131,7 +131,7 @@
         __strong typeof(self) strongSelf = weakSelf;
 
         [MBHudSet dismiss:strongSelf.view];
-        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
+//        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"NickName"] forKey:kUserName];
@@ -143,13 +143,13 @@
             
             [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
                 
-                NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
-                NSLog(@"ID：%@",kFetchUserId);
+//                NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+//                NSLog(@"ID：%@",kFetchUserId);
                 
                 [strongSelf dismissViewControllerAnimated:YES completion:nil];
 
             } error:^(RCConnectErrorCode status) {
-                NSLog(@"登陆的错误码为:%ld", (long)status);
+//                NSLog(@"登陆的错误码为:%ld", (long)status);
                 
                 
                 
@@ -157,7 +157,22 @@
                 //token过期或者不正确。
                 //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
                 //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
-                NSLog(@"token错误");
+//                NSLog(@"token错误");
+                
+                __strong typeof(self) strongSelf = weakSelf;
+                
+                UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"连接失败，请重新登录" preferredStyle:UIAlertControllerStyleAlert];
+                alertControl.view.tintColor=[UIColor blackColor];
+                [strongSelf presentViewController:alertControl animated:YES completion:nil];
+                
+                [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                    
+                    LoginViewController *loginVc     = [[LoginViewController alloc]init];
+                    loginVc.hidesBottomBarWhenPushed = YES;
+                    [strongSelf presentViewController:loginVc animated:YES completion:nil];
+                }]];
+                [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+                
             }];
         } else {
             

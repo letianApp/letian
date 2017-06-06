@@ -49,22 +49,22 @@
     params[@"enumMessageType"]=@(1);
     params[@"pageIndex"]=@(1);
     params[@"pageSize"]=@(10);
-    NSLog(@"token----%@",kFetchToken);
+//    NSLog(@"token----%@",kFetchToken);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [weakSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:weakSelf.view];
-        NSLog(@"&&&&&&&&&*获取系统消息列表%@",responseObject);
+//        NSLog(@"&&&&&&&&&*获取系统消息列表%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             weakSelf.systemModelList=[SystemMsgModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-            NSLog(@"Msg%@",responseObject[@"Msg"]);
+//            NSLog(@"Msg%@",responseObject[@"Msg"]);
             [weakSelf.tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:self.view];
-        NSLog(@"%@",error);
+//        NSLog(@"%@",error);
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
             [MBHudSet showText:@"请求超时" andOnView:self.view];
@@ -121,7 +121,7 @@
     }
      
     
-    NSLog(@"cell被点击%li",indexPath.row);
+//    NSLog(@"cell被点击%li",indexPath.row);
     
 }
 

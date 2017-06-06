@@ -83,8 +83,8 @@
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
         
-        NSLog(@"重置密码%@",responseObject);
-        NSLog(@"Msg%@",responseObject[@"Msg"]);
+//        NSLog(@"重置密码%@",responseObject);
+//        NSLog(@"Msg%@",responseObject[@"Msg"]);
         
         if([responseObject[@"Code"] integerValue] == 200){
             

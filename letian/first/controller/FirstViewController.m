@@ -252,7 +252,7 @@
     //跳到测试
     }else if (tap.view.tag==102) {
         if (![GQUserManager isHaveLogin]) {
-            NSLog(@"登录一下");
+//            NSLog(@"登录一下");
             //未登录
             UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
             __weak typeof(self) weakSelf = self;
@@ -294,7 +294,7 @@
     }
     
     GQScrollView *scrollView = [[GQScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_W*0.6) withImages:imageArray withIsRunloop:YES withBlock:^(NSInteger index) {
-        NSLog(@"点击了index%zd",index);
+//        NSLog(@"点击了index%zd",index);
         //跳到咨询页面
         if (index==0) {
             self.tabBarController.selectedIndex=1;
@@ -306,7 +306,7 @@
             //跳到测试
         }else if (index==2) {
             if (![GQUserManager isHaveLogin]) {
-                NSLog(@"登录一下");
+//                NSLog(@"登录一下");
                 //未登录
                 UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
                 __weak typeof(self) weakSelf = self;

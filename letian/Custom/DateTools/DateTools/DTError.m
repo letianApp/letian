@@ -62,11 +62,11 @@ NSString *const DTErrorDomain = @"com.mattyork.dateTools";
 
 +(void)printErrorWithCallStack:(NSError *)error{
     //Print error
-    NSLog(@"%@", error);
+//    NSLog(@"%@", error);
     
     //Print call stack
     for (NSString *symbol in [NSThread callStackSymbols]) {
-        NSLog(@"\n\n %@", symbol);
+//        NSLog(@"\n\n %@", symbol);
     }
 }
 @end

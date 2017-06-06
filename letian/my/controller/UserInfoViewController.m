@@ -215,7 +215,7 @@
         [formData appendPartWithFileData:imageData name:@"image" fileName:fileName mimeType:@"image/jpeg"];
     } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        NSLog(@"上传头像result%@",responseObject);
+//        NSLog(@"上传头像result%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             [self requestData];
         }else{
@@ -228,7 +228,7 @@
             [MBHudSet showText:@"请求超时" andOnView:self.view];
         } else{
             [MBHudSet showText:@"请求失败" andOnView:self.view];
-            NSLog(@"%@",error);
+//            NSLog(@"%@",error);
         }
     }];
 }
@@ -261,7 +261,7 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        NSLog(@"&&&&&&&&&*修改昵称%@",responseObject);
+//        NSLog(@"&&&&&&&&&*修改昵称%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             self.nameLabel.text=nickName;
         }
@@ -327,7 +327,7 @@
     datePickVC.date = [NSDate date];
     //日期回调
     datePickVC.completeBlock = ^(NSString *selectDate) {
-        NSLog(@"时间%@",selectDate);
+//        NSLog(@"时间%@",selectDate);
         [self requestChangeBirthday:selectDate];
     };
     //配置属性
@@ -350,7 +350,7 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        NSLog(@"修改生日：%@",responseObject);
+//        NSLog(@"修改生日：%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             self.birthdayLabel.text=birthdayStr;
         }
@@ -382,8 +382,8 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
         [MBHudSet dismiss:self.view];
-        NSLog(@"绑定手机发送验证码%@",responseObject);
-        NSLog(@"Msg%@",responseObject[@"Msg"]);
+//        NSLog(@"绑定手机发送验证码%@",responseObject);
+//        NSLog(@"Msg%@",responseObject[@"Msg"]);
         if([responseObject[@"Code"] integerValue] == 200){
             [weakSelf inputMsgCode];
         }else{
@@ -429,7 +429,7 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
         [MBHudSet dismiss:self.view];
-        NSLog(@"验证短信验证码%@",responseObject);
+//        NSLog(@"验证短信验证码%@",responseObject);
         if([responseObject[@"Code"] integerValue] == 200){
             [self bindingMoblePhone:self.inputPhoneStr andMsgCode:msgCode];
         }else{
@@ -485,7 +485,7 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
         [MBHudSet dismiss:self.view];
-        NSLog(@"修改绑定手机%@",responseObject);
+//        NSLog(@"修改绑定手机%@",responseObject);
         if([responseObject[@"Code"] integerValue] == 200){
             [self.tableView reloadData];
         }else{
@@ -532,7 +532,7 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
+//        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             weakSelf.userInfoModel=[UserInfoModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
             self.nameLabel.text=weakSelf.userInfoModel.NickName;

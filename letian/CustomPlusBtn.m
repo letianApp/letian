@@ -30,7 +30,7 @@
 // 控件大小,间距大小
 // 注意：一定要根据项目中的图片去调整下面的0.7和0.9，Demo之所以这么设置，因为demo中的 plusButton 的 icon 不是正方形。
     CGFloat const imageViewEdgeWidth   = self.bounds.size.height * 0.7;
-    NSLog(@"高度%f",self.superview.bounds.size.height);
+//    NSLog(@"高度%f",self.superview.bounds.size.height);
     CGFloat const imageViewEdgeHeight  = imageViewEdgeWidth;
 
     CGFloat const centerOfViewY    = self.bounds.size.height * 0.5;
@@ -75,7 +75,7 @@
 
 - (void)clickConsultBtn {
     
-    NSLog(@"点击咨询按钮");
+//    NSLog(@"点击咨询按钮");
     
     ChatListViewController *chatListVc  = [[ChatListViewController alloc]init];
     chatListVc.hidesBottomBarWhenPushed = YES;

@@ -109,12 +109,12 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.row == 0) {
-        NSLog(@"微信");
+//        NSLog(@"微信");
         [self wechatPay];
 
         
     } else if (indexPath.row == 1) {
-        NSLog(@"支付宝");
+//        NSLog(@"支付宝");
         
         [self checkAlipay];
         
@@ -154,7 +154,7 @@
             case 6002:message = @"网络连接错误";break;
             default:message = @"未知错误";
         }
-        NSLog(@"什么鬼啊%@",message);
+//        NSLog(@"什么鬼啊%@",message);
         [self payFailedAlertWithMessage:message];
 
     }];
@@ -168,14 +168,14 @@
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_CONSULT];
     [requestString appendFormat:@"%@",API_NAME_CHECKALIPAY];
-    NSLog(@"%@",requestString);
+//    NSLog(@"%@",requestString);
     __weak typeof(self) weakSelf   = self;
     
     NSMutableDictionary *params    = [[NSMutableDictionary alloc]init];
     params[@"orderID"]     = @(self.orderID);
     
     [PPNetworkHelper GET:requestString parameters:params success:^(id responseObject) {
-        NSLog(@"支付宝预支付%@%@",responseObject,responseObject[@"Msg"]);
+//        NSLog(@"支付宝预支付%@%@",responseObject,responseObject[@"Msg"]);
         if ([responseObject[@"IsSuccess"] boolValue] == YES){
             
             [self aliPay];
@@ -204,7 +204,7 @@
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"微信预支付%@%@",responseObject,responseObject[@"Msg"]);
+//        NSLog(@"微信预支付%@%@",responseObject,responseObject[@"Msg"]);
         [MBHudSet dismiss:self.view];
         if ([responseObject[@"IsSuccess"] boolValue] == YES){
             NSMutableDictionary *dict = responseObject[@"Result"][@"Source"];
@@ -218,14 +218,14 @@
             req.sign                = dict[@"sign"];
             [WXApi sendReq:req];
             //日志输出
-            NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
+//            NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
         }else{
             [MBHudSet showText:@"支付失败" andOnView:self.view];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
         [MBHudSet showText:@"支付失败" andOnView:self.view];
-        NSLog(@"%@",error);
+//        NSLog(@"%@",error);
     }];
 
 }

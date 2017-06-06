@@ -173,9 +173,9 @@
     void (^deviceOrientationDidChangeBlock)(NSNotification *) = ^(NSNotification *notification) {
         UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
         if ((orientation == UIDeviceOrientationLandscapeLeft) || (orientation == UIDeviceOrientationLandscapeRight)) {
-            NSLog(@"Landscape Left or Right !");
+//            NSLog(@"Landscape Left or Right !");
         } else if (orientation == UIDeviceOrientationPortrait) {
-            NSLog(@"Landscape portrait!");
+//            NSLog(@"Landscape portrait!");
         }
         [self customizeTabBarSelectionIndicatorImage];
     };

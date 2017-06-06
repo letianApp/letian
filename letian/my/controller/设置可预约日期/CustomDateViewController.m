@@ -48,7 +48,7 @@
     [self setupCalendarWithBGView:self.view];
     
     NSString *todayStr = [NSString stringWithFormat:@"%@ 00:00:00",[self.dateFormatter stringFromDate:[NSDate new]]];
-    NSLog(@"今天：%@",todayStr);
+//    NSLog(@"今天：%@",todayStr);
     
     [self getCounsultSetForDay:todayStr];
 
@@ -153,7 +153,7 @@
 
 - (UIView *)setupDatePiker {
     
-    NSLog(@"btn:%d",self.startBtn.isSelected);
+//    NSLog(@"btn:%d",self.startBtn.isSelected);
     
     UIView *backView                                 = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
     _timePicker                                      = [[UIDatePicker alloc]init];
@@ -292,7 +292,7 @@
     
     NSString *selDateStr                = [self.dateFormatter stringFromDate:date];
 
-    NSLog(@"%@",selDateStr);
+//    NSLog(@"%@",selDateStr);
 
 //    [self setCounsultSetForDay:[NSString stringWithFormat:@"%@ 00:00:00",selDateStr]];
     [self getCounsultSetForDay:selDateStr];
@@ -301,7 +301,7 @@
 
 - (void)calendar:(FSCalendar *)calendar boundingRectWillChange:(CGRect)bounds animated:(BOOL)animated {
     calendar.frame = (CGRect){calendar.frame.origin,bounds.size};
-    NSLog(@"%f",self.calendar.bottom);
+//    NSLog(@"%f",self.calendar.bottom);
 
 }
 
@@ -322,13 +322,13 @@
     
     [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
     
-    NSLog(@"token:%@",kFetchToken);
-    NSLog(@"parames:%@",parames)
+//    NSLog(@"token:%@",kFetchToken);
+//    NSLog(@"parames:%@",parames)
     [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
         __strong typeof(self) strongSelf = weakSelf;
         [MBHudSet dismiss:strongSelf.view];
 
-        NSLog(@"获取咨询时间返回的数据%@",responseObject);
+//        NSLog(@"获取咨询时间返回的数据%@",responseObject);
         
         if([responseObject[@"Code"] integerValue] == 200) {
 
@@ -357,9 +357,9 @@
     
     if (model.ConsultTimeList != nil && ![model.ConsultTimeList isKindOfClass:[NSNull class]] && model.ConsultTimeList.count != 0) {
         
-        NSLog(@"%@",model.ConsultTimeList[0]);
+//        NSLog(@"%@",model.ConsultTimeList[0]);
         NSDictionary *set = (NSDictionary *)model.ConsultTimeList[0];
-        NSLog(@"%@",set[@"StartTime"]);
+//        NSLog(@"%@",set[@"StartTime"]);
 
         NSRange rag = {5,3};
         NSString *startTime = [set[@"StartTime"] stringByReplacingCharactersInRange:rag withString:@""];
@@ -369,7 +369,6 @@
         [_endBtn setTitle:endTime forState:UIControlStateNormal];
     } else {
         
-        NSLog(@"空空空");
         [_startBtn setTitle:@"09:00" forState:UIControlStateNormal];
         [_endBtn setTitle:@"21:00" forState:UIControlStateNormal];
     }
@@ -380,9 +379,7 @@
     
     [self animationbegin:btn];
     NSString *selDayStr = [NSString stringWithFormat:@"%@ 00:00:00",[self.dateFormatter stringFromDate:self.calendar.selectedDate]];
-    NSLog(@"%@",selDayStr);
     [self setCounsultSetForDay:selDayStr];
-//        [self setCounsultSetForDay:[NSString stringWithFormat:@"%@ 00:00",selDateStr]];
     
     
 }
@@ -412,10 +409,10 @@
     [arr addObject:array];
 
     model.ConsultTimeList = arr;
-    NSLog(@"上传%@",model.mj_keyValues);
+//    NSLog(@"上传%@",model.mj_keyValues);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [manager POST:requestString parameters:model.mj_keyValues progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"修改咨询时间result%@",responseObject);
+//        NSLog(@"修改咨询时间result%@",responseObject);
         [MBHudSet showText:@"更改成功" andOnView:self.view];
     
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -424,7 +421,7 @@
             [MBHudSet showText:@"请求超时" andOnView:self.view];
         } else{
             [MBHudSet showText:@"请求失败" andOnView:self.view];
-            NSLog(@"errer%@",error);
+//            NSLog(@"errer%@",error);
         }
     }];
 
@@ -448,7 +445,7 @@
     [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
     
     [PPNetworkHelper GET:requestConsultOrderListString parameters:parames success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+//        NSLog(@"%@",responseObject);
         
     } failure:^(NSError *error) {
         __strong typeof(self) strongself = weakSelf;

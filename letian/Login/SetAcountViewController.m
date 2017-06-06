@@ -27,7 +27,7 @@
 @implementation SetAcountViewController
 
 - (IBAction)sexChoose:(id)sender {
-    NSLog(@"选择性别：%li",self.sexSegment.selectedSegmentIndex);
+//    NSLog(@"选择性别：%li",self.sexSegment.selectedSegmentIndex);
 }
 
 - (void)viewDidLoad {
@@ -67,7 +67,7 @@
     params[@"EnumSexType"]=@(self.sexSegment.selectedSegmentIndex);
     params[@"EnumUserType"]=@(1);
     
-    NSLog(@"Params=%@",params);
+//    NSLog(@"Params=%@",params);
    
     
     [MBHudSet showStatusOnView:self.view];
@@ -75,7 +75,7 @@
     [manager POST:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
 
-        NSLog(@"注册%@",responseObject);
+//        NSLog(@"注册%@",responseObject);
         
         if([responseObject[@"Code"] integerValue] == 200){
             
@@ -92,7 +92,7 @@
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"错误%@",error);
+//        NSLog(@"错误%@",error);
         [MBHudSet dismiss:self.view];
         // 如果是取消了任务，就不算请求失败，就直接返回
         if (error.code == NSURLErrorCancelled) return;

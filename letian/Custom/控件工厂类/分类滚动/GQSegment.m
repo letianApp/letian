@@ -132,7 +132,7 @@
     UIButton *btn = (UIButton *)sender;
     
     [btn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
-    NSLog(@",,,,,,,%ld",btn.tag);
+//    NSLog(@",,,,,,,%ld",btn.tag);
     
     UIButton *bt1 = (UIButton *)[self viewWithTag:1];
     UIButton *bt2 = (UIButton *)[self viewWithTag:2];
