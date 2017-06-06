@@ -887,7 +887,7 @@
 - (void)clickAgBtn:(UIButton *)btn {
     
     AgreementVC *aVC = [[AgreementVC alloc]init];
-    [self.navigationController pushViewController:aVC animated:YES];
+    [self.rt_navigationController pushViewController:aVC animated:YES];
     
 }
 

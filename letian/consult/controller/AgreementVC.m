@@ -20,9 +20,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = [UIColor whiteColor];
     // 创建WKWebView
-    WKWebView *webView = [[WKWebView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 69, SCREEN_W, SCREEN_H - 69)];
     // 设置访问的URL
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"知情同意书" ofType:@"pdf"];
@@ -38,7 +39,33 @@
     // 将WKWebView添加到视图
     [self.view addSubview:webView];
     
+//    [self customNavigation];
+    UIButton *btn = [[UIButton alloc]init];
+    [self.view addSubview:btn];
+    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+    [btn setFrame:CGRectMake(10, 30, 20, 20)];
+    [btn addTarget:self action:@selector(clickBackBtn) forControlEvents:UIControlEventTouchUpInside];
 }
+
+#pragma mark 定制导航栏
+- (void)customNavigation {
+    
+    UILabel *bar = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 69)];
+    [self.view addSubview:bar];
+    UIButton *btn = [[UIButton alloc]init];
+    [bar addSubview:btn];
+    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+    [btn setFrame:CGRectMake(10, 20, 20, 20)];
+    [btn addTarget:self action:@selector(clickBackBtn) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+- (void)clickBackBtn {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
 
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target
                                        action:(SEL)action {
