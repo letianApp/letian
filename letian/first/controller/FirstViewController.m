@@ -23,7 +23,7 @@
 #import "TestDetailViewController.h"
 #import "GQScrollView.h"
 #import "ActivityDetailViewController.h"
-
+#import "FunnyViewController.h"
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -113,8 +113,8 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UILabel *funnyTestModuleLabel=[GQControls createLabelWithFrame:CGRectMake(0, 0, SCREEN_W, 40) andText:@"**** 幽默趣事 ****" andTextColor:MAINCOLOR andFontSize:15];
-    funnyTestModuleLabel.backgroundColor=WEAKPINK;
+    UILabel *funnyTestModuleLabel=[GQControls createLabelWithFrame:CGRectMake(0, 0, SCREEN_W, 40) andText:@"．·°∴ ☆．．·°．·°∴乐天派 ☆．．·°∴ ☆．．·° " andTextColor:MAINCOLOR andFontSize:15];
+    funnyTestModuleLabel.backgroundColor=[UIColor colorWithRed:247/255.0 green:235/255.0 blue:242/255.0 alpha:0.5];
     funnyTestModuleLabel.textAlignment=NSTextAlignmentCenter;
     self.sectionHeaderLabel=funnyTestModuleLabel;
     return self.sectionHeaderLabel;
@@ -130,7 +130,7 @@
     if (self.tableView.contentOffset.y >= 325) {
         
         self.sectionHeaderLabel.hidden = YES;
-        self.navigationItem.title = @"幽默趣事";
+        self.navigationItem.title = @"乐天派";
         self.navigationController.navigationBarHidden = NO;
     }else{
         
@@ -156,10 +156,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
-    ActivityDetailViewController *articleVc=[[ActivityDetailViewController alloc]init];
-    articleVc.activeModel=self.funnyListArray[indexPath.row];
-    articleVc.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:articleVc animated:NO];
+    FunnyViewController *funnyVc=[[FunnyViewController alloc]init];
+    funnyVc.activeModel=self.funnyListArray[indexPath.row];
+    funnyVc.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:funnyVc animated:NO];
 }
 
 

@@ -197,6 +197,9 @@
 		77DA5DCE1E666B92003FAE0C /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */; };
 		77EF53271EE53123001B5C70 /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EF53251EE53123001B5C70 /* ActivityCell.m */; };
 		77EF53281EE53123001B5C70 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EF53261EE53123001B5C70 /* ActivityCell.xib */; };
+		77EF532B1EE59E78001B5C70 /* FunnyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EF532A1EE59E78001B5C70 /* FunnyViewController.m */; };
+		77EF532F1EE5A9A2001B5C70 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EF532D1EE5A9A2001B5C70 /* AboutViewController.m */; };
+		77EF53301EE5A9A2001B5C70 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EF532E1EE5A9A2001B5C70 /* AboutViewController.xib */; };
 		77F3D85D1E764E22008B5FC0 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F3D85B1E764E22008B5FC0 /* OrderViewController.m */; };
 		77F3D85E1E764E22008B5FC0 /* OrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F3D85C1E764E22008B5FC0 /* OrderViewController.xib */; };
 		77F3D8621E7670D2008B5FC0 /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F3D8601E7670D2008B5FC0 /* OrderCell.m */; };
@@ -623,6 +626,11 @@
 		77EF53241EE53123001B5C70 /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
 		77EF53251EE53123001B5C70 /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
 		77EF53261EE53123001B5C70 /* ActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
+		77EF53291EE59E78001B5C70 /* FunnyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunnyViewController.h; sourceTree = "<group>"; };
+		77EF532A1EE59E78001B5C70 /* FunnyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunnyViewController.m; sourceTree = "<group>"; };
+		77EF532C1EE5A9A2001B5C70 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		77EF532D1EE5A9A2001B5C70 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		77EF532E1EE5A9A2001B5C70 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		77F3D85A1E764E22008B5FC0 /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
 		77F3D85B1E764E22008B5FC0 /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
 		77F3D85C1E764E22008B5FC0 /* OrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderViewController.xib; sourceTree = "<group>"; };
@@ -925,6 +933,8 @@
 			children = (
 				0970CFEA1E517EB8007480CB /* FirstViewController.h */,
 				0970CFEB1E517EB8007480CB /* FirstViewController.m */,
+				77EF53291EE59E78001B5C70 /* FunnyViewController.h */,
+				77EF532A1EE59E78001B5C70 /* FunnyViewController.m */,
 				77B5BCD51EAD987C0034497D /* 智慧学院 */,
 				77B5BCD61EAD98900034497D /* 心理测试 */,
 				77B5BCD71EAD98B40034497D /* 心理专栏 */,
@@ -1362,6 +1372,9 @@
 				77A17B821E7FA20B00569558 /* ActivityListViewController.m */,
 				7787B30B1EADACC300306527 /* ActivityDetailViewController.h */,
 				7787B30C1EADACC300306527 /* ActivityDetailViewController.m */,
+				77EF532C1EE5A9A2001B5C70 /* AboutViewController.h */,
+				77EF532D1EE5A9A2001B5C70 /* AboutViewController.m */,
+				77EF532E1EE5A9A2001B5C70 /* AboutViewController.xib */,
 			);
 			name = "智慧学院";
 			sourceTree = "<group>";
@@ -1772,6 +1785,7 @@
 				77DA5DCE1E666B92003FAE0C /* LoginViewController.xib in Resources */,
 				7722F09A1EB4500B001DCF5F /* LICENSE in Resources */,
 				094FC5171E8CE1D500BFFBBB /* AboutUsPageVC.xib in Resources */,
+				77EF53301EE5A9A2001B5C70 /* AboutViewController.xib in Resources */,
 				09FBE0281E70FE12003452A6 /* CounselorInfoVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1911,6 +1925,7 @@
 				77B5BD661EADA78E0034497D /* GQNetworkManager.m in Sources */,
 				77B5BD571EADA6A50034497D /* GQActionSheetItem.m in Sources */,
 				09FBE0221E70F609003452A6 /* ConfirmPageCell.m in Sources */,
+				77EF532B1EE59E78001B5C70 /* FunnyViewController.m in Sources */,
 				77283D8C1ED67232004BF2F5 /* TestListViewController.m in Sources */,
 				7772CAB51ECEE8C00096C3C5 /* SystemMsgModel.m in Sources */,
 				779C4DE71EC0345D00EBEDE9 /* ConsultDateModel.m in Sources */,
@@ -1952,6 +1967,7 @@
 				7787B3A51EB18DDA00306527 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */,
 				77B5C9E71E7A2F000028CB9E /* OrderDetailViewController.m in Sources */,
 				09BFEF211EC0099E00A2731C /* ConsultSetCell.m in Sources */,
+				77EF532F1EE5A9A2001B5C70 /* AboutViewController.m in Sources */,
 				779C4DCA1EBED84300EBEDE9 /* OrderConsultCell.m in Sources */,
 				093DA77D1E960F08003CEDD9 /* ChatListViewController.m in Sources */,
 				77D0EA511EB60FDD00254806 /* ArticleListViewController.m in Sources */,

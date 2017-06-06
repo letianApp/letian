@@ -13,7 +13,7 @@
 #import "MJExtension.h"
 #import "ActivityDetailViewController.h"
 #import "UIImageView+WebCache.h"
-
+#import "AboutViewController.h"
 @interface ActivityListViewController ()<WKNavigationDelegate,WKUIDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *tableview;
@@ -127,8 +127,16 @@
     UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_W*0.6)];
     image.image=[UIImage imageNamed:@"index_4"];
     self.tableview.tableHeaderView=image;
+    
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(aboutImage)];
+    image.userInteractionEnabled=YES;
+    [image addGestureRecognizer:tap];
 }
 
+-(void)aboutImage{
+    AboutViewController *aboutVc=[[AboutViewController alloc]init];
+    [self.navigationController pushViewController:aboutVc animated:YES];
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.activeListArray.count;
