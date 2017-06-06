@@ -37,7 +37,7 @@
     NSArray *imageNames = @[@"pengyou",@"weixin",@"weibo",@"kongjian",@"mess",@"qq"];
     GQActionSheet *sheet = [[GQActionSheet alloc] initWithTitles:titles iconNames:imageNames];
     [sheet showActionSheetWithClickBlock:^(int btnIndex) {
-        NSLog(@"btnIndex:%d",btnIndex);
+//        NSLog(@"btnIndex:%d",btnIndex);
         NSInteger platformType;
         if (btnIndex==0) {
             platformType=ShareTo_WechatTimeLine;
@@ -98,7 +98,7 @@
 
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    NSLog(@"当前网页%@",webView.URL.absoluteString);
+//    NSLog(@"当前网页%@",webView.URL.absoluteString);
 //    隐藏下载广告
     [webView evaluateJavaScript:@"document.getElementsByClassName('advertiseBar')[0].style.display = 'none'; " completionHandler:nil];
     

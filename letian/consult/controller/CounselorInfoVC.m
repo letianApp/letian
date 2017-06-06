@@ -94,7 +94,7 @@
     NSArray *imageNames = @[@"pengyou",@"weixin",@"weibo",@"kongjian",@"mess",@"qq"];
     GQActionSheet *sheet = [[GQActionSheet alloc] initWithTitles:titles iconNames:imageNames];
     [sheet showActionSheetWithClickBlock:^(int btnIndex) {
-        NSLog(@"btnIndex:%d",btnIndex);
+//        NSLog(@"btnIndex:%d",btnIndex);
         NSInteger platformType;
         if (btnIndex==0) {
             platformType=ShareTo_WechatTimeLine;
@@ -222,7 +222,7 @@
     }];
     
     float lineHeight = (_headView.height/2-_headView.width*0.1)/7;
-    NSLog(@"%f",lineHeight);
+//    NSLog(@"%f",lineHeight);
 //咨询师名字
     UILabel *nameLab = [[UILabel alloc]init];
     [view addSubview:nameLab];
@@ -275,8 +275,8 @@
     
     CGPoint offset = scrollView.contentOffset;
     
-    NSLog(@"%f",self.mainTableView.contentOffset.y - self.headView.height + navigationBar_H + statusBar_H);
-    NSLog(@"原：%f",offset.y);
+//    NSLog(@"%f",self.mainTableView.contentOffset.y - self.headView.height + navigationBar_H + statusBar_H);
+//    NSLog(@"原：%f",offset.y);
     if (offset.y < 0) {
         
         CGRect rect = self.headView.frame;
@@ -285,7 +285,7 @@
         _headView.frame = rect;
     } else if (offset.y > (self.headView.height - navigationBar_H - statusBar_H)) {
         
-        NSLog(@"aaa");
+//        NSLog(@"aaa");
         [self.view addSubview:self.naviView];
         self.naviView.image = self.headView.image;
         self.naviView.height = self.headView.height;
@@ -294,7 +294,7 @@
         [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
         
     } else {
-        NSLog(@"ddd");
+//        NSLog(@"ddd");
         [self.naviView removeFromSuperview];
         self.navigationItem.title = nil;
 
@@ -347,7 +347,7 @@
         make.width.equalTo(priceLab.mas_width);
         make.height.equalTo(priceLab.mas_height).multipliedBy(0.5);
     }];
-    NSLog(@"%.2f",_counselModel.ConsultDisCount);
+//    NSLog(@"%.2f",_counselModel.ConsultDisCount);
     couponLab.text                     = [NSString stringWithFormat:@"%@",_counselModel.ConsultTag];
     couponLab.textColor                = [UIColor orangeColor];
     couponLab.textAlignment            = NSTextAlignmentRight;

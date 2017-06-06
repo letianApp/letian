@@ -80,8 +80,8 @@
         
         [MBHudSet dismiss:self.view];
 
-        NSLog(@"发送短信%@",responseObject);
-        NSLog(@"%@",requestString);
+//        NSLog(@"发送短信%@",responseObject);
+//        NSLog(@"%@",requestString);
         if([responseObject[@"Code"] integerValue] == 200){
 
             button.userInteractionEnabled = NO;
@@ -99,7 +99,7 @@
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"错误%@",error);
+//        NSLog(@"错误%@",error);
         [MBHudSet dismiss:self.view];
         // 如果是取消了任务，就不算请求失败，就直接返回
         if (error.code == NSURLErrorCancelled) return;
@@ -188,7 +188,7 @@
         
         [MBHudSet dismiss:self.view];
 
-        NSLog(@"验证短信验证码%@",responseObject);
+//        NSLog(@"验证短信验证码%@",responseObject);
         
         if([responseObject[@"Code"] integerValue] == 200){
             

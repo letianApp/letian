@@ -65,7 +65,7 @@
         
         [webView evaluateJavaScript:@"document.getElementsByTagName('tbody')[0].style.zoom = '1.4';" completionHandler:nil];
     }
-    NSLog(@",,,%@",webView.URL.absoluteString);
+//    NSLog(@",,,%@",webView.URL.absoluteString);
     
     [MBHudSet dismiss:self.view];
     [self performSelector:@selector(webViewHidden) withObject:nil afterDelay:0.3f];

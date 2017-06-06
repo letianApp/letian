@@ -101,8 +101,8 @@
         
         [MBHudSet dismiss:self.view];
 
-        NSLog(@"忘记密码发送短信%@",responseObject);
-        NSLog(@"Msg%@",responseObject[@"Msg"]);
+//        NSLog(@"忘记密码发送短信%@",responseObject);
+//        NSLog(@"Msg%@",responseObject[@"Msg"]);
 
         if([responseObject[@"Code"] integerValue] == 200){
             
@@ -179,8 +179,8 @@
         
         [MBHudSet dismiss:self.view];
 
-        NSLog(@"忘记密码验证短信验证码%@",responseObject);
-        NSLog(@"Msg%@",responseObject[@"Msg"]);
+//        NSLog(@"忘记密码验证短信验证码%@",responseObject);
+//        NSLog(@"Msg%@",responseObject[@"Msg"]);
 
         if([responseObject[@"Code"] integerValue] == 200){
             
@@ -205,7 +205,7 @@
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"错误%@",error);
+//        NSLog(@"错误%@",error);
         [MBHudSet dismiss:self.view];
         // 如果是取消了任务，就不算请求失败，就直接返回
         if (error.code == NSURLErrorCancelled) return;

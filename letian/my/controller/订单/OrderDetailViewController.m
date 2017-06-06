@@ -64,10 +64,10 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 //        [weakSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:self.view];
-        NSLog(@"&&&&&&&&&*获取订单详情%@",responseObject);
+//        NSLog(@"&&&&&&&&&*获取订单详情%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             weakSelf.orderInfoModel=[OrderInfoModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
-            NSLog(@"Msg%@",responseObject[@"Msg"]);
+//            NSLog(@"Msg%@",responseObject[@"Msg"]);
             [self createBottomView];
             [weakSelf.tableView reloadData];
         }
@@ -191,9 +191,9 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        NSLog(@"&&&&&&&&&*取消订单%@",responseObject);
+//        NSLog(@"&&&&&&&&&*取消订单%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
-            NSLog(@"Msg%@",responseObject[@"Msg"]);
+//            NSLog(@"Msg%@",responseObject[@"Msg"]);
             [MBHudSet showText:@"订单取消成功！" andOnView:self.view];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -222,9 +222,9 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        NSLog(@"&&&&&&&&&*申请退款%@",responseObject);
+//        NSLog(@"&&&&&&&&&*申请退款%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
-            NSLog(@"Msg%@",responseObject[@"Msg"]);
+//            NSLog(@"Msg%@",responseObject[@"Msg"]);
             [MBHudSet showText:@"申请成功！退款中……" andOnView:self.view];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -253,9 +253,9 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        NSLog(@"&&&&&&&&&*修改订单为已完成%@",responseObject);
+//        NSLog(@"&&&&&&&&&*修改订单为已完成%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
-            NSLog(@"Msg%@",responseObject[@"Msg"]);
+//            NSLog(@"Msg%@",responseObject[@"Msg"]);
             [MBHudSet showText:@"确认成功！" andOnView:self.view];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

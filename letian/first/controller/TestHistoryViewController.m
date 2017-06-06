@@ -26,7 +26,7 @@
 {
     
     NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://admin.rightpsy.com/PsychTest/PsychTestHistoryIndex?userid=%@",kFetchUserId]]];
-    NSLog(@"token:%@",kFetchToken);
+//    NSLog(@"token:%@",kFetchToken);
     WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-64 )];
     webView.allowsBackForwardNavigationGestures=YES;
     [webView loadRequest:request];
@@ -40,7 +40,7 @@
 
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    NSLog(@"目前网页%@",webView.URL.absoluteString);
+//    NSLog(@"目前网页%@",webView.URL.absoluteString);
     if ([webView.URL.absoluteString rangeOfString:@"report/normal/reportviewrdlc.aspx"].location    !=NSNotFound) {
 
         [webView evaluateJavaScript:@"document.getElementsByTagName('div')[2].style.display = 'none';" completionHandler:nil];

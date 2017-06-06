@@ -97,7 +97,7 @@
 
 -(void)scrollToPage:(int)Page {
     [UIView animateWithDuration:0.3 animations:^{
-        NSLog(@"滑动到地%i页",Page);
+//        NSLog(@"滑动到地%i页",Page);
         if (Page==0) {
             self.orderState=AllOrder;//全部订单
         }else if (Page==1){
@@ -124,18 +124,18 @@
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     params[@"enumOrderState"]=@(self.orderState);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
-    NSLog(@"订单列表的token%@",kFetchToken);
+//    NSLog(@"订单列表的token%@",kFetchToken);
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         __strong typeof(self) strongSelf = weakSelf;
 
         [strongSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:strongSelf.view];
-        NSLog(@"&&&&&&&&&*获取订单列表%@",responseObject);
+//        NSLog(@"&&&&&&&&&*获取订单列表%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             [strongSelf.orderList removeAllObjects];
             strongSelf.orderList=[OrderListModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-            NSLog(@"Msg%@",responseObject[@"Msg"]);
+//            NSLog(@"Msg%@",responseObject[@"Msg"]);
             [strongSelf.tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -232,7 +232,7 @@
         cell.askBtn.hidden = NO;
         cell.askBtn.tag = indexPath.row + 100;
         [cell.askBtn addTarget:self action:@selector(clickAskBtn:) forControlEvents:UIControlEventTouchUpInside];
-        NSLog(@"ID:%ld",cell.askBtn.tag);
+//        NSLog(@"ID:%ld",cell.askBtn.tag);
 
     }else if (self.orderList[indexPath.row].EnumOrderState==10){
         //已完成
@@ -281,7 +281,7 @@
     payVc.orderID=self.orderList[indexPath.row].OrderID;
     payVc.orderNo=self.orderList[indexPath.row].OrderNo;
     payVc.totalFee=self.orderList[indexPath.row].TotalFee;
-    NSLog(@"token------%@",kFetchToken);
+//    NSLog(@"token------%@",kFetchToken);
     [self.navigationController pushViewController:payVc animated:YES];
 }
 #pragma mark------跳到订单详情

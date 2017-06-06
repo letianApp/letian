@@ -269,7 +269,7 @@
         }
 
     }
-    NSLog(@"咨询方式：%ld",(long)_orderModel.consultType);
+//    NSLog(@"咨询方式：%ld",(long)_orderModel.consultType);
     btn.userInteractionEnabled = NO;
     [self reflashInfo];
 }
@@ -351,7 +351,7 @@
         
         NSString *todayStr = [self.dateFormatter stringFromDate:date];
         NSString *todayGetInfoStr = [NSString stringWithFormat:@"%@ 00:00:00",todayStr];
-        NSLog(@"今天：%@",todayGetInfoStr);
+//        NSLog(@"今天：%@",todayGetInfoStr);
         [self getCounsultSetForDay:todayGetInfoStr];
         _orderModel.orderDate = todayStr;
         return @"今";
@@ -392,7 +392,7 @@
         [self getCounsultSetForDay:selDayStrGetInfo];
 //        [_dateDisplayLab removeFromSuperview];
     }
-    NSLog(@"点击日历：%@",_orderModel.orderDate);
+//    NSLog(@"点击日历：%@",_orderModel.orderDate);
     
     [_startBtn setTitle:@"预约时间" forState:UIControlStateNormal];
     _orderModel.orderDateTimeStart      = nil;
@@ -537,7 +537,7 @@
 #pragma mark 选择小时pick
 - (UIView *)setupChooseHoursView {
     
-    NSLog(@"%@",_orderModel.orderDateTimeStart);
+//    NSLog(@"%@",_orderModel.orderDateTimeStart);
     NSRange rag = {0,2};
     int startHour = [[_orderModel.orderDateTimeStart substringWithRange:rag] intValue];
     int endHour = [[self.customTimeEndStr substringWithRange:rag] intValue];
@@ -595,7 +595,7 @@
         _totalPrice = [_hourStr integerValue] * self.counselModel.ConsultFee;
     }
     if (_orderModel.consultType == 1) {
-        NSLog(@"面对面");
+//        NSLog(@"面对面");
         _orderModel.orderPrice = _totalPrice / 0.8;
     } else {
         _orderModel.orderPrice = _totalPrice;
@@ -608,7 +608,7 @@
     NSInteger endTime = startTime + [_hourStr integerValue];
     NSString *endStr = [_orderModel.orderDateTimeStart stringByReplacingCharactersInRange:rag withString:[NSString stringWithFormat:@"%ld",(long)endTime]];
     _orderModel.orderDateTimeEnd = endStr;
-    NSLog(@"结束时间%@",endStr);
+//    NSLog(@"结束时间%@",endStr);
 
     [self reflashInfo];
     [self.sl_popupController dismiss];
@@ -626,15 +626,15 @@
     NSMutableDictionary *parames = [[NSMutableDictionary alloc]init];
     parames[@"date"] = dayStr;
     parames[@"userID"] = @(self.counselModel.UserID);
-    NSLog(@"咨询师ID：%ld",(long)self.counselModel.UserID)
+//    NSLog(@"咨询师ID：%ld",(long)self.counselModel.UserID)
     
     [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
-    NSLog(@"token:%@",kFetchToken);
+//    NSLog(@"token:%@",kFetchToken);
     [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
         __strong typeof(self) strongSelf = weakSelf;
         [MBHudSet dismiss:strongSelf.view];
         
-        NSLog(@"获取咨询时间返回的数据%@",responseObject);
+//        NSLog(@"获取咨询时间返回的数据%@",responseObject);
         
         if([responseObject[@"Code"] integerValue] == 200) {
             
@@ -648,9 +648,9 @@
                 
                 if (strongSelf.getInfoModel.ConsultTimeList != nil && ![strongSelf.getInfoModel.ConsultTimeList isKindOfClass:[NSNull class]] && strongSelf.getInfoModel.ConsultTimeList.count != 0) {
                     
-                    NSLog(@"%@",strongSelf.getInfoModel.ConsultTimeList[0]);
+//                    NSLog(@"%@",strongSelf.getInfoModel.ConsultTimeList[0]);
                     NSDictionary *set = (NSDictionary *)strongSelf.getInfoModel.ConsultTimeList[0];
-                    NSLog(@"%@",set[@"StartTime"]);
+//                    NSLog(@"%@",set[@"StartTime"]);
                     
                     NSRange rag = {5,3};
                     strongSelf.customTimeStartStr = [set[@"StartTime"] stringByReplacingCharactersInRange:rag withString:@""];
@@ -665,7 +665,7 @@
 
                 } else {
                     
-                    NSLog(@"空空空");
+//                    NSLog(@"空空空");
                     
 
                 }
@@ -937,7 +937,7 @@
 }
 
 - (void)clickConfirmBtn {
-    NSLog(@"确认预约");
+//    NSLog(@"确认预约");
     
     if (_confirmBtn.backgroundColor == [UIColor lightGrayColor]) {
 
@@ -973,18 +973,18 @@
             params[@"ConsultDescription"]  = self.detailTextView.text;
         }
         [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
-        NSLog(@"Params=%@",params);
+//        NSLog(@"Params=%@",params);
         
         [PPNetworkHelper POST:requestString parameters:params success:^(id responseObject) {
             
             __strong typeof(self) strongSelf = weakSelf;
-            NSLog(@"%@",responseObject);
+//            NSLog(@"%@",responseObject);
             [MBHudSet dismiss:strongSelf.view];
             
             if([responseObject[@"Code"] integerValue] == 200) {
                 
                 [MBHudSet showText:@"下单成功" andOnView:strongSelf.view];
-                NSLog(@"%@",responseObject[@"Result"][@"Source"][@"OrderID"]);
+//                NSLog(@"%@",responseObject[@"Result"][@"Source"][@"OrderID"]);
                 PayPageVC *payPage = [[PayPageVC alloc]init];
                 payPage.orderID = [responseObject[@"Result"][@"Source"][@"OrderID"] integerValue];
                 payPage.orderNo = responseObject[@"Result"][@"Source"][@"OrderNo"];
