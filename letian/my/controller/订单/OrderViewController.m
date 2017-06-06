@@ -265,13 +265,21 @@
 - (void)clickAskBtn:(UIButton *)btn {
     
     [self animationbegin:btn];
+    
     ChatViewController *chatVc = [[ChatViewController alloc]init];
     chatVc.hidesBottomBarWhenPushed = YES;
     chatVc.conversationType = ConversationType_PRIVATE;
-    chatVc.targetId = [NSString stringWithFormat:@"%ld",self.orderList[btn.tag - 100].DoctorID];
-    chatVc.title = self.orderList[btn.tag - 100].DoctorName;
+
+    if ([kFetchUserType integerValue] == 11) {
+        
+        chatVc.targetId = [NSString stringWithFormat:@"%ld",self.orderList[btn.tag - 100].UserID];
+        chatVc.title = self.orderList[btn.tag - 100].UserName;
+        
+    } else {
+        chatVc.targetId = [NSString stringWithFormat:@"%ld",self.orderList[btn.tag - 100].DoctorID];
+        chatVc.title = self.orderList[btn.tag - 100].DoctorName;
+    }
     [self.navigationController pushViewController:chatVc animated:YES];
-    
 }
 
 -(void)toPayVc:(UIButton *)btn{
