@@ -44,6 +44,7 @@
     [self.view addSubview:shareButton];
     
 }
+
 -(void) back
 {
     [self.navigationController popViewControllerAnimated:YES];
