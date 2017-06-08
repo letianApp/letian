@@ -99,8 +99,10 @@
     image = UIGraphicsGetImageFromCurrentImageContext();
     scrollView.contentOffset = savedContentOffset;
     scrollView.frame = savedFrame;
-    scrollView.contentSize=CGSizeMake(SCREEN_W, scrollView.contentSize.height-200);
-
+//    scrollView.contentSize=CGSizeMake(SCREEN_W, scrollView.contentSize.height);
+    [lineView removeFromSuperview];
+    [imageV removeFromSuperview];
+    [textImage removeFromSuperview];
     
     UIGraphicsEndImageContext();
     
