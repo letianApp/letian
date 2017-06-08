@@ -71,6 +71,7 @@
 		097105E11E9A370800AC8E4F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105E01E9A370800AC8E4F /* CFNetwork.framework */; };
 		098D703D1EDE8B0300AC5B09 /* AgreementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 098D703C1EDE8B0300AC5B09 /* AgreementVC.m */; };
 		098D703F1EDE998E00AC5B09 /* 知情同意书.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 098D703E1EDE998E00AC5B09 /* 知情同意书.pdf */; };
+		09AE79431EE6EC2C008B76B1 /* Default-568.png in Resources */ = {isa = PBXBuildFile; fileRef = 09AE79421EE6EC2C008B76B1 /* Default-568.png */; };
 		09BFEF211EC0099E00A2731C /* ConsultSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BFEF1C1EC0099E00A2731C /* ConsultSetCell.m */; };
 		09BFEF221EC0099E00A2731C /* ConsultSetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09BFEF1D1EC0099E00A2731C /* ConsultSetCell.xib */; };
 		09BFEF231EC0099E00A2731C /* CustomDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BFEF1F1EC0099E00A2731C /* CustomDateViewController.m */; };
@@ -322,6 +323,7 @@
 		098D703B1EDE8B0300AC5B09 /* AgreementVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreementVC.h; sourceTree = "<group>"; };
 		098D703C1EDE8B0300AC5B09 /* AgreementVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreementVC.m; sourceTree = "<group>"; };
 		098D703E1EDE998E00AC5B09 /* 知情同意书.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "知情同意书.pdf"; sourceTree = "<group>"; };
+		09AE79421EE6EC2C008B76B1 /* Default-568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568.png"; sourceTree = "<group>"; };
 		09BFEF1B1EC0099E00A2731C /* ConsultSetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultSetCell.h; sourceTree = "<group>"; };
 		09BFEF1C1EC0099E00A2731C /* ConsultSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsultSetCell.m; sourceTree = "<group>"; };
 		09BFEF1D1EC0099E00A2731C /* ConsultSetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsultSetCell.xib; sourceTree = "<group>"; };
@@ -827,6 +829,7 @@
 				77B339781EBA0C5A004BC8B3 /* LaunchScreen.storyboard */,
 				0953C22D1E514B5800FB165C /* Assets.xcassets */,
 				0953C2321E514B5800FB165C /* Info.plist */,
+				09AE79421EE6EC2C008B76B1 /* Default-568.png */,
 				0953C2211E514B5800FB165C /* Supporting Files */,
 			);
 			path = letian;
@@ -1771,6 +1774,7 @@
 				77F3D85E1E764E22008B5FC0 /* OrderViewController.xib in Resources */,
 				09FBE0231E70F609003452A6 /* ConfirmPageCell.xib in Resources */,
 				774DBC0D1E6420FC00B8798C /* HomeCell.xib in Resources */,
+				09AE79431EE6EC2C008B76B1 /* Default-568.png in Resources */,
 				77D2BFA71E67D6A9000B9978 /* ForgetPwViewController.xib in Resources */,
 				77D07EEA1E962D7900904AD9 /* ChangePwCodeViewController.xib in Resources */,
 				779C4DDF1EBEF74700EBEDE9 /* OrderPayDetailCell.xib in Resources */,
@@ -2335,6 +2339,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = rightpsy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -2543,6 +2548,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = rightpsy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};

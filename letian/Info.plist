@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -217,18 +217,27 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>是否允许此App使用你的相机</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>是否允许此App访问你的定位？</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string></string>
+	<string>是否允许此App使用你的麦克风</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>是否允许此App访问你的相册？</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
 		<string>remote-notification</string>
 		<string>voip</string>
+	</array>
+	<key>UILaunchImages</key>
+	<array>
+		<dict>
+			<key>UILaunchImageName</key>
+			<string>Default-568</string>
+			<key>UILaunchImageSize</key>
+			<string>{320, 568}</string>
+		</dict>
 	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
@@ -236,6 +245,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
