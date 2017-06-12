@@ -29,12 +29,20 @@
 }
 
 
-+ (instancetype) cellWithTableView:(UITableView *)tableView {
++ (instancetype) cellWithTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
     
-    ConfirmPageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ConfirmPageCell"];
-    if (cell == nil) {
-        cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ConfirmPageCell"];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"Cell%zd%zd", [indexPath section], [indexPath row]];
+    
+    ConfirmPageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
+
+    
+//    ConfirmPageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ConfirmPageCell"];
+//    if (cell == nil) {
+//        cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ConfirmPageCell"];
+//    }
     return cell;
 }
 

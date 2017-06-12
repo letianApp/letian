@@ -74,6 +74,20 @@
 
 +(UIImage *)captureScrollView:(UIScrollView *)scrollView{
     UIImage* image = nil;
+    scrollView.contentSize=CGSizeMake(SCREEN_W, scrollView.contentSize.height+SCREEN_W*0.6);
+    UIView *lineView=[self createViewWithFrame:CGRectMake(30, scrollView.contentSize.height-SCREEN_W*0.5, SCREEN_W-60, 0.5) andBackgroundColor:[UIColor lightGrayColor]];
+    [scrollView addSubview:lineView];
+    UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(40, lineView.centerY+30, SCREEN_W*0.3, SCREEN_W*0.3)];
+    imageV.image =[UIImage imageNamed:@"二维码"];
+    [scrollView addSubview:imageV];
+    
+    UIImageView *textImage=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"广告语"]];
+    textImage.frame=CGRectMake(SCREEN_W*0.3+60, 0, SCREEN_W*0.5, SCREEN_W*0.2);
+    textImage.centerY=imageV.centerY;
+    [scrollView addSubview:textImage];
+
+    
+    
     
     UIGraphicsBeginImageContextWithOptions(scrollView.contentSize, NO, [UIScreen mainScreen].scale);
     
@@ -85,8 +99,16 @@
     image = UIGraphicsGetImageFromCurrentImageContext();
     scrollView.contentOffset = savedContentOffset;
     scrollView.frame = savedFrame;
+//    scrollView.contentSize=CGSizeMake(SCREEN_W, scrollView.contentSize.height);
+    [lineView removeFromSuperview];
+    [imageV removeFromSuperview];
+    [textImage removeFromSuperview];
     
     UIGraphicsEndImageContext();
+    
+    
+    
+    
     
     if (image != nil) {
         return image;

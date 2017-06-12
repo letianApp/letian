@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *detialLab;
 
 
-+ (instancetype) cellWithTableView:(UITableView *)tableview;
+//+ (instancetype) cellWithTableView:(UITableView *)tableview;
++ (instancetype) cellWithTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath;
+
 
 @end

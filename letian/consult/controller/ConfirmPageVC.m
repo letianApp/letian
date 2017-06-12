@@ -123,7 +123,7 @@
 //cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ConfirmPageCell *cell = [ConfirmPageCell cellWithTableView:tableView];
+    ConfirmPageCell *cell = [ConfirmPageCell cellWithTableView:tableView atIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;                        //设置cell不可以点
     
     NSArray *lableTagArr = @[@"咨询方式及时间",@"个人信息"];
@@ -131,30 +131,30 @@
     cell.detialLab.hidden = YES;
     [self customCell:cell withBgView:cell.backView forRowAtIndexPath:indexPath];
     
-    if (_orderModel.orderInfoName) {
-        _nameTextField.enableAnimation = NO;
-        _nameTextField.text = _orderModel.orderInfoName;
-    }
-    if (_orderModel.orderInfoSex) {
-        _sexTextField.enableAnimation = NO;
-        _sexTextField.text = _orderModel.orderInfoSex;
-    }
-    if (_orderModel.orderInfoAge) {
-        _ageTextField.enableAnimation = NO;
-        _ageTextField.text = [NSString stringWithFormat:@"%ld",_orderModel.orderInfoAge];
-    }
-    if (_orderModel.orderInfoPhone) {
-        _phoneTextField.enableAnimation = NO;
-        _phoneTextField.text = _orderModel.orderInfoPhone;
-    }
-    if (_orderModel.orderInfoEmail) {
-        _emailTextField.enableAnimation = NO;
-        _emailTextField.text = _orderModel.orderInfoEmail;
-    }
-    if (_orderModel.orderInfoDetail) {
-        _detailTextView.text = _orderModel.orderInfoDetail;
-        _placeholderLabel.hidden = YES;
-    }
+//    if (_orderModel.orderInfoName) {
+//        _nameTextField.enableAnimation = NO;
+//        _nameTextField.text = _orderModel.orderInfoName;
+//    }
+//    if (_orderModel.orderInfoSex) {
+//        _sexTextField.enableAnimation = NO;
+//        _sexTextField.text = _orderModel.orderInfoSex;
+//    }
+//    if (_orderModel.orderInfoAge) {
+//        _ageTextField.enableAnimation = NO;
+//        _ageTextField.text = [NSString stringWithFormat:@"%ld",(long)_orderModel.orderInfoAge];
+//    }
+//    if (_orderModel.orderInfoPhone) {
+//        _phoneTextField.enableAnimation = NO;
+//        _phoneTextField.text = _orderModel.orderInfoPhone;
+//    }
+//    if (_orderModel.orderInfoEmail) {
+//        _emailTextField.enableAnimation = NO;
+//        _emailTextField.text = _orderModel.orderInfoEmail;
+//    }
+//    if (_orderModel.orderInfoDetail) {
+//        _detailTextView.text = _orderModel.orderInfoDetail;
+//        _placeholderLabel.hidden = YES;
+//    }
     
     return cell;
     
@@ -169,6 +169,8 @@
     
     if(indexPath.row == 0){
         //        view.backgroundColor = [UIColor yellowColor];
+        
+        NSLog(@"11111");
         
         NSArray *btnTitle                        = @[@"面对面咨询",@"文字语音视频",@"电话咨询"];
         for (int i                               = 0; i < 3; i++) {
@@ -199,7 +201,33 @@
         [self creatTimeChoicesViewWithBGView:view];
         
     } else {
+        
         [self inputInfoWithBackView:view];
+        if (_orderModel.orderInfoName) {
+            _nameTextField.enableAnimation = NO;
+            _nameTextField.text = _orderModel.orderInfoName;
+        }
+        if (_orderModel.orderInfoSex) {
+            _sexTextField.enableAnimation = NO;
+            _sexTextField.text = _orderModel.orderInfoSex;
+        }
+        if (_orderModel.orderInfoAge) {
+            _ageTextField.enableAnimation = NO;
+            _ageTextField.text = [NSString stringWithFormat:@"%ld",(long)_orderModel.orderInfoAge];
+        }
+        if (_orderModel.orderInfoPhone) {
+            _phoneTextField.enableAnimation = NO;
+            _phoneTextField.text = _orderModel.orderInfoPhone;
+        }
+        if (_orderModel.orderInfoEmail) {
+            _emailTextField.enableAnimation = NO;
+            _emailTextField.text = _orderModel.orderInfoEmail;
+        }
+        if (_orderModel.orderInfoDetail) {
+            _detailTextView.text = _orderModel.orderInfoDetail;
+            _placeholderLabel.hidden = YES;
+        }
+
     }
 }
 
@@ -471,14 +499,15 @@
 #pragma mark 选择时间pick
 - (UIView *)setupDatePiker {
     
-    UIView *backView                                 = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
-    _timePicker                                      = [[UIDatePicker alloc]init];
+    UIView *backView           = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
+    _timePicker                = [[UIDatePicker alloc]init];
     [backView addSubview:_timePicker];
-    _timePicker.centerX                              = backView.centerX;
-    _timePicker.datePickerMode                       = UIDatePickerModeTime;
-    _timePicker.minuteInterval                       = 30;
-    
-    UIButton *btn                                    = [GQControls createButtonWithFrame:CGRectMake(SCREEN_W/4, _timePicker.bottom+5, SCREEN_W/2, 30) andTitle:@"确定" andTitleColor:MAINCOLOR andFontSize:15 andTag:233 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
+    _timePicker.center = self.view.center;
+//    _timePicker.centerX        = backView.centerX;
+    _timePicker.datePickerMode = UIDatePickerModeTime;
+    _timePicker.minuteInterval = 30;
+
+    UIButton *btn = [GQControls createButtonWithFrame:CGRectMake(SCREEN_W/4, _timePicker.bottom+5, SCREEN_W/2, 30) andTitle:@"确定" andTitleColor:MAINCOLOR andFontSize:15 andTag:233 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
     [backView addSubview:btn];
     [btn addTarget:self action:@selector(clickAffirmTimeBtn:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -495,16 +524,16 @@
     NSDate *selDateEnd                = [selDateFormatter dateFromString:selDateEndStr];
     NSDate *endDate = [NSDate dateWithTimeInterval:- 60 * 60 sinceDate:selDateEnd];
 
-    UILabel *dateLab = [[UILabel alloc]init];
+    UILabel *dateLab      = [[UILabel alloc]init];
     [backView addSubview:dateLab];
-    dateLab.x = 0;
-    dateLab.bottom = _timePicker.top - 40;
-    dateLab.width = SCREEN_W;
-    dateLab.height = _startBtn.height;
-    dateLab.text = _orderModel.orderDate;
+    dateLab.x             = 0;
+    dateLab.bottom        = _timePicker.top - 40;
+    dateLab.width         = SCREEN_W;
+    dateLab.height        = _startBtn.height;
+    dateLab.text          = _orderModel.orderDate;
     dateLab.textAlignment = NSTextAlignmentCenter;
-    dateLab.font = [UIFont systemFontOfSize:30];
-    
+    dateLab.font          = [UIFont systemFontOfSize:30];
+
     if (_isToday == YES) {
         [_timePicker setMinimumDate:[NSDate new]];
         [_timePicker setMaximumDate:endDate];
@@ -520,6 +549,7 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
+    NSLog(@"aaa:%@",_timePicker.date);
     NSString *selTimeStr           = [dateFormatter stringFromDate:_timePicker.date];
     
     [self animationbegin:btn];

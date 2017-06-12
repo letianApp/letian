@@ -155,7 +155,7 @@
 //cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ConfirmPageCell *cell = [ConfirmPageCell cellWithTableView:tableView];
+    ConfirmPageCell *cell = [ConfirmPageCell cellWithTableView:tableView atIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;                        //设置cell不可以点
     
     NSArray *lableTagArr = @[@"简介",@"擅长领域",@"咨询技能",@"咨询风格"];

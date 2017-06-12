@@ -10,7 +10,7 @@
 #import "LoginViewController.h"
 #import "SetAcountViewController.h"
 
-#import "AgreementVC.h"
+#import "AgreeRegistVC.h"
 
 
 @interface RegistViewController ()
@@ -161,7 +161,7 @@
 //乐天用户协议
 - (IBAction)agreementBtnClick:(id)sender {
     
-    AgreementVC *avc = [[AgreementVC alloc]init];
+    AgreeRegistVC *avc = [[AgreeRegistVC alloc]init];
     [self presentViewController:avc animated:YES completion:nil];
 //    [self.navigationController pushViewController:avc animated:YES];
     

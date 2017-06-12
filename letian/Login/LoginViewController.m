@@ -87,7 +87,7 @@
         [MBHudSet dismiss:self.view];
         __strong typeof(self) strongSelf = weakSelf;
 
-//        NSLog(@"登录%@",responseObject);
+        NSLog(@"登录%@",responseObject);
 //        NSLog(@"Msg%@",responseObject[@"Msg"]);
         if([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             
