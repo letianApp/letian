@@ -95,7 +95,7 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
     
     if ([kFetchUserType integerValue]==1) {
         //待支付的订单，可以取消，可以支付
-        if (self.orderInfoModel.EnumOrderState == WaitPayOrder) {
+        if (self.orderInfoModel.EnumOrderState == WaitPayOrder && self.orderInfoModel.IsCancel==0 ) {
             
             UIButton *cancelButton=[GQControls createButtonWithFrame:CGRectMake(SCREEN_W-95, 10, 80, 30) andTitle:@"取消订单" andTitleColor:MAINCOLOR andFontSize:13 andTag:CancelButtonTag andMaskToBounds:YES andRadius:8 andBorderWidth:0.5 andBorderColor:MAINCOLOR.CGColor];
             [cancelButton addTarget:self action:@selector(bottombtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -117,7 +117,7 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
             
             
             //已完成，退款中或已退款的订单，在此联系客服
-        }else if (self.orderInfoModel.EnumOrderState==SuccessOrder || self.orderInfoModel.EnumOrderState==CancelOrder || self.orderInfoModel.EnumOrderState==BackIngOrder){
+        }else if (self.orderInfoModel.EnumOrderState==SuccessOrder || self.orderInfoModel.EnumOrderState==CancelOrder || self.orderInfoModel.EnumOrderState==BackIngOrder || self.orderInfoModel.IsCancel==1){
         
         UIButton *payButton=[GQControls createButtonWithFrame:CGRectMake(SCREEN_W-95, 10, 80, 30) andTitle:@"在线客服" andTitleColor:MAINCOLOR andFontSize:13 andTag:AskButtonTag andMaskToBounds:YES andRadius:8 andBorderWidth:0.5 andBorderColor:MAINCOLOR.CGColor];
         [payButton addTarget:self action:@selector(bottombtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -294,7 +294,12 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
     if (indexPath.row==0) {
         OrderConsultCell *consultCell=[OrderConsultCell cellWithTableView:tableView];
         consultCell.orderNoLabel.text=[NSString stringWithFormat:@"订单号：%@",self.orderInfoModel.OrderNo];
-        consultCell.orderStateLabel.text=self.orderInfoModel.EnumOrderStateString;
+        //未支付却取消的
+        if (self.orderInfoModel.IsCancel==1 && self.orderInfoModel.EnumOrderState==WaitPayOrder) {
+            consultCell.orderStateLabel.text=@"已取消";
+        }else{
+            consultCell.orderStateLabel.text=self.orderInfoModel.EnumOrderStateString;
+        }
         [consultCell.doctorHeadImgView sd_setImageWithURL:[NSURL URLWithString:self.orderInfoModel.DoctorHeadImg]];
         [consultCell.userHeadImgView sd_setImageWithURL:[NSURL URLWithString:self.orderInfoModel.UserHeadImg]];
         consultCell.doctorNameLabel.text=[NSString stringWithFormat:@"咨询师：%@",self.orderInfoModel.DoctorName];

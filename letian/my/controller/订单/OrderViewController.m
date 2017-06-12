@@ -131,7 +131,7 @@
 
         [strongSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:strongSelf.view];
-//        NSLog(@"&&&&&&&&&*获取订单列表%@",responseObject);
+        NSLog(@"&&&&&&&&&*获取订单列表%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             [strongSelf.orderList removeAllObjects];
             strongSelf.orderList=[OrderListModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
@@ -208,6 +208,11 @@
     cell.moneyLabel.text=[NSString stringWithFormat:@"共%li小时，总计%.2f元",self.orderList[indexPath.row].ConsultTimeLength,self.orderList[indexPath.row].TotalFee];
     //订单状态
     if (self.orderList[indexPath.row].EnumOrderState==5) {
+        
+        if (self.orderList[indexPath.row].IsCancel==1) {
+            [cell.stateButton setTitle:@"已取消" forState:UIControlStateNormal];
+            cell.stateButton.userInteractionEnabled=NO;
+        }else{
         //计算未支付的订单创建时间与当前时间  间隔多少秒
         DTTimePeriod *timePeriod = [[DTTimePeriod alloc] initWithStartDate:[NSDate dateWithString:self.orderList[indexPath.row].CreatedDate formatString:@"yyyy-MM-dd HH:mm:ss"]  endDate:[NSDate date]];
         //超过一小时（即3600秒）未支付  则该订单失效
@@ -217,12 +222,9 @@
             [cell.stateButton addTarget:self action:@selector(toPayVc:) forControlEvents:UIControlEventTouchUpInside];
             //倒计时
             cell.secondsCountDown=(int)(3600-timePeriod.durationInSeconds);
-        }else{
-//            //订单失效
-//            [self.orderList removeObject:self.orderList[indexPath.row]];
-//            [self.tableView reloadData];
         }
         cell.timeChangeLabel.hidden=NO;
+    }
         cell.askBtn.hidden = YES;
 
     }else if (self.orderList[indexPath.row].EnumOrderState==1){
