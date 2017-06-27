@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  [self notifyUpdateUnreadMessageCount];
+//  [self notifyUpdateUnreadMessageCount];
   /*
     UIButton *button =
     [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
@@ -35,8 +35,59 @@
     UIBarButtonItem *rightBarButton =
     [[UIBarButtonItem alloc] initWithCustomView:button];
    */
-    self.navigationItem.rightBarButtonItem = nil;
+//    self.navigationItem.rightBarButtonItem = nil;
+    
+    
+    
+//    self.navigationController.navigationBar
+    
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+//    [btn setFrame:CGRectMake(0, 0, 20, 20)];
+//    [btn addTarget:self action:@selector(clickBackBtn) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//    self.navigationItem.leftBarButtonItem = item;
+    
+//    [self customNavigation];
 }
+
+- (void)clickBackBtn {
+    
+    
+    
+}
+
+#pragma mark 定制导航栏
+- (void)customNavigation {
+    
+    self.navigationController.navigationBar.tintColor = MAINCOLOR;
+//    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:nil];
+//    self.navigationItem.backBarButtonItem = backBtn;
+    
+    NSLog(@"%@",self.navigationController.navigationBar.subviews);
+//    NSLog(@"%@",self.navigationItem.hidesBackButton);
+
+    NSLog(@"%@",self.navigationController.navigationBar.subviews[3].class);
+    
+    UIButton *btn = (UIButton *)self.navigationController.navigationBar.subviews[3];
+    btn.backgroundColor = MAINCOLOR;
+    NSLog(@"%@",btn.subviews);
+    NSLog(@"%@",btn.titleLabel.text);
+    
+    
+}
+
+- (UIBarButtonItem *)customBackItemWithTarget:(id)target
+                                       action:(SEL)action {
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+    [btn setFrame:CGRectMake(0, 0, 20, 20)];
+    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    return item;
+}
+
 
 /*
 - (void)rightBarButtonItemClicked:(id)sender {

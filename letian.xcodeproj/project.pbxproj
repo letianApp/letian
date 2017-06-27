@@ -1709,7 +1709,7 @@
 				TargetAttributes = {
 					0953C21D1E514B5700FB165C = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = EWE93FDJ2V;
+						DevelopmentTeam = WKX8GB3K8G;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -2154,7 +2154,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = letian/letian.entitlements;
-				DEVELOPMENT_TEAM = EWE93FDJ2V;
+				DEVELOPMENT_TEAM = WKX8GB3K8G;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2346,7 +2346,7 @@
 					"\"UserNotifications\"",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = rightpsy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.letiancenter.letianpsychological;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
@@ -2362,7 +2362,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = letian/letian.entitlements;
-				DEVELOPMENT_TEAM = EWE93FDJ2V;
+				DEVELOPMENT_TEAM = WKX8GB3K8G;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2554,7 +2554,7 @@
 					"\"UserNotifications\"",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = rightpsy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.letiancenter.letianpsychological;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";

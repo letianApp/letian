@@ -337,7 +337,7 @@ didRegisterUserNotificationSettings:
             return completion(user);
         }else{
             
-            [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.window.rootViewController.view];
+//            [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.window.rootViewController.view];
             return completion(nil);
         }
     } failure:^(NSError *error) {

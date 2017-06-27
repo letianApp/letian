@@ -101,7 +101,7 @@
             
             } else {
                 
-            [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.view];
+            [MBHudSet showText:responseObject[@"登陆失败，请重新登录"] andOnView:strongSelf.view];
             }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -176,7 +176,7 @@
             }];
         } else {
             
-            [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.view];
+            [MBHudSet showText:responseObject[@"登陆失败，请重新登录"] andOnView:strongSelf.view];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

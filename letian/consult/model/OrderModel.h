@@ -41,6 +41,11 @@ typedef NS_ENUM (NSInteger, EnumSexType) {
 @property (nonatomic        ) EnumConsultType       consultType;
 
 /**
+ 日历选中日期
+ */
+@property (nonatomic) NSDate *selDate;
+
+/**
  咨询日期
  */
 @property (nonatomic, copy  ) NSString              *orderDate;

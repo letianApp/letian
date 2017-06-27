@@ -11,6 +11,7 @@
 #import "ConfirmPageVC.h"
 #import "CYLTabBarController.h"
 #import "ChatViewController.h"
+#import "RCDCustomerServiceViewController.h"
 
 #import "GQUserManager.h"
 #import "LoginViewController.h"
@@ -62,11 +63,11 @@
 - (void)customNavigation {
 
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-    UIButton *btn                          = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(0, 0, 20, 20)];
     [btn addTarget:self action:@selector(clickShareBtn) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item                  = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = item;
     
     self.naviView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, navigationBar_H + statusBar_H)];
@@ -359,19 +360,19 @@
     
     if ([GQUserManager isHaveLogin]) {
 
-        ChatViewController *chatVc = [[ChatViewController alloc]init];
-        chatVc.hidesBottomBarWhenPushed = YES;
-        chatVc.conversationType = ConversationType_PRIVATE;
-        chatVc.targetId = @"12";
-        chatVc.title = @"小乐";
-        [self.navigationController pushViewController:chatVc animated:YES];
+        RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
+        chatService.hidesBottomBarWhenPushed = YES;
+        chatService.conversationType = ConversationType_CUSTOMERSERVICE;
+        chatService.targetId = RONGYUN_SERVICE_ID;
+        chatService.title = @"乐天心理咨询";
+        [self.rt_navigationController pushViewController:chatService animated:YES];
     } else {
         
         UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
         
         [self presentViewController:alertControl animated:YES completion:nil];
         
-        __weak typeof(self) weakSelf    = self;
+        __weak typeof(self) weakSelf = self;
         [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
             
             __strong typeof(self) strongSelf = weakSelf;

@@ -42,35 +42,17 @@
     return self;
 }
 
-//- (void)viewWillAppear:(BOOL)animated {
-//
-//    [[RCIMClient sharedRCIMClient] setConversationToTop:ConversationType_PRIVATE targetId:@"12" isTop:YES];
-//    
-//}
-
-
-
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
     [self customNavigation];
-    [self getServiceInfo];
+//    [self getServiceInfo];
     [self emptyConversationBackView];
     
-    [[RCIMClient sharedRCIMClient] setConversationToTop:ConversationType_PRIVATE targetId:@"12" isTop:YES];
     self.topCellBackgroundColor = [UIColor snowColor];
-//    self.conversationListTableView.separatorColor = [UIColor clearColor];
-    
     self.conversationListTableView.tableFooterView = [UIView new];
-    
-//    self.conversationListTableView.delegate = self;
-//    self.conversationListTableView.dataSource = self;
-    
-//    RCConversationModel *mod = [[RCConversationModel alloc]init];
-//    mod.targetId = @"6";
-//    [self refreshConversationTableViewWithConversationModel:mod];
-    
     
 }
 
@@ -78,54 +60,19 @@
 - (void)customNavigation {
     
     self.navigationItem.title = @"咨询列表";
+    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(clickServiceBtn)];
+    self.navigationItem.rightBarButtonItem = rightBtn;
     
 }
 
-#pragma mark 获取客服资料
-- (void)getServiceInfo {
+- (void)clickServiceBtn {
     
-    self.serviceInfo = [[ServiceModel alloc]init];
-    
-    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
-    [requestString appendFormat:@"%@/",API_MODULE_USER];
-    [requestString appendString:API_NAME_GETUSERINFO];
-    
-    NSMutableDictionary *parames = [[NSMutableDictionary alloc]init];
-    parames[@"userID"] = @(12);
-    
-    [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
-    __weak typeof(self) weakSelf = self;
-    
-    [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
-        
-        __strong typeof(self) strongSelf = weakSelf;
-//        NSLog(@"&&&&&&&&&*获取用户信息%@",responseObject);
-        if([responseObject[@"Code"] integerValue] == 200) {
-            
-            strongSelf.serviceInfo.userId      = [NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"UserID"]];
-            strongSelf.serviceInfo.name        = responseObject[@"Result"][@"Source"][@"NickName"];
-            strongSelf.serviceInfo.portraitUri = responseObject[@"Result"][@"Source"][@"HeadImg"];
-
-//            [strongSelf emptyConversationBackView];
-
-        } else {
-            
-            [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.view];
-        }
-    } failure:^(NSError *error) {
-        
-        __strong typeof(self) strongSelf = weakSelf;
-        
-        [MBHudSet dismiss:strongSelf.view];
-        if (error.code == NSURLErrorCancelled) return;
-        if (error.code == NSURLErrorTimedOut) {
-            [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
-        } else{
-            [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
-        }
-        
-    }];
-
+    RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
+    chatService.hidesBottomBarWhenPushed = YES;
+    chatService.conversationType = ConversationType_CUSTOMERSERVICE;
+    chatService.targetId = RONGYUN_SERVICE_ID;
+    chatService.title = @"乐天心理咨询";
+    [self.rt_navigationController pushViewController:chatService animated:YES];
     
 }
 
@@ -139,7 +86,7 @@
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, statusBar_H + navigationBar_H)];
     [bgView addSubview:btn];
 //    btn.backgroundColor = MAINCOLOR;
-    [btn addTarget:self action:@selector(clickEmptyCell:) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(clickServiceBtn) forControlEvents:UIControlEventTouchUpInside];
     btn.layer.borderWidth = 0.5;
     btn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     
@@ -149,7 +96,7 @@
     
     self.titleLab = [[UILabel alloc]initWithFrame:CGRectMake(self.headView.right + 10, self.headView.y, 200, self.headView.height)];
     [btn addSubview:self.titleLab];
-    self.titleLab.text = @"联系客服小乐";
+    self.titleLab.text = @"联系乐天当值咨询师";
     self.titleLab.textColor = MAINCOLOR;
 
     self.emptyConversationView = bgView;
@@ -158,13 +105,12 @@
 
 - (void)clickEmptyCell:(UIButton *)btn {
     
-    ChatViewController *chatVc      = [[ChatViewController alloc]init];
-    chatVc.hidesBottomBarWhenPushed = YES;
-    chatVc.conversationType         = ConversationType_PRIVATE;
-    chatVc.targetId                 = self.serviceInfo.userId;
-    chatVc.title                    = self.serviceInfo.name;
-    [self.navigationController pushViewController:chatVc animated:YES];
-    
+    RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
+    chatService.hidesBottomBarWhenPushed = YES;
+    chatService.conversationType = ConversationType_CUSTOMERSERVICE;
+    chatService.targetId = RONGYUN_SERVICE_ID;
+    chatService.title = @"乐天心理咨询";
+    [self.rt_navigationController pushViewController:chatService animated:YES];
     
 }
 
@@ -175,10 +121,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         
         int badge = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
-//        NSLog(@"总：%d",badge);
         UITabBarItem *item = [weakSelf.tabBarController.tabBar.items objectAtIndex:2];
         if (badge > 0) {
-            
             NSString *badgeStr = [NSString stringWithFormat:@"%d",badge];
             item.badgeValue = badgeStr;
         } else {
@@ -186,39 +130,14 @@
         }
     });
 
-    
-    [[RCIMClient sharedRCIMClient] setConversationToTop:ConversationType_PRIVATE targetId:@"12" isTop:YES];
-    RCConversationModel *model = self.conversationListDataSource[indexPath.row];
-//    model.topCellBackgroundColor = [UIColor snowColor];
-
-    
-//    RCConversationModel *cellModel = cell.model;
-//    if (model.isTop == YES) {
-//        NSLog(@"顶部：%@",model.conversationTitle);
-//        model.topCellBackgroundColor = [UIColor blackColor];
-//    }
-    
-    
     RCConversationCell *conversationCell = (RCConversationCell *)cell;
     conversationCell.topCellBackgroundColor = [UIColor snowColor];
-//    if ([conversationCell.conversationTitle.text isEqual: @"测试药师2"]) {
-//        
-//        NSLog(@"hhhhhhh");
-//        model.isTop = YES;
-//    }
     NSInteger unreadCount = conversationCell.model.unreadMessageCount;
-//    NSLog(@"未读：%ld",(long)model.unreadMessageCount);
     if (unreadCount > 0){
         conversationCell.bubbleTipView.bubbleTipText = (unreadCount > 99) ? @"99+" : [NSString stringWithFormat:@"%ld",(long)unreadCount];
     }else{
         conversationCell.bubbleTipView.bubbleTipText = nil;
     }
-    
-    
-//        conversationCell.messageCreatedTimeLabel.text = @"1000";
-//        conversationCell.messageContentLabel.text = @"aaaaa";
-//    }
-//    cell.bubbleTipView.bubbleTipBackgroundColor = MAINCOLOR;
 }
 
 #pragma mark 点击cell方法
@@ -242,30 +161,20 @@
         chatVc.conversationType         = model.conversationType;
         chatVc.targetId                 = model.targetId;
         chatVc.title                    = model.conversationTitle;
-        
-//        [chatVc.chatSessionInputBarControl.pluginBoardView removeItemWithTag:1101];
-//        [chatVc.chatSessionInputBarControl.pluginBoardView removeItemAtIndex:3];
-
         model.unreadMessageCount        = 0;
         [self.navigationController pushViewController:chatVc animated:YES];
         
-//        [self.conversationListDataSource removeObjectAtIndex:indexPath.row];
-//        [self.conversationListTableView reloadData];
+    } else if (conversationModelType == ConversationType_CUSTOMERSERVICE) {
+        
+        RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
+        chatService.hidesBottomBarWhenPushed = YES;
+        chatService.conversationType = ConversationType_CUSTOMERSERVICE;
+        chatService.targetId = RONGYUN_SERVICE_ID;
+        chatService.title = model.conversationTitle;
+        [self.navigationController pushViewController:chatService animated:YES];
 
     }
     
-//    if (indexPath.row == 0) {
-    
-//    }
-//    } else if (conversationModelType == ConversationType_CUSTOMERSERVICE) {
-//        
-//        RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
-//        chatService.conversationType = ConversationType_CUSTOMERSERVICE;
-//        chatService.targetId = @"KEFU149145862082595";
-//        chatService.title = @"客服";
-////        chatService.csInfo = csInfo; //用户的详细信息，此数据用于上传用户信息到客服后台，数据的nickName和portraitUrl必须填写。(目前该字段暂时没用到，客服后台显示的用户信息是你获取token时传的参数，之后会用到）
-//        [self.navigationController pushViewController :chatService animated:YES];
-//    }
 }
 
 
