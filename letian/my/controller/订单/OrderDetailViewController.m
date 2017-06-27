@@ -217,9 +217,9 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
     [requestString appendFormat:@"%@/",API_MODULE_CONSULT];
     [requestString appendString:API_NAME_REFUNDORDER];
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    [MBHudSet showStatusOnView:self.view];
     params[@"orderID"]=@(self.orderID);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
-    [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
 //        NSLog(@"&&&&&&&&&*申请退款%@",responseObject);

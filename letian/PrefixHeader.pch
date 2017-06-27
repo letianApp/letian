@@ -90,8 +90,8 @@
 #define EMAILAUTHCODE      @"cf0a786a-bc08-489e-9f0f-5af42c838768"
 
 //极光推送
-#define JPUSH_APPKEY       @"4c395a924e846f2c729009b6"
-#define JPUSH_SECRET       @"50be4900f2b53f9ca1b2dbb7"
+#define JPUSH_APPKEY       @"3c6714d00b2c9fccccb9de88"
+#define JPUSH_SECRET       @"b941127cc2d2faf621c0fe38"
 
 //友盟
 #define UMENG_APPKEY       @"58e6ec7804e205b94e00200c"
