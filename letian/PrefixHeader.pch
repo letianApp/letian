@@ -97,6 +97,10 @@
 #define UMENG_APPKEY       @"58e6ec7804e205b94e00200c"
 
 //融云
+//开发环境
+//#define RONGYUN_APPKEY     @"82hegw5u83dkx"
+//#define RONGYUN_APPSECRET  @"TZwaP6feAoneVl"
+//生产环境
 #define RONGYUN_APPKEY     @"e0x9wycfehtgq"
 #define RONGYUN_APPSECRET  @"8QLzrA3UNJb"
 #define RONGYUN_SERVICE_ID @"KEFU149740678033940"

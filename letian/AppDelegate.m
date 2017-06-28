@@ -241,7 +241,7 @@
         [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
             
             __strong typeof(self) strongSelf = weakSelf;
-//            NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+            NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
@@ -440,6 +440,7 @@ didRegisterUserNotificationSettings:
     token = [token stringByReplacingOccurrencesOfString:@" "
                                              withString:@""];
     [[RCIMClient sharedRCIMClient] setDeviceToken:token];
+    NSLog(@"ttttttttttttt:%@",token);
 
 }
 

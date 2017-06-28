@@ -143,7 +143,7 @@
             
             [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
                 
-//                NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+                NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
 //                NSLog(@"ID：%@",kFetchUserId);
                 
                 [strongSelf dismissViewControllerAnimated:YES completion:nil];
