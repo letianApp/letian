@@ -437,7 +437,7 @@
 {
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"乐天心理" descr:@"解除心理束缚，重获心灵自由。——最好的心理医生" thumImage:[UIImage imageNamed:@"乐天logo"]];
-    shareObject.webpageUrl =@"https://itunes.apple.com/cn/app/乐天心理/id1224472009?mt=8";
+    shareObject.webpageUrl = @"https://itunes.apple.com/cn/app/乐天心理-值得信赖的心理咨询平台/id1252921770?mt=8";
     messageObject.shareObject = shareObject;
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
         if (error) {
