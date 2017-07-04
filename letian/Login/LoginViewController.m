@@ -78,9 +78,9 @@
     params[@"Timestamp"]           = timeSp;
     params[@"Nonce"]               = nonce;
     params[@"AppId"]               = APPID;
-    params[@"PushNo"]              = [JPUSHService registrationID];;
+    params[@"PushNo"]              = [JPUSHService registrationID];
     
-//    NSLog(@"推送号：。。。。。%@",params[@"PushNo"]);
+    NSLog(@"推送号：。。。。。%@",params[@"PushNo"]);
     __weak typeof(self) weakSelf   = self;
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -88,7 +88,6 @@
         __strong typeof(self) strongSelf = weakSelf;
 
         NSLog(@"登录%@",responseObject);
-//        NSLog(@"Msg%@",responseObject[@"Msg"]);
         if([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             
             [GQUserManager saveUserData:@{@"UserId":[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"userid"]]} andToken:responseObject[@"Result"][@"Source"][@"access_token"]];

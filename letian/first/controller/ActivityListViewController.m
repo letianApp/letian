@@ -19,6 +19,7 @@
 @property (nonatomic,strong) UITableView *tableview;
 @property (nonatomic,strong) NSArray *dataArray;
 @property(nonatomic,strong)NSMutableArray <ActiveModel *> *activeListArray;
+
 @property (nonatomic,strong) WKWebView *webView;
 @property(nonatomic,assign)NSInteger pageIndex;
 
@@ -76,28 +77,16 @@
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     params[@"pageIndex"]=@(self.pageIndex);
-    params[@"pageSize"]=@(40);
+    params[@"pageSize"]=@(50);
+    params[@"activeType"]=@(11);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
         [self.tableview.mj_header endRefreshing];
-//        NSLog(@"&&&&&&&&&*获取活动列表%@",responseObject);
-//        NSLog(@"ActiveTypeIDString=%@",responseObject[@"Result"][@"Source"][0][@"ActiveTypeIDString"]);
+        NSLog(@"&&&&&&&&&*获取智慧学院活动列表%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             weakSelf.activeListArray=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-            if (weakSelf.activeListArray.count >= 3) {
-                weakSelf.tableview.mj_footer.hidden = NO;
-            }else{
-                weakSelf.tableview.mj_footer.hidden=YES;
-            }
-            NSArray *deleArray=[NSArray arrayWithArray:weakSelf.activeListArray];
-            for (ActiveModel *model in deleArray) {
-                if (model.ActiveTypeID==1) {
-                    [weakSelf.activeListArray removeObject:model];
-                }
-            }
-            
             [self.tableview reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

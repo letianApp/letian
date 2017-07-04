@@ -426,7 +426,7 @@ didRegisterUserNotificationSettings:
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
     [JPUSHService setupWithOption:launchOptions appKey:JPUSH_APPKEY
                           channel:@"APPStore"
-                 apsForProduction:false];
+                 apsForProduction:TRUE];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -440,7 +440,7 @@ didRegisterUserNotificationSettings:
     token = [token stringByReplacingOccurrencesOfString:@" "
                                              withString:@""];
     [[RCIMClient sharedRCIMClient] setDeviceToken:token];
-
+    
 }
 
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler

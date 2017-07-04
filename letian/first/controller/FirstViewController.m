@@ -175,19 +175,14 @@
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     params[@"pageIndex"]=@(self.pageIndex);
-    params[@"pageSize"]=@(40);
+    params[@"pageSize"]=@(100);
+    params[@"activeType"]=@(1);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
         [weakSelf.tableView.mj_header endRefreshing];
         weakSelf.funnyListArray=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-        NSArray *deleArray=[NSArray arrayWithArray:weakSelf.funnyListArray];
-        for (ActiveModel *model in deleArray) {
-            if (model.ActiveTypeID==11) {
-                [weakSelf.funnyListArray removeObject:model];
-            }
-        }
         [_tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];
