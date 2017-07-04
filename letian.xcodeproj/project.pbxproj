@@ -242,7 +242,6 @@
 		091991781EC9950E007AEC8F /* RCDCustomerServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCustomerServiceViewController.m; sourceTree = "<group>"; };
 		0932B85A1ED2B04D00C8131E /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceModel.h; path = letian/chat/controller/ServiceModel.h; sourceTree = SOURCE_ROOT; };
 		0932B85B1ED2B04D00C8131E /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServiceModel.m; path = letian/chat/controller/ServiceModel.m; sourceTree = SOURCE_ROOT; };
-		0935872C1E94A1C10007B1D9 /* letian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = letian.entitlements; sourceTree = "<group>"; };
 		0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0935872F1E94BD9D0007B1D9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		093587311E94BDB30007B1D9 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -291,6 +290,7 @@
 		0953C2481E514B5900FB165C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09591B791ECAB9BA0040CD1C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		09591B7A1ECAB9BA0040CD1C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		095D41891F036302004690E4 /* letian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = letian.entitlements; sourceTree = "<group>"; };
 		0965FBB01E7A918900C0FBAD /* HZQDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZQDatePickerView.h; sourceTree = "<group>"; };
 		0965FBB11E7A918900C0FBAD /* HZQDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZQDatePickerView.m; sourceTree = "<group>"; };
 		0965FBB21E7A918900C0FBAD /* HZQDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HZQDatePickerView.xib; sourceTree = "<group>"; };
@@ -812,7 +812,7 @@
 		0953C2201E514B5800FB165C /* letian */ = {
 			isa = PBXGroup;
 			children = (
-				0935872C1E94A1C10007B1D9 /* letian.entitlements */,
+				095D41891F036302004690E4 /* letian.entitlements */,
 				77B5BCFD1EAD9B460034497D /* Categories */,
 				77DA5DC91E666B92003FAE0C /* Login */,
 				77038DE91E63C49F0096C07D /* Custom */,
@@ -1710,7 +1710,7 @@
 					0953C21D1E514B5700FB165C = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = WKX8GB3K8G;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2154,6 +2154,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = letian/letian.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = WKX8GB3K8G;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2348,6 +2350,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.letiancenter.letianpsychological;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0e84f315-9a0f-456e-9099-c48448f631d2";
+				PROVISIONING_PROFILE_SPECIFIER = devPro;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
@@ -2362,6 +2366,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = letian/letian.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Letian Psychological Counseling Center (WKX8GB3K8G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = WKX8GB3K8G;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2556,6 +2562,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.letiancenter.letianpsychological;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "d59f5f64-3fda-49ee-b99e-e33ca053ecfa";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.letiancenter.letianpsychological";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
