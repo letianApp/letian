@@ -79,7 +79,7 @@
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     params[@"cateID"]=@(self.cateID);
     params[@"pageIndex"]=@(self.pageIndex);
-    params[@"pageSize"]=@(20);
+    params[@"pageSize"]=@(10);
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [weakSelf.tableView.mj_header endRefreshing];
@@ -110,6 +110,7 @@
     params[@"pageIndex"]=@(++self.pageIndex);
     params[@"pageSize"]=@(10);
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBHudSet dismiss:self.view];
         NSArray *array=[WebArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         if (array.count >= 10) {
             weakSelf.tableView.mj_footer.hidden = NO;
@@ -120,6 +121,7 @@
         [weakSelf.webArticleList addObjectsFromArray:array];
         [weakSelf.tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
         [weakSelf.tableView.mj_footer endRefreshing];
     }];
 }

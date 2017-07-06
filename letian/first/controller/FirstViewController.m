@@ -81,6 +81,9 @@
     header.stateLabel.hidden = YES;
     self.tableView.mj_header = header;
     self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    self.tableView.mj_footer.hidden = YES;
+    self.tableView.mj_footer = [RefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
+    self.tableView.mj_footer.hidden = YES;
     
 }
 
@@ -96,9 +99,9 @@
     [self.view addSubview:tableView];
     self.tableView = tableView;
     self.tableView.tableHeaderView=[self createHeadBgView];
-    UILabel *footLabel=[GQControls createLabelWithFrame:CGRectMake(0, 0, SCREEN_W, 30) andText:@"没有更多内容咯～" andTextColor:MAINCOLOR andFontSize:10];
-    footLabel.textAlignment=NSTextAlignmentCenter;
-    self.tableView.tableFooterView=footLabel;
+//    UILabel *footLabel=[GQControls createLabelWithFrame:CGRectMake(0, 0, SCREEN_W, 30) andText:@"没有更多内容咯～" andTextColor:MAINCOLOR andFontSize:10];
+//    footLabel.textAlignment=NSTextAlignmentCenter;
+//    self.tableView.tableFooterView=footLabel;
 
 }
 
@@ -171,22 +174,29 @@
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_ACTIVE];
-    [requestString appendString:API_NAME_GETACTIVELIST];
+    [requestString appendString:API_NAME_GETACTIVELISTBYTYPE];
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     params[@"pageIndex"]=@(self.pageIndex);
-    params[@"pageSize"]=@(100);
-    params[@"activeType"]=@(1);
+    params[@"pageSize"]=@(10);
+    params[@"enumActiveType"]=@(1);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
-    [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
         [weakSelf.tableView.mj_header endRefreshing];
         weakSelf.funnyListArray=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        if (weakSelf.funnyListArray.count >= 10) {
+            weakSelf.tableView.mj_footer.hidden = NO;
+        }else{
+            weakSelf.tableView.mj_footer.hidden=YES;
+        }
         [_tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:self.view];
+        NSLog(@"?????%@",error);
+
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
             [MBHudSet showText:@"请求超时" andOnView:self.view];
@@ -196,6 +206,35 @@
     }];
 }
 
+-(void)requestMoreData
+{
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_ACTIVE];
+    [requestString appendString:API_NAME_GETACTIVELISTBYTYPE];
+    __weak typeof(self) weakSelf = self;
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    params[@"pageIndex"]=@(++self.pageIndex);
+    params[@"pageSize"]=@(10);
+    params[@"enumActiveType"]=@(1);
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBHudSet dismiss:self.view];
+        NSArray *array=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        if (array.count >= 10) {
+            weakSelf.tableView.mj_footer.hidden = NO;
+            [weakSelf.tableView.mj_footer endRefreshing];
+        }else{
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        [weakSelf.funnyListArray addObjectsFromArray:array];
+        [weakSelf.tableView reloadData];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+        [weakSelf.tableView.mj_footer endRefreshing];
+    }];
+}
 #pragma mark------头视图
 
 -(UIView *)createHeadBgView

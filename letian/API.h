@@ -90,6 +90,9 @@
 //获取活动列表
 #define API_NAME_GETACTIVELIST       @"GetActiveList"
 
+//根据活动类型获取活动列表
+#define API_NAME_GETACTIVELISTBYTYPE @"GetActiveListByTypeID"
+
 //获取活动详情
 #define API_NAME_GETACTIVEINFO       @"GetActiveInfo"
 

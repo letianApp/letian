@@ -62,6 +62,9 @@
     header.stateLabel.hidden = YES;
     self.tableview.mj_header = header;
     self.tableview.mj_header.automaticallyChangeAlpha = YES;
+    self.tableview.mj_footer.hidden = YES;
+    self.tableview.mj_footer = [RefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
+    self.tableview.mj_footer.hidden = YES;
 
 }
 
@@ -73,31 +76,65 @@
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_ACTIVE];
-    [requestString appendString:API_NAME_GETACTIVELIST];
+    [requestString appendString:API_NAME_GETACTIVELISTBYTYPE];
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     params[@"pageIndex"]=@(self.pageIndex);
-    params[@"pageSize"]=@(50);
-    params[@"activeType"]=@(11);
+    params[@"pageSize"]=@(10);
+    params[@"enumActiveType"]=@(11);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
-    [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        [self.tableview.mj_header endRefreshing];
-        NSLog(@"&&&&&&&&&*获取智慧学院活动列表%@",responseObject);
-        if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
-            weakSelf.activeListArray=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-            [self.tableview reloadData];
+        [weakSelf.tableview.mj_header endRefreshing];
+        weakSelf.activeListArray=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        if (weakSelf.activeListArray.count >= 10) {
+            weakSelf.tableview.mj_footer.hidden = NO;
+        }else{
+            weakSelf.tableview.mj_footer.hidden=YES;
         }
+        [_tableview reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [weakSelf.tableview.mj_header endRefreshing];
         [MBHudSet dismiss:self.view];
-        [self.tableview.mj_header endRefreshing];
+        NSLog(@"?????%@",error);
+        
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
             [MBHudSet showText:@"请求超时" andOnView:self.view];
         } else{
             [MBHudSet showText:@"请求失败" andOnView:self.view];
         }
+    }];
+}
+
+-(void)requestMoreData
+{
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_ACTIVE];
+    [requestString appendString:API_NAME_GETACTIVELISTBYTYPE];
+    __weak typeof(self) weakSelf = self;
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    params[@"pageIndex"]=@(++self.pageIndex);
+    params[@"pageSize"]=@(10);
+    params[@"enumActiveType"]=@(11);
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBHudSet dismiss:self.view];
+        NSArray *array=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        if (array.count >= 10) {
+            weakSelf.tableview.mj_footer.hidden = NO;
+            [weakSelf.tableview.mj_footer endRefreshing];
+        }else{
+            [weakSelf.tableview.mj_footer endRefreshingWithNoMoreData];
+        }
+        [weakSelf.activeListArray addObjectsFromArray:array];
+        [weakSelf.tableview reloadData];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+        [weakSelf.tableview.mj_footer endRefreshing];
     }];
 }
 
