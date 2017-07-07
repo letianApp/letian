@@ -65,9 +65,10 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="headImageView" destination="g25-hI-cOE" id="PsJ-Kf-Qja"/>
+                <outlet property="timeLabel" destination="BLW-qy-ppU" id="XvP-Nn-bhc"/>
                 <outlet property="titleLabel" destination="dTb-6R-HMa" id="mNw-al-eMn"/>
             </connections>
-            <point key="canvasLocation" x="-780.5" y="-571.5"/>
+            <point key="canvasLocation" x="-1022" y="-562"/>
         </tableViewCell>
     </objects>
 </document>

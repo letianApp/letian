@@ -149,7 +149,7 @@
 {
     HomeCell *cell=[HomeCell cellWithTableView:tableView];
     cell.titleLabel.text=self.funnyListArray[indexPath.row].Name;
-    cell.detailLabel.text=self.funnyListArray[indexPath.row].Description;
+    cell.timeLabel.text=self.funnyListArray[indexPath.row].CreatedDate;
     [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.funnyListArray[indexPath.row].ActiveImg]];
 
     
