@@ -560,7 +560,7 @@
     for (int i = 0; i < (endHour - startHour); i++) {
         [_hoursData addObject:[NSString stringWithFormat:@"%d",i+1]];
     }
-//    _hourStr = _hoursData[0];
+    _hourStr = _hoursData[0];
     UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
     
     _chooseHoursView = [[UIPickerView alloc]initWithFrame:CGRectMake(SCREEN_W*0.3, 0, SCREEN_W*0.4, backView.height*0.7)];
@@ -571,7 +571,7 @@
     UIButton *btn = [GQControls createButtonWithFrame:CGRectMake(SCREEN_W/4, _chooseHoursView.bottom+10, SCREEN_W/2, 30) andTitle:@"确定" andTitleColor:MAINCOLOR andFontSize:15 andTag:234 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
     [backView addSubview:btn];
     [btn addTarget:self action:@selector(clickAffirmHoursBtn:) forControlEvents:UIControlEventTouchUpInside];
-
+//    NSLog(@"结束：%@",_orderModel.orderDateTimeEnd);
     return backView;
 }
 
@@ -630,7 +630,7 @@
 #pragma mark - 获取咨询师设置
 - (void)getCounsultSetForDay:(NSString *)dayStr {
     
-    NSLog(@"重新获取：%@",dayStr);
+//    NSLog(@"重新获取：%@",dayStr);
     
     __weak typeof(self) weakSelf = self;
     [MBHudSet showStatusOnView:self.view];
@@ -649,7 +649,7 @@
         __strong typeof(self) strongSelf = weakSelf;
         [MBHudSet dismiss:strongSelf.view];
         
-        NSLog(@"获取咨询时间返回的数据%@",responseObject);
+//        NSLog(@"获取咨询时间返回的数据%@",responseObject);
         
         if([responseObject[@"Code"] integerValue] == 200) {
             
