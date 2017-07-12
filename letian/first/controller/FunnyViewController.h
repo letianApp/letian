@@ -11,4 +11,4 @@
 @interface FunnyViewController : UIViewController
 @property(nonatomic,strong)ActiveModel *activeModel;
 
-@end
+@end 
