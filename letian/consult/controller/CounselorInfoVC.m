@@ -199,7 +199,7 @@
 //咨询师头像
     UIImageView *picView = [[UIImageView alloc]init];
     [picView sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg] placeholderImage:[UIImage imageNamed:@"乐天logo"]];
-    picView.layer.cornerRadius = SCREEN_W/10;
+    picView.layer.cornerRadius = _headView.height*0.2;
     picView.layer.borderWidth = 1;
     picView.layer.borderColor = ([UIColor whiteColor].CGColor);
     picView.layer.masksToBounds = YES;
@@ -208,8 +208,8 @@
         
         make.centerX.equalTo(_headView.mas_centerX);
         make.centerY.equalTo(_headView.mas_centerY);
-        make.width.equalTo(_headView.mas_width).multipliedBy(0.2);
-        make.height.equalTo(_headView.mas_width).multipliedBy(0.2);
+        make.width.equalTo(_headView.mas_height).multipliedBy(0.4);
+        make.height.equalTo(_headView.mas_height).multipliedBy(0.4);
     }];
     
     UIImageView *sexView = [[UIImageView alloc]init];
@@ -223,7 +223,8 @@
     }];
     
     float lineHeight = (_headView.height/2-_headView.width*0.1)/7;
-//    NSLog(@"%f",lineHeight);
+
+    NSLog(@"aaaaa:%f",lineHeight);
 //咨询师名字
     UILabel *nameLab = [[UILabel alloc]init];
     [view addSubview:nameLab];

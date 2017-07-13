@@ -1710,7 +1710,7 @@
 					0953C21D1E514B5700FB165C = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = WKX8GB3K8G;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2156,7 +2156,7 @@
 				CODE_SIGN_ENTITLEMENTS = letian/letian.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = WKX8GB3K8G;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2350,9 +2350,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.letiancenter.letianpsychological;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0e84f315-9a0f-456e-9099-c48448f631d2";
-				PROVISIONING_PROFILE_SPECIFIER = devPro;
-				TARGETED_DEVICE_FAMILY = 1;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -2367,8 +2367,8 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = letian/letian.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Letian Psychological Counseling Center (WKX8GB3K8G)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = WKX8GB3K8G;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2562,9 +2562,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.letiancenter.letianpsychological;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d59f5f64-3fda-49ee-b99e-e33ca053ecfa";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.letiancenter.letianpsychological";
-				TARGETED_DEVICE_FAMILY = 1;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
