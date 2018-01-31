@@ -988,7 +988,7 @@
             params[@"ConsultDescription"]  = self.detailTextView.text;
         }
         [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
-//        NSLog(@"Params=%@",params);
+        NSLog(@"Params=%@",params);
         
         [PPNetworkHelper POST:requestString parameters:params success:^(id responseObject) {
             

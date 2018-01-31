@@ -74,19 +74,29 @@
 
 +(UIImage *)captureScrollView:(UIScrollView *)scrollView{
     UIImage* image = nil;
-    scrollView.contentSize=CGSizeMake(SCREEN_W, scrollView.contentSize.height+SCREEN_W*0.6);
-    UIView *lineView=[self createViewWithFrame:CGRectMake(30, scrollView.contentSize.height-SCREEN_W*0.5, SCREEN_W-60, 0.5) andBackgroundColor:[UIColor lightGrayColor]];
+    scrollView.contentSize=CGSizeMake(SCREEN_W, scrollView.contentSize.height+SCREEN_W*0.8);
+//    scrollView.backgroundColor = MAINCOLOR;
+    UIView *lineView=[self createViewWithFrame:CGRectMake(30, scrollView.contentSize.height-SCREEN_W*0.7, SCREEN_W-60, 0.5) andBackgroundColor:[UIColor lightGrayColor]];
     [scrollView addSubview:lineView];
-    UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(40, lineView.centerY+30, SCREEN_W*0.3, SCREEN_W*0.3)];
+    UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(40, lineView.centerY+10, SCREEN_W*0.3, SCREEN_W*0.3)];
     imageV.image =[UIImage imageNamed:@"二维码"];
+    imageV.contentMode = UIViewContentModeScaleToFill;
+//    imageV.backgroundColor = [UIColor blackColor];
     [scrollView addSubview:imageV];
     
     UIImageView *textImage=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"广告语"]];
     textImage.frame=CGRectMake(SCREEN_W*0.3+60, 0, SCREEN_W*0.5, SCREEN_W*0.2);
     textImage.centerY=imageV.centerY;
     [scrollView addSubview:textImage];
-
     
+    NSLog(@"yyy:%f",imageV.bottom);
+
+    UILabel *adText = [[UILabel alloc]initWithFrame:CGRectMake(40, imageV.bottom+10, imageV.width, 20)];
+    adText.text = @"乐天心理APP二维码";
+    adText.textColor = MAINCOLOR;
+    adText.numberOfLines = 1;
+    adText.adjustsFontSizeToFitWidth = YES;
+    [scrollView addSubview:adText];
     
     
     UIGraphicsBeginImageContextWithOptions(scrollView.contentSize, NO, [UIScreen mainScreen].scale);

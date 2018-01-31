@@ -23,7 +23,7 @@
     self.automaticallyAdjustsScrollViewInsets=NO;
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
     //2.建立内容视图
-    UIImageView * view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"乐天智慧学院简介"]];
+    UIImageView * view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"乐天情商学院简介"]];
     view.frame=CGRectMake(0, 0, SCREEN_W, SCREEN_W*5.8);
     view.contentMode=UIViewContentModeScaleAspectFill;
     [scrollView addSubview: view];
