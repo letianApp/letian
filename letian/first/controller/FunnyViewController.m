@@ -69,7 +69,7 @@
         return cell;
     }
 
-    self.detailLabel=[GQControls createLabelWithFrame:CGRectMake(20, 30, SCREEN_W-40, 50) andText:self.activeModel.Description andTextColor:[UIColor darkGrayColor] andFontSize:14];
+    self.detailLabel=[GQControls createLabelWithFrame:CGRectMake(20, 30, SCREEN_W-40, 50) andText:self.activeModel.Description andTextColor:[UIColor darkGrayColor] andFontSize:20];
     self.detailLabel.numberOfLines=0;
     [self.detailLabel sizeToFit];
     [cell.contentView addSubview:self.detailLabel];
