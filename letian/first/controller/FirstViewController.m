@@ -241,7 +241,7 @@
 {
     UIView *headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 105+SCREEN_W*0.6)];
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_W*0.6, SCREEN_W, 100)];
-    NSArray *nameArray=@[@"- 预约咨询 -",@"- 心理专栏 -",@"- 专业测试 -",@"- 情商学院 -"];
+    NSArray *nameArray=@[@"- 预约咨询 -",@"- 心理专栏 -",@"- 专业测试 -",@"- 成长乐园 -"];
     for (NSInteger i=0; i<2; i++) {
         for (NSInteger j=0; j<2; j++) {
             UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/2*j, i*50, SCREEN_W/2, 50)];
