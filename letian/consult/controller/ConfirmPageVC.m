@@ -41,6 +41,7 @@
 @property (nonatomic, strong) UILabel                *dateDisplayLab;
 @property (nonatomic, strong) UILabel                *consultSetLab;
 
+@property (nonatomic, strong) UIView                 *pickBackView;
 @property (nonatomic, strong) UIDatePicker           *timePicker;
 @property (nonatomic, strong) UIPickerView           *chooseHoursView;
 @property (nonatomic, strong) NSMutableArray         *hoursData;
@@ -77,7 +78,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.coordinate                           = CLLocationCoordinate2DMake(31.1843580000, 121.4398670000);
+    self.coordinate                           = CLLocationCoordinate2DMake(31.187489, 121.436822);
     self.keyboardUtil                         = [[ZYKeyboardUtil alloc] init];
     _orderModel                               = [[OrderModel alloc]init];
     _isToday                                  = YES;
@@ -234,15 +235,15 @@
     if (btn.tag == 1) {
         
         _mapBtn.userInteractionEnabled = YES;
-        NSString *str = @"面对面咨询地点：上海市徐汇区零陵路791弄上影广场3号楼20层2002室";
+        NSString *str = @"面对面咨询地点：上海市徐汇区中山西路2240号鼎力创意园B401室";
         NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:str];
-        [attrStr addAttribute:NSForegroundColorAttributeName value:MAINCOLOR range:NSMakeRange(8, 28)];
-        [attrStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(8, 28)];
+        [attrStr addAttribute:NSForegroundColorAttributeName value:MAINCOLOR range:NSMakeRange(8, 25)];
+        [attrStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(8, 25)];
         [_mapBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
         [_mapBtn addTarget:self action:@selector(clickMapBtn:) forControlEvents:UIControlEventTouchUpInside];
 
         if (!NULLString(_priceLab.text)) {
-            _orderModel.orderPrice = _totalPrice / 0.8;
+            _orderModel.orderPrice = _totalPrice / 1;
             [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
         }
         
@@ -287,7 +288,7 @@
     [alertController addAction:[UIAlertAction actionWithTitle:@"复制地址" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         __strong typeof(self) strongself = weakSelf;
-        [UIPasteboard generalPasteboard].string = @"上海市徐汇区零陵路791弄上影广场3号楼20层2002室";
+        [UIPasteboard generalPasteboard].string = @"上海市徐汇区中山西路2240号鼎力创意园B401室";
         [MBHudSet showText:@"地址已经复制到剪贴板" andOnView:strongself.view];
     }]];
     
@@ -455,24 +456,26 @@
     
     [self animationbegin:btn];
     
-    self.sl_popupController                          = [[SnailPopupController alloc] init];
-    self.sl_popupController.layoutType               = PopupLayoutTypeCenter;
-    self.sl_popupController.maskType                 = PopupMaskTypeWhiteBlur;
-    self.sl_popupController.transitStyle             = PopupTransitStyleSlightScale;
-    self.sl_popupController.dismissOppositeDirection = YES;
+//    self.sl_popupController                          = [[SnailPopupController alloc] init];
+//    self.sl_popupController.layoutType               = PopupLayoutTypeCenter;
+//    self.sl_popupController.maskType                 = PopupMaskTypeWhiteBlur;
+//    self.sl_popupController.transitStyle             = PopupTransitStyleSlightScale;
+//    self.sl_popupController.dismissOnMaskTouched = NO;
     
     if (btn == _startBtn) {
-//        [self setupDatePiker];
         [_endBtn setTitle:@"预约时长" forState:0];
         _orderModel.orderDateTimeEnd = nil;
-        [self.sl_popupController presentContentView:[self setupDatePiker]];
+//        [self.sl_popupController presentContentView:[self setupDatePiker]];
+        [self.view addSubview:[self setupDatePiker]];
+        
         
     } else if (btn == _endBtn) {
         
         if ([_startBtn.titleLabel.text isEqual: @"预约时间"]) {
             [MBHudSet showText:@"请确认预约时间" andOnView:self.view];
         } else {
-            [self.sl_popupController presentContentView:[self setupChooseHoursView]];
+//            [self.sl_popupController presentContentView:[self setupChooseHoursView]];
+            [self.view addSubview:[self setupChooseHoursView]];
 
         }
         
@@ -484,10 +487,10 @@
 - (UIView *)setupDatePiker {
     
     UIView *backView           = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
+    backView.backgroundColor = [UIColor whiteColor];
     _timePicker                = [[UIDatePicker alloc]init];
     [backView addSubview:_timePicker];
     _timePicker.center = self.view.center;
-//    _timePicker.centerX        = backView.centerX;
     _timePicker.datePickerMode = UIDatePickerModeTime;
     _timePicker.minuteInterval = 30;
 
@@ -495,8 +498,6 @@
     [backView addSubview:btn];
     [btn addTarget:self action:@selector(clickAffirmTimeBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-//    _customTimeStartStr                     = @"9:00";
-//    _customTimeEndStr                       = @"21:00";
     NSMutableString *selDateStartStr  = [NSMutableString stringWithFormat:@"%@ %@", _orderModel.orderDate,_customTimeStartStr];
     NSMutableString *selDateEndStr    = [NSMutableString stringWithFormat:@"%@ %@", _orderModel.orderDate,_customTimeEndStr];
     NSDateFormatter *selDateFormatter = [[NSDateFormatter alloc]init];
@@ -531,6 +532,8 @@
 
 - (void)clickAffirmTimeBtn:(UIButton *)btn {
     
+    UIView *backView = btn.superview;
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
     NSLog(@"aaa:%@",_timePicker.date);
@@ -538,7 +541,9 @@
     
     [self animationbegin:btn];
     if ([selTimeStr containsString:@":00"] || [selTimeStr containsString:@":30"]) {
-        [self.sl_popupController dismiss];
+//        [self.sl_popupController dismiss];
+        [backView removeAllSubviews];
+        [backView removeFromSuperview];
         _orderModel.orderDateTimeStart = selTimeStr;
         [_startBtn setTitle:[NSString stringWithFormat:@"%@ %@",_orderModel.orderDate,_orderModel.orderDateTimeStart] forState:UIControlStateNormal];
         
@@ -561,8 +566,10 @@
         [_hoursData addObject:[NSString stringWithFormat:@"%d",i+1]];
     }
     _hourStr = _hoursData[0];
-    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
-    
+//    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
+    backView.backgroundColor = [UIColor whiteColor];
+
     _chooseHoursView = [[UIPickerView alloc]initWithFrame:CGRectMake(SCREEN_W*0.3, 0, SCREEN_W*0.4, backView.height*0.7)];
     [backView addSubview:_chooseHoursView];
     _chooseHoursView.dataSource = self;
@@ -602,6 +609,9 @@
     
     [self animationbegin:btn];
 //    NSLog(@"");
+    
+    UIView *backView = btn.superview;
+    
     [_endBtn setTitle:[NSString stringWithFormat:@"%@ 小时",_hourStr] forState:UIControlStateNormal];
     if ([_hourStr intValue] > self.counselModel.ConsultPreferDateLength) {
         
@@ -610,7 +620,7 @@
         _totalPrice = [_hourStr integerValue] * self.counselModel.ConsultFee;
     }
     if (_orderModel.consultType == 1) {
-        _orderModel.orderPrice = _totalPrice / 0.8;
+        _orderModel.orderPrice = _totalPrice / 1;
     } else {
         _orderModel.orderPrice = _totalPrice;
     }
@@ -624,7 +634,9 @@
 //    NSLog(@"结束时间%@",endStr);
 
     [self reflashInfo];
-    [self.sl_popupController dismiss];
+    [backView removeAllSubviews];
+    [backView removeFromSuperview];
+//    [self.sl_popupController dismiss];
 }
 
 #pragma mark - 获取咨询师设置

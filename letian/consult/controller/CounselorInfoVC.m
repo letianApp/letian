@@ -394,14 +394,14 @@
         confirmPagevc.counselModel   = self.counselModel;
         [self.rt_navigationController pushViewController:confirmPagevc animated:YES];
     } else {
-        
+
         UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
         alertControl.view.tintColor=[UIColor blackColor];
         [self presentViewController:alertControl animated:YES completion:nil];
 
         __weak typeof(self) weakSelf    = self;
         [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-            
+
             __strong typeof(self) strongSelf = weakSelf;
             LoginViewController *loginVc     = [[LoginViewController alloc]init];
             loginVc.hidesBottomBarWhenPushed = YES;
