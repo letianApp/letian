@@ -194,7 +194,7 @@
 
 -(void) setUpNavigationBar
 {
-    self.navigationItem.title=@"乐天情商学院";
+    self.navigationItem.title=@"乐天成长乐园";
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
