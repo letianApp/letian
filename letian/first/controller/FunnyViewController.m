@@ -80,17 +80,22 @@
 
 -(void) setUpNavigationBar
 {
-    self.navigationItem.title=@"详情";
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    backButton.frame=CGRectMake(30, 12, 20, 20);
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [shareButton setImage:[UIImage imageNamed:@"pinkshare"] forState:UIControlStateNormal];
-    [shareButton addTarget:self action:@selector(shareButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    shareButton.frame=CGRectMake(30, 12, 20, 20);
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+//    self.navigationItem.title=@"详情";
+//    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+//    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+//    backButton.frame=CGRectMake(30, 12, 20, 20);
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+//    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [shareButton setImage:[UIImage imageNamed:@"pinkshare"] forState:UIControlStateNormal];
+//    [shareButton addTarget:self action:@selector(shareButtonClick) forControlEvents:UIControlEventTouchUpInside];
+//    shareButton.frame=CGRectMake(30, 12, 20, 20);
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+    
+    self.navigationController.navigationBar.prefersLargeTitles = true;
+//    self.navigationItem.backBarButtonItem = 
+
+    
 }
 -(void) back
 {

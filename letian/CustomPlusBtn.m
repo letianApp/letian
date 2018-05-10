@@ -82,10 +82,13 @@
 
     
     ChatViewController *secondViewController           = [[ChatViewController alloc] init];
-    RTRootNavigationController *secondNavigationController = [[RTRootNavigationController alloc]
-                                                    initWithRootViewController:chatListVc];
+//    RTRootNavigationController *secondNavigationController = [[RTRootNavigationController alloc]
+//                                                    initWithRootViewController:chatListVc];
+    
+    
+    
     UITabBarController *tabBarController               = (UITabBarController *)self.window.rootViewController;
-    [tabBarController presentViewController:secondNavigationController animated:YES completion:nil];
+//    [tabBarController presentViewController:secondNavigationController animated:YES completion:nil];
     
     
 }

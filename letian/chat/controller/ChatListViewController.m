@@ -72,7 +72,7 @@
     chatService.conversationType = ConversationType_CUSTOMERSERVICE;
     chatService.targetId = RONGYUN_SERVICE_ID;
     chatService.title = @"乐天心理咨询";
-    [self.rt_navigationController pushViewController:chatService animated:YES];
+    [self.navigationController pushViewController:chatService animated:YES];
     
 }
 
@@ -110,7 +110,7 @@
     chatService.conversationType = ConversationType_CUSTOMERSERVICE;
     chatService.targetId = RONGYUN_SERVICE_ID;
     chatService.title = @"乐天心理咨询";
-    [self.rt_navigationController pushViewController:chatService animated:YES];
+    [self.navigationController pushViewController:chatService animated:YES];
     
 }
 

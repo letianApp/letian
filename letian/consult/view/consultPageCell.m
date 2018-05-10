@@ -28,6 +28,7 @@
     self.conselorImage.contentMode        = UIViewContentModeScaleAspectFill;
     self.conselorName.textColor           = MAINCOLOR;
     self.conselorName.font                = [UIFont boldSystemFontOfSize:15];
+    self.conserlorSex.contentMode         = UIViewContentModeScaleAspectFill;
     self.conselorStatus.textColor         = [UIColor lightGrayColor];
     self.conserlorAbout.numberOfLines     = 0;
     self.conserlorAbout.font              = [UIFont systemFontOfSize:12];

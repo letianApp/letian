@@ -13,17 +13,22 @@
 #import "GQUserManager.h"
 #import "LoginViewController.h"
 
+#import "ZLDropDownMenuUICalc.h"
+#import "ZLDropDownMenuCollectionViewCell.h"
+#import "ZLDropDownMenu.h"
+#import "NSString+ZLStringSize.h"
+
 #import "MJExtension.h"
 #import "SnailPopupController.h"
 #import "MJRefresh.h"
 #import "UIImageView+WebCache.h"
 #import "Colours.h"
-#import "JSDropDownMenu.h"
+//#import "JSDropDownMenu.h"
 
 #import "ChatListViewController.h"
 
 
-@interface ConsultViewController ()<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@interface ConsultViewController ()<ZLDropDownMenuDelegate, ZLDropDownMenuDataSource, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray <counselorInfoModel  *> *counselorArr;
 
@@ -34,9 +39,13 @@
 @property (nonatomic, copy  ) NSArray             *priceDataSource;
 @property (nonatomic, strong) NSMutableDictionary *requestParams;
 @property (nonatomic        ) NSInteger           pageIndex;
+
+@property (nonatomic, strong) NSArray             *mainTitleArray;
+@property (nonatomic, strong) NSMutableArray      *subTitleArray;
 @property (nonatomic, strong) NSMutableArray      *priceData;
 
 @property (nonatomic, strong) UISearchBar         *searchBar;
+@property ZLDropDownMenu *menu;
 @property (nonatomic, strong) UIScrollView        *classifiedSectionFirstLine;
 @property (nonatomic, strong) UITableView         *counselorInfoTableview;
 @property (nonatomic, strong) UILabel             *noDataLab;
@@ -52,7 +61,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.automaticallyAdjustsScrollViewInsets = NO;
 
     _counselorArr = [NSMutableArray new];
     _requestParams = [NSMutableDictionary new];
@@ -69,14 +78,20 @@
 
 - (void)customSearchBar {
     
-    _searchBar             = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W/2, 40)];
+    _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W/2, 40)];
+    if (@available(iOS 11.0, *)){
+        [[_searchBar.heightAnchor constraintEqualToConstant:44.0] setActive:YES];
+//        self.navigationController.navigationBar.prefersLargeTitles = true;
+
+    }
+    
     _searchBar.placeholder = @"搜索咨询师";
     _searchBar.delegate    = self;
     [_searchBar setTranslucent:YES];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    
+
     [_searchBar setShowsCancelButton:YES animated:YES];
 }
 
@@ -87,16 +102,6 @@
         [self getCounsultListSource];
     }
 }
-
-//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-//    if (NULLString(searchBar.text)) {
-//        [_requestParams removeObjectForKey:@"SearchName"];
-//    } else {
-//        [_requestParams setValue:searchBar.text forKey:@"SearchName"];
-//    }
-//    [self.searchBar resignFirstResponder];// 放弃第一响应者
-//    [self getCounsultListSource];
-//}
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
@@ -117,20 +122,21 @@
 - (void)customNavigation {
     
     self.navigationController.navigationBar.tintColor = MAINCOLOR;
+//    self.navigationItem.backBarButtonItem.title = @"<";
+
     self.navigationItem.titleView = _searchBar;
 }
 
-- (UIBarButtonItem *)customBackItemWithTarget:(id)target
-                                       action:(SEL)action {
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [btn setFrame:CGRectMake(0, 0, 20, 20)];
-    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    return item;
-}
-
+//- (UIBarButtonItem *)customBackItemWithTarget:(id)target
+//                                       action:(SEL)action {
+//    
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+//    [btn setFrame:CGRectMake(0, 0, 20, 20)];
+//    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//    return item;
+//}
 
 - (void)selRightButton {
     
@@ -149,7 +155,6 @@
     [_requestParams removeObjectForKey:@"MaxFee"];
 
     [self getCounsultTypeSource];
-//    [self getCounsultFeeSource];
     [self getCounsultListSource];
 }
 
@@ -275,13 +280,9 @@
     _pageIndex++;
     __weak typeof(self) weakSelf   = self;
     
-//    [MBHudSet showStatusOnView:self.view];
-    
     NSMutableString *requestConsultListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestConsultListString appendFormat:@"%@/",API_MODULE_CONSULT];
     [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
-    
-//    NSLog(@"moreRe:%@",_requestParams);
     [_requestParams setValue:@(_pageIndex) forKey:@"pageIndex"];
     
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
@@ -318,171 +319,82 @@
     
 }
 
-
-
 #pragma mark - 创建分类栏
 - (void)creatClassifiedSection {
 
+    _mainTitleArray = @[@"咨询类型", @"咨询师资历", @"价格"];
     _priceDataSource = @[@"全部价格(元)",@"500及以下",@"500-1000",@"1000及以上"];
+    _subTitleArray = [NSMutableArray new];
+    [_subTitleArray addObject:_counselorCategoryArr];
+    [_subTitleArray addObject:_counselorTitleArr];
+    [_subTitleArray addObject:_priceDataSource];
+
     
-//    NSLog(@"%@",_counselorCategoryArr);
-    [self customClassifiedSectionBtnFotData:_counselorCategoryArr withLineNumber:0];
-    [self customClassifiedSectionBtnFotData:_counselorTitleArr withLineNumber:1];
-    [self customClassifiedSectionBtnFotData:_priceDataSource withLineNumber:2];
-    
-//    [self customPriceSection];
-    
+    _menu = [[ZLDropDownMenu alloc] init];
+    _menu.bounds = CGRectMake(0, 0, deviceWidth(), 50.f);
+    _menu.delegate = self;
+    _menu.dataSource = self;
+    _counselorInfoTableview.tableHeaderView = _menu;
+//    [self.navigationItem.titleView addSubview:_menu];
+
 }
 
-//分类栏按钮
-- (void)customClassifiedSectionBtnFotData:(NSArray *)dataArr withLineNumber:(int)n{
-    
-    
-    UIScrollView *ParentView                  = [[UIScrollView alloc]initWithFrame:CGRectMake(0, n*navigationBar_H, SCREEN_W, navigationBar_H)];
-    [_mainHeadView addSubview:ParentView];
-    ParentView.backgroundColor                = [UIColor snowColor];
-    ParentView.showsHorizontalScrollIndicator = NO;
-//    ParentView.contentSize                    = CGSizeMake(dataArr.count * SCREEN_W/3 , navigationBar_H);
-    ParentView.tag                            = 50+n;
-    
-    int btnX = 0;
-    
-    for (int i                                = 0; i < dataArr.count; i++) {
-        
-        NSString *btnTitle = dataArr[i];
-        NSInteger titleLen = btnTitle.length;
-        if ([btnTitle containsString:@"/"]) {
-            titleLen--;
-        }
-//        float wi = [self widthForString:btnTitle fontSize:10 andHeight:10];
-        NSInteger wi = [self getStringLength:btnTitle];
-//        NSLog(@"宽：%ld",wi);
-        
-        UIButton *btn                             = [[UIButton alloc]initWithFrame:CGRectMake(btnX+10, 8, wi * SCREEN_W * 0.02 + 20 , navigationBar_H-16)];
-//        NSLog(@"btn宽：%f",btn.width);
-
-        [btn setTitle:dataArr[i] forState:UIControlStateNormal];
-        [btn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        btn.backgroundColor                       = [UIColor whiteColor];
-        btn.layer.borderColor                     = MAINCOLOR.CGColor;
-        btn.layer.borderWidth                     = 1;
-        btn.layer.cornerRadius                    = 10;
-        btn.titleLabel.font                       = [UIFont systemFontOfSize:12];
-        btn.tag                                   = n*100+i+1;
-        [btn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [ParentView addSubview:btn];
-        btnX = btn.right;
-    }
-    [self beginningButtonSelectedWithTag:n*100 + 1];
-    ParentView.contentSize                    = CGSizeMake(btnX + 10 , navigationBar_H);
-    
+// ZLDropDownMenuDataSource
+- (NSInteger)numberOfColumnsInMenu:(ZLDropDownMenu *)menu {
+    return _mainTitleArray.count;
 }
 
-//获取字符串的宽度
-- (NSInteger)getStringLength:(NSString*)strtemp {
-    
-    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-    NSData* da = [strtemp dataUsingEncoding:enc];
-    return [da length];
+- (NSInteger)menu:(ZLDropDownMenu *)menu numberOfRowsInColumns:(NSInteger)column {
+    return [self.subTitleArray[column] count];
 }
 
-//首按钮初始点击状态
-- (void)beginningButtonSelectedWithTag:(int)tag {
-    
-    UIButton *beginningButton       = [self.view viewWithTag:tag];
-    beginningButton.selected        = YES;
-    beginningButton.backgroundColor = MAINCOLOR;
+- (NSString *)menu:(ZLDropDownMenu *)menu titleForColumn:(NSInteger)column {
+    return self.mainTitleArray[column];
 }
 
-//点击按钮方法
-- (void)clickBtn:(UIButton *)btn {
-    
-    [self animationbegin:btn];
-    
-//    NSLog(@"%@",btn.titleLabel.text);
-    
-    if (btn.tag < 100) {
-        for (int i = 1; i < _counselorCategoryArr.count+1; i++) {
-            UIButton *otherBtn = [self.view viewWithTag:i];
-            otherBtn.selected = NO;
-            otherBtn.backgroundColor = [UIColor whiteColor];
-        }
-        NSArray *keyArr = _counselorCategoryDic.allKeys;
-        for (id key in keyArr) {
-            if ([btn.titleLabel.text isEqual:_counselorCategoryDic[key]]) {
+- (NSString *)menu:(ZLDropDownMenu *)menu titleForRowAtIndexPath:(ZLIndexPath *)indexPath {
+    NSArray *array = self.subTitleArray[indexPath.column];
+    return array[indexPath.row];
+}
+
+// ZLDropDownMenuDelegate
+- (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
+    NSArray *array = self.subTitleArray[indexPath.column];
+    NSLog(@"r:%@,c:%d", array[indexPath.row],indexPath.column);
+    if (indexPath.column == 0) {
+//        [_requestParams setValue:array[indexPath.row] forKey:@"enumPsyCategory"];
+        NSArray *categoryKeyArr = _counselorCategoryDic.allKeys;
+        for (id key in categoryKeyArr) {
+            if ([array[indexPath.row] isEqual:_counselorCategoryDic[key]]) {
                 [_requestParams setValue:key forKey:@"enumPsyCategory"];
             }
         }
-        btn.selected         = YES;
-        btn.backgroundColor  = MAINCOLOR;
-        
-    } else if (btn.tag < 200) {
-        for (int i = 1; i < _counselorTitleArr.count+1; i++) {
-            UIButton *otherBtn       = [self.view viewWithTag:i+100];
-            otherBtn.selected        = NO;
-            otherBtn.backgroundColor = [UIColor whiteColor];
-        }
+    } else if (indexPath.column == 1) {
         NSArray *keyArr = _counselorTitleDic.allKeys;
         for (id key in keyArr) {
-            if ([btn.titleLabel.text isEqual:_counselorTitleDic[key]]) {
+            if ([array[indexPath.row] isEqual:_counselorTitleDic[key]]) {
                 [_requestParams setValue:key forKey:@"enumUserTitle"];
             }
-        }
-        btn.selected         = YES;
-        btn.backgroundColor  = MAINCOLOR;
-        
-        
-    } else {
-        
-        for (int i = 1; i < 5; i++) {
-            UIButton *otherBtn       = [self.view viewWithTag:i+200];
-            otherBtn.selected        = NO;
-            otherBtn.backgroundColor = [UIColor whiteColor];
-        }
-        btn.selected         = YES;
-        btn.backgroundColor  = MAINCOLOR;
-
-        switch (btn.tag) {
-            case 201:
-                [_requestParams removeObjectForKey:@"MinFee"];
-                [_requestParams removeObjectForKey:@"MaxFee"];
-
-                break;
-            case 202:
-                [_requestParams removeObjectForKey:@"MinFee"];
-                [_requestParams setValue:@(500) forKey:@"MaxFee"];
-
-                break;
-            case 203:
-                [_requestParams setValue:@(500) forKey:@"MinFee"];
-                [_requestParams setValue:@(1000) forKey:@"MaxFee"];
-                
-                break;
-            case 204:
-                [_requestParams setValue:@(1000) forKey:@"MinFee"];
-                [_requestParams removeObjectForKey:@"MaxFee"];
-
-            default:
-                break;
         }
     }
     
     [self getCounsultListSource];
+
+    
 }
 
 #pragma mark - 创建tabview
 - (void)creatTableView {
     
+//    NSLog(@"高度：%f",self.navigationController.navigationBar.bottom);
     _counselorInfoTableview                 = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, SCREEN_H - statusBar_H - navigationBar_H - tabBar_H) style:UITableViewStyleGrouped];
     _counselorInfoTableview.dataSource      = self;
     _counselorInfoTableview.delegate        = self;
     _counselorInfoTableview.backgroundColor = [UIColor snowColor];
     [self.view addSubview:_counselorInfoTableview];
     _counselorInfoTableview.rowHeight       = 100;
-    _mainHeadView                           = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, navigationBar_H*3)];
-    _counselorInfoTableview.tableHeaderView = _mainHeadView;
+//    _mainHeadView                           = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, navigationBar_H*3)];
+//    _counselorInfoTableview.tableHeaderView = _menu;
     _counselorInfoTableview.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
     _noDataLab = [[UILabel alloc]initWithFrame:CGRectMake(0, SCREEN_H*0.4, SCREEN_W, SCREEN_W*0.2)];
@@ -509,8 +421,6 @@
     _counselorInfoTableview.mj_footer = [RefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(getMoreDate)];
     _counselorInfoTableview.mj_footer.hidden = YES;
 
-    
-    
 }
 
 
@@ -553,7 +463,7 @@
     counselorInfoMainVC.counselModel = _counselorArr[indexPath.row];
 //    counselorInfoMainVC.headImage = _counselorArr[indexPath.row].HeadImg;
     counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
-    [self.rt_navigationController pushViewController:counselorInfoMainVC animated:YES];
+    [self.navigationController pushViewController:counselorInfoMainVC animated:YES];
     
 }
 

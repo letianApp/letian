@@ -60,7 +60,7 @@
 - (void)clickNcRightBtn {
     
     ConsultViewController *vc = [[ConsultViewController alloc]init];
-    [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)willDisplayMessageCell:(RCMessageBaseCell *)cell

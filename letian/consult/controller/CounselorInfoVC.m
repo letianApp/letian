@@ -61,31 +61,49 @@
 
 #pragma mark - 定制导航栏
 - (void)customNavigation {
-
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
-    [btn setFrame:CGRectMake(0, 0, 20, 20)];
-    [btn addTarget:self action:@selector(clickShareBtn) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    self.navigationItem.rightBarButtonItem = item;
     
+    if (@available(iOS 11.0, *)){
+        [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
+        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        self.navigationItem.backBarButtonItem.title = @"<";
+        
+        
+        
+    } else {
+        
+        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+        [btn setFrame:CGRectMake(0, 0, 20, 20)];
+        [btn addTarget:self action:@selector(clickShareBtn) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+        self.navigationItem.rightBarButtonItem = item;
+        
+
+    }
     self.naviView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, navigationBar_H + statusBar_H)];
     self.naviView.contentMode = UIViewContentModeScaleAspectFill;
     self.naviView.clipsToBounds = YES;
     
 }
 
-- (UIBarButtonItem *)customBackItemWithTarget:(id)target
-                                       action:(SEL)action {
+//- (UIBarButtonItem *)customBackItemWithTarget:(id)target
+//                                       action:(SEL)action {
+
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    btn.titleLabel.text = @"返回";
+//    btn.titleLabel.textColor = [UIColor whiteColor];
+//    [btn setImage:[UIImage imageNamed:@"whiteback"] forState:UIControlStateNormal];
+//    btn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//    btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+
+//    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
     
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setImage:[UIImage imageNamed:@"whiteback"] forState:UIControlStateNormal];
-    [btn setFrame:CGRectMake(0, 0, 20, 20)];
-    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    return item;
-}
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
+//    return item;
+//}
 
 
 #pragma mark---------弹出分享面板
@@ -114,7 +132,7 @@
     } cancelBlock:nil];
 }
 
-#pragma mark---------分享截图
+#pragma mark - 分享截图
 
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType {
     
@@ -366,7 +384,7 @@
         chatService.conversationType = ConversationType_CUSTOMERSERVICE;
         chatService.targetId = RONGYUN_SERVICE_ID;
         chatService.title = @"乐天心理咨询";
-        [self.rt_navigationController pushViewController:chatService animated:YES];
+        [self.navigationController pushViewController:chatService animated:YES];
     } else {
         
         UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
@@ -392,7 +410,7 @@
     
         ConfirmPageVC *confirmPagevc = [[ConfirmPageVC alloc]init];
         confirmPagevc.counselModel   = self.counselModel;
-        [self.rt_navigationController pushViewController:confirmPagevc animated:YES];
+        [self.navigationController pushViewController:confirmPagevc animated:YES];
     } else {
 
         UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];

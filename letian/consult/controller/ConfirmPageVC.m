@@ -102,11 +102,14 @@
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target
                                        action:(SEL)action {
     
-    UIButton *btn         = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [btn setFrame:CGRectMake(0, 0, 20, 20)];
-    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//    UIButton *btn         = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+//    btn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//    btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
+    
     return item;
 }
 
@@ -914,7 +917,7 @@
 - (void)clickAgBtn:(UIButton *)btn {
     
     AgreementVC *aVC = [[AgreementVC alloc]init];
-    [self.rt_navigationController pushViewController:aVC animated:YES];
+    [self.navigationController pushViewController:aVC animated:YES];
     
 }
 

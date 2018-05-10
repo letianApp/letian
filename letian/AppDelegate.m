@@ -79,7 +79,7 @@
         
     [self setStartAction];
 
-    [self setUpStatusBar];
+//    [self setUpStatusBar];
     
     [self resignWechat];
     
@@ -89,6 +89,10 @@
     
     [self customEMwithApp:application withLaunchOptions:launchOptions];
     
+    if (@available(iOS 11.0, *)){
+        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    }
+        
     return YES;
     
 }

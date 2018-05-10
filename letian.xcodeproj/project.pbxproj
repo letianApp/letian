@@ -32,6 +32,7 @@
 		093DA77E1E960F08003CEDD9 /* ChatListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 093DA77C1E960F08003CEDD9 /* ChatListViewController.xib */; };
 		093DA7821E9628C6003CEDD9 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093DA7801E9628C6003CEDD9 /* ChatViewController.m */; };
 		093DA7831E9628C6003CEDD9 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 093DA7811E9628C6003CEDD9 /* ChatViewController.xib */; };
+		09420AB02091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 09420AAF2091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		0945B1481E6937DF005B7560 /* CustomCYLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0945B1471E6937DF005B7560 /* CustomCYLTabBar.m */; };
 		094FC50C1E8CBF0D00BFFBBB /* PayPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 094FC50A1E8CBF0D00BFFBBB /* PayPageVC.m */; };
 		094FC50D1E8CBF0E00BFFBBB /* PayPageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094FC50B1E8CBF0D00BFFBBB /* PayPageVC.xib */; };
@@ -76,6 +77,11 @@
 		09BFEF221EC0099E00A2731C /* ConsultSetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09BFEF1D1EC0099E00A2731C /* ConsultSetCell.xib */; };
 		09BFEF231EC0099E00A2731C /* CustomDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BFEF1F1EC0099E00A2731C /* CustomDateViewController.m */; };
 		09BFEF241EC0099E00A2731C /* CustomDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09BFEF201EC0099E00A2731C /* CustomDateViewController.xib */; };
+		09E9AD6B208EEB81007B432A /* ZLDropDownMenuUICalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E9AD45208EEB81007B432A /* ZLDropDownMenuUICalc.m */; };
+		09E9AD6C208EEB81007B432A /* ZLDropDownMenuTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E9AD46208EEB81007B432A /* ZLDropDownMenuTitleButton.m */; };
+		09E9AD77208EEB81007B432A /* ZLDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E9AD66208EEB81007B432A /* ZLDropDownMenu.m */; };
+		09E9AD78208EEB81007B432A /* NSString+ZLStringSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E9AD68208EEB81007B432A /* NSString+ZLStringSize.m */; };
+		09E9AD79208EEB81007B432A /* ZLDropDownMenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E9AD6A208EEB81007B432A /* ZLDropDownMenuCollectionViewCell.m */; };
 		09F6F95A1EA5C26700A95CD5 /* CustomPlusBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F6F9591EA5C26700A95CD5 /* CustomPlusBtn.m */; };
 		09FBE01D1E70EE60003452A6 /* ConfirmPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FBE01B1E70EE5F003452A6 /* ConfirmPageVC.m */; };
 		09FBE01E1E70EE60003452A6 /* ConfirmPageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FBE01C1E70EE5F003452A6 /* ConfirmPageVC.xib */; };
@@ -262,6 +268,8 @@
 		093DA77F1E9628C6003CEDD9 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		093DA7801E9628C6003CEDD9 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		093DA7811E9628C6003CEDD9 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		09420AAE2091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
+		09420AAF2091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		0945B1461E6937DE005B7560 /* CustomCYLTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCYLTabBar.h; sourceTree = "<group>"; };
 		0945B1471E6937DF005B7560 /* CustomCYLTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCYLTabBar.m; sourceTree = "<group>"; };
 		094FC5091E8CBF0D00BFFBBB /* PayPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPageVC.h; sourceTree = "<group>"; };
@@ -332,6 +340,16 @@
 		09BFEF1E1EC0099E00A2731C /* CustomDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDateViewController.h; sourceTree = "<group>"; };
 		09BFEF1F1EC0099E00A2731C /* CustomDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDateViewController.m; sourceTree = "<group>"; };
 		09BFEF201EC0099E00A2731C /* CustomDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomDateViewController.xib; sourceTree = "<group>"; };
+		09E9AD45208EEB81007B432A /* ZLDropDownMenuUICalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLDropDownMenuUICalc.m; sourceTree = "<group>"; };
+		09E9AD46208EEB81007B432A /* ZLDropDownMenuTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLDropDownMenuTitleButton.m; sourceTree = "<group>"; };
+		09E9AD47208EEB81007B432A /* ZLDropDownMenuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLDropDownMenuCollectionViewCell.h; sourceTree = "<group>"; };
+		09E9AD63208EEB81007B432A /* ZLDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLDropDownMenu.h; sourceTree = "<group>"; };
+		09E9AD64208EEB81007B432A /* ZLDropDownMenuUICalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLDropDownMenuUICalc.h; sourceTree = "<group>"; };
+		09E9AD65208EEB81007B432A /* ZLDropDownMenuTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLDropDownMenuTitleButton.h; sourceTree = "<group>"; };
+		09E9AD66208EEB81007B432A /* ZLDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLDropDownMenu.m; sourceTree = "<group>"; };
+		09E9AD68208EEB81007B432A /* NSString+ZLStringSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ZLStringSize.m"; sourceTree = "<group>"; };
+		09E9AD69208EEB81007B432A /* NSString+ZLStringSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ZLStringSize.h"; sourceTree = "<group>"; };
+		09E9AD6A208EEB81007B432A /* ZLDropDownMenuCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLDropDownMenuCollectionViewCell.m; sourceTree = "<group>"; };
 		09F6F9581EA5C26700A95CD5 /* CustomPlusBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPlusBtn.h; sourceTree = "<group>"; };
 		09F6F9591EA5C26700A95CD5 /* CustomPlusBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPlusBtn.m; sourceTree = "<group>"; };
 		09FBE01A1E70EE5F003452A6 /* ConfirmPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmPageVC.h; sourceTree = "<group>"; };
@@ -787,6 +805,15 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		09420AAD2091C91A008C8E13 /* FDFullscreenPopGesture */ = {
+			isa = PBXGroup;
+			children = (
+				09420AAE2091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.h */,
+				09420AAF2091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.m */,
+			);
+			path = FDFullscreenPopGesture;
+			sourceTree = "<group>";
+		};
 		0953C2151E514B5700FB165C = {
 			isa = PBXGroup;
 			children = (
@@ -1087,6 +1114,31 @@
 				09BFEF201EC0099E00A2731C /* CustomDateViewController.xib */,
 			);
 			path = "设置可预约日期";
+			sourceTree = "<group>";
+		};
+		09E9AD44208EEB81007B432A /* ZLDropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				09E9AD45208EEB81007B432A /* ZLDropDownMenuUICalc.m */,
+				09E9AD46208EEB81007B432A /* ZLDropDownMenuTitleButton.m */,
+				09E9AD47208EEB81007B432A /* ZLDropDownMenuCollectionViewCell.h */,
+				09E9AD63208EEB81007B432A /* ZLDropDownMenu.h */,
+				09E9AD64208EEB81007B432A /* ZLDropDownMenuUICalc.h */,
+				09E9AD65208EEB81007B432A /* ZLDropDownMenuTitleButton.h */,
+				09E9AD66208EEB81007B432A /* ZLDropDownMenu.m */,
+				09E9AD67208EEB81007B432A /* Categories */,
+				09E9AD6A208EEB81007B432A /* ZLDropDownMenuCollectionViewCell.m */,
+			);
+			path = ZLDropDownMenu;
+			sourceTree = "<group>";
+		};
+		09E9AD67208EEB81007B432A /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				09E9AD68208EEB81007B432A /* NSString+ZLStringSize.m */,
+				09E9AD69208EEB81007B432A /* NSString+ZLStringSize.h */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		17141F58EED1935B6AB46B35 /* Pods */ = {
@@ -1493,8 +1545,10 @@
 		77B5BD3B1EADA6A50034497D /* 控件工厂类 */ = {
 			isa = PBXGroup;
 			children = (
+				09420AAD2091C91A008C8E13 /* FDFullscreenPopGesture */,
 				77B5BD3C1EADA6A50034497D /* GQControls.h */,
 				77B5BD3D1EADA6A50034497D /* GQControls.m */,
+				09E9AD44208EEB81007B432A /* ZLDropDownMenu */,
 				09106FA01EDFBE8700F5E676 /* JSDropDownMenu */,
 				77D259781ED71DA000C1EBC1 /* GQDatePickView */,
 				09591B721ECAB00A0040CD1C /* ImageEffects */,
@@ -1917,6 +1971,7 @@
 				776CF2BC1EB7900A00CE9620 /* UIView+TYLaunchAnimation.m in Sources */,
 				77283D8F1ED67247004BF2F5 /* TestHistoryViewController.m in Sources */,
 				77D2597B1ED71DA000C1EBC1 /* GQDatePickView.m in Sources */,
+				09E9AD6B208EEB81007B432A /* ZLDropDownMenuUICalc.m in Sources */,
 				0965FBC81E824AF900C0FBAD /* OrderPageVC.m in Sources */,
 				0965FBC31E8230B400C0FBAD /* KuroTextField.m in Sources */,
 				7722F0951EB4500B001DCF5F /* DTTimePeriod.m in Sources */,
@@ -1927,6 +1982,7 @@
 				77B5BD6C1EADA91D0034497D /* BDImagePicker.m in Sources */,
 				774DBC0C1E6420FC00B8798C /* HomeCell.m in Sources */,
 				77B5BD541EADA6A50034497D /* GQControls.m in Sources */,
+				09E9AD77208EEB81007B432A /* ZLDropDownMenu.m in Sources */,
 				7787B3741EB0746500306527 /* OrderListModel.m in Sources */,
 				091991791EC9950E007AEC8F /* RCDCustomerServiceViewController.m in Sources */,
 				77D0EA0C1EB5DD4700254806 /* WebArticleCateModel.m in Sources */,
@@ -1958,7 +2014,9 @@
 				7787B3AA1EB18DDA00306527 /* WXMediaMessage+messageConstruct.m in Sources */,
 				09FBE01D1E70EE60003452A6 /* ConfirmPageVC.m in Sources */,
 				7752C7B31E70EC360093ED37 /* MessageCell.m in Sources */,
+				09E9AD79208EEB81007B432A /* ZLDropDownMenuCollectionViewCell.m in Sources */,
 				0953C2261E514B5800FB165C /* AppDelegate.m in Sources */,
+				09E9AD6C208EEB81007B432A /* ZLDropDownMenuTitleButton.m in Sources */,
 				77B5BD151EAD9B460034497D /* NSString+YYExtension.m in Sources */,
 				09FBE0271E70FE12003452A6 /* CounselorInfoVC.m in Sources */,
 				77F3D8621E7670D2008B5FC0 /* OrderCell.m in Sources */,
@@ -1967,6 +2025,7 @@
 				77B5BD5B1EADA6A50034497D /* MBHudSet.m in Sources */,
 				0965FBB51E7A918900C0FBAD /* HZQDatePickerView.m in Sources */,
 				77B5BD141EAD9B460034497D /* NSString+Additions.m in Sources */,
+				09420AB02091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				7722F0931EB4500B001DCF5F /* DTConstants.m in Sources */,
 				7722F0991EB4500B001DCF5F /* NSDate+DateTools.m in Sources */,
 				77FF30371EA0705F00F3A1C9 /* WebArticleCell.m in Sources */,
@@ -1996,6 +2055,7 @@
 				7787B3701EAEF2FE00306527 /* RSADataVerifier.m in Sources */,
 				0970CFEC1E517EB8007480CB /* FirstViewController.m in Sources */,
 				77B5BD1A1EAD9B460034497D /* UIView+Layout.m in Sources */,
+				09E9AD78208EEB81007B432A /* NSString+ZLStringSize.m in Sources */,
 				096DE4591E82591C00C57DDF /* LRTextField.m in Sources */,
 				77B5BD181EAD9B460034497D /* UIImageView+YYExtension.m in Sources */,
 				7787B30E1EADACC300306527 /* ActivityDetailViewController.m in Sources */,
