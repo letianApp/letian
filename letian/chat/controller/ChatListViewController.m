@@ -60,6 +60,8 @@
 - (void)customNavigation {
     
     self.navigationItem.title = @"咨询列表";
+//    self.navigationItem.titleView.tintColor = MAINCOLOR;
+    self.navigationController.navigationBar.tintColor = MAINCOLOR;
     UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(clickServiceBtn)];
     self.navigationItem.rightBarButtonItem = rightBtn;
     

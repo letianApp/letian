@@ -36,7 +36,7 @@
     
     UIView *bgView=[GQControls createViewWithFrame:CGRectMake(0, 0, SCREEN_W, 100) andBackgroundColor:[UIColor whiteColor]];
     
-    UILabel *headLabel=[GQControls createLabelWithFrame:CGRectMake(20, 20, SCREEN_W-40, 50) andText:self.activeModel.Name andTextColor:[UIColor blackColor] andFontSize:20];
+    UILabel *headLabel=[GQControls createLabelWithFrame:CGRectMake(20, 20, SCREEN_W-40, 50) andText:self.activeModel.ArticleName andTextColor:[UIColor blackColor] andFontSize:20];
     headLabel.numberOfLines=0;
     headLabel.font=[UIFont boldSystemFontOfSize:20];
     [bgView addSubview:headLabel];
@@ -64,7 +64,7 @@
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     if (indexPath.row==0) {
         UIImageView *mainImageView=[[UIImageView alloc]initWithFrame:CGRectMake(10, 0,SCREEN_W-20 , SCREEN_W*0.6)];
-        [mainImageView sd_setImageWithURL:[NSURL URLWithString:self.activeModel.ActiveImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
+        [mainImageView sd_setImageWithURL:[NSURL URLWithString:self.activeModel.ArticleImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
         [cell.contentView addSubview:mainImageView];
         return cell;
     }

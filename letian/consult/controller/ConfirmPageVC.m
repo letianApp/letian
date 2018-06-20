@@ -44,6 +44,8 @@
 @property (nonatomic, strong) UIView                 *pickBackView;
 @property (nonatomic, strong) UIDatePicker           *timePicker;
 @property (nonatomic, strong) UIPickerView           *chooseHoursView;
+@property (nonatomic, strong) UILabel                *hoursPriceLab;
+
 @property (nonatomic, strong) NSMutableArray         *hoursData;
 @property (nonatomic, strong) NSString               *hourStr;
 @property (nonatomic, strong) NSString               *customTimeStartStr;
@@ -96,20 +98,21 @@
     
     self.navigationItem.title = self.counselModel.UserName;
     _orderModel.conserlorName = self.navigationItem.title;
+    [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
+    self.navigationController.navigationBar.clipsToBounds = YES;
+    
     
 }
 
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target
                                        action:(SEL)action {
     
-//    UIButton *btn         = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-//    btn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-//    btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
-    
+    UIButton *btn = [[UIButton alloc]init];
+    UIImageView *backView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 20, 20)];
+    backView.image = [UIImage imageNamed:@"pinkback"];
+    [btn addSubview:backView];
+    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
     return item;
 }
 
@@ -147,7 +150,6 @@
 - (void)customCell:(UITableViewCell *)cell withBgView:(UIView *)view forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if(indexPath.row == 0){
-        //        view.backgroundColor = [UIColor yellowColor];
         
         NSArray *btnTitle                        = @[@"面对面咨询",@"文字语音视频",@"电话咨询"];
         for (int i                               = 0; i < 3; i++) {
@@ -245,12 +247,11 @@
         [_mapBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
         [_mapBtn addTarget:self action:@selector(clickMapBtn:) forControlEvents:UIControlEventTouchUpInside];
 
-        if (!NULLString(_priceLab.text)) {
-            _orderModel.orderPrice = _totalPrice / 1;
-            [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
-        }
+//        if (!NULLString(_priceLab.text)) {
+//            _orderModel.orderPrice = _totalPrice / 1;
+//            [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
+//        }
         
-
     } else if (btn.tag == 11) {
         
         NSAttributedString *attrStr = [[NSAttributedString alloc]initWithString:@"预约成功后可直接在订单页面与咨询师取得联系，详情请咨询乐天客服"];
@@ -258,10 +259,10 @@
 //        [_mapBtn setTitle:btn.titleLabel.text forState:UIControlStateNormal];
         _mapBtn.userInteractionEnabled = NO;
         
-        if (!NULLString(_priceLab.text)) {
-            _orderModel.orderPrice = _totalPrice;
-            [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
-        }
+//        if (!NULLString(_priceLab.text)) {
+//            _orderModel.orderPrice = _totalPrice;
+//            [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
+//        }
 
     } else {
         
@@ -269,10 +270,10 @@
         [_mapBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
         _mapBtn.userInteractionEnabled = NO;
 
-        if (!NULLString(_priceLab.text)) {
-            _orderModel.orderPrice = _totalPrice;
-            [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
-        }
+//        if (!NULLString(_priceLab.text)) {
+//            _orderModel.orderPrice = _totalPrice;
+//            [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
+//        }
 
     }
 //    NSLog(@"咨询方式：%ld",(long)_orderModel.consultType);
@@ -410,7 +411,6 @@
     } else {
         _isToday = NO;
         [self getCounsultSetForDay:selDateStr];
-        
     }
 }
 
@@ -458,39 +458,48 @@
 - (void)clickTimeChoiceBtn:(UIButton *)btn {
     
     [self animationbegin:btn];
-    
-//    self.sl_popupController                          = [[SnailPopupController alloc] init];
-//    self.sl_popupController.layoutType               = PopupLayoutTypeCenter;
-//    self.sl_popupController.maskType                 = PopupMaskTypeWhiteBlur;
-//    self.sl_popupController.transitStyle             = PopupTransitStyleSlightScale;
-//    self.sl_popupController.dismissOnMaskTouched = NO;
-    
+    self.sl_popupController                          = [SnailPopupController new];
+    self.sl_popupController.layoutType               = PopupLayoutTypeCenter;
+    self.sl_popupController.maskType                 = PopupMaskTypeWhiteBlur;
+    self.sl_popupController.transitStyle             = PopupTransitStyleSlightScale;
+    self.sl_popupController.dismissOnMaskTouched = NO;
     if (btn == _startBtn) {
+        
         [_endBtn setTitle:@"预约时长" forState:0];
         _orderModel.orderDateTimeEnd = nil;
-//        [self.sl_popupController presentContentView:[self setupDatePiker]];
-        [self.view addSubview:[self setupDatePiker]];
-        
-        
+        UIView *view = [self setupDatePiker];
+        [self.sl_popupController presentContentView:view];
+        [self ios11Bug:view];
     } else if (btn == _endBtn) {
-        
+
         if ([_startBtn.titleLabel.text isEqual: @"预约时间"]) {
             [MBHudSet showText:@"请确认预约时间" andOnView:self.view];
         } else {
-//            [self.sl_popupController presentContentView:[self setupChooseHoursView]];
-            [self.view addSubview:[self setupChooseHoursView]];
-
+            UIView *view = [self setupChooseHoursView];
+            [self.sl_popupController presentContentView:view];
+            [self ios11Bug:view];
         }
-        
     }
     [self reflashInfo];
+}
+
+- (void)ios11Bug:(UIView *)view {
+    
+    UIView *tooView = view.superview.superview;
+    [tooView layoutIfNeeded];
+    NSArray *subViewArray = tooView.subviews;
+    for (id sView in subViewArray) {
+        if ([sView isKindOfClass:(NSClassFromString(@"_UIToolbarContentView"))]) {
+            UIView *testView = sView;
+            testView.userInteractionEnabled = NO;
+        }
+    }
 }
 
 #pragma mark 选择时间pick
 - (UIView *)setupDatePiker {
     
     UIView *backView           = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
-    backView.backgroundColor = [UIColor whiteColor];
     _timePicker                = [[UIDatePicker alloc]init];
     [backView addSubview:_timePicker];
     _timePicker.center = self.view.center;
@@ -535,18 +544,13 @@
 
 - (void)clickAffirmTimeBtn:(UIButton *)btn {
     
-    UIView *backView = btn.superview;
-    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
-    NSLog(@"aaa:%@",_timePicker.date);
-    NSString *selTimeStr           = [dateFormatter stringFromDate:_timePicker.date];
+    NSString *selTimeStr = [dateFormatter stringFromDate:_timePicker.date];
     
     [self animationbegin:btn];
     if ([selTimeStr containsString:@":00"] || [selTimeStr containsString:@":30"]) {
-//        [self.sl_popupController dismiss];
-        [backView removeAllSubviews];
-        [backView removeFromSuperview];
+        [self.sl_popupController dismiss];
         _orderModel.orderDateTimeStart = selTimeStr;
         [_startBtn setTitle:[NSString stringWithFormat:@"%@ %@",_orderModel.orderDate,_orderModel.orderDateTimeStart] forState:UIControlStateNormal];
         
@@ -559,7 +563,6 @@
 #pragma mark 选择小时pick
 - (UIView *)setupChooseHoursView {
     
-//    NSLog(@"%@",_orderModel.orderDateTimeStart);
     NSRange rag = {0,2};
     int startHour = [[_orderModel.orderDateTimeStart substringWithRange:rag] intValue];
     int endHour = [[self.customTimeEndStr substringWithRange:rag] intValue];
@@ -569,10 +572,7 @@
         [_hoursData addObject:[NSString stringWithFormat:@"%d",i+1]];
     }
     _hourStr = _hoursData[0];
-//    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
-    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
-    backView.backgroundColor = [UIColor whiteColor];
-
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H/4, SCREEN_W, SCREEN_H*0.4)];
     _chooseHoursView = [[UIPickerView alloc]initWithFrame:CGRectMake(SCREEN_W*0.3, 0, SCREEN_W*0.4, backView.height*0.7)];
     [backView addSubview:_chooseHoursView];
     _chooseHoursView.dataSource = self;
@@ -581,7 +581,15 @@
     UIButton *btn = [GQControls createButtonWithFrame:CGRectMake(SCREEN_W/4, _chooseHoursView.bottom+10, SCREEN_W/2, 30) andTitle:@"确定" andTitleColor:MAINCOLOR andFontSize:15 andTag:234 andMaskToBounds:YES andRadius:5 andBorderWidth:0.5 andBorderColor:(MAINCOLOR.CGColor)];
     [backView addSubview:btn];
     [btn addTarget:self action:@selector(clickAffirmHoursBtn:) forControlEvents:UIControlEventTouchUpInside];
-//    NSLog(@"结束：%@",_orderModel.orderDateTimeEnd);
+    
+    _hoursPriceLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_W/4, btn.bottom+10, SCREEN_W/2, 30)];
+    [backView addSubview:_hoursPriceLab];
+    _hoursPriceLab.adjustsFontSizeToFitWidth = YES;
+    _hoursPriceLab.textColor = MAINCOLOR;
+    _hoursPriceLab.text = [NSString stringWithFormat:@"%ld元／小时",self.counselModel.ConsultFee];
+    _hoursPriceLab.textAlignment = NSTextAlignmentCenter;
+    _hoursPriceLab.font = [UIFont boldSystemFontOfSize:15];
+    
     return backView;
 }
 
@@ -606,27 +614,31 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
     _hourStr = _hoursData[row];
+    if ([_hourStr intValue] > self.counselModel.ConsultPreferDateLength) {
+        
+        _orderModel.orderPrice = [_hourStr integerValue] * self.counselModel.ConsultFee * self.counselModel.ConsultDisCount;
+    } else {
+        _orderModel.orderPrice = [_hourStr integerValue] * self.counselModel.ConsultFee;
+    }
+    [_hoursPriceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
 }
 
 - (void)clickAffirmHoursBtn:(UIButton *)btn {
     
     [self animationbegin:btn];
-//    NSLog(@"");
-    
-    UIView *backView = btn.superview;
     
     [_endBtn setTitle:[NSString stringWithFormat:@"%@ 小时",_hourStr] forState:UIControlStateNormal];
     if ([_hourStr intValue] > self.counselModel.ConsultPreferDateLength) {
-        
-        _totalPrice = [_hourStr integerValue] * self.counselModel.ConsultFee * self.counselModel.ConsultDisCount;
+
+        _orderModel.orderPrice = [_hourStr integerValue] * self.counselModel.ConsultFee * self.counselModel.ConsultDisCount;
     } else {
-        _totalPrice = [_hourStr integerValue] * self.counselModel.ConsultFee;
+        _orderModel.orderPrice = [_hourStr integerValue] * self.counselModel.ConsultFee;
     }
-    if (_orderModel.consultType == 1) {
-        _orderModel.orderPrice = _totalPrice / 1;
-    } else {
-        _orderModel.orderPrice = _totalPrice;
-    }
+//    if (_orderModel.consultType == 1) {
+//        _orderModel.orderPrice = _totalPrice / 1;
+//    } else {
+//        _orderModel.orderPrice = _totalPrice;
+//    }
     [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
     
     NSRange rag = {0,2};
@@ -637,15 +649,11 @@
 //    NSLog(@"结束时间%@",endStr);
 
     [self reflashInfo];
-    [backView removeAllSubviews];
-    [backView removeFromSuperview];
-//    [self.sl_popupController dismiss];
+    [self.sl_popupController dismiss];
 }
 
 #pragma mark - 获取咨询师设置
 - (void)getCounsultSetForDay:(NSString *)dayStr {
-    
-//    NSLog(@"重新获取：%@",dayStr);
     
     __weak typeof(self) weakSelf = self;
     [MBHudSet showStatusOnView:self.view];
@@ -848,14 +856,23 @@
     
     _orderModel.orderInfoName  = _nameTextField.text;
     _orderModel.orderInfoAge   = [_ageTextField.text integerValue];
-    _orderModel.orderInfoPhone = _phoneTextField.text;
+    _orderModel.orderInfoPhone = [_phoneTextField.text removeAllSpace];
     _orderModel.orderInfoEmail = _emailTextField.text;
-//    _orderModel.orderInfoSex = _sexTextField.text;
     
+    NSLog(@"电话：%@ 长度:%d",_orderModel.orderInfoPhone,_orderModel.orderInfoPhone.length);
+
     [self reflashInfo];
     
     return YES;
 }
+
+//- (NSString *)removeSpaceAndNewline:(NSString *)str {
+//
+//    NSString *temp = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    temp = [temp stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+//    temp = [temp stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+//    return temp;
+//}
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
     
@@ -943,9 +960,22 @@
         make.height.equalTo(_tabBar.mas_height);
     }];
     _priceLab.textColor = MAINCOLOR;
-//    _priceLab.text = @"1000元";
+    _priceLab.text = [NSString stringWithFormat:@"%ld元／小时",self.counselModel.ConsultFee];
     _priceLab.textAlignment = NSTextAlignmentRight;
     _priceLab.font = [UIFont boldSystemFontOfSize:15];
+    //优惠lable
+    UILabel *couponLab                 = [[UILabel alloc]init];
+    [_tabBar addSubview:couponLab];
+    [couponLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(_priceLab.mas_right);
+        make.bottom.equalTo(_tabBar.mas_bottom);
+        make.width.equalTo(_priceLab.mas_width);
+        make.height.equalTo(_priceLab.mas_height).multipliedBy(0.5);
+    }];
+    couponLab.text                     = [NSString stringWithFormat:@"%@",self.counselModel.ConsultTag];
+    couponLab.textColor                = [UIColor orangeColor];
+    couponLab.textAlignment            = NSTextAlignmentRight;
+    couponLab.font                     = [UIFont boldSystemFontOfSize:10];
     
 }
 
@@ -960,7 +990,7 @@
     }
     
     if (NULLString(_orderModel.orderDateTimeStart) || NULLString(_orderModel.orderDateTimeEnd)) {
-        self.priceLab.text = nil;
+        _priceLab.text = [NSString stringWithFormat:@"%ld元／小时",self.counselModel.ConsultFee];
 //        _orderModel.orderPrice = _totalPrice;
     }
     
@@ -996,6 +1026,7 @@
         }
         params[@"ConsultAge"] = @(_orderModel.orderInfoAge);
         params[@"ConsultPhone"] = _orderModel.orderInfoPhone;
+//        NSLog(@"电话：%@ 长度:@d",_orderModel.orderInfoPhone,_orderModel.orderInfoPhone.length);
         if (_emailTextField.text) {
             params[@"ConsultEmail"] = _orderModel.orderInfoEmail;
         }
@@ -1003,18 +1034,14 @@
             params[@"ConsultDescription"]  = self.detailTextView.text;
         }
         [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
-        NSLog(@"Params=%@",params);
-        
         [PPNetworkHelper POST:requestString parameters:params success:^(id responseObject) {
             
             __strong typeof(self) strongSelf = weakSelf;
-//            NSLog(@"%@",responseObject);
             [MBHudSet dismiss:strongSelf.view];
             
             if([responseObject[@"Code"] integerValue] == 200) {
                 
                 [MBHudSet showText:@"下单成功" andOnView:strongSelf.view];
-//                NSLog(@"%@",responseObject[@"Result"][@"Source"][@"OrderID"]);
                 PayPageVC *payPage = [[PayPageVC alloc]init];
                 payPage.orderID = [responseObject[@"Result"][@"Source"][@"OrderID"] integerValue];
                 payPage.orderNo = responseObject[@"Result"][@"Source"][@"OrderNo"];

@@ -48,9 +48,11 @@
 
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target
                                        action:(SEL)action {
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [btn setFrame:CGRectMake(0, 0, 20, 20)];
+    
+    UIButton *btn = [[UIButton alloc]init];
+    UIImageView *backView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 20, 20)];
+    backView.image = [UIImage imageNamed:@"pinkback"];
+    [btn addSubview:backView];
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
     return item;
@@ -59,7 +61,7 @@
 
 - (void)customTableView {
     
-    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H) style:UITableViewStyleGrouped];
+    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, navigationBar_H+statusBar_H, SCREEN_W, SCREEN_H) style:UITableViewStyleGrouped];
     [self.view addSubview:tableView];
     tableView.backgroundColor = [UIColor whiteColor];
     tableView.delegate = self;

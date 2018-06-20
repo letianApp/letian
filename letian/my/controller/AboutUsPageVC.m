@@ -23,9 +23,7 @@
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-
     [self customNavigation];
-    
     [self customTableView];
 }
 
@@ -39,9 +37,10 @@
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target
                                        action:(SEL)action {
     
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setImage:[UIImage imageNamed:@"whiteback"] forState:UIControlStateNormal];
-    [btn setFrame:CGRectMake(0, 0, 20, 20)];
+    UIButton *btn = [[UIButton alloc]init];
+    UIImageView *backView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 20, 20)];
+    backView.image = [UIImage imageNamed:@"whiteback"];
+    [btn addSubview:backView];
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
     return item;

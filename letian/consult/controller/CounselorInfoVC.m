@@ -46,12 +46,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
-        
-//    self.view.backgroundColor = [UIColor whiteColor];
-    
-    
+//    self.automaticallyAdjustsScrollViewInsets = NO;
     [self customNavigation];
     [self customMainTableView];
     [self customHeadView];
@@ -62,25 +57,31 @@
 #pragma mark - 定制导航栏
 - (void)customNavigation {
     
+    self.navigationController.navigationBar.clipsToBounds = YES;
+
+    UIButton *btn = [[UIButton alloc]init];
+    [btn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    [btn setFrame:CGRectMake(0, 0, 20, 20)];
+    btn.translatesAutoresizingMaskIntoConstraints = YES;
+    [btn addTarget:self action:@selector(clickShareBtn) forControlEvents:UIControlEventTouchUpInside];
+    
     if (@available(iOS 11.0, *)){
+//        if ([UITableView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
+//            _mainTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//        }
         [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
-        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-        self.navigationItem.backBarButtonItem.title = @"<";
         
-        
-        
+        UIView *containVew = [[UIView alloc] initWithFrame:btn.bounds];
+        [containVew addSubview:btn];
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:containVew];
+        self.navigationItem.rightBarButtonItem = item;
+
     } else {
-        
+    
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
-        [btn setFrame:CGRectMake(0, 0, 20, 20)];
-        [btn addTarget:self action:@selector(clickShareBtn) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
         self.navigationItem.rightBarButtonItem = item;
-        
-
     }
     self.naviView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, navigationBar_H + statusBar_H)];
     self.naviView.contentMode = UIViewContentModeScaleAspectFill;
@@ -88,22 +89,17 @@
     
 }
 
-//- (UIBarButtonItem *)customBackItemWithTarget:(id)target
-//                                       action:(SEL)action {
+- (UIBarButtonItem *)customBackItemWithTarget:(id)target
+                                       action:(SEL)action {
 
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    btn.titleLabel.text = @"返回";
-//    btn.titleLabel.textColor = [UIColor whiteColor];
-//    [btn setImage:[UIImage imageNamed:@"whiteback"] forState:UIControlStateNormal];
-//    btn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-//    btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-
-//    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    
-//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
-//    return item;
-//}
+    UIButton *btn = [[UIButton alloc]init];
+    UIImageView *backView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 20, 20)];
+    backView.image = [UIImage imageNamed:@"whiteback"];
+    [btn addSubview:backView];
+    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    return item;
+}
 
 
 #pragma mark---------弹出分享面板
@@ -168,6 +164,10 @@
     _holdView                         = [[UIView alloc]init];
     _holdView.backgroundColor         = MAINCOLOR;
     [_mainTableView addSubview:_holdView];
+
+    if (@available(iOS 11.0, *)){
+        _mainTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
 
 }
 
@@ -339,7 +339,7 @@
     [askBtn addTarget:self action:@selector(clickAskBrn) forControlEvents:UIControlEventTouchUpInside];
     UILabel *askLab                    = [[UILabel alloc]initWithFrame:CGRectMake(15, tabBar_H*2/3, tabBar_H*2/3, tabBar_H/3)];
     [_tabBar addSubview:askLab];
-    askLab.text                        = @"咨询";
+    askLab.text                        = @"倾诉";
     askLab.textAlignment               = NSTextAlignmentCenter;
     askLab.font                        = [UIFont systemFontOfSize:10];
     askLab.textColor                   = [UIColor darkGrayColor];
@@ -367,7 +367,6 @@
         make.width.equalTo(priceLab.mas_width);
         make.height.equalTo(priceLab.mas_height).multipliedBy(0.5);
     }];
-//    NSLog(@"%.2f",_counselModel.ConsultDisCount);
     couponLab.text                     = [NSString stringWithFormat:@"%@",_counselModel.ConsultTag];
     couponLab.textColor                = [UIColor orangeColor];
     couponLab.textAlignment            = NSTextAlignmentRight;

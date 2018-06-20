@@ -18,6 +18,7 @@
 #import "MJExtension.h"
 #import "UIImageView+WebCache.h"
 #import "ActiveModel.h"
+#import "WebArticleModel.h"
 #import "GQUserManager.h"
 #import "SystomMsgViewController.h"
 #import "TestDetailViewController.h"
@@ -61,15 +62,15 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
     self.automaticallyAdjustsScrollViewInsets=NO;
     
     [self createTableView];
-    
     [self requestData];
-    
     [self setUpRefresh];
-    
+    if (@available(iOS 11.0, *)){
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    [self cellTab];
 }
 
 #pragma mark-------下拉刷新
@@ -85,6 +86,26 @@
     self.tableView.mj_footer = [RefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
     self.tableView.mj_footer.hidden = YES;
     
+}
+
+- (void)cellTab {
+    
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W/2, 20, 190, 30)];
+    [self.view addSubview:btn];
+    [btn setTitle:@"400-109-2007" forState:UIControlStateNormal];
+    [btn setTitleColor:WEAKPINK forState:UIControlStateNormal];
+    btn.titleLabel.textAlignment = NSTextAlignmentRight;
+    btn.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+    [btn addTarget:self action:@selector(cellPhone) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+- (void)cellPhone {
+    
+    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"400-109-2007"];
+    UIWebView * callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+    [self.view addSubview:callWebview];
 }
 
 #pragma mark-------创建TableView
@@ -106,28 +127,29 @@
 }
 
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.funnyListArray.count;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 85;
 }
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
     UILabel *funnyTestModuleLabel=[GQControls createLabelWithFrame:CGRectMake(0, 0, SCREEN_W, 40) andText:@"．·°∴ ☆．．·°．·°∴乐天派 ☆．．·°∴ ☆．．·° " andTextColor:MAINCOLOR andFontSize:15];
     funnyTestModuleLabel.backgroundColor=[UIColor colorWithRed:247/255.0 green:235/255.0 blue:242/255.0 alpha:0.5];
     funnyTestModuleLabel.textAlignment=NSTextAlignmentCenter;
     self.sectionHeaderLabel=funnyTestModuleLabel;
     return self.sectionHeaderLabel;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
     return 40;
 }
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     [self setNeedsStatusBarAppearanceUpdate];
     if (self.tableView.contentOffset.y >= 325) {
@@ -145,19 +167,20 @@
 
 
 #pragma mark------cell定制
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     HomeCell *cell=[HomeCell cellWithTableView:tableView];
-    cell.titleLabel.text=self.funnyListArray[indexPath.row].Name;
+    cell.titleLabel.text=self.funnyListArray[indexPath.row].ArticleName;
     cell.timeLabel.text=self.funnyListArray[indexPath.row].CreatedDate;
-    [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.funnyListArray[indexPath.row].ActiveImg]];
+    [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.funnyListArray[indexPath.row].ArticleImg]];
 
     
     return cell;
 }
+
 #pragma mark------cell点击事件
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
     FunnyViewController *funnyVc=[[FunnyViewController alloc]init];
     funnyVc.activeModel=self.funnyListArray[indexPath.row];
@@ -166,26 +189,29 @@
 }
 
 
-#pragma mark------获取趣味列表
+#pragma mark------精选文章列表
 
 -(void)requestData
 {
     self.pageIndex=1;
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
-    [requestString appendFormat:@"%@/",API_MODULE_ACTIVE];
-    [requestString appendString:API_NAME_GETACTIVELISTBYTYPE];
+    [requestString appendFormat:@"%@/",API_MODULE_ARTICLE];
+    [requestString appendString:API_NAME_GETARTICLELIST];
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     params[@"pageIndex"]=@(self.pageIndex);
     params[@"pageSize"]=@(10);
-    params[@"enumActiveType"]=@(1);
+    params[@"enumArticleType"]=@(1);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
         [weakSelf.tableView.mj_header endRefreshing];
-        weakSelf.funnyListArray=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        weakSelf.funnyListArray = [ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+//        weakSelf.funnyListArray = [WebArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+
+        NSLog(@"首页：%@",responseObject);
         if (weakSelf.funnyListArray.count >= 10) {
             weakSelf.tableView.mj_footer.hidden = NO;
         }else{
@@ -195,7 +221,6 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:self.view];
-        NSLog(@"?????%@",error);
 
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
@@ -221,7 +246,11 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
+        
+//        NSLog(@"%@",responseObject);
         NSArray *array=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+//        NSArray *array=[WebArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+
         if (array.count >= 10) {
             weakSelf.tableView.mj_footer.hidden = NO;
             [weakSelf.tableView.mj_footer endRefreshing];
@@ -237,8 +266,8 @@
 }
 #pragma mark------头视图
 
--(UIView *)createHeadBgView
-{
+- (UIView *)createHeadBgView {
+    
     UIView *headBgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 105+SCREEN_W*0.6)];
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_W*0.6, SCREEN_W, 100)];
     NSArray *nameArray=@[@"- 预约咨询 -",@"- 心理专栏 -",@"- 专业测试 -",@"- 成长乐园 -"];

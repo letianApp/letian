@@ -10,7 +10,7 @@
 #define API_h
 
 //域名
-#define API_HTTP_PREFIX              @"http://webapi.rightpsy.com/api/"
+#define API_HTTP_PREFIX              @"https://webapi.rightpsy.com/api/"
 
 //图片域名
 #define API_HTTP_IMAGEPREFIX         @"http://image.rightpsy.com/api/"
@@ -107,6 +107,9 @@
 
 //获取文章详情
 #define API_NAME_GETWEBACTIVEL       @"GetWebArticleInfo"
+
+//获取精选文章列表
+#define API_NAME_GETARTICLELIST     @"GetArticleList"
 
 //获取咨询师类型
 #define API_NAME_GETCONSULTTITLELIST  @"GetUserPsyAndTitleList"

@@ -81,13 +81,9 @@
     _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W/2, 40)];
     if (@available(iOS 11.0, *)){
         [[_searchBar.heightAnchor constraintEqualToConstant:44.0] setActive:YES];
-//        self.navigationController.navigationBar.prefersLargeTitles = true;
-
     }
-    
     _searchBar.placeholder = @"搜索咨询师";
     _searchBar.delegate    = self;
-    [_searchBar setTranslucent:YES];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
@@ -122,9 +118,10 @@
 - (void)customNavigation {
     
     self.navigationController.navigationBar.tintColor = MAINCOLOR;
-//    self.navigationItem.backBarButtonItem.title = @"<";
-
+    self.navigationController.navigationBar.clipsToBounds = YES;
+    [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
     self.navigationItem.titleView = _searchBar;
+    self.navigationItem.backBarButtonItem.title = @"";
 }
 
 //- (UIBarButtonItem *)customBackItemWithTarget:(id)target
@@ -330,11 +327,12 @@
     [_subTitleArray addObject:_priceDataSource];
 
     
-    _menu = [[ZLDropDownMenu alloc] init];
-    _menu.bounds = CGRectMake(0, 0, deviceWidth(), 50.f);
+    _menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, deviceWidth(), 50.f)];
+//    _menu.bounds = CGRectMake(0, statusBar_H + navigationBar_H, deviceWidth(), 50.f);
     _menu.delegate = self;
     _menu.dataSource = self;
-    _counselorInfoTableview.tableHeaderView = _menu;
+    [self.view addSubview:_menu];
+//    _counselorInfoTableview.tableHeaderView = _menu;
 //    [self.navigationItem.titleView addSubview:_menu];
 
 }
@@ -387,7 +385,7 @@
 - (void)creatTableView {
     
 //    NSLog(@"高度：%f",self.navigationController.navigationBar.bottom);
-    _counselorInfoTableview                 = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, SCREEN_H - statusBar_H - navigationBar_H - tabBar_H) style:UITableViewStyleGrouped];
+    _counselorInfoTableview                 = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H + 50, SCREEN_W, SCREEN_H - statusBar_H - navigationBar_H - tabBar_H) style:UITableViewStylePlain];
     _counselorInfoTableview.dataSource      = self;
     _counselorInfoTableview.delegate        = self;
     _counselorInfoTableview.backgroundColor = [UIColor snowColor];
@@ -410,7 +408,7 @@
 
 - (void)setupMJRefresh {
     
-    MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(relodeDate)];
+    MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getCounsultListSource)];
     //    header.lastUpdatedTimeLabel.textColor = MAINCOLOR;
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.textColor = MAINCOLOR;
@@ -453,7 +451,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _counselorArr.count;
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     

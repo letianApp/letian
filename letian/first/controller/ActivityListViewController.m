@@ -174,10 +174,10 @@
 #pragma mark-------cell定制
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ActivityCell *cell = [ActivityCell cellWithTableView:tableView];
-    [cell.mainImageView sd_setImageWithURL:[NSURL URLWithString:self.activeListArray[indexPath.row].ActiveImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
+    [cell.mainImageView sd_setImageWithURL:[NSURL URLWithString:self.activeListArray[indexPath.row].ArticleImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
     cell.mainImageView.contentMode=UIViewContentModeScaleAspectFill;
     cell.mainImageView.clipsToBounds=YES;
-    cell.titleLabel.text=self.activeListArray[indexPath.row].Name;
+    cell.titleLabel.text=self.activeListArray[indexPath.row].ArticleName;
     
     return cell;
 }
