@@ -28,10 +28,14 @@
 		093587451E94E5690007B1D9 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093587441E94E5690007B1D9 /* CoreMotion.framework */; };
 		093587471E94E5DE0007B1D9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093587461E94E5DE0007B1D9 /* Social.framework */; };
 		093587491E94E5EE0007B1D9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093587481E94E5EE0007B1D9 /* Accounts.framework */; };
+		0936248A20DB63C30093C681 /* selectionArticleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0936248920DB63C30093C681 /* selectionArticleVC.m */; };
 		093DA77D1E960F08003CEDD9 /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093DA77B1E960F08003CEDD9 /* ChatListViewController.m */; };
 		093DA77E1E960F08003CEDD9 /* ChatListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 093DA77C1E960F08003CEDD9 /* ChatListViewController.xib */; };
 		093DA7821E9628C6003CEDD9 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093DA7801E9628C6003CEDD9 /* ChatViewController.m */; };
 		093DA7831E9628C6003CEDD9 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 093DA7811E9628C6003CEDD9 /* ChatViewController.xib */; };
+		093F862520F5AE1A00271675 /* CommitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 093F862320F5AE1A00271675 /* CommitCell.m */; };
+		093F862620F5AE1A00271675 /* CommitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 093F862420F5AE1A00271675 /* CommitCell.xib */; };
+		093F862C20F5DF9500271675 /* CommitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 093F862B20F5DF9400271675 /* CommitModel.m */; };
 		09420AB02091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 09420AAF2091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		0945B1481E6937DF005B7560 /* CustomCYLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0945B1471E6937DF005B7560 /* CustomCYLTabBar.m */; };
 		094FC50C1E8CBF0D00BFFBBB /* PayPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 094FC50A1E8CBF0D00BFFBBB /* PayPageVC.m */; };
@@ -48,6 +52,7 @@
 		0953C23C1E514B5800FB165C /* letianTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0953C23B1E514B5800FB165C /* letianTests.m */; };
 		0953C2471E514B5900FB165C /* letianUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0953C2461E514B5900FB165C /* letianUITests.m */; };
 		09591B7B1ECAB9BA0040CD1C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 09591B7A1ECAB9BA0040CD1C /* UIImage+ImageEffects.m */; };
+		09646B5420EE0DAE0033EAC7 /* CommitVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 09646B5320EE0DAE0033EAC7 /* CommitVC.m */; };
 		0965FBB51E7A918900C0FBAD /* HZQDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0965FBB11E7A918900C0FBAD /* HZQDatePickerView.m */; };
 		0965FBB61E7A918900C0FBAD /* HZQDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0965FBB21E7A918900C0FBAD /* HZQDatePickerView.xib */; };
 		0965FBB71E7A918900C0FBAD /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 0965FBB41E7A918900C0FBAD /* UIColor+HexString.m */; };
@@ -262,12 +267,19 @@
 		093587441E94E5690007B1D9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		093587461E94E5DE0007B1D9 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		093587481E94E5EE0007B1D9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		0936248820DB63C30093C681 /* selectionArticleVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = selectionArticleVC.h; sourceTree = "<group>"; };
+		0936248920DB63C30093C681 /* selectionArticleVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = selectionArticleVC.m; sourceTree = "<group>"; };
 		093DA77A1E960F08003CEDD9 /* ChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListViewController.h; sourceTree = "<group>"; };
 		093DA77B1E960F08003CEDD9 /* ChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListViewController.m; sourceTree = "<group>"; };
 		093DA77C1E960F08003CEDD9 /* ChatListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatListViewController.xib; sourceTree = "<group>"; };
 		093DA77F1E9628C6003CEDD9 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		093DA7801E9628C6003CEDD9 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		093DA7811E9628C6003CEDD9 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		093F862220F5AE1A00271675 /* CommitCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommitCell.h; sourceTree = "<group>"; };
+		093F862320F5AE1A00271675 /* CommitCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommitCell.m; sourceTree = "<group>"; };
+		093F862420F5AE1A00271675 /* CommitCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommitCell.xib; sourceTree = "<group>"; };
+		093F862A20F5DF9400271675 /* CommitModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommitModel.h; sourceTree = "<group>"; };
+		093F862B20F5DF9400271675 /* CommitModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommitModel.m; sourceTree = "<group>"; };
 		09420AAE2091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		09420AAF2091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		0945B1461E6937DE005B7560 /* CustomCYLTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCYLTabBar.h; sourceTree = "<group>"; };
@@ -299,6 +311,8 @@
 		09591B791ECAB9BA0040CD1C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		09591B7A1ECAB9BA0040CD1C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		095D41891F036302004690E4 /* letian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = letian.entitlements; sourceTree = "<group>"; };
+		09646B5220EE0DAE0033EAC7 /* CommitVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommitVC.h; sourceTree = "<group>"; };
+		09646B5320EE0DAE0033EAC7 /* CommitVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommitVC.m; sourceTree = "<group>"; };
 		0965FBB01E7A918900C0FBAD /* HZQDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZQDatePickerView.h; sourceTree = "<group>"; };
 		0965FBB11E7A918900C0FBAD /* HZQDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZQDatePickerView.m; sourceTree = "<group>"; };
 		0965FBB21E7A918900C0FBAD /* HZQDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HZQDatePickerView.xib; sourceTree = "<group>"; };
@@ -970,6 +984,10 @@
 				0970CFEB1E517EB8007480CB /* FirstViewController.m */,
 				77EF53291EE59E78001B5C70 /* FunnyViewController.h */,
 				77EF532A1EE59E78001B5C70 /* FunnyViewController.m */,
+				0936248820DB63C30093C681 /* selectionArticleVC.h */,
+				0936248920DB63C30093C681 /* selectionArticleVC.m */,
+				09646B5220EE0DAE0033EAC7 /* CommitVC.h */,
+				09646B5320EE0DAE0033EAC7 /* CommitVC.m */,
 				77B5BCD51EAD987C0034497D /* 智慧学院 */,
 				77B5BCD61EAD98900034497D /* 心理测试 */,
 				77B5BCD71EAD98B40034497D /* 心理专栏 */,
@@ -989,6 +1007,9 @@
 				77EF53241EE53123001B5C70 /* ActivityCell.h */,
 				77EF53251EE53123001B5C70 /* ActivityCell.m */,
 				77EF53261EE53123001B5C70 /* ActivityCell.xib */,
+				093F862220F5AE1A00271675 /* CommitCell.h */,
+				093F862320F5AE1A00271675 /* CommitCell.m */,
+				093F862420F5AE1A00271675 /* CommitCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1004,6 +1025,8 @@
 				77D0EA0B1EB5DD4700254806 /* WebArticleCateModel.m */,
 				77FF30311EA06EFD00F3A1C9 /* WebArticleModel.h */,
 				77FF30321EA06EFD00F3A1C9 /* WebArticleModel.m */,
+				093F862A20F5DF9400271675 /* CommitModel.h */,
+				093F862B20F5DF9400271675 /* CommitModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1831,6 +1854,7 @@
 				77D2BF981E66B3D0000B9978 /* RegistViewController.xib in Resources */,
 				09FBE01E1E70EE60003452A6 /* ConfirmPageVC.xib in Resources */,
 				09BFEF221EC0099E00A2731C /* ConsultSetCell.xib in Resources */,
+				093F862620F5AE1A00271675 /* CommitCell.xib in Resources */,
 				0970CFF61E5180DF007480CB /* MyViewController.xib in Resources */,
 				770FFC5F1E95F51E009B81FC /* SettingViewController.xib in Resources */,
 				77F3D85E1E764E22008B5FC0 /* OrderViewController.xib in Resources */,
@@ -1967,6 +1991,7 @@
 				77A17B831E7FA20B00569558 /* ActivityListViewController.m in Sources */,
 				0953C2291E514B5800FB165C /* ViewController.m in Sources */,
 				7787B3B41EB1BF4E00306527 /* AlipayHelper.m in Sources */,
+				09646B5420EE0DAE0033EAC7 /* CommitVC.m in Sources */,
 				7784D8AC1E6E80C5004AB0CC /* MessageViewController.m in Sources */,
 				776CF2BC1EB7900A00CE9620 /* UIView+TYLaunchAnimation.m in Sources */,
 				77283D8F1ED67247004BF2F5 /* TestHistoryViewController.m in Sources */,
@@ -2025,12 +2050,14 @@
 				77B5BD5B1EADA6A50034497D /* MBHudSet.m in Sources */,
 				0965FBB51E7A918900C0FBAD /* HZQDatePickerView.m in Sources */,
 				77B5BD141EAD9B460034497D /* NSString+Additions.m in Sources */,
+				0936248A20DB63C30093C681 /* selectionArticleVC.m in Sources */,
 				09420AB02091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				7722F0931EB4500B001DCF5F /* DTConstants.m in Sources */,
 				7722F0991EB4500B001DCF5F /* NSDate+DateTools.m in Sources */,
 				77FF30371EA0705F00F3A1C9 /* WebArticleCell.m in Sources */,
 				77F3D85D1E764E22008B5FC0 /* OrderViewController.m in Sources */,
 				77D0EA551EB6276700254806 /* GQScrollView.m in Sources */,
+				093F862520F5AE1A00271675 /* CommitCell.m in Sources */,
 				77B5BD691EADA7F10034497D /* Foundation+Log.m in Sources */,
 				0965FBBA1E82155500C0FBAD /* OrderModel.m in Sources */,
 				77B5BD2F1EAD9E480034497D /* GQUserManager.m in Sources */,
@@ -2045,6 +2072,7 @@
 				09BFEF211EC0099E00A2731C /* ConsultSetCell.m in Sources */,
 				77EF532F1EE5A9A2001B5C70 /* AboutViewController.m in Sources */,
 				779C4DCA1EBED84300EBEDE9 /* OrderConsultCell.m in Sources */,
+				093F862C20F5DF9500271675 /* CommitModel.m in Sources */,
 				093DA77D1E960F08003CEDD9 /* ChatListViewController.m in Sources */,
 				77D0EA511EB60FDD00254806 /* ArticleListViewController.m in Sources */,
 				094FC5161E8CE1D500BFFBBB /* AboutUsPageVC.m in Sources */,

@@ -46,40 +46,19 @@
     [self.segment showsInNavBarOf:self withFrame:CGRectMake(5, 5, 120, 30)];
     [self.view addSubview:self.segment];
     
-        UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-        backButton.frame=CGRectMake(30, 12, 20, 20);
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 }
 
-
--(void) back
-{
+- (UIBarButtonItem *)customBackItemWithTarget:(id)target
+                                       action:(SEL)action {
     
-    [self.navigationController popViewControllerAnimated:YES];
-//    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    appDelegate.rotation_Style = 0;
+    UIButton *btn = [[UIButton alloc]init];
+    UIImageView *backView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 20, 20)];
+    backView.image = [UIImage imageNamed:@"pinkback"];
+    [btn addSubview:backView];
+    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    return item;
 }
-//
-//-(void)viewWillAppear:(BOOL)animated{
-//    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    appDelegate.rotation_Style = 1;
-//    NSNumber *orientationUnknown = [NSNumber numberWithInt:UIInterfaceOrientationUnknown];
-//    [[UIDevice currentDevice] setValue:orientationUnknown forKey:@"orientation"];
-//    
-//    NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-//    [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
-//}
-//
-//-(BOOL)shouldAutorotate{
-//    return true;
-//}
-//- (UIInterfaceOrientationMask)supportedInterfaceOrientations//当前viewcontroller支持哪些转屏方向
-//{
-//    return UIInterfaceOrientationMaskLandscapeRight;
-//}
-
 
 -(void)segmentDidselectTab:(NSUInteger)index
 {

@@ -111,6 +111,15 @@
 //获取精选文章列表
 #define API_NAME_GETARTICLELIST     @"GetArticleList"
 
+//获取一篇精选文章模型
+#define API_NAME_GETARTICLEINFO @"GetArticleInfo"
+
+//点赞精选文章或评论
+#define API_NAME_DOARTICLEPRAISE @"DoArticlePraise"
+
+//获取精选文章评论列表
+#define API_NAME_GETARTICLECOMMIT @"GetArticleCommonetList"
+
 //获取咨询师类型
 #define API_NAME_GETCONSULTTITLELIST  @"GetUserPsyAndTitleList"
 

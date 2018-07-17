@@ -17,6 +17,8 @@
 
 + (void)showText:(NSString *)str andOnView:(UIView *)fatherView
 {
+    if (fatherView == nil) fatherView = [UIApplication sharedApplication].keyWindow;
+
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:fatherView animated:YES];;
     HUD.mode = MBProgressHUDModeText;
     HUD.label.text = str;
@@ -25,11 +27,15 @@
 
 + (void)showStatusOnView:(UIView *)fatherView
 {
+    if (fatherView == nil) fatherView = [UIApplication sharedApplication].keyWindow;
+    
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:fatherView animated:YES];;
     HUD.mode = MBProgressHUDModeIndeterminate;
 }
 
 +(void)dismiss:(UIView *)fatherView{
+    if (fatherView == nil) fatherView = [UIApplication sharedApplication].keyWindow;
+
     [MBProgressHUD hideHUDForView:fatherView animated:YES];
 }
 @end

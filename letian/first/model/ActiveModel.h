@@ -21,4 +21,6 @@
 @property(nonatomic,assign)NSInteger ID;//
 @property(nonatomic,assign)NSInteger IsAbort;//
 @property(nonatomic,copy)NSString *ArticleImg;
+@property(nonatomic,copy)NSString *ArticleUrl;
+
 @end

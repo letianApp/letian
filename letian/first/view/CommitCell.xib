@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="106" id="KGk-i7-Jjw" customClass="CommitCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21S-Dg-0vL">
+                        <rect key="frame" x="10" y="10" width="45" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="zoN-gS-iaP"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="aaaaa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDb-at-djL">
+                        <rect key="frame" x="63" y="10" width="100" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="Te0-BQ-54Y"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="ffffffffffffffffffffff" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URp-1i-U5X">
+                        <rect key="frame" x="63" y="62" width="127" height="28"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ssss" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UR9-7b-MIl">
+                        <rect key="frame" x="63" y="34" width="100" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="21S-Dg-0vL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="4fF-rm-aCX"/>
+                    <constraint firstItem="UR9-7b-MIl" firstAttribute="leading" secondItem="21S-Dg-0vL" secondAttribute="trailing" constant="8" id="5AF-vU-ud9"/>
+                    <constraint firstItem="URp-1i-U5X" firstAttribute="top" secondItem="UR9-7b-MIl" secondAttribute="bottom" constant="7" id="AW5-qC-Yex"/>
+                    <constraint firstItem="21S-Dg-0vL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="DZr-Gj-Aaj"/>
+                    <constraint firstItem="URp-1i-U5X" firstAttribute="leading" secondItem="UR9-7b-MIl" secondAttribute="leading" id="HX8-Nl-IMZ"/>
+                    <constraint firstItem="URp-1i-U5X" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="47" id="abh-eo-svU"/>
+                    <constraint firstItem="UR9-7b-MIl" firstAttribute="top" secondItem="gDb-at-djL" secondAttribute="bottom" constant="3.5" id="cra-0W-jee"/>
+                    <constraint firstItem="gDb-at-djL" firstAttribute="leading" secondItem="21S-Dg-0vL" secondAttribute="trailing" constant="8" id="hPl-jV-7Ro"/>
+                    <constraint firstItem="UR9-7b-MIl" firstAttribute="bottom" secondItem="21S-Dg-0vL" secondAttribute="bottom" id="p3y-Sb-SL0"/>
+                    <constraint firstAttribute="bottom" secondItem="URp-1i-U5X" secondAttribute="bottom" constant="10" id="tsG-DZ-s6n"/>
+                    <constraint firstItem="gDb-at-djL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="xdp-c4-NxA"/>
+                    <constraint firstItem="gDb-at-djL" firstAttribute="trailing" secondItem="UR9-7b-MIl" secondAttribute="trailing" id="zEE-ax-YYF"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dateLab" destination="UR9-7b-MIl" id="0yh-28-fR5"/>
+                <outlet property="detailLab" destination="URp-1i-U5X" id="MOu-58-pZz"/>
+                <outlet property="headImg" destination="21S-Dg-0vL" id="YUl-HB-8Mk"/>
+                <outlet property="nameLab" destination="gDb-at-djL" id="Yqj-hF-BQy"/>
+            </connections>
+            <point key="canvasLocation" x="32.5" y="101"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -66,7 +66,7 @@
         vc.title = self.articleCateList[i].CateName;
         [viewControllers addObject:vc];
     }
-    self.segment = [[GQSegmentButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H - 64)];
+    self.segment = [[GQSegmentButton alloc] initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H - 64)];
     self.segment.delegate = self;
     self.segment.btnSelectedColor = MAINCOLOR;
     self.segment.btnNormalColor = [UIColor blackColor];
@@ -85,17 +85,19 @@
 -(void) setUpNavigationBar
 {
     self.navigationItem.title=@"心理健康专栏";
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    backButton.frame=CGRectMake(30, 12, 20, 20);
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    self.navigationController.navigationBar.translucent = NO;
+
 }
 
--(void) back
-{
-    [self.navigationController popViewControllerAnimated:YES];
+- (UIBarButtonItem *)customBackItemWithTarget:(id)target
+                                       action:(SEL)action {
+    
+    UIButton *btn = [[UIButton alloc]init];
+    UIImageView *backView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 20, 20)];
+    backView.image = [UIImage imageNamed:@"pinkback"];
+    [btn addSubview:backView];
+    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    return item;
 }
 
 - (void)didReceiveMemoryWarning {

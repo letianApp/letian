@@ -20,6 +20,7 @@
 #import "SnailPopupController.h"
 
 #import "OrderPageVC.h"
+#import "OrderViewController.h"
 #import "PayPageVC.h"
 #import "MJExtension.h"
 
@@ -240,17 +241,19 @@
     if (btn.tag == 1) {
         
         _mapBtn.userInteractionEnabled = YES;
-        NSString *str = @"面对面咨询地点：上海市徐汇区中山西路2240号鼎力创意园B401室";
-        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:str];
-        [attrStr addAttribute:NSForegroundColorAttributeName value:MAINCOLOR range:NSMakeRange(8, 25)];
-        [attrStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(8, 25)];
-        [_mapBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
-        [_mapBtn addTarget:self action:@selector(clickMapBtn:) forControlEvents:UIControlEventTouchUpInside];
-
-//        if (!NULLString(_priceLab.text)) {
-//            _orderModel.orderPrice = _totalPrice / 1;
-//            [_priceLab setText:[NSString stringWithFormat:@"%.2f 元",_orderModel.orderPrice]];
-//        }
+        //EAP通道
+        if (self.counselModel.UserID == 313) {
+            NSString *str = @"面对面咨询地点：上海市浦东新区祖冲之路555号1号楼1楼郁金香厅";
+            [_mapBtn setTitle:str forState:UIControlStateNormal];
+            [_mapBtn addTarget:self action:@selector(clickMapBtn:) forControlEvents:UIControlEventTouchUpInside];
+        } else {
+            NSString *str = @"面对面咨询地点：上海市徐汇区中山西路2240号鼎力创意园B401室";
+            NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:str];
+            [attrStr addAttribute:NSForegroundColorAttributeName value:MAINCOLOR range:NSMakeRange(8, 25)];
+            [attrStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(8, 25)];
+            [_mapBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
+            [_mapBtn addTarget:self action:@selector(clickMapBtn:) forControlEvents:UIControlEventTouchUpInside];
+        }
         
     } else if (btn.tag == 11) {
         
@@ -781,6 +784,10 @@
     _detailTextView.delegate               = self;
     _detailTextView.font                   = [UIFont systemFontOfSize:17];
     _placeholderLabel                      = [GQControls createLabelWithFrame:CGRectMake(5, 10, 200, 20) andText:@"请简述您的咨询内容*" andTextColor:[UIColor lightGrayColor] andFontSize:17];
+    //EAP通道
+    if (self.counselModel.UserID == 313) {
+        _placeholderLabel.text = @"请输入身份证后四位数";
+    }
     [_detailTextView addSubview:_placeholderLabel];
     _detailTextView.layer.masksToBounds    = YES;
     _detailTextView.layer.cornerRadius     = 5;
@@ -859,24 +866,17 @@
     _orderModel.orderInfoPhone = [_phoneTextField.text removeAllSpace];
     _orderModel.orderInfoEmail = _emailTextField.text;
     
-    NSLog(@"电话：%@ 长度:%d",_orderModel.orderInfoPhone,_orderModel.orderInfoPhone.length);
+//    NSLog(@"电话：%@ 长度:%d",_orderModel.orderInfoPhone,_orderModel.orderInfoPhone.length);
 
     [self reflashInfo];
     
     return YES;
 }
 
-//- (NSString *)removeSpaceAndNewline:(NSString *)str {
-//
-//    NSString *temp = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    temp = [temp stringByReplacingOccurrencesOfString:@"\r" withString:@""];
-//    temp = [temp stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-//    return temp;
-//}
-
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
     
     _orderModel.orderInfoDetail = _detailTextView.text;
+    [self reflashInfo];
     return YES;
 }
 
@@ -976,6 +976,10 @@
     couponLab.textColor                = [UIColor orangeColor];
     couponLab.textAlignment            = NSTextAlignmentRight;
     couponLab.font                     = [UIFont boldSystemFontOfSize:10];
+    //EAP通道
+    if (self.counselModel.UserID == 313) {
+        couponLab.hidden = YES;
+    }
     
 }
 
@@ -985,6 +989,8 @@
     if (NULLString(_orderModel.orderDateTimeStart) ||  NULLString(_orderModel.orderDateTimeEnd) || NULLString(_nameTextField.text) ||  NULLString(_sexTextField.text) ||  NULLString(_ageTextField.text) || NULLString(_phoneTextField.text) || !_doSwitch.isOn) {
         self.confirmBtn.backgroundColor = [UIColor lightGrayColor];
         
+    } else if (self.counselModel.UserID == 313 && NULLString(_detailTextView.text)) {
+        self.confirmBtn.backgroundColor = [UIColor lightGrayColor];
     } else {
         self.confirmBtn.backgroundColor = MAINCOLOR;
     }
@@ -1031,7 +1037,7 @@
             params[@"ConsultEmail"] = _orderModel.orderInfoEmail;
         }
         if (_detailTextView.text) {
-            params[@"ConsultDescription"]  = self.detailTextView.text;
+            params[@"ConsultDescription"] = self.detailTextView.text;
         }
         [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
         [PPNetworkHelper POST:requestString parameters:params success:^(id responseObject) {
@@ -1048,10 +1054,16 @@
                 payPage.orderTypeString = responseObject[@"Result"][@"Source"][@"ConsultTypeIDString"];
                 payPage.consultorName = strongSelf.orderModel.conserlorName;
                 payPage.totalFee = [responseObject[@"Result"][@"Source"][@"TotalFee"] floatValue];
-                [strongSelf.navigationController pushViewController:payPage animated:YES];
-                
+                //EAP通道
+                if (self.counselModel.UserID == 313) {
+                    OrderViewController *orderVc = [[OrderViewController alloc] init];
+                    orderVc.orderState = 1;
+                    [strongSelf.navigationController pushViewController:orderVc animated:YES];
+                    return;
+                } else {
+                    [strongSelf.navigationController pushViewController:payPage animated:YES];
+                }
             }else{
-                
                 [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.view];
             }
         } failure:^(NSError *error) {

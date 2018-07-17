@@ -25,12 +25,17 @@
 #import "GQScrollView.h"
 #import "ActivityDetailViewController.h"
 #import "FunnyViewController.h"
+#import "selectionArticleVC.h"
+
+
+
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) UILabel *sectionHeaderLabel;
-@property(nonatomic,strong)NSMutableArray <ActiveModel *> *funnyListArray;
-@property(nonatomic,assign)NSInteger pageIndex;
+@property (nonatomic,strong) GQScrollView *scrollView;
+@property (nonatomic,strong) NSMutableArray <ActiveModel *> *funnyListArray;
+@property (nonatomic,assign) NSInteger pageIndex;
 
 @end
 
@@ -90,12 +95,13 @@
 
 - (void)cellTab {
     
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W/2, 20, 190, 30)];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W/2, 20, 170, 30)];
     [self.view addSubview:btn];
     [btn setTitle:@"400-109-2007" forState:UIControlStateNormal];
     [btn setTitleColor:WEAKPINK forState:UIControlStateNormal];
-    btn.titleLabel.textAlignment = NSTextAlignmentRight;
-    btn.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+//    btn.titleLabel.textAlignment = NSTextAlignmentRight;
+    btn.titleLabel.font = [UIFont boldSystemFontOfSize:17];
+    btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [btn addTarget:self action:@selector(cellPhone) forControlEvents:UIControlEventTouchUpInside];
     
 }
@@ -169,12 +175,11 @@
 #pragma mark------cell定制
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    HomeCell *cell=[HomeCell cellWithTableView:tableView];
-    cell.titleLabel.text=self.funnyListArray[indexPath.row].ArticleName;
-    cell.timeLabel.text=self.funnyListArray[indexPath.row].CreatedDate;
+    HomeCell *cell = [HomeCell cellWithTableView:tableView];
+    cell.titleLabel.text = self.funnyListArray[indexPath.row].ArticleName;
+    cell.timeLabel.text = self.funnyListArray[indexPath.row].CreatedDate;
     [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.funnyListArray[indexPath.row].ArticleImg]];
 
-    
     return cell;
 }
 
@@ -182,10 +187,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
-    FunnyViewController *funnyVc=[[FunnyViewController alloc]init];
-    funnyVc.activeModel=self.funnyListArray[indexPath.row];
-    funnyVc.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:funnyVc animated:NO];
+    selectionArticleVC *articleVC = [[selectionArticleVC alloc]init];
+    articleVC.ArticleUrl = self.funnyListArray[indexPath.row].ArticleUrl;
+    articleVC.ID = self.funnyListArray[indexPath.row].ID;
+//    funnyVc.activeModel=self.funnyListArray[indexPath.row];
+    articleVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:articleVC animated:NO];
 }
 
 
@@ -202,16 +209,30 @@
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     params[@"pageIndex"]=@(self.pageIndex);
     params[@"pageSize"]=@(10);
-    params[@"enumArticleType"]=@(1);
+    params[@"enumArticleType"]=@(0);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
         [weakSelf.tableView.mj_header endRefreshing];
         weakSelf.funnyListArray = [ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-//        weakSelf.funnyListArray = [WebArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        
+        NSLog(@"列表:%@",weakSelf.scrollView.imageViews);
+        
+        NSMutableArray *imageArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i < 4; i++) {
 
-        NSLog(@"首页：%@",responseObject);
+            UIImageView *imgView = [[UIImageView alloc]init];
+            [imgView sd_setImageWithURL:[NSURL URLWithString:weakSelf.funnyListArray[i].ArticleImg]];
+            
+//            UIView *view = weakSelf.scrollView.imageViews[i];
+//            NSLog(@"列表:%@",weakSelf.scrollView.imageViews);
+
+
+//            [imageArray addObject:imgView.image];
+        }
+//        weakSelf.scrollView.imageViews = imageArray;
+        
         if (weakSelf.funnyListArray.count >= 10) {
             weakSelf.tableView.mj_footer.hidden = NO;
         }else{
@@ -352,11 +373,17 @@
     
     for (int i = 0; i < 4; i++) {
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"index_%d",i+1]];
+        
+        
+
+//        UIImageView *imgView = [[UIImageView alloc]init];
+//        [imgView sd_setImageWithURL:[NSURL URLWithString:self.funnyListArray[i].ArticleImg]];
+        
         [imageArray addObject:image];
         
     }
     
-    GQScrollView *scrollView = [[GQScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_W*0.6) withImages:imageArray withIsRunloop:YES withBlock:^(NSInteger index) {
+    _scrollView = [[GQScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_W*0.6) withImages:imageArray withIsRunloop:YES withBlock:^(NSInteger index) {
 //        NSLog(@"点击了index%zd",index);
         //跳到咨询页面
         if (index==0) {
@@ -400,12 +427,11 @@
     }];
     
    
-    scrollView.color_currentPageControl = MAINCOLOR;
+    _scrollView.color_currentPageControl = MAINCOLOR;
     
     
     
-    
-    return scrollView;
+    return _scrollView;
 }
 
 //

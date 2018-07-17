@@ -66,9 +66,6 @@
     [btn addTarget:self action:@selector(clickShareBtn) forControlEvents:UIControlEventTouchUpInside];
     
     if (@available(iOS 11.0, *)){
-//        if ([UITableView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
-//            _mainTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-//        }
         [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
         
@@ -177,7 +174,13 @@
     ConfirmPageCell *cell = [ConfirmPageCell cellWithTableView:tableView atIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;                        //设置cell不可以点
     
-    NSArray *lableTagArr = @[@"简介",@"擅长领域",@"咨询技能",@"咨询风格"];
+    NSArray *lableTagArr = [[NSArray alloc]init];
+    //EAP通道
+    if (self.counselModel.UserID == 313) {
+        lableTagArr = @[@"简介",@"服务时间",@"预约流程",@"备注"];
+    } else {
+        lableTagArr = @[@"简介",@"擅长领域",@"咨询技能",@"咨询风格"];
+    }
     cell.labelTag.text = lableTagArr[indexPath.row];
     NSArray *detialArr = @[self.counselModel.Description,self.counselModel.Expertise,self.counselModel.Specific,self.counselModel.Idea];
     if (NULLString(detialArr[indexPath.row])) {
@@ -325,6 +328,7 @@
 - (void)creatBottomBar {
     
     _tabBar                            = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
+    [self.view addSubview:_tabBar];
     //预约按钮
     UIButton *AppointmentBtn           = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
     AppointmentBtn.backgroundColor     = MAINCOLOR;
@@ -343,7 +347,6 @@
     askLab.textAlignment               = NSTextAlignmentCenter;
     askLab.font                        = [UIFont systemFontOfSize:10];
     askLab.textColor                   = [UIColor darkGrayColor];
-    [self.view addSubview:_tabBar];
     //价格lable
     UILabel *priceLab                  = [[UILabel alloc]init];
     priceLab.adjustsFontSizeToFitWidth = YES;
@@ -371,6 +374,11 @@
     couponLab.textColor                = [UIColor orangeColor];
     couponLab.textAlignment            = NSTextAlignmentRight;
     couponLab.font                     = [UIFont boldSystemFontOfSize:10];
+    //EAP通道
+    if (self.counselModel.UserID == 313) {
+        couponLab.hidden = YES;
+    }
+    
 
 }
 

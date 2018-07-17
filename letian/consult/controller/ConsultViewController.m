@@ -173,17 +173,12 @@
     [PPNetworkHelper GET:requestConsultPsyAndTitleListString parameters:nil success:^(id responseObject) {
         
         __strong typeof(self) strongSelf = weakSelf;
-//        NSLog(@"%@",responseObject);
-
         strongSelf.counselorCategoryDic = responseObject[@"Result"][@"Source"][@"PsyCategoryDic"];
         strongSelf.counselorCategoryArr = [strongSelf arrangeForKeyWithDic:strongSelf.counselorCategoryDic];
-        
         strongSelf.counselorTitleDic = responseObject[@"Result"][@"Source"][@"UserTitleDic"];
         strongSelf.counselorTitleArr = [strongSelf arrangeForKeyWithDic:strongSelf.counselorTitleDic];
-        
         [strongSelf.mainHeadView removeAllSubviews];
         [strongSelf creatClassifiedSection];
-        
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongSelf = weakSelf;
@@ -391,19 +386,12 @@
     _counselorInfoTableview.backgroundColor = [UIColor snowColor];
     [self.view addSubview:_counselorInfoTableview];
     _counselorInfoTableview.rowHeight       = 100;
-//    _mainHeadView                           = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, navigationBar_H*3)];
-//    _counselorInfoTableview.tableHeaderView = _menu;
     _counselorInfoTableview.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
     _noDataLab = [[UILabel alloc]initWithFrame:CGRectMake(0, SCREEN_H*0.4, SCREEN_W, SCREEN_W*0.2)];
-//    _noDataLab.layer.borderColor  = MAINCOLOR.CGColor;
-//    _noDataLab.layer.borderWidth  = 1;
-//    _noDataLab.layer.cornerRadius = 15;
     _noDataLab.text               = @"没有符合条件的咨询师";
     _noDataLab.textColor          = MAINCOLOR;
     _noDataLab.textAlignment      = NSTextAlignmentCenter;
-//    [_noDataLab sizeToFit];
-
 }
 
 - (void)setupMJRefresh {
