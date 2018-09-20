@@ -10,12 +10,15 @@
 #import "CommitCell.h"
 #import "CommitModel.h"
 #import "ZYKeyboardUtil.h"
+#import "UIImageView+WebCache.h"
+#import "GQUserManager.h"
+#import "RegistViewController.h"
 
 
 @interface CommitVC ()<UIGestureRecognizerDelegate, UITextFieldDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *mainTab;
-@property (nonatomic, strong) NSMutableArray *mainArr;
+@property (nonatomic, strong) NSMutableArray <CommitModel *> *mainArr;
 @property (nonatomic, strong) UITextField *tabBar;
 @property (nonatomic, strong) ZYKeyboardUtil *keyboardUtil;
 
@@ -71,7 +74,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     CommitCell *cell = [CommitCell cellWithTableView:_mainTab];
-//    [cell.headImg setImage:[UIImage imageNamed:@"index_1"]];
+    [cell.headImg sd_setImageWithURL:[NSURL URLWithString:self.mainArr[indexPath.row].HeadImg]];
+    cell.nameLab.text = self.mainArr[indexPath.row].CreatedByString;
+    cell.dateLab.text = self.mainArr[indexPath.row].CreatedDate;
+    cell.detailLab.text = self.mainArr[indexPath.row].CommentContent;
     return cell;
 
 }
@@ -84,10 +90,8 @@
 
 //返回第section组有多少行
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0;
+    return self.mainArr.count;
 }
-
-
 
 - (void)requestData {
     
@@ -102,10 +106,11 @@
     params[@"pageSize"] = @(10);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"详细：%@",responseObject);
         __strong typeof(self) strongSelf = weakSelf;
+        strongSelf.mainArr = [CommitModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        NSLog(@"详细：%@",strongSelf.mainArr);
+        [strongSelf.mainTab reloadData];
         
-       
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
         
@@ -130,7 +135,6 @@
     _tabBar.delegate = self;
     _tabBar.placeholder = @"说点什么...";
     _tabBar.returnKeyType = UIReturnKeySend;
-
     
     [self.view addSubview:_tabBar];
     
@@ -150,12 +154,60 @@
     [[[UIApplication sharedApplication]keyWindow]endEditing:YES];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return YES;
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (![GQUserManager isHaveLogin]) {
+        
+        NSLog(@"点击评论");
+        [textField resignFirstResponder];
+        textField.tintColor = [UIColor clearColor];
+        UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alertControl animated:YES completion:nil];
+
+        __weak typeof(self) weakSelf = self;
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            
+            __strong typeof(self) strongSelf = weakSelf;
+            RegistViewController *loginVc     = [[RegistViewController alloc]init];
+            loginVc.hidesBottomBarWhenPushed = YES;
+            [strongSelf presentViewController:loginVc animated:YES completion:nil];
+        }]];
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    }
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+//    NSLog(@"--发送%@--", textField.text);
+    
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_ARTICLE];
+    [requestString appendString:API_NAME_DOARTICLECOMMIT];
+    __weak typeof(self) weakSelf = self;
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    params[@"ArticleID"] = @(self.ID);
+    params[@"CommentContent"] = textField.text;
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    
+    [manager POST:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        __strong typeof(self) strongSelf = weakSelf;
+        NSLog(@"发：%@",responseObject);
+        [strongSelf requestData];
+        textField.text = nil;
 
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+        
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+        }
+    }];
+    
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

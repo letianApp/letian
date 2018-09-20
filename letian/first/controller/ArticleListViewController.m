@@ -213,9 +213,8 @@
 }
 
 
--(void) setUpNavigationBar
-{
-    self.navigationItem.title=@"心理文章";
+-(void) setUpNavigationBar {
+    self.navigationItem.title = @"心理文章";
 
 }
 

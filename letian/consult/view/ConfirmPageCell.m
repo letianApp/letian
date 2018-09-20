@@ -21,28 +21,22 @@
 - (void)customCell {
     
     self.mainColorTag.backgroundColor = MAINCOLOR;
-    self.labelTag.font = [UIFont boldSystemFontOfSize:15];
+    self.labelTag.font = [UIFont boldSystemFontOfSize:17];
+    self.labelTag.textColor = [UIColor whiteColor];
     self.detialLab.numberOfLines = 0;
-    self.detialLab.font = [UIFont systemFontOfSize:13];
-    self.detialLab.textColor = [UIColor darkGrayColor];
-    
+    self.detialLab.font = [UIFont systemFontOfSize:14];
+    self.detialLab.textColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
+    self.backView.backgroundColor = [UIColor clearColor];
 }
 
 
 + (instancetype) cellWithTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *cellIdentifier = [NSString stringWithFormat:@"Cell%zd%zd", [indexPath section], [indexPath row]];
-    
-    ConfirmPageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    ConfirmPageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ConfirmPageCell"];
     if (!cell) {
-        cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ConfirmPageCell"];
     }
-
-    
-//    ConfirmPageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ConfirmPageCell"];
-//    if (cell == nil) {
-//        cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ConfirmPageCell"];
-//    }
     return cell;
 }
 

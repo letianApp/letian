@@ -12,6 +12,11 @@
 
 @property (nonatomic, copy) NSString *ArticleUrl;
 @property (nonatomic, assign) NSInteger ID;
+@property (nonatomic, copy) NSString *ArticleTitle;
+@property (nonatomic, copy) NSString *CreatedByString;
+@property (nonatomic, copy) NSString *ArticleImg;
+
+
 
 
 @end

@@ -13,11 +13,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.bgView.layer.masksToBounds=YES;
-    self.bgView.layer.cornerRadius=8;
-    self.bgView.layer.borderWidth=1;
-    self.bgView.layer.borderColor=[MAINCOLOR CGColor] ;
-    self.bgView.alpha=0.5;
+    self.bgView.layer.masksToBounds = YES;
+    self.bgView.layer.cornerRadius = 8;
+    self.bgView.layer.borderWidth = 1;
+    self.bgView.layer.borderColor = [MAINCOLOR CGColor] ;
+    self.bgView.alpha = 0.5;
     // Initialization code
 }
 

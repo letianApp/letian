@@ -18,6 +18,7 @@
 @property(nonatomic,strong)WebArticleModel *articleModel;
 @property(nonatomic,strong)UITextView *textView;
 
+
 @end
 
 @implementation WebArticleViewController
@@ -30,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor=[UIColor whiteColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     [self setUpNavigationBar];
 
@@ -51,7 +52,7 @@
     params[@"articleID"]=@(self.articleID);
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"什么情况？文章详情%@",responseObject);
+        NSLog(@"文章详情:%@",responseObject);
         [MBHudSet dismiss:self.view];
         weakSelf.articleModel=[WebArticleModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
 //        NSLog(@"responseObject=%@",responseObject);
@@ -127,13 +128,11 @@
 
 #pragma mark---------分享截图
 
-- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
-{
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType {
     
-    //创建图片内容对象
-    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-    [shareObject setShareImage:[GQControls captureScrollView:self.textView]];
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.articleModel.Title descr:self.articleModel.Abstract thumImage:[UIImage imageNamed:@"乐天logo"]];
+    shareObject.webpageUrl = self.articleModel.OriginalUrl;
     messageObject.shareObject = shareObject;
     
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
@@ -155,15 +154,19 @@
     }
 }
 
--(void) setUpNavigationBar
-{
+-(void) setUpNavigationBar {
+    
     self.navigationItem.title=@"文章";
     
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [shareButton setImage:[UIImage imageNamed:@"pinkshare"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    shareButton.frame=CGRectMake(30, 12, 20, 20);
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+    shareButton.frame=CGRectMake(0, 0, 20, 20);
+    
+    UIView *shareVew = [[UIView alloc] initWithFrame:shareButton.bounds];
+    [shareVew addSubview:shareButton];
+//    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithCustomView:shareVew];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareVew];
 }
 
 - (UIBarButtonItem *)customBackItemWithTarget:(id)target

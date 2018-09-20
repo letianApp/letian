@@ -22,8 +22,7 @@
 @property (nonatomic,strong) UILabel *comLab;
 @property (nonatomic,strong) UIButton *likeBtn;
 @property (nonatomic,strong) UILabel *likeLab;
-
-
+@property (nonatomic,strong) UIImpactFeedbackGenerator *feedBackGenertor;
 
 @end
 
@@ -35,6 +34,8 @@
     
     [self customNav];
     [self requestData];
+    
+    _feedBackGenertor = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleMedium];
     
     self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.ArticleUrl]]];
@@ -114,7 +115,7 @@
 
 - (void)clickComBtn {
     
-    [MBHudSet showText:@"评论" andOnView:self.view];
+//    [MBHudSet showText:@"评论" andOnView:self.view];
     CommitVC *commitVC = [[CommitVC alloc]init];
     commitVC.ID = self.ID;
     [self.navigationController pushViewController:commitVC animated:YES];
@@ -122,6 +123,9 @@
 }
 
 - (void)clickLikeBtn {
+    
+    [_feedBackGenertor impactOccurred];
+    
     if (_likeBtn.isSelected == YES) {
         _likeBtn.selected = NO;
     } else {
@@ -141,26 +145,23 @@
     params[@"articleID"]=@(self.ID);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"详细：%@",[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"]]);
+        NSLog(@"详细：%@",[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"]]);
         __strong typeof(self) strongSelf = weakSelf;
-
         if (![[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"PraiseCount"]] isEqualToString:@"0"]) {
-        
             strongSelf.likeLab.text = [NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"PraiseCount"]];
+        } else {
+            strongSelf.likeLab.text = @"";
         }
         
         if ([[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"IsCurUserPraise"]] isEqualToString:@"1"]) {
-
             strongSelf.likeBtn.selected = YES;
         } else {
-            
             strongSelf.likeBtn.selected = NO;
         }
-        
         if (![[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"CommentCount"]] isEqualToString:@"0"]) {
-
             strongSelf.comLab.text = [NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"CommentCount"]];
         }
+        strongSelf.CreatedByString = responseObject[@"Result"][@"Source"][@"CreatedByString"];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
@@ -227,7 +228,7 @@
     
     NSString *navbarJs = @"document.getElementsByClassName('navbar navbar-static-top bs-docs-nav container')[0].style.display = 'NONE'";//获取整个页面的HTMLstring
     [webView evaluateJavaScript:navbarJs completionHandler:^(id _Nullable HTMLsource, NSError * _Nullable error) {
-        NSLog(@"这一页：%@",HTMLsource);
+//        NSLog(@"这一页：%@",HTMLsource);
     }];
     
     NSString *breadcrumbJs = @"document.getElementsByClassName('breadcrumb')[0].style.display = 'NONE'";
@@ -245,6 +246,10 @@
     NSString *historycommentsJs = @"document.getElementsByClassName('history-comments')[0].style.display = 'NONE'";
     [webView evaluateJavaScript:historycommentsJs completionHandler:^(id _Nullable HTMLsource, NSError * _Nullable error) {
     }];
+    
+//    NSString *zhichiBtncommentsJs = @"document.getElementsByIdName('zhichiBtnBox').style.display = 'NONE'";
+//    [webView evaluateJavaScript:zhichiBtncommentsJs completionHandler:^(id _Nullable HTMLsource, NSError * _Nullable error) {
+//    }];
 
     NSString *colJs = @"document.getElementsByClassName('col-xs-5')[0].style.display = 'NONE'";
     [webView evaluateJavaScript:colJs completionHandler:^(id _Nullable HTMLsource, NSError * _Nullable error) {
@@ -325,24 +330,22 @@
     } cancelBlock:nil];
 }
 
-#pragma mark - 分享截图
+#pragma mark - 分享
 
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType {
     
-//    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-//
-//    //创建图片内容对象
-//    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-//    [shareObject setShareImage:[GQControls captureScrollView:self.view]];
-//    messageObject.shareObject = shareObject;
-//
-//    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-//        if (error) {
-//            [MBHudSet showText:@"分享失败" andOnView:self.view];
-//        }else{
-//            [MBHudSet showText:@"分享成功" andOnView:self.view];
-//        }
-//    }];
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.ArticleTitle descr:self.CreatedByString thumImage:self.ArticleImg];
+    shareObject.webpageUrl = self.ArticleUrl;
+    messageObject.shareObject = shareObject;
+
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            [MBHudSet showText:@"分享失败" andOnView:self.view];
+        }else{
+            [MBHudSet showText:@"分享成功" andOnView:self.view];
+        }
+    }];
 }
 
 

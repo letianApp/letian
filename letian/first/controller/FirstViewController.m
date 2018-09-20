@@ -190,6 +190,8 @@
     selectionArticleVC *articleVC = [[selectionArticleVC alloc]init];
     articleVC.ArticleUrl = self.funnyListArray[indexPath.row].ArticleUrl;
     articleVC.ID = self.funnyListArray[indexPath.row].ID;
+    articleVC.ArticleTitle = self.funnyListArray[indexPath.row].ArticleName;
+    articleVC.ArticleImg = self.funnyListArray[indexPath.row].ArticleImg;
 //    funnyVc.activeModel=self.funnyListArray[indexPath.row];
     articleVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:articleVC animated:NO];
@@ -198,40 +200,32 @@
 
 #pragma mark------精选文章列表
 
--(void)requestData
-{
-    self.pageIndex=1;
+-(void)requestData {
+    
+    self.pageIndex = 1;
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_ARTICLE];
     [requestString appendString:API_NAME_GETARTICLELIST];
     __weak typeof(self) weakSelf = self;
-    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    params[@"pageIndex"]=@(self.pageIndex);
-    params[@"pageSize"]=@(10);
-    params[@"enumArticleType"]=@(0);
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    params[@"pageIndex"] = @(self.pageIndex);
+    params[@"pageSize"] = @(10);
+    params[@"enumArticleType"] = @(0);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+
         [MBHudSet dismiss:self.view];
         [weakSelf.tableView.mj_header endRefreshing];
         weakSelf.funnyListArray = [ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-        
-        NSLog(@"列表:%@",weakSelf.scrollView.imageViews);
-        
         NSMutableArray *imageArray = [[NSMutableArray alloc] init];
         for (int i = 0; i < 4; i++) {
 
             UIImageView *imgView = [[UIImageView alloc]init];
             [imgView sd_setImageWithURL:[NSURL URLWithString:weakSelf.funnyListArray[i].ArticleImg]];
             
-//            UIView *view = weakSelf.scrollView.imageViews[i];
-//            NSLog(@"列表:%@",weakSelf.scrollView.imageViews);
-
-
-//            [imageArray addObject:imgView.image];
         }
-//        weakSelf.scrollView.imageViews = imageArray;
         
         if (weakSelf.funnyListArray.count >= 10) {
             weakSelf.tableView.mj_footer.hidden = NO;
@@ -252,24 +246,24 @@
     }];
 }
 
--(void)requestMoreData
-{
+-(void)requestMoreData {
+    
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
-    [requestString appendFormat:@"%@/",API_MODULE_ACTIVE];
-    [requestString appendString:API_NAME_GETACTIVELISTBYTYPE];
+    [requestString appendFormat:@"%@/",API_MODULE_ARTICLE];
+    [requestString appendString:API_NAME_GETARTICLELIST];
     __weak typeof(self) weakSelf = self;
-    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    params[@"pageIndex"]=@(++self.pageIndex);
-    params[@"pageSize"]=@(10);
-    params[@"enumActiveType"]=@(1);
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    params[@"pageIndex"] = @(++self.pageIndex);
+    params[@"pageSize"] = @(10);
+    params[@"enumArticleType"] = @(0);
+
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
         
-//        NSLog(@"%@",responseObject);
-        NSArray *array=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        NSArray *array = [ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
 //        NSArray *array=[WebArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
 
         if (array.count >= 10) {

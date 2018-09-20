@@ -18,6 +18,8 @@
     self.headImg.layer.cornerRadius = self.headImg.frame.size.width / 2;
     self.headImg.clipsToBounds      = YES;
     self.headImg.contentMode        = UIViewContentModeScaleToFill;
+    self.dateLab.font = [UIFont systemFontOfSize:13];
+    [self.dateLab sizeToFit];
     
 }
 

@@ -8,6 +8,7 @@
 
 #import "ConsultViewController.h"
 #import "consultPageCell.h"
+#import "SpecialCollectionViewCell.h"
 #import "counselorInfoModel.h"
 #import "CounselorInfoVC.h"
 #import "GQUserManager.h"
@@ -28,7 +29,7 @@
 #import "ChatListViewController.h"
 
 
-@interface ConsultViewController ()<ZLDropDownMenuDelegate, ZLDropDownMenuDataSource, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@interface ConsultViewController ()<ZLDropDownMenuDelegate, ZLDropDownMenuDataSource, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray <counselorInfoModel  *> *counselorArr;
 
@@ -48,6 +49,7 @@
 @property ZLDropDownMenu *menu;
 @property (nonatomic, strong) UIScrollView        *classifiedSectionFirstLine;
 @property (nonatomic, strong) UITableView         *counselorInfoTableview;
+@property (nonatomic, strong) UICollectionView    *mainCollectionView;
 @property (nonatomic, strong) UILabel             *noDataLab;
 @property (nonatomic, strong) UIView              *mainHeadView;
 
@@ -69,6 +71,7 @@
     [self customSearchBar];
     [self customNavigation];
     [self creatTableView];
+//    [self creatCollectionView];
     
     [self relodeDate];
     [self setupMJRefresh];
@@ -124,23 +127,11 @@
     self.navigationItem.backBarButtonItem.title = @"";
 }
 
-//- (UIBarButtonItem *)customBackItemWithTarget:(id)target
-//                                       action:(SEL)action {
-//    
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-//    [btn setFrame:CGRectMake(0, 0, 20, 20)];
-//    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-//    return item;
-//}
-
 - (void)selRightButton {
     
     ChatListViewController *chatListVc  = [[ChatListViewController alloc]init];
     chatListVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:chatListVc animated:YES];
-    
 }
 
 #pragma mark - 获取Date
@@ -321,14 +312,11 @@
     [_subTitleArray addObject:_counselorTitleArr];
     [_subTitleArray addObject:_priceDataSource];
 
-    
     _menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, deviceWidth(), 50.f)];
-//    _menu.bounds = CGRectMake(0, statusBar_H + navigationBar_H, deviceWidth(), 50.f);
     _menu.delegate = self;
     _menu.dataSource = self;
-    [self.view addSubview:_menu];
-//    _counselorInfoTableview.tableHeaderView = _menu;
-//    [self.navigationItem.titleView addSubview:_menu];
+//    [_counselorInfoTableview.tableHeaderView addSubview:_menu];
+    _counselorInfoTableview.tableHeaderView = _menu;
 
 }
 
@@ -353,7 +341,7 @@
 // ZLDropDownMenuDelegate
 - (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
     NSArray *array = self.subTitleArray[indexPath.column];
-    NSLog(@"r:%@,c:%d", array[indexPath.row],indexPath.column);
+    NSLog(@"r:%@,c:%d", array[indexPath.row],indexPath.row);
     if (indexPath.column == 0) {
 //        [_requestParams setValue:array[indexPath.row] forKey:@"enumPsyCategory"];
         NSArray *categoryKeyArr = _counselorCategoryDic.allKeys;
@@ -369,6 +357,20 @@
                 [_requestParams setValue:key forKey:@"enumUserTitle"];
             }
         }
+    } else {
+        if (indexPath.row == 0) {
+            [_requestParams removeObjectForKey:@"MinFee"];
+            [_requestParams removeObjectForKey:@"MaxFee"];
+        } else if (indexPath.row == 1) {
+            [_requestParams setValue:@(0) forKey:@"MinFee"];
+            [_requestParams setValue:@(500) forKey:@"MaxFee"];
+        } else if (indexPath.row == 2) {
+            [_requestParams setValue:@(500) forKey:@"MinFee"];
+            [_requestParams setValue:@(1000) forKey:@"MaxFee"];
+        } else if (indexPath.row == 3) {
+            [_requestParams setValue:@(1000) forKey:@"MinFee"];
+            [_requestParams removeObjectForKey:@"MaxFee"];
+        }
     }
     
     [self getCounsultListSource];
@@ -376,11 +378,72 @@
     
 }
 
+#pragma mark - 创建CollectionView
+- (void)creatCollectionView {
+    
+    //流式布局对象--用来布局的
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    
+    //创建集合视图--用flowLayout来布局
+    _mainCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, 85) collectionViewLayout:flowLayout];
+    [self.view addSubview:_mainCollectionView];
+    _mainCollectionView.dataSource = self;
+    _mainCollectionView.delegate = self;
+    _mainCollectionView.backgroundColor = [UIColor whiteColor];
+    
+    [_mainCollectionView registerNib:[UINib nibWithNibName:@"SpecialCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"SpecialCollectionViewCell"];
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 5;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    //先复用，如果复用失败会自动创建
+    SpecialCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SpecialCollectionViewCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
+//    cell.backgroundView.layer.shadowColor = [UIColor blackColor].CGColor;
+//    cell.backgroundView.layer.shadowOpacity = 0.8f;
+//    cell.backgroundView.layer.shadowRadius = 4.f;
+//    cell.backgroundView.layer.shadowOffset = CGSizeMake(4, 4);
+    
+    return cell;
+}
+
+#pragma mark flowLayout协议方法
+//返回cell的大小
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return CGSizeMake(130, 75);
+}
+
+//当前组相对于上下左右cell的偏移的距离
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(5, 10, 5, 5);
+}
+
+//返回最小行间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return 20;
+}
+
+//返回最小列间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return 5;
+}
+
+
+
+
+
 #pragma mark - 创建tabview
 - (void)creatTableView {
     
-//    NSLog(@"高度：%f",self.navigationController.navigationBar.bottom);
-    _counselorInfoTableview                 = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H + 50, SCREEN_W, SCREEN_H - statusBar_H - navigationBar_H - tabBar_H) style:UITableViewStylePlain];
+    NSLog(@"高度：%f",self.searchBar.bottom);
+    _counselorInfoTableview                 = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H + 0, SCREEN_W, SCREEN_H - statusBar_H - navigationBar_H - tabBar_H) style:UITableViewStylePlain];
     _counselorInfoTableview.dataSource      = self;
     _counselorInfoTableview.delegate        = self;
     _counselorInfoTableview.backgroundColor = [UIColor snowColor];
@@ -473,7 +536,6 @@
     [view.layer addAnimation:animation forKey:@"scale-layer"];
     
 }
-
 
 
 - (void)didReceiveMemoryWarning {

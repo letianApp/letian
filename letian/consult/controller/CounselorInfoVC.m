@@ -8,10 +8,13 @@
 
 #import "CounselorInfoVC.h"
 #import "ConfirmPageCell.h"
+#import "ThankLetterCell.h"
+#import "UserLetterModel.h"
 #import "ConfirmPageVC.h"
 #import "CYLTabBarController.h"
 #import "ChatViewController.h"
 #import "RCDCustomerServiceViewController.h"
+#import "RegistViewController.h"
 
 #import "GQUserManager.h"
 #import "LoginViewController.h"
@@ -19,9 +22,38 @@
 #import "UIImageView+WebCache.h"
 #import "Colours.h"
 #import "UIImage+ImageEffects.h"
+#import "TDImageColors.h"
+//#import "UIImage+MostColor.h"
+
 
 #import "GQActionSheet.h"
 #import <UShareUI/UShareUI.h>
+
+static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
+{
+    float min, max, delta;
+    min = MIN( r, MIN( g, b ));
+    max = MAX( r, MAX( g, b ));
+    *v = max;               // v
+    delta = max - min;
+    if( max != 0 )
+        *s = delta / max;       // s
+    else {
+        // r = g = b = 0        // s = 0, v is undefined
+        *s = 0;
+        *h = -1;
+        return;
+    }
+    if( r == max )
+        *h = ( g - b ) / delta;     // between yellow & magenta
+    else if( g == max )
+        *h = 2 + ( b - r ) / delta; // between cyan & yellow
+    else
+        *h = 4 + ( r - g ) / delta; // between magenta & cyan
+    *h *= 60;               // degrees
+    if( *h < 0 )
+        *h += 360;
+}
 
 
 @interface CounselorInfoVC ()<UITableViewDataSource,UITableViewDelegate>
@@ -33,6 +65,8 @@
 @property (nonatomic, strong) UITableView  *mainTableView;
 @property (nonatomic, strong) UIView       *holdView;
 @property (nonatomic, strong) UITabBar     *tabBar;
+
+@property (nonatomic, strong) NSMutableArray<UserLetterModel *> *userLetterArr;
 
 
 @end
@@ -47,9 +81,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    _userLetterArr = [NSMutableArray new];
+    
     [self customNavigation];
     [self customMainTableView];
     [self customHeadView];
+    [self getUserLetter];
     [self creatBottomBar];
 }
 
@@ -67,6 +105,8 @@
     
     if (@available(iOS 11.0, *)){
         [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
+//        NSLog(@"导航栏：%@",self.navigationController.navigationBar.subviews);
+
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
         
         UIView *containVew = [[UIView alloc] initWithFrame:btn.bounds];
@@ -148,18 +188,21 @@
 #pragma mark - 主界面tableview
 - (void)customMainTableView {
     
-    _mainTableView                    = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-tabBar_H) style:UITableViewStyleGrouped];
+    _mainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H - navigationBar_H) style:UITableViewStyleGrouped];
     [self.view addSubview:_mainTableView];
-    _mainTableView.backgroundColor    = [UIColor whiteColor];
+//    _mainTableView.backgroundColor    = [UIColor whiteColor];
     _mainTableView.delegate           = self;
     _mainTableView.dataSource         = self;
     //自动计算高度 iOS8
     _mainTableView.estimatedRowHeight = 44.0;
     _mainTableView.rowHeight          = UITableViewAutomaticDimension;
     _mainTableView.separatorStyle     = UITableViewCellSeparatorStyleNone;
+//     [_mainTableView registerClass:[ThankLetterCell class] forCellReuseIdentifier:@"ThankLetterCell"];
+    [_mainTableView registerNib:[UINib nibWithNibName:@"ThankLetterCell" bundle:nil] forCellReuseIdentifier:@"ThankLetterCell"];
+
 
     _holdView                         = [[UIView alloc]init];
-    _holdView.backgroundColor         = MAINCOLOR;
+    _holdView.backgroundColor         = [UIColor easterPinkColor];
     [_mainTableView addSubview:_holdView];
 
     if (@available(iOS 11.0, *)){
@@ -171,31 +214,108 @@
 //cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ConfirmPageCell *cell = [ConfirmPageCell cellWithTableView:tableView atIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;                        //设置cell不可以点
-    
-    NSArray *lableTagArr = [[NSArray alloc]init];
-    //EAP通道
-    if (self.counselModel.UserID == 313) {
-        lableTagArr = @[@"简介",@"服务时间",@"预约流程",@"备注"];
+    if (indexPath.section == 0) {
+        ConfirmPageCell *cell = [ConfirmPageCell cellWithTableView:tableView atIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        NSArray *lableTagArr = [[NSArray alloc]init];
+        //EAP通道
+        if (self.counselModel.UserID == 313) {
+            lableTagArr = @[@"简介",@"服务时间",@"预约流程",@"备注"];
+        } else {
+            lableTagArr = @[@"简介",@"擅长领域",@"咨询技能",@"咨询风格"];
+        }
+        cell.labelTag.text = lableTagArr[indexPath.row];
+        NSArray *detialArr = @[self.counselModel.Description,self.counselModel.Expertise,self.counselModel.Specific,self.counselModel.Idea];
+        if (NULLString(detialArr[indexPath.row])) {
+            cell.detialLab.text = @"暂无";
+        } else {
+            cell.detialLab.text = detialArr[indexPath.row];
+        }
+        
+        return cell;
+        
     } else {
-        lableTagArr = @[@"简介",@"擅长领域",@"咨询技能",@"咨询风格"];
+        ThankLetterCell *cell = nil;
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ThankLetterCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell.headImg sd_setImageWithURL:[NSURL URLWithString:_userLetterArr[indexPath.row].HeadImg]];
+        cell.nameLab.text = _userLetterArr[indexPath.row].CreatedByString;
+        NSString *timeStr = [_userLetterArr[indexPath.row].CreatedDate substringToIndex:10];
+        cell.timeLab.text = timeStr;
+        cell.detailLab.text = _userLetterArr[indexPath.row].LetterContent;
+
+
+
+        return cell;
     }
-    cell.labelTag.text = lableTagArr[indexPath.row];
-    NSArray *detialArr = @[self.counselModel.Description,self.counselModel.Expertise,self.counselModel.Specific,self.counselModel.Idea];
-    if (NULLString(detialArr[indexPath.row])) {
-        cell.detialLab.text = @"暂无";
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    if (section == 1) {
+        UIView *bgview = [[UIView alloc]init];
+        UILabel *clView = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, SCREEN_W-20, 30)];
+        clView.text = @"感谢信";
+        clView.textColor = [UIColor whiteColor];
+        clView.font = [UIFont boldSystemFontOfSize:17];
+        clView.textAlignment = NSTextAlignmentCenter;
+        clView.backgroundColor = [UIColor coralColor];
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:clView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10,10)];
+        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+        maskLayer.frame = clView.bounds;
+        maskLayer.path = maskPath.CGPath;
+        clView.layer.mask = maskLayer;
+        [bgview addSubview:clView];
+        return bgview;
     } else {
-        cell.detialLab.text = detialArr[indexPath.row];
+        return NULL;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        return 30;
+    } else {
+        return 0;
+    }
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     
-    return cell;
-    
+    if (section == 1) {
+        UIView *bgview = [[UIView alloc]init];
+        UILabel *clView = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, SCREEN_W-20, 20)];
+        clView.backgroundColor = [UIColor coralColor];
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:clView.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(10,10)];
+        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+        maskLayer.frame = clView.bounds;
+        maskLayer.path = maskPath.CGPath;
+        clView.layer.mask = maskLayer;
+        [bgview addSubview:clView];
+        return bgview;
+    } else {
+        return NULL;
+    }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 1) {
+        return 40;
+    } else {
+        return 15;
+    }
 }
 
 //行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    if (section == 1) {
+        return _userLetterArr.count;
+    } else {
+        return 4;
+    }}
+//组数
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
 }
 
 #pragma mark 头部视图
@@ -214,8 +334,17 @@
 
     UIImageView *primaryPic = [UIImageView new];
     [primaryPic sd_setImageWithURL:[NSURL URLWithString:self.counselModel.HeadImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
-    UIImage *blurImage             = [primaryPic.image blurImageWithRadius:15];
-    _headView.image                = blurImage;
+    _headView.backgroundColor = [UIColor easterPinkColor];
+    _mainTableView.backgroundColor = [UIColor easterPinkColor];
+
+//    TDImageColors *imageColors = [[TDImageColors alloc] initWithImage:primaryPic.image count:5];
+//    _headView.backgroundColor = imageColors.colors[0];
+//    _mainTableView.backgroundColor = imageColors.colors[0];
+
+    
+    
+//    UIImage *blurImage             = [primaryPic.image blurImageWithRadius:15];
+//    _headView.image                = blurImage;
 
 //咨询师头像
     UIImageView *picView = [[UIImageView alloc]init];
@@ -252,14 +381,15 @@
     [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(picView.mas_centerX);
         make.top.equalTo(picView.mas_bottom).offset(lineHeight);
-        make.width.equalTo(self.view.mas_width).multipliedBy(0.3);
+//        make.width.equalTo(self.view.mas_width).multipliedBy(0.3);
         make.height.equalTo(picView.mas_height).multipliedBy(0.25);
     }];
     nameLab.textAlignment = NSTextAlignmentCenter;
     nameLab.text = self.counselModel.UserName;
     nameLab.textColor = [UIColor whiteColor];
     nameLab.shadowOffset = CGSizeMake(0, 1);
-    nameLab.font = [UIFont systemFontOfSize:14 weight:2];
+    nameLab.font = [UIFont systemFontOfSize:17 weight:2];
+    [nameLab sizeToFit];
 //咨询师称号
     UILabel *statusLab = [[UILabel alloc]init];
     [view addSubview:statusLab];
@@ -310,7 +440,8 @@
         
 //        NSLog(@"aaa");
         [self.view addSubview:self.naviView];
-        self.naviView.image = self.headView.image;
+//        self.naviView.image = self.headView.image;
+        self.naviView.backgroundColor = [UIColor easterPinkColor];
         self.naviView.height = self.headView.height;
         self.naviView.bottom = navigationBar_H + statusBar_H;
         self.navigationItem.title = self.counselModel.UserName;
@@ -324,24 +455,51 @@
     }
 }
 
+#pragma mark 获取感谢信
+- (void)getUserLetter {
+    
+    __weak typeof(self) weakSelf = self;
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_CONSULT];
+    [requestString appendFormat:@"%@",API_NAME_GETUSERLETTER];
+    
+    NSMutableDictionary *parames = [[NSMutableDictionary alloc]init];
+    parames[@"doctorID"] = @(self.counselModel.UserID);
+    
+    [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
+    //    NSLog(@"token:%@",kFetchToken);
+    [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
+        __strong typeof(self) strongSelf = weakSelf;
+        NSLog(@"感谢：%@",responseObject);
+        strongSelf.userLetterArr = [UserLetterModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        [strongSelf.mainTableView reloadData];
+        
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+}
+
+
 #pragma mark 定制底部TabBar
 - (void)creatBottomBar {
     
-    _tabBar                            = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
+    _tabBar = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
     [self.view addSubview:_tabBar];
     //预约按钮
-    UIButton *AppointmentBtn           = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
-    AppointmentBtn.backgroundColor     = MAINCOLOR;
-//    [AppointmentBtn setBackgroundImage:[UIImage imageNamed:@"btnBackImage"] forState:UIControlStateNormal];
+    UIButton *AppointmentBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
+    AppointmentBtn.backgroundColor = [UIColor colorWithRed:253/255.0 green:216/255.0 blue:126/255.0 alpha:1];
     [AppointmentBtn setTitle:@"预约" forState:UIControlStateNormal];
     [AppointmentBtn addTarget:self action:@selector(clickAppointmentBtn) forControlEvents:UIControlEventTouchUpInside];
     [_tabBar addSubview:AppointmentBtn];
     //咨询按钮
-    UIButton *askBtn                   = [[UIButton alloc]initWithFrame:CGRectMake(15, 3, tabBar_H*2/3, tabBar_H*2/3)];
+    UIButton *askBtn = [[UIButton alloc]initWithFrame:CGRectMake(15, 3, tabBar_H*2/3, tabBar_H*2/3)];
     [_tabBar addSubview:askBtn];
     [askBtn setImage:[UIImage imageNamed:@"ask"] forState:UIControlStateNormal];
     [askBtn addTarget:self action:@selector(clickAskBrn) forControlEvents:UIControlEventTouchUpInside];
-    UILabel *askLab                    = [[UILabel alloc]initWithFrame:CGRectMake(15, tabBar_H*2/3, tabBar_H*2/3, tabBar_H/3)];
+    UILabel *askLab = [[UILabel alloc]initWithFrame:CGRectMake(15, tabBar_H*2/3, tabBar_H*2/3, tabBar_H/3)];
     [_tabBar addSubview:askLab];
     askLab.text                        = @"倾诉";
     askLab.textAlignment               = NSTextAlignmentCenter;
@@ -371,7 +529,7 @@
         make.height.equalTo(priceLab.mas_height).multipliedBy(0.5);
     }];
     couponLab.text                     = [NSString stringWithFormat:@"%@",_counselModel.ConsultTag];
-    couponLab.textColor                = [UIColor orangeColor];
+    couponLab.textColor                = [UIColor colorWithRed:253/255.0 green:216/255.0 blue:126/255.0 alpha:1];
     couponLab.textAlignment            = NSTextAlignmentRight;
     couponLab.font                     = [UIFont boldSystemFontOfSize:10];
     //EAP通道
@@ -402,7 +560,7 @@
         [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
             
             __strong typeof(self) strongSelf = weakSelf;
-            LoginViewController *loginVc     = [[LoginViewController alloc]init];
+            RegistViewController *loginVc     = [[RegistViewController alloc]init];
             loginVc.hidesBottomBarWhenPushed = YES;
             [strongSelf presentViewController:loginVc animated:YES completion:nil];
         }]];
@@ -428,7 +586,7 @@
         [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 
             __strong typeof(self) strongSelf = weakSelf;
-            LoginViewController *loginVc     = [[LoginViewController alloc]init];
+            RegistViewController *loginVc     = [[RegistViewController alloc]init];
             loginVc.hidesBottomBarWhenPushed = YES;
             [strongSelf presentViewController:loginVc animated:YES completion:nil];
         }]];
@@ -436,6 +594,68 @@
     }
 
 }
+
+- (UIColor*)mostColor:(UIImage*)image{
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_6_1
+    int bitmapInfo = kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedLast;
+#else
+    int bitmapInfo = kCGImageAlphaPremultipliedLast;
+#endif
+    
+    //第一步 先把图片缩小 加快计算速度. 但越小结果误差可能越大
+    CGSize thumbSize=CGSizeMake(100, 100);
+    
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(NULL,
+                                                 thumbSize.width,
+                                                 thumbSize.height,
+                                                 8,//bits per component
+                                                 thumbSize.width*4,
+                                                 colorSpace,
+                                                 bitmapInfo);
+    
+    CGRect drawRect = CGRectMake(0, 0, thumbSize.width, thumbSize.height);
+    CGContextDrawImage(context, drawRect, image.CGImage);
+    CGColorSpaceRelease(colorSpace);
+    
+    //第二步 取每个点的像素值
+    unsigned char* data = CGBitmapContextGetData (context);
+    
+    if (data == NULL) return nil;
+    NSArray *MaxColor=nil;
+    // NSCountedSet *cls=[NSCountedSet setWithCapacity:thumbSize.width*thumbSize.height];
+    float maxScore=0;
+    for (int x=0; x<thumbSize.width*thumbSize.height; x++) {
+        
+        int offset = 4*x;
+        int red = data[offset];
+        int green = data[offset+1];
+        int blue = data[offset+2];
+        int alpha =  data[offset+3];
+        
+        if (alpha<25)continue;
+        
+        float h,s,v;
+        
+        RGBtoHSV(red, green, blue, &h, &s, &v);
+        
+        float y = MIN(abs(red*2104+green*4130+blue*802+4096+131072)>>13, 235);
+        y= (y-16)/(235-16);
+        if (y>0.9) continue;
+        
+        float score = (s+0.1)*x;
+        if (score>maxScore) {
+            maxScore = score;
+        }
+        MaxColor=@[@(red),@(green),@(blue),@(alpha)];
+        
+    }
+    
+    CGContextRelease(context);
+    return [UIColor colorWithRed:([MaxColor[0] intValue]/255.0f) green:([MaxColor[1] intValue]/255.0f) blue:([MaxColor[2] intValue]/255.0f) alpha:([MaxColor[3] intValue]/255.0f)];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

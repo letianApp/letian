@@ -9,6 +9,7 @@
 #import "SettingViewController.h"
 #import "GQUserManager.h"
 #import "LoginViewController.h"
+#import "RegistViewController.h"
 #import "ChangePwCodeViewController.h"
 
 #import "SDImageCache.h"
@@ -90,7 +91,7 @@
         [[RCIMClient sharedRCIMClient] clearMessagesUnreadStatus:ConversationType_PRIVATE targetId:kFetchUserId];
         [GQUserManager removeAllUserInfo];
         [[RCIM sharedRCIM] logout];
-        LoginViewController *loginVc = [[LoginViewController alloc]init];
+        RegistViewController *loginVc = [[RegistViewController alloc]init];
         
         [strongSelf presentViewController:loginVc animated:YES completion:^{
             

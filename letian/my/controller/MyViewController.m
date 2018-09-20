@@ -17,6 +17,7 @@
 #import "MJExtension.h"
 #import "GQUserManager.h"
 #import "LoginViewController.h"
+#import "RegistViewController.h"
 #import "UserInfoViewController.h"
 #import <UShareUI/UShareUI.h>
 #import "GQActionSheet.h"
@@ -221,9 +222,9 @@
 #pragma mark--------点击登录
 
 -(void)loginButtonClick{
-    LoginViewController *loginVc = [[LoginViewController alloc]init];
+    RegistViewController *loginVc = [[RegistViewController alloc]init];
     loginVc.hidesBottomBarWhenPushed = YES;
-    loginVc.tabbarIndex=2;
+//    loginVc.tabbarIndex=2;
     [self presentViewController:loginVc animated:YES completion:nil];
     
 }
@@ -330,7 +331,7 @@
         [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
             
             __strong typeof(self) strongSelf = weakSelf;
-            LoginViewController *loginVc     = [[LoginViewController alloc]init];
+            RegistViewController *loginVc     = [[RegistViewController alloc]init];
             loginVc.hidesBottomBarWhenPushed = YES;
             [strongSelf presentViewController:loginVc animated:YES completion:nil];
         }]];
@@ -360,7 +361,7 @@
         [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
             
             __strong typeof(self) strongSelf = weakSelf;
-            LoginViewController *loginVc     = [[LoginViewController alloc]init];
+            RegistViewController *loginVc     = [[RegistViewController alloc]init];
             loginVc.hidesBottomBarWhenPushed = YES;
             [strongSelf presentViewController:loginVc animated:YES completion:nil];
         }]];

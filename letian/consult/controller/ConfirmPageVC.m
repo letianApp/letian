@@ -99,7 +99,7 @@
     
     self.navigationItem.title = self.counselModel.UserName;
     _orderModel.conserlorName = self.navigationItem.title;
-    [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
+//    [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
     self.navigationController.navigationBar.clipsToBounds = YES;
     
     

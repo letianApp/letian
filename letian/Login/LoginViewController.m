@@ -142,10 +142,8 @@
             
             [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
                 
-                NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
-//                NSLog(@"ID：%@",kFetchUserId);
-                
-                [strongSelf dismissViewControllerAnimated:YES completion:nil];
+                [strongSelf.presentingViewController.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+
 
             } error:^(RCConnectErrorCode status) {
 //                NSLog(@"登陆的错误码为:%ld", (long)status);
@@ -192,26 +190,13 @@
 }
 
 
--(void)registBtnClicked
-{
-    
-    RegistViewController *registVc=[[RegistViewController alloc]init];
-    
-    [self presentViewController:registVc animated:YES completion:nil];
-    
+-(void)registBtnClicked {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 //不登录随便看看
 - (IBAction)doNotLogin:(id)sender {
-    
-//    CustomCYLTabBar *tabBarController = [[CustomCYLTabBar alloc] init];
-//    
-//    [UIApplication sharedApplication].keyWindow.rootViewController = tabBarController.tabBarController;
-//    
-//    tabBarController.tabBarController.selectedIndex = self.tabbarIndex;
-        
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
+    [self.presentingViewController.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 
 //点击忘记密码

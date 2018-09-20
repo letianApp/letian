@@ -78,6 +78,9 @@
 //登录
 #define API_NAME_LOGIN               @"Login"
 
+//验证码登录
+#define API_NAME_LOGINBYSMS               @"LoginBySmsCode"
+
 //忘记密码
 #define API_NAME_FORGETPW            @"ForgetPwd"
 
@@ -120,6 +123,9 @@
 //获取精选文章评论列表
 #define API_NAME_GETARTICLECOMMIT @"GetArticleCommonetList"
 
+//评论文章
+#define API_NAME_DOARTICLECOMMIT @"DoArticleCommentReply"
+
 //获取咨询师类型
 #define API_NAME_GETCONSULTTITLELIST  @"GetUserPsyAndTitleList"
 
@@ -131,6 +137,9 @@
 
 //获取咨询师详情
 #define API_NAME_GETCONSULTINFO @"GetConsultDoctorInfo"
+
+//获取咨询师感谢信
+#define API_NAME_GETUSERLETTER @"GetUserLetterList"
 
 //获取咨询师在某个月份的咨询情况和设置信息
 #define API_NAME_GETCONSULTSETFORMONTH @"GetMonthCousultListInfo"

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -76,13 +76,13 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7W-ik-ur4">
-                    <rect key="frame" x="230" y="352" width="90" height="30"/>
+                    <rect key="frame" x="215" y="352" width="105" height="30"/>
                     <color key="backgroundColor" red="0.89019607840000003" green="0.43529411759999997" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="GnP-ll-M22"/>
-                        <constraint firstAttribute="width" constant="90" id="T99-th-JoF"/>
+                        <constraint firstAttribute="width" constant="105" id="T99-th-JoF"/>
                     </constraints>
-                    <state key="normal" title="注册">
+                    <state key="normal" title="验证码登录">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
@@ -142,7 +142,7 @@
                 <constraint firstItem="rfl-wl-QRl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="xMY-Te-it4"/>
                 <constraint firstAttribute="trailing" secondItem="rfl-wl-QRl" secondAttribute="trailing" constant="45" id="zTx-ZJ-gFB"/>
             </constraints>
-            <point key="canvasLocation" x="-560" y="-97"/>
+            <point key="canvasLocation" x="-560.5" y="-97.5"/>
         </view>
     </objects>
 </document>

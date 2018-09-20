@@ -42,6 +42,7 @@
 #import "FirstViewController.h"
 #import "ConsultViewController.h"
 #import "MyViewController.h"
+#import "RegistViewController.h"
 
 #import <RongIMKit/RongIMKit.h>
 #import "WXApi.h"
@@ -151,9 +152,7 @@
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController*)viewController {
     
     if ([viewController.tabBarItem.title isEqualToString:@"咨询"]) {
-//        NSLog(@"tabbar登录:%d",[GQUserManager isHaveLogin]);
         if (![GQUserManager isHaveLogin]) {
-            //未登录
             UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
             [self.window.rootViewController presentViewController:alertControl animated:YES completion:nil];
            
@@ -163,15 +162,13 @@
                 
                 __strong typeof(self) strongSelf = weakSelf;
 
-                LoginViewController *loginVc = [[LoginViewController alloc]init];
+                RegistViewController *loginVc     = [[RegistViewController alloc]init];
                 loginVc.hidesBottomBarWhenPushed = YES;
                 [strongSelf.window.rootViewController presentViewController:loginVc animated:YES completion:nil];
             }]];
             [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
             return NO;
-
         }
-        
     }
 
     return YES;

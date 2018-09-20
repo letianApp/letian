@@ -238,13 +238,16 @@
 
     }else if (self.orderList[indexPath.row].EnumOrderState==10){
         //已完成
-        [cell.stateButton setTitle:@"已完成" forState:UIControlStateNormal];
-        cell.stateButton.userInteractionEnabled=NO;
+        [cell.stateButton setTitle:@"写感谢信" forState:UIControlStateNormal];
+//        cell.stateButton.userInteractionEnabled = NO;
+        cell.stateButton.layer.borderColor = MAINCOLOR.CGColor;
+        [cell.stateButton addTarget:self action:@selector(clickUserLetterBtn:) forControlEvents:UIControlEventTouchUpInside];
         cell.askBtn.hidden = YES;
+        
     }else if (self.orderList[indexPath.row].EnumOrderState==15){
         //退款中
         [cell.stateButton setTitle:@"退款中" forState:UIControlStateNormal];
-        cell.stateButton.userInteractionEnabled=NO;
+        cell.stateButton.userInteractionEnabled = NO;
         cell.askBtn.hidden = YES;
 
     }else if (self.orderList[indexPath.row].EnumOrderState==30){
@@ -294,6 +297,11 @@
 //    NSLog(@"token------%@",kFetchToken);
     [self.navigationController pushViewController:payVc animated:YES];
 }
+
+- (void)clickUserLetterBtn:(UIButton *)btn {
+    
+}
+
 #pragma mark------跳到订单详情
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
