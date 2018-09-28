@@ -14,6 +14,8 @@
 		090AC55B214668BD0018835B /* SpecialCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 090AC559214668BD0018835B /* SpecialCollectionViewCell.xib */; };
 		09106FA41EDFBE8700F5E676 /* ico_make.png in Resources */ = {isa = PBXBuildFile; fileRef = 09106FA11EDFBE8700F5E676 /* ico_make.png */; };
 		09106FA51EDFBE8700F5E676 /* JSDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 09106FA31EDFBE8700F5E676 /* JSDropDownMenu.m */; };
+		091634F3215CDA3700507E56 /* ActiveUrlVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 091634F1215CDA3700507E56 /* ActiveUrlVC.m */; };
+		091634F4215CDA3700507E56 /* ActiveUrlVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 091634F2215CDA3700507E56 /* ActiveUrlVC.xib */; };
 		091991791EC9950E007AEC8F /* RCDCustomerServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 091991781EC9950E007AEC8F /* RCDCustomerServiceViewController.m */; };
 		0932B85C1ED2B04D00C8131E /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0932B85B1ED2B04D00C8131E /* ServiceModel.m */; };
 		093338C521523BB20006584F /* UserLetterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 093338C421523BB20006584F /* UserLetterModel.m */; };
@@ -267,6 +269,9 @@
 		09106FA11EDFBE8700F5E676 /* ico_make.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_make.png; sourceTree = "<group>"; };
 		09106FA21EDFBE8700F5E676 /* JSDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDropDownMenu.h; sourceTree = "<group>"; };
 		09106FA31EDFBE8700F5E676 /* JSDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDropDownMenu.m; sourceTree = "<group>"; };
+		091634F0215CDA3700507E56 /* ActiveUrlVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActiveUrlVC.h; sourceTree = "<group>"; };
+		091634F1215CDA3700507E56 /* ActiveUrlVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActiveUrlVC.m; sourceTree = "<group>"; };
+		091634F2215CDA3700507E56 /* ActiveUrlVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveUrlVC.xib; sourceTree = "<group>"; };
 		091991771EC9950E007AEC8F /* RCDCustomerServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCustomerServiceViewController.h; sourceTree = "<group>"; };
 		091991781EC9950E007AEC8F /* RCDCustomerServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCustomerServiceViewController.m; sourceTree = "<group>"; };
 		0932B85A1ED2B04D00C8131E /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceModel.h; path = letian/chat/controller/ServiceModel.h; sourceTree = SOURCE_ROOT; };
@@ -1560,6 +1565,9 @@
 				77A17B821E7FA20B00569558 /* ActivityListViewController.m */,
 				7787B30B1EADACC300306527 /* ActivityDetailViewController.h */,
 				7787B30C1EADACC300306527 /* ActivityDetailViewController.m */,
+				091634F0215CDA3700507E56 /* ActiveUrlVC.h */,
+				091634F1215CDA3700507E56 /* ActiveUrlVC.m */,
+				091634F2215CDA3700507E56 /* ActiveUrlVC.xib */,
 				77EF532C1EE5A9A2001B5C70 /* AboutViewController.h */,
 				77EF532D1EE5A9A2001B5C70 /* AboutViewController.m */,
 				77EF532E1EE5A9A2001B5C70 /* AboutViewController.xib */,
@@ -1988,6 +1996,7 @@
 				77DA5DCE1E666B92003FAE0C /* LoginViewController.xib in Resources */,
 				7722F09A1EB4500B001DCF5F /* LICENSE in Resources */,
 				094FC5171E8CE1D500BFFBBB /* AboutUsPageVC.xib in Resources */,
+				091634F4215CDA3700507E56 /* ActiveUrlVC.xib in Resources */,
 				77EF53301EE5A9A2001B5C70 /* AboutViewController.xib in Resources */,
 				09FBE0281E70FE12003452A6 /* CounselorInfoVC.xib in Resources */,
 				77EF53321EE9393E001B5C70 /* 注册协议.pdf in Resources */,
@@ -2095,6 +2104,7 @@
 				7769CA601E8253D000646619 /* TestListModel.m in Sources */,
 				0970CFF51E5180DF007480CB /* MyViewController.m in Sources */,
 				77D2BFA61E67D6A9000B9978 /* ForgetPwViewController.m in Sources */,
+				091634F3215CDA3700507E56 /* ActiveUrlVC.m in Sources */,
 				77D07EED1E9637CC00904AD9 /* ActiveModel.m in Sources */,
 				77FF30331EA06EFD00F3A1C9 /* WebArticleModel.m in Sources */,
 				7787B3A61EB18DDA00306527 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m in Sources */,

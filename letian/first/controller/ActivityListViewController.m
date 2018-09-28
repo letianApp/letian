@@ -14,6 +14,10 @@
 #import "ActivityDetailViewController.h"
 #import "UIImageView+WebCache.h"
 #import "AboutViewController.h"
+#import "ActiveUrlVC.h"
+
+
+
 @interface ActivityListViewController ()<WKNavigationDelegate,WKUIDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *tableview;
@@ -70,8 +74,7 @@
 
 #pragma mark-------获取活动列表
 
--(void)requestData
-{
+- (void)requestData {
     self.pageIndex=1;
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
@@ -79,25 +82,25 @@
     [requestString appendString:API_NAME_GETACTIVELISTBYTYPE];
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    params[@"pageIndex"]=@(self.pageIndex);
-    params[@"pageSize"]=@(10);
-    params[@"enumActiveType"]=@(11);
+    params[@"pageIndex"] = @(self.pageIndex);
+    params[@"pageSize"] = @(10);
+    params[@"enumActiveType"] = @(11);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
         [weakSelf.tableview.mj_header endRefreshing];
-        weakSelf.activeListArray=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        weakSelf.activeListArray = [ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         if (weakSelf.activeListArray.count >= 10) {
             weakSelf.tableview.mj_footer.hidden = NO;
         }else{
             weakSelf.tableview.mj_footer.hidden=YES;
         }
+
         [_tableview reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [weakSelf.tableview.mj_header endRefreshing];
         [MBHudSet dismiss:self.view];
-        NSLog(@"?????%@",error);
         
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
@@ -123,7 +126,7 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-        NSArray *array=[ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        NSArray *array = [ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         if (array.count >= 10) {
             weakSelf.tableview.mj_footer.hidden = NO;
             [weakSelf.tableview.mj_footer endRefreshing];
@@ -174,19 +177,20 @@
 #pragma mark-------cell定制
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ActivityCell *cell = [ActivityCell cellWithTableView:tableView];
-    [cell.mainImageView sd_setImageWithURL:[NSURL URLWithString:self.activeListArray[indexPath.row].ArticleImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
-    cell.mainImageView.contentMode=UIViewContentModeScaleAspectFill;
-    cell.mainImageView.clipsToBounds=YES;
-    cell.titleLabel.text=self.activeListArray[indexPath.row].ArticleName;
+    [cell.mainImageView sd_setImageWithURL:[NSURL URLWithString:self.activeListArray[indexPath.row].ActiveImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
+    
+    cell.mainImageView.contentMode = UIViewContentModeScaleAspectFill;
+    cell.mainImageView.clipsToBounds = YES;
+    cell.titleLabel.text = self.activeListArray[indexPath.row].Name;
     
     return cell;
 }
 
 #pragma mark-------跳到活动详情
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    ActivityDetailViewController *detailVc=[[ActivityDetailViewController alloc] init];
-    detailVc.activeModel=self.activeListArray[indexPath.item];
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ActiveUrlVC *detailVc = [[ActiveUrlVC alloc] init];
+    detailVc.activeModel = self.activeListArray[indexPath.item];
     [self.navigationController pushViewController:detailVc animated:YES];
 }
 

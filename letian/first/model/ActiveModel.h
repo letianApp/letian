@@ -22,5 +22,11 @@
 @property(nonatomic,assign)NSInteger IsAbort;//
 @property(nonatomic,copy)NSString *ArticleImg;
 @property(nonatomic,copy)NSString *ArticleUrl;
+@property(nonatomic,copy)NSString *Name;
+@property(nonatomic,copy)NSString *ActiveImg;
+@property(nonatomic,copy)NSString *ActiveUrl;
+
+
+
 
 @end

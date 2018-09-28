@@ -12,8 +12,14 @@
 #import "UIImageView+WebCache.h"
 #import <UShareUI/UShareUI.h>
 #import "GQActionSheet.h"
+#import <WebKit/WebKit.h>
 
-@interface ActivityDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@interface ActivityDetailViewController ()<UITableViewDelegate,UITableViewDataSource, WKUIDelegate,WKNavigationDelegate>
+
+
+@property (nonatomic,strong) WKWebView *webView;
+@property (nonatomic,strong) UIView *bgView;
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) UILabel *detailLabel;
@@ -24,28 +30,101 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets=NO;
-    [self setUpNavigationBar];
-    [self creatTableView];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+//    [self setUpNavigationBar];
+//    [self creatTableView];
 //    [self requestData];
+    
+    self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.activeModel.ActiveUrl]]];
+    [self.view addSubview:self.webView];
+    self.webView.UIDelegate = self;
+    self.webView.navigationDelegate = self;
+    [self.webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
+
+//    self.bgView = [[UIView alloc]initWithFrame:self.view.bounds];
+//    _bgView.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:_bgView];
+//    [MBHudSet showStatusOnView:self.view];
+    
+}
+
+#pragma mark - WKNavigationDelegate
+// 页面开始加载时调用
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+    
+}
+// 当内容开始返回时调用
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
+    
+}
+// 页面加载完成之后调用
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
+    
+//    [self.bgView removeFromSuperview];
+//    [MBHudSet dismiss:self.view];
+}
+// 页面加载失败时调用
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
+    
+}
+// 接收到服务器跳转请求之后调用
+- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation{
+    
+}
+// 在收到响应后，决定是否跳转
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
+    
+    NSLog(@"%@",navigationResponse.response.URL.absoluteString);
+    //允许跳转
+    decisionHandler(WKNavigationResponsePolicyAllow);
+    //不允许跳转
+    //decisionHandler(WKNavigationResponsePolicyCancel);
+}
+// 在发送请求之前，决定是否跳转
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
+    
+    NSLog(@"%@",navigationAction.request.URL.absoluteString);
+    //允许跳转
+    decisionHandler(WKNavigationActionPolicyAllow);
+    //不允许跳转
+    //decisionHandler(WKNavigationActionPolicyCancel);
+}
+#pragma mark - WKUIDelegate
+// 创建一个新的WebView
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
+    return [[WKWebView alloc]init];
+}
+// 输入框
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler{
+    completionHandler(@"http");
+}
+// 确认框
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler{
+    completionHandler(YES);
+}
+// 警告框
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
+    NSLog(@"%@",message);
+    completionHandler();
 }
 
 
--(void)creatTableView
-{
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H-64) style:UITableViewStylePlain];
+-(void)creatTableView {
+    
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H-64) style:UITableViewStylePlain];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.showsVerticalScrollIndicator=NO;
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
-    UIView *bgView=[GQControls createViewWithFrame:CGRectMake(0, 0, SCREEN_W, 100) andBackgroundColor:[UIColor whiteColor]];
+    UIView *bgView = [GQControls createViewWithFrame:CGRectMake(0, 0, SCREEN_W, 100) andBackgroundColor:[UIColor whiteColor]];
     
-    UILabel *headLabel=[GQControls createLabelWithFrame:CGRectMake(20, 20, SCREEN_W-40, 50) andText:self.activeModel.ArticleName andTextColor:[UIColor blackColor] andFontSize:20];
+    UILabel *headLabel = [GQControls createLabelWithFrame:CGRectMake(20, 20, SCREEN_W-40, 50) andText:self.activeModel.Name andTextColor:[UIColor blackColor] andFontSize:20];
 //    headLabel.textAlignment=NSTextAlignmentCenter;
-    headLabel.numberOfLines=0;
-    headLabel.font=[UIFont boldSystemFontOfSize:20];
+    headLabel.numberOfLines = 0;
+    headLabel.font = [UIFont boldSystemFontOfSize:20];
     [bgView addSubview:headLabel];
     
     UILabel *creatTimeLabel=[GQControls createLabelWithFrame:CGRectMake(20, 70, SCREEN_W-40, 20) andText:self.activeModel.CreatedDate andTextColor:[UIColor darkGrayColor] andFontSize:12];
@@ -68,7 +147,7 @@
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     if (indexPath.row==0) {
         UIImageView *mainImageView=[[UIImageView alloc]initWithFrame:CGRectMake(10, 0,SCREEN_W-20 , SCREEN_W*0.6)];
-        [mainImageView sd_setImageWithURL:[NSURL URLWithString:self.activeModel.ArticleImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
+        [mainImageView sd_setImageWithURL:[NSURL URLWithString:self.activeModel.ActiveImg] placeholderImage:[UIImage imageNamed:@"mine_bg"]];
         [cell.contentView addSubview:mainImageView];
         return cell;
     }else if (indexPath.row==1){
@@ -122,7 +201,7 @@
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
-//        NSLog(@"活动详情responseObject=%@",responseObject);
+        NSLog(@"活动详情responseObject=%@",responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
     }];
@@ -175,24 +254,35 @@
     }];
 }
 
--(void) setUpNavigationBar
-{
-    self.navigationItem.title=@"详情";
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    backButton.frame=CGRectMake(30, 12, 20, 20);
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [shareButton setImage:[UIImage imageNamed:@"pinkshare"] forState:UIControlStateNormal];
-    [shareButton addTarget:self action:@selector(shareButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    shareButton.frame=CGRectMake(30, 12, 20, 20);
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+- (UIBarButtonItem *)customBackItemWithTarget:(id)target
+                                       action:(SEL)action {
+    
+    UIButton *btn = [[UIButton alloc]init];
+    UIImageView *backView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 20, 20)];
+    backView.image = [UIImage imageNamed:@"pinkback"];
+    [btn addSubview:backView];
+    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    return item;
 }
--(void) back
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
+//-(void) setUpNavigationBar
+//{
+////    self.navigationItem.title=@"详情";
+//    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [backButton setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+//    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+//    backButton.frame=CGRectMake(30, 12, 20, 20);
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+//    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [shareButton setImage:[UIImage imageNamed:@"pinkshare"] forState:UIControlStateNormal];
+//    [shareButton addTarget:self action:@selector(shareButtonClick) forControlEvents:UIControlEventTouchUpInside];
+//    shareButton.frame=CGRectMake(30, 12, 20, 20);
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+//}
+//-(void) back
+//{
+//    [self.navigationController popViewControllerAnimated:YES];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
