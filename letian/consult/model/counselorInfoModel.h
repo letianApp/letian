@@ -61,6 +61,26 @@
 @property (nonatomic, copy  ) NSString  *Idea;
 
 /**
+ 默认咨询技能
+ */
+@property (nonatomic, copy  ) NSString  *SpecificLabelString;
+
+/**
+ 默认咨询风格
+ */
+@property (nonatomic, copy  ) NSString  *IdeaLabelString;
+
+/**
+ 默认擅长领域
+ */
+@property (nonatomic, copy  ) NSString  *ExpertiseLabelString;
+
+/**
+ 默认简介
+ */
+@property (nonatomic, copy  ) NSString  *DescriptionLabelString;
+
+/**
  咨询师单价
  */
 @property (nonatomic, assign) NSInteger  ConsultFee;

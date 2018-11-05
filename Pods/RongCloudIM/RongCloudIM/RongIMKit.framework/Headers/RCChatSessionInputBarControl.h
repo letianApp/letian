@@ -12,6 +12,7 @@
 #import "RCEmojiBoardView.h"
 #import "RCPluginBoardView.h"
 
+
 #define RC_ChatSessionInputBar_Height 50.f
 ///输入栏扩展输入的唯一标示
 #define INPUT_MENTIONED_SELECT_TAG       1000

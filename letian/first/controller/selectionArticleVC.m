@@ -145,7 +145,7 @@
     params[@"articleID"]=@(self.ID);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"详细：%@",[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"]]);
+//        NSLog(@"详细：%@",[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"]]);
         __strong typeof(self) strongSelf = weakSelf;
         if (![[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"PraiseCount"]] isEqualToString:@"0"]) {
             strongSelf.likeLab.text = [NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"PraiseCount"]];
@@ -193,7 +193,7 @@
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        NSLog(@"赞赞：%@",responseObject);
+//        NSLog(@"赞赞：%@",responseObject);
         __strong typeof(self) strongSelf = weakSelf;
         [strongSelf requestData];
         

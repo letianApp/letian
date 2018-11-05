@@ -86,6 +86,9 @@
         [[_searchBar.heightAnchor constraintEqualToConstant:44.0] setActive:YES];
     }
     _searchBar.placeholder = @"搜索咨询师";
+    UITextField *searchField = [_searchBar valueForKey:@"searchField"];
+    searchField.backgroundColor = [UIColor seashellColor];
+//    [searchField setValue:[UIColor whiteColor] forKeyPath:@"placeholderLabel.textColor"];
     _searchBar.delegate    = self;
 }
 
@@ -223,7 +226,6 @@
 
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
         
-//        NSLog(@"%@",responseObject);
         __strong typeof(self) strongSelf = weakSelf;
         [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorArr removeAllObjects];

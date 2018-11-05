@@ -28,6 +28,9 @@
         [self.chatSessionInputBarControl.pluginBoardView removeItemAtIndex:3];
     }
     
+//    self.chatSessionInputBarControl.frame = CGRectMake(0, SCREEN_H - TAB_BAR_HEIGHT, SCREEN_W, TAB_BAR_HEIGHT);
+//    self.chatSessionInputBarControl = [[RCChatSessionInputBarControl alloc]initWithFrame:CGRectMake(0, 83, SCREEN_W, 83)withContainerView:self.view controlType:0 controlStyle:0 defaultInputType:0];
+//    NSLog(@"高：%d",self.chatSessionInputBarControl.height);
     
 }
 

@@ -218,13 +218,7 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
         ConfirmPageCell *cell = [ConfirmPageCell cellWithTableView:tableView atIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        NSArray *lableTagArr = [[NSArray alloc]init];
-        //EAP通道
-        if (self.counselModel.UserID == 313) {
-            lableTagArr = @[@"简介",@"服务时间",@"预约流程",@"备注"];
-        } else {
-            lableTagArr = @[@"简介",@"擅长领域",@"咨询技能",@"咨询风格"];
-        }
+        NSArray *lableTagArr = @[self.counselModel.DescriptionLabelString,self.counselModel.ExpertiseLabelString,self.counselModel.SpecificLabelString,self.counselModel.IdeaLabelString];
         cell.labelTag.text = lableTagArr[indexPath.row];
         NSArray *detialArr = @[self.counselModel.Description,self.counselModel.Expertise,self.counselModel.Specific,self.counselModel.Idea];
         if (NULLString(detialArr[indexPath.row])) {
@@ -245,15 +239,13 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
         cell.timeLab.text = timeStr;
         cell.detailLab.text = _userLetterArr[indexPath.row].LetterContent;
 
-
-
         return cell;
     }
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    if (section == 1) {
+    if (section == 1 && self.userLetterArr.count) {
         UIView *bgview = [[UIView alloc]init];
         UILabel *clView = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, SCREEN_W-20, 30)];
         clView.text = @"感谢信";
@@ -274,7 +266,7 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 1) {
+    if (section == 1 && self.userLetterArr.count) {
         return 30;
     } else {
         return 0;
@@ -283,7 +275,7 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     
-    if (section == 1) {
+    if (section == 1 && self.userLetterArr.count) {
         UIView *bgview = [[UIView alloc]init];
         UILabel *clView = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, SCREEN_W-20, 20)];
         clView.backgroundColor = [UIColor coralColor];
@@ -470,8 +462,11 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
     //    NSLog(@"token:%@",kFetchToken);
     [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
         __strong typeof(self) strongSelf = weakSelf;
-        NSLog(@"感谢：%@",responseObject);
+//        NSLog(@"感谢：%@",responseObject);
         strongSelf.userLetterArr = [UserLetterModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+//        if (!strongSelf.userLetterArr.count) {
+//            [strongSelf.mainTableView deleteSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+//        }
         [strongSelf.mainTableView reloadData];
         
         
@@ -486,7 +481,7 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
 #pragma mark 定制底部TabBar
 - (void)creatBottomBar {
     
-    _tabBar = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
+    _tabBar = [[UITabBar alloc]initWithFrame:CGRectMake(0, SCREEN_H - TAB_BAR_HEIGHT, SCREEN_W, tabBar_H)];
     [self.view addSubview:_tabBar];
     //预约按钮
     UIButton *AppointmentBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W*2/3, 0, SCREEN_W/3, tabBar_H)];
@@ -499,9 +494,10 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
     [_tabBar addSubview:askBtn];
     [askBtn setImage:[UIImage imageNamed:@"ask"] forState:UIControlStateNormal];
     [askBtn addTarget:self action:@selector(clickAskBrn) forControlEvents:UIControlEventTouchUpInside];
-    UILabel *askLab = [[UILabel alloc]initWithFrame:CGRectMake(15, tabBar_H*2/3, tabBar_H*2/3, tabBar_H/3)];
+    UILabel *askLab = [[UILabel alloc]initWithFrame:CGRectMake(15, tabBar_H*2/3, tabBar_H, tabBar_H/3)];
     [_tabBar addSubview:askLab];
-    askLab.text                        = @"倾诉";
+    askLab.centerX = askBtn.centerX;
+    askLab.text                        = @"在线倾诉";
     askLab.textAlignment               = NSTextAlignmentCenter;
     askLab.font                        = [UIFont systemFontOfSize:10];
     askLab.textColor                   = [UIColor darkGrayColor];
@@ -513,7 +509,7 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
         make.right.equalTo(AppointmentBtn.mas_left).offset(-SCREEN_W/100);
         make.top.equalTo(_tabBar.mas_top);
         make.width.equalTo(_tabBar.mas_width).multipliedBy(0.3);
-        make.height.equalTo(_tabBar.mas_height);
+        make.height.equalTo(AppointmentBtn.mas_height);
     }];
     priceLab.textColor                 = MAINCOLOR;
     priceLab.text                      = [NSString stringWithFormat:@"%ld元／小时",_counselModel.ConsultFee];
@@ -524,7 +520,7 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
     [_tabBar addSubview:couponLab];
     [couponLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(priceLab.mas_right);
-        make.bottom.equalTo(_tabBar.mas_bottom);
+        make.bottom.equalTo(priceLab.mas_bottom);
         make.width.equalTo(priceLab.mas_width);
         make.height.equalTo(priceLab.mas_height).multipliedBy(0.5);
     }];
@@ -533,7 +529,7 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
     couponLab.textAlignment            = NSTextAlignmentRight;
     couponLab.font                     = [UIFont boldSystemFontOfSize:10];
     //EAP通道
-    if (self.counselModel.UserID == 313) {
+    if (self.counselModel.ConsultDisCount == 1) {
         couponLab.hidden = YES;
     }
     

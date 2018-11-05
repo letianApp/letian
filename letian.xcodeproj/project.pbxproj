@@ -17,6 +17,9 @@
 		091634F3215CDA3700507E56 /* ActiveUrlVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 091634F1215CDA3700507E56 /* ActiveUrlVC.m */; };
 		091634F4215CDA3700507E56 /* ActiveUrlVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 091634F2215CDA3700507E56 /* ActiveUrlVC.xib */; };
 		091991791EC9950E007AEC8F /* RCDCustomerServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 091991781EC9950E007AEC8F /* RCDCustomerServiceViewController.m */; };
+		093155DC218312FD00D66349 /* TYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 093155D8218312FC00D66349 /* TYPageControl.m */; };
+		093155DD218312FD00D66349 /* TYCyclePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093155D9218312FC00D66349 /* TYCyclePagerView.m */; };
+		093155DE218312FD00D66349 /* TYCyclePagerTransformLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 093155DA218312FC00D66349 /* TYCyclePagerTransformLayout.m */; };
 		0932B85C1ED2B04D00C8131E /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0932B85B1ED2B04D00C8131E /* ServiceModel.m */; };
 		093338C521523BB20006584F /* UserLetterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 093338C421523BB20006584F /* UserLetterModel.m */; };
 		0935872E1E94BD6A0007B1D9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0935872D1E94BD6A0007B1D9 /* AudioToolbox.framework */; };
@@ -84,6 +87,7 @@
 		098D703D1EDE8B0300AC5B09 /* AgreementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 098D703C1EDE8B0300AC5B09 /* AgreementVC.m */; };
 		098D703F1EDE998E00AC5B09 /* 知情同意书.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 098D703E1EDE998E00AC5B09 /* 知情同意书.pdf */; };
 		09AE79431EE6EC2C008B76B1 /* Default-568.png in Resources */ = {isa = PBXBuildFile; fileRef = 09AE79421EE6EC2C008B76B1 /* Default-568.png */; };
+		09B508642186AD800098ED05 /* TYCyclePagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B508632186AD800098ED05 /* TYCyclePagerViewCell.m */; };
 		09BCC64E211C30A1007872C1 /* PaletteColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BCC63E211C30A0007872C1 /* PaletteColorUtils.m */; };
 		09BCC64F211C30A1007872C1 /* Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BCC63F211C30A0007872C1 /* Palette.m */; };
 		09BCC650211C30A1007872C1 /* PaletteSwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BCC640211C30A0007872C1 /* PaletteSwatch.m */; };
@@ -274,6 +278,12 @@
 		091634F2215CDA3700507E56 /* ActiveUrlVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveUrlVC.xib; sourceTree = "<group>"; };
 		091991771EC9950E007AEC8F /* RCDCustomerServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCustomerServiceViewController.h; sourceTree = "<group>"; };
 		091991781EC9950E007AEC8F /* RCDCustomerServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCustomerServiceViewController.m; sourceTree = "<group>"; };
+		093155D6218312FC00D66349 /* TYCyclePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerView.h; sourceTree = "<group>"; };
+		093155D7218312FC00D66349 /* TYCyclePagerTransformLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerTransformLayout.h; sourceTree = "<group>"; };
+		093155D8218312FC00D66349 /* TYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYPageControl.m; sourceTree = "<group>"; };
+		093155D9218312FC00D66349 /* TYCyclePagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYCyclePagerView.m; sourceTree = "<group>"; };
+		093155DA218312FC00D66349 /* TYCyclePagerTransformLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYCyclePagerTransformLayout.m; sourceTree = "<group>"; };
+		093155DB218312FC00D66349 /* TYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYPageControl.h; sourceTree = "<group>"; };
 		0932B85A1ED2B04D00C8131E /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceModel.h; path = letian/chat/controller/ServiceModel.h; sourceTree = SOURCE_ROOT; };
 		0932B85B1ED2B04D00C8131E /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServiceModel.m; path = letian/chat/controller/ServiceModel.m; sourceTree = SOURCE_ROOT; };
 		093338C321523BB20006584F /* UserLetterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLetterModel.h; sourceTree = "<group>"; };
@@ -376,6 +386,8 @@
 		098D703C1EDE8B0300AC5B09 /* AgreementVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreementVC.m; sourceTree = "<group>"; };
 		098D703E1EDE998E00AC5B09 /* 知情同意书.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "知情同意书.pdf"; sourceTree = "<group>"; };
 		09AE79421EE6EC2C008B76B1 /* Default-568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568.png"; sourceTree = "<group>"; };
+		09B508622186AD800098ED05 /* TYCyclePagerViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerViewCell.h; sourceTree = "<group>"; };
+		09B508632186AD800098ED05 /* TYCyclePagerViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYCyclePagerViewCell.m; sourceTree = "<group>"; };
 		09BCC63C211C30A0007872C1 /* iOSPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSPalette.h; sourceTree = "<group>"; };
 		09BCC63E211C30A0007872C1 /* PaletteColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteColorUtils.m; sourceTree = "<group>"; };
 		09BCC63F211C30A0007872C1 /* Palette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Palette.m; sourceTree = "<group>"; };
@@ -833,6 +845,19 @@
 			path = JSDropDownMenu;
 			sourceTree = "<group>";
 		};
+		093155D5218312FC00D66349 /* TYCyclePagerView */ = {
+			isa = PBXGroup;
+			children = (
+				093155D6218312FC00D66349 /* TYCyclePagerView.h */,
+				093155D7218312FC00D66349 /* TYCyclePagerTransformLayout.h */,
+				093155D8218312FC00D66349 /* TYPageControl.m */,
+				093155D9218312FC00D66349 /* TYCyclePagerView.m */,
+				093155DA218312FC00D66349 /* TYCyclePagerTransformLayout.m */,
+				093155DB218312FC00D66349 /* TYPageControl.h */,
+			);
+			path = TYCyclePagerView;
+			sourceTree = "<group>";
+		};
 		093587431E94C14F0007B1D9 /* chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -1062,6 +1087,8 @@
 				77FF30341EA0705F00F3A1C9 /* WebArticleCell.h */,
 				77FF30351EA0705F00F3A1C9 /* WebArticleCell.m */,
 				77FF30361EA0705F00F3A1C9 /* WebArticleCell.xib */,
+				09B508622186AD800098ED05 /* TYCyclePagerViewCell.h */,
+				09B508632186AD800098ED05 /* TYCyclePagerViewCell.m */,
 				77EF53241EE53123001B5C70 /* ActivityCell.h */,
 				77EF53251EE53123001B5C70 /* ActivityCell.m */,
 				77EF53261EE53123001B5C70 /* ActivityCell.xib */,
@@ -1686,6 +1713,7 @@
 				77B5BD3D1EADA6A50034497D /* GQControls.m */,
 				09BCC660211D7CDA007872C1 /* UIImage+MostColor.h */,
 				09BCC661211D7CDA007872C1 /* UIImage+MostColor.m */,
+				093155D5218312FC00D66349 /* TYCyclePagerView */,
 				09BCC656211D751B007872C1 /* TDImageColors */,
 				09E9AD44208EEB81007B432A /* ZLDropDownMenu */,
 				09106FA01EDFBE8700F5E676 /* JSDropDownMenu */,
@@ -2072,6 +2100,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				093155DD218312FD00D66349 /* TYCyclePagerView.m in Sources */,
 				7787B36F1EAEF2FE00306527 /* RSADataSigner.m in Sources */,
 				7787B3A81EB18DDA00306527 /* WXApiRequestHandler.m in Sources */,
 				779C4DDE1EBEF74700EBEDE9 /* OrderPayDetailCell.m in Sources */,
@@ -2184,6 +2213,8 @@
 				09420AB02091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				7722F0931EB4500B001DCF5F /* DTConstants.m in Sources */,
 				09BCC64F211C30A1007872C1 /* Palette.m in Sources */,
+				093155DE218312FD00D66349 /* TYCyclePagerTransformLayout.m in Sources */,
+				093155DC218312FD00D66349 /* TYPageControl.m in Sources */,
 				7722F0991EB4500B001DCF5F /* NSDate+DateTools.m in Sources */,
 				09BCC64E211C30A1007872C1 /* PaletteColorUtils.m in Sources */,
 				77FF30371EA0705F00F3A1C9 /* WebArticleCell.m in Sources */,
@@ -2197,6 +2228,7 @@
 				776CF2BF1EB795CD00CE9620 /* DrawCircleProgressButton.m in Sources */,
 				77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */,
 				7722F0941EB4500B001DCF5F /* DTError.m in Sources */,
+				09B508642186AD800098ED05 /* TYCyclePagerViewCell.m in Sources */,
 				77EF53351EE93A03001B5C70 /* AgreeRegistVC.m in Sources */,
 				77D07EE41E962D2A00904AD9 /* ChangePwViewController.m in Sources */,
 				7787B3A51EB18DDA00306527 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */,
