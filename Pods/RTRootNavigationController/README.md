@@ -5,6 +5,13 @@
 [![License](https://img.shields.io/cocoapods/l/RTRootNavigationController.svg?style=flat)](http://cocoapods.org/pods/RTRootNavigationController)
 [![Platform](https://img.shields.io/cocoapods/p/RTRootNavigationController.svg?style=flat)](http://cocoapods.org/pods/RTRootNavigationController)
 
+## iPhone X
+How many lines of code should I write to fit in iPhone X? Zero.
+
+我需要写多少代码来适配 **iPhone X**？0。
+
+![iphone-x](https://user-images.githubusercontent.com/1250207/30429339-abb20914-9989-11e7-9058-c967839315f4.gif)
+
 ## Introduction
 More and more apps use custom navigation bar for each different view controller, instead of one common, global navigation bar.
 
@@ -54,11 +61,11 @@ As an advise, please set `RTRootNavigationController` as your rootViewController
 }
 ```
 
-you can override following method to customize back bar button item (**Recommended**):
+you can implement following method to customize back bar button item (**Recommended**):
 
 ```objective-c
-- (UIBarButtonItem *)customBackItemWithTarget:(id)target
-                                       action:(SEL)action
+- (UIBarButtonItem *)rt_customBackItemWithTarget:(id)target
+                                          action:(SEL)action
 {
     return [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", nil)
                                             style:UIBarButtonItemStylePlain
@@ -71,7 +78,7 @@ or just set `useSystemBackBarButtonItem` to **YES** and use the default one.
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## __Notice__
+## __Notice__(Only for below v0.6)
 
 Your **ViewController** hierarchy will change to:
 ```
@@ -110,6 +117,10 @@ rickytan, ricky.tan.xin@gmail.com
 - [**FDFullscreenPopGesture**](https://github.com/forkingdog/FDFullscreenPopGesture)
   - 使用原生的 *UINavigationController*，在 `- (void)viewWillAppear` 中做处理
   - 支持全屏返回
+  
+## Apps Integrated
+
+* [网易美学](https://itunes.apple.com/cn/app/%E7%BD%91%E6%98%93%E7%BE%8E%E5%AD%A6-%E9%A2%9C%E5%80%BC%E6%9C%80%E9%AB%98%E7%9A%84%E7%BE%8E%E5%A6%86%E7%A4%BE%E5%8C%BA/id1147533466?mt=8)
 
 ## License
 

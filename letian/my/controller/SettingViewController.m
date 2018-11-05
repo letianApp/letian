@@ -70,7 +70,7 @@
 
 -(void)createCancelButton {
     
-    UIButton *cancalButton = [GQControls createButtonWithFrame:CGRectMake(0, SCREEN_H-44, SCREEN_W, 44) andTitle:@"退出登录" andTitleColor:[UIColor whiteColor] andFontSize:15 andBackgroundColor:MAINCOLOR];
+    UIButton *cancalButton = [GQControls createButtonWithFrame:CGRectMake(0, SCREEN_H - TAB_BAR_HEIGHT, SCREEN_W, TAB_BAR_HEIGHT) andTitle:@"退出登录" andTitleColor:[UIColor whiteColor] andFontSize:15 andBackgroundColor:MAINCOLOR];
     cancalButton.titleLabel.font=[UIFont boldSystemFontOfSize:15];
     [cancalButton addTarget:self action:@selector(cancelButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancalButton];

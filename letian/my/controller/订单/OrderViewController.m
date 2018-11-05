@@ -70,10 +70,10 @@
 #pragma mark-------创建Segment
 
 -(void)setSegment {
-    self.topView=[[UIView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_W, 50)];
+    self.topView=[[UIView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, 50)];
     [self.view addSubview:self.topView];
     
-    self.segment = [[GQSegment alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    self.segment = [[GQSegment alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 50)];
     self.segment.delegate = self;
     self.segment.backgroundColor=[UIColor whiteColor];
     [self.topView addSubview:self.segment];
@@ -155,7 +155,7 @@
 
 -(void)createTableView
 {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64+50, SCREEN_W, SCREEN_H-64-50) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H+50, SCREEN_W, SCREEN_H-64-50) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.showsVerticalScrollIndicator=NO;

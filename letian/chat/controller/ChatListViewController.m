@@ -83,7 +83,7 @@
     
     UIView *bgView = [[UIView alloc] init];
     bgView.backgroundColor = [UIColor whiteColor];
-    bgView.frame = CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, SCREEN_H);
+    bgView.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, statusBar_H + navigationBar_H)];
     [bgView addSubview:btn];

@@ -166,7 +166,6 @@
 		7787B3701EAEF2FE00306527 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B3691EAEF2FE00306527 /* RSADataVerifier.m */; };
 		7787B3711EAEF34000306527 /* AlipaySDK.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105D01E9A34FE00AC8E4F /* AlipaySDK.bundle */; };
 		7787B3741EB0746500306527 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B3731EB0746500306527 /* OrderListModel.m */; };
-		7787B3941EB188CE00306527 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7787B3901EB188CE00306527 /* libWeChatSDK.a */; };
 		7787B3961EB1896800306527 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7787B3951EB1896800306527 /* Security.framework */; };
 		7787B3A51EB18DDA00306527 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B39A1EB18DDA00306527 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7787B3A61EB18DDA00306527 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B39C1EB18DDA00306527 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -607,10 +606,6 @@
 		7787B3691EAEF2FE00306527 /* RSADataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataVerifier.m; sourceTree = "<group>"; };
 		7787B3721EB0746500306527 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
 		7787B3731EB0746500306527 /* OrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListModel.m; sourceTree = "<group>"; };
-		7787B3901EB188CE00306527 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		7787B3911EB188CE00306527 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		7787B3921EB188CE00306527 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		7787B3931EB188CE00306527 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		7787B3951EB1896800306527 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7787B3981EB18DDA00306527 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		7787B3991EB18DDA00306527 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GetMessageFromWXResp+responseWithTextOrMediaMessage.h"; sourceTree = "<group>"; };
@@ -773,7 +768,6 @@
 				0935873E1E94BE4F0007B1D9 /* Foundation.framework in Frameworks */,
 				0935873A1E94BE130007B1D9 /* libsqlite3.tbd in Frameworks */,
 				093587381E94BDF80007B1D9 /* libz.tbd in Frameworks */,
-				7787B3941EB188CE00306527 /* libWeChatSDK.a in Frameworks */,
 				093587361E94BDE70007B1D9 /* libc++.tbd in Frameworks */,
 				093587341E94BDC90007B1D9 /* ImageIO.framework in Frameworks */,
 				093587321E94BDB30007B1D9 /* MobileCoreServices.framework in Frameworks */,
@@ -1512,10 +1506,6 @@
 			isa = PBXGroup;
 			children = (
 				7787B3971EB18DDA00306527 /* WXHelper */,
-				7787B3901EB188CE00306527 /* libWeChatSDK.a */,
-				7787B3911EB188CE00306527 /* WechatAuthSDK.h */,
-				7787B3921EB188CE00306527 /* WXApi.h */,
-				7787B3931EB188CE00306527 /* WXApiObject.h */,
 			);
 			path = WechatPaySDK;
 			sourceTree = "<group>";
@@ -2434,11 +2424,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/letian/Custom/pay",
-					"$(PROJECT_DIR)/letian/Custom/WeChatSDK",
-					"$(PROJECT_DIR)/letian/Custom/WechatPaySDK",
-					"\"$(SRCROOT)/letian/Custom/WechatPaySDK/libWeChatSDK.a\"",
-					"\"$(SRCROOT)/letian/Custom/WechatPaySDK/WXApi.h\"",
-					"\"$(SRCROOT)/letian/Custom/WechatPaySDK/WXApiObject.h\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -2482,8 +2467,8 @@
 					"-l\"WeiboSDK\"",
 					"-l\"YixinSDK\"",
 					"-l\"c++\"",
-					"-l\"jcore-ios-1.1.2\"",
-					"-l\"jpush-ios-3.0.3\"",
+					"-l\"jcore-ios-1.2.5\"",
+					"-l\"jpush-ios-3.1.1\"",
 					"-l\"opencore-amrnb\"",
 					"-l\"resolv\"",
 					"-l\"sqlite3\"",
@@ -2646,11 +2631,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/letian/Custom/pay",
-					"$(PROJECT_DIR)/letian/Custom/WeChatSDK",
-					"$(PROJECT_DIR)/letian/Custom/WechatPaySDK",
-					"\"$(SRCROOT)/letian/Custom/WechatPaySDK/libWeChatSDK.a\"",
-					"\"$(SRCROOT)/letian/Custom/WechatPaySDK/WXApi.h\"",
-					"\"$(SRCROOT)/letian/Custom/WechatPaySDK/WXApiObject.h\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -2694,8 +2674,8 @@
 					"-l\"WeiboSDK\"",
 					"-l\"YixinSDK\"",
 					"-l\"c++\"",
-					"-l\"jcore-ios-1.1.2\"",
-					"-l\"jpush-ios-3.0.3\"",
+					"-l\"jcore-ios-1.2.5\"",
+					"-l\"jpush-ios-3.1.1\"",
 					"-l\"opencore-amrnb\"",
 					"-l\"resolv\"",
 					"-l\"sqlite3\"",

@@ -35,7 +35,7 @@
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDelegate,TYCyclePagerViewDataSource, TYCyclePagerViewDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) UISearchBar *searchBar;
-
+@property (nonatomic, strong) UIView *whiteView;
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) UILabel *sectionHeaderLabel;
 @property (nonatomic,strong) GQScrollView *scrollView;
@@ -44,6 +44,7 @@
 @property (nonatomic, strong) TYCyclePagerView *pagerView;
 @property (nonatomic, strong) TYPageControl *pageControl;
 @property (nonatomic, strong) NSArray *datas;
+
 
 
 @end
@@ -189,8 +190,7 @@
 
 #pragma mark-------创建TableView
 
--(void)createTableView
-{
+- (void)createTableView {
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, SCREEN_H-49) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
@@ -199,12 +199,7 @@
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
-
     self.tableView.tableHeaderView = [self createHeadBgView];
-    
-//    UILabel *footLabel=[GQControls createLabelWithFrame:CGRectMake(0, 0, SCREEN_W, 30) andText:@"没有更多内容咯～" andTextColor:MAINCOLOR andFontSize:10];
-//    footLabel.textAlignment=NSTextAlignmentCenter;
-//    self.tableView.tableFooterView=footLabel;
 
 }
 
@@ -304,15 +299,7 @@
         }
         [_tableView reloadData];
         [_pagerView reloadData];
-        
-//        NSMutableArray *imageArray = [[NSMutableArray alloc] init];
-//        for (int i = 0; i < 3; i++) {
-//            [_scrollView.imageViews[i] sd_setImageWithURL:[NSURL URLWithString:weakSelf.funnyListArray[i].ArticleImg]];
-//
-//        }
-//        [weakSelf.tableView.tableHeaderView addSubview:[self createScrollView]];
-
-
+        [_whiteView removeFromSuperview];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];
@@ -382,6 +369,7 @@
     }
     [headBgView addSubview:view];
     [self addPagerView:headBgView];
+    
 //    [self customSearchBar:headBgView];
 //    [self loadData];
     return headBgView;
@@ -451,6 +439,9 @@
     // registerClass or registerNib
     [pagerView registerClass:[TYCyclePagerViewCell class] forCellWithReuseIdentifier:@"cellId"];
     [bgView addSubview:pagerView];
+    _whiteView = [[UIView alloc]initWithFrame:pagerView.frame];
+    _whiteView.backgroundColor = [UIColor whiteColor];
+    [bgView addSubview:_whiteView];
     _pagerView = pagerView;
 }
 
