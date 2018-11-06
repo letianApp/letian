@@ -496,11 +496,16 @@
         [cell.bgImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"index_%ld",index+1]]];
     } else {
         [cell.bgImg sd_setImageWithURL:[NSURL URLWithString:self.funnyListArray[index].ArticleImg]];
+//        cell.label.text = [NSString stringWithFormat:@"%@",self.funnyListArray[index].ArticleName];
     }
-    
+    cell.layer.shadowColor = [UIColor blackColor].CGColor;
+    cell.layer.shadowOpacity = 0.8f;
+    cell.layer.shadowRadius = 2.f;
+    cell.layer.shadowOffset = CGSizeMake(0, 2);
+
 //    [cell.bgImg sd_setImageWithURL:[NSURL URLWithString:self.funnyListArray[index].ArticleImg] placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"index_%ld",index+1]]];
 //    [cell.bgImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"index_%ld",index+1]]];
-    cell.label.text = [NSString stringWithFormat:@"index->%ld",index];
+//    cell.label.text = [NSString stringWithFormat:@"index->%ld",index];
     return cell;
 }
 

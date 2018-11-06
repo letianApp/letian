@@ -66,7 +66,7 @@
         vc.title = self.articleCateList[i].CateName;
         [viewControllers addObject:vc];
     }
-    self.segment = [[GQSegmentButton alloc] initWithFrame:CGRectMake(0, 64, SCREEN_W, SCREEN_H - 64)];
+    self.segment = [[GQSegmentButton alloc] initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, SCREEN_H - 64)];
     self.segment.delegate = self;
     self.segment.btnSelectedColor = MAINCOLOR;
     self.segment.btnNormalColor = [UIColor blackColor];
