@@ -33,20 +33,22 @@
 
 @property (nonatomic, strong) NSMutableArray <counselorInfoModel  *> *counselorArr;
 
-@property (nonatomic, strong) NSDictionary        *counselorCategoryDic;
-@property (nonatomic, strong) NSDictionary        *counselorTitleDic;
+@property (nonatomic, copy  ) NSDictionary        *counselorCategoryDic;
+@property (nonatomic, copy  ) NSDictionary        *counselorTitleDic;
 @property (nonatomic, strong) NSMutableArray      *counselorCategoryArr;
 @property (nonatomic, strong) NSMutableArray      *counselorTitleArr;
 @property (nonatomic, copy  ) NSArray             *priceDataSource;
+@property (nonatomic, strong) NSMutableArray      *regionArr;
+@property (nonatomic, strong) NSMutableArray      *regionDicArr;
 @property (nonatomic, strong) NSMutableDictionary *requestParams;
 @property (nonatomic        ) NSInteger           pageIndex;
 
-@property (nonatomic, strong) NSArray             *mainTitleArray;
+@property (nonatomic, copy  ) NSArray             *mainTitleArray;
 @property (nonatomic, strong) NSMutableArray      *subTitleArray;
 @property (nonatomic, strong) NSMutableArray      *priceData;
 
 @property (nonatomic, strong) UISearchBar         *searchBar;
-@property ZLDropDownMenu *menu;
+@property (nonatomic, strong) ZLDropDownMenu      *menu;
 @property (nonatomic, strong) UIScrollView        *classifiedSectionFirstLine;
 @property (nonatomic, strong) UITableView         *counselorInfoTableview;
 @property (nonatomic, strong) UICollectionView    *mainCollectionView;
@@ -72,11 +74,20 @@
     [self customNavigation];
     [self creatTableView];
 //    [self creatCollectionView];
-    
-    [self relodeDate];
+    if (!kFetchUChoise) {
+        [_requestParams setValue:@(0) forKey:@"enumPsyCategory"];
+        [self relodeDate];
+    }
     [self setupMJRefresh];
     
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    if (kFetchUChoise) {
+        [_requestParams setValue:kFetchUChoise forKey:@"enumPsyCategory"];
+        [self relodeDate];
+    }
 }
 
 - (void)customSearchBar {
@@ -140,7 +151,6 @@
 #pragma mark - 获取Date
 - (void)relodeDate {
     
-    [_requestParams setValue:@(0) forKey:@"enumPsyCategory"];
     [_requestParams setValue:@(0) forKey:@"enumUserTitle"];
     [_requestParams removeObjectForKey:@"MinFee"];
     [_requestParams removeObjectForKey:@"MaxFee"];
@@ -158,7 +168,7 @@
     _counselorCategoryArr = [NSMutableArray new];
     _counselorTitleArr = [NSMutableArray new];
     
-    __weak typeof(self) weakSelf   = self;
+    __weak typeof(self) weakSelf = self;
     
     NSMutableString *requestConsultPsyAndTitleListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestConsultPsyAndTitleListString appendFormat:@"%@/",API_MODULE_UTILS];
@@ -171,8 +181,7 @@
         strongSelf.counselorCategoryArr = [strongSelf arrangeForKeyWithDic:strongSelf.counselorCategoryDic];
         strongSelf.counselorTitleDic = responseObject[@"Result"][@"Source"][@"UserTitleDic"];
         strongSelf.counselorTitleArr = [strongSelf arrangeForKeyWithDic:strongSelf.counselorTitleDic];
-        [strongSelf.mainHeadView removeAllSubviews];
-        [strongSelf creatClassifiedSection];
+        [strongSelf getRegionList];
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongSelf = weakSelf;
@@ -208,6 +217,46 @@
     return valuesArr;
 }
 
+- (void)getRegionList {
+    
+    __weak typeof(self) weakSelf = self;
+    _regionArr = [NSMutableArray new];
+    _regionDicArr = [NSMutableArray new];
+    
+    NSMutableString *requestConsultPsyAndTitleListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestConsultPsyAndTitleListString appendFormat:@"%@/",API_MODULE_REGION];
+    [requestConsultPsyAndTitleListString appendFormat:@"%@",API_NAME_GETBUSINESSREGIN];
+    
+    [PPNetworkHelper GET:requestConsultPsyAndTitleListString parameters:nil success:^(id responseObject) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+
+        strongSelf.regionDicArr = responseObject[@"Result"][@"Source"];
+        [strongSelf.regionArr addObject:@"全部地区"];
+        for (NSDictionary *dic in responseObject[@"Result"][@"Source"]) {
+//            NSLog (dic[@"FullName"]);
+            [strongSelf.regionArr addObject:dic[@"FullName"]];
+        }
+        
+        [strongSelf.mainHeadView removeAllSubviews];
+        [strongSelf creatClassifiedSection];
+
+    } failure:^(NSError *error) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+        //        [MBHudSet dismiss:strongSelf.view];
+        [strongSelf.counselorInfoTableview.mj_header endRefreshing];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
+        }
+        
+    }];
+    
+}
+
 #pragma mark 获取咨询师列表
 - (void)getCounsultListSource {
     
@@ -220,12 +269,8 @@
     NSMutableString *requestConsultListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestConsultListString appendFormat:@"%@/",API_MODULE_CONSULT];
     [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
-    
     [_requestParams setValue:@(_pageIndex) forKey:@"pageIndex"];
-//    NSLog(@"re:%@",_requestParams);
-
     [PPNetworkHelper GET:requestConsultListString parameters:_requestParams success:^(id responseObject) {
-        
         __strong typeof(self) strongSelf = weakSelf;
         [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorArr removeAllObjects];
@@ -282,7 +327,6 @@
         }
 
         [strongSelf.counselorArr addObjectsFromArray:moreConselor];
-//        NSLog(@"底：%ld",strongSelf.counselorArr.count);
 
         [strongSelf.counselorInfoTableview reloadData];
         
@@ -307,18 +351,20 @@
 #pragma mark - 创建分类栏
 - (void)creatClassifiedSection {
 
-    _mainTitleArray = @[@"咨询类型", @"咨询师资历", @"价格"];
+    _mainTitleArray = @[@"咨询类型", @"咨询师资历", @"价格", @"地区"];
     _priceDataSource = @[@"全部价格(元)",@"500及以下",@"500-1000",@"1000及以上"];
+//    _regionArr = @[@"全部地区",@"上海"];
     _subTitleArray = [NSMutableArray new];
     [_subTitleArray addObject:_counselorCategoryArr];
     [_subTitleArray addObject:_counselorTitleArr];
     [_subTitleArray addObject:_priceDataSource];
+    [_subTitleArray addObject:_regionArr];
 
     _menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, deviceWidth(), 50.f)];
     _menu.delegate = self;
     _menu.dataSource = self;
-//    [_counselorInfoTableview.tableHeaderView addSubview:_menu];
     _counselorInfoTableview.tableHeaderView = _menu;
+    
 
 }
 
@@ -337,13 +383,18 @@
 
 - (NSString *)menu:(ZLDropDownMenu *)menu titleForRowAtIndexPath:(ZLIndexPath *)indexPath {
     NSArray *array = self.subTitleArray[indexPath.column];
-    return array[indexPath.row];
+    if (kFetchUChoise && indexPath.column == 0 && indexPath.row == 0) {
+        NSString *vel = kFetchUChoise;
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserChoise];
+        return _counselorCategoryDic[vel];
+    } else {
+        return array[indexPath.row];
+    }
 }
 
 // ZLDropDownMenuDelegate
 - (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
     NSArray *array = self.subTitleArray[indexPath.column];
-    NSLog(@"r:%@,c:%d", array[indexPath.row],indexPath.row);
     if (indexPath.column == 0) {
 //        [_requestParams setValue:array[indexPath.row] forKey:@"enumPsyCategory"];
         NSArray *categoryKeyArr = _counselorCategoryDic.allKeys;
@@ -359,7 +410,7 @@
                 [_requestParams setValue:key forKey:@"enumUserTitle"];
             }
         }
-    } else {
+    } else if (indexPath.column == 2) {
         if (indexPath.row == 0) {
             [_requestParams removeObjectForKey:@"MinFee"];
             [_requestParams removeObjectForKey:@"MaxFee"];
@@ -373,11 +424,20 @@
             [_requestParams setValue:@(1000) forKey:@"MinFee"];
             [_requestParams removeObjectForKey:@"MaxFee"];
         }
+    } else {
+        for (int i = 0; i < _regionDicArr.count; i++) {
+            if (array[indexPath.row] == _regionDicArr[i][@"FullName"]) {
+//                NSLog(@"%@",_regionDicArr[i][@"ID"]);
+                NSInteger ID = [_regionDicArr[i][@"ID"] integerValue];
+                [_requestParams setValue:@(ID) forKey:@"RegionID"];
+                break;
+            } else {
+                [_requestParams removeObjectForKey:@"RegionID"];
+            }
+        }
     }
     
     [self getCounsultListSource];
-
-    
 }
 
 #pragma mark - 创建CollectionView
@@ -444,7 +504,6 @@
 #pragma mark - 创建tabview
 - (void)creatTableView {
     
-    NSLog(@"高度：%f",self.searchBar.bottom);
     _counselorInfoTableview                 = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H + 0, SCREEN_W, SCREEN_H - statusBar_H - navigationBar_H - tabBar_H) style:UITableViewStylePlain];
     _counselorInfoTableview.dataSource      = self;
     _counselorInfoTableview.delegate        = self;
@@ -495,6 +554,7 @@
     cell.conserlorAbout.text = _counselorArr[indexPath.row].Description;
     cell.conserlorPrice.text = [NSString stringWithFormat:@"%ld元/小时",_counselorArr[indexPath.row].ConsultFee];
     cell.conserVisitors.text = [NSString stringWithFormat:@"%@人咨询过",_counselorArr[indexPath.row].TotalConsultCount];
+    cell.conserlorRegion.text = _counselorArr[indexPath.row].RegionIDString;
     
     return cell;
     

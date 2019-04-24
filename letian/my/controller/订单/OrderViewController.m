@@ -16,6 +16,8 @@
 #import "PayPageVC.h"
 #import "UIImageView+WebCache.h"
 #import "DateTools.h"
+#import "UserLetterViewController.h"
+
 
 @interface OrderViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,SegmentDelegate>
 
@@ -97,7 +99,6 @@
 
 -(void)scrollToPage:(int)Page {
     [UIView animateWithDuration:0.3 animations:^{
-//        NSLog(@"滑动到地%i页",Page);
         if (Page==0) {
             self.orderState=AllOrder;//全部订单
         }else if (Page==1){
@@ -122,20 +123,17 @@
     [requestString appendString:API_NAME_GETORDERLIST];
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    params[@"enumOrderState"]=@(self.orderState);
+    params[@"enumOrderState"] = @(self.orderState);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
-//    NSLog(@"订单列表的token%@",kFetchToken);
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         __strong typeof(self) strongSelf = weakSelf;
 
         [strongSelf.tableView.mj_header endRefreshing];
         [MBHudSet dismiss:strongSelf.view];
-        NSLog(@"&&&&&&&&&*获取订单列表%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             [strongSelf.orderList removeAllObjects];
             strongSelf.orderList=[OrderListModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-//            NSLog(@"Msg%@",responseObject[@"Msg"]);
             [strongSelf.tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -231,10 +229,9 @@
         //已预约
         [cell.stateButton setTitle:@"已预约" forState:UIControlStateNormal];
         cell.stateButton.userInteractionEnabled=NO;
-        cell.askBtn.hidden = NO;
+        cell.askBtn.hidden = YES;
         cell.askBtn.tag = indexPath.row + 100;
         [cell.askBtn addTarget:self action:@selector(clickAskBtn:) forControlEvents:UIControlEventTouchUpInside];
-//        NSLog(@"ID:%ld",cell.askBtn.tag);
 
     }else if (self.orderList[indexPath.row].EnumOrderState==10){
         //已完成
@@ -294,12 +291,16 @@
     payVc.orderID=self.orderList[indexPath.row].OrderID;
     payVc.orderNo=self.orderList[indexPath.row].OrderNo;
     payVc.totalFee=self.orderList[indexPath.row].TotalFee;
-//    NSLog(@"token------%@",kFetchToken);
     [self.navigationController pushViewController:payVc animated:YES];
 }
 
 - (void)clickUserLetterBtn:(UIButton *)btn {
-    
+    OrderCell *cell=(OrderCell *)btn.superview.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    UserLetterViewController *userVc = [[UserLetterViewController alloc]init];
+    userVc.orderID = self.orderList[indexPath.row].OrderID;
+    [self.navigationController pushViewController:userVc animated:YES];
+
 }
 
 #pragma mark------跳到订单详情
@@ -307,8 +308,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
-    OrderDetailViewController *orderDetailVc=[[OrderDetailViewController alloc]init];
-    orderDetailVc.orderID=self.orderList[indexPath.row].OrderID;
+    OrderDetailViewController *orderDetailVc = [[OrderDetailViewController alloc]init];
+    orderDetailVc.orderID = self.orderList[indexPath.row].OrderID;
     orderDetailVc.DoctorID = self.orderList[indexPath.row].DoctorID;
     [self.navigationController pushViewController:orderDetailVc animated:YES];
 }

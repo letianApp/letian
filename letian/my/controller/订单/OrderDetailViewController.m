@@ -14,12 +14,13 @@
 #import "UIImageView+WebCache.h"
 #import "PayPageVC.h"
 #import "ChatViewController.h"
+#import "ZhiChiViewController.h"
+
 
 @interface OrderDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property(nonatomic,strong)UITableView *tableView;
-
-@property(nonatomic,strong)OrderInfoModel *orderInfoModel;
+@property(nonatomic, strong)UITableView *tableView;
+@property(nonatomic, strong)OrderInfoModel *orderInfoModel;
 
 @end
 
@@ -111,9 +112,9 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
             [payButton addTarget:self action:@selector(bottombtnClick:) forControlEvents:UIControlEventTouchUpInside];
             [bottomView addSubview:payButton];
             
-            UIButton *consultBtn = [GQControls createButtonWithFrame:CGRectMake(15, 10, 80, 30) andTitle:@"咨询" andTitleColor:MAINCOLOR andFontSize:13 andTag:ConsultButtonTag andMaskToBounds:YES andRadius:8 andBorderWidth:0.5 andBorderColor:MAINCOLOR.CGColor];
-            [consultBtn addTarget:self action:@selector(bottombtnClick:) forControlEvents:UIControlEventTouchUpInside];
-            [bottomView addSubview:consultBtn];
+//            UIButton *consultBtn = [GQControls createButtonWithFrame:CGRectMake(15, 10, 80, 30) andTitle:@"咨询" andTitleColor:MAINCOLOR andFontSize:13 andTag:ConsultButtonTag andMaskToBounds:YES andRadius:8 andBorderWidth:0.5 andBorderColor:MAINCOLOR.CGColor];
+//            [consultBtn addTarget:self action:@selector(bottombtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//            [bottomView addSubview:consultBtn];
             
             
             //已完成，退款中或已退款的订单，在此联系客服
@@ -160,12 +161,12 @@ typedef NS_ENUM(NSInteger,OrderButtonTag)
         [self finishOrder];
     }else if (btn.tag==AskButtonTag){
         //联系客服
-        ChatViewController *chatVc=[[ChatViewController alloc]init];
-        chatVc.hidesBottomBarWhenPushed = YES;
-        chatVc.conversationType = ConversationType_PRIVATE;
-        chatVc.targetId = @"12";
-        chatVc.title = @"小乐";
-        [self.navigationController pushViewController:chatVc animated:YES];
+        ZhiChiViewController *chatService = [[ZhiChiViewController alloc] init];
+        chatService.hidesBottomBarWhenPushed = YES;
+        //    chatService.conversationType = ConversationType_CUSTOMERSERVICE;
+        //    chatService.targetId = RONGYUN_SERVICE_ID;
+        chatService.title = @"乐天心理咨询";
+        [self.navigationController pushViewController:chatService animated:YES];
     } else if (btn.tag == ConsultButtonTag) {
         ChatViewController *chatVc=[[ChatViewController alloc]init];
         chatVc.hidesBottomBarWhenPushed = YES;

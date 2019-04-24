@@ -19,4 +19,6 @@
 @property(nonatomic,assign)NSInteger UserID;
 @property(nonatomic,copy)NSString *EnumUserType;//身份
 @property(nonatomic,copy)NSString *Birhtday;
+@property(nonatomic,copy)NSString *CompanyString;
+
 @end

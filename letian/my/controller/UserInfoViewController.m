@@ -15,7 +15,7 @@
 #import "GQDatePickView.h"
 
 
-@interface UserInfoViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface UserInfoViewController ()<UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSArray *dataArray;
@@ -24,10 +24,16 @@
 @property (nonatomic,strong)UILabel *sexLabel;
 @property (nonatomic,strong)UILabel *birthdayLabel;
 @property (nonatomic,strong)UILabel *phoneLabel;
+@property (nonatomic,strong)UILabel *companyLabel;
 @property (nonatomic,strong)UIButton *getCodeBtn;
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,assign) NSInteger time;
 @property (nonatomic,copy)NSString *inputPhoneStr;
+@property (nonatomic,strong) NSArray *comListArr;
+@property (nonatomic,strong) UIView *comPickBgView;
+@property (nonatomic,strong) UIPickerView *pickView;
+@property (nonatomic,assign) NSInteger selRow;
+
 
 @end
 
@@ -37,12 +43,11 @@
     [super viewDidLoad];
     self.time=60;
     
-    self.dataArray=@[@"头像",@"昵称",@"性别",@"生日"];
+    self.dataArray=@[@"头像",@"昵称",@"性别",@"生日",@"所属单位"];
+    self.comListArr = [[NSArray alloc]init];
     
     [self createTableView];
-    
     [self requestData];
-    
     [self setUpNavigationBar];
 }
 
@@ -147,10 +152,17 @@
             [cell.contentView addSubview:self.sexLabel];
         }else if (indexPath.row==3){
             //生日
-            lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
+//            lineView.frame=CGRectMake(0, 49, SCREEN_W, 1);
             self.birthdayLabel=[GQControls createLabelWithFrame:CGRectMake(SCREEN_W-190, 15, 150, 20) andText:[self.userInfoModel.Birhtday substringToIndex:11] andTextColor:[UIColor darkGrayColor] andFontSize:15];
-            self.birthdayLabel.textAlignment=NSTextAlignmentRight;
+            self.birthdayLabel.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:self.birthdayLabel];
+        } else if (indexPath.row==4) {
+            lineView.frame = CGRectMake(0, 49, SCREEN_W, 1);
+            NSLog(@"%@",self.userInfoModel.CompanyString);
+            self.companyLabel = [GQControls createLabelWithFrame:CGRectMake(SCREEN_W-190, 15, 150, 20) andText:self.userInfoModel.CompanyString andTextColor:[UIColor darkGrayColor] andFontSize:15];
+            self.companyLabel.textAlignment = NSTextAlignmentRight;
+            [cell.contentView addSubview:self.companyLabel];
+
         }
     }else if (indexPath.section==1){
         //手机号
@@ -187,6 +199,9 @@
         }else if (indexPath.row==3){
             //修改生日
             [self changeBirthday];
+        }else if (indexPath.row==4){
+            //修改单位
+            [self changeCompany];
         }
     }else{
         //绑定手机
@@ -352,7 +367,7 @@
         [MBHudSet dismiss:self.view];
 //        NSLog(@"修改生日：%@",responseObject);
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
-            self.birthdayLabel.text=birthdayStr;
+            self.birthdayLabel.text = birthdayStr;
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
@@ -364,6 +379,127 @@
         }
     }];
 
+}
+
+#pragma mark------------修改单位
+- (void)changeCompany {
+    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_UTILS];
+    [requestString appendString:@"GetCompanyList"];
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBHudSet dismiss:self.view];
+        if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
+            _comListArr = responseObject[@"Result"][@"Source"];
+            self.selRow = 0;
+            [self creatComListPick];
+
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+        }
+    }];
+}
+
+- (void)creatComListPick {
+    
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
+    bgView.backgroundColor = [UIColor colorWithWhite:0.227 alpha:0.5];
+    [self.view addSubview:bgView];
+    
+    _comPickBgView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_H - 200, SCREEN_W, 200)];
+    _comPickBgView.backgroundColor = [UIColor whiteColor];
+    [bgView addSubview:_comPickBgView];
+    
+    //确定按钮
+    UIButton *commitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    commitBtn.frame = CGRectMake(_comPickBgView.bounds.size.width - 50, 0, 40, 30);
+    commitBtn.tag = 1;
+    commitBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    [commitBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [commitBtn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
+    [commitBtn addTarget:self action:@selector(choiceComp) forControlEvents:UIControlEventTouchUpInside];
+    [_comPickBgView addSubview:commitBtn];
+    
+    //取消按钮
+    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancelBtn.frame = CGRectMake(10, 0, 40, 30);
+    cancelBtn.tag = 1;
+    cancelBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelBtn setTitleColor:MAINCOLOR forState:UIControlStateNormal];
+    [cancelBtn addTarget:self action:@selector(cancelChoiceComp) forControlEvents:UIControlEventTouchUpInside];
+    [_comPickBgView addSubview:cancelBtn];
+
+    _pickView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, _comPickBgView.height - 162, SCREEN_W, 162)];
+    _pickView.delegate = self;
+    _pickView.dataSource = self;
+    _pickView.showsSelectionIndicator = YES;
+    
+    [_comPickBgView addSubview:_pickView];
+    
+}
+
+/** 设置组件中每行的标题row:行 */
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return _comListArr[row][@"FullName"];
+    
+}
+/** 当选择某一个列中的某一行的时候会调用该方法 */
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    _selRow = row;
+}
+// 返回多少列
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+// 返回每列的行数
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return _comListArr.count;
+}
+
+- (void)choiceComp {
+    NSLog(@"%@",_comListArr[_selRow][@"ID"]);
+    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_USER];
+    [requestString appendString:@"ModifyUserCompanyID"];
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    params[@"companyID"] = _comListArr[_selRow][@"ID"];
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBHudSet dismiss:self.view];
+        if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
+            UIView *view = _comPickBgView.superview;
+            [view removeFromSuperview];
+            self.companyLabel.text = _comListArr[_selRow][@"FullName"];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBHudSet dismiss:self.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:self.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:self.view];
+        }
+    }];
+
+}
+
+- (void)cancelChoiceComp {
+    
+    UIView *view = _comPickBgView.superview;
+    [view removeFromSuperview];
+    
 }
 
 #pragma mark------------发送验证码
@@ -443,9 +579,12 @@
             [MBHudSet showText:@"请求超时" andOnView:self.view];
         } else{
             [MBHudSet showText:@"请求失败" andOnView:self.view];
-        }    }];
+        }
+    }];
     
 }
+
+
 
 #pragma mark------------输入新手机号
 

@@ -47,6 +47,8 @@
 		094229E4213D1C8700DFE628 /* ThankLetterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 094229E2213D1C8700DFE628 /* ThankLetterCell.m */; };
 		094229E5213D1C8700DFE628 /* ThankLetterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094229E3213D1C8700DFE628 /* ThankLetterCell.xib */; };
 		0945B1481E6937DF005B7560 /* CustomCYLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0945B1471E6937DF005B7560 /* CustomCYLTabBar.m */; };
+		094BD80021E4708C006E5DDA /* ZhiChiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 094BD7FE21E4708C006E5DDA /* ZhiChiViewController.m */; };
+		094BD80121E4708C006E5DDA /* ZhiChiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094BD7FF21E4708C006E5DDA /* ZhiChiViewController.xib */; };
 		094FC50C1E8CBF0D00BFFBBB /* PayPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 094FC50A1E8CBF0D00BFFBBB /* PayPageVC.m */; };
 		094FC50D1E8CBF0E00BFFBBB /* PayPageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094FC50B1E8CBF0D00BFFBBB /* PayPageVC.xib */; };
 		094FC5111E8CC1E500BFFBBB /* PayPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 094FC50F1E8CC1E500BFFBBB /* PayPageCell.m */; };
@@ -86,6 +88,11 @@
 		097105E11E9A370800AC8E4F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105E01E9A370800AC8E4F /* CFNetwork.framework */; };
 		098D703D1EDE8B0300AC5B09 /* AgreementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 098D703C1EDE8B0300AC5B09 /* AgreementVC.m */; };
 		098D703F1EDE998E00AC5B09 /* 知情同意书.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 098D703E1EDE998E00AC5B09 /* 知情同意书.pdf */; };
+		09A66393219529F300E75D3D /* UserLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A66391219529F300E75D3D /* UserLetterViewController.m */; };
+		09A66394219529F300E75D3D /* UserLetterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09A66392219529F300E75D3D /* UserLetterViewController.xib */; };
+		09AD46F0223B55DA00AC0348 /* NSDate+MNDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09AD46EE223B55DA00AC0348 /* NSDate+MNDate.m */; };
+		09AD46F1223B55DA00AC0348 /* MNFloatBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 09AD46EF223B55DA00AC0348 /* MNFloatBtn.m */; };
+		09AD46F3223B7EFB00AC0348 /* MNFloatBtn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 09AD46F2223B7EFA00AC0348 /* MNFloatBtn.bundle */; };
 		09AE79431EE6EC2C008B76B1 /* Default-568.png in Resources */ = {isa = PBXBuildFile; fileRef = 09AE79421EE6EC2C008B76B1 /* Default-568.png */; };
 		09B508642186AD800098ED05 /* TYCyclePagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B508632186AD800098ED05 /* TYCyclePagerViewCell.m */; };
 		09BCC64E211C30A1007872C1 /* PaletteColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BCC63E211C30A0007872C1 /* PaletteColorUtils.m */; };
@@ -321,6 +328,9 @@
 		094229E3213D1C8700DFE628 /* ThankLetterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThankLetterCell.xib; sourceTree = "<group>"; };
 		0945B1461E6937DE005B7560 /* CustomCYLTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCYLTabBar.h; sourceTree = "<group>"; };
 		0945B1471E6937DF005B7560 /* CustomCYLTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCYLTabBar.m; sourceTree = "<group>"; };
+		094BD7FD21E4708C006E5DDA /* ZhiChiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiChiViewController.h; sourceTree = "<group>"; };
+		094BD7FE21E4708C006E5DDA /* ZhiChiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiChiViewController.m; sourceTree = "<group>"; };
+		094BD7FF21E4708C006E5DDA /* ZhiChiViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZhiChiViewController.xib; sourceTree = "<group>"; };
 		094FC5091E8CBF0D00BFFBBB /* PayPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPageVC.h; sourceTree = "<group>"; };
 		094FC50A1E8CBF0D00BFFBBB /* PayPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayPageVC.m; sourceTree = "<group>"; };
 		094FC50B1E8CBF0D00BFFBBB /* PayPageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayPageVC.xib; sourceTree = "<group>"; };
@@ -384,6 +394,14 @@
 		098D703B1EDE8B0300AC5B09 /* AgreementVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreementVC.h; sourceTree = "<group>"; };
 		098D703C1EDE8B0300AC5B09 /* AgreementVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreementVC.m; sourceTree = "<group>"; };
 		098D703E1EDE998E00AC5B09 /* 知情同意书.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "知情同意书.pdf"; sourceTree = "<group>"; };
+		09A66390219529F300E75D3D /* UserLetterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLetterViewController.h; sourceTree = "<group>"; };
+		09A66391219529F300E75D3D /* UserLetterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLetterViewController.m; sourceTree = "<group>"; };
+		09A66392219529F300E75D3D /* UserLetterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserLetterViewController.xib; sourceTree = "<group>"; };
+		09AD46EC223B55DA00AC0348 /* MNFloatBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNFloatBtn.h; sourceTree = "<group>"; };
+		09AD46ED223B55DA00AC0348 /* NSDate+MNDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MNDate.h"; sourceTree = "<group>"; };
+		09AD46EE223B55DA00AC0348 /* NSDate+MNDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MNDate.m"; sourceTree = "<group>"; };
+		09AD46EF223B55DA00AC0348 /* MNFloatBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNFloatBtn.m; sourceTree = "<group>"; };
+		09AD46F2223B7EFA00AC0348 /* MNFloatBtn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MNFloatBtn.bundle; sourceTree = "<group>"; };
 		09AE79421EE6EC2C008B76B1 /* Default-568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568.png"; sourceTree = "<group>"; };
 		09B508622186AD800098ED05 /* TYCyclePagerViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerViewCell.h; sourceTree = "<group>"; };
 		09B508632186AD800098ED05 /* TYCyclePagerViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYCyclePagerViewCell.m; sourceTree = "<group>"; };
@@ -878,6 +896,9 @@
 				093DA77A1E960F08003CEDD9 /* ChatListViewController.h */,
 				093DA77B1E960F08003CEDD9 /* ChatListViewController.m */,
 				093DA77C1E960F08003CEDD9 /* ChatListViewController.xib */,
+				094BD7FD21E4708C006E5DDA /* ZhiChiViewController.h */,
+				094BD7FE21E4708C006E5DDA /* ZhiChiViewController.m */,
+				094BD7FF21E4708C006E5DDA /* ZhiChiViewController.xib */,
 				093DA77F1E9628C6003CEDD9 /* ChatViewController.h */,
 				093DA7801E9628C6003CEDD9 /* ChatViewController.m */,
 				093DA7811E9628C6003CEDD9 /* ChatViewController.xib */,
@@ -1205,6 +1226,18 @@
 			path = pay;
 			sourceTree = "<group>";
 		};
+		09AD46EB223B55DA00AC0348 /* MNFloatBtn */ = {
+			isa = PBXGroup;
+			children = (
+				09AD46F2223B7EFA00AC0348 /* MNFloatBtn.bundle */,
+				09AD46EC223B55DA00AC0348 /* MNFloatBtn.h */,
+				09AD46ED223B55DA00AC0348 /* NSDate+MNDate.h */,
+				09AD46EE223B55DA00AC0348 /* NSDate+MNDate.m */,
+				09AD46EF223B55DA00AC0348 /* MNFloatBtn.m */,
+			);
+			path = MNFloatBtn;
+			sourceTree = "<group>";
+		};
 		09BCC63B211C30A0007872C1 /* iOSPalette */ = {
 			isa = PBXGroup;
 			children = (
@@ -1308,6 +1341,7 @@
 			children = (
 				098D703E1EDE998E00AC5B09 /* 知情同意书.pdf */,
 				77EF53311EE9393E001B5C70 /* 注册协议.pdf */,
+				09AD46EB223B55DA00AC0348 /* MNFloatBtn */,
 				7722F07E1EB4500B001DCF5F /* DateTools */,
 				7787B38F1EB188CE00306527 /* WechatPaySDK */,
 				77B5BD3B1EADA6A50034497D /* 控件工厂类 */,
@@ -1816,6 +1850,9 @@
 				77B5C9E41E7A2F000028CB9E /* OrderDetailViewController.h */,
 				77B5C9E51E7A2F000028CB9E /* OrderDetailViewController.m */,
 				77B5C9E61E7A2F000028CB9E /* OrderDetailViewController.xib */,
+				09A66390219529F300E75D3D /* UserLetterViewController.h */,
+				09A66391219529F300E75D3D /* UserLetterViewController.m */,
+				09A66392219529F300E75D3D /* UserLetterViewController.xib */,
 			);
 			path = "订单";
 			sourceTree = "<group>";
@@ -1948,6 +1985,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -1974,6 +2012,7 @@
 				0970CFF11E5180BF007480CB /* ConsultViewController.xib in Resources */,
 				77F3D8631E7670D2008B5FC0 /* OrderCell.xib in Resources */,
 				770FFC6D1E961070009B81FC /* UserInfoViewController.xib in Resources */,
+				09A66394219529F300E75D3D /* UserLetterViewController.xib in Resources */,
 				77B5C9E81E7A2F000028CB9E /* OrderDetailViewController.xib in Resources */,
 				779C4DD01EBEF2B300EBEDE9 /* OrderMoneyCell.xib in Resources */,
 				098D703F1EDE998E00AC5B09 /* 知情同意书.pdf in Resources */,
@@ -2002,6 +2041,7 @@
 				7752C7B41E70EC360093ED37 /* MessageCell.xib in Resources */,
 				77D07EE51E962D2A00904AD9 /* ChangePwViewController.xib in Resources */,
 				090733961E655B0600F21E02 /* consultPageCell.xib in Resources */,
+				094BD80121E4708C006E5DDA /* ZhiChiViewController.xib in Resources */,
 				094FC5121E8CC1E500BFFBBB /* PayPageCell.xib in Resources */,
 				0965FBB61E7A918900C0FBAD /* HZQDatePickerView.xib in Resources */,
 				09106FA41EDFBE8700F5E676 /* ico_make.png in Resources */,
@@ -2017,6 +2057,7 @@
 				091634F4215CDA3700507E56 /* ActiveUrlVC.xib in Resources */,
 				77EF53301EE5A9A2001B5C70 /* AboutViewController.xib in Resources */,
 				09FBE0281E70FE12003452A6 /* CounselorInfoVC.xib in Resources */,
+				09AD46F3223B7EFB00AC0348 /* MNFloatBtn.bundle in Resources */,
 				77EF53321EE9393E001B5C70 /* 注册协议.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2118,6 +2159,7 @@
 				77D2BF971E66B3D0000B9978 /* RegistViewController.m in Sources */,
 				094229E4213D1C8700DFE628 /* ThankLetterCell.m in Sources */,
 				09BCC65D211D751B007872C1 /* UIColor+TDAdditions.m in Sources */,
+				09AD46F1223B55DA00AC0348 /* MNFloatBtn.m in Sources */,
 				7787B36E1EAEF2FE00306527 /* openssl_wrapper.m in Sources */,
 				7722F0971EB4500B001DCF5F /* DTTimePeriodCollection.m in Sources */,
 				7769CA601E8253D000646619 /* TestListModel.m in Sources */,
@@ -2158,6 +2200,7 @@
 				77B5BD161EAD9B460034497D /* UIColor+YYExtension.m in Sources */,
 				776CF2B91EB7900A00CE9620 /* TYLaunchBaseAnimation.m in Sources */,
 				7787B36C1EAEF2FE00306527 /* base64.m in Sources */,
+				09AD46F0223B55DA00AC0348 /* NSDate+MNDate.m in Sources */,
 				094FC50C1E8CBF0D00BFFBBB /* PayPageVC.m in Sources */,
 				0907339A1E65665A00F21E02 /* counselorInfoModel.m in Sources */,
 				776CF2AB1EB78E9D00CE9620 /* GQFeatureCell.m in Sources */,
@@ -2185,6 +2228,7 @@
 				090733951E655B0600F21E02 /* consultPageCell.m in Sources */,
 				7787B3AA1EB18DDA00306527 /* WXMediaMessage+messageConstruct.m in Sources */,
 				09FBE01D1E70EE60003452A6 /* ConfirmPageVC.m in Sources */,
+				094BD80021E4708C006E5DDA /* ZhiChiViewController.m in Sources */,
 				7752C7B31E70EC360093ED37 /* MessageCell.m in Sources */,
 				09E9AD79208EEB81007B432A /* ZLDropDownMenuCollectionViewCell.m in Sources */,
 				09BCC650211C30A1007872C1 /* PaletteSwatch.m in Sources */,
@@ -2202,6 +2246,7 @@
 				09BCC662211D7CDA007872C1 /* UIImage+MostColor.m in Sources */,
 				09420AB02091C91A008C8E13 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				7722F0931EB4500B001DCF5F /* DTConstants.m in Sources */,
+				09A66393219529F300E75D3D /* UserLetterViewController.m in Sources */,
 				09BCC64F211C30A1007872C1 /* Palette.m in Sources */,
 				093155DE218312FD00D66349 /* TYCyclePagerTransformLayout.m in Sources */,
 				093155DC218312FD00D66349 /* TYPageControl.m in Sources */,
@@ -2467,8 +2512,8 @@
 					"-l\"WeiboSDK\"",
 					"-l\"YixinSDK\"",
 					"-l\"c++\"",
-					"-l\"jcore-ios-1.2.5\"",
-					"-l\"jpush-ios-3.1.1\"",
+					"-l\"jcore-ios-1.2.6\"",
+					"-l\"jpush-ios-3.1.2\"",
 					"-l\"opencore-amrnb\"",
 					"-l\"resolv\"",
 					"-l\"sqlite3\"",
@@ -2674,8 +2719,8 @@
 					"-l\"WeiboSDK\"",
 					"-l\"YixinSDK\"",
 					"-l\"c++\"",
-					"-l\"jcore-ios-1.2.5\"",
-					"-l\"jpush-ios-3.1.1\"",
+					"-l\"jcore-ios-1.2.6\"",
+					"-l\"jpush-ios-3.1.2\"",
 					"-l\"opencore-amrnb\"",
 					"-l\"resolv\"",
 					"-l\"sqlite3\"",

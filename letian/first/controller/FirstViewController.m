@@ -7,13 +7,16 @@
 //
 
 #import "FirstViewController.h"
+#import "ConsultViewController.h"
 #import "HomeCell.h"
 #import "LoginViewController.h"
+#import "RegistViewController.h"
 #import "CategoryViewController.h"
 #import "TestViewController.h"
 #import "ActivityListViewController.h"
+#import "UserInfoViewController.h"
 #import "CustomCYLTabBar.h"
-#import "ConsultViewController.h"
+#import "CounselorInfoVC.h"
 #import "AppDelegate.h"
 #import "MJExtension.h"
 #import "UIImageView+WebCache.h"
@@ -30,17 +33,25 @@
 #import "TYPageControl.h"
 #import "TYCyclePagerViewCell.h"
 #import "Colours.h"
+#import "MNFloatBtn.h"
+
 
 
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDelegate,TYCyclePagerViewDataSource, TYCyclePagerViewDelegate, UISearchBarDelegate>
 
+@property (nonatomic, strong) NSDictionary *counselorCategoryDic;
+@property (nonatomic, strong) NSMutableArray *counselorCategoryArr;
+@property (nonatomic, strong) UserInfoModel *userInfoModel;
+@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) UIButton *suspBtn;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UIView *whiteView;
-@property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic,strong) UILabel *sectionHeaderLabel;
-@property (nonatomic,strong) GQScrollView *scrollView;
-@property (nonatomic,strong) NSMutableArray <ActiveModel *> *funnyListArray;
-@property (nonatomic,assign) NSInteger pageIndex;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UILabel *sectionHeaderLabel;
+@property (nonatomic, strong) GQScrollView *scrollView;
+@property (nonatomic, strong) NSMutableArray <ActiveModel *> *funnyListArray;
+@property (nonatomic, strong) NSMutableArray <counselorInfoModel  *> *counselorArr;
+@property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, strong) TYCyclePagerView *pagerView;
 @property (nonatomic, strong) TYPageControl *pageControl;
 @property (nonatomic, strong) NSArray *datas;
@@ -51,23 +62,7 @@
 
 @implementation FirstViewController
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    
-    if (self.tableView.contentOffset.y >= 220) {
-
-        return UIStatusBarStyleDefault;
-    } else {
-        
-        return UIStatusBarStyleLightContent;
-    }
-}
-
-//-(void)viewWillAppear:(BOOL)animated{
-//    self.navigationController.navigationBarHidden=YES;
-//}
-
--(NSMutableArray *)funnyListArray
-{
+- (NSMutableArray *)funnyListArray {
     if (_funnyListArray == nil) {
         _funnyListArray = [NSMutableArray array];
     }
@@ -79,15 +74,28 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets=NO;
     
+    self.counselorArr = [NSMutableArray new];
+    [self getCounsultTypeSource];
     [self customSearchBar];
     [self customNavigation];
     [self createTableView];
     [self requestData];
+//    if ([GQUserManager isHaveLogin]) {
+//    }
     [self setUpRefresh];
     if (@available(iOS 11.0, *)){
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
+
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//    });
 //    [self cellTab];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserChoise];
+    [self createSuspBtn];
+
 }
 
 - (void)customSearchBar {
@@ -112,34 +120,7 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     
-//    [_searchBar setShowsCancelButton:YES animated:YES];
-//    NSLog(@"点击");
-//    [_searchBar endEditing:YES];
-//    self.tabBarController.selectedIndex = 1;
 }
-
-//- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-
-//    if (NULLString(searchText)) {
-//        [_requestParams removeObjectForKey:@"SearchName"];
-//        [self getCounsultListSource];
-//    }
-//}
-
-//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-
-//    [_requestParams setValue:searchBar.text forKey:@"SearchName"];
-//    [self.searchBar resignFirstResponder];
-//    [self getCounsultListSource];
-//}
-
-//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-//    [_requestParams removeObjectForKey:@"SearchName"];
-//    [self getCounsultListSource];
-//    searchBar.text = @"";
-//    [self.searchBar resignFirstResponder];
-//    [self.searchBar setShowsCancelButton:NO animated:YES];
-//}
 
 #pragma mark 定制Navigation
 - (void)customNavigation {
@@ -153,8 +134,8 @@
 
 #pragma mark-------下拉刷新
 
--(void)setUpRefresh
-{
+-(void)setUpRefresh {
+    
     MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
@@ -163,7 +144,6 @@
     self.tableView.mj_header.automaticallyChangeAlpha = YES;
     self.tableView.mj_footer.hidden = YES;
     self.tableView.mj_footer = [RefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
-    
 }
 
 - (void)cellTab {
@@ -171,11 +151,6 @@
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W/4*3, 20, 40, 40)];
     [self.view addSubview:btn];
     [btn setImage:[UIImage imageNamed:@"cell"] forState:UIControlStateNormal];
-//    [btn setTitle:@"400-109-2007" forState:UIControlStateNormal];
-//    [btn setTitleColor:WEAKPINK forState:UIControlStateNormal];
-//    btn.titleLabel.textAlignment = NSTextAlignmentRight;
-//    btn.titleLabel.font = [UIFont boldSystemFontOfSize:17];
-//    btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [btn addTarget:self action:@selector(cellPhone) forControlEvents:UIControlEventTouchUpInside];
     
 }
@@ -188,18 +163,27 @@
     [self.view addSubview:callWebview];
 }
 
+#pragma mark - 创建悬浮的按钮
+- (void)createSuspBtn {
+    [MNFloatBtn show];
+    [MNFloatBtn sharedBtn].btnClick = ^(UIButton *sender) {
+        
+        [self getCounsultListSource];
+    };
+}
+
+
 #pragma mark-------创建TableView
 
 - (void)createTableView {
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, SCREEN_W, SCREEN_H-49) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
-    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    tableView.showsVerticalScrollIndicator=NO;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
-    self.tableView.tableHeaderView = [self createHeadBgView];
 
 }
 
@@ -209,48 +193,30 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 85;
+    return 120;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    UILabel *funnyTestModuleLabel = [GQControls createLabelWithFrame:CGRectMake(0, 0, SCREEN_W, 1) andText:@"" andTextColor:MAINCOLOR andFontSize:15];
-    funnyTestModuleLabel.backgroundColor = [UIColor lightGrayColor];
-//    funnyTestModuleLabel.textAlignment = NSTextAlignmentCenter;
+
+    UILabel *funnyTestModuleLabel = [GQControls createLabelWithFrame:CGRectMake(0, 0, SCREEN_W, 25) andText:@"乐天派·每日文章" andTextColor:[UIColor darkGrayColor] andFontSize:15];
+    funnyTestModuleLabel.backgroundColor = [UIColor whiteColor];
+    funnyTestModuleLabel.textAlignment = NSTextAlignmentCenter;
     self.sectionHeaderLabel = funnyTestModuleLabel;
     return self.sectionHeaderLabel;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 1;
+    return 25;
 }
-
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//
-//    [self setNeedsStatusBarAppearanceUpdate];
-//    if (self.tableView.contentOffset.y >= 325) {
-//
-//        self.sectionHeaderLabel.hidden = YES;
-//        self.navigationItem.title = @"乐天派";
-//        self.navigationController.navigationBarHidden = NO;
-//    }else{
-//
-//        self.sectionHeaderLabel.hidden = NO;
-//        self.navigationController.navigationBarHidden = YES;
-//    }
-//}
-
-
 
 #pragma mark------cell定制
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     HomeCell *cell = [HomeCell cellWithTableView:tableView];
     cell.titleLabel.text = self.funnyListArray[indexPath.row].ArticleName;
-    cell.timeLabel.text = self.funnyListArray[indexPath.row].CreatedDate;
     [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:self.funnyListArray[indexPath.row].ArticleImg]];
-    
+    cell.detailLabel.text = self.funnyListArray[indexPath.row].ArticleContent;
 
     return cell;
 }
@@ -262,16 +228,104 @@
     selectionArticleVC *articleVC = [[selectionArticleVC alloc]init];
     articleVC.ArticleUrl = self.funnyListArray[indexPath.row].ArticleUrl;
     articleVC.ID = self.funnyListArray[indexPath.row].ID;
-//    articleVC.ArticleTitle = self.funnyListArray[indexPath.row].ArticleName;
-//    articleVC.ArticleImg = self.funnyListArray[indexPath.row].ArticleImg;
+    articleVC.ArticleTitle = self.funnyListArray[indexPath.row].ArticleName;
+    articleVC.ArticleImg = self.funnyListArray[indexPath.row].ArticleImg;
 //    funnyVc.activeModel=self.funnyListArray[indexPath.row];
-    articleVC.hidesBottomBarWhenPushed = YES;
+//    articleVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:articleVC animated:YES];
 }
 
+#pragma mark------------获取用户信息
+- (void)requestUserData {
+    
+    GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
+    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestString appendFormat:@"%@/",API_MODULE_USER];
+    [requestString appendString:API_NAME_GETUSERINFO];
+    __weak typeof(self) weakSelf = self;
+    [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
+//        NSLog(@"token------------%@",kFetchToken);
+    [MBHudSet showStatusOnView:self.view];
+    [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+        
+//        NSLog(@"sr:%@",responseObject[@"Result"][@"Source"][@"Birhtday"]);
+        [MBHudSet dismiss:strongSelf.view];
+        if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
+            strongSelf.userInfoModel = [UserInfoModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
+            
+            if (NULLString(responseObject[@"Result"][@"Source"][@"Birhtday"])) {
+                UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"为使测评结果更准确" message:@"请前往设置生日" preferredStyle:UIAlertControllerStyleAlert];
+                __weak typeof(self) weakSelf = self;
+                [alertControl addAction:[UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                    
+                    UserInfoViewController *userInfoVc = [[UserInfoViewController alloc]init];
+                    userInfoVc.hidesBottomBarWhenPushed = YES;
+                    userInfoVc.userInfoModel = self.userInfoModel;
+                    [weakSelf.navigationController pushViewController:userInfoVc animated:YES];
+                }]];
+                [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+                [self presentViewController:alertControl animated:YES completion:nil];
+                
+            } else {
+                TestViewController *testVc = [[TestViewController alloc]init];
+                testVc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:testVc animated:YES];
+            }
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        [MBHudSet dismiss:strongSelf.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
+        }
+    }];
+}
+
+#pragma mark 获取咨询师列表
+- (void)getCounsultListSource {
+    
+    __weak typeof(self) weakSelf = self;
+    [MBHudSet showStatusOnView:self.view];
+    
+    NSMutableString *requestConsultListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestConsultListString appendFormat:@"%@/",API_MODULE_CONSULT];
+    [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+//    [params setValue:@(1) forKey:@"pageIndex"];
+    [params setValue:@(0) forKey:@"EnumPsyCategory"];
+    [params setValue:@(0) forKey:@"EnumUserTitle"];
+//    [_requestParams setValue:@(_pageIndex) forKey:@"pageIndex"];
+    [PPNetworkHelper GET:requestConsultListString parameters:params success:^(id responseObject) {
+        __strong typeof(self) strongSelf = weakSelf;
+        [MBHudSet dismiss:strongSelf.view];
+        strongSelf.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+//        NSLog(@"%@",strongSelf.counselorArr);
+        CounselorInfoVC *eacInfo = [[CounselorInfoVC alloc]init];
+        eacInfo.counselModel = strongSelf.counselorArr[1];
+        eacInfo.hidesBottomBarWhenPushed = YES;
+        [strongSelf.navigationController pushViewController:eacInfo animated:YES];
+        
+    } failure:^(NSError *error) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+        [MBHudSet dismiss:strongSelf.view];
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
+        } else {
+            [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
+        }
+    }];
+}
 
 #pragma mark------精选文章列表
-
 -(void)requestData {
     
     self.pageIndex = 1;
@@ -349,80 +403,172 @@
 }
 #pragma mark------头视图
 
+#pragma mark 获取类型信息
+- (void)getCounsultTypeSource {
+    
+    _counselorCategoryDic = [NSMutableDictionary new];
+    _counselorCategoryArr = [NSMutableArray new];
+    
+    __weak typeof(self) weakSelf   = self;
+    
+    NSMutableString *requestConsultPsyAndTitleListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestConsultPsyAndTitleListString appendFormat:@"%@/",API_MODULE_UTILS];
+    [requestConsultPsyAndTitleListString appendFormat:@"%@",API_NAME_GETCONSULTTITLELIST];
+    
+    [PPNetworkHelper GET:requestConsultPsyAndTitleListString parameters:nil success:^(id responseObject) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+        strongSelf.counselorCategoryDic = responseObject[@"Result"][@"Source"][@"PsyCategoryDic"];
+        strongSelf.counselorCategoryArr = [strongSelf arrangeForKeyWithDic:strongSelf.counselorCategoryDic];
+        
+        strongSelf.tableView.tableHeaderView = [strongSelf createHeadBgView];
+        
+    } failure:^(NSError *error) {
+        
+        __strong typeof(self) strongSelf = weakSelf;
+        if (error.code == NSURLErrorCancelled) return;
+        if (error.code == NSURLErrorTimedOut) {
+            [MBHudSet showText:@"请求超时" andOnView:strongSelf.view];
+        } else{
+            [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
+        }
+        
+    }];
+}
+
+#pragma mark 根据key排列dic
+- (NSMutableArray *)arrangeForKeyWithDic:(NSDictionary *)dic {
+    
+    NSMutableArray *keyArr = [[NSMutableArray alloc]initWithArray:dic.allKeys];
+    for (int i = 0; i < keyArr.count; i++) {
+        for (int k = 0; k < keyArr.count-1; k++) {
+            if ([keyArr[k] integerValue] > [keyArr[k+1] integerValue]) {
+                [keyArr exchangeObjectAtIndex:k withObjectAtIndex:k+1];
+            }
+        }
+    }
+    
+    NSMutableArray *valuesArr = [NSMutableArray new];
+    for (int i = 0; i < keyArr.count; i++) {
+        [valuesArr addObject:dic[keyArr[i]]];
+    }
+    
+    return valuesArr;
+}
+
+
 - (UIView *)createHeadBgView {
     
-    UIView *headBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 75+SCREEN_W*0.6)];
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_W*0.6, SCREEN_W, 70)];
+    UIView *headBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 250+SCREEN_W*0.6)];
+    [self addPagerView:headBgView];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, _pagerView.bottom, SCREEN_W, 170)];
 //    view.backgroundColor = MAINCOLOR;
     
-    NSArray *nameArray = @[@"心理专栏",@"专业测试",@"成长乐园"];
-    for (int i = 0; i < 3; i++) {
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W / 3 * i, 0, SCREEN_W / 3, view.height)];
-        [view addSubview:btn];
-        [btn setTitle:nameArray[i] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"first%d",i+1]] forState:UIControlStateNormal];
-        [btn addTarget:self action:@selector(headBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        btn.tag = 100+i;
-        [self textUnderImageButton:btn];
+    NSArray *nameArray = self.counselorCategoryArr;
+    for (int k = 0; k < 2; k++) {
+        for (int i = 0; i < 4; i++) {
+            UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W / 4 * i, view.height/2 * k, SCREEN_W / 4, view.height/2)];
+            [view addSubview:btn];
+            [btn setTitle:nameArray[i + k * 4] forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+            btn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
+            [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"first%d",i + k * 4 + 1]] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(headBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            btn.tag = 100 + i + k * 4;
+            [self textUnderImageButton:btn];
+        }
     }
-    [headBgView addSubview:view];
-    [self addPagerView:headBgView];
     
-//    [self customSearchBar:headBgView];
-//    [self loadData];
+    [headBgView addSubview:view];
+    
+    UIButton *tabBtn = [[UIButton alloc]initWithFrame:CGRectMake(15, view.bottom + 20, SCREEN_W * 3 / 10, 60)];
+    [headBgView addSubview:tabBtn];
+    tabBtn.tag = 10;
+    [self customBtn:tabBtn WithL1:@"寻找专家" withL2:@"资深·专家"];
+    
+    NSArray *L1arr = @[@"心理测试",@"成长乐园",@"专栏文章"];
+    NSArray *L2arr = @[@"准确·免费",@"活动·课程",@"分类·丰富"];
+    for (int i = 0; i < 3; i++) {
+        UIButton *tabB = [[UIButton alloc]initWithFrame:CGRectMake(tabBtn.right + 10 + (SCREEN_W * 2 / 3 - 20) / 3 * i, view.bottom + 20, (SCREEN_W * 2 / 3 - 45) / 3, 60)];
+        [headBgView addSubview:tabB];
+        tabB.tag = 11 + i;
+        [self customBtn:tabB WithL1:L1arr[i] withL2:L2arr[i]];
+    }
+    
     return headBgView;
 }
 
 - (void)textUnderImageButton:(UIButton *)button {
-    // the space between the image and text
-    CGFloat spacing = 6.0;
     
-    // lower the text and push it left so it appears centered below the image
-    CGSize imageSize = button.imageView.image.size;
-    button.titleEdgeInsets = UIEdgeInsetsMake(0.0, - imageSize.width, - (imageSize.height + spacing), 0.0);
+    [button setImageEdgeInsets:UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height, 0, 0, -button.titleLabel.intrinsicContentSize.width)];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(button.currentImage.size.height + 20, -button.currentImage.size.width, 0, 0)];
+    button.imageView.clipsToBounds = YES;
+    button.imageView.layer.cornerRadius = button.imageView.width*0.5;
+    button.imageView.layer.masksToBounds = YES;
+}
+
+- (void)customBtn:(UIButton *)button WithL1:(NSString *)str1 withL2:(NSString *)str2 {
     
-    // raise the image and push it right so it appears centered above the text
-    CGSize titleSize = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName: button.titleLabel.font}];
-    button.imageEdgeInsets = UIEdgeInsetsMake(- (titleSize.height + spacing), 0.0, 0.0, - titleSize.width);
+    button.layer.borderColor = MAINCOLOR.CGColor;
+    button.layer.borderWidth = 1;
+    button.layer.cornerRadius = 10;
+    
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",str1] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13], NSForegroundColorAttributeName:MAINCOLOR}];
+    NSAttributedString *time = [[NSAttributedString alloc] initWithString:str2 attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10],NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [title appendAttributedString:time];
+    
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    [paraStyle setLineSpacing:5];
+//    paraStyle.alignment = NSTextAlignmentLeft;
+    [title addAttributes:@{NSParagraphStyleAttributeName:paraStyle} range:NSMakeRange(0, title.length)];
+    
+    button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    [button setAttributedTitle:title forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(headBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
 #pragma mark------点击头视图模块
 - (void)headBtnClick:(UIButton *)btn {
     
-    if (btn.tag == 100) {
+    if (btn.tag == 13) {
         CategoryViewController *articleVc = [[CategoryViewController alloc]init];
         articleVc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:articleVc animated:YES];
         //跳到测试
-    } else if (btn.tag == 101) {
+    } else if (btn.tag == 11) {
         if (![GQUserManager isHaveLogin]) {
-            //            NSLog(@"登录一下");
             //未登录
             UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
             __weak typeof(self) weakSelf = self;
             [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
                 
-                LoginViewController *loginVc = [[LoginViewController alloc]init];
+                RegistViewController *loginVc = [[RegistViewController alloc]init];
                 loginVc.hidesBottomBarWhenPushed = YES;
                 [weakSelf presentViewController:loginVc animated:YES completion:nil];
             }]];
             [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-            
             [self presentViewController:alertControl animated:YES completion:nil];
             
-        }else{
-            
-            TestViewController *testVc = [[TestViewController alloc]init];
-            testVc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:testVc animated:YES];
+        } else {
+            [self requestUserData];
         }
         //跳到活动
-    } else if (btn.tag == 102) {
+    } else if (btn.tag == 12) {
         ActivityListViewController *activityVc=[[ActivityListViewController alloc]init];
         activityVc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:activityVc animated:YES];
+    } else if (btn.tag == 10) {
+        self.tabBarController.selectedIndex = 1;
+    } else {
+        
+        for (NSString *key in self.counselorCategoryDic) {
+            if (btn.titleLabel.text == self.counselorCategoryDic[key]) {
+                [[NSUserDefaults standardUserDefaults] setObject:key forKey:kUserChoise];
+                break;
+            }
+        }
+        self.tabBarController.selectedIndex = 1;
     }
 }
 
@@ -430,7 +576,7 @@
 
 #pragma mark 轮播图
 - (void)addPagerView:(UIView *)bgView {
-    TYCyclePagerView *pagerView = [[TYCyclePagerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_W*0.6)];
+    TYCyclePagerView *pagerView = [[TYCyclePagerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_W*5/9)];
 //    pagerView.layer.borderWidth = 1;
     pagerView.isInfiniteLoop = YES;
     pagerView.autoScrollInterval = 4.0;
@@ -445,28 +591,16 @@
     _pagerView = pagerView;
 }
 
-- (void)addPageControl {
-    TYPageControl *pageControl = [[TYPageControl alloc]init];
-    //pageControl.numberOfPages = _datas.count;
-    pageControl.currentPageIndicatorSize = CGSizeMake(6, 6);
-    pageControl.pageIndicatorSize = CGSizeMake(12, 6);
-    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-    pageControl.pageIndicatorTintColor = [UIColor grayColor];
-    //    pageControl.pageIndicatorImage = [UIImage imageNamed:@"Dot"];
-    //    pageControl.currentPageIndicatorImage = [UIImage imageNamed:@"DotSelected"];
-    //    pageControl.contentInset = UIEdgeInsetsMake(0, 20, 0, 20);
-    //    pageControl.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    //    pageControl.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    //    [pageControl addTarget:self action:@selector(pageControlValueChangeAction:) forControlEvents:UIControlEventValueChanged];
-    [_pagerView addSubview:pageControl];
-    _pageControl = pageControl;
-}
-
-//- (void)viewWillLayoutSubviews {
-//    [super viewWillLayoutSubviews];
-//    _pagerView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 200);
-//    _pageControl.frame = CGRectMake(0, CGRectGetHeight(_pagerView.frame) - 26, CGRectGetWidth(_pagerView.frame), 26);
+//- (void)addPageControl {
+//    TYPageControl *pageControl = [[TYPageControl alloc]init];
+//    pageControl.currentPageIndicatorSize = CGSizeMake(6, 6);
+//    pageControl.pageIndicatorSize = CGSizeMake(12, 6);
+//    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+//    pageControl.pageIndicatorTintColor = [UIColor grayColor];
+//    [_pagerView addSubview:pageControl];
+//    _pageControl = pageControl;
 //}
+
 
 - (void)loadData {
     NSMutableArray *datas = [NSMutableArray array];
@@ -480,7 +614,6 @@
     _datas = [datas copy];
     _pageControl.numberOfPages = _datas.count;
     [_pagerView reloadData];
-    //[_pagerView scrollToItemAtIndex:3 animate:YES];
 }
 
 #pragma mark - TYCyclePagerViewDataSource
@@ -491,28 +624,23 @@
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
     TYCyclePagerViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndex:index];
-//    cell.backgroundColor = MAINCOLOR;
+//    cell.bgImg.contentMode = UIViewContentModeScaleToFill;
     if (!self.funnyListArray.count) {
         [cell.bgImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"index_%ld",index+1]]];
+    } else if (index == 0) {
+        [cell.bgImg setImage:[UIImage imageNamed:@"EAP"]];
+        cell.label.text = @"中科院上海生科院专用预约通道";
     } else {
         [cell.bgImg sd_setImageWithURL:[NSURL URLWithString:self.funnyListArray[index].ArticleImg]];
-//        cell.label.text = [NSString stringWithFormat:@"%@",self.funnyListArray[index].ArticleName];
+        cell.label.text = [NSString stringWithFormat:@"%@",self.funnyListArray[index].ArticleName];
     }
-    cell.layer.shadowColor = [UIColor blackColor].CGColor;
-    cell.layer.shadowOpacity = 0.8f;
-    cell.layer.shadowRadius = 2.f;
-    cell.layer.shadowOffset = CGSizeMake(0, 2);
-
-//    [cell.bgImg sd_setImageWithURL:[NSURL URLWithString:self.funnyListArray[index].ArticleImg] placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"index_%ld",index+1]]];
-//    [cell.bgImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"index_%ld",index+1]]];
-//    cell.label.text = [NSString stringWithFormat:@"index->%ld",index];
     return cell;
 }
 
 - (TYCyclePagerViewLayout *)layoutForPagerView:(TYCyclePagerView *)pageView {
     TYCyclePagerViewLayout *layout = [[TYCyclePagerViewLayout alloc]init];
-    layout.itemSize = CGSizeMake(CGRectGetWidth(pageView.frame)*0.8, CGRectGetHeight(pageView.frame)*0.8);
-    layout.itemSpacing = 15;
+    layout.itemSize = CGSizeMake(CGRectGetWidth(pageView.frame)*0.85, CGRectGetHeight(pageView.frame)*0.85);
+    layout.itemSpacing = 13;
     layout.layoutType = 1;
     //layout.minimumAlpha = 0.3;
     layout.itemHorizontalCenter = YES;
@@ -527,24 +655,20 @@
 
 - (void)pagerView:(TYCyclePagerView *)pageView didSelectedItemCell:(__kindof UICollectionViewCell *)cell atIndex:(NSInteger)index {
     
-    NSLog(@"%d",index);
-    selectionArticleVC *articleVC = [[selectionArticleVC alloc]init];
-    articleVC.ArticleUrl = self.funnyListArray[index].ArticleUrl;
-    articleVC.ID = self.funnyListArray[index].ID;
-    articleVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:articleVC animated:YES];
-
+    if (index == 0) {
+        
+        [self getCounsultListSource];
+    } else {
+        
+        selectionArticleVC *articleVC = [[selectionArticleVC alloc]init];
+        articleVC.ArticleUrl = self.funnyListArray[index-1].ArticleUrl;
+        articleVC.ID = self.funnyListArray[index].ID;
+        //    articleVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:articleVC animated:YES];
+    }
 }
 
-
-
-
-
-
-
-
--(GQScrollView *)createScrollView
-{
+- (GQScrollView *)createScrollView {
     NSMutableArray *imageArray = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < 4; i++) {
@@ -563,87 +687,21 @@
         selectionArticleVC *articleVC = [[selectionArticleVC alloc]init];
         articleVC.ArticleUrl = self.funnyListArray[index].ArticleUrl;
         articleVC.ID = self.funnyListArray[index].ID;
-        articleVC.hidesBottomBarWhenPushed = YES;
+//        articleVC.ArticleTitle = self.funnyListArray[index].ArticleName;
+//        articleVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:articleVC animated:NO];
-        
-        
-//        if (index==0) {
-//            self.tabBarController.selectedIndex=1;
-//            //跳到文章列表
-//        }else if (index==1) {
-//            CategoryViewController *articleVc=[[CategoryViewController alloc]init];
-//            articleVc.hidesBottomBarWhenPushed=YES;
-//            [self.navigationController pushViewController:articleVc animated:NO];
-//            //跳到测试
-//        }else if (index==2) {
-//            if (![GQUserManager isHaveLogin]) {
-////                NSLog(@"登录一下");
-//                //未登录
-//                UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
-//                __weak typeof(self) weakSelf = self;
-//                [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-//
-//                    LoginViewController *loginVc = [[LoginViewController alloc]init];
-//                    loginVc.hidesBottomBarWhenPushed = YES;
-//                    [weakSelf presentViewController:loginVc animated:YES completion:nil];
-//                }]];
-//                [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-//
-//                [self presentViewController:alertControl animated:YES completion:nil];
-//
-//            }else{
-//
-//                TestViewController *testVc=[[TestViewController alloc]init];
-//                testVc.hidesBottomBarWhenPushed=YES;
-//                [self.navigationController pushViewController:testVc animated:NO];
-//            }
-//            //跳到活动
-//        }else if (index==3){
-//            ActivityListViewController *activityVc=[[ActivityListViewController alloc]init];
-//            activityVc.hidesBottomBarWhenPushed=YES;
-//            [self.navigationController pushViewController:activityVc animated:YES];
-//        }
-
     
     }];
     
-   
     _scrollView.color_currentPageControl = MAINCOLOR;
-//    [_scrollView reloadInputViews];
-//    NSLog(@"%@",_scrollView.scrollView.subviews);
-    
-    
     return _scrollView;
 }
 
-//
-////是否可以旋转
-//- (BOOL)shouldAutorotate
-//{
-//    return false;
-// }
-////支持的方向
-// -(UIInterfaceOrientationMask)supportedInterfaceOrientations
-// {
-//    return UIInterfaceOrientationMaskPortrait;
-// }
-#pragma mark------特效
-
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    CATransform3D rotation;
-//    rotation = CATransform3DMakeRotation((90.0*M_PI/180), 0.0, 0.7, 0.4);
-//    rotation.m44 = 1.0/-600;
-//    cell.layer.shadowColor = [[UIColor blackColor]CGColor];
-//    cell.layer.shadowOffset = CGSizeMake(10, 10);
-//    cell.alpha = 0;
-//    cell.layer.transform = rotation;
-//    cell.layer.anchorPoint = CGPointMake(0.5, 0.5);
-//    [UIView beginAnimations:@"rotaion" context:NULL];
-//    [UIView setAnimationDuration:0.3];
-//    cell.layer.transform = CATransform3DIdentity;
-//    cell.alpha = 1;
-//    cell.layer.shadowOffset = CGSizeMake(0, 0);
-//    [UIView commitAnimations];
+//视图将要消失
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [MNFloatBtn hidden];
 }
 
 - (void)didReceiveMemoryWarning {

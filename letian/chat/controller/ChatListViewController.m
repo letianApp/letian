@@ -9,6 +9,7 @@
 #import "ChatListViewController.h"
 #import "ChatViewController.h"
 #import "RCDCustomerServiceViewController.h"
+#import "ZhiChiViewController.h"
 
 #import "ServiceModel.h"
 
@@ -26,33 +27,33 @@
 
 @implementation ChatListViewController
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        //设置在列表中需要显示的会话类型
-        [self setDisplayConversationTypes:@[@(ConversationType_PRIVATE),
-                                              @(ConversationType_CUSTOMERSERVICE),
-                                              @(ConversationType_SYSTEM)]];
-        //设置需要将哪些类型的会话在会话列表中聚合显示
-        [self setCollectionConversationType:@[@(ConversationType_SYSTEM)]];
-        
-        
-    }
-    return self;
-}
+//- (instancetype)init
+//{
+//    self = [super init];
+//    if (self) {
+//        //设置在列表中需要显示的会话类型
+//        [self setDisplayConversationTypes:@[@(ConversationType_PRIVATE),
+//                                              @(ConversationType_CUSTOMERSERVICE),
+//                                              @(ConversationType_SYSTEM)]];
+//        //设置需要将哪些类型的会话在会话列表中聚合显示
+//        [self setCollectionConversationType:@[@(ConversationType_SYSTEM)]];
+//
+//
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    self.isShowNetworkIndicatorView = NO;
     [self customNavigation];
 //    [self getServiceInfo];
     [self emptyConversationBackView];
     
     self.topCellBackgroundColor = [UIColor snowColor];
-    self.conversationListTableView.tableFooterView = [UIView new];
+//    self.conversationListTableView.tableFooterView = [UIView new];
     
 }
 
@@ -60,7 +61,7 @@
 - (void)customNavigation {
     
     self.navigationItem.title = @"咨询列表";
-//    self.navigationItem.titleView.tintColor = MAINCOLOR;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = MAINCOLOR;
     UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(clickServiceBtn)];
     self.navigationItem.rightBarButtonItem = rightBtn;
@@ -69,10 +70,10 @@
 
 - (void)clickServiceBtn {
     
-    RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
+    ZhiChiViewController *chatService = [[ZhiChiViewController alloc] init];
     chatService.hidesBottomBarWhenPushed = YES;
-    chatService.conversationType = ConversationType_CUSTOMERSERVICE;
-    chatService.targetId = RONGYUN_SERVICE_ID;
+//    chatService.conversationType = ConversationType_CUSTOMERSERVICE;
+//    chatService.targetId = RONGYUN_SERVICE_ID;
     chatService.title = @"乐天心理咨询";
     [self.navigationController pushViewController:chatService animated:YES];
     
@@ -107,79 +108,77 @@
 
 - (void)clickEmptyCell:(UIButton *)btn {
     
-    RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
+    ZhiChiViewController *chatService = [[ZhiChiViewController alloc] init];
     chatService.hidesBottomBarWhenPushed = YES;
-    chatService.conversationType = ConversationType_CUSTOMERSERVICE;
-    chatService.targetId = RONGYUN_SERVICE_ID;
+//    chatService.conversationType = ConversationType_CUSTOMERSERVICE;
+//    chatService.targetId = RONGYUN_SERVICE_ID;
     chatService.title = @"乐天心理咨询";
     [self.navigationController pushViewController:chatService animated:YES];
     
 }
 
 #pragma mark 定制cell
-- (void)willDisplayConversationTableCell:(RCConversationBaseCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    
-    __weak typeof(self) weakSelf   = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        int badge = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
-        UITabBarItem *item = [weakSelf.tabBarController.tabBar.items objectAtIndex:2];
-        if (badge > 0) {
-            NSString *badgeStr = [NSString stringWithFormat:@"%d",badge];
-            item.badgeValue = badgeStr;
-        } else {
-            item.badgeValue = nil;
-        }
-    });
-
-    RCConversationCell *conversationCell = (RCConversationCell *)cell;
-    conversationCell.topCellBackgroundColor = [UIColor snowColor];
-    NSInteger unreadCount = conversationCell.model.unreadMessageCount;
-    if (unreadCount > 0){
-        conversationCell.bubbleTipView.bubbleTipText = (unreadCount > 99) ? @"99+" : [NSString stringWithFormat:@"%ld",(long)unreadCount];
-    }else{
-        conversationCell.bubbleTipView.bubbleTipText = nil;
-    }
-}
-
-#pragma mark 点击cell方法
-- (void)onSelectedTableRow:(RCConversationModelType)conversationModelType
-         conversationModel:(RCConversationModel *)model
-               atIndexPath:(NSIndexPath *)indexPath {
-    
-    if (conversationModelType == RC_CONVERSATION_MODEL_TYPE_COLLECTION) {
-        
-        ChatListViewController *systemChatVc = [[ChatListViewController alloc]init];
-        NSArray *arr = [NSArray arrayWithObject:[NSNumber numberWithInt:model.conversationType]];
-        [systemChatVc setDisplayConversationTypeArray:arr];
-        [systemChatVc setCollectionConversationType:nil];
-        systemChatVc.isEnteredToCollectionViewController = YES;
-        [self.navigationController pushViewController:systemChatVc animated:YES];
-        
-    } else if (conversationModelType == ConversationType_PRIVATE) {
-    
-        ChatViewController *chatVc      = [[ChatViewController alloc]init];
-        chatVc.hidesBottomBarWhenPushed = YES;
-        chatVc.conversationType         = model.conversationType;
-        chatVc.targetId                 = model.targetId;
-        chatVc.title                    = model.conversationTitle;
-        model.unreadMessageCount        = 0;
-        [self.navigationController pushViewController:chatVc animated:YES];
-        
-    } else if (conversationModelType == ConversationType_CUSTOMERSERVICE) {
-        
-        RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
-        chatService.hidesBottomBarWhenPushed = YES;
-        chatService.conversationType = ConversationType_CUSTOMERSERVICE;
-        chatService.targetId = RONGYUN_SERVICE_ID;
-        chatService.title = model.conversationTitle;
-        [self.navigationController pushViewController:chatService animated:YES];
-
-    }
-    
-}
-
-
+//- (void)willDisplayConversationTableCell:(RCConversationBaseCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+//
+//    __weak typeof(self) weakSelf   = self;
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//
+//        int badge = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
+//        UITabBarItem *item = [weakSelf.tabBarController.tabBar.items objectAtIndex:2];
+//        if (badge > 0) {
+//            NSString *badgeStr = [NSString stringWithFormat:@"%d",badge];
+//            item.badgeValue = badgeStr;
+//        } else {
+//            item.badgeValue = nil;
+//        }
+//    });
+//
+//    RCConversationCell *conversationCell = (RCConversationCell *)cell;
+//    conversationCell.topCellBackgroundColor = [UIColor snowColor];
+//    NSInteger unreadCount = conversationCell.model.unreadMessageCount;
+//    if (unreadCount > 0){
+//        conversationCell.bubbleTipView.bubbleTipText = (unreadCount > 99) ? @"99+" : [NSString stringWithFormat:@"%ld",(long)unreadCount];
+//    }else{
+//        conversationCell.bubbleTipView.bubbleTipText = nil;
+//    }
+//}
+//
+//#pragma mark 点击cell方法
+//- (void)onSelectedTableRow:(RCConversationModelType)conversationModelType
+//         conversationModel:(RCConversationModel *)model
+//               atIndexPath:(NSIndexPath *)indexPath {
+//
+//    if (conversationModelType == RC_CONVERSATION_MODEL_TYPE_COLLECTION) {
+//
+//        ChatListViewController *systemChatVc = [[ChatListViewController alloc]init];
+//        NSArray *arr = [NSArray arrayWithObject:[NSNumber numberWithInt:model.conversationType]];
+//        [systemChatVc setDisplayConversationTypeArray:arr];
+//        [systemChatVc setCollectionConversationType:nil];
+//        systemChatVc.isEnteredToCollectionViewController = YES;
+//        [self.navigationController pushViewController:systemChatVc animated:YES];
+//
+//    } else if (conversationModelType == ConversationType_PRIVATE) {
+//
+//        ChatViewController *chatVc      = [[ChatViewController alloc]init];
+//        chatVc.hidesBottomBarWhenPushed = YES;
+//        chatVc.conversationType         = model.conversationType;
+//        chatVc.targetId                 = model.targetId;
+//        chatVc.title                    = model.conversationTitle;
+//        model.unreadMessageCount        = 0;
+//        [self.navigationController pushViewController:chatVc animated:YES];
+//
+//    } else if (conversationModelType == ConversationType_CUSTOMERSERVICE) {
+//
+//        RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
+//        chatService.hidesBottomBarWhenPushed = YES;
+//        chatService.conversationType = ConversationType_CUSTOMERSERVICE;
+//        chatService.targetId = RONGYUN_SERVICE_ID;
+//        chatService.title = model.conversationTitle;
+//        [self.navigationController pushViewController:chatService animated:YES];
+//
+//    }
+//
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

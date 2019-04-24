@@ -11,6 +11,7 @@
 #import "ChatListViewController.h"
 #import "GQSegmentedControl.h"
 
+
 @interface MessageViewController ()<GQSegmentDelegate>
 
 @property (nonatomic,strong ) GQSegmentedControl *segment;

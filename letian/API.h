@@ -43,7 +43,8 @@
 //消息
 #define API_MODULE_MESSAGE           @"Message"
 
-
+//地区
+#define API_MODULE_REGION            @"Region"
 
 
 
@@ -129,6 +130,9 @@
 //获取咨询师类型
 #define API_NAME_GETCONSULTTITLELIST  @"GetUserPsyAndTitleList"
 
+//获取咨询师所属区域列表
+#define API_NAME_GETBUSINESSREGIN @"GetBusinessRegion"
+
 //获取咨询师价格规则
 #define API_NAME_GETCONSULFEELIST  @"GetConsultFeeList"
 
@@ -173,6 +177,9 @@
 
 //咨询师修改订单为已完成状态
 #define API_NAME_FINISHORDER         @"DoFinishConsultOrder"
+
+//添加感谢信
+#define API_NAME_ADDUSERLETTER       @"AddUserLetter"
 
 //系统消息列表
 #define API_NAME_GETMESSAGELIST      @"GetMessageList"

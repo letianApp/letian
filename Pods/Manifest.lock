@@ -17,7 +17,7 @@ PODS:
   - Colours (5.13.0):
     - Colours/ObjC (= 5.13.0)
   - Colours/ObjC (5.13.0)
-  - CYLTabBarController (1.10.0)
+  - CYLTabBarController (1.17.22)
   - FSCalendar (2.7.4)
   - JCore (1.1.2)
   - JPush (3.0.3):
@@ -44,6 +44,7 @@ PODS:
   - SDWebImage/Core (3.7.6)
   - Shimmer (1.0.2)
   - SnailPopupController (2.0.2)
+  - SobotKit (2.6.7)
   - UMengUShare (6.4.2):
     - UMengUShare/Core (= 6.4.2)
     - UMengUShare/Network (= 6.4.2)
@@ -168,7 +169,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
   - Colours
-  - CYLTabBarController (= 1.10.0)
+  - CYLTabBarController (~> 1.17.22)
   - FSCalendar
   - JPush
   - JSONModel
@@ -185,6 +186,7 @@ DEPENDENCIES:
   - SDWebImage (~> 3.7.5)
   - Shimmer (~> 1.0.2)
   - SnailPopupController
+  - SobotKit
   - UMengUShare
   - WechatOpenSDK
   - ZYKeyboardUtil (~> 1.0.7)
@@ -192,7 +194,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Colours: f24220c38f13deac88612667e9b4a7fb96b871d4
-  CYLTabBarController: 2de9a4c26f50d33574398becf8e7b0aaed794240
+  CYLTabBarController: 35784c2969383583d11cc56ff5abce078f19d94a
   FSCalendar: e95995a746acae531c4a7dd636b8393233125ec5
   JCore: 9e9bd280a38090d66aca0a7547581cd29804c6eb
   JPush: 8ea7c5bee363191cb5214f5d34ae11e1c5494722
@@ -207,11 +209,12 @@ SPEC CHECKSUMS:
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
   SnailPopupController: 0355c7f9e67567123a7172d68b87fe9e1163b13f
+  SobotKit: 3ceaccbbecfe8c8d1e777edc5fc81d3af7475add
   UMengUShare: 740664d1dd5cc2fb2cc3325d61e4b35539aa9c78
   WechatOpenSDK: cbd332148eb792d444ed4eec94f421d98f2046ee
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   ZYKeyboardUtil: c4b920eed9af063c46af2e9ea62e851d9331fbd9
 
-PODFILE CHECKSUM: 6f2f48040c0938381c4639efc6f95f6edd015dc7
+PODFILE CHECKSUM: dedf0e76882f17cda2401610a495b068ced2cd2c
 
 COCOAPODS: 1.2.1

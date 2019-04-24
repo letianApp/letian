@@ -60,7 +60,7 @@
     
     [self requestData];
     
-    [self viewAmimationPlay];
+//    [self viewAmimationPlay];
     
     [self setUpRefresh];
 }

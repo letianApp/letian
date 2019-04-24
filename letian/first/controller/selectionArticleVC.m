@@ -9,6 +9,7 @@
 #import "selectionArticleVC.h"
 #import <WebKit/WebKit.h>
 #import "CommitVC.h"
+#import "RegistViewController.h"
 
 #import "GQUserManager.h"
 #import "GQActionSheet.h"
@@ -22,7 +23,7 @@
 @property (nonatomic,strong) UILabel *comLab;
 @property (nonatomic,strong) UIButton *likeBtn;
 @property (nonatomic,strong) UILabel *likeLab;
-@property (nonatomic,strong) UIImpactFeedbackGenerator *feedBackGenertor;
+@property (nonatomic,strong) UIImpactFeedbackGenerator *feedBackGenertor;//3dtouch
 
 @end
 
@@ -118,20 +119,37 @@
 //    [MBHudSet showText:@"评论" andOnView:self.view];
     CommitVC *commitVC = [[CommitVC alloc]init];
     commitVC.ID = self.ID;
+    commitVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:commitVC animated:YES];
 
 }
 
 - (void)clickLikeBtn {
     
-    [_feedBackGenertor impactOccurred];
-    
-    if (_likeBtn.isSelected == YES) {
-        _likeBtn.selected = NO;
+    if (![GQUserManager isHaveLogin]) {
+        
+        UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alertControl animated:YES completion:nil];
+        
+        __weak typeof(self) weakSelf = self;
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            
+            __strong typeof(self) strongSelf = weakSelf;
+            RegistViewController *loginVc     = [[RegistViewController alloc]init];
+            loginVc.hidesBottomBarWhenPushed = YES;
+            [strongSelf presentViewController:loginVc animated:YES completion:nil];
+        }]];
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     } else {
-        _likeBtn.selected = YES;
+        [_feedBackGenertor impactOccurred];
+        if (_likeBtn.isSelected == YES) {
+            _likeBtn.selected = NO;
+        } else {
+            _likeBtn.selected = YES;
+        }
+        [self doArticlePraise];
     }
-    [self doArticlePraise];
+    
 }
 
 - (void)requestData {

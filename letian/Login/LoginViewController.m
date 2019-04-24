@@ -62,6 +62,7 @@
         [MBHudSet showText:@"请输入账号" andOnView:self.view];
         return;
     }
+    [MBHudSet showStatusOnView:self.view];
 
     GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
@@ -80,12 +81,11 @@
     params[@"AppId"]               = APPID;
     params[@"PushNo"]              = [JPUSHService registrationID];
     
-    NSLog(@"推送号：。。。。。%@",params[@"PushNo"]);
-    __weak typeof(self) weakSelf   = self;
-    [MBHudSet showStatusOnView:self.view];
+//    NSLog(@"推送号：。。。。。%@",params[@"PushNo"]);
+    __weak typeof(self) weakSelf = self;
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [MBHudSet dismiss:self.view];
         __strong typeof(self) strongSelf = weakSelf;
+        [MBHudSet dismiss:self.view];
 
         NSLog(@"登录%@",responseObject);
         if([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
@@ -98,10 +98,11 @@
 
             [strongSelf getUserInfo];
             
-            } else {
-                
-            [MBHudSet showText:responseObject[@"登陆失败，请重新登录"] andOnView:strongSelf.view];
-            }
+        } else {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+             [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.view];
+            });
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         __strong typeof(self) strongSelf = weakSelf;
@@ -135,6 +136,8 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"NickName"] forKey:kUserName];
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"HeadImg"] forKey:kUserHeadImageUrl];
+            [strongSelf.presentingViewController.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+
             RCUserInfo *currentUser = [RCIM sharedRCIM].currentUserInfo;
             currentUser.name = kFetchUserName;
             currentUser.portraitUri = kFetchUserHeadImageUrl;
@@ -142,13 +145,11 @@
             
             [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
                 
-                [strongSelf.presentingViewController.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+//                [strongSelf.presentingViewController.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 
 
             } error:^(RCConnectErrorCode status) {
 //                NSLog(@"登陆的错误码为:%ld", (long)status);
-                
-                
                 
             } tokenIncorrect:^{
                 //token过期或者不正确。

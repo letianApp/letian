@@ -227,7 +227,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBHudSet dismiss:self.view];
         [MBHudSet showText:@"支付失败" andOnView:self.view];
-//        NSLog(@"%@",error);
+        NSLog(@"%@",error);
     }];
 
 }

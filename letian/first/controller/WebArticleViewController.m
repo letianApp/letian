@@ -54,7 +54,7 @@
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"文章详情:%@",responseObject);
         [MBHudSet dismiss:self.view];
-        weakSelf.articleModel=[WebArticleModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
+        weakSelf.articleModel = [WebArticleModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
 //        NSLog(@"responseObject=%@",responseObject);
         [self createRichTextView:self.articleModel.Content];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -94,7 +94,7 @@
     authorLabel.textAlignment=NSTextAlignmentRight;
     [textview addSubview:authorLabel];
     
-    textview.textContainerInset=UIEdgeInsetsMake(titleLabel.height+45+authorLabel.height, 15, 0, 15);
+    textview.textContainerInset = UIEdgeInsetsMake(titleLabel.height+45+authorLabel.height, 15, 0, 15);
     [self.view addSubview:textview];
     
     self.textView=textview;

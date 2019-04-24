@@ -48,6 +48,7 @@
 #import "WXApi.h"
 #import "WXApiManager.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import <SobotKit/SobotKit.h>
 
 #import <UMSocialCore/UMSocialCore.h>
 
@@ -69,10 +70,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     //实时调试
-    Class Test = NSClassFromString(@"UIDebuggingInformationOverlay");
-    [[Test class] performSelector:@selector(prepareDebuggingOverlay)];
-    
-
+//    Class Test = NSClassFromString(@"UIDebuggingInformationOverlay");
+//    [[Test class] performSelector:@selector(prepareDebuggingOverlay)];
     
     self.window = [[UIWindow alloc]init];
     self.window.frame = [UIScreen mainScreen].bounds;
@@ -81,19 +80,13 @@
     [self setStartAction];
 
 //    [self setUpStatusBar];
-    
     [self resignWechat];
-    
     [self ConfigJPush:launchOptions];
-    
     [self setUSharePlatforms];
-    
-    [self customEMwithApp:application withLaunchOptions:launchOptions];
-    
+//    [self customEMwithApp:application withLaunchOptions:launchOptions];
     if (@available(iOS 11.0, *)){
 //        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
-        
     return YES;
     
 }
@@ -186,11 +179,8 @@
 //    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin) forBarMetrics:UIBarMetricsDefault];
     
     UIImage *image = [UIImage imageNamed:@"pinkback"];
-    
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
     [UINavigationBar appearance].backIndicatorImage = image;
-    
     [UINavigationBar appearance].backIndicatorTransitionMaskImage = image;
 
 }
@@ -242,7 +232,7 @@
         [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
             
             __strong typeof(self) strongSelf = weakSelf;
-            NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+//            NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 

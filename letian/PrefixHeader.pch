@@ -83,6 +83,7 @@
 #define kUserType                @"kUserType"            //用户的身份
 #define kTokenKey                @"kToken"               //用户的Token用于与服务器进行校验
 #define kRongYunToken            @"kRToken"              //融云token
+#define kUserChoise              @"kUserChoise"          //选择咨询类型
 
 
 //=================================获取用户信息 =================================
@@ -96,6 +97,7 @@
 #define kFetchToken             [[NSUserDefaults standardUserDefaults] objectForKey:kTokenKey]
 #define kFetchUserType          [[NSUserDefaults standardUserDefaults] objectForKey:kUserType]
 #define kFetchRToken            [[NSUserDefaults standardUserDefaults] objectForKey:kRongYunToken]
+#define kFetchUChoise           [[NSUserDefaults standardUserDefaults] objectForKey:kUserChoise]
 
 
 //================================= 通知名 =================================

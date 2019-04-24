@@ -13,6 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "GQUserManager.h"
 #import "RegistViewController.h"
+#import "Colours.h"
 
 
 @interface CommitVC ()<UIGestureRecognizerDelegate, UITextFieldDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
@@ -108,7 +109,6 @@
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         __strong typeof(self) strongSelf = weakSelf;
         strongSelf.mainArr = [CommitModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-        NSLog(@"详细：%@",strongSelf.mainArr);
         [strongSelf.mainTab reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -130,11 +130,12 @@
     [self.view addGestureRecognizer:tap];
     tap.delegate = self;
     
-    _tabBar = [[UITextField alloc]initWithFrame:CGRectMake(0, SCREEN_H-tabBar_H, SCREEN_W, tabBar_H)];
+    _tabBar = [[UITextField alloc]initWithFrame:CGRectMake(0, SCREEN_H - TAB_BAR_HEIGHT, SCREEN_W, TAB_BAR_HEIGHT)];
     _tabBar.borderStyle = UITextBorderStyleRoundedRect;
     _tabBar.delegate = self;
     _tabBar.placeholder = @"说点什么...";
     _tabBar.returnKeyType = UIReturnKeySend;
+    _tabBar.backgroundColor = [UIColor seashellColor];
     
     [self.view addSubview:_tabBar];
     
@@ -150,14 +151,12 @@
 }
 
 - (void)hideKeyboard {
-    //    [self.view endEditing:YES];
     [[[UIApplication sharedApplication]keyWindow]endEditing:YES];
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
     if (![GQUserManager isHaveLogin]) {
         
-        NSLog(@"点击评论");
         [textField resignFirstResponder];
         textField.tintColor = [UIColor clearColor];
         UIAlertController *alertControl  = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
@@ -177,7 +176,6 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
-//    NSLog(@"--发送%@--", textField.text);
     
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
@@ -191,7 +189,6 @@
     
     [manager POST:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         __strong typeof(self) strongSelf = weakSelf;
-        NSLog(@"发：%@",responseObject);
         [strongSelf requestData];
         textField.text = nil;
 

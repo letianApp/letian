@@ -60,7 +60,7 @@
 - (void)customNavigation {
     
     self.navigationItem.title = @"设置可预约日期";
-    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithTitle:@"周" style:UIBarButtonItemStylePlain target:self action:@selector(rightBtnClick:)];
+    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithTitle:@"月" style:UIBarButtonItemStylePlain target:self action:@selector(rightBtnClick:)];
     rightBtn.tintColor = MAINCOLOR;
     self.navigationItem.rightBarButtonItem = rightBtn;
 }
@@ -86,6 +86,18 @@
     [_mainTableView setTableHeaderView:_calendar];
     [_mainTableView endUpdates];
 
+}
+
+- (UIBarButtonItem *)customBackItemWithTarget:(id)target
+                                       action:(SEL)action {
+    
+    UIButton *btn = [[UIButton alloc]init];
+    UIImageView *backView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 20, 20)];
+    backView.image = [UIImage imageNamed:@"pinkback"];
+    [btn addSubview:backView];
+    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    return item;
 }
 
 - (void)customMainTableView {
@@ -121,16 +133,6 @@
     [cell.affirmBtn addTarget:self action:@selector(affirmSetTime:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
-
-//    } else {
-//        
-//        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"setCellId"];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        
-//        return cell;
-//
-//    }
-
 }
 
 - (void)clickTimeBtn:(UIButton *)btn {
@@ -147,8 +149,23 @@
     self.sl_popupController.transitStyle             = PopupTransitStyleSlightScale;
     self.sl_popupController.dismissOppositeDirection = YES;
     
-    [self.sl_popupController presentContentView:[self setupDatePiker]];
+    UIView *view = [self setupDatePiker];
+    [self.sl_popupController presentContentView:view];
+    [self ios11Bug:view];
 
+}
+
+- (void)ios11Bug:(UIView *)view {
+    
+    UIView *tooView = view.superview.superview;
+    [tooView layoutIfNeeded];
+    NSArray *subViewArray = tooView.subviews;
+    for (id sView in subViewArray) {
+        if ([sView isKindOfClass:(NSClassFromString(@"_UIToolbarContentView"))]) {
+            UIView *testView = sView;
+            testView.userInteractionEnabled = NO;
+        }
+    }
 }
 
 - (UIView *)setupDatePiker {
@@ -241,16 +258,6 @@
     return 0.01;
 }
 
-- (UIBarButtonItem *)customBackItemWithTarget:(id)target
-                                       action:(SEL)action {
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [btn setFrame:CGRectMake(0, 0, 20, 20)];
-    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    return item;
-}
 
 #pragma mark 日历
 - (void)setupCalendarWithBGView:(UIView *)view {
@@ -265,7 +272,7 @@
     calendar.appearance.todayColor       = MAINCOLOR;
     calendar.appearance.selectionColor   = MAINCOLOR;
     calendar.scrollDirection             = FSCalendarScrollDirectionHorizontal;
-    calendar.scope                       = FSCalendarScopeWeek;
+    calendar.scope                       = FSCalendarScopeMonth;
     
     self.calendar                        = calendar;
     _mainTableView.tableHeaderView       = self.calendar;

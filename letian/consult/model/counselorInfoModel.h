@@ -105,6 +105,11 @@
  */
 @property (nonatomic, copy  ) NSString  *TotalConsultCount;
 
+/**
+ 咨询师地区
+ */
+@property (nonatomic, copy  ) NSString  *RegionIDString;
+
 
 
 @end

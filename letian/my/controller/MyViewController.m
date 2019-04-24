@@ -67,8 +67,8 @@
 
 
 #pragma mark------------获取用户信息
--(void)requestData
-{
+-(void)requestData {
+    
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_USER];
@@ -80,7 +80,7 @@
     [manager GET:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         __strong typeof(self) strongSelf = weakSelf;
-
+//        NSLog(@"%@",responseObject);
         [MBHudSet dismiss:strongSelf.view];
         if ([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             strongSelf.userInfoModel = [UserInfoModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
@@ -215,7 +215,7 @@
 -(void)userInfoClick{
     UserInfoViewController *userInfoVc=[[UserInfoViewController alloc]init];
     userInfoVc.hidesBottomBarWhenPushed=YES;
-    userInfoVc.userInfoModel=self.userInfoModel;
+    userInfoVc.userInfoModel = self.userInfoModel;
     [self.navigationController pushViewController:userInfoVc animated:YES];
 }
 
@@ -348,7 +348,7 @@
 
         OrderViewController *orderVc=[[OrderViewController alloc]init];
         orderVc.hidesBottomBarWhenPushed=YES;
-        orderVc.orderState=AllOrder;
+        orderVc.orderState = AllOrder;
         [self.navigationController pushViewController:orderVc animated:YES];
     
     } else {

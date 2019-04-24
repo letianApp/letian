@@ -22,8 +22,13 @@
     if (cell == nil) {
         cell = [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.detailLabel.textColor = [UIColor lightGrayColor];
+    cell.detailLabel.numberOfLines = 2;
+    cell.headImageView.contentMode = UIViewContentModeScaleToFill;
+    cell.headImageView.clipsToBounds = YES;
+    cell.separatView.backgroundColor = MAINCOLOR;
+    
     return cell;
 }
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

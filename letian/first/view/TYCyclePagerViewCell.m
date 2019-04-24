@@ -35,14 +35,14 @@
 
 - (void)addLabel {
     UIImageView *bgImg = [[UIImageView alloc]init];
-    bgImg.contentMode = UIViewContentModeScaleAspectFill;
+    bgImg.contentMode = UIViewContentModeScaleToFill;
     [self addSubview:bgImg];
     _bgImg = bgImg;
     
     UILabel *label = [[UILabel alloc]init];
     label.textAlignment = NSTextAlignmentLeft;
     label.textColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:18];
+    label.font = [UIFont boldSystemFontOfSize:15];
 //    label.backgroundColor = MAINCOLOR;
     [_bgImg addSubview:label];
     _label = label;
@@ -55,7 +55,7 @@
     _bgImg.clipsToBounds = YES;
     _bgImg.layer.cornerRadius = 5.f;
     
-    _label.frame = CGRectMake(_bgImg.width/5, _bgImg.height*4/5, _bgImg.width*4/5, _bgImg.height/5);
+    _label.frame = CGRectMake(10, _bgImg.height*4/5, _bgImg.width*4/5, _bgImg.height/5);
 
 //    UIView *shadow = [[UIView alloc] initWithFrame:self.contentView.bounds];
 //    [_bgImg.superview insertSubview:shadow aboveSubview:_bgImg];

@@ -25,6 +25,8 @@
 @property(nonatomic,copy)NSString *Name;
 @property(nonatomic,copy)NSString *ActiveImg;
 @property(nonatomic,copy)NSString *ActiveUrl;
+@property(nonatomic,copy)NSString *ArticleContent;
+
 
 
 

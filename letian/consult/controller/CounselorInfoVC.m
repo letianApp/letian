@@ -15,6 +15,7 @@
 #import "ChatViewController.h"
 #import "RCDCustomerServiceViewController.h"
 #import "RegistViewController.h"
+#import "ZhiChiViewController.h"
 
 #import "GQUserManager.h"
 #import "LoginViewController.h"
@@ -23,8 +24,7 @@
 #import "Colours.h"
 #import "UIImage+ImageEffects.h"
 #import "TDImageColors.h"
-//#import "UIImage+MostColor.h"
-
+#import "SnailPopupController.h"
 
 #import "GQActionSheet.h"
 #import <UShareUI/UShareUI.h>
@@ -366,7 +366,6 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
     
     float lineHeight = (_headView.height/2-_headView.width*0.1)/7;
 
-    NSLog(@"aaaaa:%f",lineHeight);
 //咨询师名字
     UILabel *nameLab = [[UILabel alloc]init];
     [view addSubview:nameLab];
@@ -459,19 +458,15 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
     parames[@"doctorID"] = @(self.counselModel.UserID);
     
     [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
-    //    NSLog(@"token:%@",kFetchToken);
     [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
         __strong typeof(self) strongSelf = weakSelf;
 //        NSLog(@"感谢：%@",responseObject);
         strongSelf.userLetterArr = [UserLetterModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-//        if (!strongSelf.userLetterArr.count) {
-//            [strongSelf.mainTableView deleteSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-//        }
         [strongSelf.mainTableView reloadData];
         
-        
     } failure:^(NSError *error) {
-        
+        __strong typeof(self) strongSelf = weakSelf;
+        [MBHudSet showText:@"获取感谢信失败" andOnView:strongSelf.view];
     }];
     
     
@@ -493,7 +488,7 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
     UIButton *askBtn = [[UIButton alloc]initWithFrame:CGRectMake(15, 3, tabBar_H*2/3, tabBar_H*2/3)];
     [_tabBar addSubview:askBtn];
     [askBtn setImage:[UIImage imageNamed:@"ask"] forState:UIControlStateNormal];
-    [askBtn addTarget:self action:@selector(clickAskBrn) forControlEvents:UIControlEventTouchUpInside];
+    [askBtn addTarget:self action:@selector(clickAskBtn) forControlEvents:UIControlEventTouchUpInside];
     UILabel *askLab = [[UILabel alloc]initWithFrame:CGRectMake(15, tabBar_H*2/3, tabBar_H, tabBar_H/3)];
     [_tabBar addSubview:askLab];
     askLab.centerX = askBtn.centerX;
@@ -501,6 +496,18 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
     askLab.textAlignment               = NSTextAlignmentCenter;
     askLab.font                        = [UIFont systemFontOfSize:10];
     askLab.textColor                   = [UIColor darkGrayColor];
+    //担保
+    UIButton *assBtn = [[UIButton alloc]initWithFrame:CGRectMake(askBtn.right+15, 3, tabBar_H*2/3, tabBar_H*2/3)];
+    [_tabBar addSubview:assBtn];
+    [assBtn setImage:[UIImage imageNamed:@"ass"] forState:UIControlStateNormal];
+    [assBtn addTarget:self action:@selector(clickAssBtn) forControlEvents:UIControlEventTouchUpInside];
+    UILabel *assLab = [[UILabel alloc]initWithFrame:CGRectMake(askLab.right+15, tabBar_H*2/3, tabBar_H, tabBar_H/3)];
+    [_tabBar addSubview:assLab];
+    assLab.centerX = assBtn.centerX;
+    assLab.text                        = @"担保交易";
+    assLab.textAlignment               = NSTextAlignmentCenter;
+    assLab.font                        = [UIFont systemFontOfSize:10];
+    assLab.textColor                   = [UIColor darkGrayColor];
     //价格lable
     UILabel *priceLab                  = [[UILabel alloc]init];
     priceLab.adjustsFontSizeToFitWidth = YES;
@@ -536,16 +543,17 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
 
 }
 
-- (void)clickAskBrn {
+- (void)clickAskBtn {
     
     if ([GQUserManager isHaveLogin]) {
 
-        RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
+        ZhiChiViewController *chatService = [[ZhiChiViewController alloc] init];
         chatService.hidesBottomBarWhenPushed = YES;
-        chatService.conversationType = ConversationType_CUSTOMERSERVICE;
-        chatService.targetId = RONGYUN_SERVICE_ID;
+        //    chatService.conversationType = ConversationType_CUSTOMERSERVICE;
+        //    chatService.targetId = RONGYUN_SERVICE_ID;
         chatService.title = @"乐天心理咨询";
         [self.navigationController pushViewController:chatService animated:YES];
+        
     } else {
         
         UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您尚未登录" preferredStyle:UIAlertControllerStyleAlert];
@@ -562,7 +570,27 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
         }]];
         [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     }
+}
 
+- (void)clickAssBtn {
+    
+    self.sl_popupController = [SnailPopupController new];
+    self.sl_popupController.layoutType = PopupLayoutTypeBottom;
+    self.sl_popupController.maskType = PopupMaskTypeWhiteBlur;
+    self.sl_popupController.transitStyle = PopupTransitStyleSlightScale;
+    UILabel *assTitleView = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H/5*2)];
+    assTitleView.backgroundColor = [UIColor lightTextColor];
+    UILabel *assTitleLab = [[UILabel alloc]initWithFrame:CGRectMake(20, 30, SCREEN_W-40, assTitleView.height-20)];
+    [assTitleView addSubview:assTitleLab];
+    NSString *assStr = @"担保交易\n平台保证资金安全和服务规范 ，未消费金额申请即退。\n\n资质认证\n心理咨询师资格证书已经通过审核。";
+    NSMutableAttributedString *attrAssStr = [[NSMutableAttributedString alloc]initWithString:assStr];
+    [attrAssStr addAttribute:NSForegroundColorAttributeName value:MAINCOLOR range:NSMakeRange(0, 4)];
+    [attrAssStr addAttribute:NSForegroundColorAttributeName value:MAINCOLOR range:NSMakeRange(32, 4)];
+    assTitleLab.font = [UIFont systemFontOfSize:15];
+    assTitleLab.numberOfLines = 0;
+    assTitleLab.attributedText = attrAssStr;
+    [assTitleLab sizeToFit];
+    [self.sl_popupController presentContentView:assTitleView];
 }
 
 - (void)clickAppointmentBtn {

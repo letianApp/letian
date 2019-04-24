@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *conserlorPrice;
 @property (weak, nonatomic) IBOutlet UIImageView *conserlorSex;
 @property (weak, nonatomic) IBOutlet UILabel *conserVisitors;
+@property (weak, nonatomic) IBOutlet UILabel *conserlorRegion;
 
 
 + (instancetype) cellWithTableView:(UITableView *)tableview;

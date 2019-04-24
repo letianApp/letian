@@ -48,9 +48,9 @@
 @property (nonatomic, strong) UILabel                *hoursPriceLab;
 
 @property (nonatomic, strong) NSMutableArray         *hoursData;
-@property (nonatomic, strong) NSString               *hourStr;
-@property (nonatomic, strong) NSString               *customTimeStartStr;
-@property (nonatomic, strong) NSString               *customTimeEndStr;
+@property (nonatomic, copy  ) NSString               *hourStr;
+@property (nonatomic, copy  ) NSString               *customTimeStartStr;
+@property (nonatomic, copy  ) NSString               *customTimeEndStr;
 
 @property (nonatomic, strong) UIButton               *startBtn;
 @property (nonatomic, strong) UIButton               *endBtn;
@@ -240,26 +240,25 @@
     
     if (btn.tag == 1) {
         
-        _mapBtn.userInteractionEnabled = YES;
-        //EAP通道
-        if (self.counselModel.UserID == 313) {
-            NSString *str = @"面对面咨询地点：上海市浦东新区祖冲之路555号1号楼1楼郁金香厅";
-            [_mapBtn setTitle:str forState:UIControlStateNormal];
-            [_mapBtn addTarget:self action:@selector(clickMapBtn:) forControlEvents:UIControlEventTouchUpInside];
-        } else {
-            NSString *str = @"面对面咨询地点：上海市徐汇区中山西路2240号鼎力创意园B401室";
-            NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:str];
-            [attrStr addAttribute:NSForegroundColorAttributeName value:MAINCOLOR range:NSMakeRange(8, 25)];
-            [attrStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(8, 25)];
-            [_mapBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
-            [_mapBtn addTarget:self action:@selector(clickMapBtn:) forControlEvents:UIControlEventTouchUpInside];
-        }
+//        _mapBtn.userInteractionEnabled = YES;
+//        //EAP通道
+//        if (self.counselModel.UserID == 313) {
+//            NSString *str = @"面对面咨询地点：上海市浦东新区祖冲之路555号1号楼1楼郁金香厅";
+//            [_mapBtn setTitle:str forState:UIControlStateNormal];
+//            [_mapBtn addTarget:self action:@selector(clickMapBtn:) forControlEvents:UIControlEventTouchUpInside];
+//        } else {
+//            NSString *str = @"面对面咨询地点：上海市徐汇区中山西路2240号鼎力创意园B401室";
+//            NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:str];
+//            [attrStr addAttribute:NSForegroundColorAttributeName value:MAINCOLOR range:NSMakeRange(8, 25)];
+//            [attrStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(8, 25)];
+//            [_mapBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
+//            [_mapBtn addTarget:self action:@selector(clickMapBtn:) forControlEvents:UIControlEventTouchUpInside];
+//        }
         
     } else if (btn.tag == 11) {
         
         NSAttributedString *attrStr = [[NSAttributedString alloc]initWithString:@"预约成功后可直接在订单页面与咨询师取得联系，详情请咨询乐天客服"];
         [_mapBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
-//        [_mapBtn setTitle:btn.titleLabel.text forState:UIControlStateNormal];
         _mapBtn.userInteractionEnabled = NO;
         
 //        if (!NULLString(_priceLab.text)) {
@@ -522,7 +521,7 @@
     NSMutableString *selDateStartStr  = [NSMutableString new];
     if (_endBtn.selected) {
         selDateStartStr  = [NSMutableString stringWithFormat:@"%@ %@", _orderModel.orderDate,_orderModel.orderDateTimeStart];
-        NSLog(@"点结束");
+//        NSLog(@"点结束");
     } else {
         selDateStartStr  = [NSMutableString stringWithFormat:@"%@ %@", _orderModel.orderDate,_customTimeStartStr];
     }
@@ -537,6 +536,7 @@
     NSDate *selDateStart              = [selDateFormatter dateFromString:selDateStartStr];
     NSDate *selDateEnd                = [selDateFormatter dateFromString:selDateEndStr];
     NSDate *endDate = [NSDate dateWithTimeInterval:- 60 * 60 sinceDate:selDateEnd];
+//    NSLog(@"结束：%@",endDate);
 
     UILabel *dateLab      = [[UILabel alloc]init];
     [backView addSubview:dateLab];
@@ -699,16 +699,12 @@
     NSMutableDictionary *parames = [[NSMutableDictionary alloc]init];
     parames[@"date"] = dayStr;
     parames[@"userID"] = @(self.counselModel.UserID);
-//    NSLog(@"咨询师ID：%ld",(long)self.counselModel.UserID)
     
     [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
 //    NSLog(@"token:%@",kFetchToken);
     [PPNetworkHelper GET:requestString parameters:parames success:^(id responseObject) {
         __strong typeof(self) strongSelf = weakSelf;
         [MBHudSet dismiss:strongSelf.view];
-        
-//        NSLog(@"获取咨询时间返回的数据%@",responseObject);
-        
         if([responseObject[@"Code"] integerValue] == 200) {
             
             strongSelf.getInfoModel = [ConsultDateModel mj_objectWithKeyValues:responseObject[@"Result"][@"Source"]];
@@ -737,12 +733,7 @@
                     strongSelf.consultSetLab.centerX = strongSelf.startBtn.centerX;
 
                 } else {
-                    
-//                    NSLog(@"空空空");
-                    
-
                 }
-
             } else {
                 
                 [strongSelf.timeChoicesView removeAllSubviews];
@@ -757,6 +748,8 @@
         
         [MBHudSet dismiss:strongSelf.view];
         [MBHudSet showText:[NSString stringWithFormat:@"获取咨询师订单列表错误，错误代码：%ld",(long)error.code]andOnView:strongSelf.view];
+//        NSLog(@"%@",strongSelf.dateDisplayLab.text);
+
     }];
     
     
@@ -1072,10 +1065,12 @@
         if (_detailTextView.text) {
             params[@"ConsultDescription"] = self.detailTextView.text;
         }
+//        NSLog(@"pa:%@",params);
         [PPNetworkHelper setValue:kFetchToken forHTTPHeaderField:@"token"];
         [PPNetworkHelper POST:requestString parameters:params success:^(id responseObject) {
             
             __strong typeof(self) strongSelf = weakSelf;
+//            NSLog(@"re:%@",responseObject);
             [MBHudSet dismiss:strongSelf.view];
             
             if([responseObject[@"Code"] integerValue] == 200) {
@@ -1088,7 +1083,7 @@
                 payPage.consultorName = strongSelf.orderModel.conserlorName;
                 payPage.totalFee = [responseObject[@"Result"][@"Source"][@"TotalFee"] floatValue];
                 //EAP通道
-                if (self.counselModel.UserID == 313) {
+                if (self.counselModel.UserID == 313 || self.counselModel.UserID == 2002) {
                     OrderViewController *orderVc = [[OrderViewController alloc] init];
                     orderVc.orderState = 1;
                     [strongSelf.navigationController pushViewController:orderVc animated:YES];

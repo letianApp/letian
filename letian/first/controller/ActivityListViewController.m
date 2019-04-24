@@ -79,16 +79,17 @@
     GQNetworkManager *manager = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_ACTIVE];
-    [requestString appendString:API_NAME_GETACTIVELISTBYTYPE];
+    [requestString appendString:@"GetActiveList"];
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     params[@"pageIndex"] = @(self.pageIndex);
     params[@"pageSize"] = @(10);
-    params[@"enumActiveType"] = @(11);
+//    params[@"enumActiveType"] = @(11);
     [manager.requestSerializer setValue:kFetchToken forHTTPHeaderField:@"token"];
     [MBHudSet showStatusOnView:self.view];
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBHudSet dismiss:self.view];
+//        NSLog(@"乐园：%@",responseObject);
         [weakSelf.tableview.mj_header endRefreshing];
         weakSelf.activeListArray = [ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
         if (weakSelf.activeListArray.count >= 10) {

@@ -10,4 +10,6 @@
 
 @interface ConsultViewController : ViewController
 
+@property (nonatomic, copy) NSString *selStr;
+
 @end

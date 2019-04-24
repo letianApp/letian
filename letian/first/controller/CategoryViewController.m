@@ -78,13 +78,13 @@
 #pragma mark-------选中某个分类
 -(void)slideSwitchDidselectTab:(NSUInteger)index
 {
-    ArticleListViewController * vc = self.segment.viewControllers[index];
+    ArticleListViewController *vc = self.segment.viewControllers[index];
     [vc viewWillAppear:YES];
 }
 
 -(void) setUpNavigationBar
 {
-    self.navigationItem.title=@"心理健康专栏";
+    self.navigationItem.title = @"心理健康专栏";
 
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import "consultPageCell.h"
-//#import "counselorInfoModel.h"
+#import "Colours.h"
 
 @implementation consultPageCell
 
@@ -33,6 +33,7 @@
     self.conserlorAbout.numberOfLines     = 0;
     self.conserlorAbout.font              = [UIFont systemFontOfSize:12];
     self.conserlorAbout.textColor         = [UIColor lightGrayColor];
+//    self.conserlorRegion.textColor        = [UIColor lightGrayColor];
     
 }
 

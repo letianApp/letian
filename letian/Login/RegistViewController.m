@@ -67,7 +67,7 @@
     __weak typeof(self) weakSelf   = self;
     NSMutableDictionary *params    = [NSMutableDictionary dictionary];
 
-    params[@"authCode"]            =AUTHCODE;
+    params[@"authCode"]            = AUTHCODE;
     params[@"phone"]               = self.phoneTextField.text;
     params[@"enumSmsType"]         = @(1);
     
@@ -169,17 +169,6 @@
     [self.phoneTextField resignFirstResponder];
     [self.codeTextField resignFirstResponder];
     
-//    GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
-//    NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
-//    [requestString appendFormat:@"%@/",API_MODULE_UTILS];
-//    [requestString appendFormat:@"%@",API_NAME_CHECKCODE];
-////    __weak typeof(self) weakSelf   = self;
-//    NSMutableDictionary *params    = [NSMutableDictionary dictionary];
-//
-//    params[@"verifyCode"]            =self.codeTextField.text;
-//    params[@"phone"]               = self.phoneTextField.text;
-//    params[@"enumSmsType"]         = @(2);
-    
     GQNetworkManager *manager      = [GQNetworkManager sharedNetworkToolWithoutBaseUrl];
     NSMutableString *requestString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestString appendFormat:@"%@/",API_MODULE_USER];
@@ -203,16 +192,7 @@
         
         __strong typeof(self) strongSelf = weakSelf;
         [MBHudSet dismiss:self.view];
-//        if([responseObject[@"Code"] integerValue] == 200){
-//
-//            SetAcountViewController *setAcountVc=[[SetAcountViewController alloc]init];
-//            setAcountVc.phone=self.phoneTextField.text;
-//            setAcountVc.msgCode=self.codeTextField.text;
-//            [self presentViewController:setAcountVc animated:YES completion:nil];
-//        }else{
-//
-//            [MBHudSet showText:@"请输入正确信息" andOnView:self.view];
-//        }
+//        NSLog(@"%@",responseObject);
         if([responseObject[@"Code"] integerValue] == 200 && [responseObject[@"IsSuccess"] boolValue] == YES) {
             
             [GQUserManager saveUserData:@{@"UserId":[NSString stringWithFormat:@"%@",responseObject[@"Result"][@"Source"][@"userid"]]} andToken:responseObject[@"Result"][@"Source"][@"access_token"]];
@@ -225,7 +205,10 @@
             
         } else {
             
-            [MBHudSet showText:responseObject[@"登陆失败，请重新登录"] andOnView:strongSelf.view];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBHudSet showText:responseObject[@"Msg"] andOnView:strongSelf.view];
+            });
+            
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -260,6 +243,8 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"NickName"] forKey:kUserName];
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"Result"][@"Source"][@"HeadImg"] forKey:kUserHeadImageUrl];
+            [strongSelf dismissViewControllerAnimated:YES completion:nil];
+
             RCUserInfo *currentUser = [RCIM sharedRCIM].currentUserInfo;
             currentUser.name = kFetchUserName;
             currentUser.portraitUri = kFetchUserHeadImageUrl;
@@ -267,8 +252,8 @@
             
             [[RCIM sharedRCIM] connectWithToken:kFetchRToken success:^(NSString *userId) {
                 
-                NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
-                [strongSelf dismissViewControllerAnimated:YES completion:nil];
+//                NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+//                [strongSelf dismissViewControllerAnimated:YES completion:nil];
                 
             } error:^(RCConnectErrorCode status) {
                 

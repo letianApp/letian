@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "test.png",
+      "filename" : "home-cate-shimian.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "test@2x.png",
+      "filename" : "home-cate-shimian-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "test@3x.png",
+      "filename" : "home-cate-shimian-2.png",
       "scale" : "3x"
     }
   ],
