@@ -161,6 +161,7 @@
 		776CF2BC1EB7900A00CE9620 /* UIView+TYLaunchAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 776CF2B71EB7900A00CE9620 /* UIView+TYLaunchAnimation.m */; };
 		776CF2BF1EB795CD00CE9620 /* DrawCircleProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 776CF2BE1EB795CD00CE9620 /* DrawCircleProgressButton.m */; };
 		7772CAB51ECEE8C00096C3C5 /* SystemMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7772CAB41ECEE8C00096C3C5 /* SystemMsgModel.m */; };
+		7778C3FA237AB47500ED9621 /* FeeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7778C3F9237AB47500ED9621 /* FeeModel.m */; };
 		7784D8AC1E6E80C5004AB0CC /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7784D8AA1E6E80C5004AB0CC /* MessageViewController.m */; };
 		7784D8AD1E6E80C5004AB0CC /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */; };
 		7787B30E1EADACC300306527 /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B30C1EADACC300306527 /* ActivityDetailViewController.m */; };
@@ -529,6 +530,8 @@
 		776CF2BE1EB795CD00CE9620 /* DrawCircleProgressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawCircleProgressButton.m; sourceTree = "<group>"; };
 		7772CAB31ECEE8C00096C3C5 /* SystemMsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMsgModel.h; sourceTree = "<group>"; };
 		7772CAB41ECEE8C00096C3C5 /* SystemMsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMsgModel.m; sourceTree = "<group>"; };
+		7778C3F8237AB47500ED9621 /* FeeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeeModel.h; sourceTree = "<group>"; };
+		7778C3F9237AB47500ED9621 /* FeeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeeModel.m; sourceTree = "<group>"; };
 		7784D8A91E6E80C5004AB0CC /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageViewController.h; path = ../../my/controller/MessageViewController.h; sourceTree = "<group>"; };
 		7784D8AA1E6E80C5004AB0CC /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageViewController.m; path = ../../my/controller/MessageViewController.m; sourceTree = "<group>"; };
 		7784D8AB1E6E80C5004AB0CC /* MessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageViewController.xib; path = ../../my/controller/MessageViewController.xib; sourceTree = "<group>"; };
@@ -821,6 +824,8 @@
 				093338C421523BB20006584F /* UserLetterModel.m */,
 				0965FBB81E82155500C0FBAD /* OrderModel.h */,
 				0965FBB91E82155500C0FBAD /* OrderModel.m */,
+				7778C3F8237AB47500ED9621 /* FeeModel.h */,
+				7778C3F9237AB47500ED9621 /* FeeModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2263,6 +2268,7 @@
 				776CF2BF1EB795CD00CE9620 /* DrawCircleProgressButton.m in Sources */,
 				77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */,
 				7722F0941EB4500B001DCF5F /* DTError.m in Sources */,
+				7778C3FA237AB47500ED9621 /* FeeModel.m in Sources */,
 				09B508642186AD800098ED05 /* TYCyclePagerViewCell.m in Sources */,
 				77EF53351EE93A03001B5C70 /* AgreeRegistVC.m in Sources */,
 				77D07EE41E962D2A00904AD9 /* ChangePwViewController.m in Sources */,
@@ -2445,7 +2451,8 @@
 				CODE_SIGN_ENTITLEMENTS = letian/letian.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WKX8GB3K8G;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2650,9 +2657,10 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = letian/letian.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Letian Psychological Counseling Center (WKX8GB3K8G)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WKX8GB3K8G;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

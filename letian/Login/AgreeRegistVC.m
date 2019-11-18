@@ -9,7 +9,9 @@
 #import "AgreeRegistVC.h"
 #import <WebKit/WebKit.h>
 
-@interface AgreeRegistVC ()
+@interface AgreeRegistVC ()<WKUIDelegate,WKNavigationDelegate>
+
+@property (nonatomic,strong) WKWebView *webView;
 
 @end
 
@@ -21,39 +23,28 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     // 创建WKWebView
-    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 69, SCREEN_W, SCREEN_H - 69)];
-    // 设置访问的URL
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"注册协议" ofType:@"pdf"];
-    NSURL *url = [NSURL fileURLWithPath:path];
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, NAVIGATION_BAR_HEIGHT, SCREEN_W, SCREEN_H - NAVIGATION_BAR_HEIGHT)];
+    _webView.UIDelegate = self;
+    _webView.navigationDelegate = self;
+    NSURL *url = [NSURL URLWithString:@"https://www.rightpsy.com/app/yinsi"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [webView loadRequest:request];
+    [_webView loadRequest:request];
+    [self.view addSubview:_webView];
     
-    //    NSURL *url = [NSURL URLWithString:@"http://www.jianshu.com"];
-    // 根据URL创建请求
-    //    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    // WKWebView加载请求
-    [webView loadRequest:request];
-    // 将WKWebView添加到视图
-    [self.view addSubview:webView];
-    
-    //    [self customNavigation];
-    UIButton *btn = [[UIButton alloc]init];
-    [self.view addSubview:btn];
-    [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [btn setFrame:CGRectMake(10, 30, 20, 20)];
-    [btn addTarget:self action:@selector(clickBackBtn) forControlEvents:UIControlEventTouchUpInside];
+    [self customNavigation];
+    _webView.hidden = YES;
+    [MBHudSet showStatusOnView:self.view];
 }
 
 #pragma mark 定制导航栏
 - (void)customNavigation {
     
-    UILabel *bar = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 69)];
+    UIView *bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, NAVIGATION_BAR_HEIGHT)];
     [self.view addSubview:bar];
     UIButton *btn = [[UIButton alloc]init];
     [bar addSubview:btn];
     [btn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
-    [btn setFrame:CGRectMake(10, 20, 20, 20)];
+    [btn setFrame:CGRectMake(10, NAVIGATION_BAR_HEIGHT - 30, 20, 20)];
     [btn addTarget:self action:@selector(clickBackBtn) forControlEvents:UIControlEventTouchUpInside];
     
 }
@@ -61,7 +52,14 @@
 - (void)clickBackBtn {
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    
+}
+
+-(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
+    [webView evaluateJavaScript:@"document.getElementsByTagName('header')[0].hidden = true;document.getElementsByClassName('breadcrumb')[0].hidden = true;document.getElementsByClassName('right-side-bar new-right-side-bar')[0].hidden = true;"
+      completionHandler:^(id evaluate, NSError * error) {
+          _webView.hidden = NO;
+          [MBHudSet dismiss:self.view];
+     }];
 }
 
 

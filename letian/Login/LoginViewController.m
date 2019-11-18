@@ -81,7 +81,7 @@
     params[@"AppId"]               = APPID;
     params[@"PushNo"]              = [JPUSHService registrationID];
     
-//    NSLog(@"推送号：。。。。。%@",params[@"PushNo"]);
+    NSLog(@"登录参数。。。。。%@",params);
     __weak typeof(self) weakSelf = self;
     [manager GET:requestString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         __strong typeof(self) strongSelf = weakSelf;

@@ -308,7 +308,12 @@
         strongSelf.counselorArr = [counselorInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
 //        NSLog(@"%@",strongSelf.counselorArr);
         CounselorInfoVC *eacInfo = [[CounselorInfoVC alloc]init];
-        eacInfo.counselModel = strongSelf.counselorArr[1];
+        for (int i = 0; i < strongSelf.counselorArr.count; i++) {
+            if (strongSelf.counselorArr[i].UserName = @"中科院上海生科院专用预约通道") {
+                eacInfo.counselModel = strongSelf.counselorArr[i];
+                break;
+            }
+        }
         eacInfo.hidesBottomBarWhenPushed = YES;
         [strongSelf.navigationController pushViewController:eacInfo animated:YES];
         
@@ -386,7 +391,6 @@
         [MBHudSet dismiss:self.view];
         
         NSArray *array = [ActiveModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
-//        NSArray *array=[WebArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
 
         if (array.count >= 10) {
             weakSelf.tableView.mj_footer.hidden = NO;
@@ -603,6 +607,7 @@
 
 
 - (void)loadData {
+    
     NSMutableArray *datas = [NSMutableArray array];
     for (int i = 0; i < 7; ++i) {
         if (i == 0) {
@@ -656,12 +661,12 @@
 - (void)pagerView:(TYCyclePagerView *)pageView didSelectedItemCell:(__kindof UICollectionViewCell *)cell atIndex:(NSInteger)index {
     
     if (index == 0) {
-        
+
         [self getCounsultListSource];
     } else {
-        
+    
         selectionArticleVC *articleVC = [[selectionArticleVC alloc]init];
-        articleVC.ArticleUrl = self.funnyListArray[index-1].ArticleUrl;
+        articleVC.ArticleUrl = self.funnyListArray[index].ArticleUrl;
         articleVC.ID = self.funnyListArray[index].ID;
         //    articleVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:articleVC animated:YES];

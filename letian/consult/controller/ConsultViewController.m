@@ -18,6 +18,7 @@
 #import "ZLDropDownMenuCollectionViewCell.h"
 #import "ZLDropDownMenu.h"
 #import "NSString+ZLStringSize.h"
+#import "FeeModel.h"
 
 #import "MJExtension.h"
 #import "SnailPopupController.h"
@@ -37,7 +38,7 @@
 @property (nonatomic, copy  ) NSDictionary        *counselorTitleDic;
 @property (nonatomic, strong) NSMutableArray      *counselorCategoryArr;
 @property (nonatomic, strong) NSMutableArray      *counselorTitleArr;
-@property (nonatomic, copy  ) NSArray             *priceDataSource;
+@property (nonatomic, copy  ) NSMutableArray      *priceDataSource;
 @property (nonatomic, strong) NSMutableArray      *regionArr;
 @property (nonatomic, strong) NSMutableArray      *regionDicArr;
 @property (nonatomic, strong) NSMutableDictionary *requestParams;
@@ -54,6 +55,7 @@
 @property (nonatomic, strong) UICollectionView    *mainCollectionView;
 @property (nonatomic, strong) UILabel             *noDataLab;
 @property (nonatomic, strong) UIView              *mainHeadView;
+@property (nonatomic, strong) NSArray<FeeModel *> *feeModel;
 
 
 @end
@@ -65,15 +67,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    self.automaticallyAdjustsScrollViewInsets = NO;
-
+    //    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     _counselorArr = [NSMutableArray new];
     _requestParams = [NSMutableDictionary new];
+    [self getConsultFeeList];
     
     [self customSearchBar];
     [self customNavigation];
     [self creatTableView];
-//    [self creatCollectionView];
+    //    [self creatCollectionView];
     if (!kFetchUChoise) {
         [_requestParams setValue:@(0) forKey:@"enumPsyCategory"];
         [self relodeDate];
@@ -99,12 +102,12 @@
     _searchBar.placeholder = @"搜索咨询师";
     UITextField *searchField = [_searchBar valueForKey:@"searchField"];
     searchField.backgroundColor = [UIColor seashellColor];
-//    [searchField setValue:[UIColor whiteColor] forKeyPath:@"placeholderLabel.textColor"];
+    //    [searchField setValue:[UIColor whiteColor] forKeyPath:@"placeholderLabel.textColor"];
     _searchBar.delegate    = self;
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-
+    
     [_searchBar setShowsCancelButton:YES animated:YES];
 }
 
@@ -154,7 +157,7 @@
     [_requestParams setValue:@(0) forKey:@"enumUserTitle"];
     [_requestParams removeObjectForKey:@"MinFee"];
     [_requestParams removeObjectForKey:@"MaxFee"];
-
+    
     [self getCounsultTypeSource];
     [self getCounsultListSource];
 }
@@ -185,7 +188,7 @@
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongSelf = weakSelf;
-//        [MBHudSet dismiss:strongSelf.view];
+        //        [MBHudSet dismiss:strongSelf.view];
         [strongSelf.counselorInfoTableview.mj_header endRefreshing];
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
@@ -193,7 +196,7 @@
         } else{
             [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
         }
-
+        
     }];
 }
 
@@ -230,17 +233,17 @@
     [PPNetworkHelper GET:requestConsultPsyAndTitleListString parameters:nil success:^(id responseObject) {
         
         __strong typeof(self) strongSelf = weakSelf;
-
+        
         strongSelf.regionDicArr = responseObject[@"Result"][@"Source"];
         [strongSelf.regionArr addObject:@"全部地区"];
         for (NSDictionary *dic in responseObject[@"Result"][@"Source"]) {
-//            NSLog (dic[@"FullName"]);
+            //            NSLog (dic[@"FullName"]);
             [strongSelf.regionArr addObject:dic[@"FullName"]];
         }
         
-        [strongSelf.mainHeadView removeAllSubviews];
+        //        [strongSelf.mainHeadView removeAllSubviews];
         [strongSelf creatClassifiedSection];
-
+        
     } failure:^(NSError *error) {
         
         __strong typeof(self) strongSelf = weakSelf;
@@ -262,10 +265,10 @@
     
     _pageIndex = 1;
     [_counselorInfoTableview.mj_footer endRefreshing];
-
+    
     __weak typeof(self) weakSelf = self;
     [MBHudSet showStatusOnView:self.view];
-
+    
     NSMutableString *requestConsultListString = [NSMutableString stringWithString:API_HTTP_PREFIX];
     [requestConsultListString appendFormat:@"%@/",API_MODULE_CONSULT];
     [requestConsultListString appendFormat:@"%@",API_NAME_GETCONSULTLIST];
@@ -325,9 +328,9 @@
         }else{
             [strongSelf.counselorInfoTableview.mj_footer endRefreshingWithNoMoreData];
         }
-
+        
         [strongSelf.counselorArr addObjectsFromArray:moreConselor];
-
+        
         [strongSelf.counselorInfoTableview reloadData];
         
         
@@ -343,29 +346,51 @@
             [MBHudSet showText:@"请求失败" andOnView:strongSelf.view];
         }
         [strongSelf.counselorInfoTableview.mj_footer endRefreshing];
-
+        
     }];
+    
+}
+
+- (void)getConsultFeeList {
+    
+    NSMutableString *requestStr = [NSMutableString stringWithString:API_HTTP_PREFIX];
+    [requestStr appendFormat:@"%@/",API_MODULE_UTILS];
+    [requestStr appendFormat:@"%@",API_NAME_GETCONSULFEELIST];
+    [PPNetworkHelper GET:requestStr parameters:nil success:^(id responseObject) {
+        
+        self.feeModel = [FeeModel mj_objectArrayWithKeyValuesArray:responseObject[@"Result"][@"Source"]];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
     
 }
 
 #pragma mark - 创建分类栏
 - (void)creatClassifiedSection {
-
+    
     _mainTitleArray = @[@"咨询类型", @"咨询师资历", @"价格", @"地区"];
-    _priceDataSource = @[@"全部价格(元)",@"500及以下",@"500-1000",@"1000及以上"];
-//    _regionArr = @[@"全部地区",@"上海"];
+    _priceDataSource = [NSMutableArray array];
+    for (FeeModel *model in self.feeModel) {
+        [_priceDataSource addObject:model.Name];
+    }
+    [_priceDataSource insertObject:@"全部价格(元)" atIndex:0];
+    
     _subTitleArray = [NSMutableArray new];
     [_subTitleArray addObject:_counselorCategoryArr];
     [_subTitleArray addObject:_counselorTitleArr];
     [_subTitleArray addObject:_priceDataSource];
     [_subTitleArray addObject:_regionArr];
-
+    
     _menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H, deviceWidth(), 50.f)];
     _menu.delegate = self;
     _menu.dataSource = self;
-    _counselorInfoTableview.tableHeaderView = _menu;
+    [self.view addSubview:_menu];
+    //    _counselorInfoTableview.tableHeaderView = _menu;
     
-
+    
 }
 
 // ZLDropDownMenuDataSource
@@ -396,7 +421,7 @@
 - (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
     NSArray *array = self.subTitleArray[indexPath.column];
     if (indexPath.column == 0) {
-//        [_requestParams setValue:array[indexPath.row] forKey:@"enumPsyCategory"];
+        //        [_requestParams setValue:array[indexPath.row] forKey:@"enumPsyCategory"];
         NSArray *categoryKeyArr = _counselorCategoryDic.allKeys;
         for (id key in categoryKeyArr) {
             if ([array[indexPath.row] isEqual:_counselorCategoryDic[key]]) {
@@ -411,25 +436,22 @@
             }
         }
     } else if (indexPath.column == 2) {
+        
         if (indexPath.row == 0) {
             [_requestParams removeObjectForKey:@"MinFee"];
             [_requestParams removeObjectForKey:@"MaxFee"];
-        } else if (indexPath.row == 1) {
-            [_requestParams setValue:@(0) forKey:@"MinFee"];
-            [_requestParams setValue:@(500) forKey:@"MaxFee"];
-        } else if (indexPath.row == 2) {
-            [_requestParams setValue:@(500) forKey:@"MinFee"];
-            [_requestParams setValue:@(1000) forKey:@"MaxFee"];
-        } else if (indexPath.row == 3) {
-            [_requestParams setValue:@(1000) forKey:@"MinFee"];
-            [_requestParams removeObjectForKey:@"MaxFee"];
+
+        } else {
+            _requestParams[@"MinFee"] = _feeModel[indexPath.row -1].MinFee;
+            _requestParams[@"MaxFee"] = _feeModel[indexPath.row -1].MaxFee;
         }
+        
     } else {
         for (int i = 0; i < _regionDicArr.count; i++) {
             if (array[indexPath.row] == _regionDicArr[i][@"FullName"]) {
-//                NSLog(@"%@",_regionDicArr[i][@"ID"]);
+                //                NSLog(@"%@",_regionDicArr[i][@"ID"]);
                 NSInteger ID = [_regionDicArr[i][@"ID"] integerValue];
-                [_requestParams setValue:@(ID) forKey:@"RegionID"];
+                _requestParams[@"RegionID"] = @(ID);
                 break;
             } else {
                 [_requestParams removeObjectForKey:@"RegionID"];
@@ -468,10 +490,10 @@
     //先复用，如果复用失败会自动创建
     SpecialCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SpecialCollectionViewCell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
-//    cell.backgroundView.layer.shadowColor = [UIColor blackColor].CGColor;
-//    cell.backgroundView.layer.shadowOpacity = 0.8f;
-//    cell.backgroundView.layer.shadowRadius = 4.f;
-//    cell.backgroundView.layer.shadowOffset = CGSizeMake(4, 4);
+    //    cell.backgroundView.layer.shadowColor = [UIColor blackColor].CGColor;
+    //    cell.backgroundView.layer.shadowOpacity = 0.8f;
+    //    cell.backgroundView.layer.shadowRadius = 4.f;
+    //    cell.backgroundView.layer.shadowOffset = CGSizeMake(4, 4);
     
     return cell;
 }
@@ -504,7 +526,7 @@
 #pragma mark - 创建tabview
 - (void)creatTableView {
     
-    _counselorInfoTableview                 = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H + 0, SCREEN_W, SCREEN_H - statusBar_H - navigationBar_H - tabBar_H) style:UITableViewStylePlain];
+    _counselorInfoTableview                 = [[UITableView alloc]initWithFrame:CGRectMake(0, statusBar_H + navigationBar_H + 50.f, SCREEN_W, SCREEN_H - statusBar_H - navigationBar_H - tabBar_H) style:UITableViewStylePlain];
     _counselorInfoTableview.dataSource      = self;
     _counselorInfoTableview.delegate        = self;
     _counselorInfoTableview.backgroundColor = [UIColor snowColor];
@@ -530,7 +552,7 @@
     
     _counselorInfoTableview.mj_footer = [RefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(getMoreDate)];
     _counselorInfoTableview.mj_footer.hidden = YES;
-
+    
 }
 
 
@@ -571,7 +593,7 @@
     
     CounselorInfoVC *counselorInfoMainVC = [[CounselorInfoVC alloc]init];
     counselorInfoMainVC.counselModel = _counselorArr[indexPath.row];
-//    counselorInfoMainVC.headImage = _counselorArr[indexPath.row].HeadImg;
+    //    counselorInfoMainVC.headImage = _counselorArr[indexPath.row].HeadImg;
     counselorInfoMainVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:counselorInfoMainVC animated:YES];
     
@@ -598,7 +620,6 @@
     [view.layer addAnimation:animation forKey:@"scale-layer"];
     
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -61,6 +61,7 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
 
 @property (nonatomic, strong) UIImageView  *headView;
 @property (nonatomic, strong) UIImageView  *naviView;
+@property (nonatomic, strong) UILabel      *nameLab;
 //@property (nonatomic, strong) UIVisualEffectView *effectview;
 @property (nonatomic, strong) UITableView  *mainTableView;
 @property (nonatomic, strong) UIView       *holdView;
@@ -367,28 +368,28 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
     float lineHeight = (_headView.height/2-_headView.width*0.1)/7;
 
 //咨询师名字
-    UILabel *nameLab = [[UILabel alloc]init];
-    [view addSubview:nameLab];
-    [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+    _nameLab = [[UILabel alloc]init];
+    [view addSubview:_nameLab];
+    [_nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(picView.mas_centerX);
         make.top.equalTo(picView.mas_bottom).offset(lineHeight);
 //        make.width.equalTo(self.view.mas_width).multipliedBy(0.3);
         make.height.equalTo(picView.mas_height).multipliedBy(0.25);
     }];
-    nameLab.textAlignment = NSTextAlignmentCenter;
-    nameLab.text = self.counselModel.UserName;
-    nameLab.textColor = [UIColor whiteColor];
-    nameLab.shadowOffset = CGSizeMake(0, 1);
-    nameLab.font = [UIFont systemFontOfSize:17 weight:2];
-    [nameLab sizeToFit];
+    _nameLab.textAlignment = NSTextAlignmentCenter;
+    _nameLab.text = self.counselModel.UserName;
+    _nameLab.textColor = [UIColor whiteColor];
+    _nameLab.shadowOffset = CGSizeMake(0, 1);
+    _nameLab.font = [UIFont systemFontOfSize:17 weight:2];
+    [_nameLab sizeToFit];
 //咨询师称号
     UILabel *statusLab = [[UILabel alloc]init];
     [view addSubview:statusLab];
     [statusLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(nameLab.mas_centerX);
-        make.top.equalTo(nameLab.mas_bottom).offset(lineHeight);
+        make.centerX.equalTo(_nameLab.mas_centerX);
+        make.top.equalTo(_nameLab.mas_bottom).offset(lineHeight);
         make.width.equalTo(self.view.mas_width).multipliedBy(0.3);
-        make.height.equalTo(nameLab.mas_height);
+        make.height.equalTo(_nameLab.mas_height);
     }];
     statusLab.textAlignment = NSTextAlignmentCenter;
     statusLab.textColor = [UIColor whiteColor];
@@ -423,11 +424,11 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
 //    NSLog(@"原：%f",offset.y);
     if (offset.y < 0) {
         
-        CGRect rect = self.headView.frame;
-        rect.origin.y = offset.y;
-        rect.size.height = (SCREEN_H*0.3) - offset.y;
-        _headView.frame = rect;
-    } else if (offset.y > (self.headView.height - navigationBar_H - statusBar_H)) {
+//        CGRect rect = self.headView.frame;
+//        rect.origin.y = offset.y;
+//        rect.size.height = (SCREEN_H*0.3) - offset.y;
+//        _headView.frame = rect;
+    } else if (offset.y > 0 && offset.y <= self.headView.centerY) {
         
 //        NSLog(@"aaa");
         [self.view addSubview:self.naviView];
@@ -435,11 +436,17 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
         self.naviView.backgroundColor = [UIColor easterPinkColor];
         self.naviView.height = self.headView.height;
         self.naviView.bottom = navigationBar_H + statusBar_H;
-        self.navigationItem.title = self.counselModel.UserName;
+        self.navigationItem.title = @"";
+//        self.nameLab.text = @"";
         [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
+        
+    } else if (offset.y > self.headView.centerY) {
+        
+        self.navigationItem.title = self.counselModel.UserName;
         
     } else {
 //        NSLog(@"ddd");
+//        self.nameLab.text = self.counselModel.UserName;
         [self.naviView removeFromSuperview];
         self.navigationItem.title = nil;
 

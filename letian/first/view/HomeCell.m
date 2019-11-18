@@ -25,7 +25,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.detailLabel.textColor = [UIColor lightGrayColor];
     cell.detailLabel.numberOfLines = 2;
-    cell.headImageView.contentMode = UIViewContentModeScaleToFill;
+    cell.headImageView.contentMode = UIViewContentModeScaleAspectFill;
     cell.headImageView.clipsToBounds = YES;
     cell.separatView.backgroundColor = MAINCOLOR;
     

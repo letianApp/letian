@@ -35,7 +35,6 @@
     
     [self customNav];
     [self requestData];
-    
     _feedBackGenertor = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleMedium];
     
     self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
@@ -52,12 +51,25 @@
     
 }
 
+- (void)back {
+    if (self.fromPush) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 - (void)customNav {
     
     UIButton *btn = [[UIButton alloc]init];
     [btn setImage:[UIImage imageNamed:@"pinkshare"] forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(0, 0, 20, 20)];
     [btn addTarget:self action:@selector(clickShareBtn) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *backBtn = [[UIButton alloc]init];
+    [backBtn setImage:[UIImage imageNamed:@"pinkback"] forState:UIControlStateNormal];
+    [backBtn setFrame:CGRectMake(0, 0, 20, 20)];
+    [backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     
     _comBtn = [[UIButton alloc]init];
     [_comBtn setImage:[UIImage imageNamed:@"pinkComment"] forState:UIControlStateNormal];
@@ -80,9 +92,15 @@
         
         self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
         
+        
+        
         UIView *shareVew = [[UIView alloc] initWithFrame:btn.bounds];
         [shareVew addSubview:btn];
         UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithCustomView:shareVew];
+        
+        UIView *backView = [[UIView alloc] initWithFrame:backBtn.bounds];
+        [backView addSubview:backBtn];
+        UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backView];
         
         UIView *commitView = [[UIView alloc]initWithFrame:_comBtn.bounds];
         [commitView addSubview:_comBtn];
@@ -98,6 +116,7 @@
         spaceItem.width = 40;
         
         self.navigationItem.rightBarButtonItems = @[shareItem,spaceItem,commitItem,spaceItem,likeItem];
+        self.navigationItem.leftBarButtonItem = backItem;
 
     }
 }
@@ -187,8 +206,6 @@
         if (error.code == NSURLErrorCancelled) return;
         if (error.code == NSURLErrorTimedOut) {
             [MBHudSet showText:@"请求超时" andOnView:self.view];
-        } else{
-            [MBHudSet showText:@"请求失败" andOnView:self.view];
         }
     }];
 }
@@ -244,39 +261,12 @@
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     
-    NSString *navbarJs = @"document.getElementsByClassName('navbar navbar-static-top bs-docs-nav container')[0].style.display = 'NONE'";//获取整个页面的HTMLstring
+    NSString *navbarJs = @"document.getElementsByClassName('navbar navbar-static-top bs-docs-nav container')[0].style.display = 'NONE';document.getElementsByClassName('breadcrumb')[0].style.display = 'NONE';document.getElementsByClassName('text-right')[0].style.display = 'NONE';document.getElementsByClassName('send-comments')[0].style.display = 'NONE';document.getElementsByClassName('history-comments')[0].style.display = 'NONE';document.getElementsByClassName('col-xs-5')[0].style.display = 'NONE';document.getElementsByClassName('right-side-bar new-right-side-bar')[0].hidden = true;";//获取整个页面的HTMLstring
     [webView evaluateJavaScript:navbarJs completionHandler:^(id _Nullable HTMLsource, NSError * _Nullable error) {
 //        NSLog(@"这一页：%@",HTMLsource);
-    }];
-    
-    NSString *breadcrumbJs = @"document.getElementsByClassName('breadcrumb')[0].style.display = 'NONE'";
-    [webView evaluateJavaScript:breadcrumbJs completionHandler:^(id _Nullable HTMLsource, NSError * _Nullable error) {
-    }];
-    
-    NSString *textrightJs = @"document.getElementsByClassName('text-right')[0].style.display = 'NONE'";
-    [webView evaluateJavaScript:textrightJs completionHandler:^(id _Nullable HTMLsource, NSError * _Nullable error) {
-    }];
-    
-    NSString *sendcommentsJs = @"document.getElementsByClassName('send-comments')[0].style.display = 'NONE'";
-    [webView evaluateJavaScript:sendcommentsJs completionHandler:^(id _Nullable HTMLsource, NSError * _Nullable error) {
-    }];
-
-    NSString *historycommentsJs = @"document.getElementsByClassName('history-comments')[0].style.display = 'NONE'";
-    [webView evaluateJavaScript:historycommentsJs completionHandler:^(id _Nullable HTMLsource, NSError * _Nullable error) {
-    }];
-    
-//    NSString *zhichiBtncommentsJs = @"document.getElementsByIdName('zhichiBtnBox').style.display = 'NONE'";
-//    [webView evaluateJavaScript:zhichiBtncommentsJs completionHandler:^(id _Nullable HTMLsource, NSError * _Nullable error) {
-//    }];
-
-    NSString *colJs = @"document.getElementsByClassName('col-xs-5')[0].style.display = 'NONE'";
-    [webView evaluateJavaScript:colJs completionHandler:^(id _Nullable HTMLsource, NSError * _Nullable error) {
-        
         [self.bgView removeFromSuperview];
         [MBHudSet dismiss:self.view];
-
     }];
-    
     
 }
 // 页面加载失败时调用

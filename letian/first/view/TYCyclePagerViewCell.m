@@ -35,7 +35,7 @@
 
 - (void)addLabel {
     UIImageView *bgImg = [[UIImageView alloc]init];
-    bgImg.contentMode = UIViewContentModeScaleToFill;
+    bgImg.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:bgImg];
     _bgImg = bgImg;
     
