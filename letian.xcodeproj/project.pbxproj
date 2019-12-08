@@ -77,8 +77,6 @@
 		0970CFF11E5180BF007480CB /* ConsultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0970CFEF1E5180BF007480CB /* ConsultViewController.xib */; };
 		0970CFF51E5180DF007480CB /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0970CFF31E5180DF007480CB /* MyViewController.m */; };
 		0970CFF61E5180DF007480CB /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0970CFF41E5180DF007480CB /* MyViewController.xib */; };
-		097105D21E9A34FE00AC8E4F /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 097105D01E9A34FE00AC8E4F /* AlipaySDK.bundle */; };
-		097105D31E9A34FE00AC8E4F /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105D11E9A34FE00AC8E4F /* AlipaySDK.framework */; };
 		097105D51E9A368A00AC8E4F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105D41E9A368A00AC8E4F /* SystemConfiguration.framework */; };
 		097105D71E9A369E00AC8E4F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105D61E9A369E00AC8E4F /* CoreTelephony.framework */; };
 		097105D91E9A36AD00AC8E4F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105D81E9A36AD00AC8E4F /* QuartzCore.framework */; };
@@ -172,7 +170,6 @@
 		7787B36E1EAEF2FE00306527 /* openssl_wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B3651EAEF2FE00306527 /* openssl_wrapper.m */; };
 		7787B36F1EAEF2FE00306527 /* RSADataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B3671EAEF2FE00306527 /* RSADataSigner.m */; };
 		7787B3701EAEF2FE00306527 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B3691EAEF2FE00306527 /* RSADataVerifier.m */; };
-		7787B3711EAEF34000306527 /* AlipaySDK.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 097105D01E9A34FE00AC8E4F /* AlipaySDK.bundle */; };
 		7787B3741EB0746500306527 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B3731EB0746500306527 /* OrderListModel.m */; };
 		7787B3961EB1896800306527 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7787B3951EB1896800306527 /* Security.framework */; };
 		7787B3A51EB18DDA00306527 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787B39A1EB18DDA00306527 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -235,6 +232,8 @@
 		77D2BFA71E67D6A9000B9978 /* ForgetPwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D2BFA51E67D6A9000B9978 /* ForgetPwViewController.xib */; };
 		77DA5DCD1E666B92003FAE0C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DA5DCB1E666B92003FAE0C /* LoginViewController.m */; };
 		77DA5DCE1E666B92003FAE0C /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */; };
+		77E150D7239B685E0014FB76 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 77E150D5239B685D0014FB76 /* AlipaySDK.bundle */; };
+		77E150D8239B685E0014FB76 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E150D6239B685E0014FB76 /* AlipaySDK.framework */; };
 		77EF53271EE53123001B5C70 /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EF53251EE53123001B5C70 /* ActivityCell.m */; };
 		77EF53281EE53123001B5C70 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EF53261EE53123001B5C70 /* ActivityCell.xib */; };
 		77EF532B1EE59E78001B5C70 /* FunnyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EF532A1EE59E78001B5C70 /* FunnyViewController.m */; };
@@ -383,8 +382,6 @@
 		0970CFF21E5180DF007480CB /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		0970CFF31E5180DF007480CB /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		0970CFF41E5180DF007480CB /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
-		097105D01E9A34FE00AC8E4F /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
-		097105D11E9A34FE00AC8E4F /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		097105D41E9A368A00AC8E4F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		097105D61E9A369E00AC8E4F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		097105D81E9A36AD00AC8E4F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -738,6 +735,8 @@
 		77DA5DCB1E666B92003FAE0C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		77DA5DCC1E666B92003FAE0C /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		77E10CE61E88A69300E1A254 /* API.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
+		77E150D5239B685D0014FB76 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		77E150D6239B685E0014FB76 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		77EF53241EE53123001B5C70 /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
 		77EF53251EE53123001B5C70 /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
 		77EF53261EE53123001B5C70 /* ActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
@@ -775,12 +774,11 @@
 				7787B36A1EAEF2FE00306527 /* libcrypto.a in Frameworks */,
 				097105DD1E9A36EB00AC8E4F /* CoreGraphics.framework in Frameworks */,
 				097105DB1E9A36C100AC8E4F /* CoreText.framework in Frameworks */,
+				77E150D8239B685E0014FB76 /* AlipaySDK.framework in Frameworks */,
 				097105D91E9A36AD00AC8E4F /* QuartzCore.framework in Frameworks */,
 				097105D71E9A369E00AC8E4F /* CoreTelephony.framework in Frameworks */,
 				097105D51E9A368A00AC8E4F /* SystemConfiguration.framework in Frameworks */,
 				093587491E94E5EE0007B1D9 /* Accounts.framework in Frameworks */,
-				097105D31E9A34FE00AC8E4F /* AlipaySDK.framework in Frameworks */,
-				7787B3711EAEF34000306527 /* AlipaySDK.bundle in Frameworks */,
 				7787B36B1EAEF2FE00306527 /* libssl.a in Frameworks */,
 				093587471E94E5DE0007B1D9 /* Social.framework in Frameworks */,
 				093587451E94E5690007B1D9 /* CoreMotion.framework in Frameworks */,
@@ -1223,10 +1221,10 @@
 				7787B3C01EB20D8100306527 /* Order.m */,
 				7787B3101EAEF2FE00306527 /* libcrypto.a */,
 				7787B3111EAEF2FE00306527 /* libssl.a */,
+				77E150D5239B685D0014FB76 /* AlipaySDK.bundle */,
+				77E150D6239B685E0014FB76 /* AlipaySDK.framework */,
 				7787B3121EAEF2FE00306527 /* openssl */,
 				7787B35E1EAEF2FE00306527 /* Util */,
-				097105D01E9A34FE00AC8E4F /* AlipaySDK.bundle */,
-				097105D11E9A34FE00AC8E4F /* AlipaySDK.framework */,
 			);
 			path = pay;
 			sourceTree = "<group>";
@@ -1963,7 +1961,7 @@
 					0953C21D1E514B5700FB165C = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = WKX8GB3K8G;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2014,6 +2012,7 @@
 				093DA77E1E960F08003CEDD9 /* ChatListViewController.xib in Resources */,
 				77EF53281EE53123001B5C70 /* ActivityCell.xib in Resources */,
 				0965FBC91E824AF900C0FBAD /* OrderPageVC.xib in Resources */,
+				77E150D7239B685E0014FB76 /* AlipaySDK.bundle in Resources */,
 				0970CFF11E5180BF007480CB /* ConsultViewController.xib in Resources */,
 				77F3D8631E7670D2008B5FC0 /* OrderCell.xib in Resources */,
 				770FFC6D1E961070009B81FC /* UserInfoViewController.xib in Resources */,
@@ -2027,7 +2026,6 @@
 				0953C22E1E514B5800FB165C /* Assets.xcassets in Resources */,
 				77D2BFA21E66C404000B9978 /* SetAcountViewController.xib in Resources */,
 				0953C22C1E514B5800FB165C /* Main.storyboard in Resources */,
-				097105D21E9A34FE00AC8E4F /* AlipaySDK.bundle in Resources */,
 				093DA7831E9628C6003CEDD9 /* ChatViewController.xib in Resources */,
 				77D2BF981E66B3D0000B9978 /* RegistViewController.xib in Resources */,
 				09FBE01E1E70EE60003452A6 /* ConfirmPageVC.xib in Resources */,
@@ -2372,7 +2370,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Letian Psychological Counseling Center (WKX8GB3K8G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Letian Psychological Counseling Center (WKX8GB3K8G)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2394,6 +2393,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2420,7 +2420,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Letian Psychological Counseling Center (WKX8GB3K8G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Letian Psychological Counseling Center (WKX8GB3K8G)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2435,6 +2436,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2449,9 +2451,9 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = letian/letian.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Letian Psychological Counseling Center (WKX8GB3K8G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Letian Psychological Counseling Center (WKX8GB3K8G)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = WKX8GB3K8G;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2642,7 +2644,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.letiancenter.letianpsychological;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = rightpsy_ios;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
@@ -2657,9 +2659,9 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = letian/letian.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Letian Psychological Counseling Center (WKX8GB3K8G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Letian Psychological Counseling Center (WKX8GB3K8G)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = WKX8GB3K8G;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2850,7 +2852,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.letiancenter.letianpsychological;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = rightpsy_ios;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
